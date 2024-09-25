@@ -1,6 +1,6 @@
 # IFC 5 development repository
 
-Welcome to the **IFC 5 pre-alpha Examples**! This repository contains initial examples as a proof of concept for the IFC 5 developments.
+Welcome to the **IFC 5 pre-alpha Examples**!  These examples are the result of years of work by many volunteers. The IFC 5 taskforce has been working on these examples inntensively in the last year. This repository contains initial examples as a proof of concept for the IFC 5 developments.
 
 ## Disclaimer: Early Stage Examples
 
