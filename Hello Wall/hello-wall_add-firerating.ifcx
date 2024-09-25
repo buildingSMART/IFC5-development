@@ -1,0 +1,32 @@
+[
+{
+	"disclaimer": "2024-09-25 publication of the examples. (C) buildingSMART International. Published under CC BY-ND 4.0."
+},
+ {
+  "def": "over",
+  "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b",
+  "attributes": {
+   "ifc5:properties": {
+    "firerating": "R60"
+   }
+  }
+ },
+ {
+  "def": "over",
+  "name": "N2c2d549ff9fe4e228590562fda81a690",
+  "attributes": {
+   "ifc5:properties": {
+    "firerating": "R30"
+   }
+  }
+ },
+ {
+  "def": "over",
+  "name": "N592504dc469a44d69ae8c801b591679b",
+  "attributes": {
+   "ifc5:properties": {
+    "firerating": "R30"
+   }
+  }
+ }
+]
