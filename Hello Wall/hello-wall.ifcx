@@ -198,12 +198,16 @@
  {
   "def": "class",
   "type": "UsdGeom:Xform",
-  "name": "N2c2d549ff9fe4e228590562fda81a690"
+  "name": "N2c2d549ff9fe4e228590562fda81a690",
+  "inherits": [
+   "</N25503984660543a18597eae657ff5bea>"]
  },
  {
   "def": "class",
   "type": "UsdGeom:Xform",
-  "name": "N592504dc469a44d69ae8c801b591679b"
+  "name": "N592504dc469a44d69ae8c801b591679b",
+  "inherits": [
+   "</N25503984660543a18597eae657ff5bea>"]
  },
  {
   "def": "class",
