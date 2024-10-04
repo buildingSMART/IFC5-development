@@ -1,0 +1,14 @@
+[
+{
+	"disclaimer": "2024-09-25 publication of the examples. (C) buildingSMART International. Published under CC BY-ND 4.0."
+},
+ {
+  "def": "over",
+  "name": "/My_Project/My_Site/My_Building/My_Storey/Wall/Window_001",
+  "attributes": {
+   "ifc5:properties": {
+    "firerating": "R120"
+   }
+  }
+ }
+]
