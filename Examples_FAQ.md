@@ -33,6 +33,8 @@ The files contain a couple of terms you need to know:
 	- UsdGeom.mesh (https://openusd.org/dev/api/class_usd_geom_mesh.html): Mesh geometry. These first examples will only focus on Meshes ('Reference View'). Alignment is supported with curves. More detailled geometry will follow later. 
 	- Attributes (https://openusd.org/release/glossary.html#attribute): Not the same as IFC attributes. A way to add information to components.
 	- Xform (https://openusd.org/release/api/class_usd_geom_xform.html): Mainly used for transformations.
+   	- UsdShade:Material (https://openusd.org/dev/api/class_usd_shade_material.html): for Materials.
+   	- UsdShade:Shader (https://openusd.org/dev/api/class_usd_shade_shader.html): for things like color.
 - The 'hello-wall_add-firerating' file can be seen as a file from another author (actually every component can be authored by different people). By adding that file as a new 'layer' to the composition, the additional FireRating properties will provide the new value (while the original ones from the first author are also still in the original dataset). 
 - This example only shows a very small  number of IFC Entities (project, site, building, alignment, railway, etc). The eventual IFC 5 schema will have more. 
 - This example only shows a very small  number of IFC Properties (FireRating, IsExternal, etc). The eventual IFC 5 schema will have more. 
