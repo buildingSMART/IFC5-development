@@ -30,7 +30,7 @@ The files contain a couple of terms you need to know:
 	- Def (https://openusd.org/release/glossary.html#def): a way to place / instantiate something.
 	- Over (https://openusd.org/release/glossary.html#usdglossary-over): A way to 'overlay' data over other data. This is a way to extend/add data to objects of yourself and others.
 	- Inherits (https://openusd.org/release/glossary.html#usdglossary-inherits): A way to add data to your object. 
-	- UsdGeom.mesh (https://openusd.org/dev/api/class_usd_geom_mesh.html): Mesh geometry. These first examples will only focus on Meshes ('Reference View'). Alignment is supported with curves. More detailled geometry will follow later. 
+	- UsdGeom.mesh (https://openusd.org/dev/api/class_usd_geom_mesh.html): Mesh geometry. These first examples will only focus on Meshes ('Reference View'). Alignment is supported with curves. More detailled geometry will follow later. There are also UsdGeom things like VisibilityAPI and BasisCurves but you'll find those in the USD documentation as well.
 	- Attributes (https://openusd.org/release/glossary.html#attribute): Not the same as IFC attributes. A way to add information to components.
 	- Xform (https://openusd.org/release/api/class_usd_geom_xform.html): Mainly used for transformations.
    	- UsdShade:Material (https://openusd.org/dev/api/class_usd_shade_material.html): for Materials.
