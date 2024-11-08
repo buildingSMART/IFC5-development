@@ -113,7 +113,7 @@ function compose(datas) {
     //  - apply inheritance relationships
     //  - recompose into hierarchical structure
 
-    const compositionEdges = {};
+    let compositionEdges = {};
 
     // Undo the hierarhy introduced in 'ECS'.
     function flattenAttributes(prim) {
@@ -162,7 +162,14 @@ function compose(datas) {
         return paths;
     }
 
+    function removeDuplicates(map_of_arrays) {
+        return Object.fromEntries(Object.entries(map_of_arrays).map(([k, vs]) => [k, vs.filter((value, index, array) => 
+            array.indexOf(value) === index
+        )]));
+    }
+
     const maps = datas.map(collectPaths);
+    compositionEdges = removeDuplicates(compositionEdges);
     const sorted = toposort(compositionEdges);
 
     // Reduction function to override prim attributes
@@ -272,17 +279,28 @@ function buildDomTree(prim, node) {
 
 export function composeAndRender() {
     const tree = compose(datas.map(arr => arr[1]));
+    
+    let autoCamera = true;
+    if (scene) {
+        // @todo does this actually free up resources?
+        scene.children = [];
+        // only on first load
+        autoCamera = false;
+    }
+    
     traverseTree(tree, scene || init(), tree);
 
-    const boundingBox = new THREE.Box3();
-    boundingBox.setFromObject(scene);
-    let avg = boundingBox.min.clone().add(boundingBox.max).multiplyScalar(0.5);
-    let ext = boundingBox.max.clone().sub(boundingBox.min).length();
-    camera.position.copy(avg.clone().add(new THREE.Vector3(1,1,1).normalize().multiplyScalar(ext)));
-    camera.far = ext * 3;
-    camera.updateProjectionMatrix();
-    controls.target.copy(avg);
-    controls.update();
+    if (autoCamera) {
+        const boundingBox = new THREE.Box3();
+        boundingBox.setFromObject(scene);
+        let avg = boundingBox.min.clone().add(boundingBox.max).multiplyScalar(0.5);
+        let ext = boundingBox.max.clone().sub(boundingBox.min).length();
+        camera.position.copy(avg.clone().add(new THREE.Vector3(1,1,1).normalize().multiplyScalar(ext)));
+        camera.far = ext * 3;
+        camera.updateProjectionMatrix();
+        controls.target.copy(avg);
+        controls.update();
+    }
 
     document.querySelector('.tree').innerHTML = '';
     buildDomTree(tree, document.querySelector('.tree'));
