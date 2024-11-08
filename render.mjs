@@ -28,6 +28,14 @@ function init() {
     return scene;
 }
 
+function createCurveFromJson(node, parent, root) {
+    let points = new Float32Array(node.attributes['UsdGeom:BasisCurves:points'].flat());
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.BufferAttribute(points, 3));
+    const material = new THREE.LineBasicMaterial({ color: 0x202020 });
+    return new THREE.Line(geometry, material);
+}
+
 function createMeshFromJson(node, parent, root) {
     let points = new Float32Array(node.attributes['UsdGeom:Mesh:points'].flat());
     let indices = new Uint16Array(node.attributes['UsdGeom:Mesh:faceVertexIndices']);
@@ -69,11 +77,15 @@ function traverseTree(node, parent, root, parentNode) {
     let elem;
     if (node.type === "UsdGeom:Xform") {
         elem = new THREE.Group();
-    } else if (node.type === "UsdGeom:Mesh") {
+    } else if (node.type === "UsdGeom:Mesh" || node.type === "UsdGeom:BasisCurves") {
         if (node.attributes["UsdGeom:VisibilityAPI:visibility:visibility"] === 'invisible') {
             return;
         }
-        elem = createMeshFromJson(node, parentNode, root);
+        if (node.type === "UsdGeom:Mesh") {
+            elem = createMeshFromJson(node, parentNode, root);
+        } else {
+            elem = createCurveFromJson(node, parentNode, root);
+        }
     } else if (node !== root) {
         return;
     }
@@ -261,6 +273,17 @@ function buildDomTree(prim, node) {
 export function composeAndRender() {
     const tree = compose(datas.map(arr => arr[1]));
     traverseTree(tree, scene || init(), tree);
+
+    const boundingBox = new THREE.Box3();
+    boundingBox.setFromObject(scene);
+    let avg = boundingBox.min.clone().add(boundingBox.max).multiplyScalar(0.5);
+    let ext = boundingBox.max.clone().sub(boundingBox.min).length();
+    camera.position.copy(avg.clone().add(new THREE.Vector3(1,1,1).normalize().multiplyScalar(ext)));
+    camera.far = ext * 3;
+    camera.updateProjectionMatrix();
+    controls.target.copy(avg);
+    controls.update();
+
     document.querySelector('.tree').innerHTML = '';
     buildDomTree(tree, document.querySelector('.tree'));
     animate();
