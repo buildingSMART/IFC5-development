@@ -4,7 +4,8 @@
 },
  {
   "def": "over",
-  "name": "/My_Project/My_Site/My_Building/My_Storey/Wall/Window_001",
+  "name": "N592504dc469a44d69ae8c801b591679b",
+  "comment": "yes, this overrides the firerating on the type",
   "attributes": {
    "ifc5:properties": {
     "firerating": "R120"
