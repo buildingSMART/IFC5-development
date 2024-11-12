@@ -1,6 +1,6 @@
 [
 {
-	"disclaimer": "2024-09-25 publication of the examples. (C) buildingSMART International. Published under CC BY-ND 4.0."
+	"disclaimer": "2024-11-12 update of the examples. (C) buildingSMART International. Published under CC BY-ND 4.0."
 },
  {
   "def": "class",
@@ -198,6 +198,7 @@
  {
   "def": "class",
   "type": "UsdGeom:Xform",
+  "comment": "this is the instance of Window",
   "name": "N2c2d549ff9fe4e228590562fda81a690",
   "inherits": [
    "</N25503984660543a18597eae657ff5bea>"]
@@ -206,6 +207,7 @@
   "def": "class",
   "type": "UsdGeom:Xform",
   "name": "N592504dc469a44d69ae8c801b591679b",
+  "comment":"instance of Window_001",
   "inherits": [
    "</N25503984660543a18597eae657ff5bea>"]
  },
@@ -808,36 +810,6 @@
   "def": "over",
   "name": "N2c2d549ff9fe4e228590562fda81a690",
   "attributes": {
-   "ifc5:class": {
-    "code": "IfcWindow",
-    "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcWindow"
-   }
-  }
- },
- {
-  "def": "over",
-  "name": "N2c2d549ff9fe4e228590562fda81a690",
-  "attributes": {
-   "ifc5:properties": {
-    "IsExternal": 1
-   }
-  }
- },
- {
-  "def": "over",
-  "name": "N2c2d549ff9fe4e228590562fda81a690",
-  "attributes": {
-   "UsdShade:MaterialBindingAPI": {
-    "material:binding": {
-     "ref": "</WindowMaterial>"
-    }
-   }
-  }
- },
- {
-  "def": "over",
-  "name": "N2c2d549ff9fe4e228590562fda81a690",
-  "attributes": {
    "xformOp": {
     "transform": [
      [1,0,0,0],
@@ -858,17 +830,7 @@
  },
  {
   "def": "over",
-  "name": "N592504dc469a44d69ae8c801b591679b",
-  "attributes": {
-   "ifc5:class": {
-    "code": "IfcWindow",
-    "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcWindow"
-   }
-  }
- },
- {
-  "def": "over",
-  "name": "N592504dc469a44d69ae8c801b591679b",
+  "name": "N25503984660543a18597eae657ff5bea",
   "attributes": {
    "ifc5:properties": {
     "IsExternal": 1
@@ -877,7 +839,7 @@
  },
  {
   "def": "over",
-  "name": "N592504dc469a44d69ae8c801b591679b",
+  "name": "N25503984660543a18597eae657ff5bea",
   "attributes": {
    "UsdShade:MaterialBindingAPI": {
     "material:binding": {
@@ -906,9 +868,6 @@
    "ifc5:spaceboundary": {
     "relatedElement": {
      "ref": "</N93791d5d5beb437bb8ec2f1f0ba4bf3b>"
-    },
-    "relatingSpace": {
-     "ref": "</Ne3035b71bd9f4cdc86fdb56e2f4605b6>"
     }
    }
   }
@@ -934,12 +893,9 @@
    "ifc5:spaceboundary": {
     "relatedElement": {
      "ref": "</N2c2d549ff9fe4e228590562fda81a690>"
-    },
-    "relatingSpace": {
-     "ref": "</Ne3035b71bd9f4cdc86fdb56e2f4605b6>"
+    }
     }
    }
-  }
  },
  {
   "def": "over",
@@ -962,12 +918,9 @@
    "ifc5:spaceboundary": {
     "relatedElement": {
      "ref": "</N592504dc469a44d69ae8c801b591679b>"
-    },
-    "relatingSpace": {
-     "ref": "</Ne3035b71bd9f4cdc86fdb56e2f4605b6>"
+    }
     }
    }
-  }
  },
  {
   "def": "over",
