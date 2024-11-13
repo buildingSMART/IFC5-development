@@ -1,3 +1,6 @@
+// (C) buildingSMART International
+// published under MIT license 
+
 let controls, renderer, scene, camera;
 let datas = [];
 

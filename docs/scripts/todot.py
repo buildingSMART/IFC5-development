@@ -1,3 +1,6 @@
+# (C) buildingSMART International
+# published under MIT license 
+
 from dataclasses import dataclass, fields
 import functools
 import re
