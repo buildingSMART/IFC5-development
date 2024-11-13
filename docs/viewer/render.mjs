@@ -274,7 +274,7 @@ function compose(datas) {
         } else if (opinions.length == 1) {
             composed[p] = composePrim(null, opinions[0]);
         } else {
-            composed[p] = opinions.reduce(composePrim);
+            composed[p] = opinions.reverse().reduce(composePrim);
         }
         delete composed[p].children;
     });
@@ -385,7 +385,7 @@ function compose(datas) {
     }
 
     if (Object.keys(compositionEdges).length !== 0) {
-        logger.error("Unresolved nodes:", ...Object.keys(compositionEdges));
+        console.error("Unresolved nodes:", ...Object.keys(compositionEdges));
     }
 
     console.log(composed['']);
@@ -422,8 +422,6 @@ function buildDomTree(prim, node) {
 }
 
 export function composeAndRender() {
-    const tree = compose(datas.map(arr => arr[1]));
-    
     let autoCamera = true;
     if (scene) {
         // @todo does this actually free up resources?
@@ -431,7 +429,17 @@ export function composeAndRender() {
         // only on first load
         autoCamera = false;
     }
-    
+
+    if (datas.length === 0) {
+        return;
+    }
+
+    const tree = compose(datas.map(arr => arr[1]));
+    if (!tree) {
+        console.error("No result from composition");
+        return;
+    }
+
     traverseTree(tree, scene || init(), tree);
 
     if (autoCamera) {
