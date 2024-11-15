@@ -195,7 +195,9 @@ function compose(datas) {
                         addEdge(...reverseWhenFullyQualified([pathStr, `${childName} complete`]));
                         if (nodeId.endsWith('over')) {
                             // when we have an over on a deeper namespace we need to make sure the root is already built
-                            addEdge(childName, `/${pathStr.split('/')[1]}`);
+                            if (pathStr.split('/').length > 2) {
+                                addEdge(childName, `/${pathStr.split('/')[1]}`);
+                            }
                         }
                     }
                     traverse(child, pathStr);
@@ -430,6 +432,8 @@ export function composeAndRender() {
         autoCamera = false;
     }
 
+    document.querySelector('.tree').innerHTML = '';
+
     if (datas.length === 0) {
         return;
     }
@@ -454,7 +458,6 @@ export function composeAndRender() {
         controls.update();
     }
 
-    document.querySelector('.tree').innerHTML = '';
     buildDomTree(tree, document.querySelector('.tree'));
     animate();
 }
