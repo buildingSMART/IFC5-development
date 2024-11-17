@@ -7,16 +7,25 @@
   "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b",
   "attributes": {
    "ifc5:properties": {
-    "firerating": "R60"
+    "firerating": "I don't know"
    }
   }
  },
  {
   "def": "over",
-  "name": "N25503984660543a18597eae657ff5bea",
+  "name": "N2c2d549ff9fe4e228590562fda81a690",
   "attributes": {
    "ifc5:properties": {
-    "firerating": "R30"
+    "firerating": "Who can tell me"
+   }
+  }
+ },
+ {
+  "def": "over",
+  "name": "N592504dc469a44d69ae8c801b591679b",
+  "attributes": {
+   "ifc5:properties": {
+    "firerating": "I shouldn't be authoring these prims"
    }
   }
  }
