@@ -158,14 +158,23 @@
         input,button {
             padding: 0.5em !important;
             border: solid 1px gray;
-            border-radius: 5px;
             background: #eee;
+            display: inline-block;
+            vertical-align: middle;
+            height: 40px;
         }
         button {
             padding: 10px !important;
+            border-radius: 0 5px 5px 0;
+            background-color: #ddd;
         }
         input {
             width: 70%;
+            border-radius: 5px 0 0 5px;
+            border-width: 1px 0 1px 1px;
+        }
+        input[type=text] {
+            padding: 9px 0.5em !important;
         }
     </style>
 </head>
@@ -177,8 +186,10 @@
             <h2>Layer browser</h2>
             <div></div>
             <form id="fileForm">
-                <input type="file" id="fileInput" required>
-                <button class="file-upload-submit" type="submit">view ></button>
+                <input type="file" id="fileInput" required><button class="file-upload-submit" type="submit">view ></button>
+            </form>
+            <form id="urlForm">
+                <input type="text" placeholder="url" id="urlInput" name="urlInput" required><button class="url-submit" type="submit">view ></button>
             </form>
         </div>
         <div class='tree-container'>
@@ -214,6 +225,14 @@
                 };
                 reader.readAsText(file);
             }
+        });
+
+        document.querySelector('#urlForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            fetch(event.target.urlInput.value).then(r => r.json()).then((j) => {
+                const name = event.target.urlInput.value.split('/').reverse()[0];
+                addModel(name, j);
+            });
         });
     </script>
 </body>
