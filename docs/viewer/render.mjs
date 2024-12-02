@@ -284,7 +284,7 @@ function compose(datas) {
     const updateName = (oldPrefix, newPrefix, prim) => {
         return {
             ...prim,
-            name: prim.name.replace(oldPrefix, newPrefix),
+            name: prim.name.replace(new RegExp(`^${oldPrefix}(?=/)`), newPrefix),
             children: prim.children.map(c => updateName(oldPrefix, newPrefix, c))
         }
     };
@@ -411,7 +411,6 @@ function buildDomTree(prim, node) {
     let span;
     elem.appendChild(document.createTextNode(prim.name ? prim.name.split('/').reverse()[0] : 'root'));
     elem.appendChild(span = document.createElement('span'));
-    console.log(prim.name ? prim.name.split('/').reverse()[0] : 'root', ...Object.keys(prim.attributes || {}));
     Object.entries(icons).forEach(([k, v]) => span.innerText += (prim.attributes || {})[k] ? v : ' ');
     span.className = "material-symbols-outlined";
     elem.onclick = (evt) => {
