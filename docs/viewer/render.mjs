@@ -3,6 +3,7 @@
 
 let controls, renderer, scene, camera;
 let datas = [];
+let autoCamera = true;
 
 function init() {
     scene = new THREE.Scene();
@@ -423,12 +424,9 @@ function buildDomTree(prim, node) {
 }
 
 export function composeAndRender() {
-    let autoCamera = true;
     if (scene) {
         // @todo does this actually free up resources?
         scene.children = [];
-        // only on first load
-        autoCamera = false;
     }
 
     document.querySelector('.tree').innerHTML = '';
@@ -448,14 +446,20 @@ export function composeAndRender() {
     if (autoCamera) {
         const boundingBox = new THREE.Box3();
         boundingBox.setFromObject(scene);
-        let avg = boundingBox.min.clone().add(boundingBox.max).multiplyScalar(0.5);
-        let ext = boundingBox.max.clone().sub(boundingBox.min).length();
-        camera.position.copy(avg.clone().add(new THREE.Vector3(1,1,1).normalize().multiplyScalar(ext)));
-        camera.far = ext * 3;
-        camera.updateProjectionMatrix();
-        controls.target.copy(avg);
-        controls.update();
+        if (!boundingBox.isEmpty()) {
+            let avg = boundingBox.min.clone().add(boundingBox.max).multiplyScalar(0.5);
+            let ext = boundingBox.max.clone().sub(boundingBox.min).length();
+            camera.position.copy(avg.clone().add(new THREE.Vector3(1,1,1).normalize().multiplyScalar(ext)));
+            camera.far = ext * 3;
+            camera.updateProjectionMatrix();
+            controls.target.copy(avg);
+            controls.update();
+            
+            // only on first successful load
+            autoCamera = false;
+        }
     }
+
 
     buildDomTree(tree, document.querySelector('.tree'));
     animate();
