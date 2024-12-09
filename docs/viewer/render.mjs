@@ -3,6 +3,7 @@
 
 let controls, renderer, scene, camera;
 let datas = [];
+let autoCamera = true;
 
 function init() {
     scene = new THREE.Scene();
@@ -284,7 +285,7 @@ function compose(datas) {
     const updateName = (oldPrefix, newPrefix, prim) => {
         return {
             ...prim,
-            name: prim.name.replace(oldPrefix, newPrefix),
+            name: prim.name.replace(new RegExp(`^${oldPrefix}(?=/)`), newPrefix),
             children: prim.children.map(c => updateName(oldPrefix, newPrefix, c))
         }
     };
@@ -411,11 +412,10 @@ function buildDomTree(prim, node) {
     let span;
     elem.appendChild(document.createTextNode(prim.name ? prim.name.split('/').reverse()[0] : 'root'));
     elem.appendChild(span = document.createElement('span'));
-    console.log(prim.name ? prim.name.split('/').reverse()[0] : 'root', ...Object.keys(prim.attributes || {}));
     Object.entries(icons).forEach(([k, v]) => span.innerText += (prim.attributes || {})[k] ? v : ' ');
     span.className = "material-symbols-outlined";
     elem.onclick = (evt) => {
-        let rows = Object.entries(prim.attributes).map(([k, v]) => `<tr><td>${encodeHtmlEntities(k)}</td><td>${encodeHtmlEntities(typeof v === 'object' ? JSON.stringify(v) : v)}</td>`).join('');
+        let rows = [['name', prim.name]].concat(Object.entries(prim.attributes)).map(([k, v]) => `<tr><td>${encodeHtmlEntities(k)}</td><td>${encodeHtmlEntities(typeof v === 'object' ? JSON.stringify(v) : v)}</td>`).join('');
         document.querySelector('.attributes .table').innerHTML = `<table border="0">${rows}</table>`;
         evt.stopPropagation();
     };
@@ -424,12 +424,9 @@ function buildDomTree(prim, node) {
 }
 
 export function composeAndRender() {
-    let autoCamera = true;
     if (scene) {
         // @todo does this actually free up resources?
         scene.children = [];
-        // only on first load
-        autoCamera = false;
     }
 
     document.querySelector('.tree').innerHTML = '';
@@ -449,14 +446,20 @@ export function composeAndRender() {
     if (autoCamera) {
         const boundingBox = new THREE.Box3();
         boundingBox.setFromObject(scene);
-        let avg = boundingBox.min.clone().add(boundingBox.max).multiplyScalar(0.5);
-        let ext = boundingBox.max.clone().sub(boundingBox.min).length();
-        camera.position.copy(avg.clone().add(new THREE.Vector3(1,1,1).normalize().multiplyScalar(ext)));
-        camera.far = ext * 3;
-        camera.updateProjectionMatrix();
-        controls.target.copy(avg);
-        controls.update();
+        if (!boundingBox.isEmpty()) {
+            let avg = boundingBox.min.clone().add(boundingBox.max).multiplyScalar(0.5);
+            let ext = boundingBox.max.clone().sub(boundingBox.min).length();
+            camera.position.copy(avg.clone().add(new THREE.Vector3(1,1,1).normalize().multiplyScalar(ext)));
+            camera.far = ext * 3;
+            camera.updateProjectionMatrix();
+            controls.target.copy(avg);
+            controls.update();
+            
+            // only on first successful load
+            autoCamera = false;
+        }
     }
+
 
     buildDomTree(tree, document.querySelector('.tree'));
     animate();
