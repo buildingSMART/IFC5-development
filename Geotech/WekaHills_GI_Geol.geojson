@@ -1,0 +1,5806 @@
+{
+  "type": "FeatureCollection",
+  "name": "weka_hills_gi_Geol",
+  "crs": {
+    "type": "name",
+    "properties": { "name": "urn:ogc:def:crs:EPSG::2193" }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_009",
+        "from": 0.0,
+        "to": 6.085,
+        "Description": "Weak thinly bedded brown fine-med grained sandy ALLUVIUM",
+        "Simple_Lith": "Alluvium",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_009",
+        "depth_to_top": 0.0,
+        "depth_to_base": 6.085,
+        "elevation_at_top": 502.8813831,
+        "elevation_at_base": 496.7963831
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1167046.628, 4888785.275999999605119, 502.8813831],
+          [1167046.628, 4888785.275999999605119, 496.796383100000014]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_009",
+        "from": 6.085,
+        "to": 50.0,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_009",
+        "depth_to_top": 6.085,
+        "depth_to_base": 50.0,
+        "elevation_at_top": 496.7963831,
+        "elevation_at_base": 452.8813831
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1167046.628, 4888785.275999999605119, 496.796383100000014],
+          [1167046.628, 4888785.275999999605119, 452.8813831]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_009A",
+        "from": 0.0,
+        "to": 7.018,
+        "Description": "Weak thinly bedded brown fine-med grained sandy ALLUVIUM",
+        "Simple_Lith": "Alluvium",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_009A",
+        "depth_to_top": 0.0,
+        "depth_to_base": 7.018,
+        "elevation_at_top": 500.897586,
+        "elevation_at_base": 493.879586
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1167046.628, 4888795.275999999605119, 500.897586],
+          [1167046.628, 4888795.275999999605119, 493.879586]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_009A",
+        "from": 7.018,
+        "to": 50.0,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_009A",
+        "depth_to_top": 7.018,
+        "depth_to_base": 50.0,
+        "elevation_at_top": 493.879586,
+        "elevation_at_base": 450.897586
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1167046.628, 4888795.275999999605119, 493.879586],
+          [1167046.628, 4888795.275999999605119, 450.897586]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_010",
+        "from": 0.0,
+        "to": 5.984,
+        "Description": "Stratified gravelly sand ALLUVIUM",
+        "Simple_Lith": "Alluvium",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_010",
+        "depth_to_top": 0.0,
+        "depth_to_base": 5.984,
+        "elevation_at_top": 518.4021,
+        "elevation_at_base": 512.4181
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1166599.321, 4888570.205, 518.4021],
+          [1166599.321, 4888570.205, 512.4181]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_010",
+        "from": 5.984,
+        "to": 50.0,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_010",
+        "depth_to_top": 5.984,
+        "depth_to_base": 50.0,
+        "elevation_at_top": 512.4181,
+        "elevation_at_base": 468.4021
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1166599.321, 4888570.205, 512.4181],
+          [1166599.321, 4888570.205, 468.4021]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_010A",
+        "from": 0.0,
+        "to": 0.126,
+        "Description": null,
+        "Simple_Lith": null,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_010A",
+        "depth_to_top": 0.0,
+        "depth_to_base": 0.126,
+        "elevation_at_top": 519.4955,
+        "elevation_at_base": 519.3695
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1166594.567, 4888575.467000000178814, 519.4955],
+          [1166594.567, 4888575.467000000178814, 519.3695]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_010A",
+        "from": 0.126,
+        "to": 9.303,
+        "Description": "Stratified gravelly sand ALLUVIUM",
+        "Simple_Lith": "Alluvium",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_010A",
+        "depth_to_top": 0.126,
+        "depth_to_base": 9.303,
+        "elevation_at_top": 519.3695,
+        "elevation_at_base": 510.1925
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1166594.567, 4888575.467000000178814, 519.3695],
+          [1166594.567, 4888575.467000000178814, 510.1925]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_010A",
+        "from": 9.303,
+        "to": 50.0,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_010A",
+        "depth_to_top": 9.303,
+        "depth_to_base": 50.0,
+        "elevation_at_top": 510.1925,
+        "elevation_at_base": 469.4955
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1166594.567, 4888575.467000000178814, 510.1925],
+          [1166594.567, 4888575.467000000178814, 469.4955]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_011",
+        "from": 0.0,
+        "to": 0.228,
+        "Description": null,
+        "Simple_Lith": null,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_011",
+        "depth_to_top": 0.0,
+        "depth_to_base": 0.228,
+        "elevation_at_top": 546.23763,
+        "elevation_at_base": 546.00963
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1166184.110000000102445, 4888296.167000000365078, 546.23763],
+          [1166184.110000000102445, 4888296.167000000365078, 546.00963]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_011",
+        "from": 0.228,
+        "to": 28.894,
+        "Description": "Stratified gravelly sand ALLUVIUM",
+        "Simple_Lith": "Alluvium",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_011",
+        "depth_to_top": 0.228,
+        "depth_to_base": 28.894,
+        "elevation_at_top": 546.00963,
+        "elevation_at_base": 517.34363
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1166184.110000000102445, 4888296.167000000365078, 546.00963],
+          [1166184.110000000102445, 4888296.167000000365078, 517.34363]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_011",
+        "from": 28.894,
+        "to": 50.0,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_011",
+        "depth_to_top": 28.894,
+        "depth_to_base": 50.0,
+        "elevation_at_top": 517.34363,
+        "elevation_at_base": 496.23763
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1166184.110000000102445, 4888296.167000000365078, 517.34363],
+          [1166184.110000000102445, 4888296.167000000365078, 496.23763]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_011A",
+        "from": 0.0,
+        "to": 1.141,
+        "Description": null,
+        "Simple_Lith": null,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_011A",
+        "depth_to_top": 0.0,
+        "depth_to_base": 1.141,
+        "elevation_at_top": 548.51473,
+        "elevation_at_base": 547.37373
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1166175.361, 4888302.434000000357628, 548.51473],
+          [1166175.361, 4888302.434000000357628, 547.37373]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_011A",
+        "from": 1.141,
+        "to": 27.509,
+        "Description": "Stratified gravelly sand ALLUVIUM",
+        "Simple_Lith": "Alluvium",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_011A",
+        "depth_to_top": 1.141,
+        "depth_to_base": 27.509,
+        "elevation_at_top": 547.37373,
+        "elevation_at_base": 521.00573
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1166175.361, 4888302.434000000357628, 547.37373],
+          [1166175.361, 4888302.434000000357628, 521.00573]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_011A",
+        "from": 27.509,
+        "to": 50.0,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_011A",
+        "depth_to_top": 27.509,
+        "depth_to_base": 50.0,
+        "elevation_at_top": 521.00573,
+        "elevation_at_base": 498.51473
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1166175.361, 4888302.434000000357628, 521.00573],
+          [1166175.361, 4888302.434000000357628, 498.51473]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_012",
+        "from": 0.0,
+        "to": 32.841,
+        "Description": "Very weak thinly bedded brown medium grained sand to gravel ALLUVIUM with fractures",
+        "Simple_Lith": "Alluvium",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_012",
+        "depth_to_top": 0.0,
+        "depth_to_base": 32.841,
+        "elevation_at_top": 563.4533858,
+        "elevation_at_base": 530.6123858
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165777.32, 4888011.235999999567866, 563.453385799999978],
+          [1165777.32, 4888011.235999999567866, 530.61238579999997]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_012",
+        "from": 32.841,
+        "to": 43.847,
+        "Description": "Very weak thinly bedded clay-fine sand ALLUVIUM with fractures",
+        "Simple_Lith": "Alluvium",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_012",
+        "depth_to_top": 32.841,
+        "depth_to_base": 43.847,
+        "elevation_at_top": 530.6123858,
+        "elevation_at_base": 519.6063858
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165777.32, 4888011.235999999567866, 530.61238579999997],
+          [1165777.32, 4888011.235999999567866, 519.6063858]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_012",
+        "from": 43.847,
+        "to": 173.552,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_012",
+        "depth_to_top": 43.847,
+        "depth_to_base": 173.552,
+        "elevation_at_top": 519.6063858,
+        "elevation_at_base": 389.9013858
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165777.32, 4888011.235999999567866, 519.6063858],
+          [1165777.32, 4888011.235999999567866, 389.901385799999957]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_012",
+        "from": 173.552,
+        "to": 300.0,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_012",
+        "depth_to_top": 173.552,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 389.9013858,
+        "elevation_at_base": 263.4533858
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165777.32, 4888011.235999999567866, 389.901385799999957],
+          [1165777.32, 4888011.235999999567866, 263.453385799999978]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_012A",
+        "from": 0.0,
+        "to": 34.007,
+        "Description": "Very weak thinly bedded clay-fine sand ALLUVIUM with fractures",
+        "Simple_Lith": "Alluvium",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_012A",
+        "depth_to_top": 0.0,
+        "depth_to_base": 34.007,
+        "elevation_at_top": 564.0108,
+        "elevation_at_base": 530.0038
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165769.949, 4888018.08, 564.0108],
+          [1165769.949, 4888018.08, 530.0038]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_012A",
+        "from": 34.007,
+        "to": 43.894,
+        "Description": "Very weak thinly bedded clay-fine sand ALLUVIUM with fractures",
+        "Simple_Lith": "Alluvium",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_012A",
+        "depth_to_top": 34.007,
+        "depth_to_base": 43.894,
+        "elevation_at_top": 530.0038,
+        "elevation_at_base": 520.1168
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165769.949, 4888018.08, 530.0038],
+          [1165769.949, 4888018.08, 520.1168]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_012A",
+        "from": 43.894,
+        "to": 173.646,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_012A",
+        "depth_to_top": 43.894,
+        "depth_to_base": 173.646,
+        "elevation_at_top": 520.1168,
+        "elevation_at_base": 390.3648
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165769.949, 4888018.08, 520.1168],
+          [1165769.949, 4888018.08, 390.3648]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_012A",
+        "from": 173.646,
+        "to": 300.0,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_012A",
+        "depth_to_top": 173.646,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 390.3648,
+        "elevation_at_base": 264.0108
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165769.949, 4888018.08, 390.3648],
+          [1165769.949, 4888018.08, 264.0108]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_014",
+        "from": 0.0,
+        "to": 0.738,
+        "Description": null,
+        "Simple_Lith": null,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_014",
+        "depth_to_top": 0.0,
+        "depth_to_base": 0.738,
+        "elevation_at_top": 588.39724,
+        "elevation_at_base": 587.65924
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165489.758, 4888037.848000000230968, 588.39724],
+          [1165489.758, 4888037.848000000230968, 587.65924]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_014",
+        "from": 0.738,
+        "to": 2.328,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_014",
+        "depth_to_top": 0.738,
+        "depth_to_base": 2.328,
+        "elevation_at_top": 587.65924,
+        "elevation_at_base": 586.06924
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165489.758, 4888037.848000000230968, 587.65924],
+          [1165489.758, 4888037.848000000230968, 586.06924]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_014",
+        "from": 2.328,
+        "to": 82.569,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_014",
+        "depth_to_top": 2.328,
+        "depth_to_base": 82.569,
+        "elevation_at_top": 586.06924,
+        "elevation_at_base": 505.82824
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165489.758, 4888037.848000000230968, 586.06924],
+          [1165489.758, 4888037.848000000230968, 505.82824]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_014",
+        "from": 82.569,
+        "to": 145.128,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_014",
+        "depth_to_top": 82.569,
+        "depth_to_base": 145.128,
+        "elevation_at_top": 505.82824,
+        "elevation_at_base": 443.26924
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165489.758, 4888037.848000000230968, 505.82824],
+          [1165489.758, 4888037.848000000230968, 443.26924]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_014",
+        "from": 145.128,
+        "to": 189.121,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_014",
+        "depth_to_top": 145.128,
+        "depth_to_base": 189.121,
+        "elevation_at_top": 443.26924,
+        "elevation_at_base": 399.27624
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165489.758, 4888037.848000000230968, 443.26924],
+          [1165489.758, 4888037.848000000230968, 399.27624]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_014",
+        "from": 189.121,
+        "to": 300.0,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_014",
+        "depth_to_top": 189.121,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 399.27624,
+        "elevation_at_base": 288.39724
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165489.758, 4888037.848000000230968, 399.27624],
+          [1165489.758, 4888037.848000000230968, 288.39724]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_014A",
+        "from": 0.0,
+        "to": 0.235,
+        "Description": null,
+        "Simple_Lith": null,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_014A",
+        "depth_to_top": 0.0,
+        "depth_to_base": 0.235,
+        "elevation_at_top": 586.335,
+        "elevation_at_base": 586.1
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165504.028, 4888037.475999999791384, 586.335],
+          [1165504.028, 4888037.475999999791384, 586.1]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_014A",
+        "from": 0.235,
+        "to": 80.619,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_014A",
+        "depth_to_top": 0.235,
+        "depth_to_base": 80.619,
+        "elevation_at_top": 586.1,
+        "elevation_at_base": 505.716
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165504.028, 4888037.475999999791384, 586.1],
+          [1165504.028, 4888037.475999999791384, 505.716]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_014A",
+        "from": 80.619,
+        "to": 139.305,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_014A",
+        "depth_to_top": 80.619,
+        "depth_to_base": 139.305,
+        "elevation_at_top": 505.716,
+        "elevation_at_base": 447.03
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165504.028, 4888037.475999999791384, 505.716],
+          [1165504.028, 4888037.475999999791384, 447.03]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_014A",
+        "from": 139.305,
+        "to": 187.495,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_014A",
+        "depth_to_top": 139.305,
+        "depth_to_base": 187.495,
+        "elevation_at_top": 447.03,
+        "elevation_at_base": 398.84
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165504.028, 4888037.475999999791384, 447.03],
+          [1165504.028, 4888037.475999999791384, 398.84]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_014A",
+        "from": 187.495,
+        "to": 300.0,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_014A",
+        "depth_to_top": 187.495,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 398.84,
+        "elevation_at_base": 286.335
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165504.028, 4888037.475999999791384, 398.84],
+          [1165504.028, 4888037.475999999791384, 286.335]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_015",
+        "from": 0.0,
+        "to": 0.622,
+        "Description": null,
+        "Simple_Lith": null,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_015",
+        "depth_to_top": 0.0,
+        "depth_to_base": 0.622,
+        "elevation_at_top": 599.52261,
+        "elevation_at_base": 598.90061
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165636.928, 4888175.004999999888241, 599.52261],
+          [1165636.928, 4888175.004999999888241, 598.90061]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_015",
+        "from": 0.622,
+        "to": 21.583,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_015",
+        "depth_to_top": 0.622,
+        "depth_to_base": 21.583,
+        "elevation_at_top": 598.90061,
+        "elevation_at_base": 577.93961
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165636.928, 4888175.004999999888241, 598.90061],
+          [1165636.928, 4888175.004999999888241, 577.93961]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_015",
+        "from": 21.583,
+        "to": 65.14,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_015",
+        "depth_to_top": 21.583,
+        "depth_to_base": 65.14,
+        "elevation_at_top": 577.93961,
+        "elevation_at_base": 534.38261
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165636.928, 4888175.004999999888241, 577.93961],
+          [1165636.928, 4888175.004999999888241, 534.38261]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_015",
+        "from": 65.14,
+        "to": 190.392,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_015",
+        "depth_to_top": 65.14,
+        "depth_to_base": 190.392,
+        "elevation_at_top": 534.38261,
+        "elevation_at_base": 409.13061
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165636.928, 4888175.004999999888241, 534.38261],
+          [1165636.928, 4888175.004999999888241, 409.13061]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_015",
+        "from": 190.392,
+        "to": 300.0,
+        "Description": "Very strong massive pale crystalline micro-GRANODIORITE",
+        "Simple_Lith": "Granodiorite",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_015",
+        "depth_to_top": 190.392,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 409.13061,
+        "elevation_at_base": 299.52261
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165636.928, 4888175.004999999888241, 409.13061],
+          [1165636.928, 4888175.004999999888241, 299.52261]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_015A",
+        "from": 0.0,
+        "to": 0.116,
+        "Description": null,
+        "Simple_Lith": null,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_015A",
+        "depth_to_top": 0.0,
+        "depth_to_base": 0.116,
+        "elevation_at_top": 596.475635,
+        "elevation_at_base": 596.359635
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165647.206, 4888163.894999999552965, 596.475635],
+          [1165647.206, 4888163.894999999552965, 596.359635]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_015A",
+        "from": 0.116,
+        "to": 17.101,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_015A",
+        "depth_to_top": 0.116,
+        "depth_to_base": 17.101,
+        "elevation_at_top": 596.359635,
+        "elevation_at_base": 579.374635
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165647.206, 4888163.894999999552965, 596.359635],
+          [1165647.206, 4888163.894999999552965, 579.374635]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_015A",
+        "from": 17.101,
+        "to": 62.305,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_015A",
+        "depth_to_top": 17.101,
+        "depth_to_base": 62.305,
+        "elevation_at_top": 579.374635,
+        "elevation_at_base": 534.170635
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165647.206, 4888163.894999999552965, 579.374635],
+          [1165647.206, 4888163.894999999552965, 534.170635]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_015A",
+        "from": 62.305,
+        "to": 189.578,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_015A",
+        "depth_to_top": 62.305,
+        "depth_to_base": 189.578,
+        "elevation_at_top": 534.170635,
+        "elevation_at_base": 406.897635
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165647.206, 4888163.894999999552965, 534.170635],
+          [1165647.206, 4888163.894999999552965, 406.897635]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_015A",
+        "from": 189.578,
+        "to": 300.0,
+        "Description": "Very strong massive pale crystalline micro-GRANODIORITE",
+        "Simple_Lith": "Granodiorite",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_015A",
+        "depth_to_top": 189.578,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 406.897635,
+        "elevation_at_base": 296.475635
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165647.206, 4888163.894999999552965, 406.897635],
+          [1165647.206, 4888163.894999999552965, 296.475635]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_016",
+        "from": 0.0,
+        "to": 41.868,
+        "Description": "Weak medium bedded light grey LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_016",
+        "depth_to_top": 0.0,
+        "depth_to_base": 41.868,
+        "elevation_at_top": 610.18681,
+        "elevation_at_base": 568.31881
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165762.475, 4888326.462000000290573, 610.18681],
+          [1165762.475, 4888326.462000000290573, 568.31881]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_016",
+        "from": 41.868,
+        "to": 70.691,
+        "Description": "Med-strong very thinly bedded brown slightly calcareous SILTSTONE",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_016",
+        "depth_to_top": 41.868,
+        "depth_to_base": 70.691,
+        "elevation_at_top": 568.31881,
+        "elevation_at_base": 539.49581
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165762.475, 4888326.462000000290573, 568.31881],
+          [1165762.475, 4888326.462000000290573, 539.49581]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_016",
+        "from": 70.691,
+        "to": 300.0,
+        "Description": "Very strong massive pale crystalline micro-GRANODIORITE",
+        "Simple_Lith": "Granodiorite",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_016",
+        "depth_to_top": 70.691,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 539.49581,
+        "elevation_at_base": 310.18681
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165762.475, 4888326.462000000290573, 539.49581],
+          [1165762.475, 4888326.462000000290573, 310.18681]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_016A",
+        "from": 0.0,
+        "to": 38.426,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_016A",
+        "depth_to_top": 0.0,
+        "depth_to_base": 38.426,
+        "elevation_at_top": 607.245885,
+        "elevation_at_base": 568.819885
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165776.349, 4888323.473000000230968, 607.245885],
+          [1165776.349, 4888323.473000000230968, 568.819885]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_016A",
+        "from": 38.426,
+        "to": 65.337,
+        "Description": "Med-strong very thinly bedded brown slightly calcareous SILTSTONE",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_016A",
+        "depth_to_top": 38.426,
+        "depth_to_base": 65.337,
+        "elevation_at_top": 568.819885,
+        "elevation_at_base": 541.908885
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165776.349, 4888323.473000000230968, 568.819885],
+          [1165776.349, 4888323.473000000230968, 541.908885]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_016A",
+        "from": 65.337,
+        "to": 300.0,
+        "Description": "Very strong massive pale crystalline micro-GRANODIORITE",
+        "Simple_Lith": "Granodiorite",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_016A",
+        "depth_to_top": 65.337,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 541.908885,
+        "elevation_at_base": 307.245885
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165776.349, 4888323.473000000230968, 541.908885],
+          [1165776.349, 4888323.473000000230968, 307.245885]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_017",
+        "from": 0.0,
+        "to": 3.982,
+        "Description": null,
+        "Simple_Lith": null,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_017",
+        "depth_to_top": 0.0,
+        "depth_to_base": 3.982,
+        "elevation_at_top": 629.225722,
+        "elevation_at_base": 625.243722
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165924.633, 4888574.485000000335276, 629.225722],
+          [1165924.633, 4888574.485000000335276, 625.243722]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_017",
+        "from": 3.982,
+        "to": 50.0,
+        "Description": "Very weak medium bedded light grey LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_017",
+        "depth_to_top": 3.982,
+        "depth_to_base": 50.0,
+        "elevation_at_top": 625.243722,
+        "elevation_at_base": 579.225722
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165924.633, 4888574.485000000335276, 625.243722],
+          [1165924.633, 4888574.485000000335276, 579.225722]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_017A",
+        "from": 0.0,
+        "to": 50.0,
+        "Description": "Very weak medium bedded light grey LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_017A",
+        "depth_to_top": 0.0,
+        "depth_to_base": 50.0,
+        "elevation_at_top": 615.798642,
+        "elevation_at_base": 565.798642
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165943.165, 4888574.188, 615.798642],
+          [1165943.165, 4888574.188, 565.798642]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_018",
+        "from": 0.0,
+        "to": 0.136,
+        "Description": null,
+        "Simple_Lith": null,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_018",
+        "depth_to_top": 0.0,
+        "depth_to_base": 0.136,
+        "elevation_at_top": 641.786331,
+        "elevation_at_base": 641.650331
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165836.916, 4888849.053000000305474, 641.786331],
+          [1165836.916, 4888849.053000000305474, 641.650331]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_018",
+        "from": 0.136,
+        "to": 16.208,
+        "Description": "Strong white crystalline calcite VEIN with some open space and euhedral crystal faces in openings",
+        "Simple_Lith": "Vein 2",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_018",
+        "depth_to_top": 0.136,
+        "depth_to_base": 16.208,
+        "elevation_at_top": 641.650331,
+        "elevation_at_base": 625.578331
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165836.916, 4888849.053000000305474, 641.650331],
+          [1165836.916, 4888849.053000000305474, 625.578331]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_018",
+        "from": 16.208,
+        "to": 50.0,
+        "Description": "Very weak medium bedded light grey LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_018",
+        "depth_to_top": 16.208,
+        "depth_to_base": 50.0,
+        "elevation_at_top": 625.578331,
+        "elevation_at_base": 591.786331
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165836.916, 4888849.053000000305474, 625.578331],
+          [1165836.916, 4888849.053000000305474, 591.786331]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_018A",
+        "from": 0.0,
+        "to": 4.112,
+        "Description": "Strong white crystalline calcite VEIN with some open space and euhedral crystal faces in openings",
+        "Simple_Lith": "Vein 2",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_018A",
+        "depth_to_top": 0.0,
+        "depth_to_base": 4.112,
+        "elevation_at_top": 637.241374,
+        "elevation_at_base": 633.129374
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165843.779, 4888864.895999999716878, 637.241374],
+          [1165843.779, 4888864.895999999716878, 633.129374]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_018A",
+        "from": 4.112,
+        "to": 50.0,
+        "Description": "Very weak medium bedded light grey LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_018A",
+        "depth_to_top": 4.112,
+        "depth_to_base": 50.0,
+        "elevation_at_top": 633.129374,
+        "elevation_at_base": 587.241374
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165843.779, 4888864.895999999716878, 633.129374],
+          [1165843.779, 4888864.895999999716878, 587.241374]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_019",
+        "from": 0.0,
+        "to": 12.379,
+        "Description": "Very weak medium bedded light grey LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_019",
+        "depth_to_top": 0.0,
+        "depth_to_base": 12.379,
+        "elevation_at_top": 657.320339,
+        "elevation_at_base": 644.941339
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165542.624, 4888843.19400000013411, 657.320339],
+          [1165542.624, 4888843.19400000013411, 644.941339]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_019",
+        "from": 12.379,
+        "to": 34.535,
+        "Description": "Strong white crystalline calcite VEIN with some open space and euhedral crystal faces in openings",
+        "Simple_Lith": "Vein 2",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_019",
+        "depth_to_top": 12.379,
+        "depth_to_base": 34.535,
+        "elevation_at_top": 644.941339,
+        "elevation_at_base": 622.785339
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165542.624, 4888843.19400000013411, 644.941339],
+          [1165542.624, 4888843.19400000013411, 622.785339]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_019",
+        "from": 34.535,
+        "to": 118.554,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_019",
+        "depth_to_top": 34.535,
+        "depth_to_base": 118.554,
+        "elevation_at_top": 622.785339,
+        "elevation_at_base": 538.766339
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165542.624, 4888843.19400000013411, 622.785339],
+          [1165542.624, 4888843.19400000013411, 538.766339]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_019",
+        "from": 118.554,
+        "to": 272.31,
+        "Description": "Very strong massive pale crystalline micro-GRANODIORITE",
+        "Simple_Lith": "Granodiorite",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_019",
+        "depth_to_top": 118.554,
+        "depth_to_base": 272.31,
+        "elevation_at_top": 538.766339,
+        "elevation_at_base": 385.010339
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165542.624, 4888843.19400000013411, 538.766339],
+          [1165542.624, 4888843.19400000013411, 385.010339]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_019",
+        "from": 272.31,
+        "to": 300.0,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_019",
+        "depth_to_top": 272.31,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 385.010339,
+        "elevation_at_base": 357.320339
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165542.624, 4888843.19400000013411, 385.010339],
+          [1165542.624, 4888843.19400000013411, 357.320339]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_019A",
+        "from": 0.0,
+        "to": 0.146,
+        "Description": null,
+        "Simple_Lith": null,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_019A",
+        "depth_to_top": 0.0,
+        "depth_to_base": 0.146,
+        "elevation_at_top": 657.136468,
+        "elevation_at_base": 656.990468
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165539.889, 4888858.82799999974668, 657.136468],
+          [1165539.889, 4888858.82799999974668, 656.990468]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_019A",
+        "from": 0.146,
+        "to": 4.744,
+        "Description": "Very weak medium bedded light grey LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_019A",
+        "depth_to_top": 0.146,
+        "depth_to_base": 4.744,
+        "elevation_at_top": 656.990468,
+        "elevation_at_base": 652.392468
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165539.889, 4888858.82799999974668, 656.990468],
+          [1165539.889, 4888858.82799999974668, 652.392468]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_019A",
+        "from": 4.744,
+        "to": 26.899,
+        "Description": "Strong white crystalline calcite VEIN with some open space and euhedral crystal faces in openings",
+        "Simple_Lith": "Vein 2",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_019A",
+        "depth_to_top": 4.744,
+        "depth_to_base": 26.899,
+        "elevation_at_top": 652.392468,
+        "elevation_at_base": 630.237468
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165539.889, 4888858.82799999974668, 652.392468],
+          [1165539.889, 4888858.82799999974668, 630.237468]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_019A",
+        "from": 26.899,
+        "to": 118.724,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_019A",
+        "depth_to_top": 26.899,
+        "depth_to_base": 118.724,
+        "elevation_at_top": 630.237468,
+        "elevation_at_base": 538.412468
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165539.889, 4888858.82799999974668, 630.237468],
+          [1165539.889, 4888858.82799999974668, 538.412468]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_019A",
+        "from": 118.724,
+        "to": 269.863,
+        "Description": "Very strong massive pale crystalline micro-GRANODIORITE",
+        "Simple_Lith": "Granodiorite",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_019A",
+        "depth_to_top": 118.724,
+        "depth_to_base": 269.863,
+        "elevation_at_top": 538.412468,
+        "elevation_at_base": 387.273468
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165539.889, 4888858.82799999974668, 538.412468],
+          [1165539.889, 4888858.82799999974668, 387.273468]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_019A",
+        "from": 269.863,
+        "to": 300.0,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_019A",
+        "depth_to_top": 269.863,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 387.273468,
+        "elevation_at_base": 357.136468
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165539.889, 4888858.82799999974668, 387.273468],
+          [1165539.889, 4888858.82799999974668, 357.136468]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_020",
+        "from": 0.0,
+        "to": 0.097,
+        "Description": null,
+        "Simple_Lith": null,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_020",
+        "depth_to_top": 0.0,
+        "depth_to_base": 0.097,
+        "elevation_at_top": 671.382171,
+        "elevation_at_base": 671.285171
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165368.804, 4888752.986999999731779, 671.382171],
+          [1165368.804, 4888752.986999999731779, 671.285171]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_020",
+        "from": 0.097,
+        "to": 40.016,
+        "Description": "Very weak medium bedded light grey LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_020",
+        "depth_to_top": 0.097,
+        "depth_to_base": 40.016,
+        "elevation_at_top": 671.285171,
+        "elevation_at_base": 631.366171
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165368.804, 4888752.986999999731779, 671.285171],
+          [1165368.804, 4888752.986999999731779, 631.366171]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_020",
+        "from": 40.016,
+        "to": 69.438,
+        "Description": "Weak medium bedded light grey LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_020",
+        "depth_to_top": 40.016,
+        "depth_to_base": 69.438,
+        "elevation_at_top": 631.366171,
+        "elevation_at_base": 601.944171
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165368.804, 4888752.986999999731779, 631.366171],
+          [1165368.804, 4888752.986999999731779, 601.944171]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_020",
+        "from": 69.438,
+        "to": 91.594,
+        "Description": "Strong white crystalline calcite VEIN with some open space and euhedral crystal faces in openings",
+        "Simple_Lith": "Vein 2",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_020",
+        "depth_to_top": 69.438,
+        "depth_to_base": 91.594,
+        "elevation_at_top": 601.944171,
+        "elevation_at_base": 579.788171
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165368.804, 4888752.986999999731779, 601.944171],
+          [1165368.804, 4888752.986999999731779, 579.788171]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_020",
+        "from": 91.594,
+        "to": 126.86,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_020",
+        "depth_to_top": 91.594,
+        "depth_to_base": 126.86,
+        "elevation_at_top": 579.788171,
+        "elevation_at_base": 544.522171
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165368.804, 4888752.986999999731779, 579.788171],
+          [1165368.804, 4888752.986999999731779, 544.522171]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_020",
+        "from": 126.86,
+        "to": 141.202,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_020",
+        "depth_to_top": 126.86,
+        "depth_to_base": 141.202,
+        "elevation_at_top": 544.522171,
+        "elevation_at_base": 530.180171
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165368.804, 4888752.986999999731779, 544.522171],
+          [1165368.804, 4888752.986999999731779, 530.180171]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_020",
+        "from": 141.202,
+        "to": 300.0,
+        "Description": "Very strong massive pale crystalline micro-GRANODIORITE",
+        "Simple_Lith": "Granodiorite",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_020",
+        "depth_to_top": 141.202,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 530.180171,
+        "elevation_at_base": 371.382171
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165368.804, 4888752.986999999731779, 530.180171],
+          [1165368.804, 4888752.986999999731779, 371.382171]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_020A",
+        "from": 0.0,
+        "to": 0.36,
+        "Description": null,
+        "Simple_Lith": null,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_020A",
+        "depth_to_top": 0.0,
+        "depth_to_base": 0.36,
+        "elevation_at_top": 671.1649947,
+        "elevation_at_base": 670.8049947
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165368.804, 4888762.986999999731779, 671.164994699999966],
+          [1165368.804, 4888762.986999999731779, 670.804994699999952]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_020A",
+        "from": 0.36,
+        "to": 37.028,
+        "Description": "Very weak medium bedded light grey LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_020A",
+        "depth_to_top": 0.36,
+        "depth_to_base": 37.028,
+        "elevation_at_top": 670.8049947,
+        "elevation_at_base": 634.1369947
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165368.804, 4888762.986999999731779, 670.804994699999952],
+          [1165368.804, 4888762.986999999731779, 634.136994699999946]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_020A",
+        "from": 37.028,
+        "to": 64.455,
+        "Description": "Weak medium bedded light grey LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_020A",
+        "depth_to_top": 37.028,
+        "depth_to_base": 64.455,
+        "elevation_at_top": 634.1369947,
+        "elevation_at_base": 606.7099947
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165368.804, 4888762.986999999731779, 634.136994699999946],
+          [1165368.804, 4888762.986999999731779, 606.709994699999925]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_020A",
+        "from": 64.455,
+        "to": 86.611,
+        "Description": "Strong white crystalline calcite VEIN with some open space and euhedral crystal faces in openings",
+        "Simple_Lith": "Vein 2",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_020A",
+        "depth_to_top": 64.455,
+        "depth_to_base": 86.611,
+        "elevation_at_top": 606.7099947,
+        "elevation_at_base": 584.5539947
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165368.804, 4888762.986999999731779, 606.709994699999925],
+          [1165368.804, 4888762.986999999731779, 584.553994699999976]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_020A",
+        "from": 86.611,
+        "to": 126.931,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_020A",
+        "depth_to_top": 86.611,
+        "depth_to_base": 126.931,
+        "elevation_at_top": 584.5539947,
+        "elevation_at_base": 544.2339947
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165368.804, 4888762.986999999731779, 584.553994699999976],
+          [1165368.804, 4888762.986999999731779, 544.233994699999926]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_020A",
+        "from": 126.931,
+        "to": 139.263,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_020A",
+        "depth_to_top": 126.931,
+        "depth_to_base": 139.263,
+        "elevation_at_top": 544.2339947,
+        "elevation_at_base": 531.9019947
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165368.804, 4888762.986999999731779, 544.233994699999926],
+          [1165368.804, 4888762.986999999731779, 531.901994699999932]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_020A",
+        "from": 139.263,
+        "to": 300.0,
+        "Description": "Very strong massive pale crystalline micro-GRANODIORITE",
+        "Simple_Lith": "Granodiorite",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_020A",
+        "depth_to_top": 139.263,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 531.9019947,
+        "elevation_at_base": 371.1649947
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165368.804, 4888762.986999999731779, 531.901994699999932],
+          [1165368.804, 4888762.986999999731779, 371.164994699999966]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_021",
+        "from": 0.0,
+        "to": 96.148,
+        "Description": "Weak medium bedded light grey LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_021",
+        "depth_to_top": 0.0,
+        "depth_to_base": 96.148,
+        "elevation_at_top": 684.4279,
+        "elevation_at_base": 588.2799
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165172.242, 4888724.320000000298023, 684.4279],
+          [1165172.242, 4888724.320000000298023, 588.2799]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_021",
+        "from": 96.148,
+        "to": 118.304,
+        "Description": "Strong white crystalline calcite VEIN with some open space and euhedral crystal faces in openings",
+        "Simple_Lith": "Vein 2",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_021",
+        "depth_to_top": 96.148,
+        "depth_to_base": 118.304,
+        "elevation_at_top": 588.2799,
+        "elevation_at_base": 566.1239
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165172.242, 4888724.320000000298023, 588.2799],
+          [1165172.242, 4888724.320000000298023, 566.1239]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_021",
+        "from": 118.304,
+        "to": 124.778,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_021",
+        "depth_to_top": 118.304,
+        "depth_to_base": 124.778,
+        "elevation_at_top": 566.1239,
+        "elevation_at_base": 559.6499
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165172.242, 4888724.320000000298023, 566.1239],
+          [1165172.242, 4888724.320000000298023, 559.6499]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_021",
+        "from": 124.778,
+        "to": 134.969,
+        "Description": "Medium strong medium bedded grey crystalline LIMESTONE with fractures",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_021",
+        "depth_to_top": 124.778,
+        "depth_to_base": 134.969,
+        "elevation_at_top": 559.6499,
+        "elevation_at_base": 549.4589
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165172.242, 4888724.320000000298023, 559.6499],
+          [1165172.242, 4888724.320000000298023, 549.4589]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_021",
+        "from": 134.969,
+        "to": 239.067,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_021",
+        "depth_to_top": 134.969,
+        "depth_to_base": 239.067,
+        "elevation_at_top": 549.4589,
+        "elevation_at_base": 445.3609
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165172.242, 4888724.320000000298023, 549.4589],
+          [1165172.242, 4888724.320000000298023, 445.3609]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_021",
+        "from": 239.067,
+        "to": 300.0,
+        "Description": "Very strong massive pale crystalline micro-GRANODIORITE",
+        "Simple_Lith": "Granodiorite",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_021",
+        "depth_to_top": 239.067,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 445.3609,
+        "elevation_at_base": 384.4279
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165172.242, 4888724.320000000298023, 445.3609],
+          [1165172.242, 4888724.320000000298023, 384.4279]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_021A",
+        "from": 0.0,
+        "to": 0.052,
+        "Description": null,
+        "Simple_Lith": null,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_021A",
+        "depth_to_top": 0.0,
+        "depth_to_base": 0.052,
+        "elevation_at_top": 683.9223,
+        "elevation_at_base": 683.8703
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165172.242, 4888734.320000000298023, 683.9223],
+          [1165172.242, 4888734.320000000298023, 683.8703]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_021A",
+        "from": 0.052,
+        "to": 90.876,
+        "Description": "Very weak medium bedded light grey LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_021A",
+        "depth_to_top": 0.052,
+        "depth_to_base": 90.876,
+        "elevation_at_top": 683.8703,
+        "elevation_at_base": 593.0463
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165172.242, 4888734.320000000298023, 683.8703],
+          [1165172.242, 4888734.320000000298023, 593.0463]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_021A",
+        "from": 90.876,
+        "to": 113.032,
+        "Description": "Strong white crystalline calcite VEIN with some open space and euhedral crystal faces in openings",
+        "Simple_Lith": "Vein 2",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_021A",
+        "depth_to_top": 90.876,
+        "depth_to_base": 113.032,
+        "elevation_at_top": 593.0463,
+        "elevation_at_base": 570.8903
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165172.242, 4888734.320000000298023, 593.0463],
+          [1165172.242, 4888734.320000000298023, 570.8903]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_021A",
+        "from": 113.032,
+        "to": 121.372,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_021A",
+        "depth_to_top": 113.032,
+        "depth_to_base": 121.372,
+        "elevation_at_top": 570.8903,
+        "elevation_at_base": 562.5503
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165172.242, 4888734.320000000298023, 570.8903],
+          [1165172.242, 4888734.320000000298023, 562.5503]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_021A",
+        "from": 121.372,
+        "to": 134.657,
+        "Description": "Medium strong medium bedded grey crystalline LIMESTONE with fractures",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_021A",
+        "depth_to_top": 121.372,
+        "depth_to_base": 134.657,
+        "elevation_at_top": 562.5503,
+        "elevation_at_base": 549.2653
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165172.242, 4888734.320000000298023, 562.5503],
+          [1165172.242, 4888734.320000000298023, 549.2653]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_021A",
+        "from": 134.657,
+        "to": 236.118,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_021A",
+        "depth_to_top": 134.657,
+        "depth_to_base": 236.118,
+        "elevation_at_top": 549.2653,
+        "elevation_at_base": 447.8043
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165172.242, 4888734.320000000298023, 549.2653],
+          [1165172.242, 4888734.320000000298023, 447.8043]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_021A",
+        "from": 236.118,
+        "to": 300.0,
+        "Description": "Very strong massive pale crystalline micro-GRANODIORITE",
+        "Simple_Lith": "Granodiorite",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_021A",
+        "depth_to_top": 236.118,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 447.8043,
+        "elevation_at_base": 383.9223
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165172.242, 4888734.320000000298023, 447.8043],
+          [1165172.242, 4888734.320000000298023, 383.9223]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_022",
+        "from": 0.0,
+        "to": 0.446,
+        "Description": null,
+        "Simple_Lith": null,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_022",
+        "depth_to_top": 0.0,
+        "depth_to_base": 0.446,
+        "elevation_at_top": 694.117,
+        "elevation_at_base": 693.671
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164980.795, 4888765.251000000163913, 694.117],
+          [1164980.795, 4888765.251000000163913, 693.671]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_022",
+        "from": 0.446,
+        "to": 86.328,
+        "Description": "Very weak medium bedded light grey LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_022",
+        "depth_to_top": 0.446,
+        "depth_to_base": 86.328,
+        "elevation_at_top": 693.671,
+        "elevation_at_base": 607.789
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164980.795, 4888765.251000000163913, 693.671],
+          [1164980.795, 4888765.251000000163913, 607.789]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_022",
+        "from": 86.328,
+        "to": 108.483,
+        "Description": "Strong white crystalline calcite VEIN with some open space and euhedral crystal faces in openings",
+        "Simple_Lith": "Vein 2",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_022",
+        "depth_to_top": 86.328,
+        "depth_to_base": 108.483,
+        "elevation_at_top": 607.789,
+        "elevation_at_base": 585.634
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164980.795, 4888765.251000000163913, 607.789],
+          [1164980.795, 4888765.251000000163913, 585.634]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_022",
+        "from": 108.483,
+        "to": 139.804,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_022",
+        "depth_to_top": 108.483,
+        "depth_to_base": 139.804,
+        "elevation_at_top": 585.634,
+        "elevation_at_base": 554.313
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164980.795, 4888765.251000000163913, 585.634],
+          [1164980.795, 4888765.251000000163913, 554.313]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_022",
+        "from": 139.804,
+        "to": 171.361,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_022",
+        "depth_to_top": 139.804,
+        "depth_to_base": 171.361,
+        "elevation_at_top": 554.313,
+        "elevation_at_base": 522.756
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164980.795, 4888765.251000000163913, 554.313],
+          [1164980.795, 4888765.251000000163913, 522.756]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_022",
+        "from": 171.361,
+        "to": 186.445,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_022",
+        "depth_to_top": 171.361,
+        "depth_to_base": 186.445,
+        "elevation_at_top": 522.756,
+        "elevation_at_base": 507.672
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164980.795, 4888765.251000000163913, 522.756],
+          [1164980.795, 4888765.251000000163913, 507.672]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_022",
+        "from": 186.445,
+        "to": 253.451,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_022",
+        "depth_to_top": 186.445,
+        "depth_to_base": 253.451,
+        "elevation_at_top": 507.672,
+        "elevation_at_base": 440.666
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164980.795, 4888765.251000000163913, 507.672],
+          [1164980.795, 4888765.251000000163913, 440.666]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_022",
+        "from": 253.451,
+        "to": 300.0,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_022",
+        "depth_to_top": 253.451,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 440.666,
+        "elevation_at_base": 394.117
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164980.795, 4888765.251000000163913, 440.666],
+          [1164980.795, 4888765.251000000163913, 394.117]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_022A",
+        "from": 0.0,
+        "to": 77.532,
+        "Description": "Very weak medium bedded light grey LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_022A",
+        "depth_to_top": 0.0,
+        "depth_to_base": 77.532,
+        "elevation_at_top": 691.83522,
+        "elevation_at_base": 614.30322
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164984.361, 4888778.916000000201166, 691.83522],
+          [1164984.361, 4888778.916000000201166, 614.30322]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_022A",
+        "from": 77.532,
+        "to": 99.688,
+        "Description": "Strong white crystalline calcite VEIN with some open space and euhedral crystal faces in openings",
+        "Simple_Lith": "Vein 2",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_022A",
+        "depth_to_top": 77.532,
+        "depth_to_base": 99.688,
+        "elevation_at_top": 614.30322,
+        "elevation_at_base": 592.14722
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164984.361, 4888778.916000000201166, 614.30322],
+          [1164984.361, 4888778.916000000201166, 592.14722]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_022A",
+        "from": 99.688,
+        "to": 137.827,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_022A",
+        "depth_to_top": 99.688,
+        "depth_to_base": 137.827,
+        "elevation_at_top": 592.14722,
+        "elevation_at_base": 554.00822
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164984.361, 4888778.916000000201166, 592.14722],
+          [1164984.361, 4888778.916000000201166, 554.00822]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_022A",
+        "from": 137.827,
+        "to": 168.799,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_022A",
+        "depth_to_top": 137.827,
+        "depth_to_base": 168.799,
+        "elevation_at_top": 554.00822,
+        "elevation_at_base": 523.03622
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164984.361, 4888778.916000000201166, 554.00822],
+          [1164984.361, 4888778.916000000201166, 523.03622]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_022A",
+        "from": 168.799,
+        "to": 179.007,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT with fractures",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_022A",
+        "depth_to_top": 168.799,
+        "depth_to_base": 179.007,
+        "elevation_at_top": 523.03622,
+        "elevation_at_base": 512.82822
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164984.361, 4888778.916000000201166, 523.03622],
+          [1164984.361, 4888778.916000000201166, 512.828220000000101]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_022A",
+        "from": 179.007,
+        "to": 250.847,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_022A",
+        "depth_to_top": 179.007,
+        "depth_to_base": 250.847,
+        "elevation_at_top": 512.82822,
+        "elevation_at_base": 440.98822
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164984.361, 4888778.916000000201166, 512.828220000000101],
+          [1164984.361, 4888778.916000000201166, 440.98822]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_022A",
+        "from": 250.847,
+        "to": 300.0,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_022A",
+        "depth_to_top": 250.847,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 440.98822,
+        "elevation_at_base": 391.83522
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164984.361, 4888778.916000000201166, 440.98822],
+          [1164984.361, 4888778.916000000201166, 391.83522]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_023",
+        "from": 0.0,
+        "to": 0.526,
+        "Description": null,
+        "Simple_Lith": null,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_023",
+        "depth_to_top": 0.0,
+        "depth_to_base": 0.526,
+        "elevation_at_top": 704.33038,
+        "elevation_at_base": 703.80438
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164799.94, 4888862.495000000111759, 704.33038],
+          [1164799.94, 4888862.495000000111759, 703.80438]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_023",
+        "from": 0.526,
+        "to": 50.19,
+        "Description": "Very weak medium bedded light grey LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_023",
+        "depth_to_top": 0.526,
+        "depth_to_base": 50.19,
+        "elevation_at_top": 703.80438,
+        "elevation_at_base": 654.14038
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164799.94, 4888862.495000000111759, 703.80438],
+          [1164799.94, 4888862.495000000111759, 654.14038]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_023",
+        "from": 50.19,
+        "to": 72.345,
+        "Description": "Strong white crystalline calcite VEIN with some open space and euhedral crystal faces in openings",
+        "Simple_Lith": "Vein 2",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_023",
+        "depth_to_top": 50.19,
+        "depth_to_base": 72.345,
+        "elevation_at_top": 654.14038,
+        "elevation_at_base": 631.98538
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164799.94, 4888862.495000000111759, 654.14038],
+          [1164799.94, 4888862.495000000111759, 631.98538]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_023",
+        "from": 72.345,
+        "to": 144.691,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_023",
+        "depth_to_top": 72.345,
+        "depth_to_base": 144.691,
+        "elevation_at_top": 631.98538,
+        "elevation_at_base": 559.63938
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164799.94, 4888862.495000000111759, 631.98538],
+          [1164799.94, 4888862.495000000111759, 559.63938]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_023",
+        "from": 144.691,
+        "to": 181.594,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_023",
+        "depth_to_top": 144.691,
+        "depth_to_base": 181.594,
+        "elevation_at_top": 559.63938,
+        "elevation_at_base": 522.73638
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164799.94, 4888862.495000000111759, 559.63938],
+          [1164799.94, 4888862.495000000111759, 522.73638]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_023",
+        "from": 181.594,
+        "to": 231.221,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_023",
+        "depth_to_top": 181.594,
+        "depth_to_base": 231.221,
+        "elevation_at_top": 522.73638,
+        "elevation_at_base": 473.10938
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164799.94, 4888862.495000000111759, 522.73638],
+          [1164799.94, 4888862.495000000111759, 473.10938]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_023",
+        "from": 231.221,
+        "to": 254.726,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with intense fracturing",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_023",
+        "depth_to_top": 231.221,
+        "depth_to_base": 254.726,
+        "elevation_at_top": 473.10938,
+        "elevation_at_base": 449.60438
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164799.94, 4888862.495000000111759, 473.10938],
+          [1164799.94, 4888862.495000000111759, 449.60438]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_023",
+        "from": 254.726,
+        "to": 300.0,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_023",
+        "depth_to_top": 254.726,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 449.60438,
+        "elevation_at_base": 404.33038
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164799.94, 4888862.495000000111759, 449.60438],
+          [1164799.94, 4888862.495000000111759, 404.33038]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_023A",
+        "from": 0.0,
+        "to": 42.948,
+        "Description": "Very weak medium bedded light grey LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_023A",
+        "depth_to_top": 0.0,
+        "depth_to_base": 42.948,
+        "elevation_at_top": 701.976062,
+        "elevation_at_base": 659.028062
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164807.814, 4888872.747999999672174, 701.976062],
+          [1164807.814, 4888872.747999999672174, 659.028062]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_023A",
+        "from": 42.948,
+        "to": 65.104,
+        "Description": "Strong white crystalline calcite VEIN with some open space and euhedral crystal faces in openings",
+        "Simple_Lith": "Vein 2",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_023A",
+        "depth_to_top": 42.948,
+        "depth_to_base": 65.104,
+        "elevation_at_top": 659.028062,
+        "elevation_at_base": 636.872062
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164807.814, 4888872.747999999672174, 659.028062],
+          [1164807.814, 4888872.747999999672174, 636.872062]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_023A",
+        "from": 65.104,
+        "to": 142.672,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_023A",
+        "depth_to_top": 65.104,
+        "depth_to_base": 142.672,
+        "elevation_at_top": 636.872062,
+        "elevation_at_base": 559.304062
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164807.814, 4888872.747999999672174, 636.872062],
+          [1164807.814, 4888872.747999999672174, 559.304062]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_023A",
+        "from": 142.672,
+        "to": 179.177,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_023A",
+        "depth_to_top": 142.672,
+        "depth_to_base": 179.177,
+        "elevation_at_top": 559.304062,
+        "elevation_at_base": 522.799062
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164807.814, 4888872.747999999672174, 559.304062],
+          [1164807.814, 4888872.747999999672174, 522.799062]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_023A",
+        "from": 179.177,
+        "to": 223.254,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_023A",
+        "depth_to_top": 179.177,
+        "depth_to_base": 223.254,
+        "elevation_at_top": 522.799062,
+        "elevation_at_base": 478.722062
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164807.814, 4888872.747999999672174, 522.799062],
+          [1164807.814, 4888872.747999999672174, 478.722062]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_023A",
+        "from": 223.254,
+        "to": 252.334,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with intense fracturing",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_023A",
+        "depth_to_top": 223.254,
+        "depth_to_base": 252.334,
+        "elevation_at_top": 478.722062,
+        "elevation_at_base": 449.642062
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164807.814, 4888872.747999999672174, 478.722062],
+          [1164807.814, 4888872.747999999672174, 449.642062]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_023A",
+        "from": 252.334,
+        "to": 300.0,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_023A",
+        "depth_to_top": 252.334,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 449.642062,
+        "elevation_at_base": 401.976062
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164807.814, 4888872.747999999672174, 449.642062],
+          [1164807.814, 4888872.747999999672174, 401.976062]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_024",
+        "from": 0.0,
+        "to": 0.012,
+        "Description": null,
+        "Simple_Lith": null,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_024",
+        "depth_to_top": 0.0,
+        "depth_to_base": 0.012,
+        "elevation_at_top": 718.5906,
+        "elevation_at_base": 718.5786
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164618.709, 4888943.03899999987334, 718.5906],
+          [1164618.709, 4888943.03899999987334, 718.5786]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_024",
+        "from": 0.012,
+        "to": 26.058,
+        "Description": "Very weak medium bedded light grey LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_024",
+        "depth_to_top": 0.012,
+        "depth_to_base": 26.058,
+        "elevation_at_top": 718.5786,
+        "elevation_at_base": 692.5326
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164618.709, 4888943.03899999987334, 718.5786],
+          [1164618.709, 4888943.03899999987334, 692.5326]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_024",
+        "from": 26.058,
+        "to": 48.214,
+        "Description": "Strong white crystalline calcite VEIN with some open space and euhedral crystal faces in openings",
+        "Simple_Lith": "Vein 2",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_024",
+        "depth_to_top": 26.058,
+        "depth_to_base": 48.214,
+        "elevation_at_top": 692.5326,
+        "elevation_at_base": 670.3766
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164618.709, 4888943.03899999987334, 692.5326],
+          [1164618.709, 4888943.03899999987334, 670.3766]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_024",
+        "from": 48.214,
+        "to": 152.252,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_024",
+        "depth_to_top": 48.214,
+        "depth_to_base": 152.252,
+        "elevation_at_top": 670.3766,
+        "elevation_at_base": 566.3386
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164618.709, 4888943.03899999987334, 670.3766],
+          [1164618.709, 4888943.03899999987334, 566.3386]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_024",
+        "from": 152.252,
+        "to": 197.247,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_024",
+        "depth_to_top": 152.252,
+        "depth_to_base": 197.247,
+        "elevation_at_top": 566.3386,
+        "elevation_at_base": 521.3436
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164618.709, 4888943.03899999987334, 566.3386],
+          [1164618.709, 4888943.03899999987334, 521.3436]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_024",
+        "from": 197.247,
+        "to": 289.256,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_024",
+        "depth_to_top": 197.247,
+        "depth_to_base": 289.256,
+        "elevation_at_top": 521.3436,
+        "elevation_at_base": 429.3346
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164618.709, 4888943.03899999987334, 521.3436],
+          [1164618.709, 4888943.03899999987334, 429.3346]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_024",
+        "from": 289.256,
+        "to": 300.0,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT with fractures",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_024",
+        "depth_to_top": 289.256,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 429.3346,
+        "elevation_at_base": 418.5906
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164618.709, 4888943.03899999987334, 429.3346],
+          [1164618.709, 4888943.03899999987334, 418.5906]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_024A",
+        "from": 0.0,
+        "to": 18.223,
+        "Description": "Very weak medium bedded light grey LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_024A",
+        "depth_to_top": 0.0,
+        "depth_to_base": 18.223,
+        "elevation_at_top": 716.70564,
+        "elevation_at_base": 698.48264
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164627.56, 4888955.524000000208616, 716.70564],
+          [1164627.56, 4888955.524000000208616, 698.48264]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_024A",
+        "from": 18.223,
+        "to": 40.378,
+        "Description": "Strong white crystalline calcite VEIN with some open space and euhedral crystal faces in openings",
+        "Simple_Lith": "Vein 2",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_024A",
+        "depth_to_top": 18.223,
+        "depth_to_base": 40.378,
+        "elevation_at_top": 698.48264,
+        "elevation_at_base": 676.32764
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164627.56, 4888955.524000000208616, 698.48264],
+          [1164627.56, 4888955.524000000208616, 676.32764]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_024A",
+        "from": 40.378,
+        "to": 150.665,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_024A",
+        "depth_to_top": 40.378,
+        "depth_to_base": 150.665,
+        "elevation_at_top": 676.32764,
+        "elevation_at_base": 566.04064
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164627.56, 4888955.524000000208616, 676.32764],
+          [1164627.56, 4888955.524000000208616, 566.04064]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_024A",
+        "from": 150.665,
+        "to": 196.394,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_024A",
+        "depth_to_top": 150.665,
+        "depth_to_base": 196.394,
+        "elevation_at_top": 566.04064,
+        "elevation_at_base": 520.31164
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164627.56, 4888955.524000000208616, 566.04064],
+          [1164627.56, 4888955.524000000208616, 520.31164]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_024A",
+        "from": 196.394,
+        "to": 280.502,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_024A",
+        "depth_to_top": 196.394,
+        "depth_to_base": 280.502,
+        "elevation_at_top": 520.31164,
+        "elevation_at_base": 436.20364
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164627.56, 4888955.524000000208616, 520.31164],
+          [1164627.56, 4888955.524000000208616, 436.20364]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_024A",
+        "from": 280.502,
+        "to": 300.0,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT with fractures",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_024A",
+        "depth_to_top": 280.502,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 436.20364,
+        "elevation_at_base": 416.70564
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164627.56, 4888955.524000000208616, 436.20364],
+          [1164627.56, 4888955.524000000208616, 416.70564]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_025",
+        "from": 0.0,
+        "to": 0.915,
+        "Description": null,
+        "Simple_Lith": null,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_025",
+        "depth_to_top": 0.0,
+        "depth_to_base": 0.915,
+        "elevation_at_top": 731.583899,
+        "elevation_at_base": 730.668899
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164426.982, 4888977.820000000298023, 731.583899],
+          [1164426.982, 4888977.820000000298023, 730.668899]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_025",
+        "from": 0.915,
+        "to": 22.473,
+        "Description": "Weak medium bedded light grey LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_025",
+        "depth_to_top": 0.915,
+        "depth_to_base": 22.473,
+        "elevation_at_top": 730.668899,
+        "elevation_at_base": 709.110899
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164426.982, 4888977.820000000298023, 730.668899],
+          [1164426.982, 4888977.820000000298023, 709.110899]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_025",
+        "from": 22.473,
+        "to": 44.629,
+        "Description": "Strong white crystalline calcite VEIN with some open space and euhedral crystal faces in openings",
+        "Simple_Lith": "Vein 2",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_025",
+        "depth_to_top": 22.473,
+        "depth_to_base": 44.629,
+        "elevation_at_top": 709.110899,
+        "elevation_at_base": 686.954899
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164426.982, 4888977.820000000298023, 709.110899],
+          [1164426.982, 4888977.820000000298023, 686.954899]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_025",
+        "from": 44.629,
+        "to": 157.901,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_025",
+        "depth_to_top": 44.629,
+        "depth_to_base": 157.901,
+        "elevation_at_top": 686.954899,
+        "elevation_at_base": 573.682899
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164426.982, 4888977.820000000298023, 686.954899],
+          [1164426.982, 4888977.820000000298023, 573.682899]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_025",
+        "from": 157.901,
+        "to": 197.494,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_025",
+        "depth_to_top": 157.901,
+        "depth_to_base": 197.494,
+        "elevation_at_top": 573.682899,
+        "elevation_at_base": 534.089899
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164426.982, 4888977.820000000298023, 573.682899],
+          [1164426.982, 4888977.820000000298023, 534.089899]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_025",
+        "from": 197.494,
+        "to": 300.0,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_025",
+        "depth_to_top": 197.494,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 534.089899,
+        "elevation_at_base": 431.583899
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164426.982, 4888977.820000000298023, 534.089899],
+          [1164426.982, 4888977.820000000298023, 431.583899]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_025A",
+        "from": 0.0,
+        "to": 0.625,
+        "Description": null,
+        "Simple_Lith": null,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_025A",
+        "depth_to_top": 0.0,
+        "depth_to_base": 0.625,
+        "elevation_at_top": 730.505981,
+        "elevation_at_base": 729.880981
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164426.982, 4888987.820000000298023, 730.505981],
+          [1164426.982, 4888987.820000000298023, 729.880981]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_025A",
+        "from": 0.625,
+        "to": 16.629,
+        "Description": "Weak medium bedded light grey LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_025A",
+        "depth_to_top": 0.625,
+        "depth_to_base": 16.629,
+        "elevation_at_top": 729.880981,
+        "elevation_at_base": 713.876981
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164426.982, 4888987.820000000298023, 729.880981],
+          [1164426.982, 4888987.820000000298023, 713.876981]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_025A",
+        "from": 16.629,
+        "to": 38.785,
+        "Description": "Strong white crystalline calcite VEIN with some open space and euhedral crystal faces in openings",
+        "Simple_Lith": "Vein 2",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_025A",
+        "depth_to_top": 16.629,
+        "depth_to_base": 38.785,
+        "elevation_at_top": 713.876981,
+        "elevation_at_base": 691.720981
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164426.982, 4888987.820000000298023, 713.876981],
+          [1164426.982, 4888987.820000000298023, 691.720981]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_025A",
+        "from": 38.785,
+        "to": 156.77,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_025A",
+        "depth_to_top": 38.785,
+        "depth_to_base": 156.77,
+        "elevation_at_top": 691.720981,
+        "elevation_at_base": 573.735981
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164426.982, 4888987.820000000298023, 691.720981],
+          [1164426.982, 4888987.820000000298023, 573.735981]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_025A",
+        "from": 156.77,
+        "to": 196.19,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_025A",
+        "depth_to_top": 156.77,
+        "depth_to_base": 196.19,
+        "elevation_at_top": 573.735981,
+        "elevation_at_base": 534.315981
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164426.982, 4888987.820000000298023, 573.735981],
+          [1164426.982, 4888987.820000000298023, 534.315981]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_025A",
+        "from": 196.19,
+        "to": 300.0,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_025A",
+        "depth_to_top": 196.19,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 534.315981,
+        "elevation_at_base": 430.505981
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164426.982, 4888987.820000000298023, 534.315981],
+          [1164426.982, 4888987.820000000298023, 430.505981]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_026",
+        "from": 0.0,
+        "to": 21.046,
+        "Description": "Very weak medium bedded light grey LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_026",
+        "depth_to_top": 0.0,
+        "depth_to_base": 21.046,
+        "elevation_at_top": 757.834218,
+        "elevation_at_base": 736.788218
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163939.549000000115484, 4889035.887000000104308, 757.834218],
+          [1163939.549000000115484, 4889035.887000000104308, 736.788218]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_026",
+        "from": 21.046,
+        "to": 43.202,
+        "Description": "Strong white crystalline calcite VEIN with some open space and euhedral crystal faces in openings",
+        "Simple_Lith": "Vein 2",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_026",
+        "depth_to_top": 21.046,
+        "depth_to_base": 43.202,
+        "elevation_at_top": 736.788218,
+        "elevation_at_base": 714.632218
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163939.549000000115484, 4889035.887000000104308, 736.788218],
+          [1163939.549000000115484, 4889035.887000000104308, 714.632218]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_026",
+        "from": 43.202,
+        "to": 50.0,
+        "Description": "Weak medium bedded light grey LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_026",
+        "depth_to_top": 43.202,
+        "depth_to_base": 50.0,
+        "elevation_at_top": 714.632218,
+        "elevation_at_base": 707.834218
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163939.549000000115484, 4889035.887000000104308, 714.632218],
+          [1163939.549000000115484, 4889035.887000000104308, 707.834218]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_026A",
+        "from": 0.0,
+        "to": 0.282,
+        "Description": null,
+        "Simple_Lith": null,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_026A",
+        "depth_to_top": 0.0,
+        "depth_to_base": 0.282,
+        "elevation_at_top": 757.5126414,
+        "elevation_at_base": 757.2306414
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163947.635, 4889042.754999999888241, 757.5126414],
+          [1163947.635, 4889042.754999999888241, 757.230641399999968]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_026A",
+        "from": 0.282,
+        "to": 17.451,
+        "Description": "Very weak medium bedded light grey LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_026A",
+        "depth_to_top": 0.282,
+        "depth_to_base": 17.451,
+        "elevation_at_top": 757.2306414,
+        "elevation_at_base": 740.0616414
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163947.635, 4889042.754999999888241, 757.230641399999968],
+          [1163947.635, 4889042.754999999888241, 740.061641399999985]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_026A",
+        "from": 17.451,
+        "to": 39.607,
+        "Description": "Strong white crystalline calcite VEIN with some open space and euhedral crystal faces in openings",
+        "Simple_Lith": "Vein 2",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_026A",
+        "depth_to_top": 17.451,
+        "depth_to_base": 39.607,
+        "elevation_at_top": 740.0616414,
+        "elevation_at_base": 717.9056414
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163947.635, 4889042.754999999888241, 740.061641399999985],
+          [1163947.635, 4889042.754999999888241, 717.905641400000036]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_026A",
+        "from": 39.607,
+        "to": 50.0,
+        "Description": "Weak medium bedded light grey LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_026A",
+        "depth_to_top": 39.607,
+        "depth_to_base": 50.0,
+        "elevation_at_top": 717.9056414,
+        "elevation_at_base": 707.5126414
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163947.635, 4889042.754999999888241, 717.905641400000036],
+          [1163947.635, 4889042.754999999888241, 707.5126414]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_027",
+        "from": 0.0,
+        "to": 50.0,
+        "Description": "Very weak medium bedded light grey LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_027",
+        "depth_to_top": 0.0,
+        "depth_to_base": 50.0,
+        "elevation_at_top": 782.222132,
+        "elevation_at_base": 732.222132
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163649.316000000108033, 4889442.706000000238419, 782.222132],
+          [1163649.316000000108033, 4889442.706000000238419, 732.222132]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_027A",
+        "from": 0.0,
+        "to": 50.0,
+        "Description": "Very weak medium bedded light grey LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_027A",
+        "depth_to_top": 0.0,
+        "depth_to_base": 50.0,
+        "elevation_at_top": 782.317,
+        "elevation_at_base": 732.317
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163661.05, 4889446.923000000417233, 782.317],
+          [1163661.05, 4889446.923000000417233, 732.317]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_028",
+        "from": 0.0,
+        "to": 50.0,
+        "Description": "Very weak medium bedded light grey LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_028",
+        "depth_to_top": 0.0,
+        "depth_to_base": 50.0,
+        "elevation_at_top": 800.38593,
+        "elevation_at_base": 750.38593
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163485.117, 4889914.849000000394881, 800.38593],
+          [1163485.117, 4889914.849000000394881, 750.38593]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_028A",
+        "from": 0.0,
+        "to": 0.22,
+        "Description": null,
+        "Simple_Lith": null,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_028A",
+        "depth_to_top": 0.0,
+        "depth_to_base": 0.22,
+        "elevation_at_top": 801.070497,
+        "elevation_at_base": 800.850497
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163496.499, 4889917.770999999716878, 801.070497],
+          [1163496.499, 4889917.770999999716878, 800.850497]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_028A",
+        "from": 0.22,
+        "to": 50.0,
+        "Description": "Very weak medium bedded light grey LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_028A",
+        "depth_to_top": 0.22,
+        "depth_to_base": 50.0,
+        "elevation_at_top": 800.850497,
+        "elevation_at_base": 751.070497
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163496.499, 4889917.770999999716878, 800.850497],
+          [1163496.499, 4889917.770999999716878, 751.070497]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_029",
+        "from": 0.0,
+        "to": 138.977,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_029",
+        "depth_to_top": 0.0,
+        "depth_to_base": 138.977,
+        "elevation_at_top": 773.2324,
+        "elevation_at_base": 634.2554
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163455.03, 4890313.824, 773.2324],
+          [1163455.03, 4890313.824, 634.2554]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_029",
+        "from": 138.977,
+        "to": 182.513,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_029",
+        "depth_to_top": 138.977,
+        "depth_to_base": 182.513,
+        "elevation_at_top": 634.2554,
+        "elevation_at_base": 590.7194
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163455.03, 4890313.824, 634.2554],
+          [1163455.03, 4890313.824, 590.7194]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_029",
+        "from": 182.513,
+        "to": 300.0,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_029",
+        "depth_to_top": 182.513,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 590.7194,
+        "elevation_at_base": 473.2324
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163455.03, 4890313.824, 590.7194],
+          [1163455.03, 4890313.824, 473.2324]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_029A",
+        "from": 0.0,
+        "to": 140.947,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_029A",
+        "depth_to_top": 0.0,
+        "depth_to_base": 140.947,
+        "elevation_at_top": 775.1198,
+        "elevation_at_base": 634.1728
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163465.16, 4890312.15500000026077, 775.1198],
+          [1163465.16, 4890312.15500000026077, 634.1728]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_029A",
+        "from": 140.947,
+        "to": 184.365,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_029A",
+        "depth_to_top": 140.947,
+        "depth_to_base": 184.365,
+        "elevation_at_top": 634.1728,
+        "elevation_at_base": 590.7548
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163465.16, 4890312.15500000026077, 634.1728],
+          [1163465.16, 4890312.15500000026077, 590.7548]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_029A",
+        "from": 184.365,
+        "to": 300.0,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_029A",
+        "depth_to_top": 184.365,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 590.7548,
+        "elevation_at_base": 475.1198
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163465.16, 4890312.15500000026077, 590.7548],
+          [1163465.16, 4890312.15500000026077, 475.1198]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_030",
+        "from": 0.0,
+        "to": 0.131,
+        "Description": null,
+        "Simple_Lith": null,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_030",
+        "depth_to_top": 0.0,
+        "depth_to_base": 0.131,
+        "elevation_at_top": 760.6543,
+        "elevation_at_base": 760.5233
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163560.912, 4890487.253999999724329, 760.6543],
+          [1163560.912, 4890487.253999999724329, 760.5233]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_030",
+        "from": 0.131,
+        "to": 97.341,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_030",
+        "depth_to_top": 0.131,
+        "depth_to_base": 97.341,
+        "elevation_at_top": 760.5233,
+        "elevation_at_base": 663.3133
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163560.912, 4890487.253999999724329, 760.5233],
+          [1163560.912, 4890487.253999999724329, 663.3133]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_030",
+        "from": 97.341,
+        "to": 119.497,
+        "Description": "Strong white crystalline calcite VEIN with blocky to elongate crystals",
+        "Simple_Lith": "Vein 1",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_030",
+        "depth_to_top": 97.341,
+        "depth_to_base": 119.497,
+        "elevation_at_top": 663.3133,
+        "elevation_at_base": 641.1573
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163560.912, 4890487.253999999724329, 663.3133],
+          [1163560.912, 4890487.253999999724329, 641.1573]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_030",
+        "from": 119.497,
+        "to": 120.808,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_030",
+        "depth_to_top": 119.497,
+        "depth_to_base": 120.808,
+        "elevation_at_top": 641.1573,
+        "elevation_at_base": 639.8463
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163560.912, 4890487.253999999724329, 641.1573],
+          [1163560.912, 4890487.253999999724329, 639.8463]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_030",
+        "from": 120.808,
+        "to": 166.398,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_030",
+        "depth_to_top": 120.808,
+        "depth_to_base": 166.398,
+        "elevation_at_top": 639.8463,
+        "elevation_at_base": 594.2563
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163560.912, 4890487.253999999724329, 639.8463],
+          [1163560.912, 4890487.253999999724329, 594.2563]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_030",
+        "from": 166.398,
+        "to": 286.427,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_030",
+        "depth_to_top": 166.398,
+        "depth_to_base": 286.427,
+        "elevation_at_top": 594.2563,
+        "elevation_at_base": 474.2273
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163560.912, 4890487.253999999724329, 594.2563],
+          [1163560.912, 4890487.253999999724329, 474.2273]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_030",
+        "from": 286.427,
+        "to": 300.0,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT with fractures",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_030",
+        "depth_to_top": 286.427,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 474.2273,
+        "elevation_at_base": 460.6543
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163560.912, 4890487.253999999724329, 474.2273],
+          [1163560.912, 4890487.253999999724329, 460.6543]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_030A",
+        "from": 0.0,
+        "to": 101.495,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_030A",
+        "depth_to_top": 0.0,
+        "depth_to_base": 101.495,
+        "elevation_at_top": 761.76553,
+        "elevation_at_base": 660.27053
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163570.181, 4890484.013000000268221, 761.76553],
+          [1163570.181, 4890484.013000000268221, 660.27053]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_030A",
+        "from": 101.495,
+        "to": 122.037,
+        "Description": "Strong white crystalline calcite VEIN with blocky to elongate crystals",
+        "Simple_Lith": "Vein 1",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_030A",
+        "depth_to_top": 101.495,
+        "depth_to_base": 122.037,
+        "elevation_at_top": 660.27053,
+        "elevation_at_base": 639.72853
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163570.181, 4890484.013000000268221, 660.27053],
+          [1163570.181, 4890484.013000000268221, 639.72853]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_030A",
+        "from": 122.037,
+        "to": 167.557,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_030A",
+        "depth_to_top": 122.037,
+        "depth_to_base": 167.557,
+        "elevation_at_top": 639.72853,
+        "elevation_at_base": 594.20853
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163570.181, 4890484.013000000268221, 639.72853],
+          [1163570.181, 4890484.013000000268221, 594.20853]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_030A",
+        "from": 167.557,
+        "to": 285.117,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_030A",
+        "depth_to_top": 167.557,
+        "depth_to_base": 285.117,
+        "elevation_at_top": 594.20853,
+        "elevation_at_base": 476.64853
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163570.181, 4890484.013000000268221, 594.20853],
+          [1163570.181, 4890484.013000000268221, 476.64853]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_030A",
+        "from": 285.117,
+        "to": 300.0,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT with fractures",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_030A",
+        "depth_to_top": 285.117,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 476.64853,
+        "elevation_at_base": 461.76553
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163570.181, 4890484.013000000268221, 476.64853],
+          [1163570.181, 4890484.013000000268221, 461.76553]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_031",
+        "from": 0.0,
+        "to": 0.096,
+        "Description": null,
+        "Simple_Lith": null,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_031",
+        "depth_to_top": 0.0,
+        "depth_to_base": 0.096,
+        "elevation_at_top": 743.6827503,
+        "elevation_at_base": 743.5867503
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163625.695, 4890669.754999999888241, 743.682750299999952],
+          [1163625.695, 4890669.754999999888241, 743.586750299999949]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_031",
+        "from": 0.096,
+        "to": 10.518,
+        "Description": "Very weak medium bedded light grey LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_031",
+        "depth_to_top": 0.096,
+        "depth_to_base": 10.518,
+        "elevation_at_top": 743.5867503,
+        "elevation_at_base": 733.1647503
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163625.695, 4890669.754999999888241, 743.586750299999949],
+          [1163625.695, 4890669.754999999888241, 733.164750299999923]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_031",
+        "from": 10.518,
+        "to": 32.674,
+        "Description": "Strong white crystalline calcite VEIN with blocky to elongate crystals",
+        "Simple_Lith": "Vein 1",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_031",
+        "depth_to_top": 10.518,
+        "depth_to_base": 32.674,
+        "elevation_at_top": 733.1647503,
+        "elevation_at_base": 711.0087503
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163625.695, 4890669.754999999888241, 733.164750299999923],
+          [1163625.695, 4890669.754999999888241, 711.008750299999974]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_031",
+        "from": 32.674,
+        "to": 97.405,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_031",
+        "depth_to_top": 32.674,
+        "depth_to_base": 97.405,
+        "elevation_at_top": 711.0087503,
+        "elevation_at_base": 646.2777503
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163625.695, 4890669.754999999888241, 711.008750299999974],
+          [1163625.695, 4890669.754999999888241, 646.27775029999998]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_031",
+        "from": 97.405,
+        "to": 146.52,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_031",
+        "depth_to_top": 97.405,
+        "depth_to_base": 146.52,
+        "elevation_at_top": 646.2777503,
+        "elevation_at_base": 597.1627503
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163625.695, 4890669.754999999888241, 646.27775029999998],
+          [1163625.695, 4890669.754999999888241, 597.162750299999971]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_031",
+        "from": 146.52,
+        "to": 200.132,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_031",
+        "depth_to_top": 146.52,
+        "depth_to_base": 200.132,
+        "elevation_at_top": 597.1627503,
+        "elevation_at_base": 543.55075029999989
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163625.695, 4890669.754999999888241, 597.162750299999971],
+          [1163625.695, 4890669.754999999888241, 543.550750299999891]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_031",
+        "from": 200.132,
+        "to": 224.721,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with intense fracturing",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_031",
+        "depth_to_top": 200.132,
+        "depth_to_base": 224.721,
+        "elevation_at_top": 543.55075029999989,
+        "elevation_at_base": 518.9617503
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163625.695, 4890669.754999999888241, 543.550750299999891],
+          [1163625.695, 4890669.754999999888241, 518.961750299999949]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_031",
+        "from": 224.721,
+        "to": 300.0,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_031",
+        "depth_to_top": 224.721,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 518.9617503,
+        "elevation_at_base": 443.6827503
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163625.695, 4890669.754999999888241, 518.961750299999949],
+          [1163625.695, 4890669.754999999888241, 443.682750299999952]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_031A",
+        "from": 0.0,
+        "to": 0.405,
+        "Description": null,
+        "Simple_Lith": null,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_031A",
+        "depth_to_top": 0.0,
+        "depth_to_base": 0.405,
+        "elevation_at_top": 744.91152,
+        "elevation_at_base": 744.50652
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163635.028, 4890672.362999999895692, 744.91152],
+          [1163635.028, 4890672.362999999895692, 744.50652]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_031A",
+        "from": 0.405,
+        "to": 12.203,
+        "Description": "Very weak medium bedded light grey LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_031A",
+        "depth_to_top": 0.405,
+        "depth_to_base": 12.203,
+        "elevation_at_top": 744.50652,
+        "elevation_at_base": 732.70852
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163635.028, 4890672.362999999895692, 744.50652],
+          [1163635.028, 4890672.362999999895692, 732.70852]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_031A",
+        "from": 12.203,
+        "to": 34.359,
+        "Description": "Strong white crystalline calcite VEIN with blocky to elongate crystals",
+        "Simple_Lith": "Vein 1",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_031A",
+        "depth_to_top": 12.203,
+        "depth_to_base": 34.359,
+        "elevation_at_top": 732.70852,
+        "elevation_at_base": 710.55252
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163635.028, 4890672.362999999895692, 732.70852],
+          [1163635.028, 4890672.362999999895692, 710.55252]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_031A",
+        "from": 34.359,
+        "to": 98.508,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_031A",
+        "depth_to_top": 34.359,
+        "depth_to_base": 98.508,
+        "elevation_at_top": 710.55252,
+        "elevation_at_base": 646.40352
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163635.028, 4890672.362999999895692, 710.55252],
+          [1163635.028, 4890672.362999999895692, 646.40352]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_031A",
+        "from": 98.508,
+        "to": 147.748,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_031A",
+        "depth_to_top": 98.508,
+        "depth_to_base": 147.748,
+        "elevation_at_top": 646.40352,
+        "elevation_at_base": 597.16352
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163635.028, 4890672.362999999895692, 646.40352],
+          [1163635.028, 4890672.362999999895692, 597.16352]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_031A",
+        "from": 147.748,
+        "to": 197.42,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_031A",
+        "depth_to_top": 147.748,
+        "depth_to_base": 197.42,
+        "elevation_at_top": 597.16352,
+        "elevation_at_base": 547.49152
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163635.028, 4890672.362999999895692, 597.16352],
+          [1163635.028, 4890672.362999999895692, 547.49152]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_031A",
+        "from": 197.42,
+        "to": 225.821,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with intense fracturing",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_031A",
+        "depth_to_top": 197.42,
+        "depth_to_base": 225.821,
+        "elevation_at_top": 547.49152,
+        "elevation_at_base": 519.09052
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163635.028, 4890672.362999999895692, 547.49152],
+          [1163635.028, 4890672.362999999895692, 519.09052]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_031A",
+        "from": 225.821,
+        "to": 300.0,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_031A",
+        "depth_to_top": 225.821,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 519.09052,
+        "elevation_at_base": 444.91152
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163635.028, 4890672.362999999895692, 519.09052],
+          [1163635.028, 4890672.362999999895692, 444.91152]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_032",
+        "from": 0.0,
+        "to": 84.858,
+        "Description": "Weak medium bedded light grey LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_032",
+        "depth_to_top": 0.0,
+        "depth_to_base": 84.858,
+        "elevation_at_top": 737.065151,
+        "elevation_at_base": 652.207151
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163573.364, 4890860.723000000230968, 737.065151],
+          [1163573.364, 4890860.723000000230968, 652.207151]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_032",
+        "from": 84.858,
+        "to": 136.422,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_032",
+        "depth_to_top": 84.858,
+        "depth_to_base": 136.422,
+        "elevation_at_top": 652.207151,
+        "elevation_at_base": 600.643151
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163573.364, 4890860.723000000230968, 652.207151],
+          [1163573.364, 4890860.723000000230968, 600.643151]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_032",
+        "from": 136.422,
+        "to": 166.101,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_032",
+        "depth_to_top": 136.422,
+        "depth_to_base": 166.101,
+        "elevation_at_top": 600.643151,
+        "elevation_at_base": 570.964151
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163573.364, 4890860.723000000230968, 600.643151],
+          [1163573.364, 4890860.723000000230968, 570.964151]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_032",
+        "from": 166.101,
+        "to": 209.721,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_032",
+        "depth_to_top": 166.101,
+        "depth_to_base": 209.721,
+        "elevation_at_top": 570.964151,
+        "elevation_at_base": 527.344151
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163573.364, 4890860.723000000230968, 570.964151],
+          [1163573.364, 4890860.723000000230968, 527.344151]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_032",
+        "from": 209.721,
+        "to": 300.0,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_032",
+        "depth_to_top": 209.721,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 527.344151,
+        "elevation_at_base": 437.065151
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163573.364, 4890860.723000000230968, 527.344151],
+          [1163573.364, 4890860.723000000230968, 437.065151]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_032A",
+        "from": 0.0,
+        "to": 82.6,
+        "Description": "Weak medium bedded light grey LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_032A",
+        "depth_to_top": 0.0,
+        "depth_to_base": 82.6,
+        "elevation_at_top": 735.0208562,
+        "elevation_at_base": 652.4208562
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163583.271, 4890865.111999999731779, 735.020856200000026],
+          [1163583.271, 4890865.111999999731779, 652.4208562]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_032A",
+        "from": 82.6,
+        "to": 134.332,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_032A",
+        "depth_to_top": 82.6,
+        "depth_to_base": 134.332,
+        "elevation_at_top": 652.4208562,
+        "elevation_at_base": 600.6888562
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163583.271, 4890865.111999999731779, 652.4208562],
+          [1163583.271, 4890865.111999999731779, 600.688856200000032]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_032A",
+        "from": 134.332,
+        "to": 159.38,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT with fractures",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_032A",
+        "depth_to_top": 134.332,
+        "depth_to_base": 159.38,
+        "elevation_at_top": 600.6888562,
+        "elevation_at_base": 575.6408562
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163583.271, 4890865.111999999731779, 600.688856200000032],
+          [1163583.271, 4890865.111999999731779, 575.64085620000003]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_032A",
+        "from": 159.38,
+        "to": 207.461,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_032A",
+        "depth_to_top": 159.38,
+        "depth_to_base": 207.461,
+        "elevation_at_top": 575.6408562,
+        "elevation_at_base": 527.5598562
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163583.271, 4890865.111999999731779, 575.64085620000003],
+          [1163583.271, 4890865.111999999731779, 527.559856200000013]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_032A",
+        "from": 207.461,
+        "to": 300.0,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_032A",
+        "depth_to_top": 207.461,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 527.5598562,
+        "elevation_at_base": 435.0208562
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163583.271, 4890865.111999999731779, 527.559856200000013],
+          [1163583.271, 4890865.111999999731779, 435.020856200000026]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_033",
+        "from": 0.0,
+        "to": 64.821,
+        "Description": "Weak medium bedded light grey LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_033",
+        "depth_to_top": 0.0,
+        "depth_to_base": 64.821,
+        "elevation_at_top": 722.148983,
+        "elevation_at_base": 657.327983
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163532.948, 4891055.728000000119209, 722.148983],
+          [1163532.948, 4891055.728000000119209, 657.327983]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_033",
+        "from": 64.821,
+        "to": 117.775,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_033",
+        "depth_to_top": 64.821,
+        "depth_to_base": 117.775,
+        "elevation_at_top": 657.327983,
+        "elevation_at_base": 604.373983
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163532.948, 4891055.728000000119209, 657.327983],
+          [1163532.948, 4891055.728000000119209, 604.373983]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_033",
+        "from": 117.775,
+        "to": 120.842,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT with fractures",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_033",
+        "depth_to_top": 117.775,
+        "depth_to_base": 120.842,
+        "elevation_at_top": 604.373983,
+        "elevation_at_base": 601.306983
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163532.948, 4891055.728000000119209, 604.373983],
+          [1163532.948, 4891055.728000000119209, 601.306983]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_033",
+        "from": 120.842,
+        "to": 186.324,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_033",
+        "depth_to_top": 120.842,
+        "depth_to_base": 186.324,
+        "elevation_at_top": 601.306983,
+        "elevation_at_base": 535.824983
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163532.948, 4891055.728000000119209, 601.306983],
+          [1163532.948, 4891055.728000000119209, 535.824983]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_033",
+        "from": 186.324,
+        "to": 300.0,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_033",
+        "depth_to_top": 186.324,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 535.824983,
+        "elevation_at_base": 422.148983
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163532.948, 4891055.728000000119209, 535.824983],
+          [1163532.948, 4891055.728000000119209, 422.148983]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_033A",
+        "from": 0.0,
+        "to": 65.761,
+        "Description": "Weak medium bedded light grey LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_033A",
+        "depth_to_top": 0.0,
+        "depth_to_base": 65.761,
+        "elevation_at_top": 723.3201,
+        "elevation_at_base": 657.5591
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163544.689, 4891058.376000000163913, 723.3201],
+          [1163544.689, 4891058.376000000163913, 657.5591]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_033A",
+        "from": 65.761,
+        "to": 116.501,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_033A",
+        "depth_to_top": 65.761,
+        "depth_to_base": 116.501,
+        "elevation_at_top": 657.5591,
+        "elevation_at_base": 606.8191
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163544.689, 4891058.376000000163913, 657.5591],
+          [1163544.689, 4891058.376000000163913, 606.8191]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_033A",
+        "from": 116.501,
+        "to": 187.357,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_033A",
+        "depth_to_top": 116.501,
+        "depth_to_base": 187.357,
+        "elevation_at_top": 606.8191,
+        "elevation_at_base": 535.9631
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163544.689, 4891058.376000000163913, 606.8191],
+          [1163544.689, 4891058.376000000163913, 535.9631]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_033A",
+        "from": 187.357,
+        "to": 300.0,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_033A",
+        "depth_to_top": 187.357,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 535.9631,
+        "elevation_at_base": 423.3201
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163544.689, 4891058.376000000163913, 535.9631],
+          [1163544.689, 4891058.376000000163913, 423.3201]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_034",
+        "from": 0.0,
+        "to": 0.281,
+        "Description": null,
+        "Simple_Lith": null,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_034",
+        "depth_to_top": 0.0,
+        "depth_to_base": 0.281,
+        "elevation_at_top": 729.120208,
+        "elevation_at_base": 728.839208
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163575.254999999888241, 4891256.17, 729.120208],
+          [1163575.254999999888241, 4891256.17, 728.839208]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_034",
+        "from": 0.281,
+        "to": 57.497,
+        "Description": "Weak medium bedded light grey LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_034",
+        "depth_to_top": 0.281,
+        "depth_to_base": 57.497,
+        "elevation_at_top": 728.839208,
+        "elevation_at_base": 671.623208
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163575.254999999888241, 4891256.17, 728.839208],
+          [1163575.254999999888241, 4891256.17, 671.623208]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_034",
+        "from": 57.497,
+        "to": 66.298,
+        "Description": "Medium strong medium bedded grey crystalline LIMESTONE with fractures",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_034",
+        "depth_to_top": 57.497,
+        "depth_to_base": 66.298,
+        "elevation_at_top": 671.623208,
+        "elevation_at_base": 662.822208
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163575.254999999888241, 4891256.17, 671.623208],
+          [1163575.254999999888241, 4891256.17, 662.822208]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_034",
+        "from": 66.298,
+        "to": 185.043,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_034",
+        "depth_to_top": 66.298,
+        "depth_to_base": 185.043,
+        "elevation_at_top": 662.822208,
+        "elevation_at_base": 544.077208
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163575.254999999888241, 4891256.17, 662.822208],
+          [1163575.254999999888241, 4891256.17, 544.077208]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_034",
+        "from": 185.043,
+        "to": 300.0,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_034",
+        "depth_to_top": 185.043,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 544.077208,
+        "elevation_at_base": 429.120208
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163575.254999999888241, 4891256.17, 544.077208],
+          [1163575.254999999888241, 4891256.17, 429.120208]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_034A",
+        "from": 0.0,
+        "to": 45.492,
+        "Description": "Weak medium bedded light grey LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_034A",
+        "depth_to_top": 0.0,
+        "depth_to_base": 45.492,
+        "elevation_at_top": 722.76453,
+        "elevation_at_base": 677.27253
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163590.079, 4891253.485000000335276, 722.76453],
+          [1163590.079, 4891253.485000000335276, 677.27253]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_034A",
+        "from": 45.492,
+        "to": 59.783,
+        "Description": "Medium strong medium bedded grey crystalline LIMESTONE with fractures",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_034A",
+        "depth_to_top": 45.492,
+        "depth_to_base": 59.783,
+        "elevation_at_top": 677.27253,
+        "elevation_at_base": 662.98153
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163590.079, 4891253.485000000335276, 677.27253],
+          [1163590.079, 4891253.485000000335276, 662.98153]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_034A",
+        "from": 59.783,
+        "to": 178.937,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_034A",
+        "depth_to_top": 59.783,
+        "depth_to_base": 178.937,
+        "elevation_at_top": 662.98153,
+        "elevation_at_base": 543.82753
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163590.079, 4891253.485000000335276, 662.98153],
+          [1163590.079, 4891253.485000000335276, 543.82753]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_034A",
+        "from": 178.937,
+        "to": 300.0,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_034A",
+        "depth_to_top": 178.937,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 543.82753,
+        "elevation_at_base": 422.76453
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163590.079, 4891253.485000000335276, 543.82753],
+          [1163590.079, 4891253.485000000335276, 422.76453]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_035",
+        "from": 0.0,
+        "to": 57.044,
+        "Description": "Weak medium bedded light grey LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_035",
+        "depth_to_top": 0.0,
+        "depth_to_base": 57.044,
+        "elevation_at_top": 724.99803,
+        "elevation_at_base": 667.95403
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163657.602999999886379, 4891440.338999999687076, 724.99803],
+          [1163657.602999999886379, 4891440.338999999687076, 667.95403]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_035",
+        "from": 57.044,
+        "to": 172.357,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_035",
+        "depth_to_top": 57.044,
+        "depth_to_base": 172.357,
+        "elevation_at_top": 667.95403,
+        "elevation_at_base": 552.64103
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163657.602999999886379, 4891440.338999999687076, 667.95403],
+          [1163657.602999999886379, 4891440.338999999687076, 552.64103]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_035",
+        "from": 172.357,
+        "to": 300.0,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_035",
+        "depth_to_top": 172.357,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 552.64103,
+        "elevation_at_base": 424.99803
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163657.602999999886379, 4891440.338999999687076, 552.64103],
+          [1163657.602999999886379, 4891440.338999999687076, 424.99803]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_035A",
+        "from": 0.0,
+        "to": 54.792,
+        "Description": "Weak medium bedded light grey LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_035A",
+        "depth_to_top": 0.0,
+        "depth_to_base": 54.792,
+        "elevation_at_top": 722.932678,
+        "elevation_at_base": 668.140678
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163671.745000000111759, 4891436.46100000012666, 722.932678],
+          [1163671.745000000111759, 4891436.46100000012666, 668.140678]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_035A",
+        "from": 54.792,
+        "to": 170.409,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_035A",
+        "depth_to_top": 54.792,
+        "depth_to_base": 170.409,
+        "elevation_at_top": 668.140678,
+        "elevation_at_base": 552.523678
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163671.745000000111759, 4891436.46100000012666, 668.140678],
+          [1163671.745000000111759, 4891436.46100000012666, 552.523678]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_035A",
+        "from": 170.409,
+        "to": 300.0,
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "Simple_Lith": "Basement",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_035A",
+        "depth_to_top": 170.409,
+        "depth_to_base": 300.0,
+        "elevation_at_top": 552.523678,
+        "elevation_at_base": 422.932678
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163671.745000000111759, 4891436.46100000012666, 552.523678],
+          [1163671.745000000111759, 4891436.46100000012666, 422.932678]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_036",
+        "from": 0.0,
+        "to": 45.012,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_036",
+        "depth_to_top": 0.0,
+        "depth_to_base": 45.012,
+        "elevation_at_top": 722.349658,
+        "elevation_at_base": 677.337658
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163849.487999999895692, 4891904.225999999791384, 722.349658],
+          [1163849.487999999895692, 4891904.225999999791384, 677.337658]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_036",
+        "from": 45.012,
+        "to": 50.0,
+        "Description": "Med-strong very thinly bedded brown slightly calcareous SILTSTONE",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_036",
+        "depth_to_top": 45.012,
+        "depth_to_base": 50.0,
+        "elevation_at_top": 677.337658,
+        "elevation_at_base": 672.349658
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163849.487999999895692, 4891904.225999999791384, 677.337658],
+          [1163849.487999999895692, 4891904.225999999791384, 672.349658]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_036A",
+        "from": 0.0,
+        "to": 0.96,
+        "Description": null,
+        "Simple_Lith": null,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_036A",
+        "depth_to_top": 0.0,
+        "depth_to_base": 0.96,
+        "elevation_at_top": 724.12701,
+        "elevation_at_base": 723.16701
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163862.799000000115484, 4891902.228000000119209, 724.12701],
+          [1163862.799000000115484, 4891902.228000000119209, 723.16701]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_036A",
+        "from": 0.96,
+        "to": 46.53,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_036A",
+        "depth_to_top": 0.96,
+        "depth_to_base": 46.53,
+        "elevation_at_top": 723.16701,
+        "elevation_at_base": 677.59701
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163862.799000000115484, 4891902.228000000119209, 723.16701],
+          [1163862.799000000115484, 4891902.228000000119209, 677.59701]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH_036A",
+        "from": 46.53,
+        "to": 50.0,
+        "Description": "Med-strong very thinly bedded brown slightly calcareous SILTSTONE",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_036A",
+        "depth_to_top": 46.53,
+        "depth_to_base": 50.0,
+        "elevation_at_top": 677.59701,
+        "elevation_at_base": 674.12701
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1163862.799000000115484, 4891902.228000000119209, 677.59701],
+          [1163862.799000000115484, 4891902.228000000119209, 674.12701]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH101",
+        "from": 0.0,
+        "to": 29.994,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH101",
+        "depth_to_top": 0.0,
+        "depth_to_base": 29.994,
+        "elevation_at_top": 709.7844227000001,
+        "elevation_at_base": 679.7904227
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164075.096, 4891729.20299999974668, 709.78442270000005],
+          [1164075.096, 4891729.20299999974668, 679.790422700000022]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH101",
+        "from": 29.994,
+        "to": 60.0,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH101",
+        "depth_to_top": 29.994,
+        "depth_to_base": 60.0,
+        "elevation_at_top": 679.7904227,
+        "elevation_at_base": 649.7844227000001
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164075.096, 4891729.20299999974668, 679.790422700000022],
+          [1164075.096, 4891729.20299999974668, 649.78442270000005]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH102",
+        "from": 0.0,
+        "to": 93.645,
+        "Description": "Weak medium bedded light grey LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH102",
+        "depth_to_top": 0.0,
+        "depth_to_base": 93.645,
+        "elevation_at_top": 770.9480562,
+        "elevation_at_base": 677.3030562
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164179.784, 4891499.860999999567866, 770.9480562],
+          [1164179.784, 4891499.860999999567866, 677.303056200000015]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH102",
+        "from": 93.645,
+        "to": 150.0,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH102",
+        "depth_to_top": 93.645,
+        "depth_to_base": 150.0,
+        "elevation_at_top": 677.3030562,
+        "elevation_at_base": 620.9480562
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164179.784, 4891499.860999999567866, 677.303056200000015],
+          [1164179.784, 4891499.860999999567866, 620.9480562]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH103",
+        "from": 0.0,
+        "to": 89.525,
+        "Description": "Very weak medium bedded light grey LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH103",
+        "depth_to_top": 0.0,
+        "depth_to_base": 89.525,
+        "elevation_at_top": 813.8907188,
+        "elevation_at_base": 724.3657188
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164395.523, 4890949.776999999769032, 813.890718799999945],
+          [1164395.523, 4890949.776999999769032, 724.365718799999968]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH103",
+        "from": 89.525,
+        "to": 111.681,
+        "Description": "Strong white crystalline calcite VEIN with blocky to elongate crystals",
+        "Simple_Lith": "Vein 1",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH103",
+        "depth_to_top": 89.525,
+        "depth_to_base": 111.681,
+        "elevation_at_top": 724.3657188,
+        "elevation_at_base": 702.2097188
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164395.523, 4890949.776999999769032, 724.365718799999968],
+          [1164395.523, 4890949.776999999769032, 702.209718799999905]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH103",
+        "from": 111.681,
+        "to": 152.824,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH103",
+        "depth_to_top": 111.681,
+        "depth_to_base": 152.824,
+        "elevation_at_top": 702.2097188,
+        "elevation_at_base": 661.0667188
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164395.523, 4890949.776999999769032, 702.209718799999905],
+          [1164395.523, 4890949.776999999769032, 661.0667188]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH103",
+        "from": 152.824,
+        "to": 200.0,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH103",
+        "depth_to_top": 152.824,
+        "depth_to_base": 200.0,
+        "elevation_at_top": 661.0667188,
+        "elevation_at_base": 613.8907188
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164395.523, 4890949.776999999769032, 661.0667188],
+          [1164395.523, 4890949.776999999769032, 613.890718799999945]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH104",
+        "from": 0.0,
+        "to": 12.28,
+        "Description": "Very weak medium bedded light grey LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH104",
+        "depth_to_top": 0.0,
+        "depth_to_base": 12.28,
+        "elevation_at_top": 821.043725,
+        "elevation_at_base": 808.763725
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164648.844, 4890289.041000000201166, 821.043725],
+          [1164648.844, 4890289.041000000201166, 808.763725]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH104",
+        "from": 12.28,
+        "to": 200.105,
+        "Description": "Weak medium bedded light grey LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH104",
+        "depth_to_top": 12.28,
+        "depth_to_base": 200.105,
+        "elevation_at_top": 808.763725,
+        "elevation_at_base": 620.938725
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164648.844, 4890289.041000000201166, 808.763725],
+          [1164648.844, 4890289.041000000201166, 620.938725]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH104",
+        "from": 200.105,
+        "to": 210.0,
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "Simple_Lith": "Siltstone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH104",
+        "depth_to_top": 200.105,
+        "depth_to_base": 210.0,
+        "elevation_at_top": 620.938725,
+        "elevation_at_base": 611.043725
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164648.844, 4890289.041000000201166, 620.938725],
+          [1164648.844, 4890289.041000000201166, 611.043725]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH105",
+        "from": 0.0,
+        "to": 30.3,
+        "Description": "Very weak medium bedded light grey LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH105",
+        "depth_to_top": 0.0,
+        "depth_to_base": 30.3,
+        "elevation_at_top": 745.9099552,
+        "elevation_at_base": 715.6099552000001
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164938.252, 4889598.96, 745.909955200000013],
+          [1164938.252, 4889598.96, 715.609955200000059]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH105",
+        "from": 30.3,
+        "to": 150.0,
+        "Description": "Very strong medium bedded light grey crystalline LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH105",
+        "depth_to_top": 30.3,
+        "depth_to_base": 150.0,
+        "elevation_at_top": 715.6099552000001,
+        "elevation_at_base": 595.9099552
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1164938.252, 4889598.96, 715.609955200000059],
+          [1164938.252, 4889598.96, 595.909955200000013]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH106",
+        "from": 0.0,
+        "to": 120.0,
+        "Description": "Weak medium bedded light grey LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH106",
+        "depth_to_top": 0.0,
+        "depth_to_base": 120.0,
+        "elevation_at_top": 672.5270838,
+        "elevation_at_base": 552.5270838
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165356.868, 4889133.523, 672.527083800000014],
+          [1165356.868, 4889133.523, 552.527083800000014]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH107",
+        "from": 0.0,
+        "to": 80.0,
+        "Description": "Very weak medium bedded light grey LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH107",
+        "depth_to_top": 0.0,
+        "depth_to_base": 80.0,
+        "elevation_at_top": 632.6341116,
+        "elevation_at_base": 552.6341116
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1165887.16, 4888900.338999999687076, 632.634111599999983],
+          [1165887.16, 4888900.338999999687076, 552.634111599999983]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LocationID": "WH108",
+        "from": 0.0,
+        "to": 40.0,
+        "Description": "Weak medium bedded light grey LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+        "Simple_Lith": "Limestone",
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH108",
+        "depth_to_top": 0.0,
+        "depth_to_base": 40.0,
+        "elevation_at_top": 575.5862778,
+        "elevation_at_base": 535.5862778
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [1166231.989, 4888857.001000000163913, 575.586277799999948],
+          [1166231.989, 4888857.001000000163913, 535.586277799999948]
+        ]
+      }
+    }
+  ]
+}
