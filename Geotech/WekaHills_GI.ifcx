@@ -113,6 +113,124 @@
   {
     "def": "class",
     "type": "UsdGeom:Xform",
+    "name": "N7b6562e1261a4f9eacbbe3f56caa1b88",
+    "children": [
+      {
+        "def": "def",
+        "type": "UsdGeom:BasisCurves",
+        "name": "LineString",
+        "inherits": [
+          "</N7b6562e1261a4f9eacbbe3f56caa1b88_LineString>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "N7b6562e1261a4f9eacbbe3f56caa1b88",
+    "attributes": {
+      "customdata": {
+        "LocationID": "WH_009",
+        "Simple_Lith": "Alluvium",
+        "Description": "Weak thinly bedded brown fine-med grained sandy ALLUVIUM",
+        "from": 0,
+        "to": 6.085,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_009",
+        "depth_to_top": 0,
+        "depth_to_base": 6.085,
+        "elevation_at_top": 502.8813831,
+        "elevation_at_base": 496.7963831
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:BasisCurves",
+    "name": "N7b6562e1261a4f9eacbbe3f56caa1b88_LineString"
+  },
+  {
+    "def": "over",
+    "name": "N7b6562e1261a4f9eacbbe3f56caa1b88_LineString",
+    "attributes": {
+      "UsdGeom:BasisCurves": {
+        "points": [
+          [
+            1167046.628,
+            4888785.276,
+            502.8813831
+          ],
+          [
+            1167046.628,
+            4888785.276,
+            496.7963831
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "Nc627679f80254e4abab62e6f40bcb332",
+    "children": [
+      {
+        "def": "def",
+        "type": "UsdGeom:BasisCurves",
+        "name": "LineString",
+        "inherits": [
+          "</Nc627679f80254e4abab62e6f40bcb332_LineString>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "Nc627679f80254e4abab62e6f40bcb332",
+    "attributes": {
+      "customdata": {
+        "LocationID": "WH_009",
+        "Simple_Lith": "Siltstone",
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "from": 6.085,
+        "to": 50,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_009",
+        "depth_to_top": 6.085,
+        "depth_to_base": 50,
+        "elevation_at_top": 496.7963831,
+        "elevation_at_base": 452.8813831
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:BasisCurves",
+    "name": "Nc627679f80254e4abab62e6f40bcb332_LineString"
+  },
+  {
+    "def": "over",
+    "name": "Nc627679f80254e4abab62e6f40bcb332_LineString",
+    "attributes": {
+      "UsdGeom:BasisCurves": {
+        "points": [
+          [
+            1167046.628,
+            4888785.276,
+            496.7963831
+          ],
+          [
+            1167046.628,
+            4888785.276,
+            452.8813831
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
     "name": "N996ff9e7b86240f898d4d038ab311d1b",
     "children": [
       {
@@ -141,9 +259,16 @@
     "children": [
       {
         "def": "def",
-        "name": "Alluvium",
+        "name": "Alluvium_Sand",
         "inherits": [
           "</N1548f2435d6444298da2dbb9529e424a>"
+        ]
+      },
+      {
+        "def": "def",
+        "name": "Alluvium_Clay",
+        "inherits": [
+          "</N20d9455fa8974a67825b2e86621b4d59>"
         ]
       },
       {
@@ -152,21 +277,250 @@
         "inherits": [
           "</N2a637b43021645d2b80395253b761079>"
         ]
+      },
+      {
+        "def": "def",
+        "name": "Basement",
+        "inherits": [
+          "</N48346d772d2f4fff8e47af6be729f2bd>"
+        ]
       }
     ]
   },
-  [
-    "N20d9455fa8974a67825b2e86621b4d59",
-    "N48346d772d2f4fff8e47af6be729f2bd",
-    "N9c99289993824716bf7887568df3265c",
-    "Nc7eea8b4c69948e6bf71cd5f4b0d4892",
-    "Nb6d28f6965dd4b89b3efd71b6caf4dee",
-    "Nddd3ef1469fa47eeab2be55a31929273",
-    "N514dde1dc6434f28a502b3422bdbcc23",
-    "Nde74fcd75a384eb5a93af7a9344df469",
-    "N7242a8c7afc34659b08ce283856214e7",
-    "N9ebd7eb5ba41443abfa56c2f717636e2",
-    "N4cd51644274247779df9bc40d674a26a",
-    "Nb8629fd5fca24a698c25f1b099fa86a5"
-  ]
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "N1548f2435d6444298da2dbb9529e424a",
+    "children": [
+      {
+        "def": "def",
+        "type": "UsdGeom:BasisCurves",
+        "name": "LineString",
+        "inherits": [
+          "</N1548f2435d6444298da2dbb9529e424a_LineString>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "N1548f2435d6444298da2dbb9529e424a",
+    "attributes": {
+      "customdata": {
+        "LocationID": "WH_012",
+        "Simple_Lith": "Alluvium",
+        "Description": "Very weak thinly bedded brown medium grained sand to gravel ALLUVIUM with fractures",
+        "from": 0,
+        "to": 32.841,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_012",
+        "depth_to_top": 0,
+        "depth_to_base": 32.841,
+        "elevation_at_top": 563.4533858,
+        "elevation_at_base": 530.6123858
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:BasisCurves",
+    "name": "N1548f2435d6444298da2dbb9529e424a_LineString"
+  },
+  {
+    "def": "over",
+    "name": "N1548f2435d6444298da2dbb9529e424a_LineString",
+    "attributes": {
+      "UsdGeom:BasisCurves": {
+        "points": [
+          [
+            1165777.32,
+            4888011.236,
+            563.4533858
+          ],
+          [
+            1165777.32,
+            4888011.236,
+            530.6123858
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "N20d9455fa8974a67825b2e86621b4d59",
+    "children": [
+      {
+        "def": "def",
+        "type": "UsdGeom:BasisCurves",
+        "name": "LineString",
+        "inherits": [
+          "</N20d9455fa8974a67825b2e86621b4d59_LineString>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "N20d9455fa8974a67825b2e86621b4d59",
+    "attributes": {
+      "customdata": {
+        "LocationID": "WH_012",
+        "Simple_Lith": "Alluvium",
+        "Description": "Very weak thinly bedded clay-fine sand ALLUVIUM with fractures",
+        "from": 32.841,
+        "to": 43.847,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_012",
+        "depth_to_top": 32.841,
+        "depth_to_base": 43.847,
+        "elevation_at_top": 530.6123858,
+        "elevation_at_base": 519.6063858
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:BasisCurves",
+    "name": "N20d9455fa8974a67825b2e86621b4d59_LineString"
+  },
+  {
+    "def": "over",
+    "name": "N20d9455fa8974a67825b2e86621b4d59_LineString",
+    "attributes": {
+      "UsdGeom:BasisCurves": {
+        "points": [
+          [
+            1165777.32,
+            4888011.236,
+            530.6123858
+          ],
+          [
+            1165777.32,
+            4888011.236,
+            519.6063858
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "N2a637b43021645d2b80395253b761079",
+    "children": [
+      {
+        "def": "def",
+        "type": "UsdGeom:BasisCurves",
+        "name": "LineString",
+        "inherits": [
+          "</N2a637b43021645d2b80395253b761079_LineString>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "N2a637b43021645d2b80395253b761079",
+    "attributes": {
+      "customdata": {
+        "LocationID": "WH_012",
+        "Simple_Lith": "Siltstone",
+        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "from": 43.847,
+        "to": 173.552,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_012",
+        "depth_to_top": 43.847,
+        "depth_to_base": 173.552,
+        "elevation_at_top": 519.6063858,
+        "elevation_at_base": 389.9013858
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:BasisCurves",
+    "name": "N2a637b43021645d2b80395253b761079_LineString"
+  },
+  {
+    "def": "over",
+    "name": "N2a637b43021645d2b80395253b761079_LineString",
+    "attributes": {
+      "UsdGeom:BasisCurves": {
+        "points": [
+          [
+            1165777.32,
+            4888011.236,
+            519.6063858
+          ],
+          [
+            1165777.32,
+            4888011.236,
+            389.90138579999996
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "N48346d772d2f4fff8e47af6be729f2bd",
+    "children": [
+      {
+        "def": "def",
+        "type": "UsdGeom:BasisCurves",
+        "name": "LineString",
+        "inherits": [
+          "</N48346d772d2f4fff8e47af6be729f2bd_LineString>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "N48346d772d2f4fff8e47af6be729f2bd",
+    "attributes": {
+      "customdata": {
+        "LocationID": "WH_012",
+        "Simple_Lith": "Basement",
+        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "from": 173.552,
+        "to": 300,
+        "project_uid": "weka-hills-boreholes",
+        "location_uid": "WH_012",
+        "depth_to_top": 173.552,
+        "depth_to_base": 300,
+        "elevation_at_top": 389.9013858,
+        "elevation_at_base": 263.4533858
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:BasisCurves",
+    "name": "N48346d772d2f4fff8e47af6be729f2bd_LineString"
+  },
+  {
+    "def": "over",
+    "name": "N48346d772d2f4fff8e47af6be729f2bd_LineString",
+    "attributes": {
+      "UsdGeom:BasisCurves": {
+        "points": [
+          [
+            1165777.32,
+            4888011.236,
+            389.90138579999996
+          ],
+          [
+            1165777.32,
+            4888011.236,
+            263.4533858
+          ]
+        ]
+      }
+    }
+  }
 ]
