@@ -522,5 +522,134 @@
         ]
       }
     }
+  },
+  {
+    "def": "over",
+    "name": "N7b6562e1261a4f9eacbbe3f56caa1b88",
+    "attributes": {
+      "UsdShade:MaterialBindingAPI": {
+        "material:binding": {
+          "ref": "</AlluviumShaderMaterial>"
+        }
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N20d9455fa8974a67825b2e86621b4d59",
+    "attributes": {
+      "UsdShade:MaterialBindingAPI": {
+        "material:binding": {
+          "ref": "</AlluviumShaderMaterial>"
+        }
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N1548f2435d6444298da2dbb9529e424a",
+    "attributes": {
+      "UsdShade:MaterialBindingAPI": {
+        "material:binding": {
+          "ref": "</AlluviumShaderMaterial>"
+        }
+      }
+    }
+  },
+  {
+    "def": "def",
+    "type": "UsdShade:Material",
+    "name": "AlluviumShaderMaterial",
+    "children": [
+      {
+        "def": "def",
+        "type": "UsdShade:Shader",
+        "name": "Shader",
+        "attributes": {
+          "info:id": "UsdPreviewSurface",
+          "inputs:diffuseColor": [
+            1,
+            0.3,
+            0.6
+          ],
+          "outputs:surface": null
+        }
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "AlluviumShaderMaterial",
+    "attributes": {
+      "UsdShade:Material": {
+        "outputs:surface.connect": {
+          "ref": "</AlluviumShaderMaterial/Shader.outputs:surface>"
+        }
+      }
+    }
+  },
+  {
+    "def": "def",
+    "type": "UsdShade:Material",
+    "name": "SiltstoneShaderMaterial",
+    "children": [
+      {
+        "def": "def",
+        "type": "UsdShade:Shader",
+        "name": "Shader",
+        "attributes": {
+          "info:id": "UsdPreviewSurface",
+          "inputs:diffuseColor": [
+            1,
+            0.52,
+            0.18
+          ],
+          "outputs:surface": null
+        }
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "SiltstoneShaderMaterial",
+    "attributes": {
+      "UsdShade:Material": {
+        "outputs:surface.connect": {
+          "ref": "</SiltstoneShaderMaterial/Shader.outputs:surface>"
+        }
+      }
+    }
+  },
+  {
+    "def": "def",
+    "type": "UsdShade:Material",
+    "name": "GeologicalBasementShaderMaterial",
+    "children": [
+      {
+        "def": "def",
+        "type": "UsdShade:Shader",
+        "name": "Shader",
+        "attributes": {
+          "info:id": "UsdPreviewSurface",
+          "inputs:diffuseColor": [
+            1,
+            1,
+            0.84
+          ],
+          "outputs:surface": null
+        }
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "GeologicalBasementShaderMaterial",
+    "attributes": {
+      "UsdShade:Material": {
+        "outputs:surface.connect": {
+          "ref": "</GeologicalBasementShaderMaterial/Shader.outputs:surface>"
+        }
+      }
+    }
   }
 ]
