@@ -1,0 +1,172 @@
+[
+  {
+    "disclaimer": "2024-09-25 publication of the examples. (C) buildingSMART International. Published under CC BY-ND 4.0."
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "Ndd9e46015e7c4b59be0b1b98dfcadb74",
+    "children": [
+      {
+        "def": "def",
+        "name": "WekaHills",
+        "inherits": [
+          "</N337e2116e7e24dd390ddbf2e42555fac>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "def",
+    "type": "Xform",
+    "name": "WekaHillsLeapfrogDemo",
+    "inherits": [
+      "</Ndd9e46015e7c4b59be0b1b98dfcadb74>"
+    ]
+  },
+  {
+    "def": "over",
+    "name": "Ndd9e46015e7c4b59be0b1b98dfcadb74",
+    "attributes": {
+      "ifc5:class": {
+        "code": "IfcProject",
+        "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcProject"
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "N337e2116e7e24dd390ddbf2e42555fac",
+    "children": [
+      {
+        "def": "def",
+        "name": "WH_009",
+        "inherits": [
+          "</Nad68cd145a6b43fdb0232e0b11a6c7bc>"
+        ]
+      },
+      {
+        "def": "def",
+        "name": "WH_012",
+        "inherits": [
+          "</N996ff9e7b86240f898d4d038ab311d1b>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "N337e2116e7e24dd390ddbf2e42555fac",
+    "attributes": {
+      "ifc5:class": {
+        "code": "IfcSite",
+        "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcSite"
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "Nad68cd145a6b43fdb0232e0b11a6c7bc",
+    "children": [
+      {
+        "def": "def",
+        "name": "Geol",
+        "inherits": [
+          "</Nd9114025e8e9454b8aa05d59e9d75cbd>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "Nad68cd145a6b43fdb0232e0b11a6c7bc",
+    "attributes": {
+      "ifc5:class": {
+        "code": "IfcBorehole",
+        "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcBorehole"
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "Nd9114025e8e9454b8aa05d59e9d75cbd",
+    "children": [
+      {
+        "def": "def",
+        "name": "Alluvium",
+        "inherits": [
+          "</N7b6562e1261a4f9eacbbe3f56caa1b88>"
+        ]
+      },
+      {
+        "def": "def",
+        "name": "Siltstone",
+        "inherits": [
+          "</Nc627679f80254e4abab62e6f40bcb332>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "N996ff9e7b86240f898d4d038ab311d1b",
+    "children": [
+      {
+        "def": "def",
+        "name": "Geol",
+        "inherits": [
+          "</Nefb42b81d3e147e4bb19723fb504655d>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "N996ff9e7b86240f898d4d038ab311d1b",
+    "attributes": {
+      "ifc5:class": {
+        "code": "IfcBorehole",
+        "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcBorehole"
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "Nefb42b81d3e147e4bb19723fb504655d",
+    "children": [
+      {
+        "def": "def",
+        "name": "Alluvium",
+        "inherits": [
+          "</N1548f2435d6444298da2dbb9529e424a>"
+        ]
+      },
+      {
+        "def": "def",
+        "name": "Siltstone",
+        "inherits": [
+          "</N2a637b43021645d2b80395253b761079>"
+        ]
+      }
+    ]
+  },
+  [
+    "N20d9455fa8974a67825b2e86621b4d59",
+    "N48346d772d2f4fff8e47af6be729f2bd",
+    "N9c99289993824716bf7887568df3265c",
+    "Nc7eea8b4c69948e6bf71cd5f4b0d4892",
+    "Nb6d28f6965dd4b89b3efd71b6caf4dee",
+    "Nddd3ef1469fa47eeab2be55a31929273",
+    "N514dde1dc6434f28a502b3422bdbcc23",
+    "Nde74fcd75a384eb5a93af7a9344df469",
+    "N7242a8c7afc34659b08ce283856214e7",
+    "N9ebd7eb5ba41443abfa56c2f717636e2",
+    "N4cd51644274247779df9bc40d674a26a",
+    "Nb8629fd5fca24a698c25f1b099fa86a5"
+  ]
+]
