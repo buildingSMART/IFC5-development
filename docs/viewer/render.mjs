@@ -29,14 +29,6 @@ function init() {
     return scene;
 }
 
-function createCurveFromJson(node, parent, root) {
-    let points = new Float32Array(node.attributes['UsdGeom:BasisCurves:points'].flat());
-    const geometry = new THREE.BufferGeometry();
-    geometry.setAttribute('position', new THREE.BufferAttribute(points, 3));
-    const material = new THREE.LineBasicMaterial({ color: 0x202020 });
-    return new THREE.Line(geometry, material);
-}
-
 function getChildByName(root, childName, skip=0) {
     let fragments = childName.replace(/^<\/|^\/|>$/g, '').split('/');
     for (let i = 0; i < skip; ++i) {
@@ -49,6 +41,36 @@ function getChildByName(root, childName, skip=0) {
     return root;
 }
 
+function createMaterialFromParent(parent, root) {
+    let reference = parent.attributes['UsdShade:MaterialBindingAPI:material:binding'];
+    let material = {
+        color: new THREE.Color(0.6, 0.6, 0.6)
+    };
+    if (reference) {
+        const materialNode = getChildByName(root, reference.ref);
+        let shader = materialNode.children.find(i => i.type === 'UsdShade:Shader');
+        let color = shader.attributes['inputs:diffuseColor'];
+        material.color = new THREE.Color(...color);
+        if (shader.attributes['inputs:opacity']) {
+            material.transparent = true;
+            material.opacity = shader.attributes['inputs:opacity'];
+        }
+    }
+    return material;
+}
+
+function createCurveFromJson(node, parent, root) {
+    let points = new Float32Array(node.attributes['UsdGeom:BasisCurves:points'].flat());
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.BufferAttribute(points, 3));
+    const material = createMaterialFromParent(parent, root);
+    let lineMaterial = new THREE.LineBasicMaterial({...material});
+    // Make lines a little darker, otherwise they have the same color as meshes
+    lineMaterial.color.multiplyScalar(0.8)
+    return new THREE.Line(geometry, lineMaterial);
+}
+
+
 function createMeshFromJson(node, parent, root) {
     let points = new Float32Array(node.attributes['UsdGeom:Mesh:points'].flat());
     let indices = new Uint16Array(node.attributes['UsdGeom:Mesh:faceVertexIndices']);
@@ -58,25 +80,10 @@ function createMeshFromJson(node, parent, root) {
     geometry.setIndex(new THREE.BufferAttribute(indices, 1));
     geometry.computeVertexNormals();
 
-    // material on parent?
-    let reference = parent.attributes['UsdShade:MaterialBindingAPI:material:binding'];
-    let material = null;
-    if (reference) {
-        const materialNode = getChildByName(root, reference.ref);
-        let shader = materialNode.children.find(i => i.type === 'UsdShade:Shader');
-        let color = shader.attributes['inputs:diffuseColor'];
-        material = new THREE.MeshBasicMaterial();
-        material.color = new THREE.Color(...color);
-        if (shader.attributes['inputs:opacity']) {
-            material.transparent = true;
-            material.opacity = shader.attributes['inputs:opacity'];
-        }
-    } else {
-        material = new THREE.MeshBasicMaterial();
-        material.color = new THREE.Color(0.6, 0.6, 0.6);
-    }
+    const material = createMaterialFromParent(parent, root);
+    let meshMaterial = new THREE.MeshBasicMaterial({...material});
 
-    return new THREE.Mesh(geometry, material);
+    return new THREE.Mesh(geometry, meshMaterial);
 }
 
 function traverseTree(node, parent, root, parentNode) {

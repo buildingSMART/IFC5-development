@@ -129,6 +129,16 @@
     "def": "over",
     "name": "N7b6562e1261a4f9eacbbe3f56caa1b88",
     "attributes": {
+      "ifc5:class": {
+        "code": "IfcGeotechnicalStratum",
+        "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcGeotechnicalStratum"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N7b6562e1261a4f9eacbbe3f56caa1b88",
+    "attributes": {
       "customdata": {
         "LocationID": "WH_009",
         "Simple_Lith": "Alluvium",
@@ -141,6 +151,17 @@
         "depth_to_base": 6.085,
         "elevation_at_top": 502.8813831,
         "elevation_at_base": 496.7963831
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N7b6562e1261a4f9eacbbe3f56caa1b88",
+    "attributes": {
+      "UsdShade:MaterialBindingAPI": {
+        "material:binding": {
+          "ref": "</AlluviumShaderMaterial>"
+        }
       }
     }
   },
@@ -188,6 +209,16 @@
     "def": "over",
     "name": "Nc627679f80254e4abab62e6f40bcb332",
     "attributes": {
+      "ifc5:class": {
+        "code": "IfcGeotechnicalStratum",
+        "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcGeotechnicalStratum"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "Nc627679f80254e4abab62e6f40bcb332",
+    "attributes": {
       "customdata": {
         "LocationID": "WH_009",
         "Simple_Lith": "Siltstone",
@@ -200,6 +231,17 @@
         "depth_to_base": 50,
         "elevation_at_top": 496.7963831,
         "elevation_at_base": 452.8813831
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "Nc627679f80254e4abab62e6f40bcb332",
+    "attributes": {
+      "UsdShade:MaterialBindingAPI": {
+        "material:binding": {
+          "ref": "</SiltstoneShaderMaterial>"
+        }
       }
     }
   },
@@ -306,6 +348,16 @@
     "def": "over",
     "name": "N1548f2435d6444298da2dbb9529e424a",
     "attributes": {
+      "ifc5:class": {
+        "code": "IfcGeotechnicalStratum",
+        "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcGeotechnicalStratum"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N2a637b43021645d2b80395253b761079",
+    "attributes": {
       "customdata": {
         "LocationID": "WH_012",
         "Simple_Lith": "Alluvium",
@@ -318,6 +370,17 @@
         "depth_to_base": 32.841,
         "elevation_at_top": 563.4533858,
         "elevation_at_base": 530.6123858
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N20d9455fa8974a67825b2e86621b4d59",
+    "attributes": {
+      "UsdShade:MaterialBindingAPI": {
+        "material:binding": {
+          "ref": "</AlluviumShaderMaterial>"
+        }
       }
     }
   },
@@ -365,6 +428,16 @@
     "def": "over",
     "name": "N20d9455fa8974a67825b2e86621b4d59",
     "attributes": {
+      "ifc5:class": {
+        "code": "IfcGeotechnicalStratum",
+        "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcGeotechnicalStratum"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N20d9455fa8974a67825b2e86621b4d59",
+    "attributes": {
       "customdata": {
         "LocationID": "WH_012",
         "Simple_Lith": "Alluvium",
@@ -377,6 +450,17 @@
         "depth_to_base": 43.847,
         "elevation_at_top": 530.6123858,
         "elevation_at_base": 519.6063858
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N1548f2435d6444298da2dbb9529e424a",
+    "attributes": {
+      "UsdShade:MaterialBindingAPI": {
+        "material:binding": {
+          "ref": "</AlluviumShaderMaterial>"
+        }
       }
     }
   },
@@ -424,6 +508,16 @@
     "def": "over",
     "name": "N2a637b43021645d2b80395253b761079",
     "attributes": {
+      "ifc5:class": {
+        "code": "IfcGeotechnicalStratum",
+        "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcGeotechnicalStratum"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N2a637b43021645d2b80395253b761079",
+    "attributes": {
       "customdata": {
         "LocationID": "WH_012",
         "Simple_Lith": "Siltstone",
@@ -436,6 +530,17 @@
         "depth_to_base": 173.552,
         "elevation_at_top": 519.6063858,
         "elevation_at_base": 389.9013858
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N2a637b43021645d2b80395253b761079",
+    "attributes": {
+      "UsdShade:MaterialBindingAPI": {
+        "material:binding": {
+          "ref": "</SiltstoneShaderMaterial>"
+        }
       }
     }
   },
@@ -483,6 +588,16 @@
     "def": "over",
     "name": "N48346d772d2f4fff8e47af6be729f2bd",
     "attributes": {
+      "ifc5:class": {
+        "code": "IfcGeotechnicalStratum",
+        "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcGeotechnicalStratum"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N48346d772d2f4fff8e47af6be729f2bd",
+    "attributes": {
       "customdata": {
         "LocationID": "WH_012",
         "Simple_Lith": "Basement",
@@ -495,6 +610,17 @@
         "depth_to_base": 300,
         "elevation_at_top": 389.9013858,
         "elevation_at_base": 263.4533858
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N48346d772d2f4fff8e47af6be729f2bd",
+    "attributes": {
+      "UsdShade:MaterialBindingAPI": {
+        "material:binding": {
+          "ref": "</GeologicalBasementShaderMaterial>"
+        }
       }
     }
   },
@@ -524,39 +650,6 @@
     }
   },
   {
-    "def": "over",
-    "name": "N7b6562e1261a4f9eacbbe3f56caa1b88",
-    "attributes": {
-      "UsdShade:MaterialBindingAPI": {
-        "material:binding": {
-          "ref": "</AlluviumShaderMaterial>"
-        }
-      }
-    }
-  },
-  {
-    "def": "over",
-    "name": "N20d9455fa8974a67825b2e86621b4d59",
-    "attributes": {
-      "UsdShade:MaterialBindingAPI": {
-        "material:binding": {
-          "ref": "</AlluviumShaderMaterial>"
-        }
-      }
-    }
-  },
-  {
-    "def": "over",
-    "name": "N1548f2435d6444298da2dbb9529e424a",
-    "attributes": {
-      "UsdShade:MaterialBindingAPI": {
-        "material:binding": {
-          "ref": "</AlluviumShaderMaterial>"
-        }
-      }
-    }
-  },
-  {
     "def": "def",
     "type": "UsdShade:Material",
     "name": "AlluviumShaderMaterial",
@@ -569,9 +662,10 @@
           "info:id": "UsdPreviewSurface",
           "inputs:diffuseColor": [
             1,
-            0.3,
-            0.6
+            0.835,
+            0.02
           ],
+          "inputs:opacity": 1,
           "outputs:surface": null
         }
       }
@@ -600,10 +694,11 @@
         "attributes": {
           "info:id": "UsdPreviewSurface",
           "inputs:diffuseColor": [
-            1,
-            0.52,
-            0.18
+            0.3,
+            0.6,
+            0.45
           ],
+          "inputs:opacity": 1,
           "outputs:surface": null
         }
       }
@@ -632,10 +727,11 @@
         "attributes": {
           "info:id": "UsdPreviewSurface",
           "inputs:diffuseColor": [
-            1,
-            1,
-            0.84
+            0.52,
+            0.18,
+            0.78
           ],
+          "inputs:opacity": 1,
           "outputs:surface": null
         }
       }
