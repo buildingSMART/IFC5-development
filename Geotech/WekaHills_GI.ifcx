@@ -72,7 +72,7 @@
     "children": [
       {
         "def": "def",
-        "name": "Geol",
+        "name": "GEOL",
         "inherits": [
           "</Nd9114025e8e9454b8aa05d59e9d75cbd>"
         ]
@@ -139,18 +139,22 @@
     "def": "over",
     "name": "N7b6562e1261a4f9eacbbe3f56caa1b88",
     "attributes": {
-      "customdata": {
-        "LocationID": "WH_009",
-        "Simple_Lith": "Alluvium",
-        "Description": "Weak thinly bedded brown fine-med grained sandy ALLUVIUM",
-        "from": 0,
-        "to": 6.085,
-        "project_uid": "weka-hills-boreholes",
-        "location_uid": "WH_009",
-        "depth_to_top": 0,
-        "depth_to_base": 6.085,
-        "elevation_at_top": 502.8813831,
-        "elevation_at_base": 496.7963831
+      "ifc5:properties": {
+        "description": "Weak thinly bedded brown fine-med grained sandy ALLUVIUM"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N7b6562e1261a4f9eacbbe3f56caa1b88",
+    "attributes": {
+      "ags4": {
+        "group": "GEOL",
+        "LOCA_ID": "WH_009",
+        "GEOL_TOP": 0,
+        "GEOL_BASE": 6.085,
+        "GEOL_DESC": "Weak thinly bedded brown fine-med grained sandy ALLUVIUM",
+        "GEOL_GEOL": "Alluvium"
       }
     }
   },
@@ -219,18 +223,22 @@
     "def": "over",
     "name": "Nc627679f80254e4abab62e6f40bcb332",
     "attributes": {
-      "customdata": {
-        "LocationID": "WH_009",
-        "Simple_Lith": "Siltstone",
-        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
-        "from": 6.085,
-        "to": 50,
-        "project_uid": "weka-hills-boreholes",
-        "location_uid": "WH_009",
-        "depth_to_top": 6.085,
-        "depth_to_base": 50,
-        "elevation_at_top": 496.7963831,
-        "elevation_at_base": 452.8813831
+      "ifc5:properties": {
+        "description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "Nc627679f80254e4abab62e6f40bcb332",
+    "attributes": {
+      "ags4": {
+        "group": "GEOL",
+        "LOCA_ID": "WH_009",
+        "GEOL_TOP": 6.085,
+        "GEOL_BASE": 50,
+        "GEOL_DESC": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "GEOL_GEOL": "Siltstone"
       }
     }
   },
@@ -277,7 +285,7 @@
     "children": [
       {
         "def": "def",
-        "name": "Geol",
+        "name": "GEOL",
         "inherits": [
           "</Nefb42b81d3e147e4bb19723fb504655d>"
         ]
@@ -356,26 +364,30 @@
   },
   {
     "def": "over",
-    "name": "N2a637b43021645d2b80395253b761079",
+    "name": "N1548f2435d6444298da2dbb9529e424a",
     "attributes": {
-      "customdata": {
-        "LocationID": "WH_012",
-        "Simple_Lith": "Alluvium",
-        "Description": "Very weak thinly bedded brown medium grained sand to gravel ALLUVIUM with fractures",
-        "from": 0,
-        "to": 32.841,
-        "project_uid": "weka-hills-boreholes",
-        "location_uid": "WH_012",
-        "depth_to_top": 0,
-        "depth_to_base": 32.841,
-        "elevation_at_top": 563.4533858,
-        "elevation_at_base": 530.6123858
+      "ifc5:properties": {
+        "description": "Very weak thinly bedded brown medium grained sand to gravel ALLUVIUM with fractures"
       }
     }
   },
   {
     "def": "over",
-    "name": "N20d9455fa8974a67825b2e86621b4d59",
+    "name": "N1548f2435d6444298da2dbb9529e424a",
+    "attributes": {
+      "ags4": {
+        "group": "GEOL",
+        "LOCA_ID": "WH_012",
+        "GEOL_TOP": 0,
+        "GEOL_BASE": 32.841,
+        "GEOL_DESC": "Very weak thinly bedded brown medium grained sand to gravel ALLUVIUM with fractures",
+        "GEOL_GEOL": "Alluvium"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N1548f2435d6444298da2dbb9529e424a",
     "attributes": {
       "UsdShade:MaterialBindingAPI": {
         "material:binding": {
@@ -438,24 +450,28 @@
     "def": "over",
     "name": "N20d9455fa8974a67825b2e86621b4d59",
     "attributes": {
-      "customdata": {
-        "LocationID": "WH_012",
-        "Simple_Lith": "Alluvium",
-        "Description": "Very weak thinly bedded clay-fine sand ALLUVIUM with fractures",
-        "from": 32.841,
-        "to": 43.847,
-        "project_uid": "weka-hills-boreholes",
-        "location_uid": "WH_012",
-        "depth_to_top": 32.841,
-        "depth_to_base": 43.847,
-        "elevation_at_top": 530.6123858,
-        "elevation_at_base": 519.6063858
+      "ifc5:properties": {
+        "description": "Very weak thinly bedded clay-fine sand ALLUVIUM with fractures"
       }
     }
   },
   {
     "def": "over",
-    "name": "N1548f2435d6444298da2dbb9529e424a",
+    "name": "N20d9455fa8974a67825b2e86621b4d59",
+    "attributes": {
+      "ags4": {
+        "group": "GEOL",
+        "LOCA_ID": "WH_012",
+        "GEOL_TOP": 32.841,
+        "GEOL_BASE": 43.847,
+        "GEOL_DESC": "Very weak thinly bedded clay-fine sand ALLUVIUM with fractures",
+        "GEOL_GEOL": "Alluvium"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N20d9455fa8974a67825b2e86621b4d59",
     "attributes": {
       "UsdShade:MaterialBindingAPI": {
         "material:binding": {
@@ -518,18 +534,22 @@
     "def": "over",
     "name": "N2a637b43021645d2b80395253b761079",
     "attributes": {
-      "customdata": {
-        "LocationID": "WH_012",
-        "Simple_Lith": "Siltstone",
-        "Description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
-        "from": 43.847,
-        "to": 173.552,
-        "project_uid": "weka-hills-boreholes",
-        "location_uid": "WH_012",
-        "depth_to_top": 43.847,
-        "depth_to_base": 173.552,
-        "elevation_at_top": 519.6063858,
-        "elevation_at_base": 389.9013858
+      "ifc5:properties": {
+        "description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N2a637b43021645d2b80395253b761079",
+    "attributes": {
+      "ags4": {
+        "group": "GEOL",
+        "LOCA_ID": "WH_012",
+        "GEOL_TOP": 43.847,
+        "GEOL_BASE": 173.552,
+        "GEOL_DESC": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "GEOL_GEOL": "Siltstone"
       }
     }
   },
@@ -598,18 +618,22 @@
     "def": "over",
     "name": "N48346d772d2f4fff8e47af6be729f2bd",
     "attributes": {
-      "customdata": {
-        "LocationID": "WH_012",
-        "Simple_Lith": "Basement",
-        "Description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
-        "from": 173.552,
-        "to": 300,
-        "project_uid": "weka-hills-boreholes",
-        "location_uid": "WH_012",
-        "depth_to_top": 173.552,
-        "depth_to_base": 300,
-        "elevation_at_top": 389.9013858,
-        "elevation_at_base": 263.4533858
+      "ifc5:properties": {
+        "description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N48346d772d2f4fff8e47af6be729f2bd",
+    "attributes": {
+      "ags4": {
+        "group": "GEOL",
+        "LOCA_ID": "WH_012",
+        "GEOL_TOP": 173.552,
+        "GEOL_BASE": 300,
+        "GEOL_DESC": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "GEOL_GEOL": "Basement"
       }
     }
   },
