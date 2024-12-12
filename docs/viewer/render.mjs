@@ -236,8 +236,8 @@ function compose(datas) {
             type: left.type || (right !== null ? right.type : null),
             name: right ? right.name : left.name,
             attributes: {
-                ...((left !== null) ? left.attributes : {}),
-                ...((right !== null) ? right.attributes : {})
+                ...((right !== null) ? right.attributes : {}),
+                ...((left !== null) ? left.attributes : {})
             },
             children: (left.children || []).concat(right ? (right.children || []) : [])
         }
