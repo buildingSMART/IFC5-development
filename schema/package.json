@@ -8,7 +8,12 @@
   },
   "devDependencies": {
     "@typespec/compiler": "latest",
-    "@typespec/openapi3": "latest"
+    "@typespec/openapi3": "latest",
+    "json-schema-to-typescript": "^15.0.3"
+  },
+  "scripts": {
+    "compile": "tsp compile .",
+    "gen": "cd ./out/@typespec/json-schema/ && json2ts Ifc5File.json ./ts/ifc5file.d.ts --no-additionalProperties"
   },
   "private": true,
   "dependencies": {
