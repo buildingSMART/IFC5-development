@@ -1,0 +1,28 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "UsdGeomMesh.json",
+    "type": "object",
+    "properties": {
+        "faceVertexIndices": {
+            "type": "array",
+            "items": {
+                "type": "integer",
+                "minimum": -2147483648,
+                "maximum": 2147483647
+            }
+        },
+        "points": {
+            "type": "array",
+            "items": {
+                "type": "array",
+                "items": {
+                    "type": "number"
+                }
+            }
+        }
+    },
+    "required": [
+        "faceVertexIndices",
+        "points"
+    ]
+}

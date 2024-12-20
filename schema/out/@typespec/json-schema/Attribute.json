@@ -1,0 +1,17 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "Attribute.json",
+    "type": "object",
+    "properties": {
+        "faceVertexIndices": {
+            "type": "string"
+        },
+        "points": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "faceVertexIndices",
+        "points"
+    ]
+}

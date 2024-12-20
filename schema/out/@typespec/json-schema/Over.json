@@ -1,0 +1,30 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "Over.json",
+    "type": "object",
+    "properties": {
+        "def": {
+            "type": "string",
+            "const": "over"
+        },
+        "name": {
+            "type": "string"
+        },
+        "attributes": {
+            "type": "object",
+            "properties": {
+                "UsdGeom:Mesh": {
+                    "$ref": "UsdGeomMesh.json"
+                },
+                "UsdGeom:VisibilityAPI:visibility": {
+                    "$ref": "UsdGeomVisibilityAPIvisibility.json"
+                }
+            }
+        }
+    },
+    "required": [
+        "def",
+        "name",
+        "attributes"
+    ]
+}

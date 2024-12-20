@@ -1,0 +1,22 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "Item.json",
+    "type": "object",
+    "properties": {
+        "def": {
+            "type": "string",
+            "default": "class"
+        },
+        "type": {
+            "type": "string"
+        },
+        "bla": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "def",
+        "type",
+        "bla"
+    ]
+}
