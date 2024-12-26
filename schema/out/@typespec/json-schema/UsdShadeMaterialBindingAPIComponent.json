@@ -1,0 +1,29 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "UsdShadeMaterialBindingAPIComponent.json",
+    "type": "object",
+    "properties": {
+        "UsdShade:MaterialBindingAPI": {
+            "type": "object",
+            "properties": {
+                "material:binding": {
+                    "type": "object",
+                    "properties": {
+                        "ref": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "ref"
+                    ]
+                }
+            },
+            "required": [
+                "material:binding"
+            ]
+        }
+    },
+    "required": [
+        "UsdShade:MaterialBindingAPI"
+    ]
+}

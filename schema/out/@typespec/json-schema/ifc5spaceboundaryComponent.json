@@ -1,0 +1,29 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "ifc5spaceboundaryComponent.json",
+    "type": "object",
+    "properties": {
+        "ifc5:spaceboundary": {
+            "type": "object",
+            "properties": {
+                "relatedElement": {
+                    "type": "object",
+                    "properties": {
+                        "ref": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "ref"
+                    ]
+                }
+            },
+            "required": [
+                "relatedElement"
+            ]
+        }
+    },
+    "required": [
+        "ifc5:spaceboundary"
+    ]
+}

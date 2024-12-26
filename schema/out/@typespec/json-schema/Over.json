@@ -11,15 +11,41 @@
             "type": "string"
         },
         "attributes": {
-            "type": "object",
-            "properties": {
-                "UsdGeom:Mesh": {
-                    "$ref": "UsdGeomMesh.json"
+            "anyOf": [
+                {
+                    "$ref": "UsdShadeMaterialComponent.json"
                 },
-                "UsdGeom:VisibilityAPI:visibility": {
-                    "$ref": "UsdGeomVisibilityAPIvisibility.json"
+                {
+                    "$ref": "ifc5spaceboundaryComponent.json"
+                },
+                {
+                    "$ref": "NLSFBComponent.json"
+                },
+                {
+                    "$ref": "UsdGeomBasisCurvesComponent.json"
+                },
+                {
+                    "$ref": "PropertiesComponent.json"
+                },
+                {
+                    "$ref": "CustomDataComponent.json"
+                },
+                {
+                    "$ref": "xformOpComponent.json"
+                },
+                {
+                    "$ref": "UsdShadeMaterialBindingAPIComponent.json"
+                },
+                {
+                    "$ref": "UsdGeomMeshComponent.json"
+                },
+                {
+                    "$ref": "UsdGeomVisibilityAPIvisibilityComponent.json"
+                },
+                {
+                    "$ref": "Ifc5ClassComponent.json"
                 }
-            }
+            ]
         }
     },
     "required": [

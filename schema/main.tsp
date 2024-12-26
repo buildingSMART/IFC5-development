@@ -17,24 +17,100 @@ enum ClassType
 }
 
 @jsonSchema
-model UsdGeomMesh {
-    faceVertexIndices: int32[],
-    points: float[][]
+model UsdGeomMeshComponent {
+    "UsdGeom:Mesh": {
+        faceVertexIndices: int32[],
+        points: float[][]
+    }
 }
 
 @jsonSchema
-model UsdGeomVisibilityAPIvisibility {
-    visibility: "visible" | "invisible"
+model UsdGeomVisibilityAPIvisibilityComponent {
+    "UsdGeom:VisibilityAPI:visibility": {
+        visibility: "visible" | "invisible";
+    }
 }
+
+@jsonSchema
+model Ifc5ClassComponent
+{
+    "ifc5:class": {
+        code: string;
+        uri: string;
+    }
+}
+
+@jsonSchema
+model UsdShadeMaterialBindingAPIComponent
+{
+    "UsdShade:MaterialBindingAPI": {
+        "material:binding": {
+            ref: string;
+        }
+    }
+}
+
+@jsonSchema
+model UsdShadeMaterialComponent
+{
+    "UsdShade:Material": {
+        "outputs:surface.connect": {
+            ref: string;
+        }
+    }
+}
+
+@jsonSchema
+model xformOpComponent
+{
+    "xformOp": {
+        transform: float[][];
+    }
+}
+
+@jsonSchema
+model CustomDataComponent
+{
+    "customdata": unknown;
+}
+
+@jsonSchema
+model NLSFBComponent
+{
+    "nlsfb:class": unknown;
+}
+
+@jsonSchema
+model PropertiesComponent
+{
+    "ifc5:properties": unknown;
+}
+
+@jsonSchema
+model UsdGeomBasisCurvesComponent
+{
+    "UsdGeom:BasisCurves": {
+        points: float[][];
+    };
+}
+
+@jsonSchema
+model ifc5spaceboundaryComponent
+{
+    "ifc5:spaceboundary": {
+        relatedElement: {
+            ref: string
+        }
+    };
+}
+
+alias ComponentType = UsdShadeMaterialComponent | ifc5spaceboundaryComponent | NLSFBComponent | UsdGeomBasisCurvesComponent | PropertiesComponent | CustomDataComponent | xformOpComponent | UsdShadeMaterialBindingAPIComponent | UsdGeomMeshComponent | UsdGeomVisibilityAPIvisibilityComponent | Ifc5ClassComponent;
 
 @jsonSchema
 model Over {
     def: "over";
     name: string;
-    attributes: {
-        "UsdGeom:Mesh"?: UsdGeomMesh;
-        "UsdGeom:VisibilityAPI:visibility"?: UsdGeomVisibilityAPIvisibility;
-    }
+    attributes: ComponentType;
 }
 
 @jsonSchema

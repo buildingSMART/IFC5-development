@@ -22,10 +22,11 @@ export interface DefJson {
 export interface OverJson {
   def: "over";
   name: string;
-  attributes: {
+  attributes2: {
     "UsdGeom:Mesh"?: UsdGeomMeshJson;
     "UsdGeom:VisibilityAPI:visibility"?: UsdGeomVisibilityAPIvisibilityJson;
   };
+  attributes: UsdGeomMeshComponentJson | UsdGeomVisibilityAPIvisibilityComponentJson;
 }
 export interface UsdGeomMeshJson {
   faceVertexIndices: number[];
@@ -33,6 +34,12 @@ export interface UsdGeomMeshJson {
 }
 export interface UsdGeomVisibilityAPIvisibilityJson {
   visibility: "visible" | "invisible";
+}
+export interface UsdGeomMeshComponentJson {
+  "UsdGeom:Mesh": UsdGeomMeshJson;
+}
+export interface UsdGeomVisibilityAPIvisibilityComponentJson {
+  "UsdGeom:VisibilityAPI:visibility": UsdGeomMeshJson;
 }
 export interface DisclaimerJson {
   disclaimer: string;

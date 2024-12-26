@@ -1,0 +1,11 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "CustomDataComponent.json",
+    "type": "object",
+    "properties": {
+        "customdata": {}
+    },
+    "required": [
+        "customdata"
+    ]
+}
