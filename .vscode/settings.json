@@ -2,7 +2,7 @@
     "json.schemas": [
         {
             "fileMatch": [
-                "/Hello Wall/hello-wall.ifcx"
+                "/**/*.ifcx"
             ],
             "url": "./schema/out/@typespec/json-schema/Ifc5File.json"
         }

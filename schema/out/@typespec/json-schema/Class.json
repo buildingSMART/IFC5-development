@@ -32,7 +32,8 @@
                 "UsdGeom:Xform",
                 "UsdGeom:BasisCurves",
                 "UsdShade:Material",
-                "UsdShade:Shader"
+                "UsdShade:Shader",
+                "Xform"
             ]
         }
     }

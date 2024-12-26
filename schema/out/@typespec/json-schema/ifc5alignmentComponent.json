@@ -1,0 +1,32 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "ifc5alignmentComponent.json",
+    "type": "object",
+    "properties": {
+        "ifc5:alignment": {
+            "type": "object",
+            "properties": {
+                "segments": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "ref": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "ref"
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "segments"
+            ]
+        }
+    },
+    "required": [
+        "ifc5:alignment"
+    ]
+}

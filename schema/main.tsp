@@ -13,7 +13,8 @@ enum ClassType
   XForm: "UsdGeom:Xform",
   BasisCurves: "UsdGeom:BasisCurves",
   Material: "UsdShade:Material",
-  Shader: "UsdShade:Shader" 
+  Shader: "UsdShade:Shader",
+  PlainXForm: "Xform";
 }
 
 @jsonSchema
@@ -104,7 +105,45 @@ model ifc5spaceboundaryComponent
     };
 }
 
-alias ComponentType = UsdShadeMaterialComponent | ifc5spaceboundaryComponent | NLSFBComponent | UsdGeomBasisCurvesComponent | PropertiesComponent | CustomDataComponent | xformOpComponent | UsdShadeMaterialBindingAPIComponent | UsdGeomMeshComponent | UsdGeomVisibilityAPIvisibilityComponent | Ifc5ClassComponent;
+@jsonSchema
+model ifc5alignmentComponent
+{
+    "ifc5:alignment": {
+        segments: {
+            ref: string
+        }[]
+    };
+}
+
+@jsonSchema
+model ifc5alignmentsegmentComponent
+{
+    "ifc5:alignmentsegment": {
+        EndRadiusOfCurvature: float,
+        PredefinedType: "LINE" | "CLOTHOID" | "CIRCULARARC" | "CONSTANTGRADIENT",
+        SegmentLength: float,
+        StartDirection: float,
+        StartPoint: float[],
+        StartRadiusOfCurvature: float
+    } | {
+        EndGradient: float,
+        PredefinedType: "LINE" | "CLOTHOID" | "CIRCULARARC" | "CONSTANTGRADIENT",
+        HorizontalLength: float,
+        StartDistAlong: float,
+        StartGradient: float,
+        StartHeight: float
+    } | {
+        EndCantLeft: float,
+        EndCantRight: float,
+        HorizontalLength: float,
+        PredefinedType: "CONSTANTCANT" | "LINEARTRANSITION",
+        StartCantLeft: float,
+        StartCantRight: float,
+        StartDistAlong: float
+    };
+}
+
+alias ComponentType = ifc5alignmentsegmentComponent | ifc5alignmentComponent | UsdShadeMaterialComponent | ifc5spaceboundaryComponent | NLSFBComponent | UsdGeomBasisCurvesComponent | PropertiesComponent | CustomDataComponent | xformOpComponent | UsdShadeMaterialBindingAPIComponent | UsdGeomMeshComponent | UsdGeomVisibilityAPIvisibilityComponent | Ifc5ClassComponent;
 
 @jsonSchema
 model Over {

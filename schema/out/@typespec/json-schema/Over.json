@@ -13,6 +13,12 @@
         "attributes": {
             "anyOf": [
                 {
+                    "$ref": "ifc5alignmentsegmentComponent.json"
+                },
+                {
+                    "$ref": "ifc5alignmentComponent.json"
+                },
+                {
                     "$ref": "UsdShadeMaterialComponent.json"
                 },
                 {
