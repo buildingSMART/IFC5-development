@@ -14,7 +14,7 @@ enum ClassType
   BasisCurves: "UsdGeom:BasisCurves",
   Material: "UsdShade:Material",
   Shader: "UsdShade:Shader",
-  PlainXForm: "Xform";
+  PlainXForm: "Xform"; // whats this?
 }
 
 @jsonSchema
@@ -115,6 +115,7 @@ model ifc5alignmentComponent
     };
 }
 
+// bit of duplication here
 @jsonSchema
 model ifc5alignmentsegmentComponent
 {
@@ -143,7 +144,20 @@ model ifc5alignmentsegmentComponent
     };
 }
 
-alias ComponentType = ifc5alignmentsegmentComponent | ifc5alignmentComponent | UsdShadeMaterialComponent | ifc5spaceboundaryComponent | NLSFBComponent | UsdGeomBasisCurvesComponent | PropertiesComponent | CustomDataComponent | xformOpComponent | UsdShadeMaterialBindingAPIComponent | UsdGeomMeshComponent | UsdGeomVisibilityAPIvisibilityComponent | Ifc5ClassComponent;
+alias ComponentType = 
+    ifc5alignmentsegmentComponent | 
+    ifc5alignmentComponent | 
+    UsdShadeMaterialComponent | 
+    ifc5spaceboundaryComponent | 
+    NLSFBComponent | 
+    UsdGeomBasisCurvesComponent | 
+    PropertiesComponent | 
+    CustomDataComponent | 
+    xformOpComponent | 
+    UsdShadeMaterialBindingAPIComponent | 
+    UsdGeomMeshComponent | 
+    UsdGeomVisibilityAPIvisibilityComponent | 
+    Ifc5ClassComponent;
 
 @jsonSchema
 model Over {
