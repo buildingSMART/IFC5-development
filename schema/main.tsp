@@ -36,6 +36,8 @@ model UsdGeomVisibilityAPIvisibilityComponent {
     }
 }
 
+// name clash with native "class"
+// code should be enum (distinction from nlsfb)
 @jsonSchema
 model Ifc5ClassComponent
 {
