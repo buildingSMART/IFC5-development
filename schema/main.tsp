@@ -2,6 +2,10 @@ import "@typespec/json-schema";
 
 using TypeSpec.JsonSchema;
 
+// _ . : rarely used, / used for relative paths (hello-wall WallMaterial)
+@pattern("</[A-Za-z0-9_/.:]+>")
+scalar reference extends string;
+
 @jsonSchema
 model Disclaimer {
     disclaimer: string;
@@ -46,7 +50,7 @@ model UsdShadeMaterialBindingAPIComponent
 {
     "UsdShade:MaterialBindingAPI": {
         "material:binding": {
-            ref: string;
+            ref: reference;
         }
     }
 }
@@ -56,7 +60,7 @@ model UsdShadeMaterialComponent
 {
     "UsdShade:Material": {
         "outputs:surface.connect": {
-            ref: string;
+            ref: reference;
         }
     }
 }
@@ -100,7 +104,7 @@ model ifc5spaceboundaryComponent
 {
     "ifc5:spaceboundary": {
         relatedElement: {
-            ref: string
+            ref: reference
         }
     };
 }
@@ -110,7 +114,7 @@ model ifc5alignmentComponent
 {
     "ifc5:alignment": {
         segments: {
-            ref: string
+            ref: reference
         }[]
     };
 }
@@ -173,7 +177,7 @@ model Def {
     type?: ClassType;
     name: string;
     children?: Def[];
-    inherits?: string[]; // optional but very rarely so
+    inherits?: reference[]; // optional but very rarely so, see (hello-wall WallMaterial)
 }
 
 @jsonSchema

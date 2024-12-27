@@ -22,7 +22,7 @@
         "inherits": {
             "type": "array",
             "items": {
-                "type": "string"
+                "$ref": "#/$defs/reference"
             }
         }
     },
@@ -41,6 +41,10 @@
                 "UsdShade:Shader",
                 "Xform"
             ]
+        },
+        "reference": {
+            "type": "string",
+            "pattern": "</[A-Za-z0-9_/.:]+>"
         }
     }
 }

@@ -10,7 +10,7 @@
                     "type": "object",
                     "properties": {
                         "ref": {
-                            "type": "string"
+                            "$ref": "#/$defs/reference"
                         }
                     },
                     "required": [
@@ -25,5 +25,11 @@
     },
     "required": [
         "UsdShade:Material"
-    ]
+    ],
+    "$defs": {
+        "reference": {
+            "type": "string",
+            "pattern": "</[A-Za-z0-9_/.:]+>"
+        }
+    }
 }
