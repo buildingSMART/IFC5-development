@@ -18,6 +18,12 @@
             "items": {
                 "$ref": "Def.json"
             }
+        },
+        "inherits": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
         }
     },
     "required": [

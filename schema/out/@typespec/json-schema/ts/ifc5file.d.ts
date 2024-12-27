@@ -18,6 +18,7 @@ export interface DefJson {
   type?: "UsdGeom:Mesh" | "UsdGeom:Xform" | "UsdGeom:BasisCurves" | "UsdShade:Material" | "UsdShade:Shader" | "Xform";
   name: string;
   children?: DefJson[];
+  inherits?: string[];
 }
 export interface OverJson {
   def: "over";

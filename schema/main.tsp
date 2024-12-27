@@ -144,6 +144,7 @@ model ifc5alignmentsegmentComponent
     };
 }
 
+// naming inconsistencies
 alias ComponentType = 
     ifc5alignmentsegmentComponent | 
     ifc5alignmentComponent | 
@@ -172,6 +173,7 @@ model Def {
     type?: ClassType;
     name: string;
     children?: Def[];
+    inherits?: string[]; // optional but very rarely so
 }
 
 @jsonSchema
