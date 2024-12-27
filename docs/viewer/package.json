@@ -1,0 +1,18 @@
+{
+  "name": "viewer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/three": "^0.171.0",
+    "esbuild": "^0.24.2"
+  },
+  "dependencies": {
+    "three": "^0.171.0"
+  }
+}

@@ -1,8 +1,12 @@
 // (C) buildingSMART International
 // published under MIT license 
 
+import * as THREE from 'three';
+import { Ifc5FileJson } from '../../schema/out/@typespec/json-schema/ts/ifc5file';
+
 let controls, renderer, scene, camera;
-let datas = [];
+type datastype = [string, Ifc5FileJson][];
+let datas: datastype = [];
 let autoCamera = true;
 
 function init() {
@@ -18,13 +22,15 @@ function init() {
         alpha: true
     });
 
+    //@ts-ignore
     renderer.setSize(nd.offsetWidth, nd.offsetHeight);
 
+    //@ts-ignore
     controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.25;
 
-    nd.appendChild(renderer.domElement);
+    nd!.appendChild(renderer.domElement);
 
     return scene;
 }
@@ -60,7 +66,7 @@ function createMeshFromJson(node, parent, root) {
 
     // material on parent?
     let reference = parent.attributes['UsdShade:MaterialBindingAPI:material:binding'];
-    let material = null;
+    let material: THREE.MeshBasicMaterial | null = null;
     if (reference) {
         const materialNode = getChildByName(root, reference.ref);
         let shader = materialNode.children.find(i => i.type === 'UsdShade:Shader');
@@ -79,7 +85,7 @@ function createMeshFromJson(node, parent, root) {
     return new THREE.Mesh(geometry, material);
 }
 
-function traverseTree(node, parent, root, parentNode) {
+function traverseTree(node, parent, root, parentNode = undefined) {
     let elem;
     if (node.type === "UsdGeom:Xform") {
         elem = new THREE.Group();
@@ -103,6 +109,7 @@ function traverseTree(node, parent, root, parentNode) {
         let matrixNode = node.attributes && node.attributes['xformOp:transform'] ? node.attributes['xformOp:transform'].flat() : null;
         if (matrixNode) {
             let matrix = new THREE.Matrix4();
+            //@ts-ignore
             matrix.set(...matrixNode);
             matrix.transpose();
             elem.matrix = matrix;
@@ -120,7 +127,7 @@ function* collectNames(node) {
     }
 }
 
-function compose(datas) {
+function compose(datas: Ifc5FileJson[]) {
     // Composition, the naive way:
     //  - flatten tree to list of <path, object> pairs
     //  - group objects with among layers with the same path
@@ -133,6 +140,7 @@ function compose(datas) {
     function flattenAttributes(prim) {
         if (prim.name !== 'Shader' && prim.attributes) {
             const [k, vs] = Object.entries(prim.attributes)[0];
+            //@ts-ignore
             const attrs = Object.fromEntries(Object.entries(vs).map(([kk, vv]) => [`${k}:${kk}`, vv]));
             return {
                 ...prim,
@@ -158,7 +166,7 @@ function compose(datas) {
                 // Fully qualified means an over on a full path like /Project/Site/Something/Body. These
                 // are applied differntly. on non-root nodes we don't assemble immutably bottom up, but rather mutate top down.
                 const isFullyQualified = node.name.split('/').length > 2;
-                const reverseWhenFullyQualified = isFullyQualified ? (a => a.reverse()) : (a => a);
+                const reverseWhenFullyQualified = isFullyQualified ? ((a: any[]) => a.reverse()) : ((a:any[]) => a);
                 
                 const pathStr = `${parentPathStr}/${node.name.replace(/^\//, '')}`
                 
@@ -173,7 +181,7 @@ function compose(datas) {
                 
                 if (node.def === 'over') {
                     nodeId = `${pathStr} over`;
-                    addEdge(...reverseWhenFullyQualified([nodeId, pathStr]));
+                    addEdge.apply(reverseWhenFullyQualified([nodeId, pathStr]));
                     addEdge(nodeIdComplete, nodeId);
                 }
                 
@@ -193,7 +201,7 @@ function compose(datas) {
                     // We only instantiate def'ed children, not classes
                     if (child.name && child.def === 'def') {
                         const childName = `${pathStr}/${child.name}`;
-                        addEdge(...reverseWhenFullyQualified([pathStr, `${childName} complete`]));
+                        addEdge.apply(reverseWhenFullyQualified([pathStr, `${childName} complete`]));
                         if (nodeId.endsWith('over')) {
                             // when we have an over on a deeper namespace we need to make sure the root is already built
                             if (pathStr.split('/').length > 2) {
@@ -218,6 +226,7 @@ function compose(datas) {
     // This is primarily for children, loading the same layer multiple times should not have an effect
     // so the child composition edges should not be duplicated. Applying overs should be idempotent.
     function removeDuplicates(map_of_arrays) {
+        //@ts-ignore
         return Object.fromEntries(Object.entries(map_of_arrays).map(([k, vs]) => [k, vs.filter((value, index, array) => 
             array.indexOf(value) === index
         )]));
@@ -416,7 +425,7 @@ function buildDomTree(prim, node) {
     span.className = "material-symbols-outlined";
     elem.onclick = (evt) => {
         let rows = [['name', prim.name]].concat(Object.entries(prim.attributes)).map(([k, v]) => `<tr><td>${encodeHtmlEntities(k)}</td><td>${encodeHtmlEntities(typeof v === 'object' ? JSON.stringify(v) : v)}</td>`).join('');
-        document.querySelector('.attributes .table').innerHTML = `<table border="0">${rows}</table>`;
+        document.querySelector('.attributes .table')!.innerHTML = `<table border="0">${rows}</table>`;
         evt.stopPropagation();
     };
     node.appendChild(elem);
@@ -429,7 +438,7 @@ export function composeAndRender() {
         scene.children = [];
     }
 
-    document.querySelector('.tree').innerHTML = '';
+    document.querySelector('.tree')!.innerHTML = '';
 
     if (datas.length === 0) {
         return;
@@ -466,7 +475,7 @@ export function composeAndRender() {
 }
 
 function createLayerDom() {
-    document.querySelector('.layers div').innerHTML = '';
+    document.querySelector('.layers div')!.innerHTML = '';
     datas.forEach(([name, _], index) => {
         const elem = document.createElement('div');
         elem.appendChild(document.createTextNode(name));
@@ -491,11 +500,11 @@ function createLayerDom() {
             btn.appendChild(document.createTextNode(lbl));
             elem.appendChild(btn);
         });
-        document.querySelector('.layers div').appendChild(elem);
+        document.querySelector('.layers div')!.appendChild(elem);
     });
 }
 
-export default function addModel(name, m) {
+export default function addModel(name, m: Ifc5FileJson) {
     datas.push([name, m]);
     createLayerDom();
     composeAndRender();
