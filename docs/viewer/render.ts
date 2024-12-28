@@ -119,7 +119,8 @@ function traverseTree(node, parent, root, parentNode = undefined) {
     (node.children || []).forEach(child => traverseTree(child, elem || parent, root, node));
 }
 
-function* collectNames(node) {
+type ComposedObject = {name: string, attributes: any, children: ComposedObject[]};
+function* collectNames(node: ComposedObject): IterableIterator<string> {
     yield node.name;
     // @todo assert node.name matches path
     for (const child of node.children || []) {
@@ -281,14 +282,13 @@ function compose(datas: Ifc5FileJson[]) {
         }
     });
 
-    type ComposedMap = Record<string, {name: string, children: ComposedMap[]}>;
-    const composed: ComposedMap = {};
+    const composed: Record<string, ComposedObject> = {};
     const built = new Set();
 
     Object.keys(compositionEdgesUnique).forEach(p => {
         const opinions = maps.map(m => m[p]).filter(a => a).flat(1);
         if (p == '') {
-            composed[p] = {name: p, children: []};
+            composed[p] = {name: p, children: [], attributes: {}};
         } else if (opinions.length === 0) {
             return;
         } else if (opinions.length == 1) {
