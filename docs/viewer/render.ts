@@ -7,7 +7,9 @@ let controls, renderer, scene, camera;
 type datastype = [string, Ifc5FileJson][];
 let datas: datastype = [];
 let autoCamera = true;
-let THREE;
+
+// hack
+let THREE = window["THREE"];
 
 function init() {
     scene = new THREE.Scene();
