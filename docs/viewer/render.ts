@@ -45,16 +45,17 @@ function createCurveFromJson(node, parent, root) {
     return new THREE.Line(geometry, material);
 }
 
-function getChildByName(root, childName, skip=0) {
+function getChildByName(root: ComposedObject, childName, skip=0) {
     let fragments = childName.replace(/^<\/|^\/|>$/g, '').split('/');
     for (let i = 0; i < skip; ++i) {
         fragments.shift();
     }
-    while (fragments.length && root) {
+    let start: ComposedObject | undefined = root;
+    while (fragments.length && start) {
         let f = fragments.shift();
-        root = root.children.find(i => i.name.split('/').reverse()[0] === f);
+        start = root.children!.find(i => i.name.split('/').reverse()[0] === f);
     }
-    return root;
+    return start;
 }
 
 function createMeshFromJson(node, parent, root) {
@@ -71,13 +72,13 @@ function createMeshFromJson(node, parent, root) {
     let material: THREE.MeshBasicMaterial | null = null;
     if (reference) {
         const materialNode = getChildByName(root, reference.ref);
-        let shader = materialNode.children.find(i => i.type === 'UsdShade:Shader');
-        let color = shader.attributes['inputs:diffuseColor'];
+        let shader = materialNode!.children!.find(i => i.type === 'UsdShade:Shader');
+        let color = shader!.attributes['inputs:diffuseColor'];
         material = new THREE.MeshBasicMaterial();
         material.color = new THREE.Color(...color);
-        if (shader.attributes['inputs:opacity']) {
+        if (shader!.attributes['inputs:opacity']) {
             material.transparent = true;
-            material.opacity = shader.attributes['inputs:opacity'];
+            material.opacity = shader!.attributes['inputs:opacity'];
         }
     } else {
         material = new THREE.MeshBasicMaterial();
@@ -121,7 +122,11 @@ function traverseTree(node, parent, root, parentNode = undefined) {
     (node.children || []).forEach(child => traverseTree(child, elem || parent, root, node));
 }
 
-type ComposedObject = {name: string, attributes?: any, children?: ComposedObject[]};
+type ComposedObject = {
+    name: string, attributes?: any, 
+    type?: "UsdGeom:Mesh" | "UsdGeom:Xform" | "UsdGeom:BasisCurves" | "UsdShade:Material" | "UsdShade:Shader" | "Xform";
+    children?: ComposedObject[]
+};
 function* collectNames(node: ComposedObject): IterableIterator<string> {
     yield node.name;
     // @todo assert node.name matches path
@@ -140,8 +145,16 @@ function compose(datas: Ifc5FileJson[]) {
     type EdgeMap = Record<string, string[]>;
     let compositionEdges: EdgeMap = {};
 
+    interface Prim
+    {
+        def: string;
+        name: string;
+        type?: "UsdGeom:Mesh" | "UsdGeom:Xform" | "UsdGeom:BasisCurves" | "UsdShade:Material" | "UsdShade:Shader" | "Xform";
+        attributes?: any;
+    }
+
     // Undo the attribute namespace of over prims introduced in 'ECS'.
-    function flattenAttributes(prim: (ClassJson | DefJson | OverJson)) {
+    function flattenAttributes(prim: (ClassJson | DefJson | OverJson)): Prim {
         if (prim.name !== 'Shader' && "attributes" in prim) {
             const [k, vs] = Object.entries(prim.attributes)[0];
             //@ts-ignore
@@ -163,7 +176,8 @@ function compose(datas: Ifc5FileJson[]) {
 
     // Traverse forest and yield paths as a map of str -> dict
     function collectPaths(nodes: Ifc5FileJson) {
-        const paths = {};
+        type pathstype = Record<string, Prim[]>;
+        const paths: pathstype = {};
 
         function traverse(node: (ClassJson | DefJson | OverJson | DisclaimerJson), parentPathStr: string) {
             if ('name' in node) {
@@ -302,7 +316,7 @@ function compose(datas: Ifc5FileJson[]) {
         } else {
             composed[p] = opinions.reverse().reduce(composePrim);
         }
-        //@todo: this was a delete
+
         delete composed[p].children;
     });
 
@@ -358,11 +372,11 @@ function compose(datas: Ifc5FileJson[]) {
                         let child = getChildByName(composed[`/${v.split('/')[1]}`], v, /*skip=*/ 1);
                         if (child) {
                             k = k.replace(/ complete$/, '');
-                            child.children.push(composed[k]);
+                            child.children!.push(composed[k]);
                         } else {
                             console.error(v, '-->', k, 'not applied');
                         }
-                        Array.from(collectNames(child)).forEach(a => definedPrims.add(a.substring(child.name.length)));
+                        Array.from(collectNames(child!)).forEach(a => definedPrims.add(a.substring(child.name.length)));
                     }
                 } else if (k.search(/over$/) !== -1) {
                     if (k.split('/').length > 2) {
