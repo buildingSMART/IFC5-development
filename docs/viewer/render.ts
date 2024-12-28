@@ -1,13 +1,13 @@
 // (C) buildingSMART International
 // published under MIT license 
 
-import * as THREE from 'three';
 import { ClassJson, DefJson, DisclaimerJson, Ifc5FileJson, OverJson } from '../../schema/out/@typespec/json-schema/ts/ifc5file';
 
 let controls, renderer, scene, camera;
 type datastype = [string, Ifc5FileJson][];
 let datas: datastype = [];
 let autoCamera = true;
+let THREE;
 
 function init() {
     scene = new THREE.Scene();
@@ -119,7 +119,7 @@ function traverseTree(node, parent, root, parentNode = undefined) {
     (node.children || []).forEach(child => traverseTree(child, elem || parent, root, node));
 }
 
-type ComposedObject = {name: string, attributes: any, children: ComposedObject[]};
+type ComposedObject = {name: string, attributes?: any, children?: ComposedObject[]};
 function* collectNames(node: ComposedObject): IterableIterator<string> {
     yield node.name;
     // @todo assert node.name matches path
@@ -139,8 +139,8 @@ function compose(datas: Ifc5FileJson[]) {
     let compositionEdges: EdgeMap = {};
 
     // Undo the attribute namespace of over prims introduced in 'ECS'.
-    function flattenAttributes(prim) {
-        if (prim.name !== 'Shader' && prim.attributes) {
+    function flattenAttributes(prim: (ClassJson | DefJson | OverJson)) {
+        if (prim.name !== 'Shader' && "attributes" in prim) {
             const [k, vs] = Object.entries(prim.attributes)[0];
             //@ts-ignore
             const attrs = Object.fromEntries(Object.entries(vs).map(([kk, vv]) => [`${k}:${kk}`, vv]));
@@ -183,7 +183,8 @@ function compose(datas: Ifc5FileJson[]) {
                 
                 if (node.def === 'over') {
                     nodeId = `${pathStr} over`;
-                    addEdge.apply(reverseWhenFullyQualified([nodeId, pathStr]));
+                    let e = reverseWhenFullyQualified([nodeId, pathStr]);
+                    addEdge(e[0], e[1]);
                     addEdge(nodeIdComplete, nodeId);
                 }
                 
@@ -208,7 +209,8 @@ function compose(datas: Ifc5FileJson[]) {
                         // We only instantiate def'ed children, not classes
                         if (child.name && child.def === 'def') {
                             const childName = `${pathStr}/${child.name}`;
-                            addEdge.apply(reverseWhenFullyQualified([pathStr, `${childName} complete`]));
+                            let e = reverseWhenFullyQualified([pathStr, `${childName} complete`]);
+                            addEdge(e[0], e[1]);
                             if (nodeId.endsWith('over')) {
                                 // when we have an over on a deeper namespace we need to make sure the root is already built
                                 if (pathStr.split('/').length > 2) {
@@ -241,7 +243,9 @@ function compose(datas: Ifc5FileJson[]) {
 
     // Prim storage based on path for the various lauers
     const maps = datas.map(collectPaths);
+    // maps is correct
 
+    // composition edges not correct, so rem dup also not correct
     let compositionEdgesOrig: EdgeMap = removeDuplicates(compositionEdges);
     
     // Reduction function to override prim attributes
@@ -288,7 +292,7 @@ function compose(datas: Ifc5FileJson[]) {
     Object.keys(compositionEdgesUnique).forEach(p => {
         const opinions = maps.map(m => m[p]).filter(a => a).flat(1);
         if (p == '') {
-            composed[p] = {name: p, children: [], attributes: {}};
+            composed[p] = {name: p};
         } else if (opinions.length === 0) {
             return;
         } else if (opinions.length == 1) {
@@ -297,7 +301,7 @@ function compose(datas: Ifc5FileJson[]) {
             composed[p] = opinions.reverse().reduce(composePrim);
         }
         //@todo: this was a delete
-        composed[p].children = [];
+        delete composed[p].children;
     });
 
     const updateName = (oldPrefix, newPrefix, prim) => {
@@ -307,6 +311,8 @@ function compose(datas: Ifc5FileJson[]) {
             children: prim.children.map(c => updateName(oldPrefix, newPrefix, c))
         }
     };
+
+    console.log(compositionEdgesUnique);
 
     // Essentially we do an 'interactive' topological sort. Where we process the composition edges for
     // those prims that do not have any dependencies left. However, as a consequence of composition,
@@ -320,7 +326,7 @@ function compose(datas: Ifc5FileJson[]) {
             break;
         }
 
-        const definedPrims = new Set();
+        const definedPrims = new Set<string>();
 
         // Apply edges in dependency order
         bottomRankNodes.forEach(k => {
@@ -340,7 +346,7 @@ function compose(datas: Ifc5FileJson[]) {
                         v = v.replace(/ complete$/, '');
 
                         composed[k].children = composed[k].children || [];
-                        composed[k].children.push(composed[v]);
+                        composed[k].children?.push(composed[v]);
                         Array.from(collectNames(composed[k])).forEach(a => definedPrims.add(a.substring(k.length)));
                     }
                 } else if (k.startsWith(v + '/')) {
