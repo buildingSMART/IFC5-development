@@ -35,11 +35,12 @@ function getChildByName(root, childName, skip = 0) {
   for (let i = 0; i < skip; ++i) {
     fragments.shift();
   }
-  while (fragments.length && root) {
+  let start = root;
+  while (fragments.length && start) {
     let f = fragments.shift();
-    root = root.children.find((i) => i.name.split("/").reverse()[0] === f);
+    start = root.children.find((i) => i.name.split("/").reverse()[0] === f);
   }
-  return root;
+  return start;
 }
 function createMeshFromJson(node, parent, root) {
   let points = new Float32Array(node.attributes["UsdGeom:Mesh:points"].flat());
