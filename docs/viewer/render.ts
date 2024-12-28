@@ -69,6 +69,7 @@ function createMeshFromJson(node, parent, root) {
 
     // material on parent?
     let reference = parent.attributes['UsdShade:MaterialBindingAPI:material:binding'];
+    //@ts-ignore
     let material: THREE.MeshBasicMaterial | null = null;
     if (reference) {
         const materialNode = getChildByName(root, reference.ref);
@@ -376,7 +377,7 @@ function compose(datas: Ifc5FileJson[]) {
                         } else {
                             console.error(v, '-->', k, 'not applied');
                         }
-                        Array.from(collectNames(child!)).forEach(a => definedPrims.add(a.substring(child.name.length)));
+                        Array.from(collectNames(child!)).forEach(a => definedPrims.add(a.substring(child!.name.length)));
                     }
                 } else if (k.search(/over$/) !== -1) {
                     if (k.split('/').length > 2) {
