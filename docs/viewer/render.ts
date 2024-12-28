@@ -168,7 +168,7 @@ function compose(datas: Ifc5FileJson[]) {
                 // Fully qualified means an over on a full path like /Project/Site/Something/Body. These
                 // are applied differntly. on non-root nodes we don't assemble immutably bottom up, but rather mutate top down.
                 const isFullyQualified = node.name.split('/').length > 2;
-                const reverseWhenFullyQualified = isFullyQualified ? ((a: any[]) => a.reverse()) : ((a:any[]) => a);
+                const reverseWhenFullyQualified = isFullyQualified ? ((a: string[]) => a.reverse()) : ((a:string[]) => a);
                 
                 const pathStr = `${parentPathStr}/${node.name.replace(/^\//, '')}`
                 
