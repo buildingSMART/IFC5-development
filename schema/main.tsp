@@ -189,6 +189,7 @@ model Class {
     type?: ClassType;
     name: string;
     children?: Def[];
+    inherits?: reference[]; // optional but very rarely so, see (hello-wall WallMaterial)
 }
 
 @jsonSchema
