@@ -58,7 +58,7 @@ function getChildByName(root: ComposedObject, childName, skip=0) {
     return start;
 }
 
-function createMeshFromJson(node, parent, root) {
+function createMeshFromJson(node: ComposedObject, parent: ComposedObject | undefined, root: ComposedObject) {
     let points = new Float32Array(node.attributes['UsdGeom:Mesh:points'].flat());
     let indices = new Uint16Array(node.attributes['UsdGeom:Mesh:faceVertexIndices']);
 
@@ -68,7 +68,7 @@ function createMeshFromJson(node, parent, root) {
     geometry.computeVertexNormals();
 
     // material on parent?
-    let reference = parent.attributes['UsdShade:MaterialBindingAPI:material:binding'];
+    let reference = parent!.attributes['UsdShade:MaterialBindingAPI:material:binding'];
     //@ts-ignore
     let material: THREE.MeshBasicMaterial | null = null;
     if (reference) {
@@ -89,7 +89,7 @@ function createMeshFromJson(node, parent, root) {
     return new THREE.Mesh(geometry, material);
 }
 
-function traverseTree(node, parent, root, parentNode = undefined) {
+function traverseTree(node: ComposedObject, parent, root: ComposedObject, parentNode: ComposedObject | undefined = undefined) {
     let elem;
     if (node.type === "UsdGeom:Xform") {
         elem = new THREE.Group();
@@ -136,7 +136,7 @@ function* collectNames(node: ComposedObject): IterableIterator<string> {
     }
 }
 
-function compose(datas: Ifc5FileJson[]) {
+export function compose(datas: Ifc5FileJson[]) {
     // Composition, the naive way:
     //  - flatten tree to list of <path, object> pairs
     //  - group objects with among layers with the same path
@@ -155,11 +155,11 @@ function compose(datas: Ifc5FileJson[]) {
     }
 
     // Undo the attribute namespace of over prims introduced in 'ECS'.
-    function flattenAttributes(prim: (ClassJson | DefJson | OverJson)): Prim {
+    function prefixAttributesWithComponentName(prim: (ClassJson | DefJson | OverJson)): Prim {
         if (prim.name !== 'Shader' && "attributes" in prim) {
-            const [k, vs] = Object.entries(prim.attributes)[0];
+            const [componentName, componentNamedValues] = Object.entries(prim.attributes)[0];
             //@ts-ignore
-            const attrs = Object.fromEntries(Object.entries(vs).map(([kk, vv]) => [`${k}:${kk}`, vv]));
+            const attrs = Object.fromEntries(Object.entries(componentNamedValues).map(([valueName, value]) => [`${componentName}:${valueName}`, value]));
             return {
                 ...prim,
                 attributes: attrs
@@ -195,7 +195,7 @@ function compose(datas: Ifc5FileJson[]) {
                 // to be inherited from or used as a subprim.
                 let nodeIdComplete = `${pathStr} complete`;
                 
-                const N = flattenAttributes(node);
+                const N = prefixAttributesWithComponentName(node);
                 N.name = pathStr;
                 
                 if (node.def === 'over') {
