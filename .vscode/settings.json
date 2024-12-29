@@ -1,0 +1,10 @@
+{
+    "json.schemas": [
+        {
+            "fileMatch": [
+                "/**/*.ifcx"
+            ],
+            "url": "./schema/out/@typespec/json-schema/Ifc5File.json"
+        }
+    ]
+}

@@ -1,0 +1,157 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "ifc5alignmentsegmentComponent.json",
+    "type": "object",
+    "properties": {
+        "ifc5:alignmentsegment": {
+            "anyOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "EndRadiusOfCurvature": {
+                            "type": "number"
+                        },
+                        "PredefinedType": {
+                            "anyOf": [
+                                {
+                                    "type": "string",
+                                    "const": "LINE"
+                                },
+                                {
+                                    "type": "string",
+                                    "const": "CLOTHOID"
+                                },
+                                {
+                                    "type": "string",
+                                    "const": "CIRCULARARC"
+                                },
+                                {
+                                    "type": "string",
+                                    "const": "CONSTANTGRADIENT"
+                                }
+                            ]
+                        },
+                        "SegmentLength": {
+                            "type": "number"
+                        },
+                        "StartDirection": {
+                            "type": "number"
+                        },
+                        "StartPoint": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            }
+                        },
+                        "StartRadiusOfCurvature": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "EndRadiusOfCurvature",
+                        "PredefinedType",
+                        "SegmentLength",
+                        "StartDirection",
+                        "StartPoint",
+                        "StartRadiusOfCurvature"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "EndGradient": {
+                            "type": "number"
+                        },
+                        "PredefinedType": {
+                            "anyOf": [
+                                {
+                                    "type": "string",
+                                    "const": "LINE"
+                                },
+                                {
+                                    "type": "string",
+                                    "const": "CLOTHOID"
+                                },
+                                {
+                                    "type": "string",
+                                    "const": "CIRCULARARC"
+                                },
+                                {
+                                    "type": "string",
+                                    "const": "CONSTANTGRADIENT"
+                                }
+                            ]
+                        },
+                        "HorizontalLength": {
+                            "type": "number"
+                        },
+                        "StartDistAlong": {
+                            "type": "number"
+                        },
+                        "StartGradient": {
+                            "type": "number"
+                        },
+                        "StartHeight": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "EndGradient",
+                        "PredefinedType",
+                        "HorizontalLength",
+                        "StartDistAlong",
+                        "StartGradient",
+                        "StartHeight"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "EndCantLeft": {
+                            "type": "number"
+                        },
+                        "EndCantRight": {
+                            "type": "number"
+                        },
+                        "HorizontalLength": {
+                            "type": "number"
+                        },
+                        "PredefinedType": {
+                            "anyOf": [
+                                {
+                                    "type": "string",
+                                    "const": "CONSTANTCANT"
+                                },
+                                {
+                                    "type": "string",
+                                    "const": "LINEARTRANSITION"
+                                }
+                            ]
+                        },
+                        "StartCantLeft": {
+                            "type": "number"
+                        },
+                        "StartCantRight": {
+                            "type": "number"
+                        },
+                        "StartDistAlong": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "EndCantLeft",
+                        "EndCantRight",
+                        "HorizontalLength",
+                        "PredefinedType",
+                        "StartCantLeft",
+                        "StartCantRight",
+                        "StartDistAlong"
+                    ]
+                }
+            ]
+        }
+    },
+    "required": [
+        "ifc5:alignmentsegment"
+    ]
+}
