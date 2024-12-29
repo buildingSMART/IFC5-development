@@ -5,17 +5,37 @@
     "items": {
         "anyOf": [
             {
-                "$ref": "Class.json"
-            },
-            {
-                "$ref": "Def.json"
-            },
-            {
-                "$ref": "Over.json"
+                "$ref": "#/$defs/Prim"
             },
             {
                 "$ref": "Disclaimer.json"
             }
         ]
+    },
+    "$defs": {
+        "Prim": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "$ref": "#/$defs/ClassType"
+                }
+            },
+            "required": [
+                "name"
+            ]
+        },
+        "ClassType": {
+            "type": "string",
+            "enum": [
+                "UsdGeom:Mesh",
+                "UsdGeom:Xform",
+                "UsdGeom:BasisCurves",
+                "UsdShade:Material",
+                "UsdShade:Shader"
+            ]
+        }
     }
 }

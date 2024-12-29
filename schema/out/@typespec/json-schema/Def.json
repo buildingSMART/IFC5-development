@@ -7,12 +7,6 @@
             "type": "string",
             "const": "def"
         },
-        "type": {
-            "$ref": "#/$defs/ClassType"
-        },
-        "name": {
-            "type": "string"
-        },
         "children": {
             "type": "array",
             "items": {
@@ -27,10 +21,32 @@
         }
     },
     "required": [
-        "def",
-        "name"
+        "def"
+    ],
+    "allOf": [
+        {
+            "$ref": "#/$defs/Prim"
+        }
     ],
     "$defs": {
+        "reference": {
+            "type": "string",
+            "pattern": "</[A-Za-z0-9_/.:]+>"
+        },
+        "Prim": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "$ref": "#/$defs/ClassType"
+                }
+            },
+            "required": [
+                "name"
+            ]
+        },
         "ClassType": {
             "type": "string",
             "enum": [
@@ -38,13 +54,8 @@
                 "UsdGeom:Xform",
                 "UsdGeom:BasisCurves",
                 "UsdShade:Material",
-                "UsdShade:Shader",
-                "Xform"
+                "UsdShade:Shader"
             ]
-        },
-        "reference": {
-            "type": "string",
-            "pattern": "</[A-Za-z0-9_/.:]+>"
         }
     }
 }

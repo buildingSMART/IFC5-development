@@ -24,6 +24,11 @@
         "def",
         "name"
     ],
+    "allOf": [
+        {
+            "$ref": "#/$defs/Prim"
+        }
+    ],
     "$defs": {
         "ClassType": {
             "type": "string",
@@ -32,8 +37,21 @@
                 "UsdGeom:Xform",
                 "UsdGeom:BasisCurves",
                 "UsdShade:Material",
-                "UsdShade:Shader",
-                "Xform"
+                "UsdShade:Shader"
+            ]
+        },
+        "Prim": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "$ref": "#/$defs/ClassType"
+                }
+            },
+            "required": [
+                "name"
             ]
         }
     }
