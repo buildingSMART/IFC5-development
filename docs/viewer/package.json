@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "build": "esbuild render.ts --bundle --outfile=render.mjs --external:three --format=esm",
+    "test": "esbuild test.ts --bundle --outfile=test.js --external:three --platform=node && node test.js",
     "serve": "serve ."
   },
   "author": "",
