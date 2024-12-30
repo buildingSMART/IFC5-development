@@ -67,15 +67,11 @@ function CleanInherit(inheritString: string)
     return inheritString.substring(2, inheritString.length - 1);
 }
 
-function BuildTree(node: string, path: string, children: Map<string, string[]>, isClass: Map<string, boolean>): ComposedObject
+function BuildTree(node: string, parentPath: string, children: Map<string, string[]>, isClass: Map<string, boolean>): ComposedObject
 {
-    let newPath = node === "" ? "" : `${path}/${node}`;
-    if (isClass.has(node))
-    {
-        newPath = path;
-    }
+    let currentNodePath = node === PSEUDO_ROOT ? PSEUDO_ROOT : `${parentPath}/${node}`;
     let obj: ComposedObject = {
-        name: newPath, 
+        name: currentNodePath, 
         attributes: {}, 
         type: "UsdGeom:Mesh"
     };
@@ -84,7 +80,8 @@ function BuildTree(node: string, path: string, children: Map<string, string[]>, 
     {
         obj.children = [];
         children.get(node)?.forEach(child => {
-            let childObject = BuildTree(child, newPath, children, isClass);
+            let childNodePath = isClass.has(node) ? parentPath : currentNodePath;
+            let childObject = BuildTree(child, childNodePath, children, isClass);
             if (isClass.has(child))
             {
                 if (childObject.children)
