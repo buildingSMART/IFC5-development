@@ -67,10 +67,15 @@ function CleanInherit(inheritString: string)
     return inheritString.substring(2, inheritString.length - 1);
 }
 
-function BuildTree(node: string, children: Map<string, string[]>, isClass: Map<string, boolean>): ComposedObject
+function BuildTree(node: string, path: string, children: Map<string, string[]>, isClass: Map<string, boolean>): ComposedObject
 {
+    let newPath = node === "" ? "" : `${path}/${node}`;
+    if (isClass.has(node))
+    {
+        newPath = path;
+    }
     let obj: ComposedObject = {
-        name: node, 
+        name: newPath, 
         attributes: {}, 
         type: "UsdGeom:Mesh"
     };
@@ -79,7 +84,7 @@ function BuildTree(node: string, children: Map<string, string[]>, isClass: Map<s
     {
         obj.children = [];
         children.get(node)?.forEach(child => {
-            let childObject = BuildTree(child, children, isClass);
+            let childObject = BuildTree(child, newPath, children, isClass);
             if (isClass.has(child))
             {
                 if (childObject.children)
@@ -159,7 +164,7 @@ function compose(file: Ifc5FileJson): ComposedObject
         MMSet(children, PSEUDO_ROOT, root);
     })
 
-    let tree = BuildTree(PSEUDO_ROOT, children, isClass);
+    let tree = BuildTree(PSEUDO_ROOT, PSEUDO_ROOT, children, isClass);
 
     let oversForID = BuildOversForId(overs);
 
