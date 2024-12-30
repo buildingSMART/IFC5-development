@@ -139,7 +139,7 @@ class IntermediateComposition
 }
 
 // once IC contains the data of all layers, we can build the composed object tree. Note that building the whole tree is something we probably dont want to do in real life
-function BuildTree(node: string, parentPath: string, ic: IntermediateComposition): ComposedObject
+function BuildTreeNodeFromIntermediateComposition(node: string, parentPath: string, ic: IntermediateComposition): ComposedObject
 {
     // root node is an exception in some ways, should fix this
     let isPseudoRoot = node === PSEUDO_ROOT;
@@ -159,7 +159,7 @@ function BuildTree(node: string, parentPath: string, ic: IntermediateComposition
         obj.children = [];
         ic.children.get(node)?.forEach(child => {
             let childNodePath = ic.isClass.has(node) ? parentPath : currentNodePath;
-            let childObject = BuildTree(child, childNodePath, ic);
+            let childObject = BuildTreeNodeFromIntermediateComposition(child, childNodePath, ic);
             if (ic.isClass.has(child))
             {
                 // if a child is a class, we "merge" it with the current node
@@ -247,7 +247,7 @@ function BuildTreeFromIntermediateComposition(ic: IntermediateComposition)
         MMSet(ic.children, PSEUDO_ROOT, root);
     })
 
-    return BuildTree(PSEUDO_ROOT, PSEUDO_ROOT, ic);
+    return BuildTreeNodeFromIntermediateComposition(PSEUDO_ROOT, PSEUDO_ROOT, ic);
 }
 
 // this compose works by constructing an intermediate composition of all files and then building a single object tree from it
