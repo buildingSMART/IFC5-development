@@ -55,11 +55,13 @@ function CollectDefChildren(objects: {name: string, children?: DefJson[]}[], out
     let addedDefs: DefJson[] = []; // two phase because defs are nested
     objects.filter(o => "children" in o).forEach((parent) => {
         parent.children!.forEach(def => {
+            //hack defs are not uniquely named, so we prefix them with parent
+            def.name = `${parent.name}__${def.name}`;
             addedDefs.push(def);
             MMSet(children, parent.name, def.name);
         })
     })
-    console.log(addedDefs);
+
     output.push(...addedDefs);
 }
 
@@ -91,6 +93,7 @@ function prefixAttributesWithComponentName(attributes: any): any {
     return prefixed;
 }
 
+// later indices in the array should "win"
 function CondenseAttributes(attrs: any[] | undefined)
 {
     if (!attrs) return undefined;
@@ -108,8 +111,11 @@ function BuildTree(node: string, parentPath: string, children: Map<string, strin
 {
     // root node is an exception in that its "" not "/"
     let isPseudoRoot = node === PSEUDO_ROOT;
-    let currentNodePath = isPseudoRoot ? PSEUDO_ROOT : `${parentPath}/${node}`;
+    //hack because nested defs are not uniquely named they are prefixed with parent, need to remove for display
+    let displayName = node.indexOf("__") > 0 ? node.substring(node.indexOf("__") + 2) : node;
+    let currentNodePath = isPseudoRoot ? PSEUDO_ROOT : `${parentPath}/${displayName}`;
     let nodeAttributes = CondenseAttributes(attributes.get(node));
+    
     let obj: ComposedObject = {
         name: currentNodePath, 
         attributes: isPseudoRoot ? undefined : nodeAttributes, 
@@ -129,7 +135,7 @@ function BuildTree(node: string, parentPath: string, children: Map<string, strin
                     obj.children?.push(...childObject.children!);
                 }
                 obj.type = childObject.type;
-                obj.attributes = CondenseAttributes([obj.attributes, childObject.attributes]);
+                obj.attributes = CondenseAttributes([childObject.attributes, obj.attributes]);
             }
             else
             {
@@ -166,8 +172,8 @@ function compose(file: Ifc5FileJson): ComposedObject
     defs.forEach(d => types.set(d.name, d.type));
 
     let attributes = new Map<string, any[]>();
-    overs.forEach(c => MMSet(attributes, c.name, c.attributes));
     defs.forEach(d => MMSet(attributes, d.name, d.attributes));
+    overs.forEach(o => MMSet(attributes, o.name, o.attributes));
 
     let prefixedAttrs = new Map<string, any[]>();
     attributes.forEach((attrs, node) => {
@@ -221,9 +227,6 @@ function compose(file: Ifc5FileJson): ComposedObject
     let tree = BuildTree(PSEUDO_ROOT, PSEUDO_ROOT, children, isClass, types, prefixedAttrs);
 
     let oversForID = BuildOversForId(overs);
-
-    console.log("classes", children);
-    console.log("roots", roots);
 
     return tree;
 }
