@@ -45,10 +45,13 @@ function CollectDefChildren(objects: {name: string, children?: DefJson[]}[], out
     let addedDefs: DefJson[] = []; // two phase because defs are nested
     objects.filter(o => "children" in o).forEach((parent) => {
         parent.children!.forEach(def => {
-            //hack defs are not uniquely named, so we prefix them with parent
-            def.name = `${parent.name}__${def.name}`;
-            addedDefs.push(def);
-            MMSet(children, parent.name, def.name);
+            //hack defs are not uniquely named, so we prefix them with parent and copy
+            let newDefName = `${parent.name}__${def.name}`;
+            addedDefs.push({
+                ...def,
+                name: newDefName
+            });
+            MMSet(children, parent.name, newDefName);
         })
     })
 

@@ -4,19 +4,24 @@ import { compose2 } from "./compose2";
 let fs = require("fs");
 
 let helloWallFileName = "../../Hello Wall/hello-wall.ifcx";
-let helloWallFR = "../../Hello Wall/hello-wall_silly-firerating.ifcx";
+let helloWallFR = "../../Hello Wall/hello-wall_add-firerating.ifcx";
 let helloWallJSON = JSON.parse(fs.readFileSync(helloWallFileName).toString());
 let helloWallFRJSON = JSON.parse(fs.readFileSync(helloWallFR).toString());
 
 console.log(helloWallJSON);
 
+let stime = new Date().getTime();
 let composed = compose([helloWallJSON, helloWallFRJSON] as Ifc5FileJson[]);
+composed = compose([helloWallJSON, helloWallFRJSON] as Ifc5FileJson[]);
+let time1 = new Date().getTime() - stime;
 
-//console.log(JSON.stringify(composed, null, 4));
 
+stime = new Date().getTime();
 let composed2 = compose2([helloWallJSON, helloWallFRJSON] as Ifc5FileJson[]);
-//console.log(JSON.stringify(composed2, null, 4));
+composed2 = compose2([helloWallJSON, helloWallFRJSON] as Ifc5FileJson[]);
+let time2 = new Date().getTime() - stime;
 
+console.log(`time1: ${time1} time2: ${time2}`);
 
 function CompareComposition(a: ComposedObject, b: ComposedObject)
 {
