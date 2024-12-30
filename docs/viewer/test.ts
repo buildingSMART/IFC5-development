@@ -10,10 +10,10 @@ console.log(helloWallJSON);
 
 let composed = compose([helloWallJSON] as Ifc5FileJson[]);
 
-console.log(JSON.stringify(composed, null, 4));
+//console.log(JSON.stringify(composed, null, 4));
 
 let composed2 = compose2([helloWallJSON] as Ifc5FileJson[]);
-console.log(JSON.stringify(composed2, null, 4));
+//console.log(JSON.stringify(composed2, null, 4));
 
 
 function CompareComposition(a: ComposedObject, b: ComposedObject)
@@ -62,9 +62,9 @@ function CompareComposition(a: ComposedObject, b: ComposedObject)
             }
 
             Object.keys(a.attributes).forEach(attrName => {
-                if (!b.attributes[attrName])
+                if (a.attributes[attrName] !== b.attributes[attrName])
                 {
-                    throw new Error(`Missing attribute ${attrName} on B`);
+                    throw new Error(`Mismatched attribute ${attrName} on B`);
                 }
             })
         }
