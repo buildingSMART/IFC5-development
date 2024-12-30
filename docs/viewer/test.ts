@@ -60,6 +60,13 @@ function CompareComposition(a: ComposedObject, b: ComposedObject)
             {
                 throw new Error(`Attribute count mismatch ${a.name} - ${b.name}`);
             }
+
+            Object.keys(a.attributes).forEach(attrName => {
+                if (!b.attributes[attrName])
+                {
+                    throw new Error(`Missing attribute ${attrName} on B`);
+                }
+            })
         }
     }
     catch (e)
