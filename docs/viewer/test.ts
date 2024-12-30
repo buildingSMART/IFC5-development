@@ -24,6 +24,11 @@ function CompareComposition(a: ComposedObject, b: ComposedObject)
             throw new Error(`Name mismatch ${a.name} - ${b.name}`);
         }
 
+        if (a.type !== b.type)
+        {
+            throw new Error(`Type mismatch ${a.type} - ${b.type}`);
+        }
+
         if (!!a.children !== !!b.children)
         {
             throw new Error(`Children mismatch ${a.children} - ${b.children}`);
@@ -40,7 +45,7 @@ function CompareComposition(a: ComposedObject, b: ComposedObject)
             {
                 let childA = a.children[i];
                 let childB = b.children[i];
-                CompareComposition(childA, childB);
+                if (!CompareComposition(childA, childB)) return false;
             }
         }
     }
@@ -53,7 +58,7 @@ function CompareComposition(a: ComposedObject, b: ComposedObject)
         bcopy.children = [];
         console.log(`A: `, acopy);
         console.log(`B: `, bcopy);
-        throw e;
+        return false;
     }
 
     return true;

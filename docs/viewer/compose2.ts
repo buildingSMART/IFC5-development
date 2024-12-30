@@ -4,6 +4,8 @@ import { ComposedObject } from "./compose";
 const ID_DELIM = "/";
 const PSEUDO_ROOT = "";
 
+type ComponentTypes = "UsdGeom:Mesh" | "UsdGeom:Xform" | "UsdGeom:BasisCurves" | "UsdShade:Material" | "UsdShade:Shader" | "Xform" | undefined;
+
 class Ifc5ID
 {
     parts: string[];
@@ -67,13 +69,14 @@ function CleanInherit(inheritString: string)
     return inheritString.substring(2, inheritString.length - 1);
 }
 
-function BuildTree(node: string, parentPath: string, children: Map<string, string[]>, isClass: Map<string, boolean>): ComposedObject
+function BuildTree(node: string, parentPath: string, children: Map<string, string[]>, isClass: Map<string, boolean>, types: Map<string, ComponentTypes>): ComposedObject
 {
+    // root node is an exception in that its "" not "/"
     let currentNodePath = node === PSEUDO_ROOT ? PSEUDO_ROOT : `${parentPath}/${node}`;
     let obj: ComposedObject = {
         name: currentNodePath, 
         attributes: {}, 
-        type: "UsdGeom:Mesh"
+        type: node === PSEUDO_ROOT ? undefined : types.get(node)
     };
 
     if (children.has(node))
@@ -81,13 +84,14 @@ function BuildTree(node: string, parentPath: string, children: Map<string, strin
         obj.children = [];
         children.get(node)?.forEach(child => {
             let childNodePath = isClass.has(node) ? parentPath : currentNodePath;
-            let childObject = BuildTree(child, childNodePath, children, isClass);
+            let childObject = BuildTree(child, childNodePath, children, isClass, types);
             if (isClass.has(child))
             {
                 if (childObject.children)
                 {
                     obj.children?.push(...childObject.children!);
                 }
+                obj.type = childObject.type;
             }
             else
             {
@@ -118,6 +122,10 @@ function compose(file: Ifc5FileJson): ComposedObject
     
     let isClass = new Map<string, boolean>();
     classes.forEach(c => isClass.set(c.name, true));
+
+    let types = new Map<string, ComponentTypes>();
+    classes.forEach(c => types.set(c.name, c.type));
+    defs.forEach(d => types.set(d.name, d.type));
 
     // add all inherits as parent child
     {
@@ -161,7 +169,7 @@ function compose(file: Ifc5FileJson): ComposedObject
         MMSet(children, PSEUDO_ROOT, root);
     })
 
-    let tree = BuildTree(PSEUDO_ROOT, PSEUDO_ROOT, children, isClass);
+    let tree = BuildTree(PSEUDO_ROOT, PSEUDO_ROOT, children, isClass, types);
 
     let oversForID = BuildOversForId(overs);
 
