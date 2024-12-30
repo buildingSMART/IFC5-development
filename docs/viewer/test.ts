@@ -4,15 +4,17 @@ import { compose2 } from "./compose2";
 let fs = require("fs");
 
 let helloWallFileName = "../../Hello Wall/hello-wall.ifcx";
+let helloWallFR = "../../Hello Wall/hello-wall_silly-firerating.ifcx";
 let helloWallJSON = JSON.parse(fs.readFileSync(helloWallFileName).toString());
+let helloWallFRJSON = JSON.parse(fs.readFileSync(helloWallFR).toString());
 
 console.log(helloWallJSON);
 
-let composed = compose([helloWallJSON] as Ifc5FileJson[]);
+let composed = compose([helloWallJSON, helloWallFRJSON] as Ifc5FileJson[]);
 
 //console.log(JSON.stringify(composed, null, 4));
 
-let composed2 = compose2([helloWallJSON] as Ifc5FileJson[]);
+let composed2 = compose2([helloWallJSON, helloWallFRJSON] as Ifc5FileJson[]);
 //console.log(JSON.stringify(composed2, null, 4));
 
 

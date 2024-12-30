@@ -106,29 +106,37 @@ function CondenseAttributes(attrs: any[] | undefined)
     return condensed;
 }
 
-// TODO: fix signature
-function BuildTree(node: string, parentPath: string, children: Map<string, string[]>, isClass: Map<string, boolean>, types: Map<string, ComponentTypes>, attributes: Map<string, any[]>): ComposedObject
+class IntermediateComposition
+{
+    names = new Set<string>();
+    children = new Map<string, string[]>;
+    isClass = new Map<string, boolean>;
+    types = new Map<string, ComponentTypes>;
+    attributes = new Map<string, any[]>;
+}
+
+function BuildTree(node: string, parentPath: string, ic: IntermediateComposition): ComposedObject
 {
     // root node is an exception in that its "" not "/"
     let isPseudoRoot = node === PSEUDO_ROOT;
     //hack because nested defs are not uniquely named they are prefixed with parent, need to remove for display
     let displayName = node.indexOf("__") > 0 ? node.substring(node.indexOf("__") + 2) : node;
     let currentNodePath = isPseudoRoot ? PSEUDO_ROOT : `${parentPath}/${displayName}`;
-    let nodeAttributes = CondenseAttributes(attributes.get(node));
+    let nodeAttributes = CondenseAttributes(ic.attributes.get(node));
     
     let obj: ComposedObject = {
         name: currentNodePath, 
         attributes: isPseudoRoot ? undefined : nodeAttributes, 
-        type: isPseudoRoot ? undefined : types.get(node)
+        type: isPseudoRoot ? undefined : ic.types.get(node)
     };
 
-    if (children.has(node))
+    if (ic.children.has(node))
     {
         obj.children = [];
-        children.get(node)?.forEach(child => {
-            let childNodePath = isClass.has(node) ? parentPath : currentNodePath;
-            let childObject = BuildTree(child, childNodePath, children, isClass, types, attributes);
-            if (isClass.has(child))
+        ic.children.get(node)?.forEach(child => {
+            let childNodePath = ic.isClass.has(node) ? parentPath : currentNodePath;
+            let childObject = BuildTree(child, childNodePath, ic);
+            if (ic.isClass.has(child))
             {
                 if (childObject.children)
                 {
@@ -147,38 +155,31 @@ function BuildTree(node: string, parentPath: string, children: Map<string, strin
     return obj;
 }
 
-function compose(file: Ifc5FileJson): ComposedObject
+function UpdateIntermediateCompositionWithFile(ic: IntermediateComposition, file: Ifc5FileJson)
 {
     let classes = file.filter(element => "def" in element && element.def === "class") as ClassJson[];
     let defs = file.filter(element => "def" in element && element.def === "def") as DefJson[];
     let overs = file.filter(element => "def" in element && element.def === "over") as OverJson[];
 
-    let children = new Map<string, string[]>();
-
     // collect all nested child defs into the main def array, store parent/child links
-    CollectDefChildren(classes, defs, children);
-    CollectDefChildren(defs, defs, children);
+    CollectDefChildren(classes, defs, ic.children);
+    CollectDefChildren(defs, defs, ic.children);
 
-    let names = new Set<string>();
-
-    classes.forEach(c => names.add(c.name));
-    defs.forEach(d => names.add(d.name));
+    classes.forEach(c => ic.names.add(c.name));
+    defs.forEach(d => ic.names.add(d.name));
     
-    let isClass = new Map<string, boolean>();
-    classes.forEach(c => isClass.set(c.name, true));
+    classes.forEach(c => ic.isClass.set(c.name, true));
 
-    let types = new Map<string, ComponentTypes>();
-    classes.forEach(c => types.set(c.name, c.type));
-    defs.forEach(d => types.set(d.name, d.type));
+    classes.forEach(c => ic.types.set(c.name, c.type));
+    defs.forEach(d => ic.types.set(d.name, d.type));
 
-    let attributes = new Map<string, any[]>();
-    defs.forEach(d => MMSet(attributes, d.name, d.attributes));
-    overs.forEach(o => MMSet(attributes, o.name, o.attributes));
+    let plainAttributes = new Map<string, any[]>();
+    defs.forEach(d => MMSet(plainAttributes, d.name, d.attributes));
+    overs.forEach(o => MMSet(plainAttributes, o.name, o.attributes));
 
-    let prefixedAttrs = new Map<string, any[]>();
-    attributes.forEach((attrs, node) => {
+    plainAttributes.forEach((attrs, node) => {
         attrs.filter(a=>a).forEach((attr) => {
-            MMSet(prefixedAttrs, node, prefixAttributesWithComponentName(attr));
+            MMSet(ic.attributes, node, prefixAttributesWithComponentName(attr));
         })
     });
 
@@ -189,7 +190,7 @@ function compose(file: Ifc5FileJson): ComposedObject
             {
                 def.inherits.forEach(parent => {
                     // inherits seems to work in reverse
-                    MMSet(children, def.name, CleanInherit(parent));
+                    MMSet(ic.children, def.name, CleanInherit(parent));
                 })
             }
         })
@@ -198,22 +199,28 @@ function compose(file: Ifc5FileJson): ComposedObject
             {
                 clss.inherits.forEach(parent => {
                     // inherits seems to work in reverse
-                    MMSet(children, clss.name, CleanInherit(parent));
+                    MMSet(ic.children, clss.name, CleanInherit(parent));
                 })
             }
         })
     }
 
+    return ic;
+}
+
+function BuildTreeFromIntermediateComposition(ic: IntermediateComposition)
+{
+    // build parents
     let parents = new Map<string, string[]>();
-    children.forEach((children, parent) => {
+    ic.children.forEach((children, parent) => {
         children.forEach(child => {
             MMSet(parents, child, parent);
         });
-    })
+    });
 
     // find roots
     let roots: string[] = [];
-    names.forEach(name => {
+    ic.names.forEach(name => {
         if (!parents.has(name) || parents.get(name)?.length === 0)
         {
             roots.push(name);
@@ -221,16 +228,14 @@ function compose(file: Ifc5FileJson): ComposedObject
     });
 
     roots.forEach(root => {
-        MMSet(children, PSEUDO_ROOT, root);
+        MMSet(ic.children, PSEUDO_ROOT, root);
     })
 
-    let tree = BuildTree(PSEUDO_ROOT, PSEUDO_ROOT, children, isClass, types, prefixedAttrs);
-
-    let oversForID = BuildOversForId(overs);
-
-    return tree;
+    return BuildTree(PSEUDO_ROOT, PSEUDO_ROOT, ic);
 }
 
 export function compose2(files: Ifc5FileJson[]): ComposedObject {
-    return compose(files[0]);
+    let ic = new IntermediateComposition();
+    files.forEach(file => UpdateIntermediateCompositionWithFile(ic, file))
+    return BuildTreeFromIntermediateComposition(ic);
 }
