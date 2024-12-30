@@ -6,6 +6,7 @@ const PSEUDO_ROOT = "";
 
 type ComponentTypes = "UsdGeom:Mesh" | "UsdGeom:Xform" | "UsdGeom:BasisCurves" | "UsdShade:Material" | "UsdShade:Shader" | "Xform" | undefined;
 
+// should really use something like this class to support more interesting OVERs, but first fix name !== id problem
 class Ifc5ID
 {
     parts: string[];
@@ -37,17 +38,6 @@ function MMSet<A, B>(map: Map<A, B[]>, key: A, value: B)
     {
         map.set(key, [value]);
     }
-}
-
-function BuildOversForId(overs: OverJson[])
-{
-    let oversForID = new Map<string, OverJson[]>();
-
-    overs.forEach(over => {
-        MMSet(oversForID, over.name, over);
-    })
-
-    return oversForID;
 }
 
 function CollectDefChildren(objects: {name: string, children?: DefJson[]}[], output: DefJson[], children: Map<string, string[]>)
