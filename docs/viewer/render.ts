@@ -3,6 +3,7 @@
 
 import { ClassJson, DefJson, DisclaimerJson, Ifc5FileJson, OverJson } from '../../schema/out/@typespec/json-schema/ts/ifc5file';
 import { compose, ComposedObject, getChildByName } from './compose';
+import { compose2 } from './compose2';
 
 let controls, renderer, scene, camera;
 type datastype = [string, Ifc5FileJson][];
@@ -151,7 +152,7 @@ export function composeAndRender() {
         return;
     }
 
-    const tree = compose(datas.map(arr => arr[1]));
+    const tree = compose2(datas.map(arr => arr[1]));
     if (!tree) {
         console.error("No result from composition");
         return;
