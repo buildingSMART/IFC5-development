@@ -69,14 +69,51 @@ function CleanInherit(inheritString: string)
     return inheritString.substring(2, inheritString.length - 1);
 }
 
-function BuildTree(node: string, parentPath: string, children: Map<string, string[]>, isClass: Map<string, boolean>, types: Map<string, ComponentTypes>): ComposedObject
+// Undo the attribute namespace of over prims introduced in 'ECS'.
+function prefixAttributesWithComponentName(attributes: any): any {
+    let prefixed = {};
+    
+    Object.keys(attributes).forEach((componentName) => {
+        // regular component attributes, hard to detect...
+        if (attributes[componentName] !== null && typeof attributes[componentName] === "object" && !Array.isArray(attributes[componentName]))
+        {
+            Object.keys(attributes[componentName]).forEach((valueName) => {
+                prefixed[`${componentName}:${valueName}`] = attributes[componentName][valueName];
+            });
+        }
+        else
+        {
+            // special inline attributes, nothing to prefix
+            prefixed[componentName] = attributes[componentName];
+        }
+    });
+
+    return prefixed;
+}
+
+function CondenseAttributes(attrs: any[] | undefined)
+{
+    if (!attrs) return undefined;
+
+    let condensed = {};
+    attrs.filter(a => a).forEach(attributes => {
+        condensed = {...condensed, ...attributes}
+    });
+
+    return condensed;
+}
+
+// TODO: fix signature
+function BuildTree(node: string, parentPath: string, children: Map<string, string[]>, isClass: Map<string, boolean>, types: Map<string, ComponentTypes>, attributes: Map<string, any[]>): ComposedObject
 {
     // root node is an exception in that its "" not "/"
-    let currentNodePath = node === PSEUDO_ROOT ? PSEUDO_ROOT : `${parentPath}/${node}`;
+    let isPseudoRoot = node === PSEUDO_ROOT;
+    let currentNodePath = isPseudoRoot ? PSEUDO_ROOT : `${parentPath}/${node}`;
+    let nodeAttributes = CondenseAttributes(attributes.get(node));
     let obj: ComposedObject = {
         name: currentNodePath, 
-        attributes: {}, 
-        type: node === PSEUDO_ROOT ? undefined : types.get(node)
+        attributes: isPseudoRoot ? undefined : nodeAttributes, 
+        type: isPseudoRoot ? undefined : types.get(node)
     };
 
     if (children.has(node))
@@ -84,7 +121,7 @@ function BuildTree(node: string, parentPath: string, children: Map<string, strin
         obj.children = [];
         children.get(node)?.forEach(child => {
             let childNodePath = isClass.has(node) ? parentPath : currentNodePath;
-            let childObject = BuildTree(child, childNodePath, children, isClass, types);
+            let childObject = BuildTree(child, childNodePath, children, isClass, types, attributes);
             if (isClass.has(child))
             {
                 if (childObject.children)
@@ -92,6 +129,7 @@ function BuildTree(node: string, parentPath: string, children: Map<string, strin
                     obj.children?.push(...childObject.children!);
                 }
                 obj.type = childObject.type;
+                obj.attributes = CondenseAttributes([obj.attributes, childObject.attributes]);
             }
             else
             {
@@ -126,6 +164,17 @@ function compose(file: Ifc5FileJson): ComposedObject
     let types = new Map<string, ComponentTypes>();
     classes.forEach(c => types.set(c.name, c.type));
     defs.forEach(d => types.set(d.name, d.type));
+
+    let attributes = new Map<string, any[]>();
+    overs.forEach(c => MMSet(attributes, c.name, c.attributes));
+    defs.forEach(d => MMSet(attributes, d.name, d.attributes));
+
+    let prefixedAttrs = new Map<string, any[]>();
+    attributes.forEach((attrs, node) => {
+        attrs.filter(a=>a).forEach((attr) => {
+            MMSet(prefixedAttrs, node, prefixAttributesWithComponentName(attr));
+        })
+    });
 
     // add all inherits as parent child
     {
@@ -169,7 +218,7 @@ function compose(file: Ifc5FileJson): ComposedObject
         MMSet(children, PSEUDO_ROOT, root);
     })
 
-    let tree = BuildTree(PSEUDO_ROOT, PSEUDO_ROOT, children, isClass, types);
+    let tree = BuildTree(PSEUDO_ROOT, PSEUDO_ROOT, children, isClass, types, prefixedAttrs);
 
     let oversForID = BuildOversForId(overs);
 

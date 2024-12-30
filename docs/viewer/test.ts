@@ -48,6 +48,19 @@ function CompareComposition(a: ComposedObject, b: ComposedObject)
                 if (!CompareComposition(childA, childB)) return false;
             }
         }
+
+        if (!!a.attributes !== !!b.attributes)
+        {
+            throw new Error(`Attributes mismatch ${a.children} - ${b.children}`);
+        }
+
+        if (a.attributes)
+        {
+            if (Object.keys(a.attributes).length !== Object.keys(b.attributes).length)
+            {
+                throw new Error(`Attribute count mismatch ${a.name} - ${b.name}`);
+            }
+        }
     }
     catch (e)
     {
@@ -58,6 +71,7 @@ function CompareComposition(a: ComposedObject, b: ComposedObject)
         bcopy.children = [];
         console.log(`A: `, acopy);
         console.log(`B: `, bcopy);
+        console.error(e);
         return false;
     }
 
