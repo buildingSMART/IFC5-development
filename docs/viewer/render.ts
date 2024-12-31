@@ -23,7 +23,8 @@ function init() {
 
     const nd = document.querySelector('.viewport');
     renderer = new THREE.WebGLRenderer({
-        alpha: true
+        alpha: true,
+        logarithmicDepthBuffer: true
     });
 
     //@ts-ignore
