@@ -18,6 +18,12 @@
             "items": {
                 "$ref": "Def.json"
             }
+        },
+        "inherits": {
+            "type": "array",
+            "items": {
+                "$ref": "#/$defs/reference"
+            }
         }
     },
     "required": [
@@ -35,6 +41,10 @@
                 "UsdShade:Shader",
                 "Xform"
             ]
+        },
+        "reference": {
+            "type": "string",
+            "pattern": "</[A-Za-z0-9_/.:]+>"
         }
     }
 }

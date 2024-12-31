@@ -1,0 +1,21 @@
+{
+  "name": "viewer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "esbuild render.ts --bundle --outfile=render.mjs --external:three --format=esm",
+    "test": "esbuild test.ts --bundle --outfile=test.js --external:three --platform=node && node test.js",
+    "serve": "serve ."
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/three": "^0.171.0",
+    "esbuild": "^0.24.2",
+    "serve": "^14.2.4"
+  },
+  "dependencies": {
+    "three": "^0.171.0"
+  }
+}
