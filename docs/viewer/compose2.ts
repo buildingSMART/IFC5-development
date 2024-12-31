@@ -160,6 +160,7 @@ function BuildTreeNodeFromIntermediateComposition(node: string, parentPath: stri
         ic.children.get(node)?.forEach(child => {
             let childNodePath = ic.isClass.has(node) ? parentPath : currentNodePath;
             let childObject = BuildTreeNodeFromIntermediateComposition(child, childNodePath, ic);
+            if (ic.isClass.has(child) && !isPseudoRoot)
             {
                 // if a child is a class, we "merge" it with the current node
                 if (childObject.children)
