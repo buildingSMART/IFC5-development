@@ -1,0 +1,62 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "Over.json",
+    "type": "object",
+    "properties": {
+        "def": {
+            "type": "string",
+            "const": "over"
+        },
+        "name": {
+            "type": "string"
+        },
+        "attributes": {
+            "anyOf": [
+                {
+                    "$ref": "ifc5alignmentsegmentComponent.json"
+                },
+                {
+                    "$ref": "ifc5alignmentComponent.json"
+                },
+                {
+                    "$ref": "UsdShadeMaterialComponent.json"
+                },
+                {
+                    "$ref": "ifc5spaceboundaryComponent.json"
+                },
+                {
+                    "$ref": "NLSFBComponent.json"
+                },
+                {
+                    "$ref": "UsdGeomBasisCurvesComponent.json"
+                },
+                {
+                    "$ref": "PropertiesComponent.json"
+                },
+                {
+                    "$ref": "CustomDataComponent.json"
+                },
+                {
+                    "$ref": "xformOpComponent.json"
+                },
+                {
+                    "$ref": "UsdShadeMaterialBindingAPIComponent.json"
+                },
+                {
+                    "$ref": "UsdGeomMeshComponent.json"
+                },
+                {
+                    "$ref": "UsdGeomVisibilityAPIvisibilityComponent.json"
+                },
+                {
+                    "$ref": "Ifc5ClassComponent.json"
+                }
+            ]
+        }
+    },
+    "required": [
+        "def",
+        "name",
+        "attributes"
+    ]
+}

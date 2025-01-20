@@ -1,0 +1,35 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "UsdShadeMaterialComponent.json",
+    "type": "object",
+    "properties": {
+        "UsdShade:Material": {
+            "type": "object",
+            "properties": {
+                "outputs:surface.connect": {
+                    "type": "object",
+                    "properties": {
+                        "ref": {
+                            "$ref": "#/$defs/reference"
+                        }
+                    },
+                    "required": [
+                        "ref"
+                    ]
+                }
+            },
+            "required": [
+                "outputs:surface.connect"
+            ]
+        }
+    },
+    "required": [
+        "UsdShade:Material"
+    ],
+    "$defs": {
+        "reference": {
+            "type": "string",
+            "pattern": "</[A-Za-z0-9_/.:]+>"
+        }
+    }
+}

@@ -176,12 +176,34 @@
         input[type=text] {
             padding: 9px 0.5em !important;
         }
+
+        .error-modal {
+            display: none;
+            position: absolute;
+            left: 15vw;
+            right: 15vw;
+            top: 15vw;
+            bottom: 15vw;
+            border: solid 2px red;
+            background-color: #fee;
+            cursor: pointer;
+            font-size: 150%;
+        }
+
+        .error-modal .message {
+            padding: 5vw;
+            display: inline-block;
+        }
+
+        .error-modal .message::before {
+            content: '\26A0 \A0 \A0';
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="header"><h1>IFC5 view <span>BETA</span></h1></div>
+        <div class="header"><h1>IFC5 view <span>BETA - IFC 5 is still heavily under development. Software tools (including this viewer), the IFC 5 datamodel, schema and examples are under constant change.</span></h1></div>
         <div class='layers'>
             <h2>Layer browser</h2>
             <div></div>
@@ -207,6 +229,9 @@
             This software is freely available for use, modification, and distribution under the MIT License, provided the original copyright notice and license terms are included.
             <a href="https://github.com/buildingSMART/IFC5-development/">https://github.com/buildingSMART/IFC5-development/</a>
         </div>
+        <div class="error-modal" onclick="document.querySelector('.error-modal').style.display = 'none';">
+            <span class="message"></span>
+        </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.142.0/examples/js/controls/OrbitControls.js"></script>
@@ -221,7 +246,16 @@
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    addModel(file.name, JSON.parse(e.target.result));
+                    let json = null;
+                    try {
+                        json = JSON.parse(e.target.result);
+                    } catch(e) {
+                        document.querySelector('.error-modal .message').innerHTML = e.message;
+                        document.querySelector('.error-modal').style.display = 'block';
+                    }
+                    if (json) {
+                        addModel(file.name, json);
+                    }
                 };
                 reader.readAsText(file);
             }
@@ -229,10 +263,16 @@
 
         document.querySelector('#urlForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            fetch(event.target.urlInput.value).then(r => r.json()).then((j) => {
-                const name = event.target.urlInput.value.split('/').reverse()[0];
-                addModel(name, j);
-            });
+            fetch(event.target.urlInput.value)
+                .then(r => r.json())
+                .then((j) => {
+                    const name = event.target.urlInput.value.split('/').reverse()[0];
+                    addModel(name, j);
+                })
+                .catch(e => {
+                    document.querySelector('.error-modal .message').innerHTML = e.message;
+                    document.querySelector('.error-modal').style.display = 'block';
+                });
         });
     </script>
 </body>

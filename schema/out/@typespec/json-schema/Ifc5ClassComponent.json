@@ -1,0 +1,25 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "Ifc5ClassComponent.json",
+    "type": "object",
+    "properties": {
+        "ifc5:class": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "uri": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "code",
+                "uri"
+            ]
+        }
+    },
+    "required": [
+        "ifc5:class"
+    ]
+}
