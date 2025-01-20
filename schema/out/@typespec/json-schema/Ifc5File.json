@@ -1,0 +1,21 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "Ifc5File.json",
+    "type": "array",
+    "items": {
+        "anyOf": [
+            {
+                "$ref": "Class.json"
+            },
+            {
+                "$ref": "Def.json"
+            },
+            {
+                "$ref": "Over.json"
+            },
+            {
+                "$ref": "Disclaimer.json"
+            }
+        ]
+    }
+}
