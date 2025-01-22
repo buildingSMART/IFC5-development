@@ -20,11 +20,14 @@ export function getChildByName(root: ComposedObject, childName, skip=0) {
         fragments.shift();
     }
     let start: ComposedObject | undefined = root;
-    while (fragments.length && start) {
+    while (fragments.length && start && start.children) {
+        console.log(start, fragments[0]);
         let f = fragments.shift();
-        start = root.children!.find(i => i.name.split('/').reverse()[0] === f);
+        start = start.children!.find(i => i.name.split('/').reverse()[0] === f);
     }
-    return start;
+    if (fragments.length == 0) {
+        return start;
+    }
 }
 
 export function compose(datas: Ifc5FileJson[]) {
@@ -220,15 +223,13 @@ export function compose(datas: Ifc5FileJson[]) {
         }
     };
 
-    console.log(compositionEdgesUnique);
-
     // Essentially we do an 'interactive' topological sort. Where we process the composition edges for
     // those prims that do not have any dependencies left. However, as a consequence of composition,
     // novel prim paths can also be formed which can resolve the dependencies for other prims.
     let maxIterations = 100;
     while (maxIterations --) {
         const bottomRankNodes = Object.entries(compositionEdgesUnique).filter(([_, dep]) => dep.size === 0 && (composed[_] || built.has(_) || _.endsWith(' complete'))).map(([k, v]) => k);
-        console.log('Bottom rank prims to resolve:', ...bottomRankNodes);
+        // console.log('Bottom rank prims to resolve:', ...bottomRankNodes);
 
         if (bottomRankNodes.length === 0) {
             break;
@@ -243,7 +244,7 @@ export function compose(datas: Ifc5FileJson[]) {
                 // (An array does not really function as a tuple). So we need to reverse engineer
                 // the type of the edge (and therefore what composition action to apply) based on
                 // the names of the vertices.
-                console.log('Processing edge:', k, ' --- ', v);
+                // console.log('Processing edge:', k, ' --- ', v);
                 if (k.endsWith(' complete') && v.endsWith(' over')) {
                     // Only for life cycle dependency management, no action associated
                 } else if (v.startsWith(k + '/')) {
@@ -307,7 +308,7 @@ export function compose(datas: Ifc5FileJson[]) {
             });
         });
 
-        console.log('Constructed prims:', ...definedPrims);
+        // console.log('Constructed prims:', ...definedPrims);
 
         Array.from(definedPrims).forEach(a => built.add(a));
 
@@ -323,6 +324,6 @@ export function compose(datas: Ifc5FileJson[]) {
         console.error("Unresolved nodes:", ...Object.keys(compositionEdgesUnique));
     }
 
-    console.log(composed['']);
+    // console.log(composed['']);
     return composed[''];
 }
