@@ -180,6 +180,7 @@ model Def {
     name: string;
     children?: Def[];
     inherits?: reference[]; // optional but very rarely so, see (hello-wall WallMaterial)
+    attributes?: unknown; // what is this?
 }
 
 @jsonSchema
@@ -188,6 +189,7 @@ model Class {
     type?: ClassType;
     name: string;
     children?: Def[];
+    inherits?: reference[]; // optional but very rarely so, see (hello-wall WallMaterial)
 }
 
 @jsonSchema

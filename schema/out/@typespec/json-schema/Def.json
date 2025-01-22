@@ -24,7 +24,8 @@
             "items": {
                 "$ref": "#/$defs/reference"
             }
-        }
+        },
+        "attributes": {}
     },
     "required": [
         "def",
