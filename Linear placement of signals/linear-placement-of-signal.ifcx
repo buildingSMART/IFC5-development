@@ -34,7 +34,7 @@
  },
  {
   "def": "def",
-  "type": "Xform",
+  "type": "UsdGeom:Xform",
   "name": "Stationing",
   "inherits": [
    "</Nb3d92a60f103434c8cd75964d56228fc>"]
