@@ -18,7 +18,7 @@
   },
   {
     "def": "def",
-    "type": "Xform",
+    "type": "UsdGeom:Xform",
     "name": "WekaHillsLeapfrogDemo",
     "inherits": [
       "</Ndd9e46015e7c4b59be0b1b98dfcadb74>"
