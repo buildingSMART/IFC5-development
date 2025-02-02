@@ -162,37 +162,17 @@ function compose(datas) {
 
         function traverse(node, parentPathStr) {
             if (node.name) {
-                // Fully qualified means an over on a full path like /Project/Site/Something/Body. These
-                // are applied differntly. on non-root nodes we don't assemble immutably bottom up, but rather mutate top down.
-                const isFullyQualified = node.name.split('/').length > 2;
-                const reverseWhenFullyQualified = isFullyQualified ? (a => a.reverse()) : (a => a);
-                
-                const pathStr = `${parentPathStr}/${node.name.replace(/^\//, '')}`
-                
+                const pathStr = `${parentPathStr}/${node.name.replace(/^\//, '')}`                
                 let nodeId = pathStr;
-                
-                // 'complete' refers to the composition lifecycle when all overs are applied and the prim is ready
-                // to be inherited from or used as a subprim.
-                let nodeIdComplete = `${pathStr} complete`;
-                
                 const N = flattenAttributes(node);
                 N.name = pathStr;
-                
-                if (node.def === 'over') {
-                    nodeId = `${pathStr} over`;
-                    addEdge(...reverseWhenFullyQualified([nodeId, pathStr]));
-                    addEdge(nodeIdComplete, nodeId);
-                }
-                
-                addEdge(nodeIdComplete, pathStr);
-
                 // Store in map
                 (paths[nodeId] = paths[nodeId] || []).push(N);
 
                 // Add inheritance edges
                 for (let ih of node.inherits || []) {
                     const target = ih.substring(1, ih.length - 1);
-                    addEdge(nodeId, `${target} complete`)
+                    addEdge(nodeId, `${target}`)
                 }
 
                 // Add subprim edges
@@ -200,13 +180,7 @@ function compose(datas) {
                     // We only instantiate def'ed children, not classes
                     if (child.name && child.def === 'def') {
                         const childName = `${pathStr}/${child.name}`;
-                        addEdge(...reverseWhenFullyQualified([pathStr, `${childName} complete`]));
-                        if (nodeId.endsWith('over')) {
-                            // when we have an over on a deeper namespace we need to make sure the root is already built
-                            if (pathStr.split('/').length > 2) {
-                                addEdge(childName, `/${pathStr.split('/')[1]}`);
-                            }
-                        }
+                        addEdge(pathStr, childName)
                     }
                     traverse(child, pathStr);
                 });
@@ -216,7 +190,7 @@ function compose(datas) {
         // Create the pseudo root and connect to its children
         nodes.forEach((n) => traverse(n, ''));
         nodes.filter(n => n.name && n.def === 'def').forEach(n => {
-            addEdge('', `/${n.name} complete`);
+            addEdge('', `/${n.name}`);
         });
 
         return paths;
@@ -319,65 +293,13 @@ function compose(datas) {
                 // the type of the edge (and therefore what composition action to apply) based on
                 // the names of the vertices.
                 console.log('Processing edge:', k, ' --- ', v);
-                if (k.endsWith(' complete') && v.endsWith(' over')) {
-                    // Only for life cycle dependency management, no action associated
-                } else if (v.startsWith(k + '/')) {
-                    // If k is a subpath of v it's a subPrim relationship
-                    if (k.split('/').length > 2) {
-                        // this should not occur
-                    } else {
-                        v = v.replace(/ complete$/, '');
-
-                        composed[k].children = composed[k].children || [];
-                        composed[k].children.push(composed[v]);
-                        Array.from(collectNames(composed[k])).forEach(a => definedPrims.add(a.substring(k.length)));
-                    }
-                } else if (k.startsWith(v + '/')) {
-                    // reversed child definition for top-down over application
-                    if (k.endsWith(' complete')) {
-                        // @todo immutability
-                        let child = getChildByName(composed[`/${v.split('/')[1]}`], v, /*skip=*/ 1);
-                        if (child) {
-                            k = k.replace(/ complete$/, '');
-                            child.children.push(composed[k]);
-                        } else {
-                            console.error(v, '-->', k, 'not applied');
-                        }
-                        Array.from(collectNames(child)).forEach(a => definedPrims.add(a.substring(child.name.length)));
-                    }
-                } else if (k.search(/over$/) !== -1) {
-                    if (k.split('/').length > 2) {
-                        // @todo immutability
-                        let child = getChildByName(composed[`/${v.split('/')[1]}`], k.split(' ')[0], /*skip=*/ 1);
-                        if (child) {
-                            Object.assign(child.attributes, composed[k].attributes);
-                        } else {
-                            console.error(k, '-->', v, 'not applied');
-                        }
-                    } else {
-                        composed[v] = composePrim(composed[v], composed[k]);
-                    }
-                } else if (v.search(/over$/) !== -1) {
-                    // reversed top-down over
-                    if (v.split('/').length > 2) {
-                        // @todo immutability
-                        let child = getChildByName(composed[`/${k.split('/')[1]}`], v.split(' ')[0], /*skip=*/ 1);
-                        if (child) {
-                            Object.assign(child.attributes, composed[v].attributes);
-                        } else {
-                            console.error(v, '-->', k, 'not registered');
-                        }
-                    } else {
-                        composed[k] = composePrim(composed[k], composed[v]);
-                    }
+                if (v.startsWith(k + '/')) {
+                    composed[k].children = composed[k].children || [];
+                    composed[k].children.push(composed[v]);
                 } else {
                     // Else it's an inheritance relationship
-                    if (v.endsWith('complete')) {
-                        // only when ends with complete, otherwise it could be the dependency edge between a concatenated-prim over and its root.
-                        v = v.replace(/ complete$/, '');
-                        composed[k] = updateName(composed[v].name, composed[k].name, composePrim(composed[k], composed[v]));
-                        Array.from(collectNames(composed[k])).forEach(a => definedPrims.add(a.substring(k.length)));
-                    }
+                    composed[k] = updateName(composed[v].name, composed[k].name, composePrim(composed[k], composed[v]));
+                    Array.from(collectNames(composed[k])).forEach(a => definedPrims.add(a));
                 }
             });
         });
