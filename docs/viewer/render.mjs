@@ -1,6 +1,8 @@
 // (C) buildingSMART International
 // published under MIT license 
 
+import toposort from "./toposort.mjs";
+
 let controls, renderer, scene, camera;
 let datas = [];
 let autoCamera = true;
@@ -119,21 +121,14 @@ function traverseTree(node, parent, root, parentNode) {
     (node.children || []).forEach(child => traverseTree(child, elem || parent, root, node));
 }
 
-function* collectNames(node) {
-    yield node.name;
-    // @todo assert node.name matches path
-    for (const child of node.children || []) {
-        yield* collectNames(child);
-    }
-}
 
 function compose(datas) {
     // Composition, the naive way:
-    //  - flatten tree to list of <path, object> pairs
-    //  - group objects with among layers with the same path
-    //  - apply inheritance relationships
+    //  - flatten forest to mapping of <path, object> pairs
+    //  - group and compose objects among layers with the same path
+    //  - apply inheritance relationships in topological order from bottom rank to top
     //  - recompose into hierarchical structure
-
+    
     let compositionEdges = {};
 
     // Undo the attribute namespace of over prims introduced in 'ECS'.
@@ -162,10 +157,8 @@ function compose(datas) {
 
         function traverse(node, parentPathStr) {
             if (node.name) {
-                const pathStr = `${parentPathStr}/${node.name.replace(/^\//, '')}`                
-                let nodeId = pathStr;
+                const nodeId = `${parentPathStr}/${node.name.replace(/^\//, '')}`                
                 const N = flattenAttributes(node);
-                N.name = pathStr;
                 // Store in map
                 (paths[nodeId] = paths[nodeId] || []).push(N);
 
@@ -179,10 +172,10 @@ function compose(datas) {
                 (node.children || []).forEach(child => {
                     // We only instantiate def'ed children, not classes
                     if (child.name && child.def === 'def') {
-                        const childName = `${pathStr}/${child.name}`;
-                        addEdge(pathStr, childName)
+                        const childName = `${nodeId}/${child.name}`;
+                        addEdge(nodeId, childName)
                     }
-                    traverse(child, pathStr);
+                    traverse(child, nodeId);
                 });
             }
         }
@@ -196,132 +189,93 @@ function compose(datas) {
         return paths;
     }
 
-    // This is primarily for children, loading the same layer multiple times should not have an effect
-    // so the child composition edges should not be duplicated. Applying overs should be idempotent.
-    function removeDuplicates(map_of_arrays) {
-        return Object.fromEntries(Object.entries(map_of_arrays).map(([k, vs]) => [k, vs.filter((value, index, array) => 
-            array.indexOf(value) === index
-        )]));
-    }
-
-    // Prim storage based on path for the various lauers
+    // Prim storage based on path for the various layers
     const maps = datas.map(collectPaths);
 
-    let compositionEdgesOrig = removeDuplicates(compositionEdges);
+    function maxSpecifier(...args) {
+        const specs = ["over", "class", "def"];
+        return specs[Math.max(...args.map(s => specs.indexOf(s)))];
+    }
     
     // Reduction function to override prim attributes
     // Assumes 'unpacked' attribute namespaces
-    function composePrim(right, left) {
+    //
+    // Children relationship is based on key prefixes in the map,
+    // not yet part of the current prim object structure.
+    function composePrim(weaker, stronger) {
         return {
-            def: left.def || (right !== null ? right.def : null),
-            type: left.type || (right !== null ? right.type : null),
-            name: right ? right.name : left.name,
+            def: maxSpecifier(stronger && stronger.def, weaker && weaker.def),
+            type: stronger && stronger.type || (weaker !== null ? weaker.type : null),
             attributes: {
-                ...((right !== null) ? right.attributes : {}),
-                ...((left !== null) ? left.attributes : {})
+                ...((weaker !== null) ? weaker.attributes : {}),
+                ...((stronger !== null) ? stronger.attributes : {})
             },
-            children: (left.children || []).concat(right ? (right.children || []) : [])
         }
     }
 
-    // Copy the input to avoid modifying it.
-    // Discard self-dependencies and copy two levels deep.
-    compositionEdges = Object.fromEntries(
-        Object.entries(compositionEdgesOrig).map(([item, dep]) => [
-            item,
-            new Set([...dep].filter((e) => e !== item)),
-        ])
-    );
-
-    // Find all items that don't depend on anything.
-    const extraItemsInDeps = new Set(
-        [...Object.values(compositionEdges).map(st => Array.from(st)).flat()].filter((value) => !compositionEdges.hasOwnProperty(value))
-    );
-
-    // Add empty dependencies where needed.
-    extraItemsInDeps.forEach((item) => {
-        if (maps.map(m => m[item]).some(i => i)) {
-            // only add defined things, not overs on concatenated paths that don't exist yet which need to be the result of actual composition steps
-            compositionEdges[item] = new Set();
-        }
-    });
-
-    const composed = {};
-    const built = new Set();
-
-    Object.keys(compositionEdges).forEach(p => {
-        const opinions = maps.map(m => m[p]).filter(a => a).flat(1);
-        if (p == '') {
-            composed[p] = {name: p};
-        } else if (opinions.length === 0) {
-            return;
-        } else if (opinions.length == 1) {
-            composed[p] = composePrim(null, opinions[0]);
+    const composed = Object.fromEntries(Array.from(new Set(maps.map(m => Object.keys(m)).flat())).map(k => {
+        let v;
+        const opinions = maps.map(m => m[k]).filter(a => a).flat(1);
+        if (opinions.length == 1) {
+            v = composePrim(null, opinions[0]);
         } else {
-            composed[p] = opinions.reverse().reduce(composePrim);
+            v = opinions.reverse().reduce(composePrim);
         }
-        delete composed[p].children;
-    });
+        return [k, v];
+    }));
 
-    const updateName = (oldPrefix, newPrefix, prim) => {
-        return {
-            ...prim,
-            name: prim.name.replace(new RegExp(`^${oldPrefix}(?=/)`), newPrefix),
-            children: prim.children.map(c => updateName(oldPrefix, newPrefix, c))
+    const publishAsNewPrefix = (oldPrefix, newPrefix) => {
+        let rp = new RegExp(`^${oldPrefix}(?=/)`);
+        for (let [k, v] of Array.from(Object.entries(composed))) {
+            if (k.match(rp) !== null) {
+                let k2 = k.replace(rp, newPrefix);
+                composed[k2] = composePrim(v, composed[k2] || null);
+            }
         }
     };
 
-    // Essentially we do an 'interactive' topological sort. Where we process the composition edges for
-    // those prims that do not have any dependencies left. However, as a consequence of composition,
-    // novel prim paths can also be formed which can resolve the dependencies for other prims.
-    let maxIterations = 100;
-    while (maxIterations --) {
-        const bottomRankNodes = Object.entries(compositionEdges).filter(([_, dep]) => dep.size === 0 && (composed[_] || built.has(_) || _.endsWith(' complete'))).map(([k, v]) => k);
-        console.log('Bottom rank prims to resolve:', ...bottomRankNodes);
-
-        if (bottomRankNodes.length === 0) {
-            break;
-        }
-
-        const definedPrims = new Set();
-
-        // Apply edges in dependency order
-        bottomRankNodes.forEach(k => {
-            (Array.from(compositionEdgesOrig[k] || [])).forEach(v => {
-                // We don't have typed edges because of the somewhat primitive type system in JS.
-                // (An array does not really function as a tuple). So we need to reverse engineer
-                // the type of the edge (and therefore what composition action to apply) based on
-                // the names of the vertices.
-                console.log('Processing edge:', k, ' --- ', v);
-                if (v.startsWith(k + '/')) {
-                    composed[k].children = composed[k].children || [];
-                    composed[k].children.push(composed[v]);
-                } else {
-                    // Else it's an inheritance relationship
-                    composed[k] = updateName(composed[v].name, composed[k].name, composePrim(composed[k], composed[v]));
-                    Array.from(collectNames(composed[k])).forEach(a => definedPrims.add(a));
-                }
-            });
+    // Apply edges in dependency order
+    const sorted = toposort(compositionEdges);
+    sorted.forEach(source => {
+        (Array.from(compositionEdges[source] || [])).forEach(target => {
+            // We don't have typed edges because of the somewhat primitive type system in JS.
+            // (An array does not really function as a tuple). So we need to reverse engineer
+            // the type of the edge (and therefore what composition action to apply) based on
+            // the names of the vertices.
+            console.log('Processing edge:', source, ' --- ', target);
+            if (target.startsWith(source + '/')) {
+                // Parent-child relationship
+                // nothing to do anymore, only for dependency sorting
+            } else {
+                // Else it's an inheritance relationship
+                publishAsNewPrefix(target, source);
+                composed[source] = composePrim(composed[target] || null, composed[source]);
+            }
         });
+    });
 
-        console.log('Constructed prims:', ...definedPrims);
+    // Build a nested tree from the path -> object map
+    const buildTree = (map) => {
+        // First pass: create a node for each key.
+        const nodes = Object.entries(map).reduce((acc, [k, v]) => {
+            if (v.def == 'def') {
+                acc[k] = { name: k, children: [], type: v.type, attributes: v.attributes || {} };
+            }
+            return acc;
+        }, {});
+        // Create pseudo-root
+        nodes[''] = { name: '', children: [] };
+        // Assign children to parent
+        Object.keys(map).forEach(key => {
+            const parentKey = key.split('/').slice(0,-1).join('/');
+            if (nodes[parentKey] && nodes[key]) {
+                nodes[parentKey].children.push(nodes[key]);
+            }
+        });
+        return nodes[''];
+    };
 
-        Array.from(definedPrims).forEach(a => built.add(a));
-
-        let orderedSet = new Set(bottomRankNodes);
-        compositionEdges = Object.fromEntries(
-            Object.entries(compositionEdges)
-            .filter(([item]) => !orderedSet.has(item))
-            .map(([item, dep]) => [item, new Set([...dep].filter((d) => (!orderedSet.has(d) && !definedPrims.has(d))))])
-        );
-    }
-
-    if (Object.keys(compositionEdges).length !== 0) {
-        console.error("Unresolved nodes:", ...Object.keys(compositionEdges));
-    }
-
-    console.log(composed['']);
-    return composed[''];
+    return buildTree(composed);
 }
 
 function encodeHtmlEntities(str) {
@@ -389,14 +343,13 @@ export function composeAndRender() {
         }
     }
 
-
     buildDomTree(tree, document.querySelector('.tree'));
     animate();
 }
 
 function createLayerDom() {
     document.querySelector('.layers div').innerHTML = '';
-    datas.forEach(([name, _], index) => {
+    datas.slice().reverse().forEach(([name, _], index) => {
         const elem = document.createElement('div');
         elem.appendChild(document.createTextNode(name));
         ['\u25B3', '\u25BD', '\u00D7'].reverse().forEach((lbl, cmd) => {
