@@ -1,0 +1,180 @@
+[
+  {
+    "disclaimer": "2024-09-25 publication of the examples. (C) buildingSMART International. Published under CC BY-ND 4.0."
+  },
+  {
+    "def": "over",
+    "type": "UsdGeom:Xform",
+    "name": "N337e2116e7e24dd390ddbf2e42555fac",
+    "children": [
+      {
+        "def": "def",
+        "name": "GeologyModel",
+        "inherits": [
+          "</N25dbbae886194be6b469e4f17f0b605c>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "N25dbbae886194be6b469e4f17f0b605c",
+    "children": [
+      {
+        "def": "def",
+        "name": "Alluvium",
+        "inherits": [
+          "</Ne4ef1ea1101a484183bb8a716924702e>"
+        ]
+      },
+      {
+        "def": "def",
+        "name": "Siltstone",
+        "inherits": [
+          "</N4586ef982fd34faab3de532a7a43544d>"
+        ]
+      },
+      {
+        "def": "def",
+        "name": "Basement",
+        "inherits": [
+          "</N450a532f5e414d609856a8a50b6a94ad>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "N25dbbae886194be6b469e4f17f0b605c",
+    "attributes": {
+      "ifc5:class": {
+        "code": "IfcGeomodel",
+        "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcGeomodel"
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "Ne4ef1ea1101a484183bb8a716924702e",
+    "children": [
+      {
+        "def": "def",
+        "type": "UsdGeom:Mesh",
+        "name": "Body",
+        "inherits": [
+          "</Ne4ef1ea1101a484183bb8a716924702e_Body>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "Ne4ef1ea1101a484183bb8a716924702e",
+    "attributes": {
+      "ifc5:class": {
+        "code": "IfcGeotechnicalStratum",
+        "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcGeotechnicalStratum"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "Ne4ef1ea1101a484183bb8a716924702e",
+    "attributes": {
+      "UsdShade:MaterialBindingAPI": {
+        "material:binding": {
+          "ref": "</AlluviumShaderMaterial>"
+        }
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Mesh",
+    "name": "Ne4ef1ea1101a484183bb8a716924702e_Body"
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "N4586ef982fd34faab3de532a7a43544d",
+    "children": [
+      {
+        "def": "def",
+        "type": "UsdGeom:Mesh",
+        "name": "Body",
+        "inherits": [
+          "</N4586ef982fd34faab3de532a7a43544d_Body>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "N4586ef982fd34faab3de532a7a43544d",
+    "attributes": {
+      "ifc5:class": {
+        "code": "IfcGeotechnicalStratum",
+        "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcGeotechnicalStratum"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N4586ef982fd34faab3de532a7a43544d",
+    "attributes": {
+      "UsdShade:MaterialBindingAPI": {
+        "material:binding": {
+          "ref": "</SiltstoneShaderMaterial>"
+        }
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Mesh",
+    "name": "N4586ef982fd34faab3de532a7a43544d_Body"
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "N450a532f5e414d609856a8a50b6a94ad",
+    "children": [
+      {
+        "def": "def",
+        "type": "UsdGeom:Mesh",
+        "name": "Body",
+        "inherits": [
+          "</N450a532f5e414d609856a8a50b6a94ad_Body>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "N450a532f5e414d609856a8a50b6a94ad",
+    "attributes": {
+      "ifc5:class": {
+        "code": "IfcGeotechnicalStratum",
+        "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcGeotechnicalStratum"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N450a532f5e414d609856a8a50b6a94ad",
+    "attributes": {
+      "UsdShade:MaterialBindingAPI": {
+        "material:binding": {
+          "ref": "</GeologicalBasementShaderMaterial>"
+        }
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Mesh",
+    "name": "N450a532f5e414d609856a8a50b6a94ad_Body"
+  }
+]
