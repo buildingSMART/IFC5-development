@@ -83,6 +83,19 @@
     "def": "over",
     "name": "Ne4ef1ea1101a484183bb8a716924702e",
     "attributes": {
+      "ifc5:groundInvestigation": {
+        "boreholeSegments": [
+          {"ref": "</N7b6562e1261a4f9eacbbe3f56caa1b88>"},
+          {"ref": "</N1548f2435d6444298da2dbb9529e424a>"},
+          {"ref": "</N1548f2435d6444298da2dbb9529e424a>"}
+        ]
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "Ne4ef1ea1101a484183bb8a716924702e",
+    "attributes": {
       "UsdShade:MaterialBindingAPI": {
         "material:binding": {
           "ref": "</AlluviumShaderMaterial>"
@@ -124,6 +137,18 @@
     "def": "over",
     "name": "N4586ef982fd34faab3de532a7a43544d",
     "attributes": {
+      "ifc5:groundInvestigation": {
+        "boreholeSegments": [
+          {"ref": "</Nc627679f80254e4abab62e6f40bcb332>"},
+          {"ref": "</N2a637b43021645d2b80395253b761079>"}
+        ]
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N4586ef982fd34faab3de532a7a43544d",
+    "attributes": {
       "UsdShade:MaterialBindingAPI": {
         "material:binding": {
           "ref": "</SiltstoneShaderMaterial>"
@@ -158,6 +183,17 @@
       "ifc5:class": {
         "code": "IfcGeotechnicalStratum",
         "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcGeotechnicalStratum"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N450a532f5e414d609856a8a50b6a94ad",
+    "attributes": {
+      "ifc5:groundInvestigation": {
+        "boreholeSegments": [
+          {"ref": "</N48346d772d2f4fff8e47af6be729f2bd>"}
+        ]
       }
     }
   },
