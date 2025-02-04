@@ -41,6 +41,30 @@
     "children": [
       {
         "def": "def",
+        "name": "GroundInvestigation",
+        "inherits": [
+          "</Ncaa536ea098a46158b24a0574ae17294>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "N337e2116e7e24dd390ddbf2e42555fac",
+    "attributes": {
+      "ifc5:class": {
+        "code": "IfcSite",
+        "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcSite"
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "Ncaa536ea098a46158b24a0574ae17294",
+    "children": [
+      {
+        "def": "def",
         "name": "WH_009",
         "inherits": [
           "</Nad68cd145a6b43fdb0232e0b11a6c7bc>"
@@ -57,11 +81,12 @@
   },
   {
     "def": "over",
-    "name": "N337e2116e7e24dd390ddbf2e42555fac",
+    "name": "Ncaa536ea098a46158b24a0574ae17294",
     "attributes": {
       "ifc5:class": {
-        "code": "IfcSite",
-        "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcSite"
+        "code": "IfcGroundInvestigation",
+        "comment": "IfcGroundInvestigation doesn't exist, but IfcGeotechnicalAssembly does exist, and is the parent of IfcBorehole in IFC 4.3. However, a 'Geotechnical Assembly' is not a common concept, whereas 'Ground Investigation' is.",
+        "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcGeotechnicalAssembly"
       }
     }
   },
