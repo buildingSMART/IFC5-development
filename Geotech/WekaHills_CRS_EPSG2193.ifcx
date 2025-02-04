@@ -20,28 +20,8 @@
   },
   {
     "def": "over",
-    "name": "Nad68cd145a6b43fdb0232e0b11a6c7bc",
-    "comment": "Assigns urn:ogc:def:crs:EPSG::2193 to the instance of borehole WH_009",
-    "attributes": {
-      "crs": {
-        "ref": "</urn:ogc:def:crs:EPSG::2193>"
-      }
-    }
-  },
-  {
-    "def": "over",
-    "name": "N996ff9e7b86240f898d4d038ab311d1b",
-    "comment": "Assigns urn:ogc:def:crs:EPSG::2193 to the instance of borehole WH_012",
-    "attributes": {
-      "crs": {
-        "ref": "</urn:ogc:def:crs:EPSG::2193>"
-      }
-    }
-  },
-  {
-    "def": "over",
-    "name": "N25dbbae886194be6b469e4f17f0b605c",
-    "comment": "Assigns urn:ogc:def:crs:EPSG::2193 to the instance of the GeologyModel",
+    "name": "N337e2116e7e24dd390ddbf2e42555fac",
+    "comment": "Assigns urn:ogc:def:crs:EPSG::2193 to the instance of site WekaHills",
     "attributes": {
       "crs": {
         "ref": "</urn:ogc:def:crs:EPSG::2193>"
