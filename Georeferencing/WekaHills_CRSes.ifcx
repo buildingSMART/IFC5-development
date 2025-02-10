@@ -1,0 +1,80 @@
+[
+  {
+    "def": "def",
+    "name": "urn:ogc:def:crs:EPSG::2193",
+    "comment": "The name of this object is an OGC Uniform Resource Name.",
+    "type": "CRS:EPSG",
+    "attributes": {
+      "WKT-CRS": {
+        "ISO": "ISO 19162:2019",
+        "wkt": "PROJCRS[\"NZGD2000 / New Zealand Transverse Mercator 2000\",BASEGEOGCRS[\"NZGD2000\",DATUM[\"New Zealand Geodetic Datum 2000\",ELLIPSOID[\"GRS 1980\",6378137,298.257222101,LENGTHUNIT[\"metre\",1]]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433]],ID[\"EPSG\",4167]],CONVERSION[\"New Zealand Transverse Mercator 2000\",METHOD[\"Transverse Mercator\",ID[\"EPSG\",9807]],PARAMETER[\"Latitude of natural origin\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8801]],PARAMETER[\"Longitude of natural origin\",173,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8802]],PARAMETER[\"Scale factor at natural origin\",0.9996,SCALEUNIT[\"unity\",1],ID[\"EPSG\",8805]],PARAMETER[\"False easting\",1600000,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8806]],PARAMETER[\"False northing\",10000000,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8807]]],CS[Cartesian,2],AXIS[\"northing (N)\",north,ORDER[1],LENGTHUNIT[\"metre\",1]],AXIS[\"easting (E)\",east,ORDER[2],LENGTHUNIT[\"metre\",1]],USAGE[SCOPE[\"Engineering survey, topographic mapping.\"],AREA[\"New Zealand - North Island, South Island, Stewart Island - onshore.\"],BBOX[-47.33,166.37,-34.1,178.63]],ID[\"EPSG\",2193]]",
+        "name": "NZGD2000 / New Zealand Transverse Mercator 2000",
+        "authority_id": "EPSG:2193",
+        "units": "m"
+      }
+    }
+  },
+  {
+    "def": "def",
+    "name": "N3674dee56a3c46509369539813004d0a_CRS",
+    "comment": "This is a The name of this CRS object is an GUID, because this CRS object is not a registed CRS.",
+    "type": "CRS:SurveyPoint",
+    "attributes": {
+      "WKT-CRS": {
+        "ISO": "ISO 19162:2019",
+        "wkt": "PROJCS[\"EngineeringCRS_latlon_-46.01646668657133_167.39635621841134\", GEOGCS[\"GCS_WGS_1984\", DATUM[\"D_WGS_1984\", SPHEROID[\"WGS_1984\", 6378137.0, 298.257223563]], PRIMEM[\"Greenwich\", 0.0], UNIT[\"Degree\", 0.0174532925199433]], PROJECTION[\"Transverse_Mercator\"], PARAMETER[\"False_Easting\", 0.0], PARAMETER[\"False_Northing\", 0.0], PARAMETER[\"Central_Meridian\", 167.39635621841134], PARAMETER[\"Scale_Factor\", 1.0], PARAMETER[\"Latitude_Of_Origin\", -46.01646668657133], UNIT[\"Meter\", 1.0]]",
+        "units": "m"
+      },
+      "SurveyPoint": {
+        "CRS:EPSG": 2193,
+        "Easting": 1166250.104,
+        "Northing": 4888836.859,
+        "Elevation": "?",
+        "Rotation": "?"
+      }
+    }
+  },
+  {
+    "def": "def",
+    "name": "N07104fd2c3ee44b1af7637c0f1ae249c_CRS",
+    "comment": "The name of this object is an OGC Uniform Resource Name.",
+    "type": "CRS:Infrastructure",
+    "attributes": {
+      "WKT-CRS": {
+        "ISO": "ISO 19162:2019",
+        "wkt": "PROJCS[\"SpeckleCRS_latlon_-46.01646668657133_167.39635621841134\", GEOGCS[\"GCS_WGS_1984\", DATUM[\"D_WGS_1984\", SPHEROID[\"WGS_1984\", 6378137.0, 298.257223563]], PRIMEM[\"Greenwich\", 0.0], UNIT[\"Degree\", 0.0174532925199433]], PROJECTION[\"Transverse_Mercator\"], PARAMETER[\"False_Easting\", 0.0], PARAMETER[\"False_Northing\", 0.0], PARAMETER[\"Central_Meridian\", 167.39635621841134], PARAMETER[\"Scale_Factor\", 1.0], PARAMETER[\"Latitude_Of_Origin\", -46.01646668657133], UNIT[\"Meter\", 1.0]]",
+        "units": "m"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N337e2116e7e24dd390ddbf2e42555fac",
+    "comment": "Assigns urn:ogc:def:crs:EPSG::2193 to the instance of site WekaHills",
+    "attributes": {
+      "crs": {
+        "ref": "</urn:ogc:def:crs:EPSG::2193>"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N0d69d9ba92254b07817a49f47ca5d6e6",
+    "comment": "Assigns Infrastructure CRS with name N07104fd2c3ee44b1af7637c0f1ae249c to the instance of WesternTunnel",
+    "attributes": {
+      "crs": {
+        "ref": "</N07104fd2c3ee44b1af7637c0f1ae249c>"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N12becaa0fa484644abe9691a29cccbed",
+    "comment": "Assigns Infrastructure CRS with name N07104fd2c3ee44b1af7637c0f1ae249c to the instance of EasternTunnel",
+    "attributes": {
+      "crs": {
+        "ref": "</N07104fd2c3ee44b1af7637c0f1ae249c>"
+      }
+    }
+  }
+]
