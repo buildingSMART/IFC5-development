@@ -1,0 +1,800 @@
+[
+  {
+    "disclaimer": "2024-09-25 publication of the examples. (C) buildingSMART International. Published under CC BY-ND 4.0."
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "Ndd9e46015e7c4b59be0b1b98dfcadb74",
+    "children": [
+      {
+        "def": "def",
+        "name": "WekaHills",
+        "inherits": [
+          "</N337e2116e7e24dd390ddbf2e42555fac>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "def",
+    "type": "UsdGeom:Xform",
+    "name": "WekaHillsLeapfrogDemo",
+    "inherits": [
+      "</Ndd9e46015e7c4b59be0b1b98dfcadb74>"
+    ]
+  },
+  {
+    "def": "over",
+    "name": "Ndd9e46015e7c4b59be0b1b98dfcadb74",
+    "attributes": {
+      "ifc5:class": {
+        "code": "IfcProject",
+        "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcProject"
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "N337e2116e7e24dd390ddbf2e42555fac",
+    "children": [
+      {
+        "def": "def",
+        "name": "GroundInvestigation",
+        "inherits": [
+          "</Ncaa536ea098a46158b24a0574ae17294>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "N337e2116e7e24dd390ddbf2e42555fac",
+    "attributes": {
+      "ifc5:class": {
+        "code": "IfcSite",
+        "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcSite"
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "Ncaa536ea098a46158b24a0574ae17294",
+    "children": [
+      {
+        "def": "def",
+        "name": "WH_009",
+        "inherits": [
+          "</Nad68cd145a6b43fdb0232e0b11a6c7bc>"
+        ]
+      },
+      {
+        "def": "def",
+        "name": "WH_012",
+        "inherits": [
+          "</N996ff9e7b86240f898d4d038ab311d1b>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "Ncaa536ea098a46158b24a0574ae17294",
+    "attributes": {
+      "ifc5:class": {
+        "code": "IfcGroundInvestigation",
+        "comment": "IfcGroundInvestigation doesn't exist, but IfcGeotechnicalAssembly does exist, and is the parent of IfcBorehole in IFC 4.3. However, a 'Geotechnical Assembly' is not a common concept, whereas 'Ground Investigation' is.",
+        "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcGeotechnicalAssembly"
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "Nad68cd145a6b43fdb0232e0b11a6c7bc",
+    "children": [
+      {
+        "def": "def",
+        "name": "GEOL",
+        "inherits": [
+          "</Nd9114025e8e9454b8aa05d59e9d75cbd>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "Nad68cd145a6b43fdb0232e0b11a6c7bc",
+    "attributes": {
+      "ifc5:class": {
+        "code": "IfcBorehole",
+        "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcBorehole"
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "Nd9114025e8e9454b8aa05d59e9d75cbd",
+    "children": [
+      {
+        "def": "def",
+        "name": "Alluvium",
+        "inherits": [
+          "</N7b6562e1261a4f9eacbbe3f56caa1b88>"
+        ]
+      },
+      {
+        "def": "def",
+        "name": "Siltstone",
+        "inherits": [
+          "</Nc627679f80254e4abab62e6f40bcb332>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "N7b6562e1261a4f9eacbbe3f56caa1b88",
+    "children": [
+      {
+        "def": "def",
+        "type": "UsdGeom:BasisCurves",
+        "name": "LineString",
+        "inherits": [
+          "</N7b6562e1261a4f9eacbbe3f56caa1b88_LineString>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "N7b6562e1261a4f9eacbbe3f56caa1b88",
+    "attributes": {
+      "ifc5:class": {
+        "code": "IfcGeotechnicalStratum",
+        "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcGeotechnicalStratum"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N7b6562e1261a4f9eacbbe3f56caa1b88",
+    "attributes": {
+      "ifc5:properties": {
+        "description": "Weak thinly bedded brown fine-med grained sandy ALLUVIUM"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N7b6562e1261a4f9eacbbe3f56caa1b88",
+    "attributes": {
+      "ags4": {
+        "group": "GEOL",
+        "LOCA_ID": "WH_009",
+        "GEOL_TOP": 0,
+        "GEOL_BASE": 6.085,
+        "GEOL_DESC": "Weak thinly bedded brown fine-med grained sandy ALLUVIUM",
+        "GEOL_GEOL": "Alluvium"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N7b6562e1261a4f9eacbbe3f56caa1b88",
+    "attributes": {
+      "UsdShade:MaterialBindingAPI": {
+        "material:binding": {
+          "ref": "</AlluviumShaderMaterial>"
+        }
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:BasisCurves",
+    "name": "N7b6562e1261a4f9eacbbe3f56caa1b88_LineString"
+  },
+  {
+    "def": "over",
+    "name": "N7b6562e1261a4f9eacbbe3f56caa1b88_LineString",
+    "attributes": {
+      "UsdGeom:BasisCurves": {
+        "points": [
+          [
+            1167046.628,
+            4888785.276,
+            502.8813831
+          ],
+          [
+            1167046.628,
+            4888785.276,
+            496.7963831
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "Nc627679f80254e4abab62e6f40bcb332",
+    "children": [
+      {
+        "def": "def",
+        "type": "UsdGeom:BasisCurves",
+        "name": "LineString",
+        "inherits": [
+          "</Nc627679f80254e4abab62e6f40bcb332_LineString>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "Nc627679f80254e4abab62e6f40bcb332",
+    "attributes": {
+      "ifc5:class": {
+        "code": "IfcGeotechnicalStratum",
+        "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcGeotechnicalStratum"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "Nc627679f80254e4abab62e6f40bcb332",
+    "attributes": {
+      "ifc5:properties": {
+        "description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "Nc627679f80254e4abab62e6f40bcb332",
+    "attributes": {
+      "ags4": {
+        "group": "GEOL",
+        "LOCA_ID": "WH_009",
+        "GEOL_TOP": 6.085,
+        "GEOL_BASE": 50,
+        "GEOL_DESC": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "GEOL_GEOL": "Siltstone"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "Nc627679f80254e4abab62e6f40bcb332",
+    "attributes": {
+      "UsdShade:MaterialBindingAPI": {
+        "material:binding": {
+          "ref": "</SiltstoneShaderMaterial>"
+        }
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:BasisCurves",
+    "name": "Nc627679f80254e4abab62e6f40bcb332_LineString"
+  },
+  {
+    "def": "over",
+    "name": "Nc627679f80254e4abab62e6f40bcb332_LineString",
+    "attributes": {
+      "UsdGeom:BasisCurves": {
+        "points": [
+          [
+            1167046.628,
+            4888785.276,
+            496.7963831
+          ],
+          [
+            1167046.628,
+            4888785.276,
+            452.8813831
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "N996ff9e7b86240f898d4d038ab311d1b",
+    "children": [
+      {
+        "def": "def",
+        "name": "GEOL",
+        "inherits": [
+          "</Nefb42b81d3e147e4bb19723fb504655d>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "N996ff9e7b86240f898d4d038ab311d1b",
+    "attributes": {
+      "ifc5:class": {
+        "code": "IfcBorehole",
+        "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcBorehole"
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "Nefb42b81d3e147e4bb19723fb504655d",
+    "children": [
+      {
+        "def": "def",
+        "name": "Alluvium_Sand",
+        "inherits": [
+          "</N1548f2435d6444298da2dbb9529e424a>"
+        ]
+      },
+      {
+        "def": "def",
+        "name": "Alluvium_Clay",
+        "inherits": [
+          "</N20d9455fa8974a67825b2e86621b4d59>"
+        ]
+      },
+      {
+        "def": "def",
+        "name": "Siltstone",
+        "inherits": [
+          "</N2a637b43021645d2b80395253b761079>"
+        ]
+      },
+      {
+        "def": "def",
+        "name": "Basement",
+        "inherits": [
+          "</N48346d772d2f4fff8e47af6be729f2bd>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "N1548f2435d6444298da2dbb9529e424a",
+    "children": [
+      {
+        "def": "def",
+        "type": "UsdGeom:BasisCurves",
+        "name": "LineString",
+        "inherits": [
+          "</N1548f2435d6444298da2dbb9529e424a_LineString>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "N1548f2435d6444298da2dbb9529e424a",
+    "attributes": {
+      "ifc5:class": {
+        "code": "IfcGeotechnicalStratum",
+        "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcGeotechnicalStratum"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N1548f2435d6444298da2dbb9529e424a",
+    "attributes": {
+      "ifc5:properties": {
+        "description": "Very weak thinly bedded brown medium grained sand to gravel ALLUVIUM with fractures"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N1548f2435d6444298da2dbb9529e424a",
+    "attributes": {
+      "ags4": {
+        "group": "GEOL",
+        "LOCA_ID": "WH_012",
+        "GEOL_TOP": 0,
+        "GEOL_BASE": 32.841,
+        "GEOL_DESC": "Very weak thinly bedded brown medium grained sand to gravel ALLUVIUM with fractures",
+        "GEOL_GEOL": "Alluvium"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N1548f2435d6444298da2dbb9529e424a",
+    "attributes": {
+      "UsdShade:MaterialBindingAPI": {
+        "material:binding": {
+          "ref": "</AlluviumShaderMaterial>"
+        }
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:BasisCurves",
+    "name": "N1548f2435d6444298da2dbb9529e424a_LineString"
+  },
+  {
+    "def": "over",
+    "name": "N1548f2435d6444298da2dbb9529e424a_LineString",
+    "attributes": {
+      "UsdGeom:BasisCurves": {
+        "points": [
+          [
+            1165777.32,
+            4888011.236,
+            563.4533858
+          ],
+          [
+            1165777.32,
+            4888011.236,
+            530.6123858
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "N20d9455fa8974a67825b2e86621b4d59",
+    "children": [
+      {
+        "def": "def",
+        "type": "UsdGeom:BasisCurves",
+        "name": "LineString",
+        "inherits": [
+          "</N20d9455fa8974a67825b2e86621b4d59_LineString>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "N20d9455fa8974a67825b2e86621b4d59",
+    "attributes": {
+      "ifc5:class": {
+        "code": "IfcGeotechnicalStratum",
+        "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcGeotechnicalStratum"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N20d9455fa8974a67825b2e86621b4d59",
+    "attributes": {
+      "ifc5:properties": {
+        "description": "Very weak thinly bedded clay-fine sand ALLUVIUM with fractures"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N20d9455fa8974a67825b2e86621b4d59",
+    "attributes": {
+      "ags4": {
+        "group": "GEOL",
+        "LOCA_ID": "WH_012",
+        "GEOL_TOP": 32.841,
+        "GEOL_BASE": 43.847,
+        "GEOL_DESC": "Very weak thinly bedded clay-fine sand ALLUVIUM with fractures",
+        "GEOL_GEOL": "Alluvium"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N20d9455fa8974a67825b2e86621b4d59",
+    "attributes": {
+      "UsdShade:MaterialBindingAPI": {
+        "material:binding": {
+          "ref": "</AlluviumShaderMaterial>"
+        }
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:BasisCurves",
+    "name": "N20d9455fa8974a67825b2e86621b4d59_LineString"
+  },
+  {
+    "def": "over",
+    "name": "N20d9455fa8974a67825b2e86621b4d59_LineString",
+    "attributes": {
+      "UsdGeom:BasisCurves": {
+        "points": [
+          [
+            1165777.32,
+            4888011.236,
+            530.6123858
+          ],
+          [
+            1165777.32,
+            4888011.236,
+            519.6063858
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "N2a637b43021645d2b80395253b761079",
+    "children": [
+      {
+        "def": "def",
+        "type": "UsdGeom:BasisCurves",
+        "name": "LineString",
+        "inherits": [
+          "</N2a637b43021645d2b80395253b761079_LineString>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "N2a637b43021645d2b80395253b761079",
+    "attributes": {
+      "ifc5:class": {
+        "code": "IfcGeotechnicalStratum",
+        "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcGeotechnicalStratum"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N2a637b43021645d2b80395253b761079",
+    "attributes": {
+      "ifc5:properties": {
+        "description": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N2a637b43021645d2b80395253b761079",
+    "attributes": {
+      "ags4": {
+        "group": "GEOL",
+        "LOCA_ID": "WH_012",
+        "GEOL_TOP": 43.847,
+        "GEOL_BASE": 173.552,
+        "GEOL_DESC": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+        "GEOL_GEOL": "Siltstone"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N2a637b43021645d2b80395253b761079",
+    "attributes": {
+      "UsdShade:MaterialBindingAPI": {
+        "material:binding": {
+          "ref": "</SiltstoneShaderMaterial>"
+        }
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:BasisCurves",
+    "name": "N2a637b43021645d2b80395253b761079_LineString"
+  },
+  {
+    "def": "over",
+    "name": "N2a637b43021645d2b80395253b761079_LineString",
+    "attributes": {
+      "UsdGeom:BasisCurves": {
+        "points": [
+          [
+            1165777.32,
+            4888011.236,
+            519.6063858
+          ],
+          [
+            1165777.32,
+            4888011.236,
+            389.90138579999996
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:Xform",
+    "name": "N48346d772d2f4fff8e47af6be729f2bd",
+    "children": [
+      {
+        "def": "def",
+        "type": "UsdGeom:BasisCurves",
+        "name": "LineString",
+        "inherits": [
+          "</N48346d772d2f4fff8e47af6be729f2bd_LineString>"
+        ]
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "N48346d772d2f4fff8e47af6be729f2bd",
+    "attributes": {
+      "ifc5:class": {
+        "code": "IfcGeotechnicalStratum",
+        "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcGeotechnicalStratum"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N48346d772d2f4fff8e47af6be729f2bd",
+    "attributes": {
+      "ifc5:properties": {
+        "description": "Very strong folliated green schistose undifferentiated volcanic BASEMENT"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N48346d772d2f4fff8e47af6be729f2bd",
+    "attributes": {
+      "ags4": {
+        "group": "GEOL",
+        "LOCA_ID": "WH_012",
+        "GEOL_TOP": 173.552,
+        "GEOL_BASE": 300,
+        "GEOL_DESC": "Very strong folliated green schistose undifferentiated volcanic BASEMENT",
+        "GEOL_GEOL": "Basement"
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "N48346d772d2f4fff8e47af6be729f2bd",
+    "attributes": {
+      "UsdShade:MaterialBindingAPI": {
+        "material:binding": {
+          "ref": "</GeologicalBasementShaderMaterial>"
+        }
+      }
+    }
+  },
+  {
+    "def": "class",
+    "type": "UsdGeom:BasisCurves",
+    "name": "N48346d772d2f4fff8e47af6be729f2bd_LineString"
+  },
+  {
+    "def": "over",
+    "name": "N48346d772d2f4fff8e47af6be729f2bd_LineString",
+    "attributes": {
+      "UsdGeom:BasisCurves": {
+        "points": [
+          [
+            1165777.32,
+            4888011.236,
+            389.90138579999996
+          ],
+          [
+            1165777.32,
+            4888011.236,
+            263.4533858
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "def": "def",
+    "type": "UsdShade:Material",
+    "name": "AlluviumShaderMaterial",
+    "children": [
+      {
+        "def": "def",
+        "type": "UsdShade:Shader",
+        "name": "Shader",
+        "attributes": {
+          "info:id": "UsdPreviewSurface",
+          "inputs:diffuseColor": [
+            1,
+            0.835,
+            0.02
+          ],
+          "inputs:opacity": 1,
+          "outputs:surface": null
+        }
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "AlluviumShaderMaterial",
+    "attributes": {
+      "UsdShade:Material": {
+        "outputs:surface.connect": {
+          "ref": "</AlluviumShaderMaterial/Shader.outputs:surface>"
+        }
+      }
+    }
+  },
+  {
+    "def": "def",
+    "type": "UsdShade:Material",
+    "name": "SiltstoneShaderMaterial",
+    "children": [
+      {
+        "def": "def",
+        "type": "UsdShade:Shader",
+        "name": "Shader",
+        "attributes": {
+          "info:id": "UsdPreviewSurface",
+          "inputs:diffuseColor": [
+            0.3,
+            0.6,
+            0.45
+          ],
+          "inputs:opacity": 1,
+          "outputs:surface": null
+        }
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "SiltstoneShaderMaterial",
+    "attributes": {
+      "UsdShade:Material": {
+        "outputs:surface.connect": {
+          "ref": "</SiltstoneShaderMaterial/Shader.outputs:surface>"
+        }
+      }
+    }
+  },
+  {
+    "def": "def",
+    "type": "UsdShade:Material",
+    "name": "GeologicalBasementShaderMaterial",
+    "children": [
+      {
+        "def": "def",
+        "type": "UsdShade:Shader",
+        "name": "Shader",
+        "attributes": {
+          "info:id": "UsdPreviewSurface",
+          "inputs:diffuseColor": [
+            0.52,
+            0.18,
+            0.78
+          ],
+          "inputs:opacity": 1,
+          "outputs:surface": null
+        }
+      }
+    ]
+  },
+  {
+    "def": "over",
+    "name": "GeologicalBasementShaderMaterial",
+    "attributes": {
+      "UsdShade:Material": {
+        "outputs:surface.connect": {
+          "ref": "</GeologicalBasementShaderMaterial/Shader.outputs:surface>"
+        }
+      }
+    }
+  }
+]
