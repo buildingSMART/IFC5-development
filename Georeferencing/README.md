@@ -8,9 +8,12 @@ https://www.buildingsmart.org/wp-content/uploads/2020/02/User-Guide-for-Geo-refe
 
 Ways to define a geodetic datum for an Engineering CRS:
 
-* Lon, Lat, Elipsoid Height, Angle to True North
-* Easting, Northing, Orthometric Height, Angle to Grid North
-* Survey Points
+* Lon, Lat, Elipsoidal Height*, Angle to True North.
+* Survey Points => Easting, Northing, Orthometric Height^, Angle to Grid North (x-axis abscissa + x-axis ordinate).
+* Any others?
+
+\* Should this really be the Elipsoidal Height or should it be possible to be any type of height?  
+^ In the bSI User Guide for Geo-referencing the IfcMapConversion parameter for the height is called Orthogonal Height. Why is this not the Orthometric Height?
 
 ## Definition of a Coordinate Reference System (CRS)
 
