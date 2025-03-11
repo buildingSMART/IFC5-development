@@ -12,6 +12,7 @@
   "description": "",
   "devDependencies": {
     "@types/three": "^0.171.0",
+    "chai": "^5.2.0",
     "esbuild": "^0.24.2",
     "serve": "^14.2.4"
   },
