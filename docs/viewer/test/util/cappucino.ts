@@ -47,6 +47,15 @@ export function it(name: string, fn: any)
     globalPath.pop();
 }
 
+export function each(prefix: string, arr: string[], fn: any)
+{
+    arr.forEach((part) => {
+        globalPath.push(`${prefix}: ${part}`);
+        testlist.push(new Test(globalPath.join("::"), () => {fn(part)}));
+        globalPath.pop();
+    })
+}
+
 export async function test()
 {
     for (let i = 0; i < testlist.length; i++)

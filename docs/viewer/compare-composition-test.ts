@@ -1,10 +1,11 @@
+import { glob } from "glob";
 import { Ifc5FileJson } from "../../schema/out/@typespec/json-schema/ts/ifc5file";
 import { compose, ComposedObject } from "./compose";
 import { compose2 } from "./compose2";
-import { describe, it } from "./test/util/cappucino";
+import { describe, each, it } from "./test/util/cappucino";
 import { expect } from "chai";
-
-let fs = require("fs");
+import * as fs from "fs";
+import * as path from "path";
 
 function CompareComposition(a: ComposedObject, b: ComposedObject)
 {
@@ -75,6 +76,13 @@ function CompareComposition(a: ComposedObject, b: ComposedObject)
     return true;
 }
 
+const fixtureDirectories = glob.sync('test/fixtures/*');
+
+function Cleanup(obj)
+{
+    return JSON.parse(JSON.stringify((obj)));
+}
+
 describe("composition version 2", () => {
     it("should be equal to version 1 for 'hello-wall.ifcx' and 'hello-wall_add-firerating.ifcx'", async() => {
         // arrange
@@ -83,21 +91,28 @@ describe("composition version 2", () => {
         let helloWallJSON = JSON.parse(fs.readFileSync(helloWallFileName).toString());
         let helloWallFRJSON = JSON.parse(fs.readFileSync(helloWallFR).toString());
         
-        let stime = new Date().getTime();
         let composed = compose([helloWallJSON, helloWallFRJSON] as Ifc5FileJson[]);
-        composed = compose([helloWallJSON, helloWallFRJSON] as Ifc5FileJson[]);
-        let time1 = new Date().getTime() - stime;
-
-
-        stime = new Date().getTime();
         let composed2 = compose2([helloWallJSON, helloWallFRJSON] as Ifc5FileJson[]);
-        composed2 = compose2([helloWallJSON, helloWallFRJSON] as Ifc5FileJson[]);
-        let time2 = new Date().getTime() - stime;
 
         // act
         let outcome = CompareComposition(composed, composed2);
 
         // assert
         expect(outcome).to.be.true;
+    });
+    
+    each("should properly handle fixture directory", fixtureDirectories, (fixtureDir) => {
+
+        const inputFiles = glob.sync(`${fixtureDir.replace(/\\/g, '/')}/input_*.ifcx`);
+        expect(inputFiles.length).to.be.above(0);
+        const inputs = inputFiles.map((inputFile) => {
+            return JSON.parse(fs.readFileSync(inputFile, 'utf8'));
+        });      
+        let actualResult = Cleanup(compose2(inputs as Ifc5FileJson[]));
+        const outputFile = path.join(fixtureDir, 'output.json');
+        const expectedOutput = JSON.parse(fs.readFileSync(outputFile).toString());
+        //console.log(JSON.stringify(actualResult, null, 4));
+        //console.log(JSON.stringify(expectedOutput, null, 4));
+        expect(actualResult).to.deep.equal(expectedOutput);
     });
 });

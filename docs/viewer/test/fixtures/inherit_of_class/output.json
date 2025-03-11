@@ -1,4 +1,5 @@
-{                                                                                                                                                        
+{     
+ "name": "",                                                                                                                                                   
  "children": [
   {
    "attributes": {
@@ -8,6 +9,5 @@
    "name": "/node1",
    "type": "UsdGeom:Xform"
   }
- ],
- "name": ""
+ ]
 }
