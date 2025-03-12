@@ -19,15 +19,15 @@
   "name": "child1class",
   "attributes": {
     "customdata": {
-      "a": 1
+      "a": "classValue"
     }
   }
  },{
   "def": "over",
-  "name": "/node1/child1",
+  "name": "node1/child1",
   "attributes": {
     "customdata": {
-      "a": 2
+      "a": "specificOverride"
     }
   }
  }

@@ -111,8 +111,8 @@ describe("composition version 2", () => {
         let actualResult = Cleanup(compose2(inputs as Ifc5FileJson[]));
         const outputFile = path.join(fixtureDir, 'output.json');
         const expectedOutput = JSON.parse(fs.readFileSync(outputFile).toString());
-        //console.log(JSON.stringify(actualResult, null, 4));
-        //console.log(JSON.stringify(expectedOutput, null, 4));
+        // console.log("actual", JSON.stringify(actualResult, null, 4));
+        // console.log("expected", JSON.stringify(expectedOutput, null, 4));
         expect(actualResult).to.deep.equal(expectedOutput);
     });
 });

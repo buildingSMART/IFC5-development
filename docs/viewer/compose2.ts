@@ -48,8 +48,8 @@ function CollectDefChildren(input: {name: string, children?: DefJson[]}[], outpu
 
     input.filter(o => "children" in o).forEach((parent) => {
         parent.children!.forEach(def => {
-            //hack defs are not uniquely named, so we prefix them with parent and copy
-            let newDefName = `${parent.name}__${def.name}`;
+            // hack defs are not uniquely named, so we prefix them with parent and copy
+            let newDefName = `${parent.name}/${def.name}`;
             addedDefs.push({
                 ...def,
                 name: newDefName
@@ -138,15 +138,32 @@ class IntermediateComposition
     attributes = new Map<string, any[]>;
 }
 
+function GetAllAttributesForNode( ic: IntermediateComposition, fullNodePath: string): any[][]
+{
+    let attributeArray: (any[] | undefined)[] = [];
+
+    let pathParts = fullNodePath.split("/");
+
+    // for a/b/c we want to resolve c b/c a/b/c, last having highest precedence
+    for (let i = pathParts.length - 1; i >= 0; i--)
+    {
+        let prefix = pathParts.slice(i, pathParts.length).join("/");
+        let attrs = ic.attributes.get(prefix);
+        if (attrs) attributeArray.push(...attrs);
+    }
+    
+    return attributeArray.filter(a => !!a);
+}
+
 // once IC contains the data of all layers, we can build the composed object tree. Note that building the whole tree is something we probably dont want to do in real life
 function BuildTreeNodeFromIntermediateComposition(node: string, parentPath: string, ic: IntermediateComposition): ComposedObject
 {
     // root node is an exception in some ways, should fix this
     let isPseudoRoot = node === PSEUDO_ROOT;
-    //hack because nested defs are not uniquely named they are prefixed with parent, need to remove for display
-    let displayName = node.indexOf("__") > 0 ? node.substring(node.indexOf("__") + 2) : node;
+    // hack because nested defs are not uniquely named they are prefixed with parent, need to remove for display
+    let displayName = node.indexOf("/") > 0 ? node.substring(node.indexOf("/") + 1) : node;
     let currentNodePath = isPseudoRoot ? PSEUDO_ROOT : `${parentPath}/${displayName}`;
-    let nodeAttributes = CondenseAttributes(ic.attributes.get(node));
+    let nodeAttributes = CondenseAttributes(GetAllAttributesForNode(ic, node));
     
     let obj: ComposedObject = {
         name: currentNodePath, 
