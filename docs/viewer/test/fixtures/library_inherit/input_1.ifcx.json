@@ -1,0 +1,10 @@
+[
+  {
+    "def": "def",
+    "type": "UsdGeom:Xform",
+    "name": "node1",
+    "inherits": [
+      "</lib/toilet>"
+    ]
+  }
+]
