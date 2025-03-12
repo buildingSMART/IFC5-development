@@ -256,7 +256,7 @@ export function compose(datas: Ifc5FileJson[]) {
 
                         composed[k].children = composed[k].children || [];
                         composed[k].children?.push(composed[v]);
-                        Array.from(collectNames(composed[k])).forEach(a => definedPrims.add(a.substring(k.length)));
+                        Array.from(collectNames(composed[k])).forEach(a => definedPrims.add(a));
                     }
                 } else if (k.startsWith(v + '/')) {
                     // reversed child definition for top-down over application
@@ -269,7 +269,7 @@ export function compose(datas: Ifc5FileJson[]) {
                         } else {
                             console.error(v, '-->', k, 'not applied');
                         }
-                        Array.from(collectNames(child!)).forEach(a => definedPrims.add(a.substring(child!.name.length)));
+                        Array.from(collectNames(child!)).forEach(a => definedPrims.add(a));
                     }
                 } else if (k.search(/over$/) !== -1) {
                     if (k.split('/').length > 2) {
@@ -302,7 +302,7 @@ export function compose(datas: Ifc5FileJson[]) {
                         // only when ends with complete, otherwise it could be the dependency edge between a concatenated-prim over and its root.
                         v = v.replace(/ complete$/, '');
                         composed[k] = updateName(composed[v].name, composed[k].name, composePrim(composed[k], composed[v]));
-                        Array.from(collectNames(composed[k])).forEach(a => definedPrims.add(a.substring(k.length)));
+                        Array.from(collectNames(composed[k])).forEach(a => definedPrims.add(a));
                     }
                 }
             });
