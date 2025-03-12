@@ -23,78 +23,62 @@ function init() {
   nd.appendChild(renderer.domElement);
   return scene;
 }
-function createCurveFromJson(node, parent, root) {
-  let points = new Float32Array(node.attributes["UsdGeom:BasisCurves:points"].flat());
-  const geometry = new THREE.BufferGeometry();
-  geometry.setAttribute("position", new THREE.BufferAttribute(points, 3));
-  const material = new THREE.LineBasicMaterial({ color: 2105376 });
-  return new THREE.Line(geometry, material);
-}
-function getChildByName(root, childName, skip = 0) {
-  let fragments = childName.replace(/^<\/|^\/|>$/g, "").split("/");
-  for (let i = 0; i < skip; ++i) {
-    fragments.shift();
-  }
-  let start = root;
-  while (fragments.length && start) {
-    let f = fragments.shift();
-    start = root.children.find((i) => i.name.split("/").reverse()[0] === f);
-  }
-  return start;
-}
-function createMeshFromJson(node, parent, root) {
-  let points = new Float32Array(node.attributes["UsdGeom:Mesh:points"].flat());
-  let indices = new Uint16Array(node.attributes["UsdGeom:Mesh:faceVertexIndices"]);
-  const geometry = new THREE.BufferGeometry();
-  geometry.setAttribute("position", new THREE.BufferAttribute(points, 3));
-  geometry.setIndex(new THREE.BufferAttribute(indices, 1));
-  geometry.computeVertexNormals();
-  let reference = parent.attributes["UsdShade:MaterialBindingAPI:material:binding"];
-  let material = null;
-  if (reference) {
-    const materialNode = getChildByName(root, reference.ref);
-    let shader = materialNode.children.find((i) => i.type === "UsdShade:Shader");
-    let color = shader.attributes["inputs:diffuseColor"];
-    material = new THREE.MeshBasicMaterial();
-    material.color = new THREE.Color(...color);
-    if (shader.attributes["inputs:opacity"]) {
-      material.transparent = true;
-      material.opacity = shader.attributes["inputs:opacity"];
+
+  function getChildByName(root, childName, skip=0) {
+      let fragments = childName.replace(/^<\/|^\/|>$/g, '').split('/');
+      for (let i = 0; i < skip; ++i) {
+          fragments.shift();
+      }
+      while (fragments.length && root) {
+          let f = fragments.shift();
+          root = root.children.find(i => i.name.split('/').reverse()[0] === f);
+      }
+      return root;
     }
-  } else {
-    material = new THREE.MeshBasicMaterial();
-    material.color = new THREE.Color(0.6, 0.6, 0.6);
-  }
-  return new THREE.Mesh(geometry, material);
-}
-function traverseTree(node, parent, root, parentNode = void 0) {
-  let elem;
-  if (node.type === "UsdGeom:Xform") {
-    elem = new THREE.Group();
-  } else if (node.type === "UsdGeom:Mesh" || node.type === "UsdGeom:BasisCurves") {
-    if (node.attributes["UsdGeom:VisibilityAPI:visibility:visibility"] === "invisible") {
-      return;
+
+    function createMaterialFromParent(parent, root) {
+        let reference = parent.attributes['UsdShade:MaterialBindingAPI:material:binding'];
+        let material = {
+            color: new THREE.Color(0.6, 0.6, 0.6)
+        };
+        if (reference) {
+            const materialNode = getChildByName(root, reference.ref);
+            let shader = materialNode.children.find(i => i.type === 'UsdShade:Shader');
+            let color = shader.attributes['inputs:diffuseColor'];
+            material.color = new THREE.Color(...color);
+            if (shader.attributes['inputs:opacity']) {
+                material.transparent = true;
+                material.opacity = shader.attributes['inputs:opacity'];
+            }
+        }
+        return material;
     }
-    if (node.type === "UsdGeom:Mesh") {
-      elem = createMeshFromJson(node, parentNode, root);
-    } else {
-      elem = createCurveFromJson(node, parentNode, root);
-    }
-  } else if (node !== root) {
-    return;
+
+  function createCurveFromJson(node, parent, root) {
+      let points = new Float32Array(node.attributes['UsdGeom:BasisCurves:points'].flat());
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute('position', new THREE.BufferAttribute(points, 3));
+      const material = createMaterialFromParent(parent, root);
+      let lineMaterial = new THREE.LineBasicMaterial({...material});
+      // Make lines a little darker, otherwise they have the same color as meshes
+      lineMaterial.color.multiplyScalar(0.8)
+      return new THREE.Line(geometry, lineMaterial);
   }
-  if (node !== root) {
-    parent.add(elem);
-    elem.matrixAutoUpdate = false;
-    let matrixNode = node.attributes && node.attributes["xformOp:transform"] ? node.attributes["xformOp:transform"].flat() : null;
-    if (matrixNode) {
-      let matrix = new THREE.Matrix4();
-      matrix.set(...matrixNode);
-      matrix.transpose();
-      elem.matrix = matrix;
-    }
-  }
-  (node.children || []).forEach((child) => traverseTree(child, elem || parent, root, node));
+
+
+  function createMeshFromJson(node, parent, root) {
+      let points = new Float32Array(node.attributes['UsdGeom:Mesh:points'].flat());
+      let indices = new Uint16Array(node.attributes['UsdGeom:Mesh:faceVertexIndices']);
+
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute('position', new THREE.BufferAttribute(points, 3));
+      geometry.setIndex(new THREE.BufferAttribute(indices, 1));
+      geometry.computeVertexNormals();
+
+      const material = createMaterialFromParent(parent, root);
+      let meshMaterial = new THREE.MeshBasicMaterial({...material});
+
+      return new THREE.Mesh(geometry, meshMaterial);
 }
 function* collectNames(node) {
   yield node.name;
@@ -300,20 +284,98 @@ function compose(datas2) {
             Array.from(collectNames(composed[k])).forEach((a) => definedPrims.add(a.substring(k.length)));
           }
         }
-      });
-    });
-    console.log("Constructed prims:", ...definedPrims);
-    Array.from(definedPrims).forEach((a) => built.add(a));
-    let orderedSet = new Set(bottomRankNodes);
-    compositionEdgesUnique = Object.fromEntries(
-      Object.entries(compositionEdgesUnique).filter(([item]) => !orderedSet.has(item)).map(([item, dep]) => [item, new Set([...dep].filter((d) => !orderedSet.has(d) && !definedPrims.has(d)))])
-    );
-  }
-  if (Object.keys(compositionEdgesUnique).length !== 0) {
-    console.error("Unresolved nodes:", ...Object.keys(compositionEdgesUnique));
-  }
-  console.log(composed[""]);
-  return composed[""];
+
+        const definedPrims = new Set();
+
+        // Apply edges in dependency order
+        bottomRankNodes.forEach(k => {
+            (Array.from(compositionEdgesOrig[k] || [])).forEach(v => {
+                // We don't have typed edges because of the somewhat primitive type system in JS.
+                // (An array does not really function as a tuple). So we need to reverse engineer
+                // the type of the edge (and therefore what composition action to apply) based on
+                // the names of the vertices.
+                console.log('Processing edge:', k, ' --- ', v);
+                if (k.endsWith(' complete') && v.endsWith(' over')) {
+                    // Only for life cycle dependency management, no action associated
+                } else if (v.startsWith(k + '/')) {
+                    // If k is a subpath of v it's a subPrim relationship
+                    if (k.split('/').length > 2) {
+                        // this should not occur
+                    } else {
+                        v = v.replace(/ complete$/, '');
+
+                        composed[k].children = composed[k].children || [];
+                        composed[k].children.push(composed[v]);
+                        Array.from(collectNames(composed[k])).forEach(a => definedPrims.add(a));
+                    }
+                } else if (k.startsWith(v + '/')) {
+                    // reversed child definition for top-down over application
+                    if (k.endsWith(' complete')) {
+                        // @todo immutability
+                        let child = getChildByName(composed[`/${v.split('/')[1]}`], v, /*skip=*/ 1);
+                        if (child) {
+                            k = k.replace(/ complete$/, '');
+                            child.children.push(composed[k]);
+                        } else {
+                            console.error(v, '-->', k, 'not applied');
+                        }
+                        Array.from(collectNames(child)).forEach(a => definedPrims.add(a));
+                    }
+                } else if (k.search(/over$/) !== -1) {
+                    if (k.split('/').length > 2) {
+                        // @todo immutability
+                        let child = getChildByName(composed[`/${v.split('/')[1]}`], k.split(' ')[0], /*skip=*/ 1);
+                        if (child) {
+                            Object.assign(child.attributes, composed[k].attributes);
+                        } else {
+                            console.error(k, '-->', v, 'not applied');
+                        }
+                    } else {
+                        composed[v] = composePrim(composed[v], composed[k]);
+                    }
+                } else if (v.search(/over$/) !== -1) {
+                    // reversed top-down over
+                    if (v.split('/').length > 2) {
+                        // @todo immutability
+                        let child = getChildByName(composed[`/${k.split('/')[1]}`], v.split(' ')[0], /*skip=*/ 1);
+                        if (child) {
+                            Object.assign(child.attributes, composed[v].attributes);
+                        } else {
+                            console.error(v, '-->', k, 'not registered');
+                        }
+                    } else {
+                        composed[k] = composePrim(composed[k], composed[v]);
+                    }
+                } else {
+                    // Else it's an inheritance relationship
+                    if (v.endsWith('complete')) {
+                        // only when ends with complete, otherwise it could be the dependency edge between a concatenated-prim over and its root.
+                        v = v.replace(/ complete$/, '');
+                        composed[k] = updateName(composed[v].name, composed[k].name, composePrim(composed[k], composed[v]));
+                        Array.from(collectNames(composed[k])).forEach(a => definedPrims.add(a));
+                    }
+                }
+            });
+        });
+
+        console.log('Constructed prims:', ...definedPrims);
+
+        Array.from(definedPrims).forEach(a => built.add(a));
+
+        let orderedSet = new Set(bottomRankNodes);
+        compositionEdges = Object.fromEntries(
+            Object.entries(compositionEdges)
+            .filter(([item]) => !orderedSet.has(item))
+            .map(([item, dep]) => [item, new Set([...dep].filter((d) => (!orderedSet.has(d) && !definedPrims.has(d))))])
+        );
+    }
+
+    if (Object.keys(compositionEdges).length !== 0) {
+        console.error("Unresolved nodes:", ...Object.keys(compositionEdges));
+    }
+
+    console.log(composed['']);
+    return composed[''];
 }
 function encodeHtmlEntities(str) {
   const div = document.createElement("div");
