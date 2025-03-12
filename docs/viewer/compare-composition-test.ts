@@ -106,7 +106,7 @@ describe("composition comparison", () => {
 describe("composition", () => {
     each("should properly handle fixture directory", fixtureDirectories, (fixtureDir) => {
 
-        const inputFiles = glob.sync(`${fixtureDir.replace(/\\/g, '/')}/input_*.ifcx`);
+        const inputFiles = glob.sync(`${fixtureDir.replace(/\\/g, '/')}/input_*.ifcx.json`);
         expect(inputFiles.length).to.be.above(0);
         const inputs = inputFiles.map((inputFile) => {
             return JSON.parse(fs.readFileSync(inputFile, 'utf8'));
