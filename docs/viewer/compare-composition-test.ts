@@ -29,6 +29,7 @@ function CompareComposition(a: ComposedObject, b: ComposedObject)
         {
             if (a.children.length !== b.children?.length)
             {
+                console.log(a.children, b.children);
                 throw new Error(`Children count mismatch ${a.name} - ${b.name}`);
             }
 
@@ -83,8 +84,8 @@ function Cleanup(obj)
     return JSON.parse(JSON.stringify((obj)));
 }
 
-describe("composition version 2", () => {
-    it("should be equal to version 1 for 'hello-wall.ifcx' and 'hello-wall_add-firerating.ifcx'", async() => {
+describe("composition comparison", () => {
+    it("should be equal for 'hello-wall.ifcx' and 'hello-wall_add-firerating.ifcx'", async() => {
         // arrange
         let helloWallFileName = "../../Hello Wall/hello-wall.ifcx";
         let helloWallFR = "../../Hello Wall/hello-wall_add-firerating.ifcx";
@@ -100,7 +101,9 @@ describe("composition version 2", () => {
         // assert
         expect(outcome).to.be.true;
     });
-    
+});
+
+describe("composition", () => {
     each("should properly handle fixture directory", fixtureDirectories, (fixtureDir) => {
 
         const inputFiles = glob.sync(`${fixtureDir.replace(/\\/g, '/')}/input_*.ifcx`);
@@ -115,4 +118,4 @@ describe("composition version 2", () => {
         // console.log("expected", JSON.stringify(expectedOutput, null, 4));
         expect(actualResult).to.deep.equal(expectedOutput);
     });
-});
+})

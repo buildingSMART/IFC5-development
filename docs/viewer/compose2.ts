@@ -68,14 +68,14 @@ function CleanInherit(inheritString: string)
     return inheritString.substring(2, inheritString.length - 1);
 }
 
-function CollectInheritsAsChildren(input: {name: string, inherits?: string[]}[], children: Map<string, string[]>)
+function CollectInherits(input: {name: string, inherits?: string[]}[], collection: Map<string, string[]>)
 {
     input.forEach(input => {
         if (input.inherits)
         {
             input.inherits.forEach(parent => {
                 // inherits seems to work in reverse
-                MMSet(children, input.name, CleanInherit(parent));
+                MMSet(collection, input.name, CleanInherit(parent));
             })
         }
     })
@@ -133,6 +133,7 @@ class IntermediateComposition
 {
     names = new Set<string>();
     children = new Map<string, string[]>;
+    inherits = new Map<string, string[]>;
     isClass = new Map<string, boolean>;
     types = new Map<string, ComponentTypes>;
     attributes = new Map<string, any[]>;
@@ -156,13 +157,13 @@ function GetAllAttributesForNode( ic: IntermediateComposition, fullNodePath: str
 }
 
 // once IC contains the data of all layers, we can build the composed object tree. Note that building the whole tree is something we probably dont want to do in real life
-function BuildTreeNodeFromIntermediateComposition(node: string, parentPath: string, ic: IntermediateComposition): ComposedObject
+function BuildTreeNodeFromIntermediateComposition(node: string, parentPath: string, parentInherits: boolean, ic: IntermediateComposition): ComposedObject
 {
     // root node is an exception in some ways, should fix this
     let isPseudoRoot = node === PSEUDO_ROOT;
     // hack because nested defs are not uniquely named they are prefixed with parent, need to remove for display
     let displayName = node.indexOf("/") > 0 ? node.substring(node.indexOf("/") + 1) : node;
-    let currentNodePath = isPseudoRoot ? PSEUDO_ROOT : `${parentPath}/${displayName}`;
+    let currentNodePath = isPseudoRoot ? PSEUDO_ROOT : (parentInherits ? parentPath : `${parentPath}/${displayName}`);
     let nodeAttributes = CondenseAttributes(GetAllAttributesForNode(ic, node));
     
     let obj: ComposedObject = {
@@ -171,27 +172,27 @@ function BuildTreeNodeFromIntermediateComposition(node: string, parentPath: stri
         type: isPseudoRoot ? undefined : ic.types.get(node)
     };
 
+    // TODO: should probably decide whether to always, or never, have children property
     if (ic.children.has(node))
     {
         obj.children = [];
         ic.children.get(node)?.forEach(child => {
-            let childNodePath = ic.isClass.has(node) ? parentPath : currentNodePath;
-            let childObject = BuildTreeNodeFromIntermediateComposition(child, childNodePath, ic);
-            if (ic.isClass.has(child) && !isPseudoRoot)
+            let childObject = BuildTreeNodeFromIntermediateComposition(child, currentNodePath, false, ic);
+            obj.children?.push(childObject);
+        });
+    }
+
+    if (ic.inherits.has(node))
+    {
+        obj.children = obj.children ? obj.children : [];
+        ic.inherits.get(node)?.forEach(child => {
+            let childObject = BuildTreeNodeFromIntermediateComposition(child, currentNodePath, true, ic);
+            if (childObject.children)
             {
-                // if a child is a class, we "merge" it with the current node
-                if (childObject.children)
-                {
-                    obj.children?.push(...childObject.children!);
-                }
-                obj.type = childObject.type;
-                obj.attributes = CondenseAttributes([childObject.attributes, obj.attributes]);
+                obj.children?.push(...childObject.children!);
             }
-            else
-            {
-                // child is a regular child, not a class
-                obj.children?.push(childObject);
-            }
+            obj.type = childObject.type;
+            obj.attributes = CondenseAttributes([childObject.attributes, obj.attributes]);
         });
     }
 
@@ -233,9 +234,8 @@ function UpdateIntermediateCompositionWithFile(ic: IntermediateComposition, file
         });
     }
 
-    // add all inherits as parent child
-    CollectInheritsAsChildren(defs, ic.children);
-    CollectInheritsAsChildren(classes, ic.children);
+    CollectInherits(defs, ic.inherits);
+    CollectInherits(classes, ic.inherits);
 
     return ic;
 }
@@ -260,11 +260,13 @@ function BuildTreeFromIntermediateComposition(ic: IntermediateComposition)
         }
     });
 
+    roots = roots.filter(root => !ic.isClass.get(root));
+
     roots.forEach(root => {
         MMSet(ic.children, PSEUDO_ROOT, root);
     })
 
-    return BuildTreeNodeFromIntermediateComposition(PSEUDO_ROOT, PSEUDO_ROOT, ic);
+    return BuildTreeNodeFromIntermediateComposition(PSEUDO_ROOT, PSEUDO_ROOT, false, ic);
 }
 
 // this compose works by constructing an intermediate composition of all files and then building a single object tree from it
