@@ -297,6 +297,108 @@ function TopoSortDependencies(ic: IntermediateComposition)
     return sorted;
 }
 
+function BuildTreeNode()
+{
+    // for node X
+    // grab inherits (assume they are complete because of toposort)
+    // grab children (and inherited children), prefix with X, eval attrs
+    // grab attributes of X
+    // store node X (downside: explodes number of nodes, but can forget subnodes if toposort is done well)
+
+    // dynamic nature of the graph means we have to do something recursively
+}
+
+interface InputNode
+{
+    path: string;
+    children: Map<string, string>;
+    inherits: Map<string, string>;
+}
+
+interface TreeNode
+{
+    node: string;
+    children: Map<string, TreeNode>
+}
+
+function GetNode(node: TreeNode, path: string): TreeNode | null
+{
+    let parts = path.split("/");
+    if (parts.length === 1) return node;
+    let child = node.children.get(path[0]);
+    if (child)
+    {
+        return child;
+    }
+    else
+    {
+        return null;
+    }
+}
+
+function GetRoot(path: string)
+{
+    return path.split("/")[0];
+}
+
+function MakeNode(node: string)
+{
+    return {
+        node,
+        children: new Map<string, TreeNode>
+    };   
+}
+
+function ExpandNewNode(node: string, nodes: Map<string, InputNode>)
+{
+    return ExpandNode(node, MakeNode(node), nodes);
+}
+
+function ExpandNode(path: string, node: TreeNode, nodes: Map<string, InputNode>)
+{
+    let input = nodes.get(path);
+
+    if (input)
+    {
+        // fill children from inherits/children on <class>
+        AddChildrenFromInput(input, node.children, nodes);
+    }
+
+    // bunch of children are now added, but this creates new prefixes for the children
+    // must check these prefixes now
+    node.children.forEach((child, name) => {
+        ExpandNode(`${path}/${name}`, child, nodes);
+    })
+
+    return node;
+}
+
+function AddChildrenFromInput(input: InputNode, children: Map<string, TreeNode>, nodes: Map<string, InputNode>)
+{
+    input.inherits.forEach((inherit) => {
+        // inherit can be <class>/a/b
+        // request <class>
+        let classNode = ExpandNewNode(GetRoot(inherit), nodes);
+        // request /a/b
+        let subnode = GetNode(classNode, inherit);
+        if (!subnode) throw new Error(`Unknown node ${inherit}`);
+        // add children of /a/b to this children
+        subnode.children.forEach((child, childName) => {
+            children.set(childName, child);
+        })
+    });
+
+    input.children.forEach((child, childName) => {
+        // child is always a -> <class>/b/c
+        let classNode = ExpandNewNode(GetRoot(child), nodes);
+        // request /b/c
+        let subnode = GetNode(classNode, child);
+        if (!subnode) throw new Error(`Unknown node ${child}`);
+        // add <node>/a/b/c
+        children.set(childName, subnode);
+    });
+}
+
 // this function figures out which nodes are root, connects them to the pseudo root, and kicks of composition for it
 function BuildTreeFromIntermediateComposition(ic: IntermediateComposition)
 {
