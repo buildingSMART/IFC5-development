@@ -308,17 +308,24 @@ function BuildTreeNode()
     // dynamic nature of the graph means we have to do something recursively
 }
 
+export interface Attribute
+{
+    code: string;
+}
+
 export interface InputNode
 {
     path: string;
-    children: Map<string, string>;
-    inherits: Map<string, string>;
+    children: {[key: string]: string};
+    inherits: {[key: string]: string};
+    attributes: {[key: string]: any};
 }
 
 export interface TreeNode
 {
     node: string;
-    children: Map<string, TreeNode>
+    attributes: Map<string, any>;
+    children: Map<string, TreeNode>;
 }
 
 function GetNode(node: TreeNode, path: string): TreeNode | null
@@ -356,8 +363,9 @@ function MakeNode(node: string)
 {
     return {
         node,
-        children: new Map<string, TreeNode>
-    };   
+        children: new Map<string, TreeNode>,
+        attributes: new Map<string, any>
+    } as TreeNode;   
 }
 
 export function ExpandNewNode(node: string, nodes: Map<string, InputNode>)
@@ -372,7 +380,7 @@ export function ExpandNode(path: string, node: TreeNode, nodes: Map<string, Inpu
     if (input)
     {
         // fill children from inherits/children on <class>
-        AddChildrenFromInput(input, node.children, nodes);
+        AddDataFromInput(input, node, nodes);
     }
 
     // bunch of children are now added, but this creates new prefixes for the children
@@ -384,9 +392,9 @@ export function ExpandNode(path: string, node: TreeNode, nodes: Map<string, Inpu
     return node;
 }
 
-function AddChildrenFromInput(input: InputNode, children: Map<string, TreeNode>, nodes: Map<string, InputNode>)
+function AddDataFromInput(input: InputNode, node: TreeNode, nodes: Map<string, InputNode>)
 {
-    input.inherits.forEach((inherit) => {
+    Object.values(input.inherits).forEach((inherit) => {
         // inherit can be <class>/a/b
         // request <class>
         let classNode = ExpandNewNode(GetHead(inherit), nodes);
@@ -395,19 +403,27 @@ function AddChildrenFromInput(input: InputNode, children: Map<string, TreeNode>,
         if (!subnode) throw new Error(`Unknown node ${inherit}`);
         // add children of /a/b to this children
         subnode.children.forEach((child, childName) => {
-            children.set(childName, child);
+            node.children.set(childName, child);
         })
+        
+        for (let [attrID, attr] of subnode.attributes) {
+            node.attributes.set(attrID, attr);
+        }
     });
 
-    input.children.forEach((child, childName) => {
+    Object.entries(input.children).forEach(([childName, child]) => {
         // child is always a -> <class>/b/c
         let classNode = ExpandNewNode(GetHead(child), nodes);
         // request /b/c
         let subnode = GetNode(classNode, GetTail(child));
         if (!subnode) throw new Error(`Unknown node ${child}`);
         // add <node>/a/b/c
-        children.set(childName, subnode);
+        node.children.set(childName, subnode);
     });
+
+    Object.entries(input.attributes).forEach(([attrID, attr]) => {
+        node.attributes.set(attrID, attr);
+    })
 }
 
 // this function figures out which nodes are root, connects them to the pseudo root, and kicks of composition for it
