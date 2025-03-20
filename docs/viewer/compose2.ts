@@ -308,14 +308,14 @@ function BuildTreeNode()
     // dynamic nature of the graph means we have to do something recursively
 }
 
-interface InputNode
+export interface InputNode
 {
     path: string;
     children: Map<string, string>;
     inherits: Map<string, string>;
 }
 
-interface TreeNode
+export interface TreeNode
 {
     node: string;
     children: Map<string, TreeNode>
@@ -323,12 +323,16 @@ interface TreeNode
 
 function GetNode(node: TreeNode, path: string): TreeNode | null
 {
+    if (path === "") return node;
     let parts = path.split("/");
-    if (parts.length === 1) return node;
-    let child = node.children.get(path[0]);
+    let child = node.children.get(parts[0]);
     if (child)
     {
-        return child;
+        if (parts.length === 1)
+        {
+            return child;
+        }
+        return GetNode(child, GetTail(path));
     }
     else
     {
@@ -336,9 +340,16 @@ function GetNode(node: TreeNode, path: string): TreeNode | null
     }
 }
 
-function GetRoot(path: string)
+function GetHead(path: string)
 {
     return path.split("/")[0];
+}
+
+function GetTail(path: string)
+{
+    let parts = path.split("/");
+    parts.shift();
+    return parts.join("/");
 }
 
 function MakeNode(node: string)
@@ -349,12 +360,12 @@ function MakeNode(node: string)
     };   
 }
 
-function ExpandNewNode(node: string, nodes: Map<string, InputNode>)
+export function ExpandNewNode(node: string, nodes: Map<string, InputNode>)
 {
     return ExpandNode(node, MakeNode(node), nodes);
 }
 
-function ExpandNode(path: string, node: TreeNode, nodes: Map<string, InputNode>)
+export function ExpandNode(path: string, node: TreeNode, nodes: Map<string, InputNode>)
 {
     let input = nodes.get(path);
 
@@ -378,9 +389,9 @@ function AddChildrenFromInput(input: InputNode, children: Map<string, TreeNode>,
     input.inherits.forEach((inherit) => {
         // inherit can be <class>/a/b
         // request <class>
-        let classNode = ExpandNewNode(GetRoot(inherit), nodes);
+        let classNode = ExpandNewNode(GetHead(inherit), nodes);
         // request /a/b
-        let subnode = GetNode(classNode, inherit);
+        let subnode = GetNode(classNode, GetTail(inherit));
         if (!subnode) throw new Error(`Unknown node ${inherit}`);
         // add children of /a/b to this children
         subnode.children.forEach((child, childName) => {
@@ -390,9 +401,9 @@ function AddChildrenFromInput(input: InputNode, children: Map<string, TreeNode>,
 
     input.children.forEach((child, childName) => {
         // child is always a -> <class>/b/c
-        let classNode = ExpandNewNode(GetRoot(child), nodes);
+        let classNode = ExpandNewNode(GetHead(child), nodes);
         // request /b/c
-        let subnode = GetNode(classNode, child);
+        let subnode = GetNode(classNode, GetTail(child));
         if (!subnode) throw new Error(`Unknown node ${child}`);
         // add <node>/a/b/c
         children.set(childName, subnode);
