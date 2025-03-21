@@ -1,4 +1,4 @@
-import { ExpandNewNode, ExpandNodeWithInput, InputNode, TreeNode } from "./compose-alpha";
+import { Diff, ExpandNewNode, ExpandNodeWithInput, Federate, InputNode, LoadIfcxFile, TreeNode } from "./compose-alpha";
 import { describe, each, it } from "./test/util/cappucino";
 import { expect } from "chai";
 
@@ -263,5 +263,72 @@ describe("composition expansion", () => {
         expect(root.children.c4.children.c8).to.exist;
         expect(root.children.c1).to.exist;
         expect(root.children.c2).to.exist;
+    });
+})
+
+import { components } from "../../schema/out/ts/ifcx";
+type IfcxFile = components["schemas"]["IfcxFile"];
+
+function DefaultFile(valueOfAttribute: any)
+{
+    return {
+        header: {
+            version: "",
+            author: "",
+            timestamp: "",
+            defaultNode: "root"
+        },
+        schemas: {},
+        data: [{
+            name: "root",
+            children: {},
+            inherits: {},
+            attributes: {
+                "attribute": valueOfAttribute,
+                "fixed_attribute": true
+            }
+        }]
+    } as IfcxFile;
+}
+
+describe("workflows", () => {
+    it("allow federation", () => {
+        let file1 = DefaultFile("a");
+        let file2 = DefaultFile("b");
+
+        let federated1 = Federate(file1, file2);
+        let federated2 = Federate(file2, file1);
+``
+        let root1 = NodeToJSON(LoadIfcxFile(federated1));
+        let root2 = NodeToJSON(LoadIfcxFile(federated2));
+
+        expect(root1.attributes.attribute).to.equal("b");
+        expect(root2.attributes.attribute).to.equal("a");
+        expect(root1.attributes.fixed_attribute).to.exist;
+        expect(root2.attributes.fixed_attribute).to.exist;
+    });
+
+    it("allow diffs", () => {
+        let file1 = DefaultFile("a");
+        let file2 = DefaultFile("b");
+
+        let diff = Diff(file1, file2);
+        let root = NodeToJSON(LoadIfcxFile(diff));
+
+        expect(root.attributes.attribute).to.equal("b");
+        expect(root.attributes.fixed_attribute).to.not.exist;
+    });
+    
+    it("allow federating diffs", () => {
+        let file1 = DefaultFile("a");
+        let file2 = DefaultFile("b");
+
+        let diff = Diff(file1, file2);
+        let federated = Federate(file1, diff);
+
+        let root = NodeToJSON(LoadIfcxFile(federated));
+
+        expect(root.attributes.attribute).to.equal("b");
+        expect(root.attributes.fixed_attribute).to.exist;
     });
 })

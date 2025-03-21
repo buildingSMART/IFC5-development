@@ -55,7 +55,7 @@ function ToInputNodes(data: IfcxNode[])
     return inputNodes;
 }
 
-function LoadIfcxFile(file: IfcxFile)
+export function LoadIfcxFile(file: IfcxFile)
 {
     return ExpandNodeWithInput(file.header.defaultNode, ToInputNodes(file.data));
 }
@@ -111,7 +111,7 @@ function DiffNodes(node1: InputNode, node2: InputNode): IfcxNode
 }
 
 // file 2 wins
-function Diff(file1: IfcxFile, file2: IfcxFile)
+export function Diff(file1: IfcxFile, file2: IfcxFile)
 {
     let result: IfcxFile = {
         header: file1.header,
@@ -159,7 +159,7 @@ function Diff(file1: IfcxFile, file2: IfcxFile)
     return result;
 }
 
-function Federate(file1: IfcxFile, file2: IfcxFile)
+export function Federate(file1: IfcxFile, file2: IfcxFile)
 {
     let result: IfcxFile = {
         header: file1.header,
