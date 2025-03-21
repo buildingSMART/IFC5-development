@@ -1,4 +1,4 @@
-import { ExpandNewNode, InputNode, TreeNode } from "./compose2";
+import { ExpandNewNode, ExpandNodeWithInput, InputNode, TreeNode } from "./compose2";
 import { describe, each, it } from "./test/util/cappucino";
 import { expect } from "chai";
 
@@ -12,31 +12,31 @@ function MakeInputNode(path: string)
     } as InputNode;
 }
 
-function AddChild(nodes: Map<string, InputNode>, path: string, name: string, cs: string)
+function AddChild(nodes: Map<string, InputNode[]>, path: string, name: string, cs: string | null)
 {
     if (!nodes.has(path))
     {
-        nodes.set(path, MakeInputNode(path));
+        nodes.set(path, [MakeInputNode(path)]);
     }
-    nodes.get(path)!.children[name] = cs;
+    nodes.get(path)![0].children[name] = cs;
 }
 
-function AddInherits(nodes: Map<string, InputNode>, path: string, name: string, cs: string)
+function AddInherits(nodes: Map<string, InputNode[]>, path: string, name: string, cs: string | null)
 {
     if (!nodes.has(path))
     {
-        nodes.set(path, MakeInputNode(path));
+        nodes.set(path, [MakeInputNode(path)]);
     }
-    nodes.get(path)!.inherits[name] = cs;
+    nodes.get(path)![0].inherits[name] = cs;
 }
 
-function AddAttribute(nodes: Map<string, InputNode>, path: string, name: string, attr: any)
+function AddAttribute(nodes: Map<string, InputNode[]>, path: string, name: string, attr: any)
 {
     if (!nodes.has(path))
     {
-        nodes.set(path, MakeInputNode(path));
+        nodes.set(path, [MakeInputNode(path)]);
     }
-    nodes.get(path)!.attributes[name] = attr;
+    nodes.get(path)![0].attributes[name] = attr;
 }
 
 function NodeToJSON(node: TreeNode)
@@ -62,78 +62,78 @@ function PrintNode(node: TreeNode)
 describe("composition expansion", () => {
 
     it("adds children", () => {
-        let nodes = new Map<string, InputNode>();
+        let nodes = new Map<string, InputNode[]>();
 
         AddChild(nodes, "parentclass", "child", "childclass");
 
-        let root = NodeToJSON(ExpandNewNode("parentclass", nodes));
+        let root = NodeToJSON(ExpandNodeWithInput("parentclass", nodes));
         expect(root.children.child).to.exist;
     });
 
     it("rejects cycles", () => {
-        let nodes = new Map<string, InputNode>();
+        let nodes = new Map<string, InputNode[]>();
 
         AddInherits(nodes, "childclass", "ih", "parentclass");
         AddInherits(nodes, "parentclass", "ih", "childclass");
 
-        let root = NodeToJSON(ExpandNewNode("parentclass", nodes));
+        let root = NodeToJSON(ExpandNodeWithInput("parentclass", nodes));
         expect(root.children.child).to.exist;
     });
 
     it("adds children of children", () => {
-        let nodes = new Map<string, InputNode>();
+        let nodes = new Map<string, InputNode[]>();
 
         AddChild(nodes, "childclass", "child2", "otherchildclass");
         AddChild(nodes, "parentclass", "child1", "childclass");
 
-        let root = NodeToJSON(ExpandNewNode("parentclass", nodes));
+        let root = NodeToJSON(ExpandNodeWithInput("parentclass", nodes));
         expect(root.children.child1.children.child2).to.exist;
     });
 
     it("adds children of child path", () => {
-        let nodes = new Map<string, InputNode>();
+        let nodes = new Map<string, InputNode[]>();
 
         AddChild(nodes, "parentclass/child1", "child2", "otherchildclass");
         AddChild(nodes, "parentclass", "child1", "childclass");
 
-        let root = NodeToJSON(ExpandNewNode("parentclass", nodes));
+        let root = NodeToJSON(ExpandNodeWithInput("parentclass", nodes));
         expect(root.children.child1.children.child2).to.exist;
     });
 
     it("adds children of inherit", () => {
-        let nodes = new Map<string, InputNode>();
+        let nodes = new Map<string, InputNode[]>();
 
         AddChild(nodes, "inheritedclass", "child", "otherchildclass");
         AddInherits(nodes, "parentclass", "inherit1", "inheritedclass");
 
-        let root = NodeToJSON(ExpandNewNode("parentclass", nodes));
+        let root = NodeToJSON(ExpandNodeWithInput("parentclass", nodes));
         expect(root.children.child).to.exist;
     });
 
     it("adds children of child path of inherit", () => {
-        let nodes = new Map<string, InputNode>();
+        let nodes = new Map<string, InputNode[]>();
 
         AddChild(nodes, "inheritedclass/child", "child2", "otherchildclass");
         AddChild(nodes, "inheritedclass", "child", "otherchildclass");
         AddInherits(nodes, "parentclass", "inherit1", "inheritedclass");
 
-        let root = NodeToJSON(ExpandNewNode("parentclass", nodes));
+        let root = NodeToJSON(ExpandNodeWithInput("parentclass", nodes));
         expect(root.children.child.children.child2).to.exist;
     });
 
     it("adds children of nested inherit", () => {
-        let nodes = new Map<string, InputNode>();
+        let nodes = new Map<string, InputNode[]>();
 
         AddChild(nodes, "inheritedclass2", "child", "otherchildclass");
         AddInherits(nodes, "inheritedclass1", "inherit2", "inheritedclass2");
         AddInherits(nodes, "parentclass", "inherit1", "inheritedclass1");
 
-        let root = NodeToJSON(ExpandNewNode("parentclass", nodes));
+        let root = NodeToJSON(ExpandNodeWithInput("parentclass", nodes));
         expect(root.children.child).to.exist;
     });
 
     it("adds children of deep inherit path", () => {
-        let nodes = new Map<string, InputNode>();
+        let nodes = new Map<string, InputNode[]>();
 
         AddChild(nodes, "otherchildclass2", "child3", "otherchildclass3");
         AddChild(nodes, "otherchildclass", "child2", "otherchildclass2");
@@ -142,12 +142,12 @@ describe("composition expansion", () => {
         
         AddInherits(nodes, "parentclass", "inherit1", "inheritedclass1/child/child2");
 
-        let root = NodeToJSON(ExpandNewNode("parentclass", nodes));
+        let root = NodeToJSON(ExpandNodeWithInput("parentclass", nodes));
         expect(root.children.child3).to.exist;
     });
 
     it("adds children of deep inherit path with nesting", () => {
-        let nodes = new Map<string, InputNode>();
+        let nodes = new Map<string, InputNode[]>();
 
         AddChild(nodes, "otherchildclass/child2", "child3", "otherchildclass3");
         AddChild(nodes, "otherchildclass", "child2", "otherchildclass2");
@@ -156,12 +156,12 @@ describe("composition expansion", () => {
         
         AddInherits(nodes, "parentclass", "inherit1", "inheritedclass1/child/child2");
 
-        let root = NodeToJSON(ExpandNewNode("parentclass", nodes));
+        let root = NodeToJSON(ExpandNodeWithInput("parentclass", nodes));
         expect(root.children.child3).to.exist;
     });
 
     it("adds children of deep child path with nesting", () => {
-        let nodes = new Map<string, InputNode>();
+        let nodes = new Map<string, InputNode[]>();
 
         AddChild(nodes, "otherchildclass/child2", "child3", "otherchildclass3");
         AddChild(nodes, "otherchildclass", "child2", "otherchildclass2");
@@ -170,12 +170,12 @@ describe("composition expansion", () => {
         
         AddChild(nodes, "parentclass", "child1", "inheritedclass1/child/child2");
 
-        let root = NodeToJSON(ExpandNewNode("parentclass", nodes));
+        let root = NodeToJSON(ExpandNodeWithInput("parentclass", nodes));
         expect(root.children.child1.children.child3).to.exist;
     });
 
     it("adds attributes of deep child path with nesting", () => {
-        let nodes = new Map<string, InputNode>();
+        let nodes = new Map<string, InputNode[]>();
 
         AddAttribute(nodes, "otherchildclass/child2", "attr", true);
         AddChild(nodes, "otherchildclass", "child2", "otherchildclass2");
@@ -184,25 +184,68 @@ describe("composition expansion", () => {
         
         AddChild(nodes, "parentclass", "child1", "inheritedclass1/child/child2");
 
-        let root = NodeToJSON(ExpandNewNode("parentclass", nodes));
+        let root = NodeToJSON(ExpandNodeWithInput("parentclass", nodes));
         expect(root.children.child1.attributes.attr).to.exist;
     });
 
     it("overrides inherited attributes with direct attributes", () => {
-        let nodes = new Map<string, InputNode>();
+        let nodes = new Map<string, InputNode[]>();
 
         AddAttribute(nodes, "otherchildclass", "attr", 1);
         AddInherits(nodes, "parentclass", "ih", "otherchildclass");
 
         AddAttribute(nodes, "parentclass", "attr", 2);
 
-        let root = NodeToJSON(ExpandNewNode("parentclass", nodes));
+        let root = NodeToJSON(ExpandNodeWithInput("parentclass", nodes));
         expect(root.attributes.attr).to.equal(2);
     });
-    
+
+    it("delete removes children in order", () => {
+        let nodes = new Map<string, InputNode[]>();
+
+        AddChild(nodes, "parentclass", "c1", null);
+        AddChild(nodes, "parentclass", "c1", "child");
+        AddChild(nodes, "parentclass", "c2", "child");
+        AddChild(nodes, "parentclass", "c2", null);
+
+        let root = NodeToJSON(ExpandNodeWithInput("parentclass", nodes));
+        expect(root.children.c1).to.exist;
+        expect(root.children.c2).to.not.exist;
+    });
+
+    it("delete removes attributes in order", () => {
+        let nodes = new Map<string, InputNode[]>();
+
+        AddAttribute(nodes, "parentclass", "a1", null);
+        AddAttribute(nodes, "parentclass", "a1", "a");
+        AddAttribute(nodes, "parentclass", "a2", "a");
+        AddAttribute(nodes, "parentclass", "a2", null);
+
+        let root = NodeToJSON(ExpandNodeWithInput("parentclass", nodes));
+        expect(root.attributes.a1).to.exist;
+        expect(root.attributes.a2).to.not.exist;
+    });
+
+    it("delete removes inherits in order", () => {
+        let nodes = new Map<string, InputNode[]>();
+
+        AddAttribute(nodes, "a", "a1", "a");
+
+        AddInherits(nodes, "c1", "i1", null);
+        AddInherits(nodes, "c1", "i1", "a");
+        AddInherits(nodes, "c2", "i2", "a");
+        AddInherits(nodes, "c2", "i2", null);
+
+        let c1 = NodeToJSON(ExpandNodeWithInput("c1", nodes));
+        let c2 = NodeToJSON(ExpandNodeWithInput("c2", nodes));
+
+        expect(c1.attributes.a1).to.exist;
+        expect(c2.attributes.a1).to.not.exist;
+    });
+
     it("adds children of children", () => {
 
-        let nodes = new Map<string, InputNode>();
+        let nodes = new Map<string, InputNode[]>();
 
         AddChild(nodes, "obj1", "c3", "obj4");
         AddChild(nodes, "obj1", "c4", "obj5");
@@ -215,7 +258,7 @@ describe("composition expansion", () => {
 
         AddChild(nodes, "a/c4", "c8", "obj5");
 
-        let root = NodeToJSON(ExpandNewNode("a", nodes));
+        let root = NodeToJSON(ExpandNodeWithInput("a", nodes));
         expect(root.children.c3.children.c7).to.exist;
         expect(root.children.c4.children.c8).to.exist;
         expect(root.children.c1).to.exist;

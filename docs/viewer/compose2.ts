@@ -313,12 +313,20 @@ export interface Attribute
     code: string;
 }
 
+export interface CompositionInput
+{
+    path: string;
+    children: {[key: string]: string | null};
+    inherits: {[key: string]: string};
+    attributes: {[key: string]: any | null};
+}
+
 export interface InputNode
 {
     path: string;
-    children: {[key: string]: string};
-    inherits: {[key: string]: string};
-    attributes: {[key: string]: any};
+    children: {[key: string]: string | null};
+    inherits: {[key: string]: string | null};
+    attributes: {[key: string]: any | null};
 }
 
 export interface TreeNode
@@ -368,12 +376,63 @@ function MakeNode(node: string)
     } as TreeNode;   
 }
 
-export function ExpandNewNode(node: string, nodes: Map<string, InputNode>)
+function ConvertToCompositionNode(path: string, inputNodes: InputNode[])
+{
+    let compositionNode = {
+        path,
+        children: {},
+        inherits: {},
+        attributes: {}
+    } as CompositionInput;
+
+    inputNodes.forEach((node) => {
+        Object.keys(node.children).forEach((childName) => {
+            compositionNode.children[childName] = node.children[childName];
+        })
+        
+        Object.keys(node.inherits).forEach((inheritName) => {
+            let ih = node.inherits[inheritName];
+            if (ih === null)
+            {
+                delete compositionNode.inherits[inheritName];
+            }
+            else
+            {
+                compositionNode.inherits[inheritName] = ih;
+            }
+        })
+
+        Object.keys(node.attributes).forEach((attrName) => {
+            compositionNode.attributes[attrName] = node.attributes[attrName];
+        })
+    })
+    
+    return compositionNode;
+}
+
+function ConvertNodes(input: Map<string, InputNode[]>)
+{
+    let compositionNodes = new Map<string, CompositionInput>();
+
+    for(let [path, inputNodes] of input)
+    {
+        compositionNodes.set(path, ConvertToCompositionNode(path, inputNodes));
+    }
+
+    return compositionNodes;
+}
+
+export function ExpandNodeWithInput(node: string, nodes: Map<string, InputNode[]>)
+{
+    return ExpandNode(node, MakeNode(node), ConvertNodes(nodes));
+}
+
+export function ExpandNewNode(node: string, nodes: Map<string, CompositionInput>)
 {
     return ExpandNode(node, MakeNode(node), nodes);
 }
 
-export function ExpandNode(path: string, node: TreeNode, nodes: Map<string, InputNode>)
+export function ExpandNode(path: string, node: TreeNode, nodes: Map<string, CompositionInput>)
 {
     let input = nodes.get(path);
 
@@ -392,7 +451,7 @@ export function ExpandNode(path: string, node: TreeNode, nodes: Map<string, Inpu
     return node;
 }
 
-function AddDataFromInput(input: InputNode, node: TreeNode, nodes: Map<string, InputNode>)
+function AddDataFromInput(input: CompositionInput, node: TreeNode, nodes: Map<string, CompositionInput>)
 {
     Object.values(input.inherits).forEach((inherit) => {
         // inherit can be <class>/a/b
@@ -412,13 +471,20 @@ function AddDataFromInput(input: InputNode, node: TreeNode, nodes: Map<string, I
     });
 
     Object.entries(input.children).forEach(([childName, child]) => {
-        // child is always a -> <class>/b/c
-        let classNode = ExpandNewNode(GetHead(child), nodes);
-        // request /b/c
-        let subnode = GetNode(classNode, GetTail(child));
-        if (!subnode) throw new Error(`Unknown node ${child}`);
-        // add <node>/a/b/c
-        node.children.set(childName, subnode);
+        if (child !== null)
+        {
+            // child is always a -> <class>/b/c
+            let classNode = ExpandNewNode(GetHead(child), nodes);
+            // request /b/c
+            let subnode = GetNode(classNode, GetTail(child));
+            if (!subnode) throw new Error(`Unknown node ${child}`);
+            // add <node>/a/b/c
+            node.children.set(childName, subnode);
+        }
+        else
+        {
+            node.children.delete(childName);
+        }
     });
 
     Object.entries(input.attributes).forEach(([attrID, attr]) => {
