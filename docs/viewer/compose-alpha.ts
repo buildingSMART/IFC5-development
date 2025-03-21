@@ -1,5 +1,8 @@
 import { components } from "../../schema/out/ts/ifcx";
 
+type IfcxFile = components["schemas"]["IfcxFile"];
+type IfcxNode = components["schemas"]["IfcxNode"];
+
 export interface CompositionInput
 {
     path: string;
@@ -36,10 +39,11 @@ function MMSet<A, B>(map: Map<A, B[]>, key: A, value: B)
     }
 }
 
-function LoadIfcxFile(file: components["schemas"]["IfcxFile"])
+
+function ToInputNodes(data: IfcxNode[])
 {
     let inputNodes = new Map<string, InputNode[]>();
-    file.data.forEach((ifcxNode) => {
+    data.forEach((ifcxNode) => {
         let node = {
             path: ifcxNode.name,
             children: ifcxNode.children,
@@ -47,8 +51,76 @@ function LoadIfcxFile(file: components["schemas"]["IfcxFile"])
             attributes: ifcxNode.attributes
         } as InputNode;
         MMSet(inputNodes, node.path, node);
+    });
+    return inputNodes;
+}
+
+function LoadIfcxFile(file: IfcxFile)
+{
+    return ExpandNodeWithInput(file.header.defaultNode, ToInputNodes(file.data));
+}
+
+function Federate(file1: IfcxFile, file2: IfcxFile)
+{
+    let result: IfcxFile = {
+        header: file1.header,
+        schemas: {},
+        data: []
+    };
+
+    file1.data.forEach((node) => result.data.push(node));
+    file2.data.forEach((node) => result.data.push(node));
+
+    return Prune(result);
+}
+
+function Collapse(nodes: InputNode[]): InputNode
+{
+    let result: InputNode = {
+        path: nodes[0].path,
+        children: {},
+        inherits: {},
+        attributes: {}
+    }
+
+    nodes.forEach((node) => {
+        Object.keys(node.children).forEach((name) => {
+            result.children[name] = node.children[name];
+        })
+        Object.keys(node.inherits).forEach((name) => {
+            result.inherits[name] = node.inherits[name];
+        })
+        Object.keys(node.attributes).forEach((name) => {
+            result.attributes[name] = node.attributes[name];
+        })
     })
-    return ExpandNodeWithInput(file.header.defaultNode, inputNodes);
+
+    // even if a node is empty, it sticks around, as it may be doing a delete
+
+    return result;
+}
+
+function Prune(file: IfcxFile)
+{
+    let result: IfcxFile = {
+        header: file.header,
+        schemas: file.schemas,
+        data: []
+    };
+
+    let inputNodes = ToInputNodes(file.data);
+
+    inputNodes.forEach((nodes) => {
+        let collapsed = Collapse(nodes);
+        result.data.push({
+            name: collapsed.path,
+            children: collapsed.children,
+            inherits: collapsed.inherits,
+            attributes: collapsed.attributes
+        });
+    })
+
+    return result;
 }
 
 function GetNode(node: TreeNode, path: string): TreeNode | null

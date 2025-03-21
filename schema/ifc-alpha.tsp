@@ -13,8 +13,8 @@ scalar path extends string;
 @jsonSchema
 model IfcxNode {
     name: path;
-    children: Record<string>;
-    inherits: Record<string>;
+    children: Record<string | null>;
+    inherits: Record<string | null>;
     attributes: Record<unknown>;
 }
 

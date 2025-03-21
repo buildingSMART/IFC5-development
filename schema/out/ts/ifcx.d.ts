@@ -23,10 +23,10 @@ export interface components {
         IfcxNode: {
             name: components["schemas"]["path"];
             children: {
-                [key: string]: string;
+                [key: string]: string | null;
             };
             inherits: {
-                [key: string]: string;
+                [key: string]: string | null;
             };
             attributes: {
                 [key: string]: unknown;

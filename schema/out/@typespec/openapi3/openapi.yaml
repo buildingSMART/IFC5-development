@@ -53,10 +53,12 @@ components:
           type: object
           additionalProperties:
             type: string
+            nullable: true
         inherits:
           type: object
           additionalProperties:
             type: string
+            nullable: true
         attributes:
           type: object
           additionalProperties: {}
