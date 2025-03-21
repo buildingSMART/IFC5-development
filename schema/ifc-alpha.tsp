@@ -3,11 +3,7 @@
 // addition, several questions on modularity and extensibility still
 // need to be answered.
 
-import "@typespec/json-schema";
-
 import "./ifcx-measures.tsp";
-
-using TypeSpec.JsonSchema;
 
 @pattern("</[A-Za-z0-9_/.:]+>")
 scalar path extends string;
@@ -15,7 +11,6 @@ scalar path extends string;
 @pattern("</[A-Za-z0-9]+>")
 scalar code extends string;
 
-@jsonSchema
 model IfcxNode {
     name: path;
     children: Record<string | null>;
@@ -23,7 +18,6 @@ model IfcxNode {
     attributes: Record<unknown>;
 }
 
-@jsonSchema
 model IfcxHeader {
     version: string;
     author: string;
@@ -78,7 +72,6 @@ model IfcxSchema
     value: IfcxValueDescription;    
 }
 
-@jsonSchema
 model IfcxFile {
     header: IfcxHeader;
     schemas: Record<IfcxSchema>;
