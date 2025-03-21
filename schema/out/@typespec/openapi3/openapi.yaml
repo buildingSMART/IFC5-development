@@ -1,0 +1,67 @@
+openapi: 3.0.0
+info:
+  title: (title)
+  version: 0.0.0
+tags: []
+paths: {}
+components:
+  schemas:
+    IfcxFile:
+      type: object
+      required:
+        - header
+        - schemas
+        - data
+      properties:
+        header:
+          $ref: '#/components/schemas/IfcxHeader'
+        schemas:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/IfcxSchema'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/IfcxNode'
+    IfcxHeader:
+      type: object
+      required:
+        - version
+        - author
+        - timestamp
+        - defaultNode
+      properties:
+        version:
+          type: string
+        author:
+          type: string
+        timestamp:
+          type: string
+        defaultNode:
+          $ref: '#/components/schemas/path'
+    IfcxNode:
+      type: object
+      required:
+        - name
+        - children
+        - inherits
+        - attributes
+      properties:
+        name:
+          $ref: '#/components/schemas/path'
+        children:
+          type: object
+          additionalProperties:
+            type: string
+        inherits:
+          type: object
+          additionalProperties:
+            type: string
+        attributes:
+          type: object
+          additionalProperties: {}
+    IfcxSchema:
+      type: object
+    path:
+      type: string
+      pattern: </[A-Za-z0-9_/.:]+>

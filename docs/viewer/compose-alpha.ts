@@ -1,3 +1,5 @@
+import { components } from "../../schema/out/ts/ifcx";
+
 export interface CompositionInput
 {
     path: string;
@@ -19,6 +21,34 @@ export interface TreeNode
     node: string;
     attributes: Map<string, any>;
     children: Map<string, TreeNode>;
+}
+
+// this is a helper function that makes a regular Map behave as a multi map
+function MMSet<A, B>(map: Map<A, B[]>, key: A, value: B)
+{
+    if (map.has(key))
+    {
+        map.get(key)?.push(value);
+    }
+    else
+    {
+        map.set(key, [value]);
+    }
+}
+
+function LoadIfcxFile(file: components["schemas"]["IfcxFile"])
+{
+    let inputNodes = new Map<string, InputNode[]>();
+    file.data.forEach((ifcxNode) => {
+        let node = {
+            path: ifcxNode.name,
+            children: ifcxNode.children,
+            inherits: ifcxNode.inherits,
+            attributes: ifcxNode.attributes
+        } as InputNode;
+        MMSet(inputNodes, node.path, node);
+    })
+    return ExpandNodeWithInput(file.header.defaultNode, inputNodes);
 }
 
 function GetNode(node: TreeNode, path: string): TreeNode | null
