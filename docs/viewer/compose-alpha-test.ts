@@ -1,4 +1,4 @@
-import { ExpandNewNode, ExpandNodeWithInput, InputNode, TreeNode } from "./compose2";
+import { ExpandNewNode, ExpandNodeWithInput, InputNode, TreeNode } from "./compose-alpha";
 import { describe, each, it } from "./test/util/cappucino";
 import { expect } from "chai";
 
