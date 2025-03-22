@@ -34,7 +34,8 @@ enum DataType
     DateTime: "DateTime",
     Enum: "Enum",
     Array: "Array",
-    Object: "Object"
+    Object: "Object",
+    Relation: "Relation"
 }
 
 model EnumRestrictions
@@ -55,6 +56,11 @@ model ObjectRestrictions
     values: Record<IfcxValueDescription>;
 }
 
+model RelationRestrictions
+{
+    type: string;
+}
+
 model IfcxValueDescription
 {
     dataType: DataType;
@@ -63,6 +69,7 @@ model IfcxValueDescription
     enumRestrictions?: EnumRestrictions;
     arrayRestrictions?: ArrayRestrictions;
     objectRestrictions?: ObjectRestrictions;
+    relationRestrictions?: RelationRestrictions;
 }
 
 model IfcxSchema

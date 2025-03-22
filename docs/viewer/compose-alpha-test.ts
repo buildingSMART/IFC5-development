@@ -1,4 +1,4 @@
-import { Diff, ExpandNewNode, ExpandNodeWithInput, Federate, InputNode, LoadIfcxFile, TreeNode } from "./compose-alpha";
+import { ExpandNodeWithInput, InputNode, TreeNode } from "./compose-alpha";
 import { describe, each, it } from "./test/util/cappucino";
 import { expect } from "chai";
 
@@ -267,6 +267,7 @@ describe("composition expansion", () => {
 })
 
 import { components } from "../../schema/out/ts/ifcx";
+import { Diff, Federate, LoadIfcxFile } from "./workflow-alpha";
 type IfcxFile = components["schemas"]["IfcxFile"];
 
 function DefaultFile(valueOfAttribute: any)

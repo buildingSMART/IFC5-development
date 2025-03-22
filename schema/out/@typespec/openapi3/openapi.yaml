@@ -28,6 +28,7 @@ components:
         - Enum
         - Array
         - Object
+        - Relation
     EnumRestrictions:
       type: object
       required:
@@ -120,6 +121,8 @@ components:
           $ref: '#/components/schemas/ArrayRestrictions'
         objectRestrictions:
           $ref: '#/components/schemas/ObjectRestrictions'
+        relationRestrictions:
+          $ref: '#/components/schemas/RelationRestrictions'
     Measure:
       type: string
       enum:
@@ -524,6 +527,13 @@ components:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/IfcxValueDescription'
+    RelationRestrictions:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
     code:
       type: string
       pattern: </[A-Za-z0-9]+>
