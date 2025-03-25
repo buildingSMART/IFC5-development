@@ -30,6 +30,24 @@ export interface components {
             timestamp: string;
             defaultNode: components["schemas"]["path"];
         };
+        IfcxJSONFile: {
+            header: components["schemas"]["IfcxHeader"];
+            schemas: {
+                [key: string]: components["schemas"]["IfcxSchema"];
+            };
+            data: {
+                name: components["schemas"]["path"];
+                children: {
+                    [key: string]: string | null;
+                };
+                inherits: {
+                    [key: string]: string | null;
+                };
+                attributes: {
+                    [key: string]: unknown;
+                };
+            }[];
+        };
         IfcxNode: {
             name: components["schemas"]["path"];
             children: {
@@ -39,7 +57,7 @@ export interface components {
                 [key: string]: string | null;
             };
             attributes: {
-                [key: string]: unknown;
+                [key: string]: string;
             };
         };
         IfcxSchema: {
