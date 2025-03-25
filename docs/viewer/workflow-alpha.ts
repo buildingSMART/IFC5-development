@@ -30,6 +30,18 @@ export function IfcxJSONToIfcxFile(file: IfcxJSONFile)
     return file as IfcxFile;
 }
 
+export function IfcxToIfcxJSONFile(file: IfcxFile)
+{
+    file.data.forEach(node => {
+        Object.keys(node.attributes).forEach((key) => {
+            let val = node.attributes[key];
+            node.attributes[key] = JSON.parse(val);
+        })
+    });
+
+    return file as IfcxJSONFile;
+}
+
 function ToInputNodes(data: IfcxNode[])
 {
     let inputNodes = new Map<string, InputNode[]>();
