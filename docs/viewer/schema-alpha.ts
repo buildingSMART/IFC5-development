@@ -75,7 +75,7 @@ function PushSchemaValue(openAPI: yml, schema: IfcxValueDescription)
         openAPI.line("properties:");
         openAPI.push();
         Object.keys(schema.objectRestrictions!.values).forEach((valueName) => {
-            let value = schema.objectRestrictions?.values[valueName];
+            let value = schema.objectRestrictions!.values[valueName];
             openAPI.line(`${valueName}:`);
             openAPI.push();
             PushSchemaValue(openAPI, value);
@@ -98,15 +98,6 @@ function PushSchemaValue(openAPI: yml, schema: IfcxValueDescription)
     {
         throw new Error(`unknown schema type ${schema.dataType}`);
     }
-
-    /*
-        openAPI.line("required:");
-        openAPI.push();
-        openAPI.pop();
-        openAPI.line("properties:");
-        openAPI.push();
-        openAPI.pop();
-    */
 }
 
 export function SchemasToOpenAPI(file: IfcxFile)
