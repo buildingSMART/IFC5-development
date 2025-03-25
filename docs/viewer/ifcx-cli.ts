@@ -4,6 +4,7 @@ import * as fs from "fs";
 import { components } from "../../schema/out/ts/ifcx";
 import { Diff, Federate, IfcxJSONToIfcxFile, IfcxToIfcxJSONFile } from "./workflow-alpha";
 import { ExampleFile } from "./example-file";
+import { SchemasToOpenAPI } from "./schema-alpha";
 
 type IfcxFile = components["schemas"]["IfcxFile"];
 type IfcxJSONFile = components["schemas"]["IfcxJSONFile"];
@@ -22,7 +23,7 @@ function processArgs(args: string[])
     {
         let path = args[1];
         if (!path.endsWith(".ifcx.json")) throw new Error(`Expected extension .ifcx.json`);
-        let file = JSON.parse(fs.readFileSync("path").toString());
+        let file = JSON.parse(fs.readFileSync(path).toString());
         let converted = IfcxJSONToIfcxFile(file as IfcxJSONFile);
         let convertedPath = path.replace(".json", "");
         fs.writeFileSync(convertedPath, JSON.stringify(converted, null, 4));
@@ -31,10 +32,19 @@ function processArgs(args: string[])
     {
         let path = args[1];
         if (!path.endsWith(".ifcx")) throw new Error(`Expected extension .ifcx`);
-        let file = JSON.parse(fs.readFileSync("path").toString());
+        let file = JSON.parse(fs.readFileSync(path).toString());
         let converted = IfcxToIfcxJSONFile(file as IfcxFile);
-        let convertedPath = path.replace(".json", "");
+        let convertedPath = path.replace(".ifcx", ".ifcx.json");
         fs.writeFileSync(convertedPath, JSON.stringify(converted, null, 4));
+    }
+    else if (operation === "schema_to_openapi")
+    {
+        let path = args[1];
+        if (!path.endsWith(".ifcx")) throw new Error(`Expected extension .ifcx`);
+        let file = JSON.parse(fs.readFileSync(path).toString());
+        let openAPI = SchemasToOpenAPI(file as IfcxFile);
+        let openaAPIPath = path.replace(".ifcx", ".openapi.yml");
+        fs.writeFileSync(openaAPIPath, openAPI);
     }
     else if (operation === "diff" || operation === "federate")
     {
@@ -66,18 +76,19 @@ function processArgs(args: string[])
             result = Federate(data1, data2);
         }
 
-        fs.writeFileSync(outputPath, JSON.stringify(result));
+        fs.writeFileSync(outputPath, JSON.stringify(result, null, 4));
     }
     else if (operation === "make_default_file")
     {
         let path = args[1];
-        fs.writeFileSync(`${path}.ifcx.json`, JSON.stringify(ExampleFile(), null, 4))
+        fs.writeFileSync(`${path}.ifcx`, JSON.stringify(ExampleFile(), null, 4))
     }
     else if (!operation || operation === "help")
     {
         console.log(`available commands:`);
         console.log(`convert_to_ifcx`);
         console.log(`convert_to_json`);
+        console.log(`convert_to_openapi`);
         console.log(`diff`);
         console.log(`federate`);
         console.log(`make_default_file`);

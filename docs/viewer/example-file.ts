@@ -6,9 +6,9 @@ export function ExampleFile()
 {
     return IfcxJSONToIfcxFile({
         header: {
-            version: "",
-            author: "",
-            timestamp: "",
+            version: "ifcx_alpha",
+            author: "tom",
+            timestamp: "now",
             defaultNode: "root"
         },
         schemas: {
@@ -86,6 +86,20 @@ export function ExampleFile()
                 }
             },
         },
-        data: []
+        data: [{
+            name: "root",
+            children: {},
+            inherits: {},
+            attributes: {
+                "attribute1": {
+                    schema: "a",
+                    value: "stringvalue"
+                },
+                "attribute2": {
+                    schema: "b",
+                    value: true
+                }
+            }
+        }]
     } as IfcxJSONFile);
 }
