@@ -1,0 +1,41 @@
+[
+  {
+    "def": "def",
+    "type": "UsdGeom:Xform",
+    "name": "node1",
+    "inherits": [
+      "</node2>"
+    ]
+  },
+  {
+    "def": "def",
+    "type": "UsdGeom:Xform",
+    "name": "node2",
+    "inherits": [
+      "</node3>"
+    ]
+  },
+  {
+    "def": "def",
+    "type": "UsdGeom:Xform",
+    "name": "node3"
+  },
+  {
+    "def": "over",
+    "name": "node3",
+    "attributes": {
+      "customdata": {
+        "a": 3
+      }
+    }
+  },
+  {
+    "def": "over",
+    "name": "node2",
+    "attributes": {
+      "customdata": {
+        "a": 2
+      }
+    }
+  }
+]
