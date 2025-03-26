@@ -1,3 +1,8 @@
+// @note This is a schema that covers the current two example models,
+// it does not cover the full breadth of the envisioned IFC5 schema. In
+// addition, several questions on modularity and extensibility still
+// need to be answered.
+
 import "@typespec/json-schema";
 
 using TypeSpec.JsonSchema;
@@ -180,6 +185,7 @@ model Def {
     name: string;
     children?: Def[];
     inherits?: reference[]; // optional but very rarely so, see (hello-wall WallMaterial)
+    attributes?: unknown; // what is this?
 }
 
 @jsonSchema
@@ -188,6 +194,7 @@ model Class {
     type?: ClassType;
     name: string;
     children?: Def[];
+    inherits?: reference[]; // optional but very rarely so, see (hello-wall WallMaterial)
 }
 
 @jsonSchema

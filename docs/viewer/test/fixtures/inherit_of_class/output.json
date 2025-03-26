@@ -1,0 +1,13 @@
+{
+    "name": "",
+    "children": [
+        {
+            "attributes": {
+                "customdata:a": 2
+            },
+            "children": [],
+            "name": "/node1",
+            "type": "UsdGeom:Xform"
+        }
+    ]
+}
