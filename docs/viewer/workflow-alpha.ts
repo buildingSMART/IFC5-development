@@ -43,13 +43,13 @@ export function CheckSchemas(file: IfcxFile)
         Object.keys(node.attributes).forEach((schemaID) => {
             if (!file.schemas[schemaID])
             {
-                throw new SchemaMissingError();   
+                throw new SchemaMissingError(`Missing schema ${schemaID}`);   
             }
         })
     })
 }
 
-export function LoadIfcxFile(file: IfcxFile, checkSchemas: boolean = false)
+export function LoadIfcxFile(file: IfcxFile, checkSchemas: boolean = true)
 {
     if (checkSchemas) CheckSchemas(file);
     return ExpandFirstRootInInput(ToInputNodes(file.data));
@@ -151,6 +151,12 @@ export function Diff(file1: IfcxFile, file2: IfcxFile)
         result.data.push(DiffNodes(file1Node, file2Node));
     }
 
+    result.data.forEach((node) => {
+        Object.keys(node.attributes).forEach((schemaID) => {
+            result.schemas[schemaID] = file2.schemas[schemaID];
+        });
+    })
+
     return result;
 }
 
@@ -161,6 +167,9 @@ export function Federate(file1: IfcxFile, file2: IfcxFile)
         schemas: {},
         data: []
     };
+
+    Object.keys(file1.schemas).forEach((schemaID) => result.schemas[schemaID] = file1.schemas[schemaID]);
+    Object.keys(file2.schemas).forEach((schemaID) => result.schemas[schemaID] = file2.schemas[schemaID]);
 
     file1.data.forEach((node) => result.data.push(node));
     file2.data.forEach((node) => result.data.push(node));
