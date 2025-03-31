@@ -266,7 +266,7 @@ describe("composition expansion", () => {
 })
 
 import { components } from "../../schema/out/ts/ifcx";
-import { Diff, Federate, LoadIfcxFile, SchemaMissingError } from "./workflow-alpha";
+import { Diff, Federate, LoadIfcxFile, SchemaValidationError } from "./workflow-alpha";
 import { SchemasToOpenAPI } from "./schema-alpha";
 import { ExampleFile, ExampleFileMissingSchema } from "./example-file";
 type IfcxFile = components["schemas"]["IfcxFile"];
@@ -356,6 +356,6 @@ describe("schemas", () => {
     });
 
     it("throws error if attribute references unknown schema ID", () => {
-        expect(() => LoadIfcxFile(ExampleFileMissingSchema(), true)).to.throw(SchemaMissingError);
+        expect(() => LoadIfcxFile(ExampleFileMissingSchema())).to.throw(SchemaValidationError);
     });
 });

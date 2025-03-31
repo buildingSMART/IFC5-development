@@ -164,7 +164,7 @@ function FindRootsOrCycles(nodes: Map<string, CompositionInput>)
     return roots;
 }
 
-function ConvertNodes(input: Map<string, InputNode[]>)
+export function ConvertNodes(input: Map<string, InputNode[]>)
 {
     let compositionNodes = new Map<string, CompositionInput>();
 
@@ -181,26 +181,29 @@ export class CycleError extends Error
     
 }
 
-export function ExpandFirstRootInInput(nodes: Map<string, InputNode[]>)
+export function ExpandFirstRootInInput(nodes: Map<string, CompositionInput>)
 {
-    let convertedNodes = ConvertNodes(nodes);
-    let roots = FindRootsOrCycles(convertedNodes);
+    let roots = FindRootsOrCycles(nodes);
     if (!roots)
     {
         throw new CycleError();
     }
-    return ExpandNewNode([...roots.values()][0], convertedNodes);
+    return ExpandNewNode([...roots.values()][0], nodes);
 }
 
 export function ExpandNodeWithInput(node: string, nodes: Map<string, InputNode[]>)
 {
-    let convertedNodes = ConvertNodes(nodes);
-    let roots = FindRootsOrCycles(convertedNodes);
+    return ExpandNodeWithCompositionInput(node, ConvertNodes(nodes));
+}
+
+export function ExpandNodeWithCompositionInput(node: string, nodes: Map<string, CompositionInput>)
+{
+    let roots = FindRootsOrCycles(nodes);
     if (!roots)
     {
         throw new CycleError();
     }
-    return ExpandNewNode(node, convertedNodes);
+    return ExpandNewNode(node, nodes);
 }
 
 export function ExpandNewNode(node: string, nodes: Map<string, CompositionInput>)

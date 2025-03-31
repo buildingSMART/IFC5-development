@@ -1,8 +1,9 @@
 import { components } from "../../schema/out/ts/ifcx";
-import { ExpandFirstRootInInput, InputNode } from "./compose-alpha";
+import { CompositionInput, ConvertNodes, ExpandFirstRootInInput, InputNode } from "./compose-alpha";
 
 type IfcxFile = components["schemas"]["IfcxFile"];
 type IfcxNode = components["schemas"]["IfcxNode"];
+type IfcxSchema = components["schemas"]["IfcxSchema"];
 
 // this is a helper function that makes a regular Map behave as a multi map
 function MMSet<A, B>(map: Map<A, B[]>, key: A, value: B)
@@ -32,27 +33,47 @@ function ToInputNodes(data: IfcxNode[])
     return inputNodes;
 }
 
-export class SchemaMissingError extends Error
+export class SchemaValidationError extends Error
 {
 
 }
 
-export function CheckSchemas(file: IfcxFile)
+function ValidateNode(schema: IfcxSchema, value: any)
 {
-    file.data.forEach((node) => {
+    // TODO
+}
+
+export function Validate(schemas: {[key: string]: IfcxSchema}, inputNodes: Map<string, CompositionInput>)
+{
+    inputNodes.forEach((node) => {
         Object.keys(node.attributes).forEach((schemaID) => {
-            if (!file.schemas[schemaID])
+            if (!schemas[schemaID])
             {
-                throw new SchemaMissingError(`Missing schema ${schemaID}`);   
+                throw new SchemaValidationError(`Missing schema ${schemaID}`);   
             }
-        })
+            let schema = schemas[schemaID];
+            let value = node.attributes[schemaID];
+            ValidateNode(schema, value);
+        });
     })
 }
 
 export function LoadIfcxFile(file: IfcxFile, checkSchemas: boolean = true)
 {
-    if (checkSchemas) CheckSchemas(file);
-    return ExpandFirstRootInInput(ToInputNodes(file.data));
+    let inputNodes = ToInputNodes(file.data);
+    let compositionNodes = ConvertNodes(inputNodes);
+
+    try {
+        if (checkSchemas)
+        {
+            Validate(file.schemas, compositionNodes);
+        }
+    } catch (e)
+    {
+        throw e;
+    }
+
+    return ExpandFirstRootInInput(compositionNodes);
 }
 
 function MakeInputNode(path: string)
