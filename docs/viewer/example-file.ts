@@ -1,5 +1,6 @@
 import { components } from "../../schema/out/ts/ifcx";
 type IfcxFile = components["schemas"]["IfcxFile"];
+type DataType = components["schemas"]["DataType"];
 
 export function ExampleFile()
 {
@@ -105,6 +106,32 @@ export function ExampleFileMissingSchema()
             inherits: {},
             attributes: {
                 "example::missing::schema": "stringvalue",
+            }
+        }]
+    } as IfcxFile;
+}
+
+export function ExampleFileWithSchema(datatype: DataType, data: any)
+{
+    return {
+        header: {
+            version: "ifcx_alpha",
+            author: "tom",
+            timestamp: "now"
+        },
+        schemas: {
+            "example::attribute": {
+                value: {
+                    dataType: datatype
+                }
+            },
+        },
+        data: [{
+            name: "root",
+            children: {},
+            inherits: {},
+            attributes: {
+                "example::attribute": data,
             }
         }]
     } as IfcxFile;

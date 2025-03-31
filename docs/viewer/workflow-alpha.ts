@@ -4,6 +4,7 @@ import { CompositionInput, ConvertNodes, ExpandFirstRootInInput, InputNode } fro
 type IfcxFile = components["schemas"]["IfcxFile"];
 type IfcxNode = components["schemas"]["IfcxNode"];
 type IfcxSchema = components["schemas"]["IfcxSchema"];
+type IfcxValueDescription = components["schemas"]["IfcxValueDescription"];
 
 // this is a helper function that makes a regular Map behave as a multi map
 function MMSet<A, B>(map: Map<A, B[]>, key: A, value: B)
@@ -38,9 +39,26 @@ export class SchemaValidationError extends Error
 
 }
 
-function ValidateNode(schema: IfcxSchema, value: any)
+function ValidateAttributeValue(desc: IfcxValueDescription, value: any)
 {
-    // TODO
+    if (desc.dataType === "Boolean")
+    {
+        if (typeof value !== "boolean")
+        {
+            throw new SchemaValidationError(`Expected ${value} to be of type boolean`);
+        }
+    }
+    else if (desc.dataType === "String")
+    {
+        if (typeof value !== "string")
+        {
+            throw new SchemaValidationError(`Expected ${value} to be of type boolean`);
+        }
+    }
+    else
+    {
+        throw new SchemaValidationError(`Unknown type ${desc.dataType}`);
+    }
 }
 
 export function Validate(schemas: {[key: string]: IfcxSchema}, inputNodes: Map<string, CompositionInput>)
@@ -49,11 +67,26 @@ export function Validate(schemas: {[key: string]: IfcxSchema}, inputNodes: Map<s
         Object.keys(node.attributes).forEach((schemaID) => {
             if (!schemas[schemaID])
             {
-                throw new SchemaValidationError(`Missing schema ${schemaID}`);   
+                throw new SchemaValidationError(`Missing schema ${schemaID} referenced by ${node.path}.attributes`);   
             }
             let schema = schemas[schemaID];
             let value = node.attributes[schemaID];
-            ValidateNode(schema, value);
+            
+            try
+            {
+                ValidateAttributeValue(schema.value, value);
+            } 
+            catch(e)
+            {
+                if (e instanceof SchemaValidationError)
+                {
+                    throw new SchemaValidationError(`Error validating ["${node.path}"].attributes["${schemaID}"]: ${e.message}`);
+                }
+                else
+                {
+                    throw e;
+                }
+            }
         });
     })
 }
