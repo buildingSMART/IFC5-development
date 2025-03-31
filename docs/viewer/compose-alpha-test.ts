@@ -266,9 +266,9 @@ describe("composition expansion", () => {
 })
 
 import { components } from "../../schema/out/ts/ifcx";
-import { Diff, Federate, LoadIfcxFile } from "./workflow-alpha";
+import { Diff, Federate, LoadIfcxFile, SchemaMissingError } from "./workflow-alpha";
 import { SchemasToOpenAPI } from "./schema-alpha";
-import { ExampleFile } from "./example-file";
+import { ExampleFile, ExampleFileMissingSchema } from "./example-file";
 type IfcxFile = components["schemas"]["IfcxFile"];
 
 function DefaultFile(valueOfAttribute: any)
@@ -352,5 +352,10 @@ describe("schemas", () => {
 
         // TODO
         expect(openAPISchema.length).to.equal(682);
+    });
+});
+describe("schemas", () => {
+    it("can generate openAPI", () => {
+        expect(() => LoadIfcxFile(ExampleFileMissingSchema(), true)).to.throw(SchemaMissingError);
     });
 });

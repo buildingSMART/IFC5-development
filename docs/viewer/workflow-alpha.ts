@@ -32,8 +32,26 @@ function ToInputNodes(data: IfcxNode[])
     return inputNodes;
 }
 
-export function LoadIfcxFile(file: IfcxFile)
+export class SchemaMissingError extends Error
 {
+
+}
+
+export function CheckSchemas(file: IfcxFile)
+{
+    file.data.forEach((node) => {
+        Object.keys(node.attributes).forEach((schemaID) => {
+            if (!file.schemas[schemaID])
+            {
+                throw new SchemaMissingError();   
+            }
+        })
+    })
+}
+
+export function LoadIfcxFile(file: IfcxFile, checkSchemas: boolean = false)
+{
+    if (checkSchemas) CheckSchemas(file);
     return ExpandFirstRootInInput(ToInputNodes(file.data));
 }
 

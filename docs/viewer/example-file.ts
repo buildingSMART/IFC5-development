@@ -13,7 +13,8 @@ export function ExampleFile()
             "example::string": {
                 uri: "http://www.example.com/string",
                 value: {
-                    dataType: "String"
+                    dataType: "String",
+                    measure: "IFCALIGNMENTHORIZONTALSEGMENTTYPEENUM"
                 }
             },
             "example::boolean": {
@@ -84,6 +85,26 @@ export function ExampleFile()
             attributes: {
                 "example::string": "stringvalue",
                 "example::boolean": true
+            }
+        }]
+    } as IfcxFile;
+}
+
+export function ExampleFileMissingSchema()
+{
+    return {
+        header: {
+            version: "ifcx_alpha",
+            author: "tom",
+            timestamp: "now"
+        },
+        schemas: {},
+        data: [{
+            name: "root",
+            children: {},
+            inherits: {},
+            attributes: {
+                "example::missing::schema": "stringvalue",
             }
         }]
     } as IfcxFile;
