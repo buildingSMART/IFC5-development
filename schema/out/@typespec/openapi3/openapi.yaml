@@ -61,7 +61,6 @@ components:
         - version
         - author
         - timestamp
-        - defaultNode
       properties:
         version:
           type: string
@@ -69,8 +68,6 @@ components:
           type: string
         timestamp:
           type: string
-        defaultNode:
-          $ref: '#/components/schemas/path'
     IfcxNode:
       type: object
       required:

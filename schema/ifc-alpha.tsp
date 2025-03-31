@@ -22,7 +22,6 @@ model IfcxHeader {
     version: string;
     author: string;
     timestamp: string;
-    defaultNode: path;
 }
 
 enum DataType

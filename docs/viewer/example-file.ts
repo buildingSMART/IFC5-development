@@ -7,8 +7,7 @@ export function ExampleFile()
         header: {
             version: "ifcx_alpha",
             author: "tom",
-            timestamp: "now",
-            defaultNode: "root"
+            timestamp: "now"
         },
         schemas: {
             "a": {

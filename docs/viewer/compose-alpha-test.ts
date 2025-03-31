@@ -1,4 +1,4 @@
-import { ExpandNodeWithInput, InputNode, TreeNode } from "./compose-alpha";
+import { CycleError, ExpandNodeWithInput, InputNode, TreeNode } from "./compose-alpha";
 import { describe, each, it } from "./test/util/cappucino";
 import { expect } from "chai";
 
@@ -76,8 +76,7 @@ describe("composition expansion", () => {
         AddInherits(nodes, "childclass", "ih", "parentclass");
         AddInherits(nodes, "parentclass", "ih", "childclass");
 
-        let root = NodeToJSON(ExpandNodeWithInput("parentclass", nodes));
-        expect(root.children.child).to.exist;
+        expect(() => ExpandNodeWithInput("parentclass", nodes)).to.throw(CycleError);
     });
 
     it("adds children of children", () => {
@@ -278,8 +277,7 @@ function DefaultFile(valueOfAttribute: any)
         header: {
             version: "",
             author: "",
-            timestamp: "",
-            defaultNode: "root"
+            timestamp: ""
         },
         schemas: {
             "asdfwf23f23f2c323r": {

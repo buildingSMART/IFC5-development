@@ -96,6 +96,74 @@ function ConvertToCompositionNode(path: string, inputNodes: InputNode[])
     return compositionNode;
 }
 
+// this is a helper function that makes a regular Map behave as a multi map
+function MMSet<A, B>(map: Map<A, B[]>, key: A, value: B)
+{
+    if (map.has(key))
+    {
+        map.get(key)?.push(value);
+    }
+    else
+    {
+        map.set(key, [value]);
+    }
+}
+
+// https://en.wikipedia.org/wiki/Topological_sorting
+function FindRootsOrCycles(nodes: Map<string, CompositionInput>)
+{
+    let dependencies = new Map<string, string[]>();
+    let dependents = new Map<string, string[]>();
+    nodes.forEach((node, path) => {
+        Object.keys(node.inherits).forEach((inheritName) => {
+            MMSet(dependencies, path, node.inherits[inheritName]);
+            MMSet(dependents, node.inherits[inheritName], path);
+        })
+        Object.keys(node.children).forEach((childName) => {
+            MMSet(dependencies, path, node.children[childName]);
+            MMSet(dependents, node.children[childName], path);
+        })
+    });
+    let paths = [...nodes.keys()];
+    let perm: {} = {};
+    let temp: {} = {};
+
+    function visit(path: string)
+    {
+        if (perm[path]) return;
+        if (temp[path]) throw new Error(`CYCLE!`);
+
+        temp[path] = true;
+
+        let deps = dependencies.get(path);
+        if (deps)
+        {
+            deps.forEach(dep => visit(dep));
+        }
+
+        perm[path] = true;
+
+        // if we wanted to toposort, this is where we would add the node to a sorted list
+    }
+
+    let roots = new Set<string>();
+    try {
+        paths.forEach((path) => {
+            if (!dependents.has(path))
+            {
+                roots.add(path);
+            }
+            visit(path);
+        })    
+    } catch (e)
+    {
+        // cycle found, return
+        return null;
+    }
+
+    return roots;
+}
+
 function ConvertNodes(input: Map<string, InputNode[]>)
 {
     let compositionNodes = new Map<string, CompositionInput>();
@@ -108,9 +176,31 @@ function ConvertNodes(input: Map<string, InputNode[]>)
     return compositionNodes;
 }
 
+export class CycleError extends Error
+{
+    
+}
+
+export function ExpandFirstRootInInput(nodes: Map<string, InputNode[]>)
+{
+    let convertedNodes = ConvertNodes(nodes);
+    let roots = FindRootsOrCycles(convertedNodes);
+    if (!roots)
+    {
+        throw new CycleError();
+    }
+    return ExpandNewNode([...roots.values()][0], convertedNodes);
+}
+
 export function ExpandNodeWithInput(node: string, nodes: Map<string, InputNode[]>)
 {
-    return ExpandNode(node, MakeNode(node), ConvertNodes(nodes));
+    let convertedNodes = ConvertNodes(nodes);
+    let roots = FindRootsOrCycles(convertedNodes);
+    if (!roots)
+    {
+        throw new CycleError();
+    }
+    return ExpandNewNode(node, convertedNodes);
 }
 
 export function ExpandNewNode(node: string, nodes: Map<string, CompositionInput>)

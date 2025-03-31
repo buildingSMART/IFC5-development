@@ -1,5 +1,5 @@
 import { components } from "../../schema/out/ts/ifcx";
-import { ExpandNodeWithInput, InputNode } from "./compose-alpha";
+import { ExpandFirstRootInInput, InputNode } from "./compose-alpha";
 
 type IfcxFile = components["schemas"]["IfcxFile"];
 type IfcxNode = components["schemas"]["IfcxNode"];
@@ -34,7 +34,7 @@ function ToInputNodes(data: IfcxNode[])
 
 export function LoadIfcxFile(file: IfcxFile)
 {
-    return ExpandNodeWithInput(file.header.defaultNode, ToInputNodes(file.data));
+    return ExpandFirstRootInInput(ToInputNodes(file.data));
 }
 
 function MakeInputNode(path: string)

@@ -28,7 +28,6 @@ export interface components {
             version: string;
             author: string;
             timestamp: string;
-            defaultNode: components["schemas"]["path"];
         };
         IfcxNode: {
             name: components["schemas"]["path"];
