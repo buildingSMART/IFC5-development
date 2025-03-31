@@ -1,10 +1,9 @@
 import { components } from "../../schema/out/ts/ifcx";
-import { IfcxJSONToIfcxFile } from "./workflow-alpha";
-type IfcxJSONFile = components["schemas"]["IfcxJSONFile"];
+type IfcxFile = components["schemas"]["IfcxFile"];
 
 export function ExampleFile()
 {
-    return IfcxJSONToIfcxFile({
+    return {
         header: {
             version: "ifcx_alpha",
             author: "tom",
@@ -101,5 +100,5 @@ export function ExampleFile()
                 }
             }
         }]
-    } as IfcxJSONFile);
+    } as IfcxFile;
 }

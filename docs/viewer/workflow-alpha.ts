@@ -3,7 +3,6 @@ import { ExpandNodeWithInput, InputNode } from "./compose-alpha";
 
 type IfcxFile = components["schemas"]["IfcxFile"];
 type IfcxNode = components["schemas"]["IfcxNode"];
-type IfcxJSONFile = components["schemas"]["IfcxJSONFile"];
 
 // this is a helper function that makes a regular Map behave as a multi map
 function MMSet<A, B>(map: Map<A, B[]>, key: A, value: B)
@@ -16,30 +15,6 @@ function MMSet<A, B>(map: Map<A, B[]>, key: A, value: B)
     {
         map.set(key, [value]);
     }
-}
-
-export function IfcxJSONToIfcxFile(file: IfcxJSONFile)
-{
-    file.data.forEach(node => {
-        Object.keys(node.attributes).forEach((key) => {
-            let val = node.attributes[key];
-            node.attributes[key] = JSON.stringify(val);
-        })
-    });
-
-    return file as IfcxFile;
-}
-
-export function IfcxToIfcxJSONFile(file: IfcxFile)
-{
-    file.data.forEach(node => {
-        Object.keys(node.attributes).forEach((key) => {
-            let val = node.attributes[key];
-            node.attributes[key] = JSON.parse(val);
-        })
-    });
-
-    return file as IfcxJSONFile;
 }
 
 function ToInputNodes(data: IfcxNode[])

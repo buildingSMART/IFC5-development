@@ -71,70 +71,29 @@ components:
           type: string
         defaultNode:
           $ref: '#/components/schemas/path'
-    IfcxJSONFile:
-      type: object
-      required:
-        - header
-        - schemas
-        - data
-      properties:
-        header:
-          $ref: '#/components/schemas/IfcxHeader'
-        schemas:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/IfcxSchema'
-        data:
-          type: array
-          items:
-            type: object
-            required:
-              - name
-              - children
-              - inherits
-              - attributes
-            properties:
-              name:
-                $ref: '#/components/schemas/path'
-              children:
-                type: object
-                additionalProperties:
-                  type: string
-                  nullable: true
-              inherits:
-                type: object
-                additionalProperties:
-                  type: string
-                  nullable: true
-              attributes:
-                type: object
-                additionalProperties: {}
     IfcxNode:
       type: object
-      allOf:
-        - type: object
-          required:
-            - name
-            - children
-            - inherits
-            - attributes
-          properties:
-            name:
-              $ref: '#/components/schemas/path'
-            children:
-              type: object
-              additionalProperties:
-                type: string
-                nullable: true
-            inherits:
-              type: object
-              additionalProperties:
-                type: string
-                nullable: true
-            attributes:
-              type: object
-              additionalProperties:
-                type: string
+      required:
+        - name
+        - children
+        - inherits
+        - attributes
+      properties:
+        name:
+          $ref: '#/components/schemas/path'
+        children:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+        inherits:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+        attributes:
+          type: object
+          additionalProperties: {}
     IfcxSchema:
       type: object
       required:

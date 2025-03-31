@@ -11,11 +11,11 @@ scalar path extends string;
 @pattern("</[A-Za-z0-9]+>")
 scalar code extends string;
 
-model TemplatedIfcxNode<T> {
+model IfcxNode {
     name: path;
     children: Record<string | null>;
     inherits: Record<string | null>;
-    attributes: Record<T>;
+    attributes: Record<unknown>;
 }
 
 model IfcxHeader {
@@ -79,19 +79,8 @@ model IfcxSchema
     value: IfcxValueDescription;    
 }
 
-model IfcxNode extends TemplatedIfcxNode<string>
-{
-    
-}
-
 model IfcxFile {
     header: IfcxHeader;
     schemas: Record<IfcxSchema>;
     data: IfcxNode[]
-}
-
-model IfcxJSONFile {
-    header: IfcxHeader;
-    schemas: Record<IfcxSchema>;
-    data: TemplatedIfcxNode<unknown>[]
 }

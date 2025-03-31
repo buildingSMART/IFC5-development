@@ -36,7 +36,7 @@ function AddAttribute(nodes: Map<string, InputNode[]>, path: string, name: strin
     {
         nodes.set(path, [MakeInputNode(path)]);
     }
-    nodes.get(path)![0].attributes[name] = JSON.stringify(attr);
+    nodes.get(path)![0].attributes[name] = attr;
 }
 
 function NodeToJSON(node: TreeNode)
@@ -49,7 +49,7 @@ function NodeToJSON(node: TreeNode)
         obj.children[c[0]] = NodeToJSON(c[1]);
     });
     [...node.attributes.entries()].forEach(c => {
-        obj.attributes[c[0]] = JSON.parse(c[1]);
+        obj.attributes[c[0]] = c[1];
     });
     return obj;
 }
@@ -267,14 +267,14 @@ describe("composition expansion", () => {
 })
 
 import { components } from "../../schema/out/ts/ifcx";
-import { Diff, Federate, IfcxJSONToIfcxFile, LoadIfcxFile } from "./workflow-alpha";
+import { Diff, Federate, LoadIfcxFile } from "./workflow-alpha";
 import { SchemasToOpenAPI } from "./schema-alpha";
 import { ExampleFile } from "./example-file";
-type IfcxJSONFile = components["schemas"]["IfcxJSONFile"];
+type IfcxFile = components["schemas"]["IfcxFile"];
 
 function DefaultFile(valueOfAttribute: any)
 {
-    return IfcxJSONToIfcxFile({
+    return {
         header: {
             version: "",
             author: "",
@@ -312,7 +312,7 @@ function DefaultFile(valueOfAttribute: any)
                 }
             }
         }]
-    } as IfcxJSONFile);
+    } as IfcxFile;
 }
 
 describe("workflows", () => {
