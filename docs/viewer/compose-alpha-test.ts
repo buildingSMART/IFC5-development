@@ -353,9 +353,8 @@ describe("schemas", () => {
         // TODO
         expect(openAPISchema.length).to.equal(682);
     });
-});
-describe("schemas", () => {
-    it("can generate openAPI", () => {
+
+    it("throws error if attribute references unknown schema ID", () => {
         expect(() => LoadIfcxFile(ExampleFileMissingSchema(), true)).to.throw(SchemaMissingError);
     });
 });
