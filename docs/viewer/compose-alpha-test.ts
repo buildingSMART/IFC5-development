@@ -360,7 +360,14 @@ describe("schemas", () => {
     });
 
     it("throws error if attributes fail to validate", () => {
-        expect(() => LoadIfcxFile(ExampleFileWithSchema("Boolean", "a"))).to.throw(SchemaValidationError);
-        expect(() => LoadIfcxFile(ExampleFileWithSchema("String", false))).to.throw(SchemaValidationError);
+        expect(() => LoadIfcxFile(ExampleFileWithSchema("Boolean", null))).to.throw(SchemaValidationError);
+        expect(() => LoadIfcxFile(ExampleFileWithSchema("String", null))).to.throw(SchemaValidationError);
+        expect(() => LoadIfcxFile(ExampleFileWithSchema("DateTime", null))).to.throw(SchemaValidationError);
+        expect(() => LoadIfcxFile(ExampleFileWithSchema("Enum", null))).to.throw(SchemaValidationError);
+        expect(() => LoadIfcxFile(ExampleFileWithSchema("Integer", null))).to.throw(SchemaValidationError);
+        expect(() => LoadIfcxFile(ExampleFileWithSchema("Object", false))).to.throw(SchemaValidationError);
+        expect(() => LoadIfcxFile(ExampleFileWithSchema("Real", null))).to.throw(SchemaValidationError);
+        expect(() => LoadIfcxFile(ExampleFileWithSchema("Relation", null))).to.throw(SchemaValidationError);
+        expect(() => LoadIfcxFile(ExampleFileWithSchema("Array", null))).to.throw(SchemaValidationError);
     });
 });

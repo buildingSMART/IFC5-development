@@ -52,12 +52,57 @@ function ValidateAttributeValue(desc: IfcxValueDescription, value: any)
     {
         if (typeof value !== "string")
         {
-            throw new SchemaValidationError(`Expected ${value} to be of type boolean`);
+            throw new SchemaValidationError(`Expected ${value} to be of type string`);
         }
     }
-    else
+    else if (desc.dataType === "DateTime")
     {
-        throw new SchemaValidationError(`Unknown type ${desc.dataType}`);
+        if (typeof value !== "string")
+        {
+            throw new SchemaValidationError(`Expected ${value} to be of type date`);
+        }
+    }
+    else if (desc.dataType === "Enum")
+    {
+        if (typeof value !== "string")
+        {
+            throw new SchemaValidationError(`Expected ${value} to be of type string`);
+        }
+    }
+    else if (desc.dataType === "Integer")
+    {
+        if (typeof value !== "number")
+        {
+            throw new SchemaValidationError(`Expected ${value} to be of type int`);
+        }
+    }
+    else if (desc.dataType === "Real")
+    {
+        if (typeof value !== "number")
+        {
+            throw new SchemaValidationError(`Expected ${value} to be of type real`);
+        }
+    }
+    else if (desc.dataType === "Relation")
+    {
+        if (typeof value !== "string")
+        {
+            throw new SchemaValidationError(`Expected ${value} to be of type relation`);
+        }
+    }
+    else if (desc.dataType === "Object")
+    {
+        if (typeof value !== "object")
+        {
+            throw new SchemaValidationError(`Expected ${value} to be of type object`);
+        }
+    }
+    else if (desc.dataType === "Array")
+    {
+        if (!Array.isArray(value))
+        {
+            throw new SchemaValidationError(`Expected ${value} to be of type array`);
+        }
     }
 }
 
