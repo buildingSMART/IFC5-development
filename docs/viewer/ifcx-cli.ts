@@ -24,7 +24,7 @@ function processArgs(args: string[])
         if (!path.endsWith(".ifcx.json")) throw new Error(`Expected extension .ifcx.json`);
         let file = JSON.parse(fs.readFileSync(path).toString());
         let openAPI = SchemasToOpenAPI(file as IfcxFile);
-        let openaAPIPath = path.replace(".ifcx", ".openapi.yml");
+        let openaAPIPath = path.replace(".ifcx.json", ".openapi.yml");
         fs.writeFileSync(openaAPIPath, openAPI);
     }
     else if (operation === "diff" || operation === "federate")
@@ -58,7 +58,7 @@ function processArgs(args: string[])
     else if (!operation || operation === "help")
     {
         console.log(`available commands:`);
-        console.log(`convert_to_openapi`);
+        console.log(`schema_to_openapi`);
         console.log(`diff`);
         console.log(`federate`);
         console.log(`make_default_file`);

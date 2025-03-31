@@ -94,11 +94,8 @@ components:
     IfcxSchema:
       type: object
       required:
-        - code
         - value
       properties:
-        code:
-          $ref: '#/components/schemas/code'
         uri:
           type: string
         value:

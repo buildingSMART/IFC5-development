@@ -73,7 +73,6 @@ model IfcxValueDescription
 
 model IfcxSchema
 {
-    code: code;
     uri?: string;
     value: IfcxValueDescription;    
 }

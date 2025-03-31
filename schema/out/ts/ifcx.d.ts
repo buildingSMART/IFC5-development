@@ -42,7 +42,6 @@ export interface components {
             };
         };
         IfcxSchema: {
-            code: components["schemas"]["code"];
             uri?: string;
             value: components["schemas"]["IfcxValueDescription"];
         };

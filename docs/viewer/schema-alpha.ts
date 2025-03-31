@@ -116,14 +116,10 @@ export function SchemasToOpenAPI(file: IfcxFile)
     openAPI.line("schemas:");
     openAPI.push();
 
-    let map = {};
-
     Object.keys(file.schemas).forEach((schemaID) => {
         let schema = file.schemas[schemaID];
 
-        map[schemaID] = schema.code;
-
-        openAPI.line(`${schema.code}:`);
+        openAPI.line(`${schemaID}:`);
         openAPI.push();
         PushSchemaValue(openAPI, schema.value);
         openAPI.pop();

@@ -10,30 +10,26 @@ export function ExampleFile()
             timestamp: "now"
         },
         schemas: {
-            "a": {
-                code: "example::attribute",
-                uri: "http://www.example.com/attribute",
+            "example::string": {
+                uri: "http://www.example.com/string",
                 value: {
                     dataType: "String"
                 }
             },
-            "b": {
-                code: "example::fixed_attribute",
-                uri: "http://www.example.com/fixed_attribute",
+            "example::boolean": {
+                uri: "http://www.example.com/boolean",
                 value: {
                     dataType: "Boolean"
                 }
             },
-            "c": {
-                code: "example::fixed_attribute",
-                uri: "http://www.example.com/fixed_attribute",
+            "example::datetime": {
+                uri: "http://www.example.com/datetime",
                 value: {
                     dataType: "DateTime"
                 }
             },
-            "d": {
-                code: "example::fixed_attribute",
-                uri: "http://www.example.com/fixed_attribute",
+            "example::enum": {
+                uri: "http://www.example.com/enum",
                 value: {
                     dataType: "Enum",
                     enumRestrictions: {
@@ -41,16 +37,14 @@ export function ExampleFile()
                     }
                 }
             },
-            "e": {
-                code: "example::fixed_attribute",
-                uri: "http://www.example.com/fixed_attribute",
+            "example::integer": {
+                uri: "http://www.example.com/integer",
                 value: {
                     dataType: "Integer"
                 }
             },
-            "f": {
-                code: "example::object_attr",
-                uri: "http://www.example.com/fixed_attribute",
+            "example::object": {
+                uri: "http://www.example.com/object",
                 value: {
                     dataType: "Object",
                     objectRestrictions: {
@@ -68,9 +62,8 @@ export function ExampleFile()
                     }
                 }
             },
-            "g": {
-                code: "example::object_attr",
-                uri: "http://www.example.com/fixed_attribute",
+            "example::array": {
+                uri: "http://www.example.com/array",
                 value: {
                     dataType: "Array",
                     arrayRestrictions: {
@@ -89,14 +82,8 @@ export function ExampleFile()
             children: {},
             inherits: {},
             attributes: {
-                "attribute1": {
-                    schema: "a",
-                    value: "stringvalue"
-                },
-                "attribute2": {
-                    schema: "b",
-                    value: true
-                }
+                "example::string": "stringvalue",
+                "example::boolean": true
             }
         }]
     } as IfcxFile;

@@ -280,15 +280,13 @@ function DefaultFile(valueOfAttribute: any)
             timestamp: ""
         },
         schemas: {
-            "asdfwf23f23f2c323r": {
-                code: "example::attribute",
+            "attribute": {
                 uri: "http://www.example.com/attribute",
                 value: {
                     dataType: "String"
                 }
             },
-            "c23-984n73-94872-394": {
-                code: "example::fixed_attribute",
+            "fixed_attribute": {
                 uri: "http://www.example.com/fixed_attribute",
                 value: {
                     dataType: "Boolean"
@@ -300,14 +298,8 @@ function DefaultFile(valueOfAttribute: any)
             children: {},
             inherits: {},
             attributes: {
-                "attribute": {
-                    schema: "asdfwf23f23f2c323r",
-                    value: valueOfAttribute
-                },
-                "fixed_attribute": {
-                    schema: "c23-984n73-94872-394",
-                    value: true
-                }
+                "attribute": valueOfAttribute,
+                "fixed_attribute": true
             }
         }]
     } as IfcxFile;
@@ -324,8 +316,8 @@ describe("workflows", () => {
         let root1 = NodeToJSON(LoadIfcxFile(federated1));
         let root2 = NodeToJSON(LoadIfcxFile(federated2));
 
-        expect(root1.attributes.attribute.value).to.equal("b");
-        expect(root2.attributes.attribute.value).to.equal("a");
+        expect(root1.attributes.attribute).to.equal("b");
+        expect(root2.attributes.attribute).to.equal("a");
         expect(root1.attributes.fixed_attribute).to.exist;
         expect(root2.attributes.fixed_attribute).to.exist;
     });
@@ -337,7 +329,7 @@ describe("workflows", () => {
         let diff = Diff(file1, file2);
         let root = NodeToJSON(LoadIfcxFile(diff));
 
-        expect(root.attributes.attribute.value).to.equal("b");
+        expect(root.attributes.attribute).to.equal("b");
         expect(root.attributes.fixed_attribute).to.not.exist;
     });
     
@@ -349,18 +341,16 @@ describe("workflows", () => {
         let federated = Federate(file1, diff);
 
         let root = NodeToJSON(LoadIfcxFile(federated));
-        expect(root.attributes.attribute.value).to.equal("b");
+        expect(root.attributes.attribute).to.equal("b");
         expect(root.attributes.fixed_attribute).to.exist;
     });
 })
-
-
 
 describe("schemas", () => {
     it("can generate openAPI", () => {
         let openAPISchema = SchemasToOpenAPI(ExampleFile());
 
         // TODO
-        expect(openAPISchema.length).to.equal(730);
+        expect(openAPISchema.length).to.equal(682);
     });
 });
