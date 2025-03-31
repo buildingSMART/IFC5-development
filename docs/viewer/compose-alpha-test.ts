@@ -329,6 +329,7 @@ describe("workflows", () => {
         let diff = Diff(file1, file2);
         let root = NodeToJSON(LoadIfcxFile(diff));
 
+        expect(diff.data.length).to.equal(1);
         expect(root.attributes.attribute).to.equal("b");
         expect(root.attributes.fixed_attribute).to.not.exist;
     });
