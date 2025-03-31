@@ -136,17 +136,13 @@ export function Diff(file1: IfcxFile, file2: IfcxFile)
 
     for (let [path, nodes] of i2)
     {
-        let file1Node: InputNode | null = null;
         if (i1.has(path))
         {
-            // diff
-            file1Node = Collapse(i1.get(path)!);
+            // diff has already been done
+            continue;
         }
-        if (file1Node === null)
-        {
-            // node was added, make dummy`
-            file1Node = MakeInputNode(path);
-        }
+        // node was added, make dummy
+        let file1Node = MakeInputNode(path);
         let file2Node = Collapse(nodes)!;
         result.data.push(DiffNodes(file1Node, file2Node));
     }
