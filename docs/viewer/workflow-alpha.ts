@@ -39,7 +39,7 @@ export class SchemaValidationError extends Error
 
 }
 
-function ValidateAttributeValue(desc: IfcxValueDescription, value: any)
+function ValidateAttributeValue(desc: IfcxValueDescription, value: any, path: string)
 {
     if (desc.dataType === "Boolean")
     {
@@ -68,6 +68,11 @@ function ValidateAttributeValue(desc: IfcxValueDescription, value: any)
         {
             throw new SchemaValidationError(`Expected ${value} to be of type string`);
         }
+        let found = desc.enumRestrictions!.options.filter(option => option === value).length === 1;
+        if (!found)
+        {
+            throw new SchemaValidationError(`Expected ${value} to be one of [${desc.enumRestrictions!.options.join(",")}]`);
+        }
     }
     else if (desc.dataType === "Integer")
     {
@@ -87,7 +92,7 @@ function ValidateAttributeValue(desc: IfcxValueDescription, value: any)
     {
         if (typeof value !== "string")
         {
-            throw new SchemaValidationError(`Expected ${value} to be of type relation`);
+            throw new SchemaValidationError(`Expected ${value} to be of type string`);
         }
     }
     else if (desc.dataType === "Object")
@@ -96,6 +101,13 @@ function ValidateAttributeValue(desc: IfcxValueDescription, value: any)
         {
             throw new SchemaValidationError(`Expected ${value} to be of type object`);
         }
+        Object.keys(desc.objectRestrictions!.values).forEach(key => {
+            if (!Object.hasOwn(value, key))
+            {
+                throw new SchemaValidationError(`Expected ${value} to have key ${key}`);
+            }
+            ValidateAttributeValue(desc.objectRestrictions!.values[key], value[key], path + "." + key);
+        })
     }
     else if (desc.dataType === "Array")
     {
@@ -103,9 +115,13 @@ function ValidateAttributeValue(desc: IfcxValueDescription, value: any)
         {
             throw new SchemaValidationError(`Expected ${value} to be of type array`);
         }
+        value.forEach((entry) => {
+            ValidateAttributeValue(desc.arrayRestrictions!.value, entry, path + ".<array>.");
+        })
     }
 }
 
+// TODO: validate the schemas themselves
 export function Validate(schemas: {[key: string]: IfcxSchema}, inputNodes: Map<string, CompositionInput>)
 {
     inputNodes.forEach((node) => {
@@ -119,7 +135,7 @@ export function Validate(schemas: {[key: string]: IfcxSchema}, inputNodes: Map<s
             
             try
             {
-                ValidateAttributeValue(schema.value, value);
+                ValidateAttributeValue(schema.value, value, "");
             } 
             catch(e)
             {

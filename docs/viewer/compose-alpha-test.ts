@@ -363,11 +363,27 @@ describe("schemas", () => {
         expect(() => LoadIfcxFile(ExampleFileWithSchema("Boolean", null))).to.throw(SchemaValidationError);
         expect(() => LoadIfcxFile(ExampleFileWithSchema("String", null))).to.throw(SchemaValidationError);
         expect(() => LoadIfcxFile(ExampleFileWithSchema("DateTime", null))).to.throw(SchemaValidationError);
+        
         expect(() => LoadIfcxFile(ExampleFileWithSchema("Enum", null))).to.throw(SchemaValidationError);
+        expect(() => LoadIfcxFile(ExampleFile("example::enum", [null]))).to.throw(SchemaValidationError);
+        expect(() => LoadIfcxFile(ExampleFile("example::enum", "d"))).to.throw(SchemaValidationError);
+        expect(() => LoadIfcxFile(ExampleFile("example::enum", "c"))).to.not.throw(SchemaValidationError);
+        
         expect(() => LoadIfcxFile(ExampleFileWithSchema("Integer", null))).to.throw(SchemaValidationError);
-        expect(() => LoadIfcxFile(ExampleFileWithSchema("Object", false))).to.throw(SchemaValidationError);
         expect(() => LoadIfcxFile(ExampleFileWithSchema("Real", null))).to.throw(SchemaValidationError);
         expect(() => LoadIfcxFile(ExampleFileWithSchema("Relation", null))).to.throw(SchemaValidationError);
+
+        expect(() => LoadIfcxFile(ExampleFileWithSchema("Object", false))).to.throw(SchemaValidationError);
+        expect(() => LoadIfcxFile(ExampleFile("example::object", [null]))).to.throw(SchemaValidationError);
+        expect(() => LoadIfcxFile(ExampleFile("example::object", {val1: ""}))).to.throw(SchemaValidationError);
+        expect(() => LoadIfcxFile(ExampleFile("example::object", {val1: "", val2: "d"}))).to.throw(SchemaValidationError);
+        expect(() => LoadIfcxFile(ExampleFile("example::object", {val1: false, val2: "a"}))).to.throw(SchemaValidationError);
+        expect(() => LoadIfcxFile(ExampleFile("example::object", {val1: "", val2: "a"}))).to.not.throw(SchemaValidationError);
+        
         expect(() => LoadIfcxFile(ExampleFileWithSchema("Array", null))).to.throw(SchemaValidationError);
+        expect(() => LoadIfcxFile(ExampleFile("example::array", [false]))).to.throw(SchemaValidationError);
+        expect(() => LoadIfcxFile(ExampleFile("example::array", ["d"]))).to.throw(SchemaValidationError);
+        expect(() => LoadIfcxFile(ExampleFile("example::array", []))).to.not.throw(SchemaValidationError);
+        expect(() => LoadIfcxFile(ExampleFile("example::array", ["a"]))).to.not.throw(SchemaValidationError);
     });
 });

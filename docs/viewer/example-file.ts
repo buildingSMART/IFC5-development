@@ -2,7 +2,7 @@ import { components } from "../../schema/out/ts/ifcx";
 type IfcxFile = components["schemas"]["IfcxFile"];
 type DataType = components["schemas"]["DataType"];
 
-export function ExampleFile()
+export function ExampleFile(attribute: string = "example::string", value: any = "stringvalue")
 {
     return {
         header: {
@@ -84,7 +84,7 @@ export function ExampleFile()
             children: {},
             inherits: {},
             attributes: {
-                "example::string": "stringvalue",
+                [attribute]: value,
                 "example::boolean": true
             }
         }]
