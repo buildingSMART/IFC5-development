@@ -41,14 +41,14 @@
     "children": [
       {
         "def": "def",
-        "name": "WesternTunnel",
+        "name": "NorthboundTunnel",
         "inherits": [
           "</N0d69d9ba92254b07817a49f47ca5d6e6>"
         ]
       },
       {
         "def": "def",
-        "name": "EasternTunnel",
+        "name": "SouthboundTunnel",
         "inherits": [
           "</N12becaa0fa484644abe9691a29cccbed>"
         ]
