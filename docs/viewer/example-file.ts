@@ -14,8 +14,7 @@ export function ExampleFile(attribute: string = "example::string", value: any = 
             "example::string": {
                 uri: "http://www.example.com/string",
                 value: {
-                    dataType: "String",
-                    measure: "IFCALIGNMENTHORIZONTALSEGMENTTYPEENUM"
+                    dataType: "String"
                 }
             },
             "example::boolean": {
@@ -43,6 +42,13 @@ export function ExampleFile(attribute: string = "example::string", value: any = 
                 uri: "http://www.example.com/integer",
                 value: {
                     dataType: "Integer"
+                }
+            },
+            "example::real": {
+                uri: "http://www.example.com/integer",
+                value: {
+                    dataType: "Real",
+                    measure: "Length"
                 }
             },
             "example::object": {
