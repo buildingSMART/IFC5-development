@@ -12,9 +12,9 @@ Every property in IFC has a data type. Allowed IFC data types are:
 - Binary, 
 - List (multiple values of the same data type).
 
-- [] TODO List or Array? It could be an unknown size.
-- [] TODO logical (true/false/unknown)?
-- [] TODO what about empty values?
+- [ ] TODO List or Array? It could be an unknown size.
+- [ ] TODO logical (true/false/unknown)?
+- [ ] TODO what about empty values?
 
 ## Units and quantity kinds
 
@@ -52,7 +52,9 @@ Software can display IFC data in user-prefered units. The software needs to perf
   
 ## List of IFC quantity kinds
 
-| Original name                                 | Name                                    | QUDT quantity kind                  | Data Type |  Unit name                       |  Unit symbol        | QUDT unit           | Dimensional exponents   |  IFC4.3 unit enumeration                                   | IFC Base unit? | SI Base or derived unit? | InIFC2x3 | InIFC4 | InIFC4.3 | InIFC5 | Tier | Column1                                                                                                                         |
+- [ ] DECIDE: add measure for information? kilobyte? or SI unit for information - bit (8 bytes)? This would enable conversions kB, GB, TB...
+
+| Original name                                 | Name                                    | QUDT quantity kind                  | Data Type |  Unit name                       |  Unit symbol        | QUDT unit           | Dimensional exponents   |  IFC4.3 unit enumeration                                   | IFC Base unit? | SI Base or derived unit? | InIFC2x3 | InIFC4 | InIFC4.3 | InIFC5 | Tier | Comment                                                                                                                         |
 | --------------------------------------------- | --------------------------------------- | ----------------------------------- | --------- | -------------------------------- | ------------------- | ------------------- | ----------------------- | ---------------------------------------------------------- | -------------- | ------------------------ | -------- | ------ | -------- | ------ | ---- | ------------------------------------------------------------------------------------------------------------------------------- |
 | IFCPLANEANGLEMEASURE                          | Plane angle                             | Angle                               | Real      | Degrees                          | °                   | DEG                 |                         | IFCUnitEnum.PLANEANGLEUNIT                                 | ✔️             | ✔️ (derived)             | ✔️       | ✔️     | ✔️       | ✔️     | 1    | Changed from radians to degrees. DECIDE rad or degrees.                                                                         |
 | IFCTHERMODYNAMICTEMPERATUREMEASURE            | Thermodynamic temperature               | Temperature                         | Real      | Kelvin                           | °K                  | K                   | (0, 0, 0, 0, 1, 0, 0)   | IFCUnitEnum.THERMODYNAMICTEMPERATUREUNIT                   | ✔️             | ✔️ (base)                | ✔️       | ✔️     | ✔️       | ✔️     | 1    | DECIDE kelvin or celcius (DEG_C).<br>DECIDE Temperature or Thermodynamic Temperature                                            |
@@ -146,5 +148,3 @@ Software can display IFC data in user-prefered units. The software needs to perf
 | IFCPOSITIVELENGTHMEASURE                      | Positive length                         |                                     | Real      | Metre                            | m                   |                     | (1, 0, 0, 0, 0, 0, 0)   | IFCUnitEnum.LENGTHUNIT                                     | ✔️             | ❌                        | ✔️       | ✔️     | ✔️       | ❌      | ⛔️   | Restriction does not make it a separate measure.                                                                                |
 | IFCPLANARFORCEMEASURE                         | Planar force                            |                                     | Real      | Pascal                           | Pa                  |                     | (-1, 1, -2, 0, 0, 0, 0) | IFCDerivedUnitEnum.PLANARFORCEUNIT                         | ❌              | ❌                        | ✔️       | ✔️     | ✔️       | ❌      | ⛔️   | Instead, use Pressure (Pa) or Force (N)                                                                                         |
 | IFCLINEARSTIFFNESSMEASURE                     | Linear stiffness                        |                                     | Real      | Newton per metre                 | N / m               |                     | (0, 1, -2, 0, 0, 0, 0)  | IFCDerivedUnitEnum.LINEARSTIFFNESSUNIT                     | ❌              | ❌                        | ✔️       | ✔️     | ✔️       | ❌      | ⛔️   | Merge with linear force                                                                                                         |
-
-- [] DECIDE: add kilobyte? or SI unit for information - bit (8 bytes).
