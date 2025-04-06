@@ -120,6 +120,112 @@
         "value": {
           "dataType": "String"
         }
+      },
+      "inputs:diffuseColor": {
+        "value": {
+          "dataType": "Array",
+          "arrayRestrictions": {
+            "value": {
+              "dataType": "Real"
+            }
+          }
+        }
+      },
+      "inputs:opacity": {
+        "value": {
+          "dataType": "Real"
+        }
+      },
+      "outputs:surface": {
+        "value": {
+          "dataType": "Object",
+          "objectRestrictions": {
+            "values": {}
+          }
+        }
+      },
+      "UsdGeom:Mesh": {
+        "value": {
+          "dataType": "Object",
+          "objectRestrictions": {
+            "values": {
+              "faceVertexIndices": {
+                "dataType": "Array",
+                "arrayRestrictions": {
+                  "value": {
+                    "dataType": "Integer"
+                  }
+                }
+              },
+              "points": {
+                "dataType": "Array",
+                "arrayRestrictions": {
+                  "value": {
+                    "dataType": "Array",
+                    "arrayRestrictions": {
+                      "value": {
+                        "dataType": "Real"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "UsdGeom:VisibilityAPI:visibility": {
+        "value": {
+          "dataType": "Object",
+          "objectRestrictions": {
+            "values": {
+              "visibility": {
+                "dataType": "String"
+              }
+            }
+          }
+        }
+      },
+      "UsdGeom:BasisCurves": {
+        "value": {
+          "dataType": "Object",
+          "objectRestrictions": {
+            "values": {
+              "points": {
+                "dataType": "Array",
+                "arrayRestrictions": {
+                  "value": {
+                    "dataType": "Array",
+                    "arrayRestrictions": {
+                      "value": {
+                        "dataType": "Real"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "UsdShade:Material": {
+        "value": {
+          "dataType": "Object",
+          "objectRestrictions": {
+            "values": {
+              "outputs:surface.connect": {
+                "dataType": "Object",
+                "objectRestrictions": {
+                  "values": {
+                    "ref": {
+                      "dataType": "String"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
   },
   "data": [
