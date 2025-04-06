@@ -45,66 +45,66 @@ function ValidateAttributeValue(desc: IfcxValueDescription, value: any, path: st
     {
         if (typeof value !== "boolean")
         {
-            throw new SchemaValidationError(`Expected ${value} to be of type boolean`);
+            throw new SchemaValidationError(`Expected "${value}" to be of type boolean`);
         }
     }
     else if (desc.dataType === "String")
     {
         if (typeof value !== "string")
         {
-            throw new SchemaValidationError(`Expected ${value} to be of type string`);
+            throw new SchemaValidationError(`Expected "${value}" to be of type string`);
         }
     }
     else if (desc.dataType === "DateTime")
     {
         if (typeof value !== "string")
         {
-            throw new SchemaValidationError(`Expected ${value} to be of type date`);
+            throw new SchemaValidationError(`Expected "${value}" to be of type date`);
         }
     }
     else if (desc.dataType === "Enum")
     {
         if (typeof value !== "string")
         {
-            throw new SchemaValidationError(`Expected ${value} to be of type string`);
+            throw new SchemaValidationError(`Expected "${value}" to be of type string`);
         }
         let found = desc.enumRestrictions!.options.filter(option => option === value).length === 1;
         if (!found)
         {
-            throw new SchemaValidationError(`Expected ${value} to be one of [${desc.enumRestrictions!.options.join(",")}]`);
+            throw new SchemaValidationError(`Expected "${value}" to be one of [${desc.enumRestrictions!.options.join(",")}]`);
         }
     }
     else if (desc.dataType === "Integer")
     {
         if (typeof value !== "number")
         {
-            throw new SchemaValidationError(`Expected ${value} to be of type int`);
+            throw new SchemaValidationError(`Expected "${value}" to be of type int`);
         }
     }
     else if (desc.dataType === "Real")
     {
         if (typeof value !== "number")
         {
-            throw new SchemaValidationError(`Expected ${value} to be of type real`);
+            throw new SchemaValidationError(`Expected "${value}" to be of type real`);
         }
     }
     else if (desc.dataType === "Relation")
     {
         if (typeof value !== "string")
         {
-            throw new SchemaValidationError(`Expected ${value} to be of type string`);
+            throw new SchemaValidationError(`Expected "${value}" to be of type string`);
         }
     }
     else if (desc.dataType === "Object")
     {
         if (typeof value !== "object")
         {
-            throw new SchemaValidationError(`Expected ${value} to be of type object`);
+            throw new SchemaValidationError(`Expected "${value}" to be of type object`);
         }
         Object.keys(desc.objectRestrictions!.values).forEach(key => {
             if (!Object.hasOwn(value, key))
             {
-                throw new SchemaValidationError(`Expected ${value} to have key ${key}`);
+                throw new SchemaValidationError(`Expected "${value}" to have key ${key}`);
             }
             ValidateAttributeValue(desc.objectRestrictions!.values[key], value[key], path + "." + key);
         })
@@ -113,11 +113,15 @@ function ValidateAttributeValue(desc: IfcxValueDescription, value: any, path: st
     {
         if (!Array.isArray(value))
         {
-            throw new SchemaValidationError(`Expected ${value} to be of type array`);
+            throw new SchemaValidationError(`Expected "${value}" to be of type array`);
         }
         value.forEach((entry) => {
             ValidateAttributeValue(desc.arrayRestrictions!.value, entry, path + ".<array>.");
         })
+    }
+    else
+    {
+        throw new SchemaValidationError(`Unexpected datatype ${desc.dataType}`);
     }
 }
 
@@ -128,7 +132,7 @@ export function Validate(schemas: {[key: string]: IfcxSchema}, inputNodes: Map<s
         Object.keys(node.attributes).forEach((schemaID) => {
             if (!schemas[schemaID])
             {
-                throw new SchemaValidationError(`Missing schema ${schemaID} referenced by ${node.path}.attributes`);   
+                throw new SchemaValidationError(`Missing schema "${schemaID}" referenced by "${node.path}".attributes`);   
             }
             let schema = schemas[schemaID];
             let value = node.attributes[schemaID];

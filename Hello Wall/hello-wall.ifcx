@@ -4,7 +4,124 @@
     "author": "authorname",
     "timestamp": "time string"
   },
-  "schemas": {},
+  "schemas": {
+    "customdata": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "originalStepInstance": {
+              "dataType": "String"
+            }
+          }
+        }
+      }
+    },
+    "ifc5:class": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "code": {
+              "dataType": "String"
+            }
+          }
+        }
+      }
+    },
+    "ifc5:properties": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "IsExternal": {
+              "dataType": "Integer"
+            }
+          }
+        }
+      }
+    },
+    "UsdShade:MaterialBindingAPI": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "material:binding": {
+              "dataType": "Object",
+              "objectRestrictions": {
+                "values": {
+                  "ref": {
+                    "dataType": "String"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "xformOp": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "transform": {
+              "dataType": "Array",
+              "arrayRestrictions": {
+                "value": {
+                    "dataType": "Array",
+                    "arrayRestrictions": {
+                      "value": {
+                        "dataType": "Real"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "nlsfb:class": {
+        "value": {
+          "dataType": "Object",
+          "objectRestrictions": {
+            "values": {
+              "code": {
+                "dataType": "String"
+              },
+              "uri": {
+                "dataType": "String"
+              }
+            }
+          }
+        }
+      },
+      "ifc5:spaceboundary": {
+        "value": {
+          "dataType": "Object",
+          "objectRestrictions": {
+            "values": {
+              "relatedElement": {
+                "dataType": "Object",
+                "objectRestrictions": {
+                  "values": {
+                    "ref": {
+                      "dataType": "String"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "info:id": {
+        "value": {
+          "dataType": "String"
+        }
+      }
+  },
   "data": [
     {
       "name": "N25503984660543a18597eae657ff5bea",
