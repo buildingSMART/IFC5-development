@@ -31,13 +31,13 @@ export interface components {
         };
         IfcxNode: {
             name: components["schemas"]["path"];
-            children: {
+            children?: {
                 [key: string]: string | null;
             };
-            inherits: {
+            inherits?: {
                 [key: string]: string | null;
             };
-            attributes: {
+            attributes?: {
                 [key: string]: unknown;
             };
         };

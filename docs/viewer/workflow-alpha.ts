@@ -25,9 +25,9 @@ function ToInputNodes(data: IfcxNode[])
     data.forEach((ifcxNode) => {
         let node = {
             path: ifcxNode.name,
-            children: ifcxNode.children,
-            inherits: ifcxNode.inherits,
-            attributes: ifcxNode.attributes
+            children: ifcxNode.children ? ifcxNode.children : {}, 
+            inherits: ifcxNode.inherits ? ifcxNode.inherits : {},
+            attributes: ifcxNode.attributes ? ifcxNode.attributes : {}
         } as InputNode;
         MMSet(inputNodes, node.path, node);
     });
@@ -199,21 +199,21 @@ function DiffNodes(node1: InputNode, node2: InputNode): IfcxNode
     Object.keys(node1.children).forEach((name) => {
         if (node1.children[name] !== node2.children[name])
         {
-            result.children[name] = node2.children[name] ? node2.children[name] : null;
+            result.children![name] = node2.children[name] ? node2.children[name] : null;
         }
     })
     
     Object.keys(node1.inherits).forEach((name) => {
         if (node1.inherits[name] !== node2.inherits[name])
         {
-            result.inherits[name] = node2.inherits[name] ? node2.inherits[name] : null;
+            result.inherits![name] = node2.inherits[name] ? node2.inherits[name] : null;
         }
     })
     
     Object.keys(node1.attributes).forEach((name) => {
         if (!DeepEqual(node1.attributes[name], node2.attributes[name]))
         {
-            result.attributes[name] = node2.attributes[name] ? node2.attributes[name] : null;
+            result.attributes![name] = node2.attributes[name] ? node2.attributes[name] : null;
         }
     })
 
@@ -263,9 +263,12 @@ export function Diff(file1: IfcxFile, file2: IfcxFile)
     }
 
     result.data.forEach((node) => {
-        Object.keys(node.attributes).forEach((schemaID) => {
-            result.schemas[schemaID] = file2.schemas[schemaID];
-        });
+        if (node.attributes)
+        {
+            Object.keys(node.attributes).forEach((schemaID) => {
+                result.schemas[schemaID] = file2.schemas[schemaID];
+            });
+        }
     })
 
     return result;

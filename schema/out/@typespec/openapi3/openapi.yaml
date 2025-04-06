@@ -72,9 +72,6 @@ components:
       type: object
       required:
         - name
-        - children
-        - inherits
-        - attributes
       properties:
         name:
           $ref: '#/components/schemas/path'

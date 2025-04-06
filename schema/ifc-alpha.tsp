@@ -13,9 +13,9 @@ scalar code extends string;
 
 model IfcxNode {
     name: path;
-    children: Record<string | null>;
-    inherits: Record<string | null>;
-    attributes: Record<unknown>;
+    children?: Record<string | null>;
+    inherits?: Record<string | null>;
+    attributes?: Record<unknown>;
 }
 
 model IfcxHeader {
