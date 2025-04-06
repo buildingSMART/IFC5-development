@@ -69,156 +69,10 @@
               "dataType": "Array",
               "arrayRestrictions": {
                 "value": {
-                    "dataType": "Array",
-                    "arrayRestrictions": {
-                      "value": {
-                        "dataType": "Real"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "nlsfb:class": {
-        "value": {
-          "dataType": "Object",
-          "objectRestrictions": {
-            "values": {
-              "code": {
-                "dataType": "String"
-              },
-              "uri": {
-                "dataType": "String"
-              }
-            }
-          }
-        }
-      },
-      "ifc5:spaceboundary": {
-        "value": {
-          "dataType": "Object",
-          "objectRestrictions": {
-            "values": {
-              "relatedElement": {
-                "dataType": "Object",
-                "objectRestrictions": {
-                  "values": {
-                    "ref": {
-                      "dataType": "String"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "info:id": {
-        "value": {
-          "dataType": "String"
-        }
-      },
-      "inputs:diffuseColor": {
-        "value": {
-          "dataType": "Array",
-          "arrayRestrictions": {
-            "value": {
-              "dataType": "Real"
-            }
-          }
-        }
-      },
-      "inputs:opacity": {
-        "value": {
-          "dataType": "Real"
-        }
-      },
-      "outputs:surface": {
-        "value": {
-          "dataType": "Object",
-          "objectRestrictions": {
-            "values": {}
-          }
-        }
-      },
-      "UsdGeom:Mesh": {
-        "value": {
-          "dataType": "Object",
-          "objectRestrictions": {
-            "values": {
-              "faceVertexIndices": {
-                "dataType": "Array",
-                "arrayRestrictions": {
-                  "value": {
-                    "dataType": "Integer"
-                  }
-                }
-              },
-              "points": {
-                "dataType": "Array",
-                "arrayRestrictions": {
-                  "value": {
-                    "dataType": "Array",
-                    "arrayRestrictions": {
-                      "value": {
-                        "dataType": "Real"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "UsdGeom:VisibilityAPI:visibility": {
-        "value": {
-          "dataType": "Object",
-          "objectRestrictions": {
-            "values": {
-              "visibility": {
-                "dataType": "String"
-              }
-            }
-          }
-        }
-      },
-      "UsdGeom:BasisCurves": {
-        "value": {
-          "dataType": "Object",
-          "objectRestrictions": {
-            "values": {
-              "points": {
-                "dataType": "Array",
-                "arrayRestrictions": {
-                  "value": {
-                    "dataType": "Array",
-                    "arrayRestrictions": {
-                      "value": {
-                        "dataType": "Real"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "UsdShade:Material": {
-        "value": {
-          "dataType": "Object",
-          "objectRestrictions": {
-            "values": {
-              "outputs:surface.connect": {
-                "dataType": "Object",
-                "objectRestrictions": {
-                  "values": {
-                    "ref": {
-                      "dataType": "String"
+                  "dataType": "Array",
+                  "arrayRestrictions": {
+                    "value": {
+                      "dataType": "Real"
                     }
                   }
                 }
@@ -227,6 +81,152 @@
           }
         }
       }
+    },
+    "nlsfb:class": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "code": {
+              "dataType": "String"
+            },
+            "uri": {
+              "dataType": "String"
+            }
+          }
+        }
+      }
+    },
+    "ifc5:spaceboundary": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "relatedElement": {
+              "dataType": "Object",
+              "objectRestrictions": {
+                "values": {
+                  "ref": {
+                    "dataType": "String"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "info:id": {
+      "value": {
+        "dataType": "String"
+      }
+    },
+    "inputs:diffuseColor": {
+      "value": {
+        "dataType": "Array",
+        "arrayRestrictions": {
+          "value": {
+            "dataType": "Real"
+          }
+        }
+      }
+    },
+    "inputs:opacity": {
+      "value": {
+        "dataType": "Real"
+      }
+    },
+    "outputs:surface": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {}
+        }
+      }
+    },
+    "UsdGeom:Mesh": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "faceVertexIndices": {
+              "dataType": "Array",
+              "arrayRestrictions": {
+                "value": {
+                  "dataType": "Integer"
+                }
+              }
+            },
+            "points": {
+              "dataType": "Array",
+              "arrayRestrictions": {
+                "value": {
+                  "dataType": "Array",
+                  "arrayRestrictions": {
+                    "value": {
+                      "dataType": "Real"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "UsdGeom:VisibilityAPI:visibility": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "visibility": {
+              "dataType": "String"
+            }
+          }
+        }
+      }
+    },
+    "UsdGeom:BasisCurves": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "points": {
+              "dataType": "Array",
+              "arrayRestrictions": {
+                "value": {
+                  "dataType": "Array",
+                  "arrayRestrictions": {
+                    "value": {
+                      "dataType": "Real"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "UsdShade:Material": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "outputs:surface.connect": {
+              "dataType": "Object",
+              "objectRestrictions": {
+                "values": {
+                  "ref": {
+                    "dataType": "String"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   },
   "data": [
     {
@@ -243,29 +243,24 @@
       }
     },
     {
-      
       "name": "My_Project",
       "inherits": {
         "N14adb22bd47448a28e8f6d4c067c1953": "N14adb22bd47448a28e8f6d4c067c1953"
       }
     },
     {
-      
       "name": "Ne0834921e09540f088743c6bd1ec699e",
       "children": {
         "My_Building": "Ne84dc79efe9d47819f4b54dd435cca91"
       }
     },
     {
-      
       "name": "Ne84dc79efe9d47819f4b54dd435cca91",
-      "children": 
-        {
-          "My_Storey": "N44af358b316040638a89a868335ff3b5"
-        }
+      "children": {
+        "My_Storey": "N44af358b316040638a89a868335ff3b5"
+      }
     },
     {
-      
       "name": "N44af358b316040638a89a868335ff3b5",
       "children": {
         "My_Space": "Ne3035b71bd9f4cdc86fdb56e2f4605b6",
@@ -273,11 +268,9 @@
       }
     },
     {
-      
       "name": "Ne3035b71bd9f4cdc86fdb56e2f4605b6",
-      "children": 
-      {
-        "Body":"Ne3035b71bd9f4cdc86fdb56e2f4605b6_Body",
+      "children": {
+        "Body": "Ne3035b71bd9f4cdc86fdb56e2f4605b6_Body",
         "Boundary_Wall": "N52836ca941db45b3ab06b0f6dafe28ed",
         "Boundary_Window": "N10654b0e96484ca0b4e53043e3807c8a",
         "Boundary_Window_001": "N12499855de8f44f68aaef76e402fcdb9"
@@ -310,24 +303,21 @@
     },
     {
       "name": "N52836ca941db45b3ab06b0f6dafe28ed",
-      "children":
-        {
-          "Body": "N52836ca941db45b3ab06b0f6dafe28ed_Body"
-        }
+      "children": {
+        "Body": "N52836ca941db45b3ab06b0f6dafe28ed_Body"
+      }
     },
     {
       "name": "N10654b0e96484ca0b4e53043e3807c8a",
-      "children": 
-        {
-          "Body": "N10654b0e96484ca0b4e53043e3807c8a_Body"
-        }
+      "children": {
+        "Body": "N10654b0e96484ca0b4e53043e3807c8a_Body"
+      }
     },
     {
       "name": "N12499855de8f44f68aaef76e402fcdb9",
-      "children": 
-        {
-          "Body": "N12499855de8f44f68aaef76e402fcdb9_Body"
-        }
+      "children": {
+        "Body": "N12499855de8f44f68aaef76e402fcdb9_Body"
+      }
     },
     {
       "name": "SpaceMaterial/Shader",
@@ -377,7 +367,6 @@
       }
     },
     {
-      
       "name": "N25503984660543a18597eae657ff5bea",
       "attributes": {
         "ifc5:class": {
@@ -387,7 +376,6 @@
       }
     },
     {
-      
       "name": "N25503984660543a18597eae657ff5bea_Void",
       "attributes": {
         "UsdGeom:Mesh": {
@@ -555,7 +543,6 @@
       }
     },
     {
-      
       "name": "N25503984660543a18597eae657ff5bea_Void",
       "attributes": {
         "UsdGeom:VisibilityAPI:visibility": {
@@ -564,7 +551,6 @@
       }
     },
     {
-      
       "name": "N25503984660543a18597eae657ff5bea_Body",
       "attributes": {
         "UsdGeom:Mesh": {
@@ -1148,7 +1134,6 @@
       }
     },
     {
-      
       "name": "N14adb22bd47448a28e8f6d4c067c1953",
       "attributes": {
         "customdata": {
@@ -1157,7 +1142,6 @@
       }
     },
     {
-      
       "name": "N14adb22bd47448a28e8f6d4c067c1953",
       "attributes": {
         "ifc5:class": {
@@ -1167,7 +1151,6 @@
       }
     },
     {
-      
       "name": "Ne0834921e09540f088743c6bd1ec699e",
       "attributes": {
         "customdata": {
@@ -1176,7 +1159,6 @@
       }
     },
     {
-      
       "name": "Ne0834921e09540f088743c6bd1ec699e",
       "attributes": {
         "ifc5:class": {
@@ -1186,7 +1168,6 @@
       }
     },
     {
-      
       "name": "Ne84dc79efe9d47819f4b54dd435cca91",
       "attributes": {
         "customdata": {
@@ -1195,7 +1176,6 @@
       }
     },
     {
-      
       "name": "Ne84dc79efe9d47819f4b54dd435cca91",
       "attributes": {
         "ifc5:class": {
@@ -1205,7 +1185,6 @@
       }
     },
     {
-      
       "name": "N44af358b316040638a89a868335ff3b5",
       "attributes": {
         "customdata": {
@@ -1214,7 +1193,6 @@
       }
     },
     {
-      
       "name": "N44af358b316040638a89a868335ff3b5",
       "attributes": {
         "ifc5:class": {
@@ -1224,7 +1202,6 @@
       }
     },
     {
-      
       "name": "Ne3035b71bd9f4cdc86fdb56e2f4605b6",
       "attributes": {
         "customdata": {
@@ -1233,7 +1210,6 @@
       }
     },
     {
-      
       "name": "Ne3035b71bd9f4cdc86fdb56e2f4605b6",
       "attributes": {
         "ifc5:class": {
@@ -1243,7 +1219,6 @@
       }
     },
     {
-      
       "name": "Ne3035b71bd9f4cdc86fdb56e2f4605b6",
       "attributes": {
         "UsdShade:MaterialBindingAPI": {
@@ -1254,7 +1229,6 @@
       }
     },
     {
-      
       "name": "Ne3035b71bd9f4cdc86fdb56e2f4605b6",
       "attributes": {
         "xformOp": {
@@ -1288,7 +1262,6 @@
       }
     },
     {
-      
       "name": "Ne3035b71bd9f4cdc86fdb56e2f4605b6_Body",
       "attributes": {
         "UsdGeom:Mesh": {
@@ -1456,7 +1429,6 @@
       }
     },
     {
-      
       "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b",
       "attributes": {
         "customdata": {
@@ -1465,7 +1437,6 @@
       }
     },
     {
-      
       "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b",
       "attributes": {
         "ifc5:class": {
@@ -1475,7 +1446,6 @@
       }
     },
     {
-      
       "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b",
       "attributes": {
         "ifc5:properties": {
@@ -1484,7 +1454,6 @@
       }
     },
     {
-      
       "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b",
       "attributes": {
         "UsdShade:MaterialBindingAPI": {
@@ -1495,7 +1464,6 @@
       }
     },
     {
-      
       "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b",
       "attributes": {
         "nlsfb:class": {
@@ -1505,7 +1473,6 @@
       }
     },
     {
-      
       "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b_Body",
       "attributes": {
         "UsdGeom:Mesh": {
@@ -2033,7 +2000,6 @@
       }
     },
     {
-      
       "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b_Axis",
       "attributes": {
         "UsdGeom:BasisCurves": {
@@ -2053,7 +2019,6 @@
       }
     },
     {
-      
       "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b_Directrix",
       "attributes": {
         "UsdGeom:BasisCurves": {
@@ -2073,7 +2038,6 @@
       }
     },
     {
-      
       "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b_Basis",
       "attributes": {
         "UsdGeom:Mesh": {
@@ -2112,7 +2076,6 @@
       }
     },
     {
-      
       "name": "N2c2d549ff9fe4e228590562fda81a690",
       "attributes": {
         "customdata": {
@@ -2121,7 +2084,6 @@
       }
     },
     {
-      
       "name": "N2c2d549ff9fe4e228590562fda81a690",
       "attributes": {
         "xformOp": {
@@ -2155,7 +2117,6 @@
       }
     },
     {
-      
       "name": "N592504dc469a44d69ae8c801b591679b",
       "attributes": {
         "customdata": {
@@ -2164,7 +2125,6 @@
       }
     },
     {
-      
       "name": "N25503984660543a18597eae657ff5bea",
       "attributes": {
         "ifc5:properties": {
@@ -2173,7 +2133,6 @@
       }
     },
     {
-      
       "name": "N25503984660543a18597eae657ff5bea",
       "attributes": {
         "UsdShade:MaterialBindingAPI": {
@@ -2184,7 +2143,6 @@
       }
     },
     {
-      
       "name": "N592504dc469a44d69ae8c801b591679b",
       "attributes": {
         "xformOp": {
@@ -2218,7 +2176,6 @@
       }
     },
     {
-      
       "name": "N52836ca941db45b3ab06b0f6dafe28ed",
       "attributes": {
         "ifc5:spaceboundary": {
@@ -2229,7 +2186,6 @@
       }
     },
     {
-      
       "name": "N52836ca941db45b3ab06b0f6dafe28ed_Body",
       "attributes": {
         "UsdGeom:Mesh": {
@@ -2267,7 +2223,6 @@
       }
     },
     {
-      
       "name": "N10654b0e96484ca0b4e53043e3807c8a",
       "attributes": {
         "ifc5:spaceboundary": {
@@ -2278,7 +2233,6 @@
       }
     },
     {
-      
       "name": "N10654b0e96484ca0b4e53043e3807c8a_Body",
       "attributes": {
         "UsdGeom:Mesh": {
@@ -2316,7 +2270,6 @@
       }
     },
     {
-      
       "name": "N12499855de8f44f68aaef76e402fcdb9",
       "attributes": {
         "ifc5:spaceboundary": {
@@ -2327,7 +2280,6 @@
       }
     },
     {
-      
       "name": "N12499855de8f44f68aaef76e402fcdb9_Body",
       "attributes": {
         "UsdGeom:Mesh": {
@@ -2365,7 +2317,6 @@
       }
     },
     {
-      
       "name": "SpaceMaterial",
       "attributes": {
         "UsdShade:Material": {
@@ -2376,7 +2327,6 @@
       }
     },
     {
-      
       "name": "WallMaterial",
       "attributes": {
         "UsdShade:Material": {
@@ -2387,7 +2337,6 @@
       }
     },
     {
-      
       "name": "WindowMaterial",
       "attributes": {
         "UsdShade:Material": {
