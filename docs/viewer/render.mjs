@@ -689,6 +689,7 @@ function composeAndRender() {
   let tree = null;
   let dataArray = datas.map((arr) => arr[1]);
   if (Array.isArray(dataArray[0])) {
+    alert(`Please upgrade your files to ifcx alpha, see https://github.com/buildingSMART/IFC5-development for more info.`);
     tree = compose2(dataArray);
   } else {
     tree = compose3(dataArray);

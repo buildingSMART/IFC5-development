@@ -190,6 +190,7 @@ export function composeAndRender() {
     let dataArray = datas.map(arr => arr[1]);
     if (Array.isArray(dataArray[0]))
     {
+        alert(`Please upgrade your files to ifcx alpha, see https://github.com/buildingSMART/IFC5-development for more info.`);
         // pre-alpha
         tree = compose2(dataArray as Ifc5FileJson[]);
     }
