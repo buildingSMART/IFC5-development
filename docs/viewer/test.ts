@@ -7,8 +7,8 @@ import * as ExampleFileTest from "./example-file-test"
 
 
 CompareComposition
-// CompositionTest
-// ComposeAlphaTest
-// ExampleFileTest
+CompositionTest
+ComposeAlphaTest
+ExampleFileTest
 
 test();

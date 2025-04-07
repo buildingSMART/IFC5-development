@@ -310,8 +310,8 @@ describe("workflows", () => {
         let file1 = DefaultFile("a");
         let file2 = DefaultFile("b");
 
-        let federated1 = Federate(file1, file2);
-        let federated2 = Federate(file2, file1);
+        let federated1 = Federate([file1, file2]);
+        let federated2 = Federate([file2, file1]);
 ``
         let root1 = NodeToJSON(LoadIfcxFile(federated1));
         let root2 = NodeToJSON(LoadIfcxFile(federated2));
@@ -339,7 +339,7 @@ describe("workflows", () => {
         let file2 = DefaultFile("b");
 
         let diff = Diff(file1, file2);
-        let federated = Federate(file1, diff);
+        let federated = Federate([file1, diff]);
 
         let root = NodeToJSON(LoadIfcxFile(federated));
         expect(root.attributes.attribute).to.equal("b");
@@ -352,7 +352,7 @@ describe("schemas", () => {
         let openAPISchema = SchemasToOpenAPI(ExampleFile());
 
         // TODO
-        expect(openAPISchema.length).to.equal(682);
+        expect(openAPISchema.length).to.equal(720);
     });
 
     it("throws error if attribute references unknown schema ID", () => {

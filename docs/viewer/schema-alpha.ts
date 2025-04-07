@@ -69,6 +69,10 @@ function PushSchemaValue(openAPI: yml, schema: IfcxValueDescription)
     {
         openAPI.line("type: number");
     }
+    else if (schema.dataType === "Real")
+    {
+        openAPI.line("type: number");
+    }
     else if (schema.dataType === "Object")
     {
         openAPI.line("type: object");

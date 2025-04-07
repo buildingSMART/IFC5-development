@@ -5,13 +5,9 @@ import { describe, each, it, nope } from "./test/util/cappucino";
 import { expect } from "chai";
 import * as fs from "fs";
 import { components } from "../../schema/out/ts/ifcx";
-import { LoadIfcxFile } from "./workflow-alpha";
-import { TreeNode } from "./compose-alpha";
+import { compose3 } from "./compose3";
 
 type IfcxFile = components["schemas"]["IfcxFile"];
-type IfcxNode = components["schemas"]["IfcxNode"];
-type IfcxSchema = components["schemas"]["IfcxSchema"];
-type IfcxValueDescription = components["schemas"]["IfcxValueDescription"];
 
 function CompareComposition(a: ComposedObject, b: ComposedObject, checkTypes: boolean = true)
 {
@@ -86,42 +82,6 @@ function CompareComposition(a: ComposedObject, b: ComposedObject, checkTypes: bo
     return true;
 }
 
-function TreeNodeToComposedObject(path: string, node: TreeNode): ComposedObject
-{
-    let co = {
-        name: path, 
-        attributes: {}, 
-        children: []
-    } as ComposedObject;
-
-    node.children.forEach((childNode, childName) => {
-        co.children?.push(TreeNodeToComposedObject(`${path}/${childName}`, childNode));
-    });
-
-    node.attributes.forEach((attr, attrName) => {
-        // flatten
-        if (attr && typeof attr === "object" && !Array.isArray(attr))
-        {
-            Object.keys(attr).forEach((compname) => {
-                co.attributes[`${attrName}:${compname}`] = attr[compname];
-            });
-        }
-        else
-        {
-            co.attributes[attrName] = attr;
-        }
-    })
-
-    if (Object.keys(co.attributes).length === 0) delete co.attributes;
-
-    return co;
-}
-
-function compose3(file: IfcxFile)
-{
-    return TreeNodeToComposedObject("", LoadIfcxFile(file, true, true));
-}
-
 describe("composition comparison", () => {
     nope("should be equal for 'hello-wall.ifcx' and 'hello-wall_add-firerating.ifcx'", async() => {
         // arrange
@@ -148,7 +108,7 @@ describe("composition comparison", () => {
         let helloWallAlphaJSON = JSON.parse(fs.readFileSync(helloWallAlpha).toString());
         
         let composed = compose([helloWallJSON] as Ifc5FileJson[]);
-        let composed3 = compose3(helloWallAlphaJSON as IfcxFile);
+        let composed3 = compose3([helloWallAlphaJSON] as IfcxFile[]);
 
         // act
         let outcome = CompareComposition(composed, composed3, false);

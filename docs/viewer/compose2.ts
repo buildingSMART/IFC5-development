@@ -241,62 +241,6 @@ function UpdateIntermediateCompositionWithFile(ic: IntermediateComposition, file
     return ic;
 }
 
-function GetDependency(path: string, exclude: string)
-{
-    let parts = path.split("/");
-    return parts.filter(s => s != exclude)[0];
-}
-
-function BuildDependencyGraph(ic: IntermediateComposition)
-{
-    ic.children.forEach((children, parent) => {
-        children.forEach((child) => {
-            MMSet(ic.dependencies, parent, child);
-        })
-    })
-    
-    ic.inherits.forEach((parents, node) => {
-        parents.forEach((parent) => {
-            MMSet(ic.dependencies, node, GetDependency(parent, node));
-        })
-    })
-}
-
-// https://en.wikipedia.org/wiki/Topological_sorting
-function TopoSortDependencies(ic: IntermediateComposition)
-{
-    let nodes = [...ic.names];
-    let sorted: string[] = [];
-    let perm: {} = {};
-    let temp: {} = {};
-
-    function visit(node: string)
-    {
-        // console.log(`visit `, node);
-        if (perm[node]) return;
-        if (temp[node]) throw new Error(`CYCLE!`);
-
-        temp[node] = true;
-
-        let deps = ic.dependencies.get(node);
-        if (deps)
-        {
-            deps.forEach(dep => visit(dep));
-        }
-
-        perm[node] = true;
-        sorted.push(node);
-
-        // console.log(`done visiting `, node);
-    }
-
-    nodes.forEach((node) => {
-        visit(node);
-    })    
-
-    return sorted;
-}
-
 // this function figures out which nodes are root, connects them to the pseudo root, and kicks of composition for it
 function BuildTreeFromIntermediateComposition(ic: IntermediateComposition)
 {
@@ -324,10 +268,6 @@ function BuildTreeFromIntermediateComposition(ic: IntermediateComposition)
     })
     
     ic.names.add(PSEUDO_ROOT);
-    BuildDependencyGraph(ic);
-    
-    let sorted = TopoSortDependencies(ic);
-    console.log(sorted);
 
     return BuildTreeNodeFromIntermediateComposition(PSEUDO_ROOT, PSEUDO_ROOT, false, ic);
 }

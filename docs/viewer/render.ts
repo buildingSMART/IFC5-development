@@ -4,6 +4,7 @@
 import { ClassJson, DefJson, DisclaimerJson, Ifc5FileJson, OverJson } from '../../schema/out/@typespec/json-schema/ts/ifc5file';
 import { compose, ComposedObject, getChildByName } from './compose';
 import { compose2 } from './compose2';
+import { compose3 } from './compose3';
 
 let controls, renderer, scene, camera;
 type datastype = [string, Ifc5FileJson][];

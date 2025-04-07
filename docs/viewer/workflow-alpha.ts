@@ -286,19 +286,21 @@ export function Diff(file1: IfcxFile, file2: IfcxFile)
     return result;
 }
 
-export function Federate(file1: IfcxFile, file2: IfcxFile)
+export function Federate(files: IfcxFile[])
 {
     let result: IfcxFile = {
-        header: file1.header,
+        header: files[0].header,
         schemas: {},
         data: []
     };
 
-    Object.keys(file1.schemas).forEach((schemaID) => result.schemas[schemaID] = file1.schemas[schemaID]);
-    Object.keys(file2.schemas).forEach((schemaID) => result.schemas[schemaID] = file2.schemas[schemaID]);
+    files.forEach((file) => {
+        Object.keys(file.schemas).forEach((schemaID) => result.schemas[schemaID] = file.schemas[schemaID]);
+    })
 
-    file1.data.forEach((node) => result.data.push(node));
-    file2.data.forEach((node) => result.data.push(node));
+    files.forEach((file) => {
+        file.data.forEach((node) => result.data.push(node));
+    })
 
     return Prune(result);
 }
