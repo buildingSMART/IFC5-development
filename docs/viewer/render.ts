@@ -5,9 +5,12 @@ import { ClassJson, DefJson, DisclaimerJson, Ifc5FileJson, OverJson } from '../.
 import { compose, ComposedObject, getChildByName } from './compose';
 import { compose2 } from './compose2';
 import { compose3 } from './compose3';
+import { components } from "../../schema/out/ts/ifcx";
+type IfcxFile = components["schemas"]["IfcxFile"];
+
 
 let controls, renderer, scene, camera;
-type datastype = [string, Ifc5FileJson][];
+type datastype = [string, Ifc5FileJson | IfcxFile][];
 let datas: datastype = [];
 let autoCamera = true;
 
@@ -41,6 +44,26 @@ function init() {
     return scene;
 }
 
+function HasAttr(node: ComposedObject | undefined, attrName: string)
+{
+    if (!node || !node.attributes) return false;
+    return !!node.attributes[attrName];
+}
+
+function FindChildWithAttr(node: ComposedObject | undefined, attrName: string)
+{
+    if (!node || !node.children) return undefined;
+    for (let i = 0; i < node.children.length; i++)
+    {
+        if (HasAttr(node.children[i], attrName))
+        {
+            return node.children[i];
+        }
+    }
+
+    return undefined;
+}
+
 function createMaterialFromParent(parent, root) {
     let reference = parent.attributes['UsdShade:MaterialBindingAPI:material:binding'];
     let material = {
@@ -50,12 +73,15 @@ function createMaterialFromParent(parent, root) {
     };
     if (reference) {
         const materialNode = getChildByName(root, reference.ref);
-        let shader = materialNode?.children?.find(i => i.type === 'UsdShade:Shader');
-        let color = shader?.attributes['inputs:diffuseColor'];
-        material.color = new THREE.Color(...color);
-        if (shader?.attributes['inputs:opacity']) {
-            material!.transparent = true;
-            material!.opacity = shader.attributes['inputs:opacity'];
+        let shader = FindChildWithAttr(materialNode, "inputs:diffuseColor");
+        if (shader)
+        {
+            let color = shader?.attributes['inputs:diffuseColor'];
+            material.color = new THREE.Color(...color);
+            if (shader?.attributes['inputs:opacity']) {
+                material!.transparent = true;
+                material!.opacity = shader.attributes['inputs:opacity'];
+            }
         }
     }
     return material;
@@ -88,24 +114,23 @@ function createMeshFromJson(node, parent, root) {
 }
 
 function traverseTree(node: ComposedObject, parent, root: ComposedObject, parentNode: ComposedObject | undefined = undefined) {
-    let elem;
-    if (node.type === "UsdGeom:Xform") {
-        elem = new THREE.Group();
-    } else if (node.type === "UsdGeom:Mesh" || node.type === "UsdGeom:BasisCurves") {
+    let elem = new THREE.Group();
+    if (HasAttr(node, "UsdGeom:VisibilityAPI:visibility:visibility"))
+    {
         if (node.attributes["UsdGeom:VisibilityAPI:visibility:visibility"] === 'invisible') {
             return;
         }
-        if (node.type === "UsdGeom:Mesh") {
-            elem = createMeshFromJson(node, parentNode, root);
-        } else {
-            elem = createCurveFromJson(node, parentNode, root);
-        }
-    } else if (node !== root) {
-        return;
-    }
+    } 
+    else if (HasAttr(node, "UsdGeom:Mesh:points")) {
+        elem = createMeshFromJson(node, parentNode, root);
+    } 
+    else if (HasAttr(node, "UsdGeom:BasisCurves:points"))
+    {
+        elem = createCurveFromJson(node, parentNode, root);
+    } 
 
+    parent.add(elem);
     if (node !== root) {
-        parent.add(elem);
         elem.matrixAutoUpdate = false;
 
         let matrixNode = node.attributes && node.attributes['xformOp:transform'] ? node.attributes['xformOp:transform'].flat() : null;
@@ -161,7 +186,18 @@ export function composeAndRender() {
         return;
     }
 
-    const tree = compose2(datas.map(arr => arr[1]));
+    let tree: null | ComposedObject = null;
+    let dataArray = datas.map(arr => arr[1]);
+    if (Array.isArray(dataArray[0]))
+    {
+        // pre-alpha
+        tree = compose2(dataArray as Ifc5FileJson[]);
+    }
+    else
+    {
+        // alpha
+        tree = compose3(dataArray as IfcxFile[]);
+    }
     if (!tree) {
         console.error("No result from composition");
         return;
