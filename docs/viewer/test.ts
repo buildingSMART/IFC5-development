@@ -6,9 +6,9 @@ import * as ComposeAlphaTest from "./compose-alpha-test"
 import * as ExampleFileTest from "./example-file-test"
 
 
-// CompareComposition
+CompareComposition
 // CompositionTest
 // ComposeAlphaTest
-ExampleFileTest
+// ExampleFileTest
 
 test();

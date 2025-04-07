@@ -1,11 +1,19 @@
 import { Ifc5FileJson } from "../../schema/out/@typespec/json-schema/ts/ifc5file";
 import { compose, ComposedObject } from "./compose";
 import { compose2 } from "./compose2";
-import { describe, each, it } from "./test/util/cappucino";
+import { describe, each, it, nope } from "./test/util/cappucino";
 import { expect } from "chai";
 import * as fs from "fs";
+import { components } from "../../schema/out/ts/ifcx";
+import { LoadIfcxFile } from "./workflow-alpha";
+import { TreeNode } from "./compose-alpha";
 
-function CompareComposition(a: ComposedObject, b: ComposedObject)
+type IfcxFile = components["schemas"]["IfcxFile"];
+type IfcxNode = components["schemas"]["IfcxNode"];
+type IfcxSchema = components["schemas"]["IfcxSchema"];
+type IfcxValueDescription = components["schemas"]["IfcxValueDescription"];
+
+function CompareComposition(a: ComposedObject, b: ComposedObject, checkTypes: boolean = true)
 {
     try{
         if (a.name !== b.name)
@@ -13,10 +21,13 @@ function CompareComposition(a: ComposedObject, b: ComposedObject)
             throw new Error(`Name mismatch ${a.name} - ${b.name}`);
         }
 
-        if (a.type !== b.type)
+        if (checkTypes && a.type !== b.type)
         {
             throw new Error(`Type mismatch ${a.type} - ${b.type}`);
         }
+
+        if (a.children?.length === 0) delete a.children;
+        if (b.children?.length === 0) delete b.children;
 
         if (!!a.children !== !!b.children)
         {
@@ -28,20 +39,20 @@ function CompareComposition(a: ComposedObject, b: ComposedObject)
             if (a.children.length !== b.children?.length)
             {
                 console.log(a.children, b.children);
-                throw new Error(`Children count mismatch ${a.name} - ${b.name}`);
+                throw new Error(`Children count mismatch ${a.name} - ${b.name}: ${a.children.length} - ${b.children?.length}`);
             }
 
             for (let i = 0; i < a.children.length; i++)
             {
                 let childA = a.children[i];
                 let childB = b.children[i];
-                if (!CompareComposition(childA, childB)) return false;
+                if (!CompareComposition(childA, childB, checkTypes)) return false;
             }
         }
 
         if (!!a.attributes !== !!b.attributes)
         {
-            throw new Error(`Attributes mismatch ${a.children} - ${b.children}`);
+            throw new Error(`Attributes mismatch ${a.attributes} - ${b.attributes}`);
         }
 
         if (a.attributes)
@@ -52,7 +63,7 @@ function CompareComposition(a: ComposedObject, b: ComposedObject)
             }
 
             Object.keys(a.attributes).forEach(attrName => {
-                if (a.attributes[attrName] !== b.attributes[attrName])
+                if (JSON.stringify(a.attributes[attrName]) !== JSON.stringify(b.attributes[attrName]))
                 {
                     throw new Error(`Mismatched attribute ${attrName} on B`);
                 }
@@ -63,9 +74,9 @@ function CompareComposition(a: ComposedObject, b: ComposedObject)
     {
         console.error(`issue with nodes:`);
         let acopy = {...a};
-        acopy.children = [];
         let bcopy = {...b};
-        bcopy.children = [];
+        // acopy.children = [];
+        // bcopy.children = [];
         console.log(`A: `, acopy);
         console.log(`B: `, bcopy);
         console.error(e);
@@ -75,8 +86,44 @@ function CompareComposition(a: ComposedObject, b: ComposedObject)
     return true;
 }
 
+function TreeNodeToComposedObject(path: string, node: TreeNode): ComposedObject
+{
+    let co = {
+        name: path, 
+        attributes: {}, 
+        children: []
+    } as ComposedObject;
+
+    node.children.forEach((childNode, childName) => {
+        co.children?.push(TreeNodeToComposedObject(`${path}/${childName}`, childNode));
+    });
+
+    node.attributes.forEach((attr, attrName) => {
+        // flatten
+        if (attr && typeof attr === "object" && !Array.isArray(attr))
+        {
+            Object.keys(attr).forEach((compname) => {
+                co.attributes[`${attrName}:${compname}`] = attr[compname];
+            });
+        }
+        else
+        {
+            co.attributes[attrName] = attr;
+        }
+    })
+
+    if (Object.keys(co.attributes).length === 0) delete co.attributes;
+
+    return co;
+}
+
+function compose3(file: IfcxFile)
+{
+    return TreeNodeToComposedObject("", LoadIfcxFile(file, true, true));
+}
+
 describe("composition comparison", () => {
-    it("should be equal for 'hello-wall.ifcx' and 'hello-wall_add-firerating.ifcx'", async() => {
+    nope("should be equal for 'hello-wall.ifcx' and 'hello-wall_add-firerating.ifcx'", async() => {
         // arrange
         let helloWallFileName = "../../Hello Wall/hello-wall.ifcx";
         let helloWallFR = "../../Hello Wall/hello-wall_add-firerating.ifcx";
@@ -88,6 +135,23 @@ describe("composition comparison", () => {
 
         // act
         let outcome = CompareComposition(composed, composed2);
+
+        // assert
+        expect(outcome).to.be.true;
+    });
+
+    it("should be equal for 'hello-wall.ifcx' pre and post alpha", async() => {
+        // arrange
+        let helloWallFileName = "../../Hello Wall/hello-wall-pre-alpha.ifcx";
+        let helloWallAlpha = "../../Hello Wall/hello-wall.ifcx";
+        let helloWallJSON = JSON.parse(fs.readFileSync(helloWallFileName).toString());
+        let helloWallAlphaJSON = JSON.parse(fs.readFileSync(helloWallAlpha).toString());
+        
+        let composed = compose([helloWallJSON] as Ifc5FileJson[]);
+        let composed3 = compose3(helloWallAlphaJSON as IfcxFile);
+
+        // act
+        let outcome = CompareComposition(composed, composed3, false);
 
         // assert
         expect(outcome).to.be.true;

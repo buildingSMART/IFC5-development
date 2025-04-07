@@ -11,5 +11,4 @@ describe("example file", () => {
         let file = JSON.parse(fs.readFileSync("../../Hello Wall/hello-wall.ifcx").toString()) as IfcxFile;
         expect(() => LoadIfcxFile(file)).to.not.throw();
     });
-
 });

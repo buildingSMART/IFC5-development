@@ -1,5 +1,5 @@
 import { components } from "../../schema/out/ts/ifcx";
-import { CompositionInput, ConvertNodes, ExpandFirstRootInInput, InputNode } from "./compose-alpha";
+import { CompositionInput, ConvertNodes, CreateArtificialRoot, ExpandFirstRootInInput, InputNode } from "./compose-alpha";
 
 type IfcxFile = components["schemas"]["IfcxFile"];
 type IfcxNode = components["schemas"]["IfcxNode"];
@@ -156,7 +156,8 @@ export function Validate(schemas: {[key: string]: IfcxSchema}, inputNodes: Map<s
     })
 }
 
-export function LoadIfcxFile(file: IfcxFile, checkSchemas: boolean = true)
+// TODO: cleanup options by creating better API
+export function LoadIfcxFile(file: IfcxFile, checkSchemas: boolean = true, createArtificialRoot: boolean = false)
 {
     let inputNodes = ToInputNodes(file.data);
     let compositionNodes = ConvertNodes(inputNodes);
@@ -171,7 +172,14 @@ export function LoadIfcxFile(file: IfcxFile, checkSchemas: boolean = true)
         throw e;
     }
 
-    return ExpandFirstRootInInput(compositionNodes);
+    if (createArtificialRoot)
+    {
+        return CreateArtificialRoot(compositionNodes);
+    }
+    else
+    {
+        return ExpandFirstRootInInput(compositionNodes);
+    }
 }
 
 function MakeInputNode(path: string)

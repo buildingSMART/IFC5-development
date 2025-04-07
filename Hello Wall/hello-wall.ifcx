@@ -291,7 +291,7 @@
       "comment": "this is the instance of Window",
       "name": "N2c2d549ff9fe4e228590562fda81a690",
       "inherits": {
-        "N25503984660543a18597eae657ff5bea": "N25503984660543a18597eae657ff5bea>"
+        "N25503984660543a18597eae657ff5bea": "N25503984660543a18597eae657ff5bea"
       }
     },
     {
@@ -2318,6 +2318,9 @@
     },
     {
       "name": "SpaceMaterial",
+      "children": {
+        "Shader": "SpaceMaterial__Shader"
+      },
       "attributes": {
         "UsdShade:Material": {
           "outputs:surface.connect": {
@@ -2328,6 +2331,9 @@
     },
     {
       "name": "WallMaterial",
+      "children": {
+        "Shader": "WallMaterial__Shader"
+      },
       "attributes": {
         "UsdShade:Material": {
           "outputs:surface.connect": {
@@ -2338,6 +2344,9 @@
     },
     {
       "name": "WindowMaterial",
+      "children": {
+        "Shader": "WindowMaterial__Shader"
+      },
       "attributes": {
         "UsdShade:Material": {
           "outputs:surface.connect": {

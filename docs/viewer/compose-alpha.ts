@@ -149,7 +149,8 @@ function FindRootsOrCycles(nodes: Map<string, CompositionInput>)
     let roots = new Set<string>();
     try {
         paths.forEach((path) => {
-            if (!dependents.has(path))
+            // TODO: dirty check for "/", fix: look only at heads for dependencies and determining roots, should check
+            if (!dependents.has(path) && path.indexOf("/") === -1)
             {
                 roots.add(path);
             }
@@ -189,6 +190,26 @@ export function ExpandFirstRootInInput(nodes: Map<string, CompositionInput>)
         throw new CycleError();
     }
     return ExpandNewNode([...roots.values()][0], nodes);
+}
+
+export function CreateArtificialRoot(nodes: Map<string, CompositionInput>)
+{
+    let roots = FindRootsOrCycles(nodes);
+    if (!roots)
+    {
+        throw new CycleError();
+    }
+    let pseudoRoot = {
+        node: "",
+        attributes: new Map<string, any>(),
+        children: new Map<string, TreeNode>()
+    } as TreeNode;
+
+    roots.forEach((root) => {
+        pseudoRoot.children.set(root, ExpandNewNode(root, nodes));
+    });
+
+    return pseudoRoot;
 }
 
 export function ExpandNodeWithInput(node: string, nodes: Map<string, InputNode[]>)
