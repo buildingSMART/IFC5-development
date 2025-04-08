@@ -17,22 +17,36 @@
         }
       }
     },
-    "bsi::ifc5::alpha::class": {
-      "value": {
-          "dataType": "String"
-      }
-    },
-    "bsi::ifc5::alpha::properties::isexternal": {
-      "value": {
-          "dataType": "Boolean"
-      }
-    },
-    "bsi::ifc5::alpha::spaceboundary": {
+    "ifc5:class": {
       "value": {
         "dataType": "Object",
         "objectRestrictions": {
           "values": {
-            "relatedElement": {
+            "code": {
+              "dataType": "String"
+            }
+          }
+        }
+      }
+    },
+    "ifc5:properties": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "IsExternal": {
+              "dataType": "Integer"
+            }
+          }
+        }
+      }
+    },
+    "UsdShade:MaterialBindingAPI": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "material:binding": {
               "dataType": "Object",
               "objectRestrictions": {
                 "values": {
@@ -46,26 +60,7 @@
         }
       }
     },
-    "usd::usdshade:materialbindingapi": {
-      "value": {
-        "dataType": "Object",
-        "objectRestrictions": {
-          "values": {
-            "material::binding": {
-              "dataType": "Object",
-              "objectRestrictions": {
-                "values": {
-                  "ref": {
-                    "dataType": "String"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "usd::xformop": {
+    "xformOp": {
       "value": {
         "dataType": "Object",
         "objectRestrictions": {
@@ -87,7 +82,7 @@
         }
       }
     },
-    "nlsfb::class": {
+    "nlsfb:class": {
       "value": {
         "dataType": "Object",
         "objectRestrictions": {
@@ -102,12 +97,31 @@
         }
       }
     },
-    "usd::materials::info::id": {
+    "ifc5:spaceboundary": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "relatedElement": {
+              "dataType": "Object",
+              "objectRestrictions": {
+                "values": {
+                  "ref": {
+                    "dataType": "String"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "info:id": {
       "value": {
         "dataType": "String"
       }
     },
-    "usd::materials::inputs::diffuseColor": {
+    "inputs:diffuseColor": {
       "value": {
         "dataType": "Array",
         "arrayRestrictions": {
@@ -117,12 +131,12 @@
         }
       }
     },
-    "usd::materials::inputs::opacity": {
+    "inputs:opacity": {
       "value": {
         "dataType": "Real"
       }
     },
-    "usd::materials::outputs::surface": {
+    "outputs:surface": {
       "value": {
         "dataType": "Object",
         "objectRestrictions": {
@@ -130,7 +144,7 @@
         }
       }
     },
-    "usd::usdgeom::mesh": {
+    "UsdGeom:Mesh": {
       "value": {
         "dataType": "Object",
         "objectRestrictions": {
@@ -160,7 +174,7 @@
         }
       }
     },
-    "usd::usdgeom::visibility": {
+    "UsdGeom:VisibilityAPI:visibility": {
       "value": {
         "dataType": "Object",
         "objectRestrictions": {
@@ -172,7 +186,7 @@
         }
       }
     },
-    "usd::usdgeom::basiscurves": {
+    "UsdGeom:BasisCurves": {
       "value": {
         "dataType": "Object",
         "objectRestrictions": {
@@ -194,12 +208,12 @@
         }
       }
     },
-    "usd::usdshade::material": {
+    "UsdShade:Material": {
       "value": {
         "dataType": "Object",
         "objectRestrictions": {
           "values": {
-            "outputs::surface.connect": {
+            "outputs:surface.connect": {
               "dataType": "Object",
               "objectRestrictions": {
                 "values": {
@@ -308,40 +322,40 @@
     {
       "name": "SpaceMaterial/Shader",
       "attributes": {
-        "usd::materials::info::id": "UsdPreviewSurface",
-        "usd::materials::inputs::diffuseColor": [
+        "info:id": "UsdPreviewSurface",
+        "inputs:diffuseColor": [
           0.6,
           0.7,
           0.8
         ],
-        "usd::materials::inputs::opacity": 0.3,
-        "usd::materials::outputs::surface": null
+        "inputs:opacity": 0.3,
+        "outputs:surface": null
       }
     },
     {
       "name": "WallMaterial/Shader",
       "attributes": {
-        "usd::materials::info::id": "UsdPreviewSurface",
-        "usd::materials::inputs::diffuseColor": [
+        "info:id": "UsdPreviewSurface",
+        "inputs:diffuseColor": [
           0.8,
           0.7,
           0.6
         ],
-        "usd::materials::inputs::opacity": 1,
-        "usd::materials::outputs::surface": null
+        "inputs:opacity": 1,
+        "outputs:surface": null
       }
     },
     {
       "name": "WindowMaterial/Shader",
       "attributes": {
-        "usd::materials::info::id": "UsdPreviewSurface",
-        "usd::materials::inputs::diffuseColor": [
+        "info:id": "UsdPreviewSurface",
+        "inputs:diffuseColor": [
           0.6,
           0.5,
           0.4
         ],
-        "usd::materials::inputs::opacity": 0.8,
-        "usd::materials::outputs::surface": null
+        "inputs:opacity": 0.8,
+        "outputs:surface": null
       }
     },
     {
@@ -355,13 +369,16 @@
     {
       "name": "N25503984660543a18597eae657ff5bea",
       "attributes": {
-        "bsi::ifc5::alpha::class": "IfcWindow"
+        "ifc5:class": {
+          "code": "IfcWindow",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcWindow"
+        }
       }
     },
     {
       "name": "N25503984660543a18597eae657ff5bea_Void",
       "attributes": {
-        "usd::usdgeom::mesh": {
+        "UsdGeom:Mesh": {
           "faceVertexIndices": [
             3,
             0,
@@ -528,7 +545,7 @@
     {
       "name": "N25503984660543a18597eae657ff5bea_Void",
       "attributes": {
-        "usd::usdgeom::visibility": {
+        "UsdGeom:VisibilityAPI:visibility": {
           "visibility": "invisible"
         }
       }
@@ -536,7 +553,7 @@
     {
       "name": "N25503984660543a18597eae657ff5bea_Body",
       "attributes": {
-        "usd::usdgeom::mesh": {
+        "UsdGeom:Mesh": {
           "faceVertexIndices": [
             0,
             1,
@@ -1127,7 +1144,10 @@
     {
       "name": "N14adb22bd47448a28e8f6d4c067c1953",
       "attributes": {
-        "bsi::ifc5::alpha::class": "IfcProject"
+        "ifc5:class": {
+          "code": "IfcProject",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcProject"
+        }
       }
     },
     {
@@ -1141,7 +1161,10 @@
     {
       "name": "Ne0834921e09540f088743c6bd1ec699e",
       "attributes": {
-        "bsi::ifc5::alpha::class": "IfcSite"
+        "ifc5:class": {
+          "code": "IfcSite",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcSite"
+        }
       }
     },
     {
@@ -1155,7 +1178,10 @@
     {
       "name": "Ne84dc79efe9d47819f4b54dd435cca91",
       "attributes": {
-        "bsi::ifc5::alpha::class": "IfcBuilding"
+        "ifc5:class": {
+          "code": "IfcBuilding",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcBuilding"
+        }
       }
     },
     {
@@ -1169,7 +1195,10 @@
     {
       "name": "N44af358b316040638a89a868335ff3b5",
       "attributes": {
-        "bsi::ifc5::alpha::class": "IfcBuildingStorey"
+        "ifc5:class": {
+          "code": "IfcBuildingStorey",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcBuildingStorey"
+        }
       }
     },
     {
@@ -1183,14 +1212,17 @@
     {
       "name": "Ne3035b71bd9f4cdc86fdb56e2f4605b6",
       "attributes": {
-        "bsi::ifc5::alpha::class": "IfcSpace"
+        "ifc5:class": {
+          "code": "IfcSpace",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcSpace"
+        }
       }
     },
     {
       "name": "Ne3035b71bd9f4cdc86fdb56e2f4605b6",
       "attributes": {
-        "usd::usdshade:materialbindingapi": {
-          "material::binding": {
+        "UsdShade:MaterialBindingAPI": {
+          "material:binding": {
             "ref": "</SpaceMaterial>"
           }
         }
@@ -1199,7 +1231,7 @@
     {
       "name": "Ne3035b71bd9f4cdc86fdb56e2f4605b6",
       "attributes": {
-        "usd::xformop": {
+        "xformOp": {
           "transform": [
             [
               1,
@@ -1232,7 +1264,7 @@
     {
       "name": "Ne3035b71bd9f4cdc86fdb56e2f4605b6_Body",
       "attributes": {
-        "usd::usdgeom::mesh": {
+        "UsdGeom:Mesh": {
           "faceVertexIndices": [
             1,
             2,
@@ -1407,20 +1439,25 @@
     {
       "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b",
       "attributes": {
-        "bsi::ifc5::alpha::class": "IfcWall"
+        "ifc5:class": {
+          "code": "IfcWall",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcWall"
+        }
       }
     },
     {
       "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b",
       "attributes": {
-        "bsi::ifc5::alpha::properties::isexternal": true
+        "ifc5:properties": {
+          "IsExternal": 1
+        }
       }
     },
     {
       "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b",
       "attributes": {
-        "usd::usdshade:materialbindingapi": {
-          "material::binding": {
+        "UsdShade:MaterialBindingAPI": {
+          "material:binding": {
             "ref": "</WallMaterial>"
           }
         }
@@ -1429,7 +1466,7 @@
     {
       "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b",
       "attributes": {
-        "nlsfb::class": {
+        "nlsfb:class": {
           "code": "21.21",
           "uri": "https://identifier.buildingsmart.org/uri/nlsfb/nlsfb2005/2.2/class/21.21"
         }
@@ -1438,7 +1475,7 @@
     {
       "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b_Body",
       "attributes": {
-        "usd::usdgeom::mesh": {
+        "UsdGeom:Mesh": {
           "faceVertexIndices": [
             3,
             0,
@@ -1965,7 +2002,7 @@
     {
       "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b_Axis",
       "attributes": {
-        "usd::usdgeom::basiscurves": {
+        "UsdGeom:BasisCurves": {
           "points": [
             [
               0,
@@ -1984,7 +2021,7 @@
     {
       "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b_Directrix",
       "attributes": {
-        "usd::usdgeom::basiscurves": {
+        "UsdGeom:BasisCurves": {
           "points": [
             [
               0,
@@ -2003,7 +2040,7 @@
     {
       "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b_Basis",
       "attributes": {
-        "usd::usdgeom::mesh": {
+        "UsdGeom:Mesh": {
           "faceVertexCounts": [
             4
           ],
@@ -2049,7 +2086,7 @@
     {
       "name": "N2c2d549ff9fe4e228590562fda81a690",
       "attributes": {
-        "usd::xformop": {
+        "xformOp": {
           "transform": [
             [
               1,
@@ -2090,14 +2127,16 @@
     {
       "name": "N25503984660543a18597eae657ff5bea",
       "attributes": {
-        "bsi::ifc5::alpha::properties::isexternal": true
+        "ifc5:properties": {
+          "IsExternal": 1
+        }
       }
     },
     {
       "name": "N25503984660543a18597eae657ff5bea",
       "attributes": {
-        "usd::usdshade:materialbindingapi": {
-          "material::binding": {
+        "UsdShade:MaterialBindingAPI": {
+          "material:binding": {
             "ref": "</WindowMaterial>"
           }
         }
@@ -2106,7 +2145,7 @@
     {
       "name": "N592504dc469a44d69ae8c801b591679b",
       "attributes": {
-        "usd::xformop": {
+        "xformOp": {
           "transform": [
             [
               1,
@@ -2139,7 +2178,7 @@
     {
       "name": "N52836ca941db45b3ab06b0f6dafe28ed",
       "attributes": {
-        "bsi::ifc5::alpha::spaceboundary": {
+        "ifc5:spaceboundary": {
           "relatedElement": {
             "ref": "</N93791d5d5beb437bb8ec2f1f0ba4bf3b>"
           }
@@ -2149,7 +2188,7 @@
     {
       "name": "N52836ca941db45b3ab06b0f6dafe28ed_Body",
       "attributes": {
-        "usd::usdgeom::mesh": {
+        "UsdGeom:Mesh": {
           "faceVertexIndices": [
             3,
             0,
@@ -2186,7 +2225,7 @@
     {
       "name": "N10654b0e96484ca0b4e53043e3807c8a",
       "attributes": {
-        "bsi::ifc5::alpha::spaceboundary": {
+        "ifc5:spaceboundary": {
           "relatedElement": {
             "ref": "</N2c2d549ff9fe4e228590562fda81a690>"
           }
@@ -2196,7 +2235,7 @@
     {
       "name": "N10654b0e96484ca0b4e53043e3807c8a_Body",
       "attributes": {
-        "usd::usdgeom::mesh": {
+        "UsdGeom:Mesh": {
           "faceVertexIndices": [
             0,
             1,
@@ -2233,7 +2272,7 @@
     {
       "name": "N12499855de8f44f68aaef76e402fcdb9",
       "attributes": {
-        "bsi::ifc5::alpha::spaceboundary": {
+        "ifc5:spaceboundary": {
           "relatedElement": {
             "ref": "</N592504dc469a44d69ae8c801b591679b>"
           }
@@ -2243,7 +2282,7 @@
     {
       "name": "N12499855de8f44f68aaef76e402fcdb9_Body",
       "attributes": {
-        "usd::usdgeom::mesh": {
+        "UsdGeom:Mesh": {
           "faceVertexIndices": [
             2,
             0,
@@ -2283,8 +2322,8 @@
         "Shader": "SpaceMaterial__Shader"
       },
       "attributes": {
-        "usd::usdshade::material": {
-          "outputs::surface.connect": {
+        "UsdShade:Material": {
+          "outputs:surface.connect": {
             "ref": "</SpaceMaterial/Shader.outputs:surface>"
           }
         }
@@ -2296,8 +2335,8 @@
         "Shader": "WallMaterial__Shader"
       },
       "attributes": {
-        "usd::usdshade::material": {
-          "outputs::surface.connect": {
+        "UsdShade:Material": {
+          "outputs:surface.connect": {
             "ref": "</WallMaterial/Shader.outputs:surface>"
           }
         }
@@ -2309,8 +2348,8 @@
         "Shader": "WindowMaterial__Shader"
       },
       "attributes": {
-        "usd::usdshade::material": {
-          "outputs::surface.connect": {
+        "UsdShade:Material": {
+          "outputs:surface.connect": {
             "ref": "</WindowMaterial/Shader.outputs:surface>"
           }
         }

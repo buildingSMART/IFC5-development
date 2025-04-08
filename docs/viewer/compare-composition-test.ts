@@ -103,7 +103,7 @@ describe("composition comparison", () => {
     it("should be equal for 'hello-wall.ifcx' pre and post alpha", async() => {
         // arrange
         let helloWallFileName = "../../Hello Wall/hello-wall-pre-alpha.ifcx";
-        let helloWallAlpha = "../../Hello Wall/hello-wall.ifcx";
+        let helloWallAlpha = "../../Hello Wall/hello-wall-alpha.ifcx";
         let helloWallJSON = JSON.parse(fs.readFileSync(helloWallFileName).toString());
         let helloWallAlphaJSON = JSON.parse(fs.readFileSync(helloWallAlpha).toString());
         
