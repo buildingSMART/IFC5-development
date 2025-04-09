@@ -34,7 +34,8 @@ Please note that these examples are **preliminary** and represent a direction of
 4. Transform your inherit arrays into an object, where the key is the name of your inherit, and the value is the path you inherit from
 4. Remove any nodes that only have a name and no children/inherits/attributes
 5. Remove any nested def attributes and put them in a new node, specifying the nested path as name.
-6. Define schemas for all your components in the `schema` property. 
+6. Define schemas for all your components in the `schema` property.
+7. If using the viewer, check out Hello-Wall.ifcx for the updated component schemas, and rename your components accordingly.
 
 
 
