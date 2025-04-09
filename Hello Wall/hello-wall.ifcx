@@ -277,14 +277,14 @@
       "comment": "this is the instance of Window",
       "name": "N2c2d549ff9fe4e228590562fda81a690",
       "inherits": {
-        "N25503984660543a18597eae657ff5bea": "N25503984660543a18597eae657ff5bea"
+        "windowclass": "N25503984660543a18597eae657ff5bea"
       }
     },
     {
       "name": "N592504dc469a44d69ae8c801b591679b",
       "comment": "instance of Window_001",
       "inherits": {
-        "N25503984660543a18597eae657ff5bea": "N25503984660543a18597eae657ff5bea"
+        "windowclass": "N25503984660543a18597eae657ff5bea"
       }
     },
     {
@@ -349,13 +349,10 @@
       "attributes": {
         "customdata": {
           "originalStepInstance": "This is only here to help understand the example. There will not be STEP code in IFC 5. This component represensts this line in the SPFF: #459=IfcWindowType('0bK3c4PWL3eOMNwkPN$rlg',$,'WT01',$,$,$,(#436,#458),$,$,.NOTDEFINED.,.NOTDEFINED.,$,$)"
+        },
+        "attributes": {
+          "bsi::ifc5::alpha::class": "IfcWindow"
         }
-      }
-    },
-    {
-      "name": "N25503984660543a18597eae657ff5bea",
-      "attributes": {
-        "bsi::ifc5::alpha::class": "IfcWindow"
       }
     },
     {
@@ -1191,7 +1188,7 @@
       "attributes": {
         "usd::usdshade:materialbindingapi": {
           "material::binding": {
-            "ref": "</SpaceMaterial>"
+            "ref": "SpaceMaterial"
           }
         }
       }
@@ -1421,7 +1418,7 @@
       "attributes": {
         "usd::usdshade:materialbindingapi": {
           "material::binding": {
-            "ref": "</WallMaterial>"
+            "ref": "WallMaterial"
           }
         }
       }
@@ -2098,7 +2095,7 @@
       "attributes": {
         "usd::usdshade:materialbindingapi": {
           "material::binding": {
-            "ref": "</WindowMaterial>"
+            "ref": "WindowMaterial"
           }
         }
       }
@@ -2141,7 +2138,7 @@
       "attributes": {
         "bsi::ifc5::alpha::spaceboundary": {
           "relatedElement": {
-            "ref": "</N93791d5d5beb437bb8ec2f1f0ba4bf3b>"
+            "ref": "N93791d5d5beb437bb8ec2f1f0ba4bf3b"
           }
         }
       }
@@ -2188,7 +2185,7 @@
       "attributes": {
         "bsi::ifc5::alpha::spaceboundary": {
           "relatedElement": {
-            "ref": "</N2c2d549ff9fe4e228590562fda81a690>"
+            "ref": "N2c2d549ff9fe4e228590562fda81a690"
           }
         }
       }
@@ -2235,7 +2232,7 @@
       "attributes": {
         "bsi::ifc5::alpha::spaceboundary": {
           "relatedElement": {
-            "ref": "</N592504dc469a44d69ae8c801b591679b>"
+            "ref": "N592504dc469a44d69ae8c801b591679b"
           }
         }
       }
@@ -2285,7 +2282,7 @@
       "attributes": {
         "usd::usdshade::material": {
           "outputs::surface.connect": {
-            "ref": "</SpaceMaterial/Shader.outputs:surface>"
+            "ref": "SpaceMaterial/Shader::usd::materials::outputs::surface"
           }
         }
       }
@@ -2298,7 +2295,7 @@
       "attributes": {
         "usd::usdshade::material": {
           "outputs::surface.connect": {
-            "ref": "</WallMaterial/Shader.outputs:surface>"
+            "ref": "WallMaterial/Shader::usd::materials::outputs::surface"
           }
         }
       }
@@ -2311,7 +2308,7 @@
       "attributes": {
         "usd::usdshade::material": {
           "outputs::surface.connect": {
-            "ref": "</WindowMaterial/Shader.outputs:surface>"
+            "ref": "WindowMaterial/Shader::usd::materials::outputs::surface"
           }
         }
       }
