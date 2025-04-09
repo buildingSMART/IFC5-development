@@ -5,6 +5,11 @@
     "timestamp": "time string"
   },
   "schemas": {
+    "bsi::name": {
+      "value": {
+        "dataType": "String"
+      }
+    },
     "customdata": {
       "value": {
         "dataType": "Object",
@@ -252,6 +257,9 @@
       "name": "My_Project",
       "inherits": {
         "N14adb22bd47448a28e8f6d4c067c1953": "N14adb22bd47448a28e8f6d4c067c1953"
+      },
+      "attributes": {
+        "bsi::name": "My_Project"
       }
     },
     {
@@ -294,17 +302,21 @@
       }
     },
     {
-      "comment": "this is the instance of Window",
       "name": "N2c2d549ff9fe4e228590562fda81a690",
       "inherits": {
         "windowType": "N25503984660543a18597eae657ff5bea"
+      },
+      "attributes": {
+        "bsi::name": "Instance of Window"
       }
     },
     {
       "name": "N592504dc469a44d69ae8c801b591679b",
-      "comment": "instance of Window_001",
       "inherits": {
         "windowType": "N25503984660543a18597eae657ff5bea"
+      },
+      "attributes": {
+        "bsi::name": "Instance of Window_001"
       }
     },
     {
@@ -328,6 +340,7 @@
     {
       "name": "SpaceMaterial/Shader",
       "attributes": {
+        "bsi::name": "SpaceMaterial shader",
         "usd::materials::info::id": "UsdPreviewSurface",
         "usd::materials::inputs::diffuseColor": [
           0.6,
@@ -341,6 +354,7 @@
     {
       "name": "WallMaterial/Shader",
       "attributes": {
+        "bsi::name": "WallMaterial shader",
         "usd::materials::info::id": "UsdPreviewSurface",
         "usd::materials::inputs::diffuseColor": [
           0.8,
@@ -354,6 +368,7 @@
     {
       "name": "WindowMaterial/Shader",
       "attributes": {
+        "bsi::name": "WindowMaterial shader",
         "usd::materials::info::id": "UsdPreviewSurface",
         "usd::materials::inputs::diffuseColor": [
           0.6,
@@ -2328,6 +2343,7 @@
         "Shader": "b3325921-8f14-4847-9473-cfc6e333683a"
       },
       "attributes": {
+        "bsi::name": "SpaceMaterial",
         "usd::usdshade::material": {
           "outputs::surface.connect": {
             "ref": "SpaceMaterial/Shader.usd::materials::outputs::surface"
@@ -2341,6 +2357,7 @@
         "Shader": "7a6173bc-e2f0-4e5f-aa73-cfed0ede1ceb"
       },
       "attributes": {
+        "bsi::name": "WallMaterial",
         "usd::usdshade::material": {
           "outputs::surface.connect": {
             "ref": "WallMaterial/Shader.usd::materials::outputs::surface"
@@ -2354,6 +2371,7 @@
         "Shader": "317cc394-2285-4f91-a120-3bcba12e9c47"
       },
       "attributes": {
+        "bsi::name": "WindowMaterial",
         "usd::usdshade::material": {
           "outputs::surface.connect": {
             "ref": "WindowMaterial/Shader.usd::materials::outputs::surface"
