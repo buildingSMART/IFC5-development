@@ -19,7 +19,17 @@
     },
     "bsi::ifc5::alpha::class": {
       "value": {
-          "dataType": "String"
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "code": {
+              "dataType": "String"
+            },
+            "uri": {
+              "dataType": "String"
+            }
+          }
+        }
       }
     },
     "bsi::ifc5::alpha::properties::isexternal": {
@@ -287,14 +297,14 @@
       "comment": "this is the instance of Window",
       "name": "N2c2d549ff9fe4e228590562fda81a690",
       "inherits": {
-        "windowclass": "N25503984660543a18597eae657ff5bea"
+        "windowType": "N25503984660543a18597eae657ff5bea"
       }
     },
     {
       "name": "N592504dc469a44d69ae8c801b591679b",
       "comment": "instance of Window_001",
       "inherits": {
-        "windowclass": "N25503984660543a18597eae657ff5bea"
+        "windowType": "N25503984660543a18597eae657ff5bea"
       }
     },
     {
@@ -360,7 +370,10 @@
         "customdata": {
           "originalStepInstance": "This is only here to help understand the example. There will not be STEP code in IFC 5. This component represensts this line in the SPFF: #459=IfcWindowType('0bK3c4PWL3eOMNwkPN$rlg',$,'WT01',$,$,$,(#436,#458),$,$,.NOTDEFINED.,.NOTDEFINED.,$,$)"
         },
-        "bsi::ifc5::alpha::class": "IfcWindow"
+        "bsi::ifc5::alpha::class": {
+          "code": "IfcWindow",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/5/class/IfcWindow"
+        }
       }
     },
     {
@@ -1132,7 +1145,10 @@
     {
       "name": "N14adb22bd47448a28e8f6d4c067c1953",
       "attributes": {
-        "bsi::ifc5::alpha::class": "IfcProject"
+        "bsi::ifc5::alpha::class": {
+          "code": "IfcProject",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/5/class/IfcProject"
+        }
       }
     },
     {
@@ -1146,7 +1162,10 @@
     {
       "name": "Ne0834921e09540f088743c6bd1ec699e",
       "attributes": {
-        "bsi::ifc5::alpha::class": "IfcSite"
+        "bsi::ifc5::alpha::class": {
+          "code": "IfcSite",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/5/class/IfcSite"
+        }
       }
     },
     {
@@ -1160,7 +1179,10 @@
     {
       "name": "Ne84dc79efe9d47819f4b54dd435cca91",
       "attributes": {
-        "bsi::ifc5::alpha::class": "IfcBuilding"
+        "bsi::ifc5::alpha::class": {
+          "code": "IfcBuilding",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/5/class/IfcBuilding"
+        }
       }
     },
     {
@@ -1174,7 +1196,10 @@
     {
       "name": "N44af358b316040638a89a868335ff3b5",
       "attributes": {
-        "bsi::ifc5::alpha::class": "IfcBuildingStorey"
+        "bsi::ifc5::alpha::class": {
+          "code": "IfcBuildingStorey",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/5/class/IfcBuildingStorey"
+        }
       }
     },
     {
@@ -1188,7 +1213,10 @@
     {
       "name": "Ne3035b71bd9f4cdc86fdb56e2f4605b6",
       "attributes": {
-        "bsi::ifc5::alpha::class": "IfcSpace"
+        "bsi::ifc5::alpha::class": {
+          "code": "IfcSpace",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/5/class/IfcSpace"
+        }
       }
     },
     {
@@ -1412,7 +1440,10 @@
     {
       "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b",
       "attributes": {
-        "bsi::ifc5::alpha::class": "IfcWall"
+        "bsi::ifc5::alpha::class": {
+          "code": "IfcWall",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/5/class/IfcWall"
+        }
       }
     },
     {
