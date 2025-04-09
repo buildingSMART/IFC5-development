@@ -241,104 +241,104 @@
   },
   "data": [
     {
-      "name": "N25503984660543a18597eae657ff5bea",
+      "name": "f40ec978-42e6-414a-a044-b6df23dfafef",
       "children": {
-        "Void": "N25503984660543a18597eae657ff5bea_Void",
-        "Body": "N25503984660543a18597eae657ff5bea_Body"
+        "Void": "4a4b35e6-05c0-4abe-8594-aa7b42d8ff58",
+        "Body": "3b1b9346-ead9-4301-ac87-3038e62ebfda"
       }
     },
     {
-      "name": "N14adb22bd47448a28e8f6d4c067c1953",
+      "name": "08aa04b9-4ca7-45e0-9549-9154fef2828b",
       "children": {
-        "My_Site": "Ne0834921e09540f088743c6bd1ec699e"
+        "My_Site": "8adf3b8f-f34a-4687-a406-5063ee095a1a"
       }
     },
     {
-      "name": "My_Project",
+      "name": "00398076-2253-4686-b269-f380ee13428c",
       "inherits": {
-        "N14adb22bd47448a28e8f6d4c067c1953": "N14adb22bd47448a28e8f6d4c067c1953"
+        "projectType": "08aa04b9-4ca7-45e0-9549-9154fef2828b"
       },
       "attributes": {
         "bsi::name": "My_Project"
       }
     },
     {
-      "name": "Ne0834921e09540f088743c6bd1ec699e",
+      "name": "8adf3b8f-f34a-4687-a406-5063ee095a1a",
       "children": {
-        "My_Building": "Ne84dc79efe9d47819f4b54dd435cca91"
+        "My_Building": "2ddfa76e-ab37-42f2-8e37-ef5780d732e8"
       }
     },
     {
-      "name": "Ne84dc79efe9d47819f4b54dd435cca91",
+      "name": "2ddfa76e-ab37-42f2-8e37-ef5780d732e8",
       "children": {
-        "My_Storey": "N44af358b316040638a89a868335ff3b5"
+        "My_Storey": "5a26bd1d-fa44-4aaa-9a5e-91a06eed2e52"
       }
     },
     {
-      "name": "N44af358b316040638a89a868335ff3b5",
+      "name": "5a26bd1d-fa44-4aaa-9a5e-91a06eed2e52",
       "children": {
-        "My_Space": "Ne3035b71bd9f4cdc86fdb56e2f4605b6",
-        "Wall": "N93791d5d5beb437bb8ec2f1f0ba4bf3b"
+        "My_Space": "f079bafd-8733-48d8-85df-1c1656a17c1f",
+        "Wall": "13168941-10d9-4c6a-8c63-505cc302312c"
       }
     },
     {
-      "name": "Ne3035b71bd9f4cdc86fdb56e2f4605b6",
+      "name": "f079bafd-8733-48d8-85df-1c1656a17c1f",
       "children": {
-        "Body": "Ne3035b71bd9f4cdc86fdb56e2f4605b6_Body",
-        "Boundary_Wall": "N52836ca941db45b3ab06b0f6dafe28ed",
-        "Boundary_Window": "N10654b0e96484ca0b4e53043e3807c8a",
-        "Boundary_Window_001": "N12499855de8f44f68aaef76e402fcdb9"
+        "Body": "a0061a96-fd61-47ec-8d38-39cf14f3c3a8",
+        "Boundary_Wall": "4fd67c00-82cf-476d-b5dd-6a06b07c6141",
+        "Boundary_Window": "15226122-42a4-428d-9b9a-16566291c182",
+        "Boundary_Window_001": "428b2888-1e0d-4f7b-b8ae-73236f626cea"
       }
     },
     {
-      "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b",
+      "name": "13168941-10d9-4c6a-8c63-505cc302312c",
       "children": {
-        "Body": "N93791d5d5beb437bb8ec2f1f0ba4bf3b_Body",
-        "Axis": "N93791d5d5beb437bb8ec2f1f0ba4bf3b_Axis",
-        "Directrix": "N93791d5d5beb437bb8ec2f1f0ba4bf3b_Directrix",
-        "Basis": "N93791d5d5beb437bb8ec2f1f0ba4bf3b_Basis",
-        "Window": "N2c2d549ff9fe4e228590562fda81a690",
-        "Window_001": "N592504dc469a44d69ae8c801b591679b"
+        "Body": "668e304b-38a2-4f8f-b3de-2a8a5a13384d",
+        "Axis": "c3055cc8-a5b6-4a84-860e-0d6cc978dfe8",
+        "Directrix": "97c55241-7a56-48d7-bc6e-be2fd24f86ac",
+        "Basis": "b6012d70-097a-4794-8d1f-220fa65a591a",
+        "Window": "82966dcf-41fc-4776-97f1-71d9cb52ab7e",
+        "Window_001": "8134f9ec-2e87-4b70-a538-9b6dc7ba94b1"
       }
     },
     {
-      "name": "N2c2d549ff9fe4e228590562fda81a690",
+      "name": "82966dcf-41fc-4776-97f1-71d9cb52ab7e",
       "inherits": {
-        "windowType": "N25503984660543a18597eae657ff5bea"
+        "windowType": "f40ec978-42e6-414a-a044-b6df23dfafef"
       },
       "attributes": {
         "bsi::name": "Instance of Window"
       }
     },
     {
-      "name": "N592504dc469a44d69ae8c801b591679b",
+      "name": "8134f9ec-2e87-4b70-a538-9b6dc7ba94b1",
       "inherits": {
-        "windowType": "N25503984660543a18597eae657ff5bea"
+        "windowType": "f40ec978-42e6-414a-a044-b6df23dfafef"
       },
       "attributes": {
         "bsi::name": "Instance of Window_001"
       }
     },
     {
-      "name": "N52836ca941db45b3ab06b0f6dafe28ed",
+      "name": "4fd67c00-82cf-476d-b5dd-6a06b07c6141",
       "children": {
-        "Body": "N52836ca941db45b3ab06b0f6dafe28ed_Body"
+        "Body": "02333064-a80b-4824-9751-36f88d0d175d"
       }
     },
     {
-      "name": "N10654b0e96484ca0b4e53043e3807c8a",
+      "name": "15226122-42a4-428d-9b9a-16566291c182",
       "children": {
-        "Body": "N10654b0e96484ca0b4e53043e3807c8a_Body"
+        "Body": "c3b8360d-98b5-4fa1-9350-a8ab8106a80f"
       }
     },
     {
-      "name": "N12499855de8f44f68aaef76e402fcdb9",
+      "name": "428b2888-1e0d-4f7b-b8ae-73236f626cea",
       "children": {
-        "Body": "N12499855de8f44f68aaef76e402fcdb9_Body"
+        "Body": "b5bdd146-5d6a-49f8-9e09-c1e7a48fb676"
       }
     },
     {
-      "name": "SpaceMaterial/Shader",
+      "name": "f83b2e90-81df-4cae-ad63-52a51009e561/Shader",
       "attributes": {
         "bsi::name": "SpaceMaterial shader",
         "usd::materials::info::id": "UsdPreviewSurface",
@@ -352,7 +352,7 @@
       }
     },
     {
-      "name": "WallMaterial/Shader",
+      "name": "359c715f-5961-4c20-be08-9bb25ea75c24/Shader",
       "attributes": {
         "bsi::name": "WallMaterial shader",
         "usd::materials::info::id": "UsdPreviewSurface",
@@ -366,7 +366,7 @@
       }
     },
     {
-      "name": "WindowMaterial/Shader",
+      "name": "82c0b0b0-1452-4fd9-b80d-20b9ee76a115/Shader",
       "attributes": {
         "bsi::name": "WindowMaterial shader",
         "usd::materials::info::id": "UsdPreviewSurface",
@@ -380,7 +380,7 @@
       }
     },
     {
-      "name": "N25503984660543a18597eae657ff5bea",
+      "name": "f40ec978-42e6-414a-a044-b6df23dfafef",
       "attributes": {
         "customdata": {
           "originalStepInstance": "This is only here to help understand the example. There will not be STEP code in IFC 5. This component represensts this line in the SPFF: #459=IfcWindowType('0bK3c4PWL3eOMNwkPN$rlg',$,'WT01',$,$,$,(#436,#458),$,$,.NOTDEFINED.,.NOTDEFINED.,$,$)"
@@ -392,7 +392,7 @@
       }
     },
     {
-      "name": "N25503984660543a18597eae657ff5bea_Void",
+      "name": "4a4b35e6-05c0-4abe-8594-aa7b42d8ff58",
       "attributes": {
         "usd::usdgeom::mesh": {
           "faceVertexIndices": [
@@ -559,7 +559,7 @@
       }
     },
     {
-      "name": "N25503984660543a18597eae657ff5bea_Void",
+      "name": "4a4b35e6-05c0-4abe-8594-aa7b42d8ff58",
       "attributes": {
         "usd::usdgeom::visibility": {
           "visibility": "invisible"
@@ -567,7 +567,7 @@
       }
     },
     {
-      "name": "N25503984660543a18597eae657ff5bea_Body",
+      "name": "3b1b9346-ead9-4301-ac87-3038e62ebfda",
       "attributes": {
         "usd::usdgeom::mesh": {
           "faceVertexIndices": [
@@ -1150,7 +1150,7 @@
       }
     },
     {
-      "name": "N14adb22bd47448a28e8f6d4c067c1953",
+      "name": "08aa04b9-4ca7-45e0-9549-9154fef2828b",
       "attributes": {
         "customdata": {
           "originalStepInstance": "This is only here to help understand the example. There will not be STEP code in IFC 5. This component represensts this line in the SPFF: #1=IfcProject('0KhR8hr7H8eewFRKm6V1bJ',$,'My Project',$,$,$,$,(#14,#26),#9)"
@@ -1158,7 +1158,7 @@
       }
     },
     {
-      "name": "N14adb22bd47448a28e8f6d4c067c1953",
+      "name": "08aa04b9-4ca7-45e0-9549-9154fef2828b",
       "attributes": {
         "bsi::ifc5::alpha::class": {
           "code": "IfcProject",
@@ -1167,7 +1167,7 @@
       }
     },
     {
-      "name": "Ne0834921e09540f088743c6bd1ec699e",
+      "name": "8adf3b8f-f34a-4687-a406-5063ee095a1a",
       "attributes": {
         "customdata": {
           "originalStepInstance": "This is only here to help understand the example. There will not be STEP code in IFC 5. This component represensts this line in the SPFF: #30=IfcSite('3WWqaXu9L0y8XqF6lHx6cU',$,'My Site',$,$,#53,$,$,$,$,$,$,$,$)"
@@ -1175,7 +1175,7 @@
       }
     },
     {
-      "name": "Ne0834921e09540f088743c6bd1ec699e",
+      "name": "8adf3b8f-f34a-4687-a406-5063ee095a1a",
       "attributes": {
         "bsi::ifc5::alpha::class": {
           "code": "IfcSite",
@@ -1184,7 +1184,7 @@
       }
     },
     {
-      "name": "Ne84dc79efe9d47819f4b54dd435cca91",
+      "name": "2ddfa76e-ab37-42f2-8e37-ef5780d732e8",
       "attributes": {
         "customdata": {
           "originalStepInstance": "This is only here to help understand the example. There will not be STEP code in IFC 5. This component represensts this line in the SPFF: #36=IfcBuilding('3eJSUU$fr7WPzBLDr3NCgH',$,'My Building',$,$,#59,$,$,$,$,$,$)"
@@ -1192,7 +1192,7 @@
       }
     },
     {
-      "name": "Ne84dc79efe9d47819f4b54dd435cca91",
+      "name": "2ddfa76e-ab37-42f2-8e37-ef5780d732e8",
       "attributes": {
         "bsi::ifc5::alpha::class": {
           "code": "IfcBuilding",
@@ -1201,7 +1201,7 @@
       }
     },
     {
-      "name": "N44af358b316040638a89a868335ff3b5",
+      "name": "5a26bd1d-fa44-4aaa-9a5e-91a06eed2e52",
       "attributes": {
         "customdata": {
           "originalStepInstance": "This is only here to help understand the example. There will not be STEP code in IFC 5. This component represensts this line in the SPFF: #42=IfcBuildingStorey('14hpMBCM10Oug9g6WpN$Er',$,'My Storey',$,$,#65,$,$,$,$)"
@@ -1209,7 +1209,7 @@
       }
     },
     {
-      "name": "N44af358b316040638a89a868335ff3b5",
+      "name": "5a26bd1d-fa44-4aaa-9a5e-91a06eed2e52",
       "attributes": {
         "bsi::ifc5::alpha::class": {
           "code": "IfcBuildingStorey",
@@ -1218,7 +1218,7 @@
       }
     },
     {
-      "name": "Ne3035b71bd9f4cdc86fdb56e2f4605b6",
+      "name": "f079bafd-8733-48d8-85df-1c1656a17c1f",
       "attributes": {
         "customdata": {
           "originalStepInstance": "This is only here to help understand the example. There will not be STEP code in IFC 5. This component represensts this line in the SPFF: #1494=IfcSpace('3Z0rjnlPzCt8RzjMulHWMs',$,'My Space',$,$,#1515,#1509,$,$,.SPACE.,$)"
@@ -1226,7 +1226,7 @@
       }
     },
     {
-      "name": "Ne3035b71bd9f4cdc86fdb56e2f4605b6",
+      "name": "f079bafd-8733-48d8-85df-1c1656a17c1f",
       "attributes": {
         "bsi::ifc5::alpha::class": {
           "code": "IfcSpace",
@@ -1235,17 +1235,17 @@
       }
     },
     {
-      "name": "Ne3035b71bd9f4cdc86fdb56e2f4605b6",
+      "name": "f079bafd-8733-48d8-85df-1c1656a17c1f",
       "attributes": {
         "usd::usdshade:materialbindingapi": {
           "material::binding": {
-            "ref": "SpaceMaterial"
+            "ref": "f83b2e90-81df-4cae-ad63-52a51009e561"
           }
         }
       }
     },
     {
-      "name": "Ne3035b71bd9f4cdc86fdb56e2f4605b6",
+      "name": "f079bafd-8733-48d8-85df-1c1656a17c1f",
       "attributes": {
         "usd::xformop": {
           "transform": [
@@ -1278,7 +1278,7 @@
       }
     },
     {
-      "name": "Ne3035b71bd9f4cdc86fdb56e2f4605b6_Body",
+      "name": "a0061a96-fd61-47ec-8d38-39cf14f3c3a8",
       "attributes": {
         "usd::usdgeom::mesh": {
           "faceVertexIndices": [
@@ -1445,7 +1445,7 @@
       }
     },
     {
-      "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b",
+      "name": "13168941-10d9-4c6a-8c63-505cc302312c",
       "attributes": {
         "customdata": {
           "originalStepInstance": "This is only here to help understand the example. There will not be STEP code in IFC 5. This component represensts this line in the SPFF: #1222=IfcWall('2JUHrTM_j3UxZiBnyBfByx',$,'Wall',$,$,#1235,#1230,$,$)"
@@ -1453,7 +1453,7 @@
       }
     },
     {
-      "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b",
+      "name": "13168941-10d9-4c6a-8c63-505cc302312c",
       "attributes": {
         "bsi::ifc5::alpha::class": {
           "code": "IfcWall",
@@ -1462,23 +1462,23 @@
       }
     },
     {
-      "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b",
+      "name": "13168941-10d9-4c6a-8c63-505cc302312c",
       "attributes": {
         "bsi::ifc5::alpha::properties::isexternal": true
       }
     },
     {
-      "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b",
+      "name": "13168941-10d9-4c6a-8c63-505cc302312c",
       "attributes": {
         "usd::usdshade:materialbindingapi": {
           "material::binding": {
-            "ref": "WallMaterial"
+            "ref": "359c715f-5961-4c20-be08-9bb25ea75c24"
           }
         }
       }
     },
     {
-      "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b",
+      "name": "13168941-10d9-4c6a-8c63-505cc302312c",
       "attributes": {
         "nlsfb::class": {
           "code": "21.21",
@@ -1487,7 +1487,7 @@
       }
     },
     {
-      "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b_Body",
+      "name": "668e304b-38a2-4f8f-b3de-2a8a5a13384d",
       "attributes": {
         "usd::usdgeom::mesh": {
           "faceVertexIndices": [
@@ -2014,7 +2014,7 @@
       }
     },
     {
-      "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b_Axis",
+      "name": "c3055cc8-a5b6-4a84-860e-0d6cc978dfe8",
       "attributes": {
         "usd::usdgeom::basiscurves": {
           "points": [
@@ -2033,7 +2033,7 @@
       }
     },
     {
-      "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b_Directrix",
+      "name": "97c55241-7a56-48d7-bc6e-be2fd24f86ac",
       "attributes": {
         "usd::usdgeom::basiscurves": {
           "points": [
@@ -2052,7 +2052,7 @@
       }
     },
     {
-      "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b_Basis",
+      "name": "b6012d70-097a-4794-8d1f-220fa65a591a",
       "attributes": {
         "usd::usdgeom::mesh": {
           "faceVertexCounts": [
@@ -2090,7 +2090,7 @@
       }
     },
     {
-      "name": "N2c2d549ff9fe4e228590562fda81a690",
+      "name": "82966dcf-41fc-4776-97f1-71d9cb52ab7e",
       "attributes": {
         "customdata": {
           "originalStepInstance": "This is only here to help understand the example. There will not be STEP code in IFC 5. This component represensts this line in the SPFF: #1262=IfcWindow('0iBLIV_VvE8eMGLY$QWQQG',$,'Window',$,$,#1349,#1291,$,$,$,$,$,$)"
@@ -2098,7 +2098,7 @@
       }
     },
     {
-      "name": "N2c2d549ff9fe4e228590562fda81a690",
+      "name": "82966dcf-41fc-4776-97f1-71d9cb52ab7e",
       "attributes": {
         "usd::xformop": {
           "transform": [
@@ -2131,7 +2131,7 @@
       }
     },
     {
-      "name": "N592504dc469a44d69ae8c801b591679b",
+      "name": "8134f9ec-2e87-4b70-a538-9b6dc7ba94b1",
       "attributes": {
         "customdata": {
           "originalStepInstance": "This is only here to help understand the example. There will not be STEP code in IFC 5. This component represensts this line in the SPFF: #1407=IfcWindow('1P9GJSHff4rfheo06raMUR',$,'Window',$,$,#1478,#1435,$,$,$,$,$,$)"
@@ -2139,23 +2139,23 @@
       }
     },
     {
-      "name": "N25503984660543a18597eae657ff5bea",
+      "name": "f40ec978-42e6-414a-a044-b6df23dfafef",
       "attributes": {
         "bsi::ifc5::alpha::properties::isexternal": true
       }
     },
     {
-      "name": "N25503984660543a18597eae657ff5bea",
+      "name": "f40ec978-42e6-414a-a044-b6df23dfafef",
       "attributes": {
         "usd::usdshade:materialbindingapi": {
           "material::binding": {
-            "ref": "WindowMaterial"
+            "ref": "82c0b0b0-1452-4fd9-b80d-20b9ee76a115"
           }
         }
       }
     },
     {
-      "name": "N592504dc469a44d69ae8c801b591679b",
+      "name": "8134f9ec-2e87-4b70-a538-9b6dc7ba94b1",
       "attributes": {
         "usd::xformop": {
           "transform": [
@@ -2188,20 +2188,20 @@
       }
     },
     {
-      "name": "N52836ca941db45b3ab06b0f6dafe28ed",
+      "name": "4fd67c00-82cf-476d-b5dd-6a06b07c6141",
       "attributes": {
         "bsi::ifc5::alpha::spaceboundary": {
           "relatedElement": {
-            "ref": "N93791d5d5beb437bb8ec2f1f0ba4bf3b"
+            "ref": "13168941-10d9-4c6a-8c63-505cc302312c"
           },
           "relatedSpace": {
-            "ref": "Ne3035b71bd9f4cdc86fdb56e2f4605b6"
+            "ref": "f079bafd-8733-48d8-85df-1c1656a17c1f"
           }
         }
       }
     },
     {
-      "name": "N52836ca941db45b3ab06b0f6dafe28ed_Body",
+      "name": "02333064-a80b-4824-9751-36f88d0d175d",
       "attributes": {
         "usd::usdgeom::mesh": {
           "faceVertexIndices": [
@@ -2238,20 +2238,20 @@
       }
     },
     {
-      "name": "N10654b0e96484ca0b4e53043e3807c8a",
+      "name": "15226122-42a4-428d-9b9a-16566291c182",
       "attributes": {
         "bsi::ifc5::alpha::spaceboundary": {
           "relatedElement": {
-            "ref": "N2c2d549ff9fe4e228590562fda81a690"
+            "ref": "82966dcf-41fc-4776-97f1-71d9cb52ab7e"
           },
           "relatedSpace": {
-            "ref": "Ne3035b71bd9f4cdc86fdb56e2f4605b6"
+            "ref": "f079bafd-8733-48d8-85df-1c1656a17c1f"
           }
         }
       }
     },
     {
-      "name": "N10654b0e96484ca0b4e53043e3807c8a_Body",
+      "name": "c3b8360d-98b5-4fa1-9350-a8ab8106a80f",
       "attributes": {
         "usd::usdgeom::mesh": {
           "faceVertexIndices": [
@@ -2288,20 +2288,20 @@
       }
     },
     {
-      "name": "N12499855de8f44f68aaef76e402fcdb9",
+      "name": "428b2888-1e0d-4f7b-b8ae-73236f626cea",
       "attributes": {
         "bsi::ifc5::alpha::spaceboundary": {
           "relatedElement": {
-            "ref": "N592504dc469a44d69ae8c801b591679b"
+            "ref": "8134f9ec-2e87-4b70-a538-9b6dc7ba94b1"
           },
           "relatedSpace": {
-            "ref": "Ne3035b71bd9f4cdc86fdb56e2f4605b6"
+            "ref": "f079bafd-8733-48d8-85df-1c1656a17c1f"
           }
         }
       }
     },
     {
-      "name": "N12499855de8f44f68aaef76e402fcdb9_Body",
+      "name": "b5bdd146-5d6a-49f8-9e09-c1e7a48fb676",
       "attributes": {
         "usd::usdgeom::mesh": {
           "faceVertexIndices": [
@@ -2338,7 +2338,7 @@
       }
     },
     {
-      "name": "SpaceMaterial",
+      "name": "f83b2e90-81df-4cae-ad63-52a51009e561",
       "children": {
         "Shader": "b3325921-8f14-4847-9473-cfc6e333683a"
       },
@@ -2346,13 +2346,13 @@
         "bsi::name": "SpaceMaterial",
         "usd::usdshade::material": {
           "outputs::surface.connect": {
-            "ref": "SpaceMaterial/Shader.usd::materials::outputs::surface"
+            "ref": "./Shader.usd::materials::outputs::surface"
           }
         }
       }
     },
     {
-      "name": "WallMaterial",
+      "name": "359c715f-5961-4c20-be08-9bb25ea75c24",
       "children": {
         "Shader": "7a6173bc-e2f0-4e5f-aa73-cfed0ede1ceb"
       },
@@ -2360,13 +2360,13 @@
         "bsi::name": "WallMaterial",
         "usd::usdshade::material": {
           "outputs::surface.connect": {
-            "ref": "WallMaterial/Shader.usd::materials::outputs::surface"
+            "ref": "./Shader.usd::materials::outputs::surface"
           }
         }
       }
     },
     {
-      "name": "WindowMaterial",
+      "name": "82c0b0b0-1452-4fd9-b80d-20b9ee76a115",
       "children": {
         "Shader": "317cc394-2285-4f91-a120-3bcba12e9c47"
       },
@@ -2374,7 +2374,7 @@
         "bsi::name": "WindowMaterial",
         "usd::usdshade::material": {
           "outputs::surface.connect": {
-            "ref": "WindowMaterial/Shader.usd::materials::outputs::surface"
+            "ref": "./Shader.usd::materials::outputs::surface"
           }
         }
       }
