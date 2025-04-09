@@ -41,6 +41,16 @@
                   }
                 }
               }
+            },
+            "relatedSpace": {
+              "dataType": "Object",
+              "objectRestrictions": {
+                "values": {
+                  "ref": {
+                    "dataType": "String"
+                  }
+                }
+              }
             }
           }
         }
@@ -350,9 +360,7 @@
         "customdata": {
           "originalStepInstance": "This is only here to help understand the example. There will not be STEP code in IFC 5. This component represensts this line in the SPFF: #459=IfcWindowType('0bK3c4PWL3eOMNwkPN$rlg',$,'WT01',$,$,$,(#436,#458),$,$,.NOTDEFINED.,.NOTDEFINED.,$,$)"
         },
-        "attributes": {
-          "bsi::ifc5::alpha::class": "IfcWindow"
-        }
+        "bsi::ifc5::alpha::class": "IfcWindow"
       }
     },
     {
@@ -2139,6 +2147,9 @@
         "bsi::ifc5::alpha::spaceboundary": {
           "relatedElement": {
             "ref": "N93791d5d5beb437bb8ec2f1f0ba4bf3b"
+          },
+          "relatedSpace": {
+            "ref": "Ne3035b71bd9f4cdc86fdb56e2f4605b6"
           }
         }
       }
@@ -2186,6 +2197,9 @@
         "bsi::ifc5::alpha::spaceboundary": {
           "relatedElement": {
             "ref": "N2c2d549ff9fe4e228590562fda81a690"
+          },
+          "relatedSpace": {
+            "ref": "Ne3035b71bd9f4cdc86fdb56e2f4605b6"
           }
         }
       }
@@ -2233,6 +2247,9 @@
         "bsi::ifc5::alpha::spaceboundary": {
           "relatedElement": {
             "ref": "N592504dc469a44d69ae8c801b591679b"
+          },
+          "relatedSpace": {
+            "ref": "Ne3035b71bd9f4cdc86fdb56e2f4605b6"
           }
         }
       }
@@ -2277,12 +2294,12 @@
     {
       "name": "SpaceMaterial",
       "children": {
-        "Shader": "SpaceMaterial__Shader"
+        "Shader": "b3325921-8f14-4847-9473-cfc6e333683a"
       },
       "attributes": {
         "usd::usdshade::material": {
           "outputs::surface.connect": {
-            "ref": "SpaceMaterial/Shader::usd::materials::outputs::surface"
+            "ref": "SpaceMaterial/Shader.usd::materials::outputs::surface"
           }
         }
       }
@@ -2290,12 +2307,12 @@
     {
       "name": "WallMaterial",
       "children": {
-        "Shader": "WallMaterial__Shader"
+        "Shader": "7a6173bc-e2f0-4e5f-aa73-cfed0ede1ceb"
       },
       "attributes": {
         "usd::usdshade::material": {
           "outputs::surface.connect": {
-            "ref": "WallMaterial/Shader::usd::materials::outputs::surface"
+            "ref": "WallMaterial/Shader.usd::materials::outputs::surface"
           }
         }
       }
@@ -2303,12 +2320,12 @@
     {
       "name": "WindowMaterial",
       "children": {
-        "Shader": "WindowMaterial__Shader"
+        "Shader": "317cc394-2285-4f91-a120-3bcba12e9c47"
       },
       "attributes": {
         "usd::usdshade::material": {
           "outputs::surface.connect": {
-            "ref": "WindowMaterial/Shader::usd::materials::outputs::surface"
+            "ref": "WindowMaterial/Shader.usd::materials::outputs::surface"
           }
         }
       }
