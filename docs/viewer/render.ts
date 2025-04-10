@@ -65,7 +65,7 @@ function FindChildWithAttr(node: ComposedObject | undefined, attrName: string)
 }
 
 function createMaterialFromParent(parent, root) {
-    let reference = parent.attributes['UsdShade:MaterialBindingAPI:material:binding'];
+    let reference = parent.attributes['usd::usdshade::materialbindingapi::material::binding'];
     let material = {
         color: new THREE.Color(0.6, 0.6, 0.6),
         transparent: false,
@@ -73,14 +73,14 @@ function createMaterialFromParent(parent, root) {
     };
     if (reference) {
         const materialNode = getChildByName(root, reference.ref);
-        let shader = FindChildWithAttr(materialNode, "inputs:diffuseColor");
+        let shader = FindChildWithAttr(materialNode, "usd::materials::inputs::diffuseColor");
         if (shader)
         {
-            let color = shader?.attributes['inputs:diffuseColor'];
+            let color = shader?.attributes['usd::materials::inputs::diffuseColor'];
             material.color = new THREE.Color(...color);
-            if (shader?.attributes['inputs:opacity']) {
+            if (shader?.attributes['usd::materials::inputs::opacity']) {
                 material!.transparent = true;
-                material!.opacity = shader.attributes['inputs:opacity'];
+                material!.opacity = shader.attributes['usd::materials::inputs::opacity'];
             }
         }
     }
@@ -88,7 +88,7 @@ function createMaterialFromParent(parent, root) {
 }
 
 function createCurveFromJson(node, parent, root) {
-    let points = new Float32Array(node.attributes['UsdGeom:BasisCurves:points'].flat());
+    let points = new Float32Array(node.attributes['usd::usdgeom::basiscurves::points'].flat());
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute('position', new THREE.BufferAttribute(points, 3));
     const material = createMaterialFromParent(parent, root);
@@ -99,8 +99,8 @@ function createCurveFromJson(node, parent, root) {
 }
 
 function createMeshFromJson(node, parent, root) {
-    let points = new Float32Array(node.attributes['UsdGeom:Mesh:points'].flat());
-    let indices = new Uint16Array(node.attributes['UsdGeom:Mesh:faceVertexIndices']);
+    let points = new Float32Array(node.attributes['usd::usdgeom::mesh::points'].flat());
+    let indices = new Uint16Array(node.attributes['usd::usdgeom::mesh::faceVertexIndices']);
 
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute('position', new THREE.BufferAttribute(points, 3));
@@ -115,16 +115,16 @@ function createMeshFromJson(node, parent, root) {
 
 function traverseTree(node: ComposedObject, parent, root: ComposedObject, parentNode: ComposedObject | undefined = undefined) {
     let elem = new THREE.Group();
-    if (HasAttr(node, "UsdGeom:VisibilityAPI:visibility:visibility"))
+    if (HasAttr(node, "usd::usdgeom::visibility::visibility"))
     {
-        if (node.attributes["UsdGeom:VisibilityAPI:visibility:visibility"] === 'invisible') {
+        if (node.attributes["usd::usdgeom::visibility::visibility"] === 'invisible') {
             return;
         }
     } 
-    else if (HasAttr(node, "UsdGeom:Mesh:points")) {
+    else if (HasAttr(node, "usd::usdgeom::mesh::points")) {
         elem = createMeshFromJson(node, parentNode, root);
     } 
-    else if (HasAttr(node, "UsdGeom:BasisCurves:points"))
+    else if (HasAttr(node, "usd::usdgeom::basiscurves::points"))
     {
         elem = createCurveFromJson(node, parentNode, root);
     } 
@@ -133,7 +133,7 @@ function traverseTree(node: ComposedObject, parent, root: ComposedObject, parent
     if (node !== root) {
         elem.matrixAutoUpdate = false;
 
-        let matrixNode = node.attributes && node.attributes['xformOp:transform'] ? node.attributes['xformOp:transform'].flat() : null;
+        let matrixNode = node.attributes && node.attributes['usd::xformop::transform'] ? node.attributes['usd::xformop::transform'].flat() : null;
         if (matrixNode) {
             let matrix = new THREE.Matrix4();
             //@ts-ignore
@@ -153,9 +153,9 @@ function encodeHtmlEntities(str) {
 };
 
 const icons = {
-    'UsdGeom:Mesh:points': 'deployed_code', 
-    'UsdGeom:BasisCurves:points': 'line_curve',
-    'UsdShade:Material:outputs:surface.connect': 'line_style'
+    'usd::usdgeom::mesh::points': 'deployed_code', 
+    'usd::usdgeom::basiscurves::points': 'line_curve',
+    'usd::usdshade::material::outputs::surface.connect': 'line_style'
 };
 
 function buildDomTree(prim, node) {

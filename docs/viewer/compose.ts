@@ -53,7 +53,7 @@ export function compose(datas: Ifc5FileJson[]) {
         if (prim.name !== 'Shader' && "attributes" in prim) {
             const [componentName, componentNamedValues] = Object.entries(prim.attributes)[0];
             //@ts-ignore
-            const attrs = Object.fromEntries(Object.entries(componentNamedValues).map(([valueName, value]) => [`${componentName}:${valueName}`, value]));
+            const attrs = Object.fromEntries(Object.entries(componentNamedValues).map(([valueName, value]) => [`${componentName}::${valueName}`, value]));
             return {
                 ...prim,
                 attributes: attrs
