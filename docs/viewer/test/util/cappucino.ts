@@ -47,6 +47,10 @@ export function it(name: string, fn: any)
     globalPath.pop();
 }
 
+export function nope(name: string, fn: any)
+{
+}
+
 export function each(prefix: string, arr: string[], fn: any)
 {
     arr.forEach((part) => {

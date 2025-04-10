@@ -134,6 +134,7 @@ class IntermediateComposition
     names = new Set<string>();
     children = new Map<string, string[]>;
     inherits = new Map<string, string[]>;
+    dependencies = new Map<string, string[]>;
     isClass = new Map<string, boolean>;
     types = new Map<string, ComponentTypes>;
     attributes = new Map<string, any[]>;
@@ -265,6 +266,8 @@ function BuildTreeFromIntermediateComposition(ic: IntermediateComposition)
     roots.forEach(root => {
         MMSet(ic.children, PSEUDO_ROOT, root);
     })
+    
+    ic.names.add(PSEUDO_ROOT);
 
     return BuildTreeNodeFromIntermediateComposition(PSEUDO_ROOT, PSEUDO_ROOT, false, ic);
 }
