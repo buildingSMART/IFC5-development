@@ -22,7 +22,7 @@ function TreeNodeToComposedObject(path: string, node: TreeNode): ComposedObject
         if (attr && typeof attr === "object" && !Array.isArray(attr))
         {
             Object.keys(attr).forEach((compname) => {
-                co.attributes[`${attrName}:${compname}`] = attr[compname];
+                co.attributes[`${attrName}::${compname}`] = attr[compname];
             });
         }
         else

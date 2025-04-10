@@ -71,7 +71,7 @@
         }
       }
     },
-    "usd::usdshade:materialbindingapi": {
+    "usd::usdshade::materialbindingapi": {
       "value": {
         "dataType": "Object",
         "objectRestrictions": {
@@ -1237,7 +1237,7 @@
     {
       "name": "f079bafd-8733-48d8-85df-1c1656a17c1f",
       "attributes": {
-        "usd::usdshade:materialbindingapi": {
+        "usd::usdshade::materialbindingapi": {
           "material::binding": {
             "ref": "f83b2e90-81df-4cae-ad63-52a51009e561"
           }
@@ -1470,7 +1470,7 @@
     {
       "name": "13168941-10d9-4c6a-8c63-505cc302312c",
       "attributes": {
-        "usd::usdshade:materialbindingapi": {
+        "usd::usdshade::materialbindingapi": {
           "material::binding": {
             "ref": "359c715f-5961-4c20-be08-9bb25ea75c24"
           }
@@ -2147,7 +2147,7 @@
     {
       "name": "f40ec978-42e6-414a-a044-b6df23dfafef",
       "attributes": {
-        "usd::usdshade:materialbindingapi": {
+        "usd::usdshade::materialbindingapi": {
           "material::binding": {
             "ref": "82c0b0b0-1452-4fd9-b80d-20b9ee76a115"
           }
