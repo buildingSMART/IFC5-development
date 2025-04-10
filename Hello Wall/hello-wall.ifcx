@@ -22,7 +22,7 @@
         }
       }
     },
-    "bsi::ifc5::alpha::class": {
+    "bsi::ifc::5a::class": {
       "value": {
         "dataType": "Object",
         "objectRestrictions": {
@@ -37,12 +37,12 @@
         }
       }
     },
-    "bsi::ifc5::alpha::properties::isexternal": {
+    "bsi::ifc::5a::prop::isexternal": {
       "value": {
           "dataType": "Boolean"
       }
     },
-    "bsi::ifc5::alpha::spaceboundary": {
+    "bsi::ifc::5a::spaceboundary": {
       "value": {
         "dataType": "Object",
         "objectRestrictions": {
@@ -385,7 +385,7 @@
         "customdata": {
           "originalStepInstance": "This is only here to help understand the example. There will not be STEP code in IFC 5. This component represensts this line in the SPFF: #459=IfcWindowType('0bK3c4PWL3eOMNwkPN$rlg',$,'WT01',$,$,$,(#436,#458),$,$,.NOTDEFINED.,.NOTDEFINED.,$,$)"
         },
-        "bsi::ifc5::alpha::class": {
+        "bsi::ifc::5a::class": {
           "code": "IfcWindow",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/5/class/IfcWindow"
         }
@@ -1160,7 +1160,7 @@
     {
       "name": "08aa04b9-4ca7-45e0-9549-9154fef2828b",
       "attributes": {
-        "bsi::ifc5::alpha::class": {
+        "bsi::ifc::5a::class": {
           "code": "IfcProject",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/5/class/IfcProject"
         }
@@ -1177,7 +1177,7 @@
     {
       "name": "8adf3b8f-f34a-4687-a406-5063ee095a1a",
       "attributes": {
-        "bsi::ifc5::alpha::class": {
+        "bsi::ifc::5a::class": {
           "code": "IfcSite",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/5/class/IfcSite"
         }
@@ -1194,7 +1194,7 @@
     {
       "name": "2ddfa76e-ab37-42f2-8e37-ef5780d732e8",
       "attributes": {
-        "bsi::ifc5::alpha::class": {
+        "bsi::ifc::5a::class": {
           "code": "IfcBuilding",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/5/class/IfcBuilding"
         }
@@ -1211,7 +1211,7 @@
     {
       "name": "5a26bd1d-fa44-4aaa-9a5e-91a06eed2e52",
       "attributes": {
-        "bsi::ifc5::alpha::class": {
+        "bsi::ifc::5a::class": {
           "code": "IfcBuildingStorey",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/5/class/IfcBuildingStorey"
         }
@@ -1228,7 +1228,7 @@
     {
       "name": "f079bafd-8733-48d8-85df-1c1656a17c1f",
       "attributes": {
-        "bsi::ifc5::alpha::class": {
+        "bsi::ifc::5a::class": {
           "code": "IfcSpace",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/5/class/IfcSpace"
         }
@@ -1455,7 +1455,7 @@
     {
       "name": "13168941-10d9-4c6a-8c63-505cc302312c",
       "attributes": {
-        "bsi::ifc5::alpha::class": {
+        "bsi::ifc::5a::class": {
           "code": "IfcWall",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/5/class/IfcWall"
         }
@@ -1464,7 +1464,7 @@
     {
       "name": "13168941-10d9-4c6a-8c63-505cc302312c",
       "attributes": {
-        "bsi::ifc5::alpha::properties::isexternal": true
+        "bsi::ifc::5a::prop::isexternal": true
       }
     },
     {
@@ -2141,7 +2141,7 @@
     {
       "name": "f40ec978-42e6-414a-a044-b6df23dfafef",
       "attributes": {
-        "bsi::ifc5::alpha::properties::isexternal": true
+        "bsi::ifc::5a::prop::isexternal": true
       }
     },
     {
@@ -2190,7 +2190,7 @@
     {
       "name": "4fd67c00-82cf-476d-b5dd-6a06b07c6141",
       "attributes": {
-        "bsi::ifc5::alpha::spaceboundary": {
+        "bsi::ifc::5a::spaceboundary": {
           "relatedElement": {
             "ref": "13168941-10d9-4c6a-8c63-505cc302312c"
           },
@@ -2240,7 +2240,7 @@
     {
       "name": "15226122-42a4-428d-9b9a-16566291c182",
       "attributes": {
-        "bsi::ifc5::alpha::spaceboundary": {
+        "bsi::ifc::5a::spaceboundary": {
           "relatedElement": {
             "ref": "82966dcf-41fc-4776-97f1-71d9cb52ab7e"
           },
@@ -2290,7 +2290,7 @@
     {
       "name": "428b2888-1e0d-4f7b-b8ae-73236f626cea",
       "attributes": {
-        "bsi::ifc5::alpha::spaceboundary": {
+        "bsi::ifc::5a::spaceboundary": {
           "relatedElement": {
             "ref": "8134f9ec-2e87-4b70-a538-9b6dc7ba94b1"
           },
