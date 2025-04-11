@@ -1,0 +1,111 @@
+[
+//This is adding actual properties to an object (typical or occurance):
+{
+	"def": "over",
+	"name": "N2550...someobject",
+	"attributes": {
+		"properties": {
+			"a603490d-d91b-5ef6-826f-19619cf5cab7": 1.0,
+			"6275c351-4936-59d3-9fb5-f4590046e1b8": 10.0,
+			"a128307d-30ce-543d-bc22-7d011ef1869a": "REI30",
+			"196e8ff9-12a4-55dd-a9e5-efc84aca34b6": ["0.01","0.002","0.0015"],
+			"da796591-5082-5687-8808-70339adc2c98": 13
+		}
+},
+//Property definitions:
+{
+	//minumum required attributes
+	"def": "class",
+	"name": "a603490d-d91b-5ef6-826f-19619cf5cab7",
+	"type": "PropertyDefinition",
+	"attributes":{
+		"code": "bsi::ifc-core::5.1.0::IsExternal"
+	}
+},
+{
+	//example with extensive metadata
+	"def": "class",
+	"name": "6275c351-4936-59d3-9fb5-f4590046e1b8",
+	"type": "PropertyDefinition",
+	"attributes":{
+		"code": "bsi::ifc-core::5.1.0::NetVolume", 
+		//alternatively "code": "Volume", "source": "bsi::ifc-core::5.1.0", //optional
+		"displayName": {"pt-BR":"Volume Líquido","sv-SE":"Netto volym"},  //optional
+		"uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/prop/NetVolume", //optional
+		"dataType": "Real", //optional, one of: Boolean, Integer, Real, String, dateTime; default: Real
+		"measure": "Volume", //optional, which corresponds to "dimension": [3,0,0,0,0,0,0], and SI unit "cubic metre" with symbol "m³". Measure is a predefined set of dimensions, units and symbols. Other examples: {Weight, kilograms}, {SoundPower, Decibel}, {Productivity, PiecePerHour, ppm"}
+	}
+},
+{
+	//example with restrictions
+	"def": "class",
+	"name": "a128307d-30ce-543d-bc22-7d011ef1869a",
+	"type": "PropertyDefinition",
+	"attributes":{
+		"code": "bsi::ifc-core::5.1.0::FireRating",
+		"dataType": "String",
+		"enum": ["REI30","REI60","REI90","REI120"],  //has to comply with the dataType
+		//Alternative restrictions:
+		//"pattern": "ABC\\d*"       //regex
+		//"minInclusive": 3.0
+		//"maxInclusive": 3.0
+		//"minExclusive": 3.0
+		//"maxExclusive": 3.0
+	}
+},
+{
+	//example with list
+	"def": "class",
+	"name": "196e8ff9-12a4-55dd-a9e5-efc84aca34b6",
+	"type": "PropertyDefinition",
+	"attributes":{
+		"code": "bsi::ifc-elec::1.0.1::CurrentAdjustmentValues",
+		"valueKind": "List", //optional, default "Single" (IFCX does not have: Table, BoundedValue, Enumerated value, key-value pairs, complex or else...)
+		"measure": "ElectricCurrent", // dimension [0,0,-1,1,0,0,0], and unit "ampere" with symbol "A".
+	}
+},
+{
+	//example with custom property and unit
+	"def": "class",
+	"name": "da796591-5082-5687-8808-70339adc2c98",
+	"type": "PropertyDefinition",
+	"attributes":{
+		"code": "anycorp::ownprops::1.2.3::ProgressInMetresPerSquareMetre"
+		//That's it, the property is just any numeric value, without defined measure or unit. The unit is just reflected in the custom name.
+	}
+},
+//Definition of measures. This was debated in the group, and could instead be made implicit, covered by the standard.
+{
+	"def": "class",
+	"name": "Volume",	//or UUID
+	"type": "Measure",
+	"attributes":{
+		"dimension": [3,0,0,0,0,0,0],
+		"unit": "cubic metre",
+		"dataType": "Real",
+		"symbol": "m³",
+		"minExclusive": 0.0
+	}
+},
+{
+	"def": "class",
+	"name": "ElectricCurrent",	//or UUID
+	"type": "Measure",
+	"attributes":{
+		"dimension": [0,0,-1,1,0,0,0],
+		"dataType": "Real",
+		"unit": "ampere",
+		"symbol": "A",
+		"alternativeUnits": {	//dangerous idea, as not all can be converted with a simple factor (example: decibel - uses log scale)
+			"mA": {
+				"name": "miliampere",
+				"conversion": 0.001
+			},
+			"kA": {
+				"name": "kiloampere",
+				"conversion": 1000
+			}
+		}
+	}
+}
+]
