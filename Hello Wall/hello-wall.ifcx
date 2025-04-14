@@ -42,6 +42,18 @@
           "dataType": "Boolean"
       }
     },
+    "bsi::ifc::v5a::prop::volume": {
+      "value": {
+          "dataType": "Real",
+          "measure": "Volume"
+      }
+    },
+    "bsi::ifc::v5a::prop::height": {
+      "value": {
+          "dataType": "Real",
+          "measure": "Length"
+      }
+    },
     "bsi::ifc::v5a::spaceboundary": {
       "value": {
         "dataType": "Object",
@@ -1229,7 +1241,9 @@
           "material::binding": {
             "ref": "f83b2e90-81df-4cae-ad63-52a51009e561"
           }
-        }
+        },
+        "bsi::ifc::v5a::prop::volume": 27.3,
+        "bsi::ifc::v5a::prop::height": 3.5
       }
     },
     {
@@ -1452,7 +1466,9 @@
     {
       "identifier":"13168941-10d9-4c6a-8c63-505cc302312c",
       "attributes": {
-        "bsi::ifc::v5a::prop::isexternal": true
+        "bsi::ifc::v5a::prop::isexternal": true,
+        "bsi::ifc::v5a::prop::volume": 0.9,
+        "bsi::ifc::v5a::prop::height": 3.5
       }
     },
     {
