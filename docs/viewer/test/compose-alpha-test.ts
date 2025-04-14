@@ -1,5 +1,5 @@
-import { CycleError, ExpandNodeWithInput, InputNode, TreeNode } from "./compose-alpha";
-import { describe, each, it } from "./test/util/cappucino";
+import { CycleError, ExpandNodeWithInput, InputNode, TreeNode } from "../compose-alpha";
+import { describe, each, it } from "./util/cappucino";
 import { expect } from "chai";
 
 function MakeInputNode(path: string)
@@ -265,9 +265,9 @@ describe("composition expansion", () => {
     });
 })
 
-import { components } from "../../schema/out/ts/ifcx";
-import { Diff, Federate, LoadIfcxFile, SchemaValidationError } from "./workflow-alpha";
-import { SchemasToOpenAPI } from "./schema-alpha";
+import { components } from "../../../schema/out/ts/ifcx";
+import { Diff, Federate, LoadIfcxFile, SchemaValidationError } from "../workflow-alpha";
+import { SchemasToOpenAPI } from "../schema-alpha";
 import { ExampleFile, ExampleFileMissingSchema, ExampleFileWithSchema } from "./example-file";
 type IfcxFile = components["schemas"]["IfcxFile"];
 
