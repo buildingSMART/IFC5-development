@@ -39,8 +39,18 @@ export class SchemaValidationError extends Error
 
 }
 
-function ValidateAttributeValue(desc: IfcxValueDescription, value: any, path: string)
+function ValidateAttributeValue(desc: IfcxValueDescription, value: any, path: string, schemas: {[key: string]: IfcxSchema})
 {
+    if (desc.inherits)
+    {
+        let inheritedSchema = schemas[desc.inherits];
+        if (!inheritedSchema)
+        {
+            throw new SchemaValidationError(`Unknown inherited schema id "${desc.inherits}"`);
+        }
+        ValidateAttributeValue(inheritedSchema.value, value, path, schemas);
+    }
+
     if (desc.dataType === "Boolean")
     {
         if (typeof value !== "boolean")
@@ -108,16 +118,9 @@ function ValidateAttributeValue(desc: IfcxValueDescription, value: any, path: st
                 {
                     throw new SchemaValidationError(`Expected "${value}" to have key ${key}`);
                 }
-                ValidateAttributeValue(desc.objectRestrictions!.values[key], value[key], path + "." + key);
+                ValidateAttributeValue(desc.objectRestrictions!.values[key], value[key], path + "." + key, schemas);
             })
         }
-        
-        Object.keys(value).forEach((key) => {
-            if (!desc.objectRestrictions || !Object.hasOwn(desc.objectRestrictions!.values, key))
-            {
-                throw new SchemaValidationError(`Unexpected key "${key}" not mentioned in its schema`);
-            } 
-        })
     }
     else if (desc.dataType === "Array")
     {
@@ -126,7 +129,7 @@ function ValidateAttributeValue(desc: IfcxValueDescription, value: any, path: st
             throw new SchemaValidationError(`Expected "${value}" to be of type array`);
         }
         value.forEach((entry) => {
-            ValidateAttributeValue(desc.arrayRestrictions!.value, entry, path + ".<array>.");
+            ValidateAttributeValue(desc.arrayRestrictions!.value, entry, path + ".<array>.", schemas);
         })
     }
     else
@@ -142,14 +145,14 @@ export function Validate(schemas: {[key: string]: IfcxSchema}, inputNodes: Map<s
         Object.keys(node.attributes).forEach((schemaID) => {
             if (!schemas[schemaID])
             {
-                throw new SchemaValidationError(`Missing schema "${schemaID}" referenced by "${node.path}".attributes`);   
+                throw new SchemaValidationError(`Missing schema "${schemaID}" referenced by ["${node.path}"].attributes`);   
             }
             let schema = schemas[schemaID];
             let value = node.attributes[schemaID];
             
             try
             {
-                ValidateAttributeValue(schema.value, value, "");
+                ValidateAttributeValue(schema.value, value, "", schemas);
             } 
             catch(e)
             {
