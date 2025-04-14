@@ -48,19 +48,19 @@ export interface components {
         IfcxValueDescription: {
             dataType: components["schemas"]["DataType"];
             inherits?: string[];
-            measure?: components["schemas"]["Measure"];
+            quantityKind?: components["schemas"]["QuantityKind"];
             enumRestrictions?: components["schemas"]["EnumRestrictions"];
             arrayRestrictions?: components["schemas"]["ArrayRestrictions"];
             objectRestrictions?: components["schemas"]["ObjectRestrictions"];
             relationRestrictions?: components["schemas"]["RelationRestrictions"];
         };
-        /** @enum {string} */
-        Measure: "Plane angle" | "Thermodynamic temperature" | "Electric current" | "Time" | "Frequency" | "Mass" | "Length" | "Linear velocity" | "Force" | "Pressure" | "Area" | "Energy" | "Power" | "Volume";
         ObjectRestrictions: {
             values: {
                 [key: string]: components["schemas"]["IfcxValueDescription"];
             };
         };
+        /** @enum {string} */
+        QuantityKind: "Plane angle" | "Thermodynamic temperature" | "Electric current" | "Time" | "Frequency" | "Mass" | "Length" | "Linear velocity" | "Force" | "Pressure" | "Area" | "Energy" | "Power" | "Volume";
         RelationRestrictions: {
             type: string;
         };

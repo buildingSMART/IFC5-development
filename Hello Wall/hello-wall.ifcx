@@ -45,13 +45,13 @@
     "bsi::ifc::v5a::prop::volume": {
       "value": {
           "dataType": "Real",
-          "measure": "Volume"
+          "quantityKind": "Volume"
       }
     },
     "bsi::ifc::v5a::prop::height": {
       "value": {
           "dataType": "Real",
-          "measure": "Length"
+          "quantityKind": "Length"
       }
     },
     "bsi::ifc::v5a::spaceboundary": {

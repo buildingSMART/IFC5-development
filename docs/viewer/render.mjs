@@ -393,12 +393,12 @@ function TreeNodeToComposedObject(path, node, schemas) {
       });
     } else {
       let schema = schemas[attrName];
-      if (schema && schema.value.measure) {
+      if (schema && schema.value.quantityKind) {
         let postfix = "";
-        let measure = schema.value.measure;
-        if (measure === "Length") {
+        let quantityKind = schema.value.quantityKind;
+        if (quantityKind === "Length") {
           postfix = "m";
-        } else if (measure === "Volume") {
+        } else if (quantityKind === "Volume") {
           postfix = "m" + String.fromCodePoint(179);
         }
         co.attributes[attrName] = `${attr} ${postfix}`;

@@ -1,5 +1,5 @@
 // https://github.com/buildingSMART/IFC5-development/blob/fab1330d6f7cccb24b5dcea62db802ee496d60ee/schema/Measures.md
-enum Measure
+enum QuantityKind
 {
     PlaneAngle: "Plane angle";
     ThermodynamicTemperatue: "Thermodynamic temperature",

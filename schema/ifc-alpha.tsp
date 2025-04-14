@@ -3,7 +3,7 @@
 // addition, several questions on modularity and extensibility still
 // need to be answered.
 
-import "./ifcx-measures.tsp";
+import "./ifcx-quantity-kinds.tsp";
 
 @pattern("</[A-Za-z0-9_/.:]+>")
 scalar path extends string;
@@ -64,7 +64,7 @@ model IfcxValueDescription
 {
     dataType: DataType;
     inherits?: string[];
-    measure?: Measure;
+    quantityKind?: QuantityKind;
 
     enumRestrictions?: EnumRestrictions;
     arrayRestrictions?: ArrayRestrictions;
