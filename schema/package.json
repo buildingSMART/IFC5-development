@@ -13,10 +13,8 @@
     "openapi-typescript": "^7.6.1"
   },
   "scripts": {
-    "compile": "tsp compile .",
-    "compile-alpha": "tsp compile ifc-alpha.tsp",
-    "gen-alpha": "npx openapi-typescript ./out/@typespec/openapi3/openapi.yaml -o ./out/ts/ifcx.d.ts",
-    "gen": "cd ./out/@typespec/json-schema/ && json2ts Ifc5File.json ./ts/ifc5file.d.ts --no-additionalProperties"
+    "compile": "tsp compile ifc-alpha.tsp",
+    "gen": "npx openapi-typescript ./out/@typespec/openapi3/openapi.yaml -o ./out/ts/ifcx.d.ts"
   },
   "private": true,
   "dependencies": {

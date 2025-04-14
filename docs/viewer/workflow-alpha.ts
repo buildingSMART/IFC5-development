@@ -101,12 +101,22 @@ function ValidateAttributeValue(desc: IfcxValueDescription, value: any, path: st
         {
             throw new SchemaValidationError(`Expected "${value}" to be of type object`);
         }
-        Object.keys(desc.objectRestrictions!.values).forEach(key => {
-            if (!Object.hasOwn(value, key))
+        if (desc.objectRestrictions)
+        {
+            Object.keys(desc.objectRestrictions!.values).forEach(key => {
+                if (!Object.hasOwn(value, key))
+                {
+                    throw new SchemaValidationError(`Expected "${value}" to have key ${key}`);
+                }
+                ValidateAttributeValue(desc.objectRestrictions!.values[key], value[key], path + "." + key);
+            })
+        }
+        
+        Object.keys(value).forEach((key) => {
+            if (!desc.objectRestrictions || !Object.hasOwn(desc.objectRestrictions!.values, key))
             {
-                throw new SchemaValidationError(`Expected "${value}" to have key ${key}`);
-            }
-            ValidateAttributeValue(desc.objectRestrictions!.values[key], value[key], path + "." + key);
+                throw new SchemaValidationError(`Unexpected key "${key}" not mentioned in its schema`);
+            } 
         })
     }
     else if (desc.dataType === "Array")

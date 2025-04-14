@@ -104,6 +104,8 @@ components:
       properties:
         dataType:
           $ref: '#/components/schemas/DataType'
+        inherits:
+          type: string
         measure:
           $ref: '#/components/schemas/Measure'
         enumRestrictions:

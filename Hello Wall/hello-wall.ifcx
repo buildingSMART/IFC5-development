@@ -115,16 +115,7 @@
     "nlsfb::class": {
       "value": {
         "dataType": "Object",
-        "objectRestrictions": {
-          "values": {
-            "code": {
-              "dataType": "String"
-            },
-            "uri": {
-              "dataType": "String"
-            }
-          }
-        }
+        "inherits": "bsi::ifc::5a::class"
       }
     },
     "usd::materials::info::id": {
@@ -2055,9 +2046,6 @@
       "name": "b6012d70-097a-4794-8d1f-220fa65a591a",
       "attributes": {
         "usd::usdgeom::mesh": {
-          "faceVertexCounts": [
-            4
-          ],
           "faceVertexIndices": [
             0,
             1,
