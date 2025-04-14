@@ -4,8 +4,9 @@ import { TreeNode } from "./compose-alpha";
 import { ComposedObject } from "./composed-object";
 
 type IfcxFile = components["schemas"]["IfcxFile"];
+type IfcxSchema = components["schemas"]["IfcxSchema"];
 
-function TreeNodeToComposedObject(path: string, node: TreeNode): ComposedObject
+function TreeNodeToComposedObject(path: string, node: TreeNode, schemas: {[key: string]: IfcxSchema}): ComposedObject
 {
     let co = {
         name: path, 
@@ -14,7 +15,7 @@ function TreeNodeToComposedObject(path: string, node: TreeNode): ComposedObject
     } as ComposedObject;
 
     node.children.forEach((childNode, childName) => {
-        co.children?.push(TreeNodeToComposedObject(`${path}/${childName}`, childNode));
+        co.children?.push(TreeNodeToComposedObject(`${path}/${childName}`, childNode, schemas));
     });
 
     node.attributes.forEach((attr, attrName) => {
@@ -27,7 +28,26 @@ function TreeNodeToComposedObject(path: string, node: TreeNode): ComposedObject
         }
         else
         {
-            co.attributes[attrName] = attr;
+            // basic unit support for non-nested attributes
+            let schema = schemas[attrName];
+            if (schema && schema.value.measure)
+            {
+                let postfix = "";
+                let measure = schema.value.measure;
+                if (measure === "Length")
+                {
+                    postfix = "m";
+                }
+                else if (measure === "Volume")
+                {
+                    postfix = "m" + String.fromCodePoint(0x00B3);
+                }
+                co.attributes[attrName] = `${attr} ${postfix}`;
+            }
+            else
+            {
+                co.attributes[attrName] = attr;
+            }
         }
     })
 
@@ -40,5 +60,5 @@ export function compose3(files: IfcxFile[])
 {
     let federated = Federate(files);
     let tree = LoadIfcxFile(federated, true, true);
-    return TreeNodeToComposedObject("", tree);
+    return TreeNodeToComposedObject("", tree, federated.schemas);
 }
