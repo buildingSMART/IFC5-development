@@ -115,7 +115,7 @@
     "nlsfb::class": {
       "value": {
         "dataType": "Object",
-        "inherits": "bsi::ifc::5a::class"
+        "inherits": ["bsi::ifc::5a::class"]
       }
     },
     "usd::materials::info::id": {

@@ -47,7 +47,7 @@ export interface components {
         };
         IfcxValueDescription: {
             dataType: components["schemas"]["DataType"];
-            inherits?: string;
+            inherits?: string[];
             measure?: components["schemas"]["Measure"];
             enumRestrictions?: components["schemas"]["EnumRestrictions"];
             arrayRestrictions?: components["schemas"]["ArrayRestrictions"];

@@ -43,12 +43,14 @@ function ValidateAttributeValue(desc: IfcxValueDescription, value: any, path: st
 {
     if (desc.inherits)
     {
-        let inheritedSchema = schemas[desc.inherits];
-        if (!inheritedSchema)
-        {
-            throw new SchemaValidationError(`Unknown inherited schema id "${desc.inherits}"`);
-        }
-        ValidateAttributeValue(inheritedSchema.value, value, path, schemas);
+        desc.inherits.forEach((inheritedSchemaID) => {
+            let inheritedSchema = schemas[inheritedSchemaID];
+            if (!inheritedSchema)
+            {
+                throw new SchemaValidationError(`Unknown inherited schema id "${desc.inherits}"`);
+            }
+            ValidateAttributeValue(inheritedSchema.value, value, path, schemas);
+        });
     }
 
     if (desc.dataType === "Boolean")

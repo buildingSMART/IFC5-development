@@ -105,7 +105,9 @@ components:
         dataType:
           $ref: '#/components/schemas/DataType'
         inherits:
-          type: string
+          type: array
+          items:
+            type: string
         measure:
           $ref: '#/components/schemas/Measure'
         enumRestrictions:

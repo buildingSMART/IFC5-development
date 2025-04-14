@@ -63,7 +63,7 @@ model RelationRestrictions
 model IfcxValueDescription
 {
     dataType: DataType;
-    inherits?: string;
+    inherits?: string[];
     measure?: Measure;
 
     enumRestrictions?: EnumRestrictions;
