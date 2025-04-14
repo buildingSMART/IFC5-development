@@ -30,7 +30,7 @@ export interface components {
             timestamp: string;
         };
         IfcxNode: {
-            name: components["schemas"]["path"];
+            identifier: components["schemas"]["path"];
             children?: {
                 [key: string]: string | null;
             };

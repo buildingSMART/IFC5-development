@@ -71,9 +71,9 @@ components:
     IfcxNode:
       type: object
       required:
-        - name
+        - identifier
       properties:
-        name:
+        identifier:
           $ref: '#/components/schemas/path'
         children:
           type: object

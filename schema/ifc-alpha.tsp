@@ -12,7 +12,7 @@ scalar path extends string;
 scalar code extends string;
 
 model IfcxNode {
-    name: path;
+    identifier: path;
     children?: Record<string | null>;
     inherits?: Record<string | null>;
     attributes?: Record<unknown>;

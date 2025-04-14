@@ -1,7 +1,7 @@
 import { components } from "../../schema/out/ts/ifcx";
 import { Federate, LoadIfcxFile } from "./workflow-alpha";
 import { TreeNode } from "./compose-alpha";
-import { ComposedObject } from "./compose";
+import { ComposedObject } from "./composed-object";
 
 type IfcxFile = components["schemas"]["IfcxFile"];
 
