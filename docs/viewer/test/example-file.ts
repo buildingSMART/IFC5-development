@@ -48,7 +48,7 @@ export function ExampleFile(attribute: string = "example::string", value: any = 
                 uri: "http://www.example.com/integer",
                 value: {
                     dataType: "Real",
-                    measure: "Length"
+                    quantityKind: "Length"
                 }
             },
             "example::object": {

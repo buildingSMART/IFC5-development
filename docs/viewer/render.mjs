@@ -377,14 +377,14 @@ function Prune(file, deleteEmpty = false) {
 }
 
 // compose-flattened.ts
-function TreeNodeToComposedObject(path, node) {
+function TreeNodeToComposedObject(path, node, schemas) {
   let co = {
     name: path,
     attributes: {},
     children: []
   };
   node.children.forEach((childNode, childName) => {
-    co.children?.push(TreeNodeToComposedObject(`${path}/${childName}`, childNode));
+    co.children?.push(TreeNodeToComposedObject(`${path}/${childName}`, childNode, schemas));
   });
   node.attributes.forEach((attr, attrName) => {
     if (attr && typeof attr === "object" && !Array.isArray(attr)) {
@@ -392,7 +392,19 @@ function TreeNodeToComposedObject(path, node) {
         co.attributes[`${attrName}::${compname}`] = attr[compname];
       });
     } else {
-      co.attributes[attrName] = attr;
+      let schema = schemas[attrName];
+      if (schema && schema.value.quantityKind) {
+        let postfix = "";
+        let quantityKind = schema.value.quantityKind;
+        if (quantityKind === "Length") {
+          postfix = "m";
+        } else if (quantityKind === "Volume") {
+          postfix = "m" + String.fromCodePoint(179);
+        }
+        co.attributes[attrName] = `${attr} ${postfix}`;
+      } else {
+        co.attributes[attrName] = attr;
+      }
     }
   });
   if (Object.keys(co.attributes).length === 0) delete co.attributes;
@@ -401,7 +413,7 @@ function TreeNodeToComposedObject(path, node) {
 function compose3(files) {
   let federated = Federate(files);
   let tree = LoadIfcxFile(federated, true, true);
-  return TreeNodeToComposedObject("", tree);
+  return TreeNodeToComposedObject("", tree, federated.schemas);
 }
 
 // render.ts

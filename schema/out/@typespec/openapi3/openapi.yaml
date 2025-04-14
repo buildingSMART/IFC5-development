@@ -108,8 +108,8 @@ components:
           type: array
           items:
             type: string
-        measure:
-          $ref: '#/components/schemas/Measure'
+        quantityKind:
+          $ref: '#/components/schemas/QuantityKind'
         enumRestrictions:
           $ref: '#/components/schemas/EnumRestrictions'
         arrayRestrictions:
@@ -118,7 +118,16 @@ components:
           $ref: '#/components/schemas/ObjectRestrictions'
         relationRestrictions:
           $ref: '#/components/schemas/RelationRestrictions'
-    Measure:
+    ObjectRestrictions:
+      type: object
+      required:
+        - values
+      properties:
+        values:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/IfcxValueDescription'
+    QuantityKind:
       type: string
       enum:
         - Plane angle
@@ -135,15 +144,6 @@ components:
         - Energy
         - Power
         - Volume
-    ObjectRestrictions:
-      type: object
-      required:
-        - values
-      properties:
-        values:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/IfcxValueDescription'
     RelationRestrictions:
       type: object
       required:
