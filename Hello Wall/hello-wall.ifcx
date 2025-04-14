@@ -239,18 +239,15 @@
       }
     },
     {
-      "identifier":"08aa04b9-4ca7-45e0-9549-9154fef2828b",
+      "identifier":"1ea5c0ac-b13b-4ead-aa94-26d4dd36823e",
       "children": {
-        "My_Site": "8adf3b8f-f34a-4687-a406-5063ee095a1a"
+        "My_Project": "08aa04b9-4ca7-45e0-9549-9154fef2828b"
       }
     },
     {
-      "identifier":"00398076-2253-4686-b269-f380ee13428c",
-      "inherits": {
-        "projectType": "08aa04b9-4ca7-45e0-9549-9154fef2828b"
-      },
-      "attributes": {
-        "bsi::name": "My_Project"
+      "identifier":"08aa04b9-4ca7-45e0-9549-9154fef2828b",
+      "children": {
+        "My_Site": "8adf3b8f-f34a-4687-a406-5063ee095a1a"
       }
     },
     {
