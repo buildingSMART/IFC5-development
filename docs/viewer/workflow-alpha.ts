@@ -24,7 +24,7 @@ function ToInputNodes(data: IfcxNode[])
     let inputNodes = new Map<string, InputNode[]>();
     data.forEach((ifcxNode) => {
         let node = {
-            path: ifcxNode.name,
+            path: ifcxNode.identifier,
             children: ifcxNode.children ? ifcxNode.children : {}, 
             inherits: ifcxNode.inherits ? ifcxNode.inherits : {},
             attributes: ifcxNode.attributes ? ifcxNode.attributes : {}
@@ -39,8 +39,20 @@ export class SchemaValidationError extends Error
 
 }
 
-function ValidateAttributeValue(desc: IfcxValueDescription, value: any, path: string)
+function ValidateAttributeValue(desc: IfcxValueDescription, value: any, path: string, schemas: {[key: string]: IfcxSchema})
 {
+    if (desc.inherits)
+    {
+        desc.inherits.forEach((inheritedSchemaID) => {
+            let inheritedSchema = schemas[inheritedSchemaID];
+            if (!inheritedSchema)
+            {
+                throw new SchemaValidationError(`Unknown inherited schema id "${desc.inherits}"`);
+            }
+            ValidateAttributeValue(inheritedSchema.value, value, path, schemas);
+        });
+    }
+
     if (desc.dataType === "Boolean")
     {
         if (typeof value !== "boolean")
@@ -101,13 +113,16 @@ function ValidateAttributeValue(desc: IfcxValueDescription, value: any, path: st
         {
             throw new SchemaValidationError(`Expected "${value}" to be of type object`);
         }
-        Object.keys(desc.objectRestrictions!.values).forEach(key => {
-            if (!Object.hasOwn(value, key))
-            {
-                throw new SchemaValidationError(`Expected "${value}" to have key ${key}`);
-            }
-            ValidateAttributeValue(desc.objectRestrictions!.values[key], value[key], path + "." + key);
-        })
+        if (desc.objectRestrictions)
+        {
+            Object.keys(desc.objectRestrictions!.values).forEach(key => {
+                if (!Object.hasOwn(value, key))
+                {
+                    throw new SchemaValidationError(`Expected "${value}" to have key ${key}`);
+                }
+                ValidateAttributeValue(desc.objectRestrictions!.values[key], value[key], path + "." + key, schemas);
+            })
+        }
     }
     else if (desc.dataType === "Array")
     {
@@ -116,7 +131,7 @@ function ValidateAttributeValue(desc: IfcxValueDescription, value: any, path: st
             throw new SchemaValidationError(`Expected "${value}" to be of type array`);
         }
         value.forEach((entry) => {
-            ValidateAttributeValue(desc.arrayRestrictions!.value, entry, path + ".<array>.");
+            ValidateAttributeValue(desc.arrayRestrictions!.value, entry, path + ".<array>.", schemas);
         })
     }
     else
@@ -132,14 +147,14 @@ export function Validate(schemas: {[key: string]: IfcxSchema}, inputNodes: Map<s
         Object.keys(node.attributes).forEach((schemaID) => {
             if (!schemas[schemaID])
             {
-                throw new SchemaValidationError(`Missing schema "${schemaID}" referenced by "${node.path}".attributes`);   
+                throw new SchemaValidationError(`Missing schema "${schemaID}" referenced by ["${node.path}"].attributes`);   
             }
             let schema = schemas[schemaID];
             let value = node.attributes[schemaID];
             
             try
             {
-                ValidateAttributeValue(schema.value, value, "");
+                ValidateAttributeValue(schema.value, value, "", schemas);
             } 
             catch(e)
             {
@@ -202,7 +217,7 @@ function DeepEqual(a: any, b: any)
 function DiffNodes(node1: InputNode, node2: InputNode): IfcxNode
 {
     let result = {
-        name: node1.path,
+        identifier: node1.path,
         children: {},
         inherits: {},
         attributes: {}
@@ -358,7 +373,7 @@ function Prune(file: IfcxFile, deleteEmpty: boolean = false)
     inputNodes.forEach((nodes) => {
         let collapsed = Collapse(nodes, deleteEmpty);
         if (collapsed) result.data.push({
-            name: collapsed.path,
+            identifier: collapsed.path,
             children: collapsed.children,
             inherits: collapsed.inherits,
             attributes: collapsed.attributes

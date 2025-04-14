@@ -1,4 +1,4 @@
-// compose.ts
+// composed-object.ts
 function getChildByName(root, childName, skip = 0) {
   let fragments = childName.replace(/^<\/|^\/|>$/g, "").split("/");
   for (let i = 0; i < skip; ++i) {
@@ -13,162 +13,6 @@ function getChildByName(root, childName, skip = 0) {
   if (fragments.length == 0) {
     return start;
   }
-}
-
-// compose2.ts
-var PSEUDO_ROOT = "";
-function MMSet(map, key, value) {
-  if (map.has(key)) {
-    map.get(key)?.push(value);
-  } else {
-    map.set(key, [value]);
-  }
-}
-function CollectDefChildren(input, output, children) {
-  let addedDefs = [];
-  input.filter((o) => "children" in o).forEach((parent) => {
-    parent.children.forEach((def) => {
-      let newDefName = `${parent.name}/${def.name}`;
-      addedDefs.push({
-        ...def,
-        name: newDefName
-      });
-      MMSet(children, parent.name, newDefName);
-    });
-  });
-  output.push(...addedDefs);
-}
-function CleanInherit(inheritString) {
-  return inheritString.substring(2, inheritString.length - 1);
-}
-function CollectInherits(input, collection) {
-  input.forEach((input2) => {
-    if (input2.inherits) {
-      input2.inherits.forEach((parent) => {
-        MMSet(collection, input2.name, CleanInherit(parent));
-      });
-    }
-  });
-}
-function prefixAttributesWithComponentName(attributes) {
-  let prefixed = {};
-  Object.keys(attributes).forEach((componentName) => {
-    if (attributes[componentName] !== null && typeof attributes[componentName] === "object" && !Array.isArray(attributes[componentName])) {
-      Object.keys(attributes[componentName]).forEach((valueName) => {
-        prefixed[`${componentName}:${valueName}`] = attributes[componentName][valueName];
-      });
-    } else {
-      prefixed[componentName] = attributes[componentName];
-    }
-  });
-  return prefixed;
-}
-function CondenseAttributes(attrs) {
-  if (!attrs) return void 0;
-  let condensed = {};
-  attrs.filter((a) => a).forEach((attributes) => {
-    condensed = { ...condensed, ...attributes };
-  });
-  return condensed;
-}
-var IntermediateComposition = class {
-  names = /* @__PURE__ */ new Set();
-  children = /* @__PURE__ */ new Map();
-  inherits = /* @__PURE__ */ new Map();
-  dependencies = /* @__PURE__ */ new Map();
-  isClass = /* @__PURE__ */ new Map();
-  types = /* @__PURE__ */ new Map();
-  attributes = /* @__PURE__ */ new Map();
-};
-function GetAllAttributesForNode(ic, fullNodePath) {
-  let attributeArray = [];
-  let pathParts = fullNodePath.split("/");
-  for (let i = pathParts.length - 1; i >= 0; i--) {
-    let prefix = pathParts.slice(i, pathParts.length).join("/");
-    let attrs = ic.attributes.get(prefix);
-    if (attrs) attributeArray.push(...attrs);
-  }
-  return attributeArray.filter((a) => !!a);
-}
-function BuildTreeNodeFromIntermediateComposition(node, parentPath, parentInherits, ic) {
-  let isPseudoRoot = node === PSEUDO_ROOT;
-  let displayName = node.indexOf("/") > 0 ? node.substring(node.indexOf("/") + 1) : node;
-  let currentNodePath = isPseudoRoot ? PSEUDO_ROOT : parentInherits ? parentPath : `${parentPath}/${displayName}`;
-  let nodeAttributes = CondenseAttributes(GetAllAttributesForNode(ic, node));
-  let obj = {
-    name: currentNodePath,
-    attributes: isPseudoRoot ? void 0 : nodeAttributes,
-    type: isPseudoRoot ? void 0 : ic.types.get(node)
-  };
-  if (ic.children.has(node)) {
-    obj.children = [];
-    ic.children.get(node)?.forEach((child) => {
-      let childObject = BuildTreeNodeFromIntermediateComposition(child, currentNodePath, false, ic);
-      obj.children?.push(childObject);
-    });
-  }
-  if (ic.inherits.has(node)) {
-    obj.children = obj.children ? obj.children : [];
-    ic.inherits.get(node)?.forEach((child) => {
-      let childObject = BuildTreeNodeFromIntermediateComposition(child, currentNodePath, true, ic);
-      if (childObject.children) {
-        obj.children?.push(...childObject.children);
-      }
-      obj.type = childObject.type;
-      obj.attributes = CondenseAttributes([childObject.attributes, obj.attributes]);
-    });
-  }
-  return obj;
-}
-function UpdateIntermediateCompositionWithFile(ic, file) {
-  let classes = file.filter((element) => "def" in element && element.def === "class");
-  let defs = file.filter((element) => "def" in element && element.def === "def");
-  let overs = file.filter((element) => "def" in element && element.def === "over");
-  CollectDefChildren(classes, defs, ic.children);
-  CollectDefChildren(defs, defs, ic.children);
-  classes.forEach((c) => ic.names.add(c.name));
-  defs.forEach((d) => ic.names.add(d.name));
-  classes.forEach((c) => ic.isClass.set(c.name, true));
-  classes.forEach((c) => ic.types.set(c.name, c.type));
-  defs.forEach((d) => ic.types.set(d.name, d.type));
-  {
-    let plainAttributes = /* @__PURE__ */ new Map();
-    defs.forEach((d) => MMSet(plainAttributes, d.name, d.attributes));
-    overs.forEach((o) => MMSet(plainAttributes, o.name, o.attributes));
-    plainAttributes.forEach((attrs, node) => {
-      attrs.filter((a) => a).forEach((attr) => {
-        MMSet(ic.attributes, node, prefixAttributesWithComponentName(attr));
-      });
-    });
-  }
-  CollectInherits(defs, ic.inherits);
-  CollectInherits(classes, ic.inherits);
-  return ic;
-}
-function BuildTreeFromIntermediateComposition(ic) {
-  let parents = /* @__PURE__ */ new Map();
-  ic.children.forEach((children, parent) => {
-    children.forEach((child) => {
-      MMSet(parents, child, parent);
-    });
-  });
-  let roots = [];
-  ic.names.forEach((name) => {
-    if (!parents.has(name) || parents.get(name)?.length === 0) {
-      roots.push(name);
-    }
-  });
-  roots = roots.filter((root) => !ic.isClass.get(root));
-  roots.forEach((root) => {
-    MMSet(ic.children, PSEUDO_ROOT, root);
-  });
-  ic.names.add(PSEUDO_ROOT);
-  return BuildTreeNodeFromIntermediateComposition(PSEUDO_ROOT, PSEUDO_ROOT, false, ic);
-}
-function compose2(files) {
-  let ic = new IntermediateComposition();
-  files.forEach((file) => UpdateIntermediateCompositionWithFile(ic, file));
-  return BuildTreeFromIntermediateComposition(ic);
 }
 
 // compose-alpha.ts
@@ -225,7 +69,7 @@ function ConvertToCompositionNode(path, inputNodes) {
   });
   return compositionNode;
 }
-function MMSet2(map, key, value) {
+function MMSet(map, key, value) {
   if (map.has(key)) {
     map.get(key)?.push(value);
   } else {
@@ -237,12 +81,12 @@ function FindRootsOrCycles(nodes) {
   let dependents = /* @__PURE__ */ new Map();
   nodes.forEach((node, path) => {
     Object.keys(node.inherits).forEach((inheritName) => {
-      MMSet2(dependencies, path, node.inherits[inheritName]);
-      MMSet2(dependents, node.inherits[inheritName], path);
+      MMSet(dependencies, path, node.inherits[inheritName]);
+      MMSet(dependents, node.inherits[inheritName], path);
     });
     Object.keys(node.children).forEach((childName) => {
-      MMSet2(dependencies, path, node.children[childName]);
-      MMSet2(dependents, node.children[childName], path);
+      MMSet(dependencies, path, node.children[childName]);
+      MMSet(dependents, node.children[childName], path);
     });
   });
   let paths = [...nodes.keys()];
@@ -343,7 +187,7 @@ function AddDataFromInput(input, node, nodes) {
 }
 
 // workflow-alpha.ts
-function MMSet3(map, key, value) {
+function MMSet2(map, key, value) {
   if (map.has(key)) {
     map.get(key)?.push(value);
   } else {
@@ -354,18 +198,27 @@ function ToInputNodes(data) {
   let inputNodes = /* @__PURE__ */ new Map();
   data.forEach((ifcxNode) => {
     let node = {
-      path: ifcxNode.name,
+      path: ifcxNode.identifier,
       children: ifcxNode.children ? ifcxNode.children : {},
       inherits: ifcxNode.inherits ? ifcxNode.inherits : {},
       attributes: ifcxNode.attributes ? ifcxNode.attributes : {}
     };
-    MMSet3(inputNodes, node.path, node);
+    MMSet2(inputNodes, node.path, node);
   });
   return inputNodes;
 }
 var SchemaValidationError = class extends Error {
 };
-function ValidateAttributeValue(desc, value, path) {
+function ValidateAttributeValue(desc, value, path, schemas) {
+  if (desc.inherits) {
+    desc.inherits.forEach((inheritedSchemaID) => {
+      let inheritedSchema = schemas[inheritedSchemaID];
+      if (!inheritedSchema) {
+        throw new SchemaValidationError(`Unknown inherited schema id "${desc.inherits}"`);
+      }
+      ValidateAttributeValue(inheritedSchema.value, value, path, schemas);
+    });
+  }
   if (desc.dataType === "Boolean") {
     if (typeof value !== "boolean") {
       throw new SchemaValidationError(`Expected "${value}" to be of type boolean`);
@@ -402,18 +255,20 @@ function ValidateAttributeValue(desc, value, path) {
     if (typeof value !== "object") {
       throw new SchemaValidationError(`Expected "${value}" to be of type object`);
     }
-    Object.keys(desc.objectRestrictions.values).forEach((key) => {
-      if (!Object.hasOwn(value, key)) {
-        throw new SchemaValidationError(`Expected "${value}" to have key ${key}`);
-      }
-      ValidateAttributeValue(desc.objectRestrictions.values[key], value[key], path + "." + key);
-    });
+    if (desc.objectRestrictions) {
+      Object.keys(desc.objectRestrictions.values).forEach((key) => {
+        if (!Object.hasOwn(value, key)) {
+          throw new SchemaValidationError(`Expected "${value}" to have key ${key}`);
+        }
+        ValidateAttributeValue(desc.objectRestrictions.values[key], value[key], path + "." + key, schemas);
+      });
+    }
   } else if (desc.dataType === "Array") {
     if (!Array.isArray(value)) {
       throw new SchemaValidationError(`Expected "${value}" to be of type array`);
     }
     value.forEach((entry) => {
-      ValidateAttributeValue(desc.arrayRestrictions.value, entry, path + ".<array>.");
+      ValidateAttributeValue(desc.arrayRestrictions.value, entry, path + ".<array>.", schemas);
     });
   } else {
     throw new SchemaValidationError(`Unexpected datatype ${desc.dataType}`);
@@ -423,12 +278,12 @@ function Validate(schemas, inputNodes) {
   inputNodes.forEach((node) => {
     Object.keys(node.attributes).forEach((schemaID) => {
       if (!schemas[schemaID]) {
-        throw new SchemaValidationError(`Missing schema "${schemaID}" referenced by "${node.path}".attributes`);
+        throw new SchemaValidationError(`Missing schema "${schemaID}" referenced by ["${node.path}"].attributes`);
       }
       let schema = schemas[schemaID];
       let value = node.attributes[schemaID];
       try {
-        ValidateAttributeValue(schema.value, value, "");
+        ValidateAttributeValue(schema.value, value, "", schemas);
       } catch (e) {
         if (e instanceof SchemaValidationError) {
           throw new SchemaValidationError(`Error validating ["${node.path}"].attributes["${schemaID}"]: ${e.message}`);
@@ -512,7 +367,7 @@ function Prune(file, deleteEmpty = false) {
   inputNodes.forEach((nodes) => {
     let collapsed = Collapse(nodes, deleteEmpty);
     if (collapsed) result.data.push({
-      name: collapsed.path,
+      identifier: collapsed.path,
       children: collapsed.children,
       inherits: collapsed.inherits,
       attributes: collapsed.attributes
@@ -521,7 +376,7 @@ function Prune(file, deleteEmpty = false) {
   return result;
 }
 
-// compose3.ts
+// compose-flattened.ts
 function TreeNodeToComposedObject(path, node) {
   let co = {
     name: path,
@@ -688,12 +543,7 @@ function composeAndRender() {
   }
   let tree = null;
   let dataArray = datas.map((arr) => arr[1]);
-  if (Array.isArray(dataArray[0])) {
-    alert(`Please upgrade your files to ifcx alpha, see https://github.com/buildingSMART/IFC5-development for more info.`);
-    tree = compose2(dataArray);
-  } else {
-    tree = compose3(dataArray);
-  }
+  tree = compose3(dataArray);
   if (!tree) {
     console.error("No result from composition");
     return;

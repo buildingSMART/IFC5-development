@@ -1,0 +1,26 @@
+{
+  "header": {
+    "version": "ifcx_alpha",
+    "author": "authorname",
+    "timestamp": "time string"
+  },
+  "schemas": {
+    "bsi::ifc::v5a::prop::firerating": {
+      "value": {
+          "dataType": "Enum",
+          "enumRestrictions": {
+            "options": ["R30", "R60"]
+          }
+      }
+    }
+  },
+  "data": [
+    {
+      "identifier":"82966dcf-41fc-4776-97f1-71d9cb52ab7e",
+      "attributes": {
+        "bsi::ifc::v5a::prop::firerating": "R60"
+      }
+    }
+  ]
+
+}

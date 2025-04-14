@@ -1,16 +1,14 @@
 // (C) buildingSMART International
 // published under MIT license 
 
-import { ClassJson, DefJson, DisclaimerJson, Ifc5FileJson, OverJson } from '../../schema/out/@typespec/json-schema/ts/ifc5file';
-import { compose, ComposedObject, getChildByName } from './compose';
-import { compose2 } from './compose2';
-import { compose3 } from './compose3';
+import { ComposedObject, getChildByName } from './composed-object';
+import { compose3 } from './compose-flattened';
 import { components } from "../../schema/out/ts/ifcx";
 type IfcxFile = components["schemas"]["IfcxFile"];
 
 
 let controls, renderer, scene, camera;
-type datastype = [string, Ifc5FileJson | IfcxFile][];
+type datastype = [string, IfcxFile][];
 let datas: datastype = [];
 let autoCamera = true;
 
@@ -188,17 +186,8 @@ export function composeAndRender() {
 
     let tree: null | ComposedObject = null;
     let dataArray = datas.map(arr => arr[1]);
-    if (Array.isArray(dataArray[0]))
-    {
-        alert(`Please upgrade your files to ifcx alpha, see https://github.com/buildingSMART/IFC5-development for more info.`);
-        // pre-alpha
-        tree = compose2(dataArray as Ifc5FileJson[]);
-    }
-    else
-    {
-        // alpha
-        tree = compose3(dataArray as IfcxFile[]);
-    }
+    // alpha
+    tree = compose3(dataArray as IfcxFile[]);
     if (!tree) {
         console.error("No result from composition");
         return;
@@ -258,7 +247,7 @@ function createLayerDom() {
     });
 }
 
-export default function addModel(name, m: Ifc5FileJson) {
+export default function addModel(name, m: IfcxFile) {
     datas.push([name, m]);
     createLayerDom();
     composeAndRender();

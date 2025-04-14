@@ -3,7 +3,7 @@ import * as fs from "fs";
 
 import { components } from "../../schema/out/ts/ifcx";
 import { Diff, Federate } from "./workflow-alpha";
-import { ExampleFile } from "./example-file";
+import { ExampleFile } from "./test/example-file";
 import { SchemasToOpenAPI } from "./schema-alpha";
 
 type IfcxFile = components["schemas"]["IfcxFile"];
@@ -45,7 +45,7 @@ function processArgs(args: string[])
         }
         if (operation === "federate")
         {
-            result = Federate(data1, data2);
+            result = Federate([data1, data2]);
         }
 
         fs.writeFileSync(outputPath, JSON.stringify(result, null, 4));

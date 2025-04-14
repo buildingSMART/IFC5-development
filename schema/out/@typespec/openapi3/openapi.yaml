@@ -71,9 +71,9 @@ components:
     IfcxNode:
       type: object
       required:
-        - name
+        - identifier
       properties:
-        name:
+        identifier:
           $ref: '#/components/schemas/path'
         children:
           type: object
@@ -104,6 +104,10 @@ components:
       properties:
         dataType:
           $ref: '#/components/schemas/DataType'
+        inherits:
+          type: array
+          items:
+            type: string
         measure:
           $ref: '#/components/schemas/Measure'
         enumRestrictions:

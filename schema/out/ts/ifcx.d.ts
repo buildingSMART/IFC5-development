@@ -30,7 +30,7 @@ export interface components {
             timestamp: string;
         };
         IfcxNode: {
-            name: components["schemas"]["path"];
+            identifier: components["schemas"]["path"];
             children?: {
                 [key: string]: string | null;
             };
@@ -47,6 +47,7 @@ export interface components {
         };
         IfcxValueDescription: {
             dataType: components["schemas"]["DataType"];
+            inherits?: string[];
             measure?: components["schemas"]["Measure"];
             enumRestrictions?: components["schemas"]["EnumRestrictions"];
             arrayRestrictions?: components["schemas"]["ArrayRestrictions"];
