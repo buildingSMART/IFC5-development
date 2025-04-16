@@ -1,10 +1,13 @@
-import json
+import os
 import sys
+import json
+from plantuml import PlantUML
+
 
 def truncate_value(value):
-    if len(value) <= 50:
+    if len(value) <= 40:
         return value
-    return value[:30] + " [...] " + value[-20:]
+    return value[:30] + " [...] " + value[-10:]
 
 def is_shader(identifier):
     return identifier.endswith("/Shader")
@@ -13,8 +16,19 @@ def get_base_id(identifier):
     return identifier[:-7]  # Remove "/Shader" suffix
 
 
-# IFCX_PATH = sys.argv[1] # r"C:/.../hello-wall.ifcx"
-IFCX_PATH = r"C:/Code/IFC/IFC5_experiments/IFC5parser/hello-wall.ifcx"
+IFCX_PATH = sys.argv[1] # r"C:/.../hello-wall.ifcx"
+
+try:
+    PRINT_PUML = sys.argv[2]
+except:
+    PRINT_PUML = True
+
+try:
+    PRINT_SVG = sys.argv[3]
+except:
+    PRINT_SVG = True
+    
+
 with open(IFCX_PATH, 'r') as f:
     data = json.load(f)
 
@@ -39,14 +53,12 @@ for obj in data['data']:
                         material_bindings.append((identifier, binding["ref"]))
                 continue
             
-            str_value = str(attr_value)
-            truncated_value = truncate_value(str_value)
             if attr_name.startswith('bsi'):
-                class_attributes[identifier]['green'].append((attr_name, truncated_value))
+                class_attributes[identifier]['green'].append((attr_name, truncate_value(str(attr_value))))
             elif attr_name.startswith('usd'):
-                class_attributes[identifier]['blue'].append((attr_name, truncated_value))
+                class_attributes[identifier]['blue'].append((attr_name, truncate_value(str(attr_value))))
             else:
-                class_attributes[identifier]['yellow'].append((attr_name, truncated_value))
+                class_attributes[identifier]['yellow'].append((attr_name, truncate_value(str(attr_value))))
 
 # Collect shader relations
 for identifier in class_attributes.keys():
@@ -55,7 +67,7 @@ for identifier in class_attributes.keys():
         if base_id in class_attributes:
             shader_relations.append((base_id, identifier))
 
-plantuml_file = IFCX_PATH.replace('.ifcx', '.plantuml')
+plantuml_file = IFCX_PATH.replace('.ifcx', '.puml')
 with open(plantuml_file, 'w') as puml:
     puml.write('@startuml\n')
     
@@ -88,7 +100,7 @@ with open(plantuml_file, 'w') as puml:
         
         if 'inherits' in obj:
             for inherit_name, inherit_id in obj['inherits'].items():
-                puml.write(f'"{identifier}" --o "inherits" "{inherit_id}"\n')
+                puml.write(f'"{identifier}" --o "inherits:{inherit_name}" "{inherit_id}"\n')
     
     for source_id, target_id in material_bindings:
         puml.write(f'"{source_id}" --|> "madeOf" "{target_id}"\n')
@@ -97,3 +109,18 @@ with open(plantuml_file, 'w') as puml:
         puml.write(f'"{base_id}" o..o "{shader_id}"\n')
     
     puml.write('@enduml\n')
+
+
+if PRINT_SVG:
+    #remove old files if they exist
+    if os.path.exists(IFCX_PATH.replace('.ifcx', '.png')):
+        os.remove(IFCX_PATH.replace('.ifcx', '.png'))
+    if os.path.exists(IFCX_PATH.replace('.ifcx', '.svg')):
+        os.remove(IFCX_PATH.replace('.ifcx', '.svg'))
+    server = PlantUML(url='http://www.plantuml.com/plantuml/svg/')
+    server.processes_file(plantuml_file)
+    #this for some reason produces svg but saves as png
+    os.rename(IFCX_PATH.replace('.ifcx', '.png'), IFCX_PATH.replace('.ifcx', '.svg'))
+
+if not PRINT_PUML:
+    os.remove(plantuml_file)

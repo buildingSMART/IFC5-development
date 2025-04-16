@@ -1,72 +1,72 @@
 @startuml
 class f40ec978-42e6-414a-a044-b6df23dfafef {
-  + "bsi::ifc::v5a::class" : "{'code': 'IfcWindow', 'uri': ' [...] /5/class/IfcWindow'}"
+  + "bsi::ifc::v5a::class" : "{'code': 'IfcWindow', 'uri': ' [...] fcWindow'}"
   + "bsi::ifc::v5a::prop::isexternal" : "True"
-  # "customdata" : "{'originalStepInstance': "This [...] ,.NOTDEFINED.,$,$)"}"
+  # "customdata" : "{'originalStepInstance': "This [...] ED.,$,$)"}"
 }
 
 class 1ea5c0ac-b13b-4ead-aa94-26d4dd36823e {
 }
 
 class 08aa04b9-4ca7-45e0-9549-9154fef2828b {
-  + "bsi::ifc::v5a::class" : "{'code': 'IfcProject', 'uri':  [...] 5/class/IfcProject'}"
-  # "customdata" : "{'originalStepInstance': "This [...] ,$,$,(#14,#26),#9)"}"
+  + "bsi::ifc::v5a::class" : "{'code': 'IfcProject', 'uri':  [...] cProject'}"
+  # "customdata" : "{'originalStepInstance': "This [...] #26),#9)"}"
 }
 
 class 8adf3b8f-f34a-4687-a406-5063ee095a1a {
-  + "bsi::ifc::v5a::class" : "{'code': 'IfcSite', 'uri': 'ht [...] fc/5/class/IfcSite'}"
-  # "customdata" : "{'originalStepInstance': "This [...] 3,$,$,$,$,$,$,$,$)"}"
+  + "bsi::ifc::v5a::class" : "{'code': 'IfcSite', 'uri': 'ht [...] /IfcSite'}"
+  # "customdata" : "{'originalStepInstance': "This [...] $,$,$,$)"}"
 }
 
 class 2ddfa76e-ab37-42f2-8e37-ef5780d732e8 {
-  + "bsi::ifc::v5a::class" : "{'code': 'IfcBuilding', 'uri': [...] /class/IfcBuilding'}"
-  # "customdata" : "{'originalStepInstance': "This [...] $,#59,$,$,$,$,$,$)"}"
+  + "bsi::ifc::v5a::class" : "{'code': 'IfcBuilding', 'uri': [...] Building'}"
+  # "customdata" : "{'originalStepInstance': "This [...] $,$,$,$)"}"
 }
 
 class 5a26bd1d-fa44-4aaa-9a5e-91a06eed2e52 {
-  + "bsi::ifc::v5a::class" : "{'code': 'IfcBuildingStorey',  [...] /IfcBuildingStorey'}"
-  # "customdata" : "{'originalStepInstance': "This [...] ',$,$,#65,$,$,$,$)"}"
+  + "bsi::ifc::v5a::class" : "{'code': 'IfcBuildingStorey',  [...] ngStorey'}"
+  # "customdata" : "{'originalStepInstance': "This [...] $,$,$,$)"}"
 }
 
 class f079bafd-8733-48d8-85df-1c1656a17c1f {
-  + "bsi::ifc::v5a::class" : "{'code': 'IfcSpace', 'uri': 'h [...] c/5/class/IfcSpace'}"
+  + "bsi::ifc::v5a::class" : "{'code': 'IfcSpace', 'uri': 'h [...] IfcSpace'}"
   + "bsi::ifc::v5a::prop::volume" : "27.3"
   + "bsi::ifc::v5a::prop::height" : "3.5"
-  ~ "usd::xformop" : "{'transform': [[1, 0, 0, 0], [ [...] 00023841858, 0, 1]]}"
-  # "customdata" : "{'originalStepInstance': "This [...] 509,$,$,.SPACE.,$)"}"
+  ~ "usd::xformop" : "{'transform': [[1, 0, 0, 0], [ [...] 8, 0, 1]]}"
+  # "customdata" : "{'originalStepInstance': "This [...] PACE.,$)"}"
 }
 
 class 13168941-10d9-4c6a-8c63-505cc302312c {
-  + "bsi::ifc::v5a::class" : "{'code': 'IfcWall', 'uri': 'ht [...] fc/5/class/IfcWall'}"
+  + "bsi::ifc::v5a::class" : "{'code': 'IfcWall', 'uri': 'ht [...] /IfcWall'}"
   + "bsi::ifc::v5a::prop::isexternal" : "True"
   + "bsi::ifc::v5a::prop::volume" : "0.9"
   + "bsi::ifc::v5a::prop::height" : "3.5"
-  # "customdata" : "{'originalStepInstance': "This [...] $,#1235,#1230,$,$)"}"
-  # "nlsfb::class" : "{'code': '21.21', 'uri': 'http [...] 05/2.2/class/21.21'}"
+  # "customdata" : "{'originalStepInstance': "This [...] 230,$,$)"}"
+  # "nlsfb::class" : "{'code': '21.21', 'uri': 'http [...] ss/21.21'}"
 }
 
 class 82966dcf-41fc-4776-97f1-71d9cb52ab7e {
   + "bsi::name" : "Instance of Window"
-  ~ "usd::xformop" : "{'transform': [[1, 0, 0, 0], [ [...] 92294312, 0, 1, 1]]}"
-  # "customdata" : "{'originalStepInstance': "This [...] #1291,$,$,$,$,$,$)"}"
+  ~ "usd::xformop" : "{'transform': [[1, 0, 0, 0], [ [...] 0, 1, 1]]}"
+  # "customdata" : "{'originalStepInstance': "This [...] $,$,$,$)"}"
 }
 
 class 8134f9ec-2e87-4b70-a538-9b6dc7ba94b1 {
   + "bsi::name" : "Instance of Window_001"
-  ~ "usd::xformop" : "{'transform': [[1, 0, 0, 0], [ [...] 63604736, 0, 1, 1]]}"
-  # "customdata" : "{'originalStepInstance': "This [...] #1435,$,$,$,$,$,$)"}"
+  ~ "usd::xformop" : "{'transform': [[1, 0, 0, 0], [ [...] 0, 1, 1]]}"
+  # "customdata" : "{'originalStepInstance': "This [...] $,$,$,$)"}"
 }
 
 class 4fd67c00-82cf-476d-b5dd-6a06b07c6141 {
-  + "bsi::ifc::v5a::spaceboundary" : "{'relatedElement': {'ref': '13 [...] 85df-1c1656a17c1f'}}"
+  + "bsi::ifc::v5a::spaceboundary" : "{'relatedElement': {'ref': '13 [...] 6a17c1f'}}"
 }
 
 class 15226122-42a4-428d-9b9a-16566291c182 {
-  + "bsi::ifc::v5a::spaceboundary" : "{'relatedElement': {'ref': '82 [...] 85df-1c1656a17c1f'}}"
+  + "bsi::ifc::v5a::spaceboundary" : "{'relatedElement': {'ref': '82 [...] 6a17c1f'}}"
 }
 
 class 428b2888-1e0d-4f7b-b8ae-73236f626cea {
-  + "bsi::ifc::v5a::spaceboundary" : "{'relatedElement': {'ref': '81 [...] 85df-1c1656a17c1f'}}"
+  + "bsi::ifc::v5a::spaceboundary" : "{'relatedElement': {'ref': '81 [...] 6a17c1f'}}"
 }
 
 stereotype "f83b2e90-81df-4cae-ad63-52a51009e561/Shader" {
@@ -94,20 +94,20 @@ stereotype "82c0b0b0-1452-4fd9-b80d-20b9ee76a115/Shader" {
 }
 
 class 4a4b35e6-05c0-4abe-8594-aa7b42d8ff58 {
-  ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [3, 0, 1 [...] , 0.59999996, 1.2]]}"
+  ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [3, 0, 1 [...] 96, 1.2]]}"
   ~ "usd::usdgeom::visibility" : "{'visibility': 'invisible'}"
 }
 
 class 3b1b9346-ead9-4301-ac87-3038e62ebfda {
-  ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [0, 1, 2 [...] , [0.8, 0.03, 1.1]]}"
+  ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [0, 1, 2 [...] 03, 1.1]]}"
 }
 
 class a0061a96-fd61-47ec-8d38-39cf14f3c3a8 {
-  ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [1, 2, 3 [...] , 5, 3], [0, 0, 3]]}"
+  ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [1, 2, 3 [...] 0, 0, 3]]}"
 }
 
 class 668e304b-38a2-4f8f-b3de-2a8a5a13384d {
-  ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [3, 0, 1 [...] 5.8466067, 0.1, 1]]}"
+  ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [3, 0, 1 [...]  0.1, 1]]}"
 }
 
 class c3055cc8-a5b6-4a84-860e-0d6cc978dfe8 {
@@ -119,34 +119,34 @@ class 97c55241-7a56-48d7-bc6e-be2fd24f86ac {
 }
 
 class b6012d70-097a-4794-8d1f-220fa65a591a {
-  ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [0, 1, 2 [...] .1, 0], [10, 0, 0]]}"
+  ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [0, 1, 2 [...] 0, 0, 0]]}"
 }
 
 class 02333064-a80b-4824-9751-36f88d0d175d {
-  ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [3, 0, 1 [...] -2.3841858e-08, 3]]}"
+  ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [3, 0, 1 [...] e-08, 3]]}"
 }
 
 class c3b8360d-98b5-4fa1-9350-a8ab8106a80f {
-  ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [0, 1, 2 [...] .3841858e-08, 2.2]]}"
+  ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [0, 1, 2 [...] 08, 2.2]]}"
 }
 
 class b5bdd146-5d6a-49f8-9e09-c1e7a48fb676 {
-  ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [2, 0, 1 [...] -2.3841858e-08, 1]]}"
+  ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [2, 0, 1 [...] e-08, 1]]}"
 }
 
 class f83b2e90-81df-4cae-ad63-52a51009e561 {
   + "bsi::name" : "SpaceMaterial"
-  ~ "usd::usdshade::material" : "{'outputs::surface.connect': { [...] :outputs::surface'}}"
+  ~ "usd::usdshade::material" : "{'outputs::surface.connect': { [...] surface'}}"
 }
 
 class 359c715f-5961-4c20-be08-9bb25ea75c24 {
   + "bsi::name" : "WallMaterial"
-  ~ "usd::usdshade::material" : "{'outputs::surface.connect': { [...] :outputs::surface'}}"
+  ~ "usd::usdshade::material" : "{'outputs::surface.connect': { [...] surface'}}"
 }
 
 class 82c0b0b0-1452-4fd9-b80d-20b9ee76a115 {
   + "bsi::name" : "WindowMaterial"
-  ~ "usd::usdshade::material" : "{'outputs::surface.connect': { [...] :outputs::surface'}}"
+  ~ "usd::usdshade::material" : "{'outputs::surface.connect': { [...] surface'}}"
 }
 
 "f40ec978-42e6-414a-a044-b6df23dfafef" --> "child:Void" "4a4b35e6-05c0-4abe-8594-aa7b42d8ff58"
@@ -167,8 +167,8 @@ class 82c0b0b0-1452-4fd9-b80d-20b9ee76a115 {
 "13168941-10d9-4c6a-8c63-505cc302312c" --> "child:Basis" "b6012d70-097a-4794-8d1f-220fa65a591a"
 "13168941-10d9-4c6a-8c63-505cc302312c" --> "child:Window" "82966dcf-41fc-4776-97f1-71d9cb52ab7e"
 "13168941-10d9-4c6a-8c63-505cc302312c" --> "child:Window_001" "8134f9ec-2e87-4b70-a538-9b6dc7ba94b1"
-"82966dcf-41fc-4776-97f1-71d9cb52ab7e" --o "inherits" "f40ec978-42e6-414a-a044-b6df23dfafef"
-"8134f9ec-2e87-4b70-a538-9b6dc7ba94b1" --o "inherits" "f40ec978-42e6-414a-a044-b6df23dfafef"
+"82966dcf-41fc-4776-97f1-71d9cb52ab7e" --o "inherits:windowType" "f40ec978-42e6-414a-a044-b6df23dfafef"
+"8134f9ec-2e87-4b70-a538-9b6dc7ba94b1" --o "inherits:windowType" "f40ec978-42e6-414a-a044-b6df23dfafef"
 "4fd67c00-82cf-476d-b5dd-6a06b07c6141" --> "child:Body" "02333064-a80b-4824-9751-36f88d0d175d"
 "15226122-42a4-428d-9b9a-16566291c182" --> "child:Body" "c3b8360d-98b5-4fa1-9350-a8ab8106a80f"
 "428b2888-1e0d-4f7b-b8ae-73236f626cea" --> "child:Body" "b5bdd146-5d6a-49f8-9e09-c1e7a48fb676"
