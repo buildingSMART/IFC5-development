@@ -44,11 +44,11 @@ function getChildByName(root, childName, skip=0) {
 }
 
 function createMaterialFromParent(parent, root) {
-    let reference = parent.attributes['UsdShade:MaterialBindingAPI:material:binding'];
     let material = {
         color: new THREE.Color(0.6, 0.6, 0.6)
     };
-    if (reference) {
+    if (parent.attributes['UsdShade:MaterialBindingAPI:material:binding']) {
+        let reference = parent.attributes['UsdShade:MaterialBindingAPI:material:binding'].value;
         const materialNode = getChildByName(root, reference.ref);
         let shader = materialNode.children.find(i => i.type === 'UsdShade:Shader');
         let color = shader.attributes['inputs:diffuseColor'];
@@ -62,7 +62,7 @@ function createMaterialFromParent(parent, root) {
 }
 
 function createCurveFromJson(node, parent, root) {
-    let points = new Float32Array(node.attributes['UsdGeom:BasisCurves:points'].flat());
+    let points = new Float32Array(node.attributes['UsdGeom:BasisCurves:points'].value.flat());
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute('position', new THREE.BufferAttribute(points, 3));
     const material = createMaterialFromParent(parent, root);
@@ -74,8 +74,8 @@ function createCurveFromJson(node, parent, root) {
 
 
 function createMeshFromJson(node, parent, root) {
-    let points = new Float32Array(node.attributes['UsdGeom:Mesh:points'].flat());
-    let indices = new Uint16Array(node.attributes['UsdGeom:Mesh:faceVertexIndices']);
+    let points = new Float32Array(node.attributes['UsdGeom:Mesh:points'].value.flat());
+    let indices = new Uint16Array(node.attributes['UsdGeom:Mesh:faceVertexIndices'].value);
 
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute('position', new THREE.BufferAttribute(points, 3));
@@ -93,7 +93,7 @@ function traverseTree(node, parent, root, parentNode) {
     if (node.type === "UsdGeom:Xform") {
         elem = new THREE.Group();
     } else if (node.type === "UsdGeom:Mesh" || node.type === "UsdGeom:BasisCurves") {
-        if (node.attributes["UsdGeom:VisibilityAPI:visibility:visibility"] === 'invisible') {
+        if (node.attributes["UsdGeom:VisibilityAPI:visibility:visibility"] && node.attributes["UsdGeom:VisibilityAPI:visibility:visibility"].value === 'invisible') {
             return;
         }
         if (node.type === "UsdGeom:Mesh") {
@@ -109,7 +109,7 @@ function traverseTree(node, parent, root, parentNode) {
         parent.add(elem);
         elem.matrixAutoUpdate = false;
 
-        let matrixNode = node.attributes && node.attributes['xformOp:transform'] ? node.attributes['xformOp:transform'].flat() : null;
+        let matrixNode = node.attributes && node.attributes['xformOp:transform'] ? node.attributes['xformOp:transform'].value.flat() : null;
         if (matrixNode) {
             let matrix = new THREE.Matrix4();
             matrix.set(...matrixNode);
@@ -132,10 +132,13 @@ function compose(datas) {
     let compositionEdges = {};
 
     // Undo the attribute namespace of over prims introduced in 'ECS'.
-    function flattenAttributes(prim) {
+    function flattenAttributes(modelId, prim) {
         if (prim.name !== 'Shader' && prim.attributes) {
             const [k, vs] = Object.entries(prim.attributes)[0];
-            const attrs = Object.fromEntries(Object.entries(vs).map(([kk, vv]) => [`${k}:${kk}`, vv]));
+            const attrs = Object.fromEntries(Object.entries(vs).map(([kk, vv]) => [`${k}:${kk}`, {
+                value: vv,
+                opinions: Object.fromEntries([[modelId, vv]])
+            }]));
             return {
                 ...prim,
                 attributes: attrs
@@ -152,13 +155,13 @@ function compose(datas) {
     }
 
     // Traverse forest and yield paths as a map of str -> dict
-    function collectPaths(nodes) {
+    function collectPaths(nodes, modelId) {
         const paths = {};
 
         function traverse(node, parentPathStr) {
             if (node.name) {
                 const nodeId = `${parentPathStr}/${node.name.replace(/^\//, '')}`                
-                const N = flattenAttributes(node);
+                const N = flattenAttributes(modelId, node);
                 // Store in map
                 (paths[nodeId] = paths[nodeId] || []).push(N);
 
@@ -190,7 +193,7 @@ function compose(datas) {
     }
 
     // Prim storage based on path for the various layers
-    const maps = datas.map(collectPaths);
+    const maps = datas.map(d => d.data ? d.data : d).map(ds => ds.filter(d => !d.disclaimer)).map(collectPaths);
 
     function maxSpecifier(...args) {
         const specs = ["over", "class", "def"];
@@ -203,13 +206,20 @@ function compose(datas) {
     // Children relationship is based on key prefixes in the map,
     // not yet part of the current prim object structure.
     function composePrim(weaker, stronger) {
+        function composeAttribute(weaker, stronger) {
+            return !weaker ? stronger : (!stronger ? weaker : {
+                value: stronger.value || weaker.value,
+                // @todo because we only use modelId as a key we will not detect conflicts within the same layer
+                opinions: {...weaker.opinions, ...stronger.opinions}
+            });
+        }
+        let weakerAttributes = ((weaker && weaker.attributes) ? weaker.attributes : {});
+        let strongerAttributes = ((stronger && stronger.attributes) ? stronger.attributes : {});
+        let keyUnion = Array.from(new Set([...Object.keys(weakerAttributes), ...Object.keys(strongerAttributes)]));
         return {
             def: maxSpecifier(stronger && stronger.def, weaker && weaker.def),
             type: stronger && stronger.type || (weaker !== null ? weaker.type : null),
-            attributes: {
-                ...((weaker !== null) ? weaker.attributes : {}),
-                ...((stronger !== null) ? stronger.attributes : {})
-            },
+            attributes: Object.fromEntries(keyUnion.map(k => [k, composeAttribute(weakerAttributes[k], strongerAttributes[k])]))
         }
     }
 
@@ -290,20 +300,39 @@ const icons = {
     'UsdShade:Material:outputs:surface.connect': 'line_style'
 };
 
-function buildDomTree(prim, node) {
+function buildDomTree(headers, prim, node) {
     const elem = document.createElement('div');
     let span;
     elem.appendChild(document.createTextNode(prim.name ? prim.name.split('/').reverse()[0] : 'root'));
     elem.appendChild(span = document.createElement('span'));
     Object.entries(icons).forEach(([k, v]) => span.innerText += (prim.attributes || {})[k] ? v : ' ');
     span.className = "material-symbols-outlined";
+    function renderValue(v) {
+        if (typeof v === 'object') {
+            if (v.value && v.opinions) {
+                let numDistinctValues = [...new Set(Object.values(v.opinions))].length;
+                let opinionList;
+                if (numDistinctValues > 1) {
+                    opinionList = Object.entries(v.opinions).map(([k, v]) => `${headers[k].name}: ${v}`).join(', ');
+                } else {
+                    opinionList = Object.keys(v.opinions).map(v => headers[v].name).join(', ');
+                }
+                let postfix = (Object.keys(v.opinions).length > 1) ? ` <span class='material-symbols-outlined' title='opinions: ${opinionList}' style='cursor:pointer'>${numDistinctValues === 1 ? 'warning' : 'error'}</span>` : "";
+                return encodeHtmlEntities(renderValue(v.value)) + postfix;
+            } else {
+                return encodeHtmlEntities(JSON.stringify(v));
+            }
+        } else {
+            return encodeHtmlEntities(v);
+        }
+    }
     elem.onclick = (evt) => {
-        let rows = [['name', prim.name]].concat(Object.entries(prim.attributes)).map(([k, v]) => `<tr><td>${encodeHtmlEntities(k)}</td><td>${encodeHtmlEntities(typeof v === 'object' ? JSON.stringify(v) : v)}</td>`).join('');
+        let rows = [['name', prim.name]].concat(Object.entries(prim.attributes)).map(([k, v]) => `<tr><td>${encodeHtmlEntities(k)}</td><td>${renderValue(v)}</td>`).join('');
         document.querySelector('.attributes .table').innerHTML = `<table border="0">${rows}</table>`;
         evt.stopPropagation();
     };
     node.appendChild(elem);
-    (prim.children || []).forEach(p => buildDomTree(p, elem));
+    (prim.children || []).forEach(p => buildDomTree(headers, p, elem));
 }
 
 export function composeAndRender() {
@@ -318,6 +347,7 @@ export function composeAndRender() {
         return;
     }
 
+    const headers = datas.map(d => d[1].header || {});
     const tree = compose(datas.map(arr => arr[1]));
     if (!tree) {
         console.error("No result from composition");
@@ -343,13 +373,13 @@ export function composeAndRender() {
         }
     }
 
-    buildDomTree(tree, document.querySelector('.tree'));
+    buildDomTree(headers, tree, document.querySelector('.tree'));
     animate();
 }
 
 function createLayerDom() {
     document.querySelector('.layers div').innerHTML = '';
-    datas.slice().reverse().forEach(([name, _], index) => {
+    datas.slice()/*.reverse()*/.forEach(([name, _], index) => {
         const elem = document.createElement('div');
         elem.appendChild(document.createTextNode(name));
         ['\u25B3', '\u25BD', '\u00D7'].reverse().forEach((lbl, cmd) => {
