@@ -47,22 +47,22 @@ function createMaterialFromParent(parent, root) {
     let material = {
         color: new THREE.Color(0.6, 0.6, 0.6)
     };
-    if (parent.attributes['UsdShade:MaterialBindingAPI:material:binding']) {
-        let reference = parent.attributes['UsdShade:MaterialBindingAPI:material:binding'].value;
+    if (parent.attributes['usd::usdshade::materialbindingapi::material::binding']) {
+        let reference = parent.attributes['usd::usdshade::materialbindingapi::material::binding'].value;
         const materialNode = getChildByName(root, reference.ref);
-        let shader = materialNode.children.find(i => i.type === 'UsdShade:Shader');
-        let color = shader.attributes['inputs:diffuseColor'];
+        let shader = materialNode.children.find(i => i.attributes['usd::materials::inputs::diffuseColor']);
+        let color = shader.attributes['usd::materials::inputs::diffuseColor'].value;
         material.color = new THREE.Color(...color);
-        if (shader.attributes['inputs:opacity']) {
+        if (shader.attributes['usd::materials::inputs::opacity']) {
             material.transparent = true;
-            material.opacity = shader.attributes['inputs:opacity'];
+            material.opacity = shader.attributes['usd::materials::inputs::opacity'].value;
         }
     }
     return material;
 }
 
 function createCurveFromJson(node, parent, root) {
-    let points = new Float32Array(node.attributes['UsdGeom:BasisCurves:points'].value.flat());
+    let points = new Float32Array(node.attributes['usd::usdgeom::basiscurves::points'].value.flat());
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute('position', new THREE.BufferAttribute(points, 3));
     const material = createMaterialFromParent(parent, root);
@@ -74,8 +74,8 @@ function createCurveFromJson(node, parent, root) {
 
 
 function createMeshFromJson(node, parent, root) {
-    let points = new Float32Array(node.attributes['UsdGeom:Mesh:points'].value.flat());
-    let indices = new Uint16Array(node.attributes['UsdGeom:Mesh:faceVertexIndices'].value);
+    let points = new Float32Array(node.attributes['usd::usdgeom::mesh::points'].value.flat());
+    let indices = new Uint16Array(node.attributes['usd::usdgeom::mesh::faceVertexIndices'].value);
 
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute('position', new THREE.BufferAttribute(points, 3));
@@ -89,27 +89,27 @@ function createMeshFromJson(node, parent, root) {
 }
 
 function traverseTree(node, parent, root, parentNode) {
-    let elem;
-    if (node.type === "UsdGeom:Xform") {
+    let elem = null;
+    if (node.attributes["usd::xformop::transform"]) {
         elem = new THREE.Group();
-    } else if (node.type === "UsdGeom:Mesh" || node.type === "UsdGeom:BasisCurves") {
-        if (node.attributes["UsdGeom:VisibilityAPI:visibility:visibility"] && node.attributes["UsdGeom:VisibilityAPI:visibility:visibility"].value === 'invisible') {
+    } else if (node.attributes["usd::usdgeom::mesh::points"] || node.attributes["usd::usdgeom::basiscurves::points"]) {
+        if (node.attributes["usd::usdgeom::visibility::visibility"] && node.attributes["usd::usdgeom::visibility::visibility"].value === 'invisible') {
             return;
         }
-        if (node.type === "UsdGeom:Mesh") {
+        if (node.attributes['usd::usdgeom::mesh::faceVertexIndices']) {
             elem = createMeshFromJson(node, parentNode, root);
         } else {
             elem = createCurveFromJson(node, parentNode, root);
         }
     } else if (node !== root) {
-        return;
+        // return;
     }
 
-    if (node !== root) {
+    if (elem !== null) {
         parent.add(elem);
         elem.matrixAutoUpdate = false;
 
-        let matrixNode = node.attributes && node.attributes['xformOp:transform'] ? node.attributes['xformOp:transform'].value.flat() : null;
+        let matrixNode = node.attributes && node.attributes['usd::xformop::transform'] ? node.attributes['usd::xformop::transform'].value.flat() : null;
         if (matrixNode) {
             let matrix = new THREE.Matrix4();
             matrix.set(...matrixNode);
@@ -132,22 +132,18 @@ function compose(datas) {
     let compositionEdges = {};
 
     // Undo the attribute namespace of over prims introduced in 'ECS'.
+    // Namespace as object no longer present, but we still want to decorate with {value:, opinions[]}
     function flattenAttributes(modelId, prim) {
-        if (prim.name !== 'Shader' && prim.attributes) {
-            const [k, vs] = Object.entries(prim.attributes)[0];
-            const attrs = Object.fromEntries(Object.entries(vs).map(([kk, vv]) => [`${k}:${kk}`, {
-                value: vv,
-                opinions: Object.fromEntries([[modelId, vv]])
-            }]));
-            return {
-                ...prim,
-                attributes: attrs
-            };
-        } else {
-            return {
-                ...prim
-            };
-        }
+        const isObject = (x) => typeof x === 'object' && !Array.isArray(x) && x !== null;
+        const pairs = Object.entries(prim.attributes || {}).map(([k, v]) => isObject(v) ? Object.entries(v).map(([kk, vv]) => [`${k}::${kk}`, vv]) : [[k, v]]).flat(1) 
+        const attrs = Object.fromEntries(pairs.map(([k, v]) => [k, {
+            value: v,
+            opinions: Object.fromEntries([[modelId, v]])
+        }]));
+        return {
+            ...prim,
+            attributes: attrs
+        };
     }
 
     function addEdge(a, b) {
@@ -183,25 +179,44 @@ function compose(datas) {
             }
         }
 
+        /*
+        // traverse is no longer necessary, we can just loop
+        
         // Create the pseudo root and connect to its children
         nodes.forEach((n) => traverse(n, ''));
         nodes.filter(n => n.name && n.def === 'def').forEach(n => {
             addEdge('', `/${n.name}`);
         });
+        */
+
+        function process(node) {
+            const nodeId = node.identifier;
+            const N = flattenAttributes(modelId, node);
+            // Store in map
+            (paths[nodeId] = paths[nodeId] || []).push(N);
+
+            // Add inheritance edges
+            for (let tgt of Object.values(node.inherits || {})) {
+                addEdge(nodeId, tgt);
+            }
+
+            // Add subprim edges
+            Object.entries(node.children || {}).forEach(([localName, tgt]) => {
+                const childName = `${nodeId}/${localName}`;
+                addEdge(nodeId, childName);
+                addEdge(childName, tgt);
+            });
+        }
+
+        nodes.forEach(process);
 
         return paths;
     }
 
     // Prim storage based on path for the various layers
     const maps = datas.map(d => d.data ? d.data : d).map(ds => ds.filter(d => !d.disclaimer)).map(collectPaths);
-
-    function maxSpecifier(...args) {
-        const specs = ["over", "class", "def"];
-        return specs[Math.max(...args.map(s => specs.indexOf(s)))];
-    }
     
     // Reduction function to override prim attributes
-    // Assumes 'unpacked' attribute namespaces
     //
     // Children relationship is based on key prefixes in the map,
     // not yet part of the current prim object structure.
@@ -217,12 +232,12 @@ function compose(datas) {
         let strongerAttributes = ((stronger && stronger.attributes) ? stronger.attributes : {});
         let keyUnion = Array.from(new Set([...Object.keys(weakerAttributes), ...Object.keys(strongerAttributes)]));
         return {
-            def: maxSpecifier(stronger && stronger.def, weaker && weaker.def),
-            type: stronger && stronger.type || (weaker !== null ? weaker.type : null),
             attributes: Object.fromEntries(keyUnion.map(k => [k, composeAttribute(weakerAttributes[k], strongerAttributes[k])]))
         }
     }
 
+    // Compose all paths prior to solving for inheritance.
+    // Set(maps.map(m => Object.keys(m)).flat()): all identifiers across layers
     const composed = Object.fromEntries(Array.from(new Set(maps.map(m => Object.keys(m)).flat())).map(k => {
         let v;
         const opinions = maps.map(m => m[k]).filter(a => a).flat(1);
@@ -246,6 +261,7 @@ function compose(datas) {
 
     // Apply edges in dependency order
     const sorted = toposort(compositionEdges);
+    const roots = new Set(Array.from((new Set(Object.keys(compositionEdges))).difference(new Set(Object.values(compositionEdges).flat()))));
     sorted.forEach(source => {
         (Array.from(compositionEdges[source] || [])).forEach(target => {
             // We don't have typed edges because of the somewhat primitive type system in JS.
@@ -268,13 +284,9 @@ function compose(datas) {
     const buildTree = (map) => {
         // First pass: create a node for each key.
         const nodes = Object.entries(map).reduce((acc, [k, v]) => {
-            if (v.def == 'def') {
-                acc[k] = { name: k, children: [], type: v.type, attributes: v.attributes || {} };
-            }
+            acc[k] = { name: k, children: [], attributes: v.attributes || {} };
             return acc;
         }, {});
-        // Create pseudo-root
-        nodes[''] = { name: '', children: [] };
         // Assign children to parent
         Object.keys(map).forEach(key => {
             const parentKey = key.split('/').slice(0,-1).join('/');
@@ -282,7 +294,11 @@ function compose(datas) {
                 nodes[parentKey].children.push(nodes[key]);
             }
         });
-        return nodes[''];
+        return {
+            name: 'root',
+            children: Object.entries(nodes).filter(([k, v]) => roots.has(k)).map(([k, v]) => v),
+            attributes: {}
+        };
     };
 
     return buildTree(composed);
@@ -295,9 +311,9 @@ function encodeHtmlEntities(str) {
 };
 
 const icons = {
-    'UsdGeom:Mesh:points': 'deployed_code', 
-    'UsdGeom:BasisCurves:points': 'line_curve',
-    'UsdShade:Material:outputs:surface.connect': 'line_style'
+    'usd::usdgeom::mesh::points': 'deployed_code', 
+    'usd::usdgeom::basiscurves::points': 'line_curve',
+    'usd::materials::inputs::diffuseColor': 'line_style'
 };
 
 function buildDomTree(headers, prim, node) {
@@ -327,7 +343,7 @@ function buildDomTree(headers, prim, node) {
         }
     }
     elem.onclick = (evt) => {
-        let rows = [['name', prim.name]].concat(Object.entries(prim.attributes)).map(([k, v]) => `<tr><td>${encodeHtmlEntities(k)}</td><td>${renderValue(v)}</td>`).join('');
+        let rows = [['name', prim.name]].concat(Object.entries(prim.attributes || {})).map(([k, v]) => `<tr><td>${encodeHtmlEntities(k)}</td><td>${renderValue(v)}</td>`).join('');
         document.querySelector('.attributes .table').innerHTML = `<table border="0">${rows}</table>`;
         evt.stopPropagation();
     };
