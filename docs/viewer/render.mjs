@@ -157,41 +157,6 @@ function compose(datas) {
     function collectPaths(nodes, modelId) {
         const paths = {};
 
-        function traverse(node, parentPathStr) {
-            if (node.name) {
-                const nodeId = `${parentPathStr}/${node.name.replace(/^\//, '')}`                
-                const N = flattenAttributes(modelId, node);
-                // Store in map
-                (paths[nodeId] = paths[nodeId] || []).push(N);
-
-                // Add inheritance edges
-                for (let ih of node.inherits || []) {
-                    const target = ih.substring(1, ih.length - 1);
-                    addEdge(nodeId, `${target}`)
-                }
-
-                // Add subprim edges
-                (node.children || []).forEach(child => {
-                    // We only instantiate def'ed children, not classes
-                    if (child.name && child.def === 'def') {
-                        const childName = `${nodeId}/${child.name}`;
-                        addEdge(nodeId, childName)
-                    }
-                    traverse(child, nodeId);
-                });
-            }
-        }
-
-        /*
-        // traverse is no longer necessary, we can just loop
-        
-        // Create the pseudo root and connect to its children
-        nodes.forEach((n) => traverse(n, ''));
-        nodes.filter(n => n.name && n.def === 'def').forEach(n => {
-            addEdge('', `/${n.name}`);
-        });
-        */
-
         function process(node) {
             const nodeId = node.identifier;
             const N = flattenAttributes(modelId, node);
@@ -209,8 +174,19 @@ function compose(datas) {
                 addEdge(nodeId, childName);
                 addEdge(childName, tgt);
             });
+
+            if (!node.inherits && !node.children) {
+                // A bit ugly, but necessary to detect isolated nodes as roots
+                (compositionEdges[nodeId] = compositionEdges[nodeId] || []);
+            }
+
+            if (nodeId.indexOf('/') !== -1) {
+                let [parent, localChild] = nodeId.split('/', 2);
+                addEdge(parent, nodeId);
+            }
         }
 
+        // traverse is no longer necessary, we can just loop
         nodes.forEach(process);
 
         return paths;
