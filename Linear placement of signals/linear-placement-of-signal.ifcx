@@ -312,7 +312,7 @@
     "def": "def",
     "name": "hA",
     "inherits": [
-     "</N12d6b086da9c54e34b2ed3b84ab4747e7>"]
+     "</Ned6b086da9c54e34b2ed3b84ab4747e7>"]
    }]
  },
  {
@@ -480,7 +480,7 @@
  {
   "def": "class",
   "type": "UsdGeom:Xform",
-  "name": "N12d6b086da9c54e34b2ed3b84ab4747e7"
+  "name": "Ned6b086da9c54e34b2ed3b84ab4747e7"
  },
  {
   "def": "class",
@@ -6644,7 +6644,7 @@
       "ref": "</Ned6b086da9c54e34b2ed3b84ab4747e6>"
      },
      {
-      "ref": "</N12d6b086da9c54e34b2ed3b84ab4747e7>"
+      "ref": "</Ned6b086da9c54e34b2ed3b84ab4747e7>"
      }]
    }
   }
@@ -9119,7 +9119,7 @@
  },
  {
   "def": "over",
-  "name": "N12d6b086da9c54e34b2ed3b84ab4747e7",
+  "name": "Ned6b086da9c54e34b2ed3b84ab4747e7",
   "attributes": {
    "customdata": {
     "originalStepInstance": "This is only here to help understand the example. There will not be STEP code in IFC 5. This component represensts this line in the SPFF: #4001=IfcAlignmentSegment('4jQmXjgSLEDBBjEuIhHqVd',#1,'hA',$,$,#2345,#4101,#4011)"
@@ -9128,7 +9128,7 @@
  },
  {
   "def": "over",
-  "name": "N12d6b086da9c54e34b2ed3b84ab4747e7",
+  "name": "Ned6b086da9c54e34b2ed3b84ab4747e7",
   "attributes": {
    "ifc5:alignmentsegment": {
     "EndRadiusOfCurvature": 0,
@@ -9142,7 +9142,7 @@
  },
  {
   "def": "over",
-  "name": "N12d6b086da9c54e34b2ed3b84ab4747e7",
+  "name": "Ned6b086da9c54e34b2ed3b84ab4747e7",
   "attributes": {
    "ifc5:class": {
     "code": "IfcAlignmentSegment",
