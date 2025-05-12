@@ -329,9 +329,9 @@ function buildDomTree(headers, prim, node) {
                 let numDistinctValues = [...new Set(Object.values(v.opinions))].length;
                 let opinionList;
                 if (numDistinctValues > 1) {
-                    opinionList = Object.entries(v.opinions).map(([k, v]) => `${headers[k].name}: ${v}`).join(', ');
+                    opinionList = Object.entries(v.opinions).map(([k, v]) => `${headers[k].author}: ${v}`).join(', ');
                 } else {
-                    opinionList = Object.keys(v.opinions).map(v => headers[v].name).join(', ');
+                    opinionList = Object.keys(v.opinions).map(v => headers[v].author).join(', ');
                 }
                 let postfix = (Object.keys(v.opinions).length > 1) ? ` <span class='material-symbols-outlined' title='opinions: ${opinionList}' style='cursor:pointer'>${numDistinctValues === 1 ? 'warning' : 'error'}</span>` : "";
                 return encodeHtmlEntities(renderValue(v.value)) + postfix;
