@@ -50,6 +50,9 @@ function createMaterialFromParent(parent, root) {
     if (parent.attributes['usd::usdshade::materialbindingapi::material::binding']) {
         let reference = parent.attributes['usd::usdshade::materialbindingapi::material::binding'].value;
         const materialNode = getChildByName(root, reference.ref);
+        if (!materialNode) {
+            return null;
+        }
         let shader = materialNode.children.find(i => i.attributes['usd::materials::inputs::diffuseColor']);
         let color = shader.attributes['usd::materials::inputs::diffuseColor'].value;
         material.color = new THREE.Color(...color);
@@ -66,7 +69,7 @@ function createCurveFromJson(node, parent, root) {
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute('position', new THREE.BufferAttribute(points, 3));
     const material = createMaterialFromParent(parent, root);
-    let lineMaterial = new THREE.LineBasicMaterial({...material});
+    let lineMaterial = new THREE.LineBasicMaterial({...(material || {})});
     // Make lines a little darker, otherwise they have the same color as meshes
     lineMaterial.color.multiplyScalar(0.8)
     return new THREE.Line(geometry, lineMaterial);
@@ -83,7 +86,7 @@ function createMeshFromJson(node, parent, root) {
     geometry.computeVertexNormals();
 
     const material = createMaterialFromParent(parent, root);
-    let meshMaterial = new THREE.MeshBasicMaterial({...material});
+    let meshMaterial = new THREE.MeshBasicMaterial({...(material || {})});
 
     return new THREE.Mesh(geometry, meshMaterial);
 }
