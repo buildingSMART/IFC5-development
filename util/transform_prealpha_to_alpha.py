@@ -1,3 +1,4 @@
+import functools
 import itertools
 import operator
 import sys
@@ -18,8 +19,11 @@ def transform_iden(s):
         u = uuid.uuid5(u, postfix)
     return str(u)
 
-def transform_attributes(d, prefix=""):
+def transform_attributes(d):
+    ignored = ("info:id", "outputs:surface", "outputs:surface.connect")
     def transform(k, v):
+        if k in ignored:
+            return None
         if k == "ref":
             parts = v[2:-1].split('/')
             v = "/".join([transform_iden(parts[0])] + parts[1:])
@@ -36,13 +40,13 @@ def transform_attributes(d, prefix=""):
 
             if k.startswith('usd'):
                 k = "usd::" + k
-            else:
-                k = prefix + k
 
         if isinstance(v, dict):
             v = transform_attributes(v)
+            if not v:
+                return None
         return k, v
-    return dict(itertools.starmap(transform, d.items()))
+    return dict(filter(None, itertools.starmap(transform, d.items())))
 
 def process():
     for elem in json.load(open(sys.argv[1])):
@@ -52,22 +56,17 @@ def process():
         print(elem["name"], '->', transform_iden(elem["name"]))
 
         children = list(filter(lambda c: c.get("inherits"), elem.get("children", [])))
+        weird_children = filter(lambda c: not c.get("inherits"), elem.get("children", []))
+        weird_child_attrs = functools.reduce(operator.or_, (c.get('attributes') or {} for c in filter(lambda c: not c.get("inherits"), weird_children)), {})
+        attributes = {**weird_child_attrs, **(elem.get("attributes") or {})}
 
-        if elem.get("attributes") or elem.get("inherits") or children:
+        if (attributes and transform_attributes(attributes)) or elem.get("inherits") or children:
             yield {
-                "identifier": transform_iden(elem["name"]),
-                **({"attributes": transform_attributes(elem["attributes"])} if elem.get("attributes") else {}),
+                "path": transform_iden(elem["name"]),
+                **({"attributes": transform_attributes(attributes)} if attributes and transform_attributes(attributes) else {}),
                 **({"inherits": dict((f"i{k}", transform_iden(v[2:-1])) for k, v in enumerate(elem["inherits"]))} if elem.get("inherits") else {}),
                 **({"children": dict((d["name"], transform_iden(d["inherits"][0][2:-1])) for d in children)} if children else {}),
             }
-
-        weird_children = filter(lambda c: not c.get("inherits"), elem.get("children", []))
-        for ch in weird_children:
-            yield {
-                "identifier": transform_iden(elem["name"]) + "/Shader",
-                **({"attributes": transform_attributes(ch["attributes"], prefix="usd::materials::")} if ch.get("attributes") else {}),
-            }
-
 
 def fold(k, vs):
     raise NotImplementedError
@@ -76,7 +75,7 @@ def fold(k, vs):
 items = list(process())
 
 if False:
-    items = list(itertools.starmap(fold, itertools.groupby(sorted(items, key=operator.attrgetter('identifier')), key=operator.attrgetter('identifier'))))
+    items = list(itertools.starmap(fold, itertools.groupby(sorted(items, key=operator.attrgetter('path')), key=operator.attrgetter('path'))))
 
 json.dump({
     "header": {
