@@ -86,7 +86,7 @@ export function ExampleFile(attribute: string = "example::string", value: any = 
             },
         },
         data: [{
-            identifier: "root",
+            path: "root",
             children: {},
             inherits: {},
             attributes: {
@@ -107,7 +107,7 @@ export function ExampleFileMissingSchema()
         },
         schemas: {},
         data: [{
-            identifier: "root",
+            path: "root",
             children: {},
             inherits: {},
             attributes: {
@@ -133,7 +133,7 @@ export function ExampleFileWithSchema(datatype: DataType, data: any)
             },
         },
         data: [{
-            identifier: "root",
+            path: "root",
             children: {},
             inherits: {},
             attributes: {

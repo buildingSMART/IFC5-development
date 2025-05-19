@@ -24,7 +24,7 @@ function ToInputNodes(data: IfcxNode[])
     let inputNodes = new Map<string, InputNode[]>();
     data.forEach((ifcxNode) => {
         let node = {
-            path: ifcxNode.identifier,
+            path: ifcxNode.path,
             children: ifcxNode.children ? ifcxNode.children : {}, 
             inherits: ifcxNode.inherits ? ifcxNode.inherits : {},
             attributes: ifcxNode.attributes ? ifcxNode.attributes : {}
@@ -217,7 +217,7 @@ function DeepEqual(a: any, b: any)
 function DiffNodes(node1: InputNode, node2: InputNode): IfcxNode
 {
     let result = {
-        identifier: node1.path,
+        path: node1.path,
         children: {},
         inherits: {},
         attributes: {}
@@ -373,7 +373,7 @@ function Prune(file: IfcxFile, deleteEmpty: boolean = false)
     inputNodes.forEach((nodes) => {
         let collapsed = Collapse(nodes, deleteEmpty);
         if (collapsed) result.data.push({
-            identifier: collapsed.path,
+            path: collapsed.path,
             children: collapsed.children,
             inherits: collapsed.inherits,
             attributes: collapsed.attributes
