@@ -53,12 +53,11 @@ function createMaterialFromParent(parent, root) {
         if (!materialNode) {
             return null;
         }
-        let shader = materialNode.children.find(i => i.attributes['usd::materials::inputs::diffuseColor']);
-        let color = shader.attributes['usd::materials::inputs::diffuseColor'].value;
+        let color = materialNode.attributes['bsi::presentation::diffuseColor'].value;
         material.color = new THREE.Color(...color);
-        if (shader.attributes['usd::materials::inputs::opacity']) {
+        if (materialNode.attributes['bsi::presentation::opacity']) {
             material.transparent = true;
-            material.opacity = shader.attributes['usd::materials::inputs::opacity'].value;
+            material.opacity = materialNode.attributes['bsi::presentation::opacity'].value;
         }
     }
     return material;
@@ -158,7 +157,7 @@ function compose(datas) {
         const paths = {};
 
         function process(node) {
-            const nodeId = node.identifier;
+            const nodeId = node.path;
             const N = flattenAttributes(modelId, node);
             // Store in map
             (paths[nodeId] = paths[nodeId] || []).push(N);
@@ -292,7 +291,7 @@ function encodeHtmlEntities(str) {
 const icons = {
     'usd::usdgeom::mesh::points': 'deployed_code', 
     'usd::usdgeom::basiscurves::points': 'line_curve',
-    'usd::materials::inputs::diffuseColor': 'line_style'
+    'bsi::presentation::diffuseColor': 'line_style'
 };
 
 function buildDomTree(headers, prim, node) {
@@ -322,7 +321,7 @@ function buildDomTree(headers, prim, node) {
         }
     }
     elem.onclick = (evt) => {
-        let rows = [['name', prim.name]].concat(Object.entries(prim.attributes || {})).map(([k, v]) => `<tr><td>${encodeHtmlEntities(k)}</td><td>${renderValue(v)}</td>`).join('');
+        let rows = [['path', prim.name]].concat(Object.entries(prim.attributes || {})).map(([k, v]) => `<tr><td>${encodeHtmlEntities(k)}</td><td>${renderValue(v)}</td>`).join('');
         document.querySelector('.attributes .table').innerHTML = `<table border="0">${rows}</table>`;
         evt.stopPropagation();
     };
