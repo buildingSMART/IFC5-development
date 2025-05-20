@@ -198,7 +198,7 @@ function ToInputNodes(data) {
   let inputNodes = /* @__PURE__ */ new Map();
   data.forEach((ifcxNode) => {
     let node = {
-      path: ifcxNode.identifier,
+      path: ifcxNode.path,
       children: ifcxNode.children ? ifcxNode.children : {},
       inherits: ifcxNode.inherits ? ifcxNode.inherits : {},
       attributes: ifcxNode.attributes ? ifcxNode.attributes : {}
@@ -367,7 +367,7 @@ function Prune(file, deleteEmpty = false) {
   inputNodes.forEach((nodes) => {
     let collapsed = Collapse(nodes, deleteEmpty);
     if (collapsed) result.data.push({
-      identifier: collapsed.path,
+      path: collapsed.path,
       children: collapsed.children,
       inherits: collapsed.inherits,
       attributes: collapsed.attributes
@@ -464,13 +464,12 @@ function createMaterialFromParent(parent, root) {
   };
   if (reference) {
     const materialNode = getChildByName(root, reference.ref);
-    let shader = FindChildWithAttr(materialNode, "usd::materials::inputs::diffuseColor");
-    if (shader) {
-      let color = shader?.attributes["usd::materials::inputs::diffuseColor"];
+    if (materialNode) {
+      let color = materialNode?.attributes["bsi::presentation::diffuseColor"];
       material.color = new THREE.Color(...color);
-      if (shader?.attributes["usd::materials::inputs::opacity"]) {
+      if (materialNode?.attributes["bsi::presentation::opacity"]) {
         material.transparent = true;
-        material.opacity = shader.attributes["usd::materials::inputs::opacity"];
+        material.opacity = materialNode.attributes["bsi::presentation::opacity"];
       }
     }
   }

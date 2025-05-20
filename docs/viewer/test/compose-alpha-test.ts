@@ -294,7 +294,7 @@ function DefaultFile(valueOfAttribute: any)
             },
         },
         data: [{
-            identifier: "root",
+            path: "root",
             children: {},
             inherits: {},
             attributes: {

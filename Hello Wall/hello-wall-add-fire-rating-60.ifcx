@@ -16,7 +16,7 @@
   },
   "data": [
     {
-      "identifier":"82966dcf-41fc-4776-97f1-71d9cb52ab7e",
+      "path":"82966dcf-41fc-4776-97f1-71d9cb52ab7e",
       "attributes": {
         "bsi::ifc::v5a::prop::firerating": "R60"
       }

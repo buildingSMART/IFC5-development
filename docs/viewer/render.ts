@@ -71,14 +71,13 @@ function createMaterialFromParent(parent, root) {
     };
     if (reference) {
         const materialNode = getChildByName(root, reference.ref);
-        let shader = FindChildWithAttr(materialNode, "usd::materials::inputs::diffuseColor");
-        if (shader)
+        if (materialNode)
         {
-            let color = shader?.attributes['usd::materials::inputs::diffuseColor'];
+            let color = materialNode?.attributes['bsi::presentation::diffuseColor'];
             material.color = new THREE.Color(...color);
-            if (shader?.attributes['usd::materials::inputs::opacity']) {
+            if (materialNode?.attributes['bsi::presentation::opacity']) {
                 material!.transparent = true;
-                material!.opacity = shader.attributes['usd::materials::inputs::opacity'];
+                material!.opacity = materialNode.attributes['bsi::presentation::opacity'];
             }
         }
     }
