@@ -208,25 +208,6 @@
           }
         }
       }
-    },
-    "usd::usdshade::material": {
-      "value": {
-        "dataType": "Object",
-        "objectRestrictions": {
-          "values": {
-            "outputs::surface.connect": {
-              "dataType": "Object",
-              "objectRestrictions": {
-                "values": {
-                  "ref": {
-                    "dataType": "String"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
     }
   },
   "data": [
