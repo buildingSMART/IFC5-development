@@ -26,8 +26,8 @@ def transform_attributes(d):
         "info:id": None,
         "outputs:surface": None,
         "outputs:surface.connect": None,
-        "inputs:diffuseColor": "bsi:presentation:diffuseColor",
-        "inputs:opacity": "bsi:presentation:opacity",
+        "inputs:diffuseColor": "bsi:ifc:v5a:schema:presentation:diffuseColor",
+        "inputs:opacity": "bsi:ifc:v5a:schema:presentation:opacity",
     }
 
     def transform(k, v):
@@ -48,6 +48,16 @@ def transform_attributes(d):
                 pass
             for i in range(len(parts) - (0 if isinstance(v, dict) else 1)):
                 parts[i] = parts[i].lower()
+            if parts and parts[0] == 'ifc5':
+                parts[0:1] = ['bsi', 'ifc', 'v5a']
+                if 'properties' in parts:
+                    parts[parts.index('properties')] = 'prop'
+                    assert len(v) == 1
+                    kk, vv = next(iter(v.items()))
+                    parts.append(kk.lower())
+                    v = bool(vv)
+                else:
+                    parts.insert(3, 'schema')
             k = "::".join(parts)
 
             if k.startswith("usd"):

@@ -1,0 +1,40 @@
+#usda 1.0
+(
+    subLayers = [
+        @usd/schema.usda@,
+        @usdGeom/schema.usda@
+    ]
+)
+
+over "GLOBAL" (
+    customData = {
+        string libraryName   = "IFC5"
+        string libraryPath   = "./"
+        string libraryPrefix = "Ifc"
+
+        # This tells usdgenschema not to generate C++ code
+        bool skipCodeGeneration = true
+    }
+) {
+}
+
+class "SpaceBoundaryAPI" (
+    inherits = </APISchemaBase>
+    customData = {
+        token apiSchemaType = "singleApply"
+    }
+)
+{
+    rel ifc5:spaceboundary:relatingSpace
+    rel ifc5:spaceboundary:relatedElement
+}
+
+class "AlignmentAPI" (
+    inherits = </APISchemaBase>
+    customData = {
+        token apiSchemaType = "singleApply"
+    }
+)
+{
+    rel ifc5:alignment:segments
+}
