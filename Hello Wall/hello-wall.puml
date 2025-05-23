@@ -1,184 +1,171 @@
 @startuml
-class f40ec978-42e6-414a-a044-b6df23dfafef {
-  + "bsi::ifc::v5a::class" : "{'code': 'IfcWindow', 'uri': ' [...] fcWindow'}"
-  + "bsi::ifc::v5a::prop::isexternal" : "True"
-  # "customdata" : "{'originalStepInstance': "This [...] ED.,$,$)"}"
+class 25503984-6605-43a1-8597-eae657ff5bea {
+  + "bsi::ifc::v5a::schema::class" : "{'code': 'IfcWindow', 'uri': ' [...] fcWindow'}"
+  # "customdata" : "{'originalStepInstance': "#459 [...] ED.,$,$)"}"
 }
 
-class 1ea5c0ac-b13b-4ead-aa94-26d4dd36823e {
+class 14adb22b-d474-48a2-8e8f-6d4c067c1953 {
+  + "bsi::ifc::v5a::schema::class" : "{'code': 'IfcProject', 'uri':  [...] cProject'}"
+  # "customdata" : "{'originalStepInstance': "#1=I [...] #26),#9)"}"
 }
 
-class 08aa04b9-4ca7-45e0-9549-9154fef2828b {
-  + "bsi::ifc::v5a::class" : "{'code': 'IfcProject', 'uri':  [...] cProject'}"
-  # "customdata" : "{'originalStepInstance': "This [...] #26),#9)"}"
+class ab143723-f7b1-5368-b106-55896e88d768 {
 }
 
-class 8adf3b8f-f34a-4687-a406-5063ee095a1a {
-  + "bsi::ifc::v5a::class" : "{'code': 'IfcSite', 'uri': 'ht [...] /IfcSite'}"
-  # "customdata" : "{'originalStepInstance': "This [...] $,$,$,$)"}"
+class e0834921-e095-40f0-8874-3c6bd1ec699e {
+  + "bsi::ifc::v5a::schema::class" : "{'code': 'IfcSite', 'uri': 'ht [...] /IfcSite'}"
+  # "customdata" : "{'originalStepInstance': "#30= [...] $,$,$,$)"}"
 }
 
-class 2ddfa76e-ab37-42f2-8e37-ef5780d732e8 {
-  + "bsi::ifc::v5a::class" : "{'code': 'IfcBuilding', 'uri': [...] Building'}"
-  # "customdata" : "{'originalStepInstance': "This [...] $,$,$,$)"}"
+class e84dc79e-fe9d-4781-9f4b-54dd435cca91 {
+  + "bsi::ifc::v5a::schema::class" : "{'code': 'IfcBuilding', 'uri': [...] Building'}"
+  # "customdata" : "{'originalStepInstance': "#36= [...] $,$,$,$)"}"
 }
 
-class 5a26bd1d-fa44-4aaa-9a5e-91a06eed2e52 {
-  + "bsi::ifc::v5a::class" : "{'code': 'IfcBuildingStorey',  [...] ngStorey'}"
-  # "customdata" : "{'originalStepInstance': "This [...] $,$,$,$)"}"
+class 44af358b-3160-4063-8a89-a868335ff3b5 {
+  + "bsi::ifc::v5a::schema::class" : "{'code': 'IfcBuildingStorey',  [...] ngStorey'}"
+  # "customdata" : "{'originalStepInstance': "#42= [...] $,$,$,$)"}"
 }
 
-class f079bafd-8733-48d8-85df-1c1656a17c1f {
-  + "bsi::ifc::v5a::class" : "{'code': 'IfcSpace', 'uri': 'h [...] IfcSpace'}"
-  + "bsi::ifc::v5a::prop::volume" : "27.3"
-  + "bsi::ifc::v5a::prop::height" : "3.5"
+class e3035b71-bd9f-4cdc-86fd-b56e2f4605b6 {
+  + "bsi::ifc::v5a::schema::class" : "{'code': 'IfcSpace', 'uri': 'h [...] IfcSpace'}"
   ~ "usd::xformop" : "{'transform': [[1, 0, 0, 0], [ [...] 8, 0, 1]]}"
-  # "customdata" : "{'originalStepInstance': "This [...] PACE.,$)"}"
+  # "customdata" : "{'originalStepInstance': "#149 [...] PACE.,$)"}"
 }
 
-class 13168941-10d9-4c6a-8c63-505cc302312c {
-  + "bsi::ifc::v5a::class" : "{'code': 'IfcWall', 'uri': 'ht [...] /IfcWall'}"
+class 93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b {
+  + "bsi::ifc::v5a::schema::class" : "{'code': 'IfcWall', 'uri': 'ht [...] /IfcWall'}"
   + "bsi::ifc::v5a::prop::isexternal" : "True"
-  + "bsi::ifc::v5a::prop::volume" : "0.9"
-  + "bsi::ifc::v5a::prop::height" : "3.5"
-  # "customdata" : "{'originalStepInstance': "This [...] 230,$,$)"}"
+  # "customdata" : "{'originalStepInstance': "#122 [...] 230,$,$)"}"
   # "nlsfb::class" : "{'code': '21.21', 'uri': 'http [...] ss/21.21'}"
 }
 
-class 82966dcf-41fc-4776-97f1-71d9cb52ab7e {
-  + "bsi::name" : "Instance of Window"
+class 2c2d549f-f9fe-4e22-8590-562fda81a690 {
+  + "bsi::ifc::v5a::schema::class" : "{'code': 'IfcWindow', 'uri': ' [...] fcWindow'}"
+  + "bsi::ifc::v5a::prop::isexternal" : "True"
   ~ "usd::xformop" : "{'transform': [[1, 0, 0, 0], [ [...] 0, 1, 1]]}"
-  # "customdata" : "{'originalStepInstance': "This [...] $,$,$,$)"}"
+  # "customdata" : "{'originalStepInstance': "#126 [...] $,$,$,$)"}"
 }
 
-class 8134f9ec-2e87-4b70-a538-9b6dc7ba94b1 {
-  + "bsi::name" : "Instance of Window_001"
+class 592504dc-469a-44d6-9ae8-c801b591679b {
+  + "bsi::ifc::v5a::schema::class" : "{'code': 'IfcWindow', 'uri': ' [...] fcWindow'}"
+  + "bsi::ifc::v5a::prop::isexternal" : "True"
   ~ "usd::xformop" : "{'transform': [[1, 0, 0, 0], [ [...] 0, 1, 1]]}"
-  # "customdata" : "{'originalStepInstance': "This [...] $,$,$,$)"}"
+  # "customdata" : "{'originalStepInstance': "#140 [...] $,$,$,$)"}"
 }
 
-class 4fd67c00-82cf-476d-b5dd-6a06b07c6141 {
-  + "bsi::ifc::v5a::spaceboundary" : "{'relatedElement': {'ref': '13 [...] 6a17c1f'}}"
+class d42f9890-1da9-400a-b313-11b5f27d0da0 {
+  + "bsi::ifc::v5a::schema::spaceboundary" : "{'relatedelement': {'ref': '93 [...] f4605b6'}}"
 }
 
-class 15226122-42a4-428d-9b9a-16566291c182 {
-  + "bsi::ifc::v5a::spaceboundary" : "{'relatedElement': {'ref': '82 [...] 6a17c1f'}}"
+class 4eb1fec0-7b91-4dd9-82ec-5e35003177ce {
+  + "bsi::ifc::v5a::schema::spaceboundary" : "{'relatedelement': {'ref': '2c [...] f4605b6'}}"
 }
 
-class 428b2888-1e0d-4f7b-b8ae-73236f626cea {
-  + "bsi::ifc::v5a::spaceboundary" : "{'relatedElement': {'ref': '81 [...] 6a17c1f'}}"
+class 3b674acb-4384-47de-9f72-0848c9cea8a1 {
+  + "bsi::ifc::v5a::schema::spaceboundary" : "{'relatedelement': {'ref': '59 [...] f4605b6'}}"
 }
 
-stereotype "f83b2e90-81df-4cae-ad63-52a51009e561/Shader" {
-  + "bsi::name" : "SpaceMaterial shader"
-  ~ "usd::materials::info::id" : "UsdPreviewSurface"
-  ~ "usd::materials::inputs::diffuseColor" : "[0.6, 0.7, 0.8]"
-  ~ "usd::materials::inputs::opacity" : "0.3"
-  ~ "usd::materials::outputs::surface" : "None"
+class 0e586931-d0c7-520d-87a1-33977bfcc094 {
+  + "bsi::ifc::v5a::schema::presentation::diffuseColor" : "[0.6, 0.7, 0.8]"
+  + "bsi::ifc::v5a::schema::presentation::opacity" : "0.3"
 }
 
-stereotype "359c715f-5961-4c20-be08-9bb25ea75c24/Shader" {
-  + "bsi::name" : "WallMaterial shader"
-  ~ "usd::materials::info::id" : "UsdPreviewSurface"
-  ~ "usd::materials::inputs::diffuseColor" : "[0.8, 0.7, 0.6]"
-  ~ "usd::materials::inputs::opacity" : "1"
-  ~ "usd::materials::outputs::surface" : "None"
+class 7a187a90-3dcf-58cc-b3a6-51a9a407c55a {
+  + "bsi::ifc::v5a::schema::presentation::diffuseColor" : "[0.8, 0.7, 0.6]"
+  + "bsi::ifc::v5a::schema::presentation::opacity" : "1"
 }
 
-stereotype "82c0b0b0-1452-4fd9-b80d-20b9ee76a115/Shader" {
-  + "bsi::name" : "WindowMaterial shader"
-  ~ "usd::materials::info::id" : "UsdPreviewSurface"
-  ~ "usd::materials::inputs::diffuseColor" : "[0.6, 0.5, 0.4]"
-  ~ "usd::materials::inputs::opacity" : "0.8"
-  ~ "usd::materials::outputs::surface" : "None"
+class 77e17b50-5b5a-54ff-8137-3ab205b6f5f8 {
+  + "bsi::ifc::v5a::schema::presentation::diffuseColor" : "[0.6, 0.5, 0.4]"
+  + "bsi::ifc::v5a::schema::presentation::opacity" : "0.8"
 }
 
-class 4a4b35e6-05c0-4abe-8594-aa7b42d8ff58 {
+class 8fada721-cff8-590b-8d0b-9300b5fe8e18 {
   ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [3, 0, 1 [...] 96, 1.2]]}"
   ~ "usd::usdgeom::visibility" : "{'visibility': 'invisible'}"
 }
 
-class 3b1b9346-ead9-4301-ac87-3038e62ebfda {
-  ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [0, 1, 2 [...] 03, 1.1]]}"
+class ea5dbe57-5159-5801-b2f9-6f0ca112829b {
+  ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [3, 0, 1 [...] 02, 1.1]]}"
 }
 
-class a0061a96-fd61-47ec-8d38-39cf14f3c3a8 {
-  ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [1, 2, 3 [...] 0, 0, 3]]}"
+class 15289df1-5ae0-5fc9-8399-19de1fbb87a0 {
+  ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [0, 1, 2 [...] 0, 0, 3]]}"
 }
 
-class 668e304b-38a2-4f8f-b3de-2a8a5a13384d {
+class 634f90c3-831e-5f29-a9b2-fa69b207821e {
   ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [3, 0, 1 [...]  0.1, 1]]}"
 }
 
-class c3055cc8-a5b6-4a84-860e-0d6cc978dfe8 {
+class 8407e490-ceaa-56e5-96df-2351d9110668 {
   ~ "usd::usdgeom::basiscurves" : "{'points': [[0, 0, 0], [10, 0, 0]]}"
 }
 
-class 97c55241-7a56-48d7-bc6e-be2fd24f86ac {
+class 9d1fce89-e179-5076-9a3b-1b40eef3524b {
   ~ "usd::usdgeom::basiscurves" : "{'points': [[0, 0, 0], [0, 0, 3]]}"
 }
 
-class b6012d70-097a-4794-8d1f-220fa65a591a {
-  ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [0, 1, 2 [...] 0, 0, 0]]}"
+class 367f7f7d-b4c5-50fe-829a-6bbced170dd1 {
+  ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [0, 1, 3 [...] 0, 0, 0]]}"
 }
 
-class 02333064-a80b-4824-9751-36f88d0d175d {
-  ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [3, 0, 1 [...] e-08, 3]]}"
+class 4e664ae2-7ff7-58d6-aa41-242e18e90a39 {
+  ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [2, 0, 1 [...] e-08, 0]]}"
 }
 
-class c3b8360d-98b5-4fa1-9350-a8ab8106a80f {
-  ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [0, 1, 2 [...] 08, 2.2]]}"
+class 649111c2-c1f1-5708-ab70-a51981cdb354 {
+  ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [3, 0, 1 [...] 08, 2.2]]}"
 }
 
-class b5bdd146-5d6a-49f8-9e09-c1e7a48fb676 {
-  ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [2, 0, 1 [...] e-08, 1]]}"
+class bcefac1b-eb16-5817-9e81-2e35337651b2 {
+  ~ "usd::usdgeom::mesh" : "{'faceVertexIndices': [1, 2, 3 [...] e-08, 1]]}"
 }
 
-class f83b2e90-81df-4cae-ad63-52a51009e561 {
-  + "bsi::name" : "SpaceMaterial"
-  ~ "usd::usdshade::material" : "{'outputs::surface.connect': { [...] surface'}}"
+class f079bafd-8733-48d8-85df-1c1656a17c1f {
+  + "bsi::ifc::v5a::prop::volume" : "1.2959999568"
+  + "bsi::ifc::v5a::prop::height" : "1.2"
+  + "bsi::ifc::v5a::prop::volume" : "0.025999999592"
+  + "bsi::ifc::v5a::prop::height" : "1.2"
+  + "bsi::ifc::v5a::prop::volume" : "150.0"
+  + "bsi::ifc::v5a::prop::height" : "3.0"
+  + "bsi::ifc::v5a::prop::volume" : "2.783999976"
+  + "bsi::ifc::v5a::prop::height" : "3.0"
+  + "bsi::ifc::v5a::prop::volume" : "0.0"
+  + "bsi::ifc::v5a::prop::height" : "0.0"
+  + "bsi::ifc::v5a::prop::volume" : "0.0"
+  + "bsi::ifc::v5a::prop::height" : "3.0"
+  + "bsi::ifc::v5a::prop::volume" : "0.0"
+  + "bsi::ifc::v5a::prop::height" : "1.2000000000000002"
+  + "bsi::ifc::v5a::prop::volume" : "0.0"
+  + "bsi::ifc::v5a::prop::height" : "1.2000000000000002"
 }
 
-class 359c715f-5961-4c20-be08-9bb25ea75c24 {
-  + "bsi::name" : "WallMaterial"
-  ~ "usd::usdshade::material" : "{'outputs::surface.connect': { [...] surface'}}"
-}
-
-class 82c0b0b0-1452-4fd9-b80d-20b9ee76a115 {
-  + "bsi::name" : "WindowMaterial"
-  ~ "usd::usdshade::material" : "{'outputs::surface.connect': { [...] surface'}}"
-}
-
-"f40ec978-42e6-414a-a044-b6df23dfafef" --> "child:Void" "4a4b35e6-05c0-4abe-8594-aa7b42d8ff58"
-"f40ec978-42e6-414a-a044-b6df23dfafef" --> "child:Body" "3b1b9346-ead9-4301-ac87-3038e62ebfda"
-"1ea5c0ac-b13b-4ead-aa94-26d4dd36823e" --> "child:My_Project" "08aa04b9-4ca7-45e0-9549-9154fef2828b"
-"08aa04b9-4ca7-45e0-9549-9154fef2828b" --> "child:My_Site" "8adf3b8f-f34a-4687-a406-5063ee095a1a"
-"8adf3b8f-f34a-4687-a406-5063ee095a1a" --> "child:My_Building" "2ddfa76e-ab37-42f2-8e37-ef5780d732e8"
-"2ddfa76e-ab37-42f2-8e37-ef5780d732e8" --> "child:My_Storey" "5a26bd1d-fa44-4aaa-9a5e-91a06eed2e52"
-"5a26bd1d-fa44-4aaa-9a5e-91a06eed2e52" --> "child:My_Space" "f079bafd-8733-48d8-85df-1c1656a17c1f"
-"5a26bd1d-fa44-4aaa-9a5e-91a06eed2e52" --> "child:Wall" "13168941-10d9-4c6a-8c63-505cc302312c"
-"f079bafd-8733-48d8-85df-1c1656a17c1f" --> "child:Body" "a0061a96-fd61-47ec-8d38-39cf14f3c3a8"
-"f079bafd-8733-48d8-85df-1c1656a17c1f" --> "child:Boundary_Wall" "4fd67c00-82cf-476d-b5dd-6a06b07c6141"
-"f079bafd-8733-48d8-85df-1c1656a17c1f" --> "child:Boundary_Window" "15226122-42a4-428d-9b9a-16566291c182"
-"f079bafd-8733-48d8-85df-1c1656a17c1f" --> "child:Boundary_Window_001" "428b2888-1e0d-4f7b-b8ae-73236f626cea"
-"13168941-10d9-4c6a-8c63-505cc302312c" --> "child:Body" "668e304b-38a2-4f8f-b3de-2a8a5a13384d"
-"13168941-10d9-4c6a-8c63-505cc302312c" --> "child:Axis" "c3055cc8-a5b6-4a84-860e-0d6cc978dfe8"
-"13168941-10d9-4c6a-8c63-505cc302312c" --> "child:Directrix" "97c55241-7a56-48d7-bc6e-be2fd24f86ac"
-"13168941-10d9-4c6a-8c63-505cc302312c" --> "child:Basis" "b6012d70-097a-4794-8d1f-220fa65a591a"
-"13168941-10d9-4c6a-8c63-505cc302312c" --> "child:Window" "82966dcf-41fc-4776-97f1-71d9cb52ab7e"
-"13168941-10d9-4c6a-8c63-505cc302312c" --> "child:Window_001" "8134f9ec-2e87-4b70-a538-9b6dc7ba94b1"
-"82966dcf-41fc-4776-97f1-71d9cb52ab7e" --o "inherits:windowType" "f40ec978-42e6-414a-a044-b6df23dfafef"
-"8134f9ec-2e87-4b70-a538-9b6dc7ba94b1" --o "inherits:windowType" "f40ec978-42e6-414a-a044-b6df23dfafef"
-"4fd67c00-82cf-476d-b5dd-6a06b07c6141" --> "child:Body" "02333064-a80b-4824-9751-36f88d0d175d"
-"15226122-42a4-428d-9b9a-16566291c182" --> "child:Body" "c3b8360d-98b5-4fa1-9350-a8ab8106a80f"
-"428b2888-1e0d-4f7b-b8ae-73236f626cea" --> "child:Body" "b5bdd146-5d6a-49f8-9e09-c1e7a48fb676"
-"f83b2e90-81df-4cae-ad63-52a51009e561" --> "child:Shader" "b3325921-8f14-4847-9473-cfc6e333683a"
-"359c715f-5961-4c20-be08-9bb25ea75c24" --> "child:Shader" "7a6173bc-e2f0-4e5f-aa73-cfed0ede1ceb"
-"82c0b0b0-1452-4fd9-b80d-20b9ee76a115" --> "child:Shader" "317cc394-2285-4f91-a120-3bcba12e9c47"
-"f079bafd-8733-48d8-85df-1c1656a17c1f" --|> "madeOf" "f83b2e90-81df-4cae-ad63-52a51009e561"
-"13168941-10d9-4c6a-8c63-505cc302312c" --|> "madeOf" "359c715f-5961-4c20-be08-9bb25ea75c24"
-"f40ec978-42e6-414a-a044-b6df23dfafef" --|> "madeOf" "82c0b0b0-1452-4fd9-b80d-20b9ee76a115"
-"f83b2e90-81df-4cae-ad63-52a51009e561" o..o "f83b2e90-81df-4cae-ad63-52a51009e561/Shader"
-"359c715f-5961-4c20-be08-9bb25ea75c24" o..o "359c715f-5961-4c20-be08-9bb25ea75c24/Shader"
-"82c0b0b0-1452-4fd9-b80d-20b9ee76a115" o..o "82c0b0b0-1452-4fd9-b80d-20b9ee76a115/Shader"
+"25503984-6605-43a1-8597-eae657ff5bea" --> "child:Void" "8fada721-cff8-590b-8d0b-9300b5fe8e18"
+"25503984-6605-43a1-8597-eae657ff5bea" --> "child:Body" "ea5dbe57-5159-5801-b2f9-6f0ca112829b"
+"14adb22b-d474-48a2-8e8f-6d4c067c1953" --> "child:My_Site" "e0834921-e095-40f0-8874-3c6bd1ec699e"
+"ab143723-f7b1-5368-b106-55896e88d768" --o "inherits:i0" "14adb22b-d474-48a2-8e8f-6d4c067c1953"
+"e0834921-e095-40f0-8874-3c6bd1ec699e" --> "child:My_Building" "e84dc79e-fe9d-4781-9f4b-54dd435cca91"
+"e84dc79e-fe9d-4781-9f4b-54dd435cca91" --> "child:My_Storey" "44af358b-3160-4063-8a89-a868335ff3b5"
+"44af358b-3160-4063-8a89-a868335ff3b5" --> "child:My_Space" "e3035b71-bd9f-4cdc-86fd-b56e2f4605b6"
+"44af358b-3160-4063-8a89-a868335ff3b5" --> "child:Wall" "93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b"
+"e3035b71-bd9f-4cdc-86fd-b56e2f4605b6" --> "child:Body" "15289df1-5ae0-5fc9-8399-19de1fbb87a0"
+"e3035b71-bd9f-4cdc-86fd-b56e2f4605b6" --> "child:Boundary_Wall" "d42f9890-1da9-400a-b313-11b5f27d0da0"
+"e3035b71-bd9f-4cdc-86fd-b56e2f4605b6" --> "child:Boundary_Window" "4eb1fec0-7b91-4dd9-82ec-5e35003177ce"
+"e3035b71-bd9f-4cdc-86fd-b56e2f4605b6" --> "child:Boundary_Window_001" "3b674acb-4384-47de-9f72-0848c9cea8a1"
+"93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b" --> "child:Body" "634f90c3-831e-5f29-a9b2-fa69b207821e"
+"93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b" --> "child:Axis" "8407e490-ceaa-56e5-96df-2351d9110668"
+"93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b" --> "child:Directrix" "9d1fce89-e179-5076-9a3b-1b40eef3524b"
+"93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b" --> "child:Basis" "367f7f7d-b4c5-50fe-829a-6bbced170dd1"
+"93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b" --> "child:Window" "2c2d549f-f9fe-4e22-8590-562fda81a690"
+"93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b" --> "child:Window_001" "592504dc-469a-44d6-9ae8-c801b591679b"
+"2c2d549f-f9fe-4e22-8590-562fda81a690" --o "inherits:i0" "25503984-6605-43a1-8597-eae657ff5bea"
+"592504dc-469a-44d6-9ae8-c801b591679b" --o "inherits:i0" "25503984-6605-43a1-8597-eae657ff5bea"
+"d42f9890-1da9-400a-b313-11b5f27d0da0" --> "child:Body" "4e664ae2-7ff7-58d6-aa41-242e18e90a39"
+"4eb1fec0-7b91-4dd9-82ec-5e35003177ce" --> "child:Body" "649111c2-c1f1-5708-ab70-a51981cdb354"
+"3b674acb-4384-47de-9f72-0848c9cea8a1" --> "child:Body" "bcefac1b-eb16-5817-9e81-2e35337651b2"
+"e3035b71-bd9f-4cdc-86fd-b56e2f4605b6" --|> "madeOf" "0e586931-d0c7-520d-87a1-33977bfcc094"
+"93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b" --|> "madeOf" "7a187a90-3dcf-58cc-b3a6-51a9a407c55a"
+"2c2d549f-f9fe-4e22-8590-562fda81a690" --|> "madeOf" "77e17b50-5b5a-54ff-8137-3ab205b6f5f8"
+"592504dc-469a-44d6-9ae8-c801b591679b" --|> "madeOf" "77e17b50-5b5a-54ff-8137-3ab205b6f5f8"
 @enduml
