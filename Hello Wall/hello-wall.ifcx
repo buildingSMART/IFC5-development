@@ -5,11 +5,6 @@
     "timestamp": "time string"
   },
   "schemas": {
-    "bsi::name": {
-      "value": {
-        "dataType": "String"
-      }
-    },
     "customdata": {
       "value": {
         "dataType": "Object",
@@ -22,355 +17,160 @@
         }
       }
     },
-    "bsi::ifc::v5a::class": {
-      "value": {
-        "dataType": "Object",
-        "objectRestrictions": {
-          "values": {
-            "code": {
-              "dataType": "String"
-            },
-            "uri": {
-              "dataType": "String"
-            }
-          }
-        }
-      }
+    "bsi::ifc::v5a::schema": {
+      "uri": "https://ifc5.technical.buildingsmart.org/schemas/bsi/ifc/v5a/schema.json"
     },
-    "bsi::ifc::v5a::prop::isexternal": {
-      "value": {
-          "dataType": "Boolean"
-      }
+    "usd": {
+      "uri": "https://ifc5.technical.buildingsmart.org/schemas/usd.json"
     },
-    "bsi::ifc::v5a::prop::volume": {
-      "value": {
-          "dataType": "Real",
-          "quantityKind": "Volume"
-      }
+    "bsi::ifc::v5a::prop": {
+      "uri": "https://ifc5.technical.buildingsmart.org/schemas/bsi/ifc/v5a/prop.json"
     },
-    "bsi::ifc::v5a::prop::height": {
-      "value": {
-          "dataType": "Real",
-          "quantityKind": "Length"
-      }
-    },
-    "bsi::ifc::v5a::spaceboundary": {
-      "value": {
-        "dataType": "Object",
-        "objectRestrictions": {
-          "values": {
-            "relatedElement": {
-              "dataType": "Object",
-              "objectRestrictions": {
-                "values": {
-                  "ref": {
-                    "dataType": "String"
-                  }
-                }
-              }
-            },
-            "relatedSpace": {
-              "dataType": "Object",
-              "objectRestrictions": {
-                "values": {
-                  "ref": {
-                    "dataType": "String"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "usd::usdshade::materialbindingapi": {
-      "value": {
-        "dataType": "Object",
-        "objectRestrictions": {
-          "values": {
-            "material::binding": {
-              "dataType": "Object",
-              "objectRestrictions": {
-                "values": {
-                  "ref": {
-                    "dataType": "String"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "usd::xformop": {
-      "value": {
-        "dataType": "Object",
-        "objectRestrictions": {
-          "values": {
-            "transform": {
-              "dataType": "Array",
-              "arrayRestrictions": {
-                "value": {
-                  "dataType": "Array",
-                  "arrayRestrictions": {
-                    "value": {
-                      "dataType": "Real"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "nlsfb::class": {
-      "value": {
-        "dataType": "Object",
-        "inherits": ["bsi::ifc::v5a::class"]
-      }
-    },
-    "bsi::presentation::diffuseColor": {
-      "value": {
-        "dataType": "Array",
-        "arrayRestrictions": {
-          "value": {
-            "dataType": "Real"
-          }
-        }
-      }
-    },
-    "bsi::presentation::opacity": {
-      "value": {
-        "dataType": "Real"
-      }
-    },
-    "usd::usdgeom::mesh": {
-      "value": {
-        "dataType": "Object",
-        "objectRestrictions": {
-          "values": {
-            "faceVertexIndices": {
-              "dataType": "Array",
-              "arrayRestrictions": {
-                "value": {
-                  "dataType": "Integer"
-                }
-              }
-            },
-            "points": {
-              "dataType": "Array",
-              "arrayRestrictions": {
-                "value": {
-                  "dataType": "Array",
-                  "arrayRestrictions": {
-                    "value": {
-                      "dataType": "Real"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "usd::usdgeom::visibility": {
-      "value": {
-        "dataType": "Object",
-        "objectRestrictions": {
-          "values": {
-            "visibility": {
-              "dataType": "String"
-            }
-          }
-        }
-      }
-    },
-    "usd::usdgeom::basiscurves": {
-      "value": {
-        "dataType": "Object",
-        "objectRestrictions": {
-          "values": {
-            "points": {
-              "dataType": "Array",
-              "arrayRestrictions": {
-                "value": {
-                  "dataType": "Array",
-                  "arrayRestrictions": {
-                    "value": {
-                      "dataType": "Real"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "usd::usdshade::material": {
-      "value": {
-        "dataType": "Object",
-        "objectRestrictions": {
-          "values": {
-            "outputs::surface.connect": {
-              "dataType": "Object",
-              "objectRestrictions": {
-                "values": {
-                  "ref": {
-                    "dataType": "String"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+    "nlsfb": {
+      "uri": "https://ifc5.technical.buildingsmart.org/schemas/nlsfb.json"
     }
   },
   "data": [
     {
-      "path":"f40ec978-42e6-414a-a044-b6df23dfafef",
+      "path": "25503984-6605-43a1-8597-eae657ff5bea",
       "children": {
-        "Void": "4a4b35e6-05c0-4abe-8594-aa7b42d8ff58",
-        "Body": "3b1b9346-ead9-4301-ac87-3038e62ebfda"
+        "Void": "8fada721-cff8-590b-8d0b-9300b5fe8e18",
+        "Body": "ea5dbe57-5159-5801-b2f9-6f0ca112829b"
       }
     },
     {
-      "path":"1ea5c0ac-b13b-4ead-aa94-26d4dd36823e",
+      "path": "14adb22b-d474-48a2-8e8f-6d4c067c1953",
       "children": {
-        "My_Project": "08aa04b9-4ca7-45e0-9549-9154fef2828b"
+        "My_Site": "e0834921-e095-40f0-8874-3c6bd1ec699e"
       }
     },
     {
-      "path":"08aa04b9-4ca7-45e0-9549-9154fef2828b",
-      "children": {
-        "My_Site": "8adf3b8f-f34a-4687-a406-5063ee095a1a"
-      }
-    },
-    {
-      "path":"8adf3b8f-f34a-4687-a406-5063ee095a1a",
-      "children": {
-        "My_Building": "2ddfa76e-ab37-42f2-8e37-ef5780d732e8"
-      }
-    },
-    {
-      "path":"2ddfa76e-ab37-42f2-8e37-ef5780d732e8",
-      "children": {
-        "My_Storey": "5a26bd1d-fa44-4aaa-9a5e-91a06eed2e52"
-      }
-    },
-    {
-      "path":"5a26bd1d-fa44-4aaa-9a5e-91a06eed2e52",
-      "children": {
-        "My_Space": "f079bafd-8733-48d8-85df-1c1656a17c1f",
-        "Wall": "13168941-10d9-4c6a-8c63-505cc302312c"
-      }
-    },
-    {
-      "path":"f079bafd-8733-48d8-85df-1c1656a17c1f",
-      "children": {
-        "Body": "a0061a96-fd61-47ec-8d38-39cf14f3c3a8",
-        "Boundary_Wall": "4fd67c00-82cf-476d-b5dd-6a06b07c6141",
-        "Boundary_Window": "15226122-42a4-428d-9b9a-16566291c182",
-        "Boundary_Window_001": "428b2888-1e0d-4f7b-b8ae-73236f626cea"
-      }
-    },
-    {
-      "path":"13168941-10d9-4c6a-8c63-505cc302312c",
-      "children": {
-        "Body": "668e304b-38a2-4f8f-b3de-2a8a5a13384d",
-        "Axis": "c3055cc8-a5b6-4a84-860e-0d6cc978dfe8",
-        "Directrix": "97c55241-7a56-48d7-bc6e-be2fd24f86ac",
-        "Basis": "b6012d70-097a-4794-8d1f-220fa65a591a",
-        "Window": "82966dcf-41fc-4776-97f1-71d9cb52ab7e",
-        "Window_001": "8134f9ec-2e87-4b70-a538-9b6dc7ba94b1"
-      }
-    },
-    {
-      "path":"82966dcf-41fc-4776-97f1-71d9cb52ab7e",
+      "path": "ab143723-f7b1-5368-b106-55896e88d768",
       "inherits": {
-        "windowType": "f40ec978-42e6-414a-a044-b6df23dfafef"
-      },
-      "attributes": {
-        "bsi::name": "Instance of Window"
+        "i0": "14adb22b-d474-48a2-8e8f-6d4c067c1953"
       }
     },
     {
-      "path":"8134f9ec-2e87-4b70-a538-9b6dc7ba94b1",
+      "path": "e0834921-e095-40f0-8874-3c6bd1ec699e",
+      "children": {
+        "My_Building": "e84dc79e-fe9d-4781-9f4b-54dd435cca91"
+      }
+    },
+    {
+      "path": "e84dc79e-fe9d-4781-9f4b-54dd435cca91",
+      "children": {
+        "My_Storey": "44af358b-3160-4063-8a89-a868335ff3b5"
+      }
+    },
+    {
+      "path": "44af358b-3160-4063-8a89-a868335ff3b5",
+      "children": {
+        "My_Space": "e3035b71-bd9f-4cdc-86fd-b56e2f4605b6",
+        "Wall": "93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b"
+      }
+    },
+    {
+      "path": "e3035b71-bd9f-4cdc-86fd-b56e2f4605b6",
+      "children": {
+        "Body": "15289df1-5ae0-5fc9-8399-19de1fbb87a0",
+        "Boundary_Wall": "d42f9890-1da9-400a-b313-11b5f27d0da0",
+        "Boundary_Window": "4eb1fec0-7b91-4dd9-82ec-5e35003177ce",
+        "Boundary_Window_001": "3b674acb-4384-47de-9f72-0848c9cea8a1"
+      }
+    },
+    {
+      "path": "93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b",
+      "children": {
+        "Body": "634f90c3-831e-5f29-a9b2-fa69b207821e",
+        "Axis": "8407e490-ceaa-56e5-96df-2351d9110668",
+        "Directrix": "9d1fce89-e179-5076-9a3b-1b40eef3524b",
+        "Basis": "367f7f7d-b4c5-50fe-829a-6bbced170dd1",
+        "Window": "2c2d549f-f9fe-4e22-8590-562fda81a690",
+        "Window_001": "592504dc-469a-44d6-9ae8-c801b591679b"
+      }
+    },
+    {
+      "path": "2c2d549f-f9fe-4e22-8590-562fda81a690",
       "inherits": {
-        "windowType": "f40ec978-42e6-414a-a044-b6df23dfafef"
-      },
+        "i0": "25503984-6605-43a1-8597-eae657ff5bea"
+      }
+    },
+    {
+      "path": "592504dc-469a-44d6-9ae8-c801b591679b",
+      "inherits": {
+        "i0": "25503984-6605-43a1-8597-eae657ff5bea"
+      }
+    },
+    {
+      "path": "d42f9890-1da9-400a-b313-11b5f27d0da0",
+      "children": {
+        "Body": "4e664ae2-7ff7-58d6-aa41-242e18e90a39"
+      }
+    },
+    {
+      "path": "4eb1fec0-7b91-4dd9-82ec-5e35003177ce",
+      "children": {
+        "Body": "649111c2-c1f1-5708-ab70-a51981cdb354"
+      }
+    },
+    {
+      "path": "3b674acb-4384-47de-9f72-0848c9cea8a1",
+      "children": {
+        "Body": "bcefac1b-eb16-5817-9e81-2e35337651b2"
+      }
+    },
+    {
+      "path": "0e586931-d0c7-520d-87a1-33977bfcc094",
       "attributes": {
-        "bsi::name": "Instance of Window_001"
-      }
-    },
-    {
-      "path":"4fd67c00-82cf-476d-b5dd-6a06b07c6141",
-      "children": {
-        "Body": "02333064-a80b-4824-9751-36f88d0d175d"
-      }
-    },
-    {
-      "path":"15226122-42a4-428d-9b9a-16566291c182",
-      "children": {
-        "Body": "c3b8360d-98b5-4fa1-9350-a8ab8106a80f"
-      }
-    },
-    {
-      "path":"428b2888-1e0d-4f7b-b8ae-73236f626cea",
-      "children": {
-        "Body": "b5bdd146-5d6a-49f8-9e09-c1e7a48fb676"
-      }
-    },
-    {
-      "path":"f83b2e90-81df-4cae-ad63-52a51009e561",
-      "attributes": {
-        "bsi::presentation::diffuseColor": [
+        "bsi::ifc::v5a::schema::presentation::diffuseColor": [
           0.6,
           0.7,
           0.8
         ],
-        "bsi::presentation::opacity": 0.3
+        "bsi::ifc::v5a::schema::presentation::opacity": 0.3
       }
     },
     {
-      "path":"359c715f-5961-4c20-be08-9bb25ea75c24",
+      "path": "7a187a90-3dcf-58cc-b3a6-51a9a407c55a",
       "attributes": {
-        "bsi::presentation::diffuseColor": [
+        "bsi::ifc::v5a::schema::presentation::diffuseColor": [
           0.8,
           0.7,
           0.6
         ],
-        "bsi::presentation::opacity": 1
+        "bsi::ifc::v5a::schema::presentation::opacity": 1
       }
     },
     {
-      "path":"82c0b0b0-1452-4fd9-b80d-20b9ee76a115",
+      "path": "77e17b50-5b5a-54ff-8137-3ab205b6f5f8",
       "attributes": {
-        "bsi::presentation::diffuseColor": [
+        "bsi::ifc::v5a::schema::presentation::diffuseColor": [
           0.6,
           0.5,
           0.4
         ],
-        "bsi::presentation::opacity": 0.8
+        "bsi::ifc::v5a::schema::presentation::opacity": 0.8
       }
     },
     {
-      "path":"f40ec978-42e6-414a-a044-b6df23dfafef",
+      "path": "25503984-6605-43a1-8597-eae657ff5bea",
       "attributes": {
         "customdata": {
-          "originalStepInstance": "This is only here to help understand the example. There will not be STEP code in IFC 5. This component represensts this line in the SPFF: #459=IfcWindowType('0bK3c4PWL3eOMNwkPN$rlg',$,'WT01',$,$,$,(#436,#458),$,$,.NOTDEFINED.,.NOTDEFINED.,$,$)"
-        },
-        "bsi::ifc::v5a::class": {
-          "code": "IfcWindow",
-          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/5/class/IfcWindow"
+          "originalStepInstance": "#459=IfcWindowType('0bK3c4PWL3eOMNwkPN$rlg',$,'WT01',$,$,$,(#436,#458),$,$,.NOTDEFINED.,.NOTDEFINED.,$,$)"
         }
       }
     },
     {
-      "path":"4a4b35e6-05c0-4abe-8594-aa7b42d8ff58",
+      "path": "25503984-6605-43a1-8597-eae657ff5bea",
+      "attributes": {
+        "bsi::ifc::v5a::schema::class": {
+          "code": "IfcWindow",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcWindow"
+        }
+      }
+    },
+    {
+      "path": "8fada721-cff8-590b-8d0b-9300b5fe8e18",
       "attributes": {
         "usd::usdgeom::mesh": {
           "faceVertexIndices": [
@@ -537,7 +337,7 @@
       }
     },
     {
-      "path":"4a4b35e6-05c0-4abe-8594-aa7b42d8ff58",
+      "path": "8fada721-cff8-590b-8d0b-9300b5fe8e18",
       "attributes": {
         "usd::usdgeom::visibility": {
           "visibility": "invisible"
@@ -545,152 +345,147 @@
       }
     },
     {
-      "path":"3b1b9346-ead9-4301-ac87-3038e62ebfda",
+      "path": "ea5dbe57-5159-5801-b2f9-6f0ca112829b",
       "attributes": {
         "usd::usdgeom::mesh": {
           "faceVertexIndices": [
+            3,
             0,
             1,
             2,
             3,
-            0,
-            2,
+            1,
+            7,
             4,
-            6,
+            5,
             7,
             5,
             6,
-            4,
+            10,
             11,
             8,
-            9,
-            11,
-            9,
             10,
+            8,
+            9,
+            14,
             15,
             12,
             13,
             14,
-            15,
-            13,
-            16,
-            17,
-            18,
-            16,
-            18,
+            12,
             19,
+            17,
+            16,
+            19,
+            16,
+            18,
+            21,
             22,
             23,
-            20,
-            22,
-            20,
             21,
-            27,
-            24,
-            25,
-            27,
-            25,
+            23,
+            20,
             26,
+            25,
+            24,
+            26,
+            27,
+            25,
+            28,
             30,
             31,
             29,
             28,
-            30,
-            29,
-            34,
+            31,
             32,
-            33,
             34,
             35,
             32,
+            35,
+            33,
+            39,
             36,
             37,
-            38,
-            36,
-            38,
             39,
-            42,
+            37,
+            38,
             41,
-            40,
             42,
             43,
             41,
+            43,
+            40,
+            47,
             44,
             45,
-            46,
-            44,
-            46,
             47,
-            50,
+            45,
+            46,
             49,
-            48,
             50,
             51,
             49,
-            52,
-            53,
-            54,
-            52,
-            54,
+            51,
+            48,
             55,
-            58,
+            53,
+            52,
+            55,
+            52,
+            54,
             56,
-            57,
             58,
             59,
             56,
-            60,
-            61,
-            62,
-            60,
-            62,
+            59,
+            57,
             63,
+            61,
+            60,
+            63,
+            60,
+            62,
+            64,
             65,
             66,
-            67,
-            65,
-            67,
             64,
+            66,
+            67,
+            71,
             68,
             69,
-            70,
-            68,
-            70,
             71,
-            74,
-            72,
+            69,
+            70,
             73,
             74,
             75,
+            73,
+            75,
             72,
+            79,
             76,
             77,
-            78,
-            76,
-            78,
             79,
-            82,
+            77,
+            78,
             81,
-            80,
             82,
             83,
             81,
+            83,
+            80,
+            87,
             84,
             85,
-            86,
-            84,
-            86,
-            87
+            87,
+            85,
+            86
           ],
           "points": [
             [
               0.099999994,
               0.05,
-              1.1
-            ],
-            [
-              0.099999994,
-              0.05,
               0.099999994
             ],
             [
@@ -704,9 +499,9 @@
               1.2
             ],
             [
-              0,
-              0,
-              0
+              0.099999994,
+              0.05,
+              1.1
             ],
             [
               0.099999994,
@@ -724,9 +519,9 @@
               1.2
             ],
             [
-              0.9,
               0,
-              1.2
+              0,
+              0
             ],
             [
               0.8,
@@ -744,7 +539,7 @@
               0
             ],
             [
-              0,
+              0.9,
               0,
               1.2
             ],
@@ -764,14 +559,9 @@
               1.2
             ],
             [
-              0.9,
               0,
-              0
-            ],
-            [
-              0.8,
               0,
-              0.099999994
+              1.2
             ],
             [
               0.099999994,
@@ -779,14 +569,19 @@
               0.099999994
             ],
             [
+              0.8,
+              0,
+              0.099999994
+            ],
+            [
               0,
               0,
               0
             ],
             [
-              0.8,
-              0.05,
-              0.099999994
+              0.9,
+              0,
+              0
             ],
             [
               0.8,
@@ -806,17 +601,17 @@
             [
               0.8,
               0.05,
-              1.1
-            ],
-            [
-              0.099999994,
-              0.05,
-              1.1
+              0.099999994
             ],
             [
               0,
               0.05,
               1.2
+            ],
+            [
+              0.099999994,
+              0.05,
+              1.1
             ],
             [
               0.9,
@@ -826,7 +621,22 @@
             [
               0.8,
               0.05,
+              1.1
+            ],
+            [
+              0.9,
+              0.05,
+              0
+            ],
+            [
+              0.8,
+              0.05,
               0.099999994
+            ],
+            [
+              0,
+              0.05,
+              0
             ],
             [
               0.099999994,
@@ -834,34 +644,39 @@
               0.099999994
             ],
             [
-              0.9,
-              0.05,
-              0
-            ],
-            [
               0,
               0.05,
               0
             ],
             [
-              0.9,
-              0,
-              0
-            ],
-            [
               0,
               0,
-              0
-            ],
-            [
-              0,
-              0.05,
               0
             ],
             [
               0.9,
               0.05,
               0
+            ],
+            [
+              0.9,
+              0,
+              0
+            ],
+            [
+              0.9,
+              0,
+              0
+            ],
+            [
+              0.9,
+              0.05,
+              0
+            ],
+            [
+              0.9,
+              0.05,
+              1.2
             ],
             [
               0.9,
@@ -869,27 +684,7 @@
               1.2
             ],
             [
-              0.9,
-              0,
-              0
-            ],
-            [
-              0.9,
-              0.05,
-              0
-            ],
-            [
-              0.9,
-              0.05,
-              1.2
-            ],
-            [
               0.8,
-              0,
-              0.099999994
-            ],
-            [
-              0.099999994,
               0,
               0.099999994
             ],
@@ -904,7 +699,7 @@
               0.099999994
             ],
             [
-              0.8,
+              0.099999994,
               0,
               0.099999994
             ],
@@ -924,12 +719,12 @@
               0.099999994
             ],
             [
-              0.9,
+              0.8,
               0,
-              1.2
+              0.099999994
             ],
             [
-              0,
+              0.9,
               0,
               1.2
             ],
@@ -942,11 +737,6 @@
               0,
               0.05,
               1.2
-            ],
-            [
-              0,
-              0,
-              0
             ],
             [
               0,
@@ -960,33 +750,43 @@
             ],
             [
               0,
+              0,
+              1.2
+            ],
+            [
+              0,
               0.05,
               0
             ],
             [
+              0,
+              0,
+              0
+            ],
+            [
+              0.099999994,
+              0.05,
+              1.1
+            ],
+            [
+              0.099999994,
+              0,
+              1.1
+            ],
+            [
+              0.8,
+              0.05,
+              1.1
+            ],
+            [
               0.8,
               0,
               1.1
             ],
             [
               0.099999994,
-              0,
-              1.1
-            ],
-            [
-              0.099999994,
               0.05,
-              1.1
-            ],
-            [
-              0.8,
-              0.05,
-              1.1
-            ],
-            [
-              0.099999994,
-              0,
-              1.1
+              0.099999994
             ],
             [
               0.099999994,
@@ -996,17 +796,12 @@
             [
               0.099999994,
               0.05,
-              0.099999994
-            ],
-            [
-              0.099999994,
-              0.05,
               1.1
             ],
             [
               0.099999994,
-              0.02,
-              0.099999994
+              0,
+              1.1
             ],
             [
               0.8,
@@ -1024,9 +819,9 @@
               1.1
             ],
             [
-              0.8,
-              0.03,
-              1.1
+              0.099999994,
+              0.02,
+              0.099999994
             ],
             [
               0.8,
@@ -1044,8 +839,8 @@
               1.1
             ],
             [
-              0.099999994,
-              0.02,
+              0.8,
+              0.03,
               1.1
             ],
             [
@@ -1066,7 +861,7 @@
             [
               0.099999994,
               0.02,
-              0.099999994
+              1.1
             ],
             [
               0.099999994,
@@ -1089,7 +884,7 @@
               0.099999994
             ],
             [
-              0.8,
+              0.099999994,
               0.02,
               0.099999994
             ],
@@ -1106,7 +901,7 @@
             [
               0.8,
               0.02,
-              1.1
+              0.099999994
             ],
             [
               0.8,
@@ -1121,6 +916,11 @@
             [
               0.8,
               0.03,
+              1.1
+            ],
+            [
+              0.8,
+              0.02,
               1.1
             ]
           ]
@@ -1128,104 +928,102 @@
       }
     },
     {
-      "path":"08aa04b9-4ca7-45e0-9549-9154fef2828b",
+      "path": "14adb22b-d474-48a2-8e8f-6d4c067c1953",
       "attributes": {
         "customdata": {
-          "originalStepInstance": "This is only here to help understand the example. There will not be STEP code in IFC 5. This component represensts this line in the SPFF: #1=IfcProject('0KhR8hr7H8eewFRKm6V1bJ',$,'My Project',$,$,$,$,(#14,#26),#9)"
+          "originalStepInstance": "#1=IfcProject('0KhR8hr7H8eewFRKm6V1bJ',$,'My Project',$,$,$,$,(#14,#26),#9)"
         }
       }
     },
     {
-      "path":"08aa04b9-4ca7-45e0-9549-9154fef2828b",
+      "path": "14adb22b-d474-48a2-8e8f-6d4c067c1953",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::v5a::schema::class": {
           "code": "IfcProject",
-          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/5/class/IfcProject"
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcProject"
         }
       }
     },
     {
-      "path":"8adf3b8f-f34a-4687-a406-5063ee095a1a",
+      "path": "e0834921-e095-40f0-8874-3c6bd1ec699e",
       "attributes": {
         "customdata": {
-          "originalStepInstance": "This is only here to help understand the example. There will not be STEP code in IFC 5. This component represensts this line in the SPFF: #30=IfcSite('3WWqaXu9L0y8XqF6lHx6cU',$,'My Site',$,$,#53,$,$,$,$,$,$,$,$)"
+          "originalStepInstance": "#30=IfcSite('3WWqaXu9L0y8XqF6lHx6cU',$,'My Site',$,$,#53,$,$,$,$,$,$,$,$)"
         }
       }
     },
     {
-      "path":"8adf3b8f-f34a-4687-a406-5063ee095a1a",
+      "path": "e0834921-e095-40f0-8874-3c6bd1ec699e",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::v5a::schema::class": {
           "code": "IfcSite",
-          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/5/class/IfcSite"
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcSite"
         }
       }
     },
     {
-      "path":"2ddfa76e-ab37-42f2-8e37-ef5780d732e8",
+      "path": "e84dc79e-fe9d-4781-9f4b-54dd435cca91",
       "attributes": {
         "customdata": {
-          "originalStepInstance": "This is only here to help understand the example. There will not be STEP code in IFC 5. This component represensts this line in the SPFF: #36=IfcBuilding('3eJSUU$fr7WPzBLDr3NCgH',$,'My Building',$,$,#59,$,$,$,$,$,$)"
+          "originalStepInstance": "#36=IfcBuilding('3eJSUU$fr7WPzBLDr3NCgH',$,'My Building',$,$,#59,$,$,$,$,$,$)"
         }
       }
     },
     {
-      "path":"2ddfa76e-ab37-42f2-8e37-ef5780d732e8",
+      "path": "e84dc79e-fe9d-4781-9f4b-54dd435cca91",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::v5a::schema::class": {
           "code": "IfcBuilding",
-          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/5/class/IfcBuilding"
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcBuilding"
         }
       }
     },
     {
-      "path":"5a26bd1d-fa44-4aaa-9a5e-91a06eed2e52",
+      "path": "44af358b-3160-4063-8a89-a868335ff3b5",
       "attributes": {
         "customdata": {
-          "originalStepInstance": "This is only here to help understand the example. There will not be STEP code in IFC 5. This component represensts this line in the SPFF: #42=IfcBuildingStorey('14hpMBCM10Oug9g6WpN$Er',$,'My Storey',$,$,#65,$,$,$,$)"
+          "originalStepInstance": "#42=IfcBuildingStorey('14hpMBCM10Oug9g6WpN$Er',$,'My Storey',$,$,#65,$,$,$,$)"
         }
       }
     },
     {
-      "path":"5a26bd1d-fa44-4aaa-9a5e-91a06eed2e52",
+      "path": "44af358b-3160-4063-8a89-a868335ff3b5",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::v5a::schema::class": {
           "code": "IfcBuildingStorey",
-          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/5/class/IfcBuildingStorey"
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcBuildingStorey"
         }
       }
     },
     {
-      "path":"f079bafd-8733-48d8-85df-1c1656a17c1f",
+      "path": "e3035b71-bd9f-4cdc-86fd-b56e2f4605b6",
       "attributes": {
         "customdata": {
-          "originalStepInstance": "This is only here to help understand the example. There will not be STEP code in IFC 5. This component represensts this line in the SPFF: #1494=IfcSpace('3Z0rjnlPzCt8RzjMulHWMs',$,'My Space',$,$,#1515,#1509,$,$,.SPACE.,$)"
+          "originalStepInstance": "#1494=IfcSpace('3Z0rjnlPzCt8RzjMulHWMs',$,'My Space',$,$,#1515,#1509,$,$,.SPACE.,$)"
         }
       }
     },
     {
-      "path":"f079bafd-8733-48d8-85df-1c1656a17c1f",
+      "path": "e3035b71-bd9f-4cdc-86fd-b56e2f4605b6",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::v5a::schema::class": {
           "code": "IfcSpace",
-          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/5/class/IfcSpace"
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcSpace"
         }
       }
     },
     {
-      "path":"f079bafd-8733-48d8-85df-1c1656a17c1f",
+      "path": "e3035b71-bd9f-4cdc-86fd-b56e2f4605b6",
       "attributes": {
         "usd::usdshade::materialbindingapi": {
           "material::binding": {
-            "ref": "f83b2e90-81df-4cae-ad63-52a51009e561"
+            "ref": "0e586931-d0c7-520d-87a1-33977bfcc094"
           }
-        },
-        "bsi::ifc::v5a::prop::volume": 27.3,
-        "bsi::ifc::v5a::prop::height": 3.5
+        }
       }
     },
     {
-      "path":"f079bafd-8733-48d8-85df-1c1656a17c1f",
+      "path": "e3035b71-bd9f-4cdc-86fd-b56e2f4605b6",
       "attributes": {
         "usd::xformop": {
           "transform": [
@@ -1258,55 +1056,50 @@
       }
     },
     {
-      "path":"a0061a96-fd61-47ec-8d38-39cf14f3c3a8",
+      "path": "15289df1-5ae0-5fc9-8399-19de1fbb87a0",
       "attributes": {
         "usd::usdgeom::mesh": {
           "faceVertexIndices": [
+            0,
             1,
             2,
-            3,
-            1,
-            3,
             0,
-            7,
-            4,
-            5,
-            7,
-            5,
+            2,
+            3,
             6,
-            11,
-            8,
-            9,
-            11,
-            9,
+            5,
+            4,
+            6,
+            7,
+            5,
             10,
+            9,
+            8,
+            10,
+            11,
+            9,
+            13,
             12,
             14,
-            15,
-            12,
-            15,
             13,
+            14,
+            15,
+            16,
+            17,
+            18,
             16,
             18,
             19,
-            16,
-            19,
-            17,
+            21,
+            20,
+            22,
             21,
             22,
-            23,
-            21,
-            23,
-            20
+            23
           ],
           "points": [
             [
               0,
-              5,
-              0
-            ],
-            [
-              0,
               0,
               0
             ],
@@ -1321,11 +1114,6 @@
               3
             ],
             [
-              10,
-              5,
-              0
-            ],
-            [
               0,
               5,
               0
@@ -1336,17 +1124,7 @@
               3
             ],
             [
-              10,
-              5,
-              3
-            ],
-            [
-              10,
               0,
-              0
-            ],
-            [
-              10,
               5,
               0
             ],
@@ -1357,43 +1135,23 @@
             ],
             [
               10,
-              0,
-              3
-            ],
-            [
-              10,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0
-            ],
-            [
-              10,
-              0,
-              3
-            ],
-            [
-              0,
-              0,
-              3
-            ],
-            [
-              0,
               5,
-              0
-            ],
-            [
-              0,
-              0,
               0
             ],
             [
               10,
               5,
+              3
+            ],
+            [
+              10,
+              5,
               0
+            ],
+            [
+              10,
+              0,
+              3
             ],
             [
               10,
@@ -1407,8 +1165,38 @@
             ],
             [
               10,
-              5,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
               3
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              5,
+              0
+            ],
+            [
+              10,
+              5,
+              0
+            ],
+            [
+              10,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -1416,7 +1204,17 @@
               3
             ],
             [
+              10,
+              5,
+              3
+            ],
+            [
               0,
+              0,
+              3
+            ],
+            [
+              10,
               0,
               3
             ]
@@ -1425,42 +1223,40 @@
       }
     },
     {
-      "path":"13168941-10d9-4c6a-8c63-505cc302312c",
+      "path": "93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b",
       "attributes": {
         "customdata": {
-          "originalStepInstance": "This is only here to help understand the example. There will not be STEP code in IFC 5. This component represensts this line in the SPFF: #1222=IfcWall('2JUHrTM_j3UxZiBnyBfByx',$,'Wall',$,$,#1235,#1230,$,$)"
+          "originalStepInstance": "#1222=IfcWall('2JUHrTM_j3UxZiBnyBfByx',$,'Wall',$,$,#1235,#1230,$,$)"
         }
       }
     },
     {
-      "path":"13168941-10d9-4c6a-8c63-505cc302312c",
+      "path": "93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::v5a::schema::class": {
           "code": "IfcWall",
-          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/5/class/IfcWall"
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcWall"
         }
       }
     },
     {
-      "path":"13168941-10d9-4c6a-8c63-505cc302312c",
+      "path": "93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b",
       "attributes": {
-        "bsi::ifc::v5a::prop::isexternal": true,
-        "bsi::ifc::v5a::prop::volume": 0.9,
-        "bsi::ifc::v5a::prop::height": 3.5
+        "bsi::ifc::v5a::prop::isexternal": true
       }
     },
     {
-      "path":"13168941-10d9-4c6a-8c63-505cc302312c",
+      "path": "93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b",
       "attributes": {
         "usd::usdshade::materialbindingapi": {
           "material::binding": {
-            "ref": "359c715f-5961-4c20-be08-9bb25ea75c24"
+            "ref": "7a187a90-3dcf-58cc-b3a6-51a9a407c55a"
           }
         }
       }
     },
     {
-      "path":"13168941-10d9-4c6a-8c63-505cc302312c",
+      "path": "93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b",
       "attributes": {
         "nlsfb::class": {
           "code": "21.21",
@@ -1469,7 +1265,7 @@
       }
     },
     {
-      "path":"668e304b-38a2-4f8f-b3de-2a8a5a13384d",
+      "path": "634f90c3-831e-5f29-a9b2-fa69b207821e",
       "attributes": {
         "usd::usdgeom::mesh": {
           "faceVertexIndices": [
@@ -1996,7 +1792,7 @@
       }
     },
     {
-      "path":"c3055cc8-a5b6-4a84-860e-0d6cc978dfe8",
+      "path": "8407e490-ceaa-56e5-96df-2351d9110668",
       "attributes": {
         "usd::usdgeom::basiscurves": {
           "points": [
@@ -2015,7 +1811,7 @@
       }
     },
     {
-      "path":"97c55241-7a56-48d7-bc6e-be2fd24f86ac",
+      "path": "9d1fce89-e179-5076-9a3b-1b40eef3524b",
       "attributes": {
         "usd::usdgeom::basiscurves": {
           "points": [
@@ -2034,14 +1830,16 @@
       }
     },
     {
-      "path":"b6012d70-097a-4794-8d1f-220fa65a591a",
+      "path": "367f7f7d-b4c5-50fe-829a-6bbced170dd1",
       "attributes": {
         "usd::usdgeom::mesh": {
           "faceVertexIndices": [
             0,
             1,
+            3,
             2,
-            3
+            3,
+            1
           ],
           "points": [
             [
@@ -2069,15 +1867,40 @@
       }
     },
     {
-      "path":"82966dcf-41fc-4776-97f1-71d9cb52ab7e",
+      "path": "2c2d549f-f9fe-4e22-8590-562fda81a690",
       "attributes": {
         "customdata": {
-          "originalStepInstance": "This is only here to help understand the example. There will not be STEP code in IFC 5. This component represensts this line in the SPFF: #1262=IfcWindow('0iBLIV_VvE8eMGLY$QWQQG',$,'Window',$,$,#1349,#1291,$,$,$,$,$,$)"
+          "originalStepInstance": "#1262=IfcWindow('0iBLIV_VvE8eMGLY$QWQQG',$,'Window',$,$,#1349,#1291,$,$,$,$,$,$)"
         }
       }
     },
     {
-      "path":"82966dcf-41fc-4776-97f1-71d9cb52ab7e",
+      "path": "2c2d549f-f9fe-4e22-8590-562fda81a690",
+      "attributes": {
+        "bsi::ifc::v5a::schema::class": {
+          "code": "IfcWindow",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcWindow"
+        }
+      }
+    },
+    {
+      "path": "2c2d549f-f9fe-4e22-8590-562fda81a690",
+      "attributes": {
+        "bsi::ifc::v5a::prop::isexternal": true
+      }
+    },
+    {
+      "path": "2c2d549f-f9fe-4e22-8590-562fda81a690",
+      "attributes": {
+        "usd::usdshade::materialbindingapi": {
+          "material::binding": {
+            "ref": "77e17b50-5b5a-54ff-8137-3ab205b6f5f8"
+          }
+        }
+      }
+    },
+    {
+      "path": "2c2d549f-f9fe-4e22-8590-562fda81a690",
       "attributes": {
         "usd::xformop": {
           "transform": [
@@ -2110,31 +1933,40 @@
       }
     },
     {
-      "path":"8134f9ec-2e87-4b70-a538-9b6dc7ba94b1",
+      "path": "592504dc-469a-44d6-9ae8-c801b591679b",
       "attributes": {
         "customdata": {
-          "originalStepInstance": "This is only here to help understand the example. There will not be STEP code in IFC 5. This component represensts this line in the SPFF: #1407=IfcWindow('1P9GJSHff4rfheo06raMUR',$,'Window',$,$,#1478,#1435,$,$,$,$,$,$)"
+          "originalStepInstance": "#1407=IfcWindow('1P9GJSHff4rfheo06raMUR',$,'Window',$,$,#1478,#1435,$,$,$,$,$,$)"
         }
       }
     },
     {
-      "path":"f40ec978-42e6-414a-a044-b6df23dfafef",
+      "path": "592504dc-469a-44d6-9ae8-c801b591679b",
+      "attributes": {
+        "bsi::ifc::v5a::schema::class": {
+          "code": "IfcWindow",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcWindow"
+        }
+      }
+    },
+    {
+      "path": "592504dc-469a-44d6-9ae8-c801b591679b",
       "attributes": {
         "bsi::ifc::v5a::prop::isexternal": true
       }
     },
     {
-      "path":"f40ec978-42e6-414a-a044-b6df23dfafef",
+      "path": "592504dc-469a-44d6-9ae8-c801b591679b",
       "attributes": {
         "usd::usdshade::materialbindingapi": {
           "material::binding": {
-            "ref": "82c0b0b0-1452-4fd9-b80d-20b9ee76a115"
+            "ref": "77e17b50-5b5a-54ff-8137-3ab205b6f5f8"
           }
         }
       }
     },
     {
-      "path":"8134f9ec-2e87-4b70-a538-9b6dc7ba94b1",
+      "path": "592504dc-469a-44d6-9ae8-c801b591679b",
       "attributes": {
         "usd::xformop": {
           "transform": [
@@ -2167,120 +1999,20 @@
       }
     },
     {
-      "path":"4fd67c00-82cf-476d-b5dd-6a06b07c6141",
+      "path": "d42f9890-1da9-400a-b313-11b5f27d0da0",
       "attributes": {
-        "bsi::ifc::v5a::spaceboundary": {
-          "relatedElement": {
-            "ref": "13168941-10d9-4c6a-8c63-505cc302312c"
+        "bsi::ifc::v5a::schema::spaceboundary": {
+          "relatedelement": {
+            "ref": "93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b"
           },
-          "relatedSpace": {
-            "ref": "f079bafd-8733-48d8-85df-1c1656a17c1f"
+          "relatingspace": {
+            "ref": "e3035b71-bd9f-4cdc-86fd-b56e2f4605b6"
           }
         }
       }
     },
     {
-      "path":"02333064-a80b-4824-9751-36f88d0d175d",
-      "attributes": {
-        "usd::usdgeom::mesh": {
-          "faceVertexIndices": [
-            3,
-            0,
-            1,
-            3,
-            1,
-            2
-          ],
-          "points": [
-            [
-              10,
-              -2.3841858e-08,
-              0
-            ],
-            [
-              0,
-              -2.3841858e-08,
-              0
-            ],
-            [
-              0,
-              -2.3841858e-08,
-              3
-            ],
-            [
-              10,
-              -2.3841858e-08,
-              3
-            ]
-          ]
-        }
-      }
-    },
-    {
-      "path":"15226122-42a4-428d-9b9a-16566291c182",
-      "attributes": {
-        "bsi::ifc::v5a::spaceboundary": {
-          "relatedElement": {
-            "ref": "82966dcf-41fc-4776-97f1-71d9cb52ab7e"
-          },
-          "relatedSpace": {
-            "ref": "f079bafd-8733-48d8-85df-1c1656a17c1f"
-          }
-        }
-      }
-    },
-    {
-      "path":"c3b8360d-98b5-4fa1-9350-a8ab8106a80f",
-      "attributes": {
-        "usd::usdgeom::mesh": {
-          "faceVertexIndices": [
-            0,
-            1,
-            2,
-            0,
-            2,
-            3
-          ],
-          "points": [
-            [
-              2.667675,
-              -2.3841858e-08,
-              2.2
-            ],
-            [
-              2.667675,
-              -2.3841858e-08,
-              1
-            ],
-            [
-              1.7676749,
-              -2.3841858e-08,
-              1
-            ],
-            [
-              1.7676749,
-              -2.3841858e-08,
-              2.2
-            ]
-          ]
-        }
-      }
-    },
-    {
-      "path":"428b2888-1e0d-4f7b-b8ae-73236f626cea",
-      "attributes": {
-        "bsi::ifc::v5a::spaceboundary": {
-          "relatedElement": {
-            "ref": "8134f9ec-2e87-4b70-a538-9b6dc7ba94b1"
-          },
-          "relatedSpace": {
-            "ref": "f079bafd-8733-48d8-85df-1c1656a17c1f"
-          }
-        }
-      }
-    },
-    {
-      "path":"b5bdd146-5d6a-49f8-9e09-c1e7a48fb676",
+      "path": "4e664ae2-7ff7-58d6-aa41-242e18e90a39",
       "attributes": {
         "usd::usdgeom::mesh": {
           "faceVertexIndices": [
@@ -2293,22 +2025,122 @@
           ],
           "points": [
             [
+              0,
+              -2.3841858e-08,
+              0
+            ],
+            [
+              0,
+              -2.3841858e-08,
+              3
+            ],
+            [
+              10,
+              -2.3841858e-08,
+              3
+            ],
+            [
+              10,
+              -2.3841858e-08,
+              0
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "path": "4eb1fec0-7b91-4dd9-82ec-5e35003177ce",
+      "attributes": {
+        "bsi::ifc::v5a::schema::spaceboundary": {
+          "relatedelement": {
+            "ref": "2c2d549f-f9fe-4e22-8590-562fda81a690"
+          },
+          "relatingspace": {
+            "ref": "e3035b71-bd9f-4cdc-86fd-b56e2f4605b6"
+          }
+        }
+      }
+    },
+    {
+      "path": "649111c2-c1f1-5708-ab70-a51981cdb354",
+      "attributes": {
+        "usd::usdgeom::mesh": {
+          "faceVertexIndices": [
+            3,
+            0,
+            1,
+            3,
+            1,
+            2
+          ],
+          "points": [
+            [
+              2.667675,
+              -2.3841858e-08,
+              1
+            ],
+            [
+              1.7676749,
+              -2.3841858e-08,
+              1
+            ],
+            [
+              1.7676749,
+              -2.3841858e-08,
+              2.2
+            ],
+            [
+              2.667675,
+              -2.3841858e-08,
+              2.2
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "path": "3b674acb-4384-47de-9f72-0848c9cea8a1",
+      "attributes": {
+        "bsi::ifc::v5a::schema::spaceboundary": {
+          "relatedelement": {
+            "ref": "592504dc-469a-44d6-9ae8-c801b591679b"
+          },
+          "relatingspace": {
+            "ref": "e3035b71-bd9f-4cdc-86fd-b56e2f4605b6"
+          }
+        }
+      }
+    },
+    {
+      "path": "bcefac1b-eb16-5817-9e81-2e35337651b2",
+      "attributes": {
+        "usd::usdgeom::mesh": {
+          "faceVertexIndices": [
+            1,
+            2,
+            3,
+            1,
+            3,
+            0
+          ],
+          "points": [
+            [
               4.9466066,
+              -2.3841858e-08,
+              2.2
+            ],
+            [
+              5.8466067,
+              -2.3841858e-08,
+              2.2
+            ],
+            [
+              5.8466067,
               -2.3841858e-08,
               1
             ],
             [
               4.9466066,
-              -2.3841858e-08,
-              2.2
-            ],
-            [
-              5.8466067,
-              -2.3841858e-08,
-              2.2
-            ],
-            [
-              5.8466067,
               -2.3841858e-08,
               1
             ]
@@ -2317,21 +2149,59 @@
       }
     },
     {
-      "path":"f83b2e90-81df-4cae-ad63-52a51009e561",
+      "path": "f079bafd-8733-48d8-85df-1c1656a17c1f",
       "attributes": {
-        "bsi::name": "SpaceMaterial"
+        "bsi::ifc::v5a::prop::volume": 1.2959999568,
+        "bsi::ifc::v5a::prop::height": 1.2
       }
     },
     {
-      "path":"359c715f-5961-4c20-be08-9bb25ea75c24",
+      "path": "f079bafd-8733-48d8-85df-1c1656a17c1f",
       "attributes": {
-        "bsi::name": "WallMaterial"
+        "bsi::ifc::v5a::prop::volume": 0.025999999592,
+        "bsi::ifc::v5a::prop::height": 1.2
       }
     },
     {
-      "path":"82c0b0b0-1452-4fd9-b80d-20b9ee76a115",
+      "path": "f079bafd-8733-48d8-85df-1c1656a17c1f",
       "attributes": {
-        "bsi::name": "WindowMaterial"
+        "bsi::ifc::v5a::prop::volume": 150.0,
+        "bsi::ifc::v5a::prop::height": 3.0
+      }
+    },
+    {
+      "path": "f079bafd-8733-48d8-85df-1c1656a17c1f",
+      "attributes": {
+        "bsi::ifc::v5a::prop::volume": 2.783999976,
+        "bsi::ifc::v5a::prop::height": 3.0
+      }
+    },
+    {
+      "path": "f079bafd-8733-48d8-85df-1c1656a17c1f",
+      "attributes": {
+        "bsi::ifc::v5a::prop::volume": 0.0,
+        "bsi::ifc::v5a::prop::height": 0.0
+      }
+    },
+    {
+      "path": "f079bafd-8733-48d8-85df-1c1656a17c1f",
+      "attributes": {
+        "bsi::ifc::v5a::prop::volume": 0.0,
+        "bsi::ifc::v5a::prop::height": 3.0
+      }
+    },
+    {
+      "path": "f079bafd-8733-48d8-85df-1c1656a17c1f",
+      "attributes": {
+        "bsi::ifc::v5a::prop::volume": 0.0,
+        "bsi::ifc::v5a::prop::height": 1.2000000000000002
+      }
+    },
+    {
+      "path": "f079bafd-8733-48d8-85df-1c1656a17c1f",
+      "attributes": {
+        "bsi::ifc::v5a::prop::volume": 0.0,
+        "bsi::ifc::v5a::prop::height": 1.2000000000000002
       }
     }
   ]
