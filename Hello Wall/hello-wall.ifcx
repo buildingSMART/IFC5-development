@@ -18,16 +18,16 @@
       }
     },
     "bsi::ifc::v5a::schema": {
-      "uri": "http://localhost:8080/schemas/bsi/ifc/v5a/schema.json"
+      "uri": "https://ifc5.technical.buildingsmart.org/schemas/bsi/ifc/v5a/schema.json"
     },
     "usd": {
-      "uri": "http://localhost:8080/schemas/usd.json"
+      "uri": "https://ifc5.technical.buildingsmart.org/schemas/usd.json"
     },
     "bsi::ifc::v5a::prop": {
-      "uri": "http://localhost:8080/schemas/bsi/ifc/v5a/prop.json"
+      "uri": "https://ifc5.technical.buildingsmart.org/schemas/bsi/ifc/v5a/prop.json"
     },
     "nlsfb": {
-      "uri": "http://localhost:8080/schemas/nlsfb.json"
+      "uri": "https://ifc5.technical.buildingsmart.org/schemas/nlsfb.json"
     }
   },
   "data": [
