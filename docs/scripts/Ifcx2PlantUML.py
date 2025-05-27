@@ -9,11 +9,11 @@ def truncate_value(value):
         return value
     return value[:30] + " [...] " + value[-10:]
 
-def is_shader(identifier):
-    return identifier.endswith("/Shader")
+def is_shader(path):
+    return path.endswith("/Shader")
 
-def get_base_id(identifier):
-    return identifier[:-7]  # Remove "/Shader" suffix
+def get_base_id(path):
+    return path[:-7]  # Remove "/Shader" suffix
 
 
 IFCX_PATH = sys.argv[1] # r"C:/.../hello-wall.ifcx"
@@ -38,10 +38,10 @@ material_bindings = []
 shader_relations = []
 
 for obj in data['data']:
-    identifier = obj['identifier']
+    path = obj['path']
     
-    if identifier not in class_attributes:
-        class_attributes[identifier] = {'green': [], 'blue': [], 'yellow': []}
+    if path not in class_attributes:
+        class_attributes[path] = {'green': [], 'blue': [], 'yellow': []}
     
     if 'attributes' in obj:
         for attr_name, attr_value in obj['attributes'].items():
@@ -50,32 +50,32 @@ for obj in data['data']:
                 if isinstance(attr_value, dict) and "material::binding" in attr_value:
                     binding = attr_value["material::binding"]
                     if isinstance(binding, dict) and "ref" in binding:
-                        material_bindings.append((identifier, binding["ref"]))
+                        material_bindings.append((path, binding["ref"]))
                 continue
             
             if attr_name.startswith('bsi'):
-                class_attributes[identifier]['green'].append((attr_name, truncate_value(str(attr_value))))
+                class_attributes[path]['green'].append((attr_name, truncate_value(str(attr_value))))
             elif attr_name.startswith('usd'):
-                class_attributes[identifier]['blue'].append((attr_name, truncate_value(str(attr_value))))
+                class_attributes[path]['blue'].append((attr_name, truncate_value(str(attr_value))))
             else:
-                class_attributes[identifier]['yellow'].append((attr_name, truncate_value(str(attr_value))))
+                class_attributes[path]['yellow'].append((attr_name, truncate_value(str(attr_value))))
 
 # Collect shader relations
-for identifier in class_attributes.keys():
-    if is_shader(identifier):
-        base_id = get_base_id(identifier)
+for path in class_attributes.keys():
+    if is_shader(path):
+        base_id = get_base_id(path)
         if base_id in class_attributes:
-            shader_relations.append((base_id, identifier))
+            shader_relations.append((base_id, path))
 
 plantuml_file = IFCX_PATH.replace('.ifcx', '.puml')
 with open(plantuml_file, 'w') as puml:
     puml.write('@startuml\n')
     
-    for identifier, attributes in class_attributes.items():
-        if is_shader(identifier):
-            puml.write(f'stereotype "{identifier}" {{\n')
+    for path, attributes in class_attributes.items():
+        if is_shader(path):
+            puml.write(f'stereotype "{path}" {{\n')
         else:
-            puml.write(f'class {identifier} {{\n')
+            puml.write(f'class {path} {{\n')
         
         # Write green attributes (bsi)
         for attr_name, attr_value in attributes['green']:
@@ -92,15 +92,15 @@ with open(plantuml_file, 'w') as puml:
         puml.write('}\n\n')
     
     for obj in data['data']:
-        identifier = obj['identifier']
+        path = obj['path']
         
         if 'children' in obj:
             for child_name, child_id in obj['children'].items():
-                puml.write(f'"{identifier}" --> "child:{child_name}" "{child_id}"\n')
+                puml.write(f'"{path}" --> "child:{child_name}" "{child_id}"\n')
         
         if 'inherits' in obj:
             for inherit_name, inherit_id in obj['inherits'].items():
-                puml.write(f'"{identifier}" --o "inherits:{inherit_name}" "{inherit_id}"\n')
+                puml.write(f'"{path}" --o "inherits:{inherit_name}" "{inherit_id}"\n')
     
     for source_id, target_id in material_bindings:
         puml.write(f'"{source_id}" --|> "madeOf" "{target_id}"\n')
