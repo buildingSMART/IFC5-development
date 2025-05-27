@@ -21,11 +21,12 @@ def height(data):
     points = np.array(data["points"], dtype=float)
     return points[:,2].max() - points[:,2].min()
 
-parents = dict(itertools.chain.from_iterable(([(c, o['path']) for c in o['children'].values()] for o in obj['data'] if o.get('children'))))
+
+parents = dict(itertools.chain.from_iterable(([(c, o['path']) for k, c in o['children'].items() if k != 'Void'] for o in obj['data'] if o.get('children'))))
 
 for d in [d for d in list(obj['data']) if d.get('attributes', {}).get('usd::usdgeom::mesh')]:
     mesh = d['attributes']['usd::usdgeom::mesh']
-    if (vol := volume(mesh)) > 0.:
+    if (vol := volume(mesh)) > 0. and d['path'] in parents:
         obj['data'].append({
         "identifier": parents[d['path']],
         "attributes": {
