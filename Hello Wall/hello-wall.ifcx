@@ -1547,18 +1547,17 @@
       }
     },
     {
-      "path": "d10e4eb4-6a35-5fbe-9491-7a6fb93f1691",
+      "path": "4549bada-a37e-5044-bb70-456516cca5a8",
       "attributes": {
         "bsi::ifc::v5a::material": {
-          "code": "GLASS",
-          "uri": "https://identifier.buildingsmart.org/uri/fish/midas-materials/26/class/GLASS"
+          "code": "WOOD",
+          "uri": "https://identifier.buildingsmart.org/uri/fish/midas-materials/26/class/WOOD"
         },
         "bsi::ifc::v5a::presentation::diffuseColor": [
-          0.5,
           0.8,
+          0.7,
           0.6
-        ],
-        "bsi::ifc::v5a::presentation::opacity": 0.3
+        ]
       }
     },
     {
@@ -1988,21 +1987,22 @@
         }
       },
       "inherits": {
-        "material": "d10e4eb4-6a35-5fbe-9491-7a6fb93f1691"
+        "material": "4549bada-a37e-5044-bb70-456516cca5a8"
       }
     },
     {
-      "path": "4549bada-a37e-5044-bb70-456516cca5a8",
+      "path": "d10e4eb4-6a35-5fbe-9491-7a6fb93f1691",
       "attributes": {
         "bsi::ifc::v5a::material": {
-          "code": "WOOD",
-          "uri": "https://identifier.buildingsmart.org/uri/fish/midas-materials/26/class/WOOD"
+          "code": "GLASS",
+          "uri": "https://identifier.buildingsmart.org/uri/fish/midas-materials/26/class/GLASS"
         },
         "bsi::ifc::v5a::presentation::diffuseColor": [
+          0.5,
           0.8,
-          0.7,
           0.6
-        ]
+        ],
+        "bsi::ifc::v5a::presentation::opacity": 0.3
       }
     },
     {
@@ -2172,7 +2172,7 @@
         }
       },
       "inherits": {
-        "material": "4549bada-a37e-5044-bb70-456516cca5a8"
+        "material": "d10e4eb4-6a35-5fbe-9491-7a6fb93f1691"
       }
     }
   ]
