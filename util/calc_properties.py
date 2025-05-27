@@ -28,7 +28,7 @@ for d in [d for d in list(obj['data']) if d.get('attributes', {}).get('usd::usdg
     mesh = d['attributes']['usd::usdgeom::mesh']
     if (vol := volume(mesh)) > 0. and d['path'] in parents:
         obj['data'].append({
-        "identifier": parents[d['path']],
+        "path": parents[d['path']],
         "attributes": {
             "bsi::ifc::v5a::prop::volume": vol,
             "bsi::ifc::v5a::prop::height": height(mesh),

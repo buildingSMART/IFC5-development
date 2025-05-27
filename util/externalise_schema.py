@@ -8,8 +8,8 @@ obj = json.load(open(sys.argv[1]))
 prefix = 'https://ifc5.technical.buildingsmart.org'
 
 mapping = {
-    'bsi::ifc::v5a::schema': 'schemas/bsi/ifc/v5a/schema.json',
     'bsi::ifc::v5a::prop': 'schemas/bsi/ifc/v5a/prop.json',
+    'bsi::ifc::v5a': 'schemas/bsi/ifc/v5a/schema.json',
     'usd': 'schemas/usd.json',
     'nlsfb': 'schemas/nlsfb.json'
 }
@@ -35,7 +35,6 @@ def w(path, name, schema):
 
 for k, v in list(obj["schemas"].items()):
     for m, n in mapping.items():
-        print(k, m)
         if k.startswith(m):
             w(n, k, v)
             del obj["schemas"][k]

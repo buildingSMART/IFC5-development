@@ -26,8 +26,8 @@ def transform_attributes(d):
         "info:id": None,
         "outputs:surface": None,
         "outputs:surface.connect": None,
-        "inputs:diffuseColor": "bsi:ifc:v5a:schema:presentation:diffuseColor",
-        "inputs:opacity": "bsi:ifc:v5a:schema:presentation:opacity",
+        "inputs:diffuseColor": "bsi:ifc:v5a:presentation:diffuseColor",
+        "inputs:opacity": "bsi:ifc:v5a:presentation:opacity",
     }
 
     def transform(k, v):
@@ -56,8 +56,8 @@ def transform_attributes(d):
                     kk, vv = next(iter(v.items()))
                     parts.append(kk.lower())
                     v = bool(vv)
-                else:
-                    parts.insert(3, 'schema')
+                # else:
+                #     parts.insert(3, 'schema')
             k = "::".join(parts)
 
             if k.startswith("usd"):
@@ -73,7 +73,15 @@ def transform_attributes(d):
 
 
 def process():
-    for elem in json.load(open(sys.argv[1])):
+    model = json.load(open(sys.argv[1]))
+    originalInstanceNames = dict(map(lambda s: (s[0], s[1].split('=')[1].split('(')[0]), filter(lambda s: s[1], [(d.get('name'), d.get('attributes', {}).get('customdata', {}).get('originalStepInstance')) for d in model])))
+    def nameInherit(i, n, ref):
+        if n == 1 and ref in originalInstanceNames:
+            r = originalInstanceNames[ref]
+            return f'{r[3].lower()}{r[4:]}'
+        else:
+            return f'inh_{i}'
+    for elem in model:
         if "disclaimer" in elem:
             continue
 
@@ -107,7 +115,7 @@ def process():
                     else {}
                 ),
                 **(
-                    {"inherits": dict((f"i{k}", transform_iden(v[2:-1])) for k, v in enumerate(elem["inherits"]))}
+                    {"inherits": dict((nameInherit(k, len(elem["inherits"]), v[2:-1]), transform_iden(v[2:-1])) for k, v in enumerate(elem["inherits"]))}
                     if elem.get("inherits")
                     else {}
                 ),
