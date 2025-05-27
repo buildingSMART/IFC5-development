@@ -1,3 +1,4 @@
+import itertools
 import json
 import sys
 import numpy as np
@@ -20,15 +21,18 @@ def height(data):
     points = np.array(data["points"], dtype=float)
     return points[:,2].max() - points[:,2].min()
 
+parents = dict(itertools.chain.from_iterable(([(c, o['path']) for c in o['children'].values()] for o in obj['data'] if o.get('children'))))
+
 for d in [d for d in list(obj['data']) if d.get('attributes', {}).get('usd::usdgeom::mesh')]:
     mesh = d['attributes']['usd::usdgeom::mesh']
-    obj['data'].append({
-      "identifier":"f079bafd-8733-48d8-85df-1c1656a17c1f",
-      "attributes": {
-        "bsi::ifc::v5a::prop::volume": volume(mesh),
-        "bsi::ifc::v5a::prop::height": height(mesh),
-      }
-    })
+    if (vol := volume(mesh)) > 0.:
+        obj['data'].append({
+        "identifier": parents[d['path']],
+        "attributes": {
+            "bsi::ifc::v5a::prop::volume": vol,
+            "bsi::ifc::v5a::prop::height": height(mesh),
+        }
+        })
 
 ostream = None
 try:
