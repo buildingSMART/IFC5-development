@@ -74,7 +74,7 @@ for d in [d for d in list(obj['data']) if d.get('attributes', {}).get('usd::usdg
                     }
                 },
                 "inherits": {
-                    "material": make_material("glass" if points2.T[1].ptp() > 0.02 else "wood")["path"]
+                    "material": make_material("wood" if points2.T[1].ptp() > 0.02 else "glass")["path"]
                 }
             })
             my_parents = [x for x in obj['data'] if x['path'] == parents[d['path']] and 'children' in x]
