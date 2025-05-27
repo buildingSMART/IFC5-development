@@ -46,8 +46,8 @@
     },
     {
       "path": "ab143723-f7b1-5368-b106-55896e88d768",
-      "inherits": {
-        "i0": "14adb22b-d474-48a2-8e8f-6d4c067c1953"
+      "children": {
+        "My_Project": "14adb22b-d474-48a2-8e8f-6d4c067c1953"
       }
     },
     {
@@ -73,9 +73,9 @@
       "path": "e3035b71-bd9f-4cdc-86fd-b56e2f4605b6",
       "children": {
         "Body": "15289df1-5ae0-5fc9-8399-19de1fbb87a0",
-        "Boundary_Wall": "d42f9890-1da9-400a-b313-11b5f27d0da0",
-        "Boundary_Window": "4eb1fec0-7b91-4dd9-82ec-5e35003177ce",
-        "Boundary_Window_001": "3b674acb-4384-47de-9f72-0848c9cea8a1"
+        "Boundary_Wall": "c8ecbf4c-e37a-4489-9133-15163b8a904e",
+        "Boundary_Window": "cc40ef6e-950e-4b79-a802-4cc710294e3a",
+        "Boundary_Window_001": "7f2a3284-bf01-4b0a-85e4-e48d92ba56dd"
       }
     },
     {
@@ -102,21 +102,21 @@
       }
     },
     {
-      "path": "d42f9890-1da9-400a-b313-11b5f27d0da0",
+      "path": "c8ecbf4c-e37a-4489-9133-15163b8a904e",
       "children": {
-        "Body": "4e664ae2-7ff7-58d6-aa41-242e18e90a39"
+        "Body": "911155b7-f688-51ee-8e3e-b97475be2452"
       }
     },
     {
-      "path": "4eb1fec0-7b91-4dd9-82ec-5e35003177ce",
+      "path": "cc40ef6e-950e-4b79-a802-4cc710294e3a",
       "children": {
-        "Body": "649111c2-c1f1-5708-ab70-a51981cdb354"
+        "Body": "f3aa8991-7481-5d6b-8dae-f98c372f4a98"
       }
     },
     {
-      "path": "3b674acb-4384-47de-9f72-0848c9cea8a1",
+      "path": "7f2a3284-bf01-4b0a-85e4-e48d92ba56dd",
       "children": {
-        "Body": "bcefac1b-eb16-5817-9e81-2e35337651b2"
+        "Body": "126781f3-6465-5c39-9216-81cc636eeb39"
       }
     },
     {
@@ -1999,7 +1999,7 @@
       }
     },
     {
-      "path": "d42f9890-1da9-400a-b313-11b5f27d0da0",
+      "path": "c8ecbf4c-e37a-4489-9133-15163b8a904e",
       "attributes": {
         "bsi::ifc::v5a::schema::spaceboundary": {
           "relatedelement": {
@@ -2012,7 +2012,7 @@
       }
     },
     {
-      "path": "4e664ae2-7ff7-58d6-aa41-242e18e90a39",
+      "path": "911155b7-f688-51ee-8e3e-b97475be2452",
       "attributes": {
         "usd::usdgeom::mesh": {
           "faceVertexIndices": [
@@ -2049,7 +2049,7 @@
       }
     },
     {
-      "path": "4eb1fec0-7b91-4dd9-82ec-5e35003177ce",
+      "path": "cc40ef6e-950e-4b79-a802-4cc710294e3a",
       "attributes": {
         "bsi::ifc::v5a::schema::spaceboundary": {
           "relatedelement": {
@@ -2062,7 +2062,7 @@
       }
     },
     {
-      "path": "649111c2-c1f1-5708-ab70-a51981cdb354",
+      "path": "f3aa8991-7481-5d6b-8dae-f98c372f4a98",
       "attributes": {
         "usd::usdgeom::mesh": {
           "faceVertexIndices": [
@@ -2099,7 +2099,7 @@
       }
     },
     {
-      "path": "3b674acb-4384-47de-9f72-0848c9cea8a1",
+      "path": "7f2a3284-bf01-4b0a-85e4-e48d92ba56dd",
       "attributes": {
         "bsi::ifc::v5a::schema::spaceboundary": {
           "relatedelement": {
@@ -2112,7 +2112,7 @@
       }
     },
     {
-      "path": "bcefac1b-eb16-5817-9e81-2e35337651b2",
+      "path": "126781f3-6465-5c39-9216-81cc636eeb39",
       "attributes": {
         "usd::usdgeom::mesh": {
           "faceVertexIndices": [
@@ -2149,59 +2149,24 @@
       }
     },
     {
-      "path": "f079bafd-8733-48d8-85df-1c1656a17c1f",
-      "attributes": {
-        "bsi::ifc::v5a::prop::volume": 1.2959999568,
-        "bsi::ifc::v5a::prop::height": 1.2
-      }
-    },
-    {
-      "path": "f079bafd-8733-48d8-85df-1c1656a17c1f",
+      "identifier": "25503984-6605-43a1-8597-eae657ff5bea",
       "attributes": {
         "bsi::ifc::v5a::prop::volume": 0.025999999592,
         "bsi::ifc::v5a::prop::height": 1.2
       }
     },
     {
-      "path": "f079bafd-8733-48d8-85df-1c1656a17c1f",
+      "identifier": "e3035b71-bd9f-4cdc-86fd-b56e2f4605b6",
       "attributes": {
         "bsi::ifc::v5a::prop::volume": 150.0,
         "bsi::ifc::v5a::prop::height": 3.0
       }
     },
     {
-      "path": "f079bafd-8733-48d8-85df-1c1656a17c1f",
+      "identifier": "93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b",
       "attributes": {
         "bsi::ifc::v5a::prop::volume": 2.783999976,
         "bsi::ifc::v5a::prop::height": 3.0
-      }
-    },
-    {
-      "path": "f079bafd-8733-48d8-85df-1c1656a17c1f",
-      "attributes": {
-        "bsi::ifc::v5a::prop::volume": 0.0,
-        "bsi::ifc::v5a::prop::height": 0.0
-      }
-    },
-    {
-      "path": "f079bafd-8733-48d8-85df-1c1656a17c1f",
-      "attributes": {
-        "bsi::ifc::v5a::prop::volume": 0.0,
-        "bsi::ifc::v5a::prop::height": 3.0
-      }
-    },
-    {
-      "path": "f079bafd-8733-48d8-85df-1c1656a17c1f",
-      "attributes": {
-        "bsi::ifc::v5a::prop::volume": 0.0,
-        "bsi::ifc::v5a::prop::height": 1.2000000000000002
-      }
-    },
-    {
-      "path": "f079bafd-8733-48d8-85df-1c1656a17c1f",
-      "attributes": {
-        "bsi::ifc::v5a::prop::volume": 0.0,
-        "bsi::ifc::v5a::prop::height": 1.2000000000000002
       }
     }
   ]
