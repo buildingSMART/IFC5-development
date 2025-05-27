@@ -301,7 +301,7 @@ function LoadIfcxFile(file, checkSchemas = true, createArtificialRoot = false) {
   try {
     if (checkSchemas) {
       function fetchJson(url) {
-        return fetch(url)
+        return fetch(url.replace("https://ifc5.technical.buildingsmart.org", "http://localhost:8080"))
           .then(res => {
             if (!res.ok) {
               throw new Error(`Failed to fetch ${url}: ${res.status}`);
@@ -476,59 +476,60 @@ function FindChildWithAttr(node, attrName) {
   }
   return void 0;
 }
-function createMaterialFromParent(parent, root) {
-  let reference = parent.attributes["usd::usdshade::materialbindingapi::material::binding"];
-  let material = {
+function createMaterialFromParent(path) {
+  const material = {
     color: new THREE.Color(0.6, 0.6, 0.6),
     transparent: false,
     opacity: 1
   };
-  if (reference) {
-    const materialNode = getChildByName(root, reference.ref);
-    if (materialNode) {
-      let color = materialNode?.attributes["bsi::ifc::v5a::schema::presentation::diffuseColor"];
+  for (let p of path) {
+    const color = p.attributes["bsi::ifc::v5a::presentation::diffuseColor"];
+    if (color) {
       material.color = new THREE.Color(...color);
-      if (materialNode?.attributes["bsi::ifc::v5a::schema::presentation::opacity"]) {
+      const opacity = p.attributes["bsi::ifc::v5a::presentation::opacity"];
+      if (opacity) {
         material.transparent = true;
-        material.opacity = materialNode.attributes["bsi::ifc::v5a::schema::presentation::opacity"];
+        material.opacity = opacity;
       }
+      break;
     }
   }
   return material;
 }
-function createCurveFromJson(node, parent, root) {
-  let points = new Float32Array(node.attributes["usd::usdgeom::basiscurves::points"].flat());
+function createCurveFromJson(path) {
+  let points = new Float32Array(path[0].attributes["usd::usdgeom::basiscurves::points"].flat());
   const geometry = new THREE.BufferGeometry();
   geometry.setAttribute("position", new THREE.BufferAttribute(points, 3));
-  const material = createMaterialFromParent(parent, root);
+  const material = createMaterialFromParent(path);
   let lineMaterial = new THREE.LineBasicMaterial({ ...material });
   lineMaterial.color.multiplyScalar(0.8);
   return new THREE.Line(geometry, lineMaterial);
 }
-function createMeshFromJson(node, parent, root) {
-  let points = new Float32Array(node.attributes["usd::usdgeom::mesh::points"].flat());
-  let indices = new Uint16Array(node.attributes["usd::usdgeom::mesh::faceVertexIndices"]);
+function createMeshFromJson(path) {
+  let points = new Float32Array(path[0].attributes["usd::usdgeom::mesh::points"].flat());
+  let indices = new Uint16Array(path[0].attributes["usd::usdgeom::mesh::faceVertexIndices"]);
   const geometry = new THREE.BufferGeometry();
   geometry.setAttribute("position", new THREE.BufferAttribute(points, 3));
   geometry.setIndex(new THREE.BufferAttribute(indices, 1));
   geometry.computeVertexNormals();
-  const material = createMaterialFromParent(parent, root);
+  const material = createMaterialFromParent(path);
   let meshMaterial = new THREE.MeshBasicMaterial({ ...material });
   return new THREE.Mesh(geometry, meshMaterial);
 }
-function traverseTree(node, parent, root, parentNode = void 0) {
+function traverseTree(nodes, parent) {
+  const node = nodes[0];
   let elem = new THREE.Group();
   if (HasAttr(node, "usd::usdgeom::visibility::visibility")) {
     if (node.attributes["usd::usdgeom::visibility::visibility"] === "invisible") {
       return;
     }
   } else if (HasAttr(node, "usd::usdgeom::mesh::points")) {
-    elem = createMeshFromJson(node, parentNode, root);
+    elem = createMeshFromJson(nodes);
   } else if (HasAttr(node, "usd::usdgeom::basiscurves::points")) {
-    elem = createCurveFromJson(node, parentNode, root);
+    elem = createCurveFromJson(nodes);
   }
   parent.add(elem);
-  if (node !== root) {
+  if (nodes.length > 1) {
     elem.matrixAutoUpdate = false;
     let matrixNode = node.attributes && node.attributes["usd::xformop::transform"] ? node.attributes["usd::xformop::transform"].flat() : null;
     if (matrixNode) {
@@ -538,7 +539,7 @@ function traverseTree(node, parent, root, parentNode = void 0) {
       elem.matrix = matrix;
     }
   }
-  (node.children || []).forEach((child) => traverseTree(child, elem || parent, root, node));
+  (node.children || []).forEach((child) => traverseTree([child, ...nodes], elem || parent));
 }
 function encodeHtmlEntities(str) {
   const div = document.createElement("div");
@@ -580,7 +581,7 @@ function composeAndRender() {
       console.error("No result from composition");
       return;
     }
-    traverseTree(tree, scene || init(), tree);
+    traverseTree([tree], scene || init());
     if (autoCamera) {
       const boundingBox = new THREE.Box3();
       boundingBox.setFromObject(scene);
