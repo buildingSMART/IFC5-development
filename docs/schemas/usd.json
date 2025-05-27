@@ -1,0 +1,95 @@
+{
+  "header": {
+    "version": "ifcx_alpha",
+    "author": "authorname",
+    "timestamp": "time string"
+  },
+  "schemas": {
+    "usd::usdgeom::mesh": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "faceVertexIndices": {
+              "dataType": "Array",
+              "arrayRestrictions": {
+                "value": {
+                  "dataType": "Integer"
+                }
+              }
+            },
+            "points": {
+              "dataType": "Array",
+              "arrayRestrictions": {
+                "value": {
+                  "dataType": "Array",
+                  "arrayRestrictions": {
+                    "value": {
+                      "dataType": "Real"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "usd::usdgeom::visibility": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "visibility": {
+              "dataType": "String"
+            }
+          }
+        }
+      }
+    },
+    "usd::xformop": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "transform": {
+              "dataType": "Array",
+              "arrayRestrictions": {
+                "value": {
+                  "dataType": "Array",
+                  "arrayRestrictions": {
+                    "value": {
+                      "dataType": "Real"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "usd::usdgeom::basiscurves": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "points": {
+              "dataType": "Array",
+              "arrayRestrictions": {
+                "value": {
+                  "dataType": "Array",
+                  "arrayRestrictions": {
+                    "value": {
+                      "dataType": "Real"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
