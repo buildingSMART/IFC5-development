@@ -77,7 +77,13 @@ def process():
         if "disclaimer" in elem:
             continue
 
-        print(elem["name"], "->", transform_iden(elem["name"]))
+        if elem.get('name') is not None and elem.get('def') == 'def' and len(elem.get('inherits', ())) == 1:
+            # handle root node differently: inherit becomes named child to retain root name
+            yield {
+                "path": transform_iden(elem["name"]),
+                "children": {elem["name"]: transform_iden(elem['inherits'][0][2:-1])}
+            }
+            continue
 
         children = list(filter(lambda c: c.get("inherits"), elem.get("children", [])))
 
