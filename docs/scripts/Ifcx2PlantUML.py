@@ -7,7 +7,7 @@ from plantuml import PlantUML
 def truncate_value(value):
     if len(value) <= 40:
         return value
-    return value[:30] + " [...] " + value[-10:]
+    return value[:40] + " [...] " + value[-15:]
 
 def is_shader(path):
     return path.endswith("/Shader")
@@ -117,6 +117,8 @@ if PRINT_SVG:
         os.remove(IFCX_PATH.replace('.ifcx', '-graph.png'))
     if os.path.exists(IFCX_PATH.replace('.ifcx', '-graph.svg')):
         os.remove(IFCX_PATH.replace('.ifcx', '-graph.svg'))
+    if os.path.exists(IFCX_PATH.replace('.ifcx', '-graph.puml')):
+        os.remove(IFCX_PATH.replace('.ifcx', '-graph.puml'))
     server = PlantUML(url='http://www.plantuml.com/plantuml/svg/')
     server.processes_file(plantuml_file)
     #this for some reason produces svg but saves as png
