@@ -26,6 +26,9 @@
     "bsi::ifc::v5a::prop": {
       "uri": "https://ifc5.technical.buildingsmart.org/schemas/bsi/ifc/v5a/prop.json"
     },
+    "bsi::ifc-mat::1.0.0::prop": {
+      "uri": "https://ifc5.technical.buildingsmart.org/schemas/bsi/ifc-mat/v1.0.0/prop.json"
+    },
     "nlsfb": {
       "uri": "https://ifc5.technical.buildingsmart.org/schemas/nlsfb.json"
     }
@@ -1561,7 +1564,7 @@
         "bsi::ifc-mat::v1.0.0::prop::strengthClass": "C24",
         "bsi::ifc-mat::v1.0.0::prop::moistureContent": 0.56,
         "bsi::ifc-mat::v1.0.0::prop::massDensity": 529.0,
-        "bsi::ifc-env::v1.0.0::prop::GWP": {
+        "bsi::ifc-mat::v1.0.0::prop::GWP": {
           "A1-A3": -629.4,
           "C2": 1.802,
           "C3": 863,

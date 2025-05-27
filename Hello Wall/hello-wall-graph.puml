@@ -123,7 +123,7 @@ class 4549bada-a37e-5044-bb70-456516cca5a8 {
   + "bsi::ifc-mat::v1.0.0::prop::strengthClass" : "C24"
   + "bsi::ifc-mat::v1.0.0::prop::moistureContent" : "0.56"
   + "bsi::ifc-mat::v1.0.0::prop::massDensity" : "529.0"
-  + "bsi::ifc-env::v1.0.0::prop::GWP" : "{'A1-A3': -629.4, 'C2': 1.802, 'C3': 863, 'D': -274.8}"
+  + "bsi::ifc-mat::v1.0.0::prop::GWP" : "{'A1-A3': -629.4, 'C2': 1.802, 'C3': 863, 'D': -274.8}"
 }
 
 class 08f06095-3f32-55b9-a353-61c9aca5cc4d {
