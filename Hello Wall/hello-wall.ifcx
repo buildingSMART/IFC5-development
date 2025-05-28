@@ -26,8 +26,8 @@
     "bsi::ifc::v5a::prop": {
       "uri": "https://ifc5.technical.buildingsmart.org/schemas/bsi/ifc/v5a/prop.json"
     },
-    "bsi::ifc-mat::1.0.0::prop": {
-      "uri": "https://ifc5.technical.buildingsmart.org/schemas/bsi/ifc-mat/v1.0.0/prop.json"
+    "bsi::ifc-mat::1.0.0": {
+      "uri": "https://ifc5.technical.buildingsmart.org/schemas/bsi/ifc-mat/v1.0.0/schema.json"
     },
     "nlsfb": {
       "uri": "https://ifc5.technical.buildingsmart.org/schemas/nlsfb.json"

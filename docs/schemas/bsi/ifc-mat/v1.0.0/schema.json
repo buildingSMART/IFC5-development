@@ -1,8 +1,8 @@
 {
   "header": {
-    "version": "ifcx_alpha",
-    "author": "authorname",
-    "timestamp": "time string"
+    "version": "1.0.0",
+    "author": "buildingSMART",
+    "timestamp": "2025-05-28T12:00:00Z"
   },
   "schemas": {
     "bsi::ifc-mat::v1.0.0::prop::strengthClass": {
@@ -46,7 +46,5 @@
           }
         }
       }
-  }
-}
 }
   
