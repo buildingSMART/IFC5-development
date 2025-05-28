@@ -35,7 +35,7 @@
         }
       }
     },
-    "bsi::ifc::v5a::spaceboundary": {
+    "bsi::ifc::v5a::spaceBoundary": {
       "value": {
         "dataType": "Object",
         "objectRestrictions": {
