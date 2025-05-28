@@ -123,7 +123,7 @@ class 4549bada-a37e-5044-bb70-456516cca5a8 {
   + "bsi::ifc-mat::v1.0.0::prop::strengthClass" : "C24"
   + "bsi::ifc-mat::v1.0.0::prop::moistureContent" : "0.56"
   + "bsi::ifc-mat::v1.0.0::prop::massDensity" : "529.0"
-  + "bsi::ifc-mat::v1.0.0::prop::GWP" : "{'A1-A3': -629.4, 'C2': 1.802, 'C3': 863, 'D': -274.8}"
+  + "bsi::ifc-mat::v1.0.0::prop::GWP" : "{'A1-A3': -629.4, 'A4': 0, 'A5': 0, 'C2' [...] 3, 'D': -274.8}"
 }
 
 class 08f06095-3f32-55b9-a353-61c9aca5cc4d {
@@ -134,6 +134,7 @@ class d10e4eb4-6a35-5fbe-9491-7a6fb93f1691 {
   + "bsi::ifc::v5a::material" : "{'code': 'GLASS', 'uri': 'https://identi [...] 6/class/GLASS'}"
   + "bsi::ifc::v5a::presentation::diffuseColor" : "[0.5, 0.8, 0.6]"
   + "bsi::ifc::v5a::presentation::opacity" : "0.3"
+  + "bsi::ifc-mat::v1.0.0::renderMaterial" : "{'code': 'glass', 'uri': 'https://ifc5.t [...] ls/glass.mtlx'}"
 }
 
 class 5ad6f475-c04c-5628-8b9d-75d0bab0c0e5 {
