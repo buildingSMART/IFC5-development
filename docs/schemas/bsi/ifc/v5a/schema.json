@@ -5,7 +5,7 @@
     "timestamp": "time string"
   },
   "schemas": {
-    "bsi::ifc::v5a::schema::presentation::diffuseColor": {
+    "bsi::ifc::v5a::presentation::diffuseColor": {
       "value": {
         "dataType": "Array",
         "arrayRestrictions": {
@@ -15,12 +15,12 @@
         }
       }
     },
-    "bsi::ifc::v5a::schema::presentation::opacity": {
+    "bsi::ifc::v5a::presentation::opacity": {
       "value": {
         "dataType": "Real"
       }
     },
-    "bsi::ifc::v5a::schema::class": {
+    "bsi::ifc::v5a::class": {
       "value": {
         "dataType": "Object",
         "objectRestrictions": {
@@ -35,7 +35,7 @@
         }
       }
     },
-    "bsi::ifc::v5a::schema::spaceboundary": {
+    "bsi::ifc::v5a::spaceBoundary": {
       "value": {
         "dataType": "Object",
         "objectRestrictions": {
@@ -59,6 +59,21 @@
                   }
                 }
               }
+            }
+          }
+        }
+      }
+    },
+    "bsi::ifc::v5a::material": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "code": {
+              "dataType": "String"
+            },
+            "uri": {
+              "dataType": "String"
             }
           }
         }

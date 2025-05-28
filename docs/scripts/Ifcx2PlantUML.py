@@ -7,7 +7,7 @@ from plantuml import PlantUML
 def truncate_value(value):
     if len(value) <= 40:
         return value
-    return value[:30] + " [...] " + value[-10:]
+    return value[:40] + " [...] " + value[-15:]
 
 def is_shader(path):
     return path.endswith("/Shader")
@@ -113,14 +113,17 @@ with open(plantuml_file, 'w') as puml:
 
 if PRINT_SVG:
     #remove old files if they exist
-    if os.path.exists(IFCX_PATH.replace('.ifcx', '.png')):
-        os.remove(IFCX_PATH.replace('.ifcx', '.png'))
-    if os.path.exists(IFCX_PATH.replace('.ifcx', '.svg')):
-        os.remove(IFCX_PATH.replace('.ifcx', '.svg'))
+    if os.path.exists(IFCX_PATH.replace('.ifcx', '-graph.png')):
+        os.remove(IFCX_PATH.replace('.ifcx', '-graph.png'))
+    if os.path.exists(IFCX_PATH.replace('.ifcx', '-graph.svg')):
+        os.remove(IFCX_PATH.replace('.ifcx', '-graph.svg'))
+    if os.path.exists(IFCX_PATH.replace('.ifcx', '-graph.puml')):
+        os.remove(IFCX_PATH.replace('.ifcx', '-graph.puml'))
     server = PlantUML(url='http://www.plantuml.com/plantuml/svg/')
     server.processes_file(plantuml_file)
     #this for some reason produces svg but saves as png
-    os.rename(IFCX_PATH.replace('.ifcx', '.png'), IFCX_PATH.replace('.ifcx', '.svg'))
+    os.rename(IFCX_PATH.replace('.ifcx', '.png'), IFCX_PATH.replace('.ifcx', '-graph.svg'))
+    os.rename(IFCX_PATH.replace('.ifcx', '.puml'), IFCX_PATH.replace('.ifcx', '-graph.puml'))
 
 if not PRINT_PUML:
     os.remove(plantuml_file)

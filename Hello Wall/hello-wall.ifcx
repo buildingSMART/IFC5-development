@@ -17,7 +17,7 @@
         }
       }
     },
-    "bsi::ifc::v5a::schema": {
+    "bsi::ifc::v5a": {
       "uri": "https://ifc5.technical.buildingsmart.org/schemas/bsi/ifc/v5a/schema.json"
     },
     "usd": {
@@ -25,6 +25,9 @@
     },
     "bsi::ifc::v5a::prop": {
       "uri": "https://ifc5.technical.buildingsmart.org/schemas/bsi/ifc/v5a/prop.json"
+    },
+    "bsi::ifc-mat::1.0.0::prop": {
+      "uri": "https://ifc5.technical.buildingsmart.org/schemas/bsi/ifc-mat/v1.0.0/prop.json"
     },
     "nlsfb": {
       "uri": "https://ifc5.technical.buildingsmart.org/schemas/nlsfb.json"
@@ -35,7 +38,8 @@
       "path": "25503984-6605-43a1-8597-eae657ff5bea",
       "children": {
         "Void": "8fada721-cff8-590b-8d0b-9300b5fe8e18",
-        "Body": "ea5dbe57-5159-5801-b2f9-6f0ca112829b"
+        "Frame": "08f06095-3f32-55b9-a353-61c9aca5cc4d",
+        "Glazing": "5ad6f475-c04c-5628-8b9d-75d0bab0c0e5"
       }
     },
     {
@@ -46,8 +50,8 @@
     },
     {
       "path": "ab143723-f7b1-5368-b106-55896e88d768",
-      "inherits": {
-        "i0": "14adb22b-d474-48a2-8e8f-6d4c067c1953"
+      "children": {
+        "My_Project": "14adb22b-d474-48a2-8e8f-6d4c067c1953"
       }
     },
     {
@@ -73,9 +77,9 @@
       "path": "e3035b71-bd9f-4cdc-86fd-b56e2f4605b6",
       "children": {
         "Body": "15289df1-5ae0-5fc9-8399-19de1fbb87a0",
-        "Boundary_Wall": "d42f9890-1da9-400a-b313-11b5f27d0da0",
-        "Boundary_Window": "4eb1fec0-7b91-4dd9-82ec-5e35003177ce",
-        "Boundary_Window_001": "3b674acb-4384-47de-9f72-0848c9cea8a1"
+        "Boundary_Wall": "c8ecbf4c-e37a-4489-9133-15163b8a904e",
+        "Boundary_Window": "cc40ef6e-950e-4b79-a802-4cc710294e3a",
+        "Boundary_Window_001": "7f2a3284-bf01-4b0a-85e4-e48d92ba56dd"
       }
     },
     {
@@ -92,64 +96,46 @@
     {
       "path": "2c2d549f-f9fe-4e22-8590-562fda81a690",
       "inherits": {
-        "i0": "25503984-6605-43a1-8597-eae657ff5bea"
+        "windowType": "25503984-6605-43a1-8597-eae657ff5bea"
       }
     },
     {
       "path": "592504dc-469a-44d6-9ae8-c801b591679b",
       "inherits": {
-        "i0": "25503984-6605-43a1-8597-eae657ff5bea"
+        "windowType": "25503984-6605-43a1-8597-eae657ff5bea"
       }
     },
     {
-      "path": "d42f9890-1da9-400a-b313-11b5f27d0da0",
+      "path": "c8ecbf4c-e37a-4489-9133-15163b8a904e",
       "children": {
-        "Body": "4e664ae2-7ff7-58d6-aa41-242e18e90a39"
+        "Body": "911155b7-f688-51ee-8e3e-b97475be2452"
       }
     },
     {
-      "path": "4eb1fec0-7b91-4dd9-82ec-5e35003177ce",
+      "path": "cc40ef6e-950e-4b79-a802-4cc710294e3a",
       "children": {
-        "Body": "649111c2-c1f1-5708-ab70-a51981cdb354"
+        "Body": "f3aa8991-7481-5d6b-8dae-f98c372f4a98"
       }
     },
     {
-      "path": "3b674acb-4384-47de-9f72-0848c9cea8a1",
+      "path": "7f2a3284-bf01-4b0a-85e4-e48d92ba56dd",
       "children": {
-        "Body": "bcefac1b-eb16-5817-9e81-2e35337651b2"
-      }
-    },
-    {
-      "path": "0e586931-d0c7-520d-87a1-33977bfcc094",
-      "attributes": {
-        "bsi::ifc::v5a::schema::presentation::diffuseColor": [
-          0.6,
-          0.7,
-          0.8
-        ],
-        "bsi::ifc::v5a::schema::presentation::opacity": 0.3
+        "Body": "126781f3-6465-5c39-9216-81cc636eeb39"
       }
     },
     {
       "path": "7a187a90-3dcf-58cc-b3a6-51a9a407c55a",
       "attributes": {
-        "bsi::ifc::v5a::schema::presentation::diffuseColor": [
-          0.8,
-          0.7,
-          0.6
-        ],
-        "bsi::ifc::v5a::schema::presentation::opacity": 1
-      }
-    },
-    {
-      "path": "77e17b50-5b5a-54ff-8137-3ab205b6f5f8",
-      "attributes": {
-        "bsi::ifc::v5a::schema::presentation::diffuseColor": [
-          0.6,
+        "bsi::ifc::v5a::presentation::diffuseColor": [
           0.5,
-          0.4
+          0.5,
+          0.5
         ],
-        "bsi::ifc::v5a::schema::presentation::opacity": 0.8
+        "bsi::ifc::v5a::presentation::opacity": 1,
+        "bsi::ifc::v5a::material": {
+          "code": "CONCRETE",
+          "uri": "https://identifier.buildingsmart.org/uri/fish/midas-materials/26/class/CONCRETE"
+        }
       }
     },
     {
@@ -163,7 +149,7 @@
     {
       "path": "25503984-6605-43a1-8597-eae657ff5bea",
       "attributes": {
-        "bsi::ifc::v5a::schema::class": {
+        "bsi::ifc::v5a::class": {
           "code": "IfcWindow",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcWindow"
         }
@@ -345,589 +331,6 @@
       }
     },
     {
-      "path": "ea5dbe57-5159-5801-b2f9-6f0ca112829b",
-      "attributes": {
-        "usd::usdgeom::mesh": {
-          "faceVertexIndices": [
-            3,
-            0,
-            1,
-            2,
-            3,
-            1,
-            7,
-            4,
-            5,
-            7,
-            5,
-            6,
-            10,
-            11,
-            8,
-            10,
-            8,
-            9,
-            14,
-            15,
-            12,
-            13,
-            14,
-            12,
-            19,
-            17,
-            16,
-            19,
-            16,
-            18,
-            21,
-            22,
-            23,
-            21,
-            23,
-            20,
-            26,
-            25,
-            24,
-            26,
-            27,
-            25,
-            28,
-            30,
-            31,
-            29,
-            28,
-            31,
-            32,
-            34,
-            35,
-            32,
-            35,
-            33,
-            39,
-            36,
-            37,
-            39,
-            37,
-            38,
-            41,
-            42,
-            43,
-            41,
-            43,
-            40,
-            47,
-            44,
-            45,
-            47,
-            45,
-            46,
-            49,
-            50,
-            51,
-            49,
-            51,
-            48,
-            55,
-            53,
-            52,
-            55,
-            52,
-            54,
-            56,
-            58,
-            59,
-            56,
-            59,
-            57,
-            63,
-            61,
-            60,
-            63,
-            60,
-            62,
-            64,
-            65,
-            66,
-            64,
-            66,
-            67,
-            71,
-            68,
-            69,
-            71,
-            69,
-            70,
-            73,
-            74,
-            75,
-            73,
-            75,
-            72,
-            79,
-            76,
-            77,
-            79,
-            77,
-            78,
-            81,
-            82,
-            83,
-            81,
-            83,
-            80,
-            87,
-            84,
-            85,
-            87,
-            85,
-            86
-          ],
-          "points": [
-            [
-              0.099999994,
-              0.05,
-              0.099999994
-            ],
-            [
-              0,
-              0.05,
-              0
-            ],
-            [
-              0,
-              0.05,
-              1.2
-            ],
-            [
-              0.099999994,
-              0.05,
-              1.1
-            ],
-            [
-              0.099999994,
-              0,
-              0.099999994
-            ],
-            [
-              0.099999994,
-              0,
-              1.1
-            ],
-            [
-              0,
-              0,
-              1.2
-            ],
-            [
-              0,
-              0,
-              0
-            ],
-            [
-              0.8,
-              0,
-              1.1
-            ],
-            [
-              0.8,
-              0,
-              0.099999994
-            ],
-            [
-              0.9,
-              0,
-              0
-            ],
-            [
-              0.9,
-              0,
-              1.2
-            ],
-            [
-              0.099999994,
-              0,
-              1.1
-            ],
-            [
-              0.8,
-              0,
-              1.1
-            ],
-            [
-              0.9,
-              0,
-              1.2
-            ],
-            [
-              0,
-              0,
-              1.2
-            ],
-            [
-              0.099999994,
-              0,
-              0.099999994
-            ],
-            [
-              0.8,
-              0,
-              0.099999994
-            ],
-            [
-              0,
-              0,
-              0
-            ],
-            [
-              0.9,
-              0,
-              0
-            ],
-            [
-              0.8,
-              0.05,
-              1.1
-            ],
-            [
-              0.9,
-              0.05,
-              1.2
-            ],
-            [
-              0.9,
-              0.05,
-              0
-            ],
-            [
-              0.8,
-              0.05,
-              0.099999994
-            ],
-            [
-              0,
-              0.05,
-              1.2
-            ],
-            [
-              0.099999994,
-              0.05,
-              1.1
-            ],
-            [
-              0.9,
-              0.05,
-              1.2
-            ],
-            [
-              0.8,
-              0.05,
-              1.1
-            ],
-            [
-              0.9,
-              0.05,
-              0
-            ],
-            [
-              0.8,
-              0.05,
-              0.099999994
-            ],
-            [
-              0,
-              0.05,
-              0
-            ],
-            [
-              0.099999994,
-              0.05,
-              0.099999994
-            ],
-            [
-              0,
-              0.05,
-              0
-            ],
-            [
-              0,
-              0,
-              0
-            ],
-            [
-              0.9,
-              0.05,
-              0
-            ],
-            [
-              0.9,
-              0,
-              0
-            ],
-            [
-              0.9,
-              0,
-              0
-            ],
-            [
-              0.9,
-              0.05,
-              0
-            ],
-            [
-              0.9,
-              0.05,
-              1.2
-            ],
-            [
-              0.9,
-              0,
-              1.2
-            ],
-            [
-              0.8,
-              0,
-              0.099999994
-            ],
-            [
-              0.8,
-              0.05,
-              0.099999994
-            ],
-            [
-              0.099999994,
-              0.05,
-              0.099999994
-            ],
-            [
-              0.099999994,
-              0,
-              0.099999994
-            ],
-            [
-              0.8,
-              0,
-              1.1
-            ],
-            [
-              0.8,
-              0.05,
-              1.1
-            ],
-            [
-              0.8,
-              0.05,
-              0.099999994
-            ],
-            [
-              0.8,
-              0,
-              0.099999994
-            ],
-            [
-              0.9,
-              0,
-              1.2
-            ],
-            [
-              0.9,
-              0.05,
-              1.2
-            ],
-            [
-              0,
-              0.05,
-              1.2
-            ],
-            [
-              0,
-              0,
-              1.2
-            ],
-            [
-              0,
-              0.05,
-              1.2
-            ],
-            [
-              0,
-              0,
-              1.2
-            ],
-            [
-              0,
-              0.05,
-              0
-            ],
-            [
-              0,
-              0,
-              0
-            ],
-            [
-              0.099999994,
-              0.05,
-              1.1
-            ],
-            [
-              0.099999994,
-              0,
-              1.1
-            ],
-            [
-              0.8,
-              0.05,
-              1.1
-            ],
-            [
-              0.8,
-              0,
-              1.1
-            ],
-            [
-              0.099999994,
-              0.05,
-              0.099999994
-            ],
-            [
-              0.099999994,
-              0,
-              0.099999994
-            ],
-            [
-              0.099999994,
-              0.05,
-              1.1
-            ],
-            [
-              0.099999994,
-              0,
-              1.1
-            ],
-            [
-              0.8,
-              0.02,
-              0.099999994
-            ],
-            [
-              0.8,
-              0.02,
-              1.1
-            ],
-            [
-              0.099999994,
-              0.02,
-              1.1
-            ],
-            [
-              0.099999994,
-              0.02,
-              0.099999994
-            ],
-            [
-              0.8,
-              0.03,
-              0.099999994
-            ],
-            [
-              0.099999994,
-              0.03,
-              0.099999994
-            ],
-            [
-              0.099999994,
-              0.03,
-              1.1
-            ],
-            [
-              0.8,
-              0.03,
-              1.1
-            ],
-            [
-              0.8,
-              0.02,
-              1.1
-            ],
-            [
-              0.8,
-              0.03,
-              1.1
-            ],
-            [
-              0.099999994,
-              0.03,
-              1.1
-            ],
-            [
-              0.099999994,
-              0.02,
-              1.1
-            ],
-            [
-              0.099999994,
-              0.02,
-              1.1
-            ],
-            [
-              0.099999994,
-              0.03,
-              1.1
-            ],
-            [
-              0.099999994,
-              0.03,
-              0.099999994
-            ],
-            [
-              0.099999994,
-              0.02,
-              0.099999994
-            ],
-            [
-              0.099999994,
-              0.02,
-              0.099999994
-            ],
-            [
-              0.099999994,
-              0.03,
-              0.099999994
-            ],
-            [
-              0.8,
-              0.03,
-              0.099999994
-            ],
-            [
-              0.8,
-              0.02,
-              0.099999994
-            ],
-            [
-              0.8,
-              0.02,
-              0.099999994
-            ],
-            [
-              0.8,
-              0.03,
-              0.099999994
-            ],
-            [
-              0.8,
-              0.03,
-              1.1
-            ],
-            [
-              0.8,
-              0.02,
-              1.1
-            ]
-          ]
-        }
-      }
-    },
-    {
       "path": "14adb22b-d474-48a2-8e8f-6d4c067c1953",
       "attributes": {
         "customdata": {
@@ -938,7 +341,7 @@
     {
       "path": "14adb22b-d474-48a2-8e8f-6d4c067c1953",
       "attributes": {
-        "bsi::ifc::v5a::schema::class": {
+        "bsi::ifc::v5a::class": {
           "code": "IfcProject",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcProject"
         }
@@ -955,7 +358,7 @@
     {
       "path": "e0834921-e095-40f0-8874-3c6bd1ec699e",
       "attributes": {
-        "bsi::ifc::v5a::schema::class": {
+        "bsi::ifc::v5a::class": {
           "code": "IfcSite",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcSite"
         }
@@ -972,7 +375,7 @@
     {
       "path": "e84dc79e-fe9d-4781-9f4b-54dd435cca91",
       "attributes": {
-        "bsi::ifc::v5a::schema::class": {
+        "bsi::ifc::v5a::class": {
           "code": "IfcBuilding",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcBuilding"
         }
@@ -989,7 +392,7 @@
     {
       "path": "44af358b-3160-4063-8a89-a868335ff3b5",
       "attributes": {
-        "bsi::ifc::v5a::schema::class": {
+        "bsi::ifc::v5a::class": {
           "code": "IfcBuildingStorey",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcBuildingStorey"
         }
@@ -1006,7 +409,7 @@
     {
       "path": "e3035b71-bd9f-4cdc-86fd-b56e2f4605b6",
       "attributes": {
-        "bsi::ifc::v5a::schema::class": {
+        "bsi::ifc::v5a::class": {
           "code": "IfcSpace",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcSpace"
         }
@@ -1015,11 +418,12 @@
     {
       "path": "e3035b71-bd9f-4cdc-86fd-b56e2f4605b6",
       "attributes": {
-        "usd::usdshade::materialbindingapi": {
-          "material::binding": {
-            "ref": "0e586931-d0c7-520d-87a1-33977bfcc094"
-          }
-        }
+        "bsi::ifc::v5a::presentation::diffuseColor": [
+          0.6,
+          0.7,
+          0.8
+        ],
+        "bsi::ifc::v5a::presentation::opacity": 0.3
       }
     },
     {
@@ -1233,7 +637,7 @@
     {
       "path": "93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b",
       "attributes": {
-        "bsi::ifc::v5a::schema::class": {
+        "bsi::ifc::v5a::class": {
           "code": "IfcWall",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcWall"
         }
@@ -1247,12 +651,8 @@
     },
     {
       "path": "93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b",
-      "attributes": {
-        "usd::usdshade::materialbindingapi": {
-          "material::binding": {
-            "ref": "7a187a90-3dcf-58cc-b3a6-51a9a407c55a"
-          }
-        }
+      "inherits": {
+        "material": "7a187a90-3dcf-58cc-b3a6-51a9a407c55a"
       }
     },
     {
@@ -1877,7 +1277,7 @@
     {
       "path": "2c2d549f-f9fe-4e22-8590-562fda81a690",
       "attributes": {
-        "bsi::ifc::v5a::schema::class": {
+        "bsi::ifc::v5a::class": {
           "code": "IfcWindow",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcWindow"
         }
@@ -1887,16 +1287,6 @@
       "path": "2c2d549f-f9fe-4e22-8590-562fda81a690",
       "attributes": {
         "bsi::ifc::v5a::prop::isexternal": true
-      }
-    },
-    {
-      "path": "2c2d549f-f9fe-4e22-8590-562fda81a690",
-      "attributes": {
-        "usd::usdshade::materialbindingapi": {
-          "material::binding": {
-            "ref": "77e17b50-5b5a-54ff-8137-3ab205b6f5f8"
-          }
-        }
       }
     },
     {
@@ -1943,7 +1333,7 @@
     {
       "path": "592504dc-469a-44d6-9ae8-c801b591679b",
       "attributes": {
-        "bsi::ifc::v5a::schema::class": {
+        "bsi::ifc::v5a::class": {
           "code": "IfcWindow",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcWindow"
         }
@@ -1953,16 +1343,6 @@
       "path": "592504dc-469a-44d6-9ae8-c801b591679b",
       "attributes": {
         "bsi::ifc::v5a::prop::isexternal": true
-      }
-    },
-    {
-      "path": "592504dc-469a-44d6-9ae8-c801b591679b",
-      "attributes": {
-        "usd::usdshade::materialbindingapi": {
-          "material::binding": {
-            "ref": "77e17b50-5b5a-54ff-8137-3ab205b6f5f8"
-          }
-        }
       }
     },
     {
@@ -1999,9 +1379,9 @@
       }
     },
     {
-      "path": "d42f9890-1da9-400a-b313-11b5f27d0da0",
+      "path": "c8ecbf4c-e37a-4489-9133-15163b8a904e",
       "attributes": {
-        "bsi::ifc::v5a::schema::spaceboundary": {
+        "bsi::ifc::v5a::spaceboundary": {
           "relatedelement": {
             "ref": "93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b"
           },
@@ -2012,7 +1392,7 @@
       }
     },
     {
-      "path": "4e664ae2-7ff7-58d6-aa41-242e18e90a39",
+      "path": "911155b7-f688-51ee-8e3e-b97475be2452",
       "attributes": {
         "usd::usdgeom::mesh": {
           "faceVertexIndices": [
@@ -2049,9 +1429,9 @@
       }
     },
     {
-      "path": "4eb1fec0-7b91-4dd9-82ec-5e35003177ce",
+      "path": "cc40ef6e-950e-4b79-a802-4cc710294e3a",
       "attributes": {
-        "bsi::ifc::v5a::schema::spaceboundary": {
+        "bsi::ifc::v5a::spaceboundary": {
           "relatedelement": {
             "ref": "2c2d549f-f9fe-4e22-8590-562fda81a690"
           },
@@ -2062,7 +1442,7 @@
       }
     },
     {
-      "path": "649111c2-c1f1-5708-ab70-a51981cdb354",
+      "path": "f3aa8991-7481-5d6b-8dae-f98c372f4a98",
       "attributes": {
         "usd::usdgeom::mesh": {
           "faceVertexIndices": [
@@ -2099,9 +1479,9 @@
       }
     },
     {
-      "path": "3b674acb-4384-47de-9f72-0848c9cea8a1",
+      "path": "7f2a3284-bf01-4b0a-85e4-e48d92ba56dd",
       "attributes": {
-        "bsi::ifc::v5a::schema::spaceboundary": {
+        "bsi::ifc::v5a::spaceboundary": {
           "relatedelement": {
             "ref": "592504dc-469a-44d6-9ae8-c801b591679b"
           },
@@ -2112,7 +1492,7 @@
       }
     },
     {
-      "path": "bcefac1b-eb16-5817-9e81-2e35337651b2",
+      "path": "126781f3-6465-5c39-9216-81cc636eeb39",
       "attributes": {
         "usd::usdgeom::mesh": {
           "faceVertexIndices": [
@@ -2149,59 +1529,662 @@
       }
     },
     {
-      "path": "f079bafd-8733-48d8-85df-1c1656a17c1f",
-      "attributes": {
-        "bsi::ifc::v5a::prop::volume": 1.2959999568,
-        "bsi::ifc::v5a::prop::height": 1.2
-      }
-    },
-    {
-      "path": "f079bafd-8733-48d8-85df-1c1656a17c1f",
+      "path": "25503984-6605-43a1-8597-eae657ff5bea",
       "attributes": {
         "bsi::ifc::v5a::prop::volume": 0.025999999592,
         "bsi::ifc::v5a::prop::height": 1.2
       }
     },
     {
-      "path": "f079bafd-8733-48d8-85df-1c1656a17c1f",
+      "path": "e3035b71-bd9f-4cdc-86fd-b56e2f4605b6",
       "attributes": {
         "bsi::ifc::v5a::prop::volume": 150.0,
         "bsi::ifc::v5a::prop::height": 3.0
       }
     },
     {
-      "path": "f079bafd-8733-48d8-85df-1c1656a17c1f",
+      "path": "93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b",
       "attributes": {
         "bsi::ifc::v5a::prop::volume": 2.783999976,
         "bsi::ifc::v5a::prop::height": 3.0
       }
     },
     {
-      "path": "f079bafd-8733-48d8-85df-1c1656a17c1f",
+      "path": "4549bada-a37e-5044-bb70-456516cca5a8",
       "attributes": {
-        "bsi::ifc::v5a::prop::volume": 0.0,
-        "bsi::ifc::v5a::prop::height": 0.0
+        "bsi::ifc::v5a::material": {
+          "code": "WOOD",
+          "uri": "https://identifier.buildingsmart.org/uri/fish/midas-materials/26/class/WOOD"
+        },
+        "bsi::ifc::v5a::presentation::diffuseColor": [
+          0.8,
+          0.7,
+          0.6
+        ],
+        "bsi::ifc-mat::v1.0.0::prop::strengthClass": "C24",
+        "bsi::ifc-mat::v1.0.0::prop::moistureContent": 0.56,
+        "bsi::ifc-mat::v1.0.0::prop::massDensity": 529.0,
+        "bsi::ifc-mat::v1.0.0::prop::GWP": {
+          "A1-A3": -629.4,
+          "C2": 1.802,
+          "C3": 863,
+          "D": -274.8
+        }
       }
     },
     {
-      "path": "f079bafd-8733-48d8-85df-1c1656a17c1f",
+      "path": "08f06095-3f32-55b9-a353-61c9aca5cc4d",
       "attributes": {
-        "bsi::ifc::v5a::prop::volume": 0.0,
-        "bsi::ifc::v5a::prop::height": 3.0
+        "usd::usdgeom::mesh": {
+          "faceVertexIndices": [
+            3,
+            0,
+            1,
+            2,
+            3,
+            1,
+            7,
+            4,
+            5,
+            7,
+            5,
+            6,
+            10,
+            11,
+            8,
+            10,
+            8,
+            9,
+            14,
+            15,
+            12,
+            13,
+            14,
+            12,
+            19,
+            17,
+            16,
+            19,
+            16,
+            18,
+            21,
+            22,
+            23,
+            21,
+            23,
+            20,
+            26,
+            25,
+            24,
+            26,
+            27,
+            25,
+            28,
+            30,
+            31,
+            29,
+            28,
+            31,
+            32,
+            34,
+            35,
+            32,
+            35,
+            33,
+            39,
+            36,
+            37,
+            39,
+            37,
+            38,
+            41,
+            42,
+            43,
+            41,
+            43,
+            40,
+            47,
+            44,
+            45,
+            47,
+            45,
+            46,
+            49,
+            50,
+            51,
+            49,
+            51,
+            48,
+            55,
+            53,
+            52,
+            55,
+            52,
+            54,
+            56,
+            58,
+            59,
+            56,
+            59,
+            57,
+            63,
+            61,
+            60,
+            63,
+            60,
+            62
+          ],
+          "points": [
+            [
+              0.099999994,
+              0.05,
+              0.099999994
+            ],
+            [
+              0.0,
+              0.05,
+              0.0
+            ],
+            [
+              0.0,
+              0.05,
+              1.2
+            ],
+            [
+              0.099999994,
+              0.05,
+              1.1
+            ],
+            [
+              0.099999994,
+              0.0,
+              0.099999994
+            ],
+            [
+              0.099999994,
+              0.0,
+              1.1
+            ],
+            [
+              0.0,
+              0.0,
+              1.2
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.8,
+              0.0,
+              1.1
+            ],
+            [
+              0.8,
+              0.0,
+              0.099999994
+            ],
+            [
+              0.9,
+              0.0,
+              0.0
+            ],
+            [
+              0.9,
+              0.0,
+              1.2
+            ],
+            [
+              0.099999994,
+              0.0,
+              1.1
+            ],
+            [
+              0.8,
+              0.0,
+              1.1
+            ],
+            [
+              0.9,
+              0.0,
+              1.2
+            ],
+            [
+              0.0,
+              0.0,
+              1.2
+            ],
+            [
+              0.099999994,
+              0.0,
+              0.099999994
+            ],
+            [
+              0.8,
+              0.0,
+              0.099999994
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.9,
+              0.0,
+              0.0
+            ],
+            [
+              0.8,
+              0.05,
+              1.1
+            ],
+            [
+              0.9,
+              0.05,
+              1.2
+            ],
+            [
+              0.9,
+              0.05,
+              0.0
+            ],
+            [
+              0.8,
+              0.05,
+              0.099999994
+            ],
+            [
+              0.0,
+              0.05,
+              1.2
+            ],
+            [
+              0.099999994,
+              0.05,
+              1.1
+            ],
+            [
+              0.9,
+              0.05,
+              1.2
+            ],
+            [
+              0.8,
+              0.05,
+              1.1
+            ],
+            [
+              0.9,
+              0.05,
+              0.0
+            ],
+            [
+              0.8,
+              0.05,
+              0.099999994
+            ],
+            [
+              0.0,
+              0.05,
+              0.0
+            ],
+            [
+              0.099999994,
+              0.05,
+              0.099999994
+            ],
+            [
+              0.0,
+              0.05,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.9,
+              0.05,
+              0.0
+            ],
+            [
+              0.9,
+              0.0,
+              0.0
+            ],
+            [
+              0.9,
+              0.0,
+              0.0
+            ],
+            [
+              0.9,
+              0.05,
+              0.0
+            ],
+            [
+              0.9,
+              0.05,
+              1.2
+            ],
+            [
+              0.9,
+              0.0,
+              1.2
+            ],
+            [
+              0.8,
+              0.0,
+              0.099999994
+            ],
+            [
+              0.8,
+              0.05,
+              0.099999994
+            ],
+            [
+              0.099999994,
+              0.05,
+              0.099999994
+            ],
+            [
+              0.099999994,
+              0.0,
+              0.099999994
+            ],
+            [
+              0.8,
+              0.0,
+              1.1
+            ],
+            [
+              0.8,
+              0.05,
+              1.1
+            ],
+            [
+              0.8,
+              0.05,
+              0.099999994
+            ],
+            [
+              0.8,
+              0.0,
+              0.099999994
+            ],
+            [
+              0.9,
+              0.0,
+              1.2
+            ],
+            [
+              0.9,
+              0.05,
+              1.2
+            ],
+            [
+              0.0,
+              0.05,
+              1.2
+            ],
+            [
+              0.0,
+              0.0,
+              1.2
+            ],
+            [
+              0.0,
+              0.05,
+              1.2
+            ],
+            [
+              0.0,
+              0.0,
+              1.2
+            ],
+            [
+              0.0,
+              0.05,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.099999994,
+              0.05,
+              1.1
+            ],
+            [
+              0.099999994,
+              0.0,
+              1.1
+            ],
+            [
+              0.8,
+              0.05,
+              1.1
+            ],
+            [
+              0.8,
+              0.0,
+              1.1
+            ],
+            [
+              0.099999994,
+              0.05,
+              0.099999994
+            ],
+            [
+              0.099999994,
+              0.0,
+              0.099999994
+            ],
+            [
+              0.099999994,
+              0.05,
+              1.1
+            ],
+            [
+              0.099999994,
+              0.0,
+              1.1
+            ]
+          ]
+        }
+      },
+      "inherits": {
+        "material": "4549bada-a37e-5044-bb70-456516cca5a8"
       }
     },
     {
-      "path": "f079bafd-8733-48d8-85df-1c1656a17c1f",
+      "path": "d10e4eb4-6a35-5fbe-9491-7a6fb93f1691",
       "attributes": {
-        "bsi::ifc::v5a::prop::volume": 0.0,
-        "bsi::ifc::v5a::prop::height": 1.2000000000000002
+        "bsi::ifc::v5a::material": {
+          "code": "GLASS",
+          "uri": "https://identifier.buildingsmart.org/uri/fish/midas-materials/26/class/GLASS"
+        },
+        "bsi::ifc::v5a::presentation::diffuseColor": [
+          0.5,
+          0.8,
+          0.6
+        ],
+        "bsi::ifc::v5a::presentation::opacity": 0.3
       }
     },
     {
-      "path": "f079bafd-8733-48d8-85df-1c1656a17c1f",
+      "path": "5ad6f475-c04c-5628-8b9d-75d0bab0c0e5",
       "attributes": {
-        "bsi::ifc::v5a::prop::volume": 0.0,
-        "bsi::ifc::v5a::prop::height": 1.2000000000000002
+        "usd::usdgeom::mesh": {
+          "faceVertexIndices": [
+            0,
+            1,
+            2,
+            0,
+            2,
+            3,
+            7,
+            4,
+            5,
+            7,
+            5,
+            6,
+            9,
+            10,
+            11,
+            9,
+            11,
+            8,
+            15,
+            12,
+            13,
+            15,
+            13,
+            14,
+            17,
+            18,
+            19,
+            17,
+            19,
+            16,
+            23,
+            20,
+            21,
+            23,
+            21,
+            22
+          ],
+          "points": [
+            [
+              0.8,
+              0.02,
+              0.099999994
+            ],
+            [
+              0.8,
+              0.02,
+              1.1
+            ],
+            [
+              0.099999994,
+              0.02,
+              1.1
+            ],
+            [
+              0.099999994,
+              0.02,
+              0.099999994
+            ],
+            [
+              0.8,
+              0.03,
+              0.099999994
+            ],
+            [
+              0.099999994,
+              0.03,
+              0.099999994
+            ],
+            [
+              0.099999994,
+              0.03,
+              1.1
+            ],
+            [
+              0.8,
+              0.03,
+              1.1
+            ],
+            [
+              0.8,
+              0.02,
+              1.1
+            ],
+            [
+              0.8,
+              0.03,
+              1.1
+            ],
+            [
+              0.099999994,
+              0.03,
+              1.1
+            ],
+            [
+              0.099999994,
+              0.02,
+              1.1
+            ],
+            [
+              0.099999994,
+              0.02,
+              1.1
+            ],
+            [
+              0.099999994,
+              0.03,
+              1.1
+            ],
+            [
+              0.099999994,
+              0.03,
+              0.099999994
+            ],
+            [
+              0.099999994,
+              0.02,
+              0.099999994
+            ],
+            [
+              0.099999994,
+              0.02,
+              0.099999994
+            ],
+            [
+              0.099999994,
+              0.03,
+              0.099999994
+            ],
+            [
+              0.8,
+              0.03,
+              0.099999994
+            ],
+            [
+              0.8,
+              0.02,
+              0.099999994
+            ],
+            [
+              0.8,
+              0.02,
+              0.099999994
+            ],
+            [
+              0.8,
+              0.03,
+              0.099999994
+            ],
+            [
+              0.8,
+              0.03,
+              1.1
+            ],
+            [
+              0.8,
+              0.02,
+              1.1
+            ]
+          ]
+        }
+      },
+      "inherits": {
+        "material": "d10e4eb4-6a35-5fbe-9491-7a6fb93f1691"
       }
     }
   ]

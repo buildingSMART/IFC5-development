@@ -47,25 +47,6 @@
         }
       }
     },
-    "usd::usdshade::materialbindingapi": {
-      "value": {
-        "dataType": "Object",
-        "objectRestrictions": {
-          "values": {
-            "material::binding": {
-              "dataType": "Object",
-              "objectRestrictions": {
-                "values": {
-                  "ref": {
-                    "dataType": "String"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "usd::xformop": {
       "value": {
         "dataType": "Object",
