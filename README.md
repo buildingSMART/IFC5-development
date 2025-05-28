@@ -12,6 +12,11 @@ Please note that these examples are **preliminary** and represent a direction of
 4. **Known Issues**: There are known and unknown issues and incomplete sections within the examples.
 5. **Development in Progress**: Further work is needed to improve the quality, accuracy, and completeness of these examples.
 
+## Viewer
+
+A viewer to visualize and explore the files is available under /docs/viewer. It is also live on https://ifc5.technical.buildingsmart.org/viewer/
+The viewer source code is MIT licensed. The intent is to help users understand the examples; and to help software developers to understand how to implement the composition of the objects.
+
 
 ## Future Development
 
