@@ -301,7 +301,7 @@ function LoadIfcxFile(file, checkSchemas = true, createArtificialRoot = false) {
   try {
     if (checkSchemas) {
       function fetchJson(url) {
-        return fetch(url.replace("https://ifc5.technical.buildingsmart.org", "http://localhost:8080"))
+        return fetch(url)
           .then(res => {
             if (!res.ok) {
               throw new Error(`Failed to fetch ${url}: ${res.status}`);
