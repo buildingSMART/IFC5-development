@@ -46,5 +46,22 @@
           }
         }
       }
+  },
+    "bsi::ifc-mat::v1.0.0::renderMaterial": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "code": {
+              "dataType": "String"
+            },
+            "materialXUri": {
+              "dataType": "String"
+            }
+          }
+        }
+      }
+    }
+}
 }
   

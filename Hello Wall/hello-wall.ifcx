@@ -2016,7 +2016,11 @@
           0.8,
           0.6
         ],
-        "bsi::ifc::v5a::presentation::opacity": 0.3
+        "bsi::ifc::v5a::presentation::opacity": 0.3,
+        "bsi::ifc-mat::v1.0.0::renderMaterial": {
+          "code": "glass",
+          "uri": "https://ifc5.technical.buildingsmart.org/resources/sample_materials/glass.mtlx"
+        }
       }
     },
     {
