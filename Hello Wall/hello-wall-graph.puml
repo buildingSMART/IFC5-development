@@ -63,15 +63,15 @@ class 592504dc-469a-44d6-9ae8-c801b591679b {
 }
 
 class c8ecbf4c-e37a-4489-9133-15163b8a904e {
-  + "bsi::ifc::v5a::spaceboundary" : "{'relatedelement': {'ref': '93791d5d-5be [...] b56e2f4605b6'}}"
+  + "bsi::ifc::v5a::spaceBoundary" : "{'relatedelement': {'ref': '93791d5d-5be [...] b56e2f4605b6'}}"
 }
 
 class cc40ef6e-950e-4b79-a802-4cc710294e3a {
-  + "bsi::ifc::v5a::spaceboundary" : "{'relatedelement': {'ref': '2c2d549f-f9f [...] b56e2f4605b6'}}"
+  + "bsi::ifc::v5a::spaceBoundary" : "{'relatedelement': {'ref': '2c2d549f-f9f [...] b56e2f4605b6'}}"
 }
 
 class 7f2a3284-bf01-4b0a-85e4-e48d92ba56dd {
-  + "bsi::ifc::v5a::spaceboundary" : "{'relatedelement': {'ref': '592504dc-469 [...] b56e2f4605b6'}}"
+  + "bsi::ifc::v5a::spaceBoundary" : "{'relatedelement': {'ref': '592504dc-469 [...] b56e2f4605b6'}}"
 }
 
 class 7a187a90-3dcf-58cc-b3a6-51a9a407c55a {
