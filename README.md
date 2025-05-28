@@ -17,6 +17,10 @@ Please note that these examples are **preliminary** and represent a direction of
 A viewer to visualize and explore the files is available under /docs/viewer. It is also live on https://ifc5.technical.buildingsmart.org/viewer/
 The viewer source code is MIT licensed. The intent is to help users understand the examples; and to help software developers to understand how to implement the composition of the objects.
 
+## Schema
+
+The schema sourece is defined using typespec and can be found under /schema.
+The JSON schema of IFC, and extensions will be published on ifcx.dev
 
 ## Future Development
 
