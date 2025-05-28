@@ -2,7 +2,7 @@
   "header": {
     "version": "1.0.0",
     "author": "buildingSMART",
-    "timestamp": "2025-05-28T12:00:00Z"
+    "timestamp": "2025-05-28T12:00:00Z"
   },
   "schemas": {
     "bsi::ifc-mat::v1.0.0::prop::strengthClass": {
