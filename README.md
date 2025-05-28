@@ -12,32 +12,6 @@ Please note that these examples are **preliminary** and represent a direction of
 4. **Known Issues**: There are known and unknown issues and incomplete sections within the examples.
 5. **Development in Progress**: Further work is needed to improve the quality, accuracy, and completeness of these examples.
 
-## Change from pre-alpha to alpha version
-
-1. Create a top level object as follows:
-```json
-
-        "header": {
-            "version": "ifcx_alpha",
-            "author": "authorname",
-            "timestamp": "time string"
-        },
-        "schemas": {
-            ... schemas
-        },
-        "data": [
-            ... data
-        ]
-```
-2. Copy your previous ifcx data into the `data` array, removing the `def` and `type` specifiers, and the complete `disclaimer` object.
-3. Transform your children arrays into an object, where the key is the child name, and the value is the path your child inherits from.
-4. Transform your inherit arrays into an object, where the key is the name of your inherit, and the value is the path you inherit from
-4. Remove any nodes that only have a name and no children/inherits/attributes
-5. Remove any nested def attributes and put them in a new node, specifying the nested path as name.
-6. Define schemas for all your components in the `schema` property.
-7. If using the viewer, check out Hello-Wall.ifcx for the updated component schemas, and rename your components accordingly.
-
-
 
 ## Future Development
 
