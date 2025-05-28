@@ -30,14 +30,11 @@ The files contain a couple of terms you need to know:
 - This example only shows a very small number of IFC Relations (RelatingSpace, RelatingElement, etc). The eventual IFC 5 schema will have more. 
 - The 'hello-wall' example also contains references to non-IFC classes (21.21 in this example). References are now to bSDD published content, but are not restricted to bSDD.
 - The 'hello-wall' example contains an example of a space boundary that is defined as an object insteaf of a relationship. The intent is to keep it that way in IFC 5.
-- The examples do not have header information about author and version info yet. This will be added in a next itteration. 
 - Opening the SPFF files may provide you information that is not relevant (predefinedType, etc). This is due to the viewer  following the IFC 4.x schema. Please ignore for this purpose.
 - Units will be documented later.
 
-There are .usda files available for these examples on request. Please contact technical@buildingsmart.org.
-
 More documentation will follow soon. 
 We are actively working on enhancing these examples, addressing known issues. Contributions, feedback, and collaboration are welcome! If you would like to contribute or discuss the development of these examples, feel free to open an issue.
-Next step in the development is to generate small assignments for people to explore. When the data model is stable, an API will be developed. 
+
 
 
