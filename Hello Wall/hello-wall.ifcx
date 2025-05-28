@@ -1381,7 +1381,7 @@
     {
       "path": "c8ecbf4c-e37a-4489-9133-15163b8a904e",
       "attributes": {
-        "bsi::ifc::v5a::spaceboundary": {
+        "bsi::ifc::v5a::spaceBoundary": {
           "relatedelement": {
             "ref": "93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b"
           },
@@ -1431,7 +1431,7 @@
     {
       "path": "cc40ef6e-950e-4b79-a802-4cc710294e3a",
       "attributes": {
-        "bsi::ifc::v5a::spaceboundary": {
+        "bsi::ifc::v5a::spaceBoundary": {
           "relatedelement": {
             "ref": "2c2d549f-f9fe-4e22-8590-562fda81a690"
           },
@@ -1481,7 +1481,7 @@
     {
       "path": "7f2a3284-bf01-4b0a-85e4-e48d92ba56dd",
       "attributes": {
-        "bsi::ifc::v5a::spaceboundary": {
+        "bsi::ifc::v5a::spaceBoundary": {
           "relatedelement": {
             "ref": "592504dc-469a-44d6-9ae8-c801b591679b"
           },
@@ -1566,6 +1566,8 @@
         "bsi::ifc-mat::v1.0.0::prop::massDensity": 529.0,
         "bsi::ifc-mat::v1.0.0::prop::GWP": {
           "A1-A3": -629.4,
+          "A4": 0,
+          "A5": 0,
           "C2": 1.802,
           "C3": 863,
           "D": -274.8
