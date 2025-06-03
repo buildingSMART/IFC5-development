@@ -53,7 +53,7 @@ if os.path.basename(fn) == 'linear-placement-of-signal.ifc':
         if i[0][0] > 10000:
             i[0] = (np.array(i[0]) - M).tolist()
 
-else:
+elif os.path.basename(fn) == 'bonsai-wall.ifc':
     # we don't want the containment rel to dominate over the void-fill rel
     for rel in f.by_type('IfcRelContainedInSpatialStructure'):
         rel.RelatedElements = [a for a in rel.RelatedElements if a.is_a() not in ('IfcDoor', 'IfcWindow')]
@@ -235,6 +235,8 @@ def getSdfType(v):
         return Sdf.ValueTypeNames.String
     elif isinstance(v, bool):
         return Sdf.ValueTypeNames.Bool
+    elif isinstance(v, int):
+        return Sdf.ValueTypeNames.Int
     else:
         breakpoint()
 
@@ -292,7 +294,11 @@ def process(el, path=(), parentPath=None, asclass=False):
 
         if el.is_a('IfcProduct') and el.ObjectPlacement:
             write_placement(el.ObjectPlacement.RelativePlacement, xf)
-        
+
+        if el.is_a('IfcDistributionPort'):
+            if fd := el.FlowDirection:
+                xf.CreateAttribute('ifc5:system:flowDirection', Sdf.ValueTypeNames.String).Set(fd)
+
         if el in object_to_geom:
             write_geom(el, xf)
 
@@ -305,9 +311,10 @@ def process(el, path=(), parentPath=None, asclass=False):
 
         if getattr(el, 'Representation', None):
             for r in [r for r in el.Representation.Representations if r.RepresentationIdentifier == 'Body']:
-                if r.Items[0].is_a('IfcExtrudedAreaSolid'):
+                if r.Items[0].is_a('IfcExtrudedAreaSolid') and os.path.basename(fn) == 'bonsai-wall.ifc':
                     B = ifcopenshell.ifcopenshell_wrapper.map_shape(ifcopenshell.geom.settings(), r.Items[0].wrapped_data)
                     V = np.array(B.direction.components) * B.depth
+                    # @nb does not work for trimmed curves like this
                     Ps = np.array([e.start.components for e in B.basis[0].children])
 
                     line_points = np.array([
@@ -424,15 +431,41 @@ for rel in f.by_type('IfcRelSpaceBoundary'):
     write_geom_2(xf, "Body", vs, idxs, eds)
     stage.DefinePrim(created_nodes[rel.RelatingSpace].GetPath().pathString + f"/Boundary_{get_name(rel.RelatedBuildingElement)}").GetInherits().AddInherit(path_str)
 
+
+for system in f.by_type('IfcSystem'):
+    path_str = f"/{get_name(system)}"
+    xf = stage.CreateClassPrim(Sdf.Path(path_str))
+    xf.SetTypeName('Xform')
+    refs = system.ServicesBuildings + getattr(system, 'ServicesFacilities', ())
+    rel = xf.GetPrim().CreateRelationship(f'ifc5:system:servicesFacility')
+    for ref in refs:
+        elem = (getattr(ref, 'RelatedBuildings', ()) + getattr(ref, 'RelatingStructure', ()))[0]
+        rel.AddTarget(created_nodes[elem].GetPath().pathString)
+    for ref in system.IsGroupedBy[0].RelatedObjects:
+        created_nodes[elem].GetPrim().CreateRelationship(f'ifc5:system:partOfSystem').AddTarget(path_str)
+    
+
+for rel in f.by_type('IfcRelConnectsPorts'):
+    cons = (rel.RelatedPort, rel.RelatingPort)
+    for a, b in zip(cons, cons[::-1]):
+        created_nodes[a].GetPrim().CreateRelationship(f'ifc5:system:connectsTo').AddTarget(created_nodes[a].GetPath().pathString)
+
+
 for typeobj in f.by_type('IfcPropertySet'):
     if typeobj.Name.startswith('EPset_'): continue
     if DIRECT_PROPS:
         for rel in typeobj.DefinesOccurrence:
             for el in rel.RelatedObjects:
                 for p in typeobj.HasProperties:
-                    created_nodes[el].GetPrim().CreateAttribute(f'ifc5:properties:{p.Name}', getSdfType(p.NominalValue[0])).Set(
-                        p.NominalValue[0]
+                    def val():
+                        try:
+                            return p.NominalValue[0]
+                        except:
+                            return p.EnumerationValues[0][0]
+                    created_nodes[el].GetPrim().CreateAttribute(f'ifc5:properties:{p.Name}', getSdfType(val())).Set(
+                        val()
                     )
+
 
 ##########################################################################
 # materials: this is just a test for presentation, not official IFC5 yet #
@@ -450,7 +483,7 @@ for k, v in created_nodes.items():
             UsdShade.MaterialBindingAPI.Apply(v.GetPrim())
             material = UsdShade.Material.Define(stage, f'/{m[3:]}Material')
             shader = UsdShade.Shader.Define(stage, f'/{m[3:]}Material/Shader')
-            shader.CreateIdAttr("UsdUSD_HOMEiewSurface")
+            shader.CreateIdAttr("UsdPreviewSurface")
             shader.CreateInput("diffuseColor", Sdf.ValueTypeNames.Color3f).Set(Gf.Vec3f(*mv[0:3]))
             shader.CreateInput("opacity", Sdf.ValueTypeNames.Float).Set(mv[3])
             material.CreateSurfaceOutput().ConnectToSource(shader.ConnectableAPI(), "surface")

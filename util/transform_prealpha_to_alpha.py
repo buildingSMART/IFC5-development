@@ -32,11 +32,13 @@ def transform_attributes(d):
 
     def transform(k, v):
         if mapping.get(k, "-") is None:
-            return None
+            return
         k = mapping.get(k, k)
         if k == "ref":
             parts = v[2:-1].split("/")
             v = "/".join([transform_iden(parts[0])] + parts[1:])
+
+        kvs = []
 
         if k == "xformOp":
             k = "usd::xformop"
@@ -46,30 +48,41 @@ def transform_attributes(d):
                 parts.remove("VisibilityAPI")
             except:
                 pass
+
             for i in range(len(parts) - (0 if isinstance(v, dict) else 1)):
                 parts[i] = parts[i].lower()
+
             if parts and parts[0] == 'ifc5':
                 parts[0:1] = ['bsi', 'ifc', 'v5a']
-                if 'properties' in parts:
-                    parts[parts.index('properties')] = 'prop'
-                    assert len(v) == 1
-                    kk, vv = next(iter(v.items()))
-                    parts.append(kk.lower())
-                    v = bool(vv)
-                # else:
-                #     parts.insert(3, 'schema')
-            k = "::".join(parts)
+                if 'properties' in parts or 'system' in parts:
+                    if 'properties' in parts:
+                        parts[parts.index('properties')] = 'prop'
+                    for kk, vv in v.items():
+                        if kk.lower() == 'isexternal':
+                            vv = bool(vv)
+                        kvs.append((parts + [kk.lower()], vv))
+            
+            if not kvs:
+                kvs.append((parts, v))
 
-            if k.startswith("usd"):
+        if not kvs:
+            kvs.append((k, v))
+
+        for k, v in kvs:
+            if isinstance(k, list):
+                k = "::".join(k)
+
+            if k.startswith("usd") and not k.startswith("usd::"):
                 k = "usd::" + k
 
-        if isinstance(v, dict):
-            v = transform_attributes(v)
-            if not v:
-                return None
-        return k, v
+            if isinstance(v, dict):
+                v = transform_attributes(v)
+                if not v:
+                    continue
 
-    return dict(filter(None, itertools.starmap(transform, d.items())))
+            yield k, v
+
+    return dict(itertools.chain.from_iterable(itertools.starmap(transform, d.items())))
 
 
 def process():

@@ -92,6 +92,7 @@ for elem in obj["data"]:
                     if unified:
                         schema[k] = unified
                     else:
+                        breakpoint()
                         assert False
             else:
                 schema[k] = new_schema

@@ -117,7 +117,7 @@ class USDAtoJSON(Transformer):
         }
 
 def parse_usda_to_dict(usda_content):
-    parse_tree = parser.parse(usda_content)
+    parse_tree = parser.parse(re.sub(r'custom rel [\w:]+', '', usda_content))
     json_data = USDAtoJSON().transform(parse_tree)
     return json_data
 
