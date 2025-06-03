@@ -63,6 +63,9 @@ class USDAtoJSON(Transformer):
             value = items[2]
         except:
             value = None
+        if isinstance(value, dict) and "ref" in value:
+            # references are always plural in USD
+            value = [value]
         return {key: value}
     
     def block(self, items):
