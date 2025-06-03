@@ -39,7 +39,7 @@ os.environ['PXR_PLUGINPATH_NAME'] = os.pathsep.join((os.path.abspath('schema/ifc
 
 from pxr import Usd, UsdGeom, Vt, Gf, Sdf, UsdShade
 
-fn = sys.argv[1]
+fn, ofn = sys.argv[1:]
 
 f = ifcopenshell.open(fn)
 
@@ -116,7 +116,7 @@ if os.path.basename(fn).startswith("bonsai-wall"):
     )
     pset.DefinesOccurrence[0].RelatedObjects = f.by_type('IfcBuildingElement')
 
-stage = Usd.Stage.CreateNew(fn[:-4] + ".usda")
+stage = Usd.Stage.CreateNew(ofn)
 UsdGeom.SetStageUpAxis(stage, UsdGeom.Tokens.z)
 
 # relationships to follow to build placement tree
@@ -354,7 +354,7 @@ def process(el, path=(), parentPath=None, asclass=False):
                     if isinstance(v, dict):
                         v.pop('type')
                         v = next(iter(v.values()))
-                    xf.GetPrim().CreateAttribute(f'ifc5:alignmentsegment:{k}', getSdfType(v)).Set(
+                    xf.GetPrim().CreateAttribute(f'ifc5:{el.DesignParameters.is_a()[3:]}:{k}', getSdfType(v)).Set(
                         (v + (0.,)) if isinstance(v, tuple) and set(map(type, v)) == {float} else v
                     )
 
@@ -463,7 +463,7 @@ for k, v in created_nodes.items():
 stage.GetRootLayer().Save()
 
 if os.path.basename(fn).startswith("bonsai-wall"):
-    newLayer = Sdf.Layer.CreateNew(fn[:-4] + "-firerating.usda")
+    newLayer = Sdf.Layer.CreateNew(ofn[:-5] + "-firerating.usda")
     stage.GetRootLayer().subLayerPaths.append(newLayer.identifier)
     stage.SetEditTarget(newLayer)
     ratings = {

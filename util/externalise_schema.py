@@ -36,7 +36,7 @@ def w(path, name, schema):
 for k, v in list(obj["schemas"].items()):
     for m, n in mapping.items():
         if k.startswith(m):
-            w(n, k, v)
+            w('../docs/' + n, k, v)
             del obj["schemas"][k]
             if m not in obj["schemas"]:
                 obj["schemas"][m] = {

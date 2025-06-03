@@ -57,19 +57,42 @@ def make_schema(v, path=[]):
     else:
         breakpoint()
 
+
+def unify_schemas(left, right):
+    if None in (left, right):
+        return left or right
+    types = set(map(type, (left, right)))
+    assert types in ({str}, {dict})
+    if types == {str}:
+        if {left, right} == {'Integer', 'Real'}:
+            return 'Real'
+        elif left == right:
+            return left
+        else:
+            return None
+    if not (left.keys() <= right.keys() or right.keys() <= left.keys()):
+        return None
+    di = {
+        k: unify_schemas(left.get(k), right.get(k)) for k in (left.keys() | right.keys())
+    }
+    if None in di.values():
+        return None
+    return di
+
+
+
 schema = {}
 for elem in obj["data"]:
     if attr := elem.get("attributes"):
         for k, v in attr.items():
             new_schema = { "value": make_schema(v, [k]) }
             if old_schema := schema.get(k):
-                new_schema_str, old_schema_str = map(json.dumps, (new_schema, old_schema))
-                if new_schema != old_schema and (new_schema_str.replace('"Real"', '"Integer"') == old_schema_str or old_schema_str.replace('"Real"', '"Integer"') == new_schema_str):
-                    # lazy way to assess compatibility, potentially wrong
-                    if new_schema_str.count('"Real"') > old_schema_str.count('"Real"'):
-                        schema[k] = new_schema
-                else:
-                    assert new_schema == old_schema
+                if new_schema != old_schema: 
+                    unified = unify_schemas(old_schema, new_schema)
+                    if unified:
+                        schema[k] = unified
+                    else:
+                        assert False
             else:
                 schema[k] = new_schema
 
