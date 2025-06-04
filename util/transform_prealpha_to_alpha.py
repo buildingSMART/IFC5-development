@@ -79,6 +79,10 @@ def transform_attributes(d):
                 v = transform_attributes(v)
                 if not v:
                     continue
+            elif isinstance(v, list) and set(map(type, v)) == {dict}:
+                v = list(filter(None, map(transform_attributes, v)))
+                # ? if not v:
+                # ?     continue
 
             yield k, v
 

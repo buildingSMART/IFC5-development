@@ -448,7 +448,7 @@ for system in f.by_type('IfcSystem'):
 for rel in f.by_type('IfcRelConnectsPorts'):
     cons = (rel.RelatedPort, rel.RelatingPort)
     for a, b in zip(cons, cons[::-1]):
-        created_nodes[a].GetPrim().CreateRelationship(f'ifc5:system:connectsTo').AddTarget(created_nodes[a].GetPath().pathString)
+        created_nodes[a].GetPrim().CreateRelationship(f'ifc5:system:connectsTo').AddTarget(created_nodes[b].GetPath().pathString)
 
 
 for typeobj in f.by_type('IfcPropertySet'):
