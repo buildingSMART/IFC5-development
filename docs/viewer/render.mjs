@@ -276,7 +276,7 @@ function ValidateAttributeValue(desc, value, path, schemas) {
 }
 function Validate(schemas, inputNodes) {
   inputNodes.forEach((node) => {
-    Object.keys(node.attributes).forEach((schemaID) => {
+    Object.keys(node.attributes).filter(v => !v.startsWith('__internal')).forEach((schemaID) => {
       if (!schemas[schemaID]) {
         throw new SchemaValidationError(`Missing schema "${schemaID}" referenced by ["${node.path}"].attributes`);
       }
@@ -432,6 +432,10 @@ function TreeNodeToComposedObject(path, node, schemas) {
 }
 function compose3(files) {
   let federated = Federate(files);
+  federated.data.forEach((n, i) => {
+    n.attributes = n.attributes || {};
+    n.attributes[`__internal_${i}`] = n.path;
+  });
   return LoadIfcxFile(federated, true, true).then(tree => {
     return TreeNodeToComposedObject("", tree, federated.schemas);
   });
@@ -530,7 +534,7 @@ function createMeshFromJson(path) {
   let meshMaterial = new THREE.MeshLambertMaterial({ ...material });
   return new THREE.Mesh(geometry, meshMaterial);
 }
-function traverseTree(nodes, parent) {
+function traverseTree(nodes, parent, pathMapping) {
   const node = nodes[0];
   let elem = new THREE.Group();
   if (HasAttr(node, "usd::usdgeom::visibility::visibility")) {
@@ -541,6 +545,9 @@ function traverseTree(nodes, parent) {
     elem = createMeshFromJson(nodes);
   } else if (HasAttr(node, "usd::usdgeom::basiscurves::points")) {
     elem = createCurveFromJson(nodes);
+  }
+  for (let path of Object.entries(node.attributes || {}).filter(([k, _]) => k.startsWith('__internal_')).map(([_, v]) => v)) {
+    (pathMapping[path] = pathMapping[path] || []).push(node.name);
   }
   parent.add(elem);
   if (nodes.length > 1) {
@@ -553,7 +560,7 @@ function traverseTree(nodes, parent) {
       elem.matrix = matrix;
     }
   }
-  (node.children || []).forEach((child) => traverseTree([child, ...nodes], elem || parent));
+  (node.children || []).forEach((child) => traverseTree([child, ...nodes], elem || parent, pathMapping));
 }
 function encodeHtmlEntities(str) {
   const div = document.createElement("div");
@@ -565,7 +572,68 @@ var icons = {
   "usd::usdgeom::basiscurves::points": "line_curve",
   "usd::usdshade::material::outputs::surface.connect": "line_style"
 };
-function buildDomTree(prim, node) {
+function handleClick(prim, pathMapping, root) {
+  const container = document.querySelector(".attributes .table");
+  container.innerHTML = "";
+  const table = document.createElement("table");
+  table.setAttribute("border", "0");
+  const entries = [["name", prim.name], ...Object.entries(prim.attributes).filter(([k, _]) => !k.startsWith('__internal_'))];
+  const format = (value) => {
+    if (Array.isArray(value)) {
+      let N = document.createElement('span');
+      N.appendChild(document.createTextNode('('));
+      let first = true;
+      for (let n of value.map(format)) {
+        if (!first) {
+          N.appendChild(document.createTextNode(','));
+        }
+        N.appendChild(n);
+        first = false;
+      }
+      N.appendChild(document.createTextNode(')'));
+      return N;
+    } else if (typeof value === "object") {
+      const ks = Object.keys(value);
+      if (ks.length == 1 && ks[0] === 'ref' && pathMapping[value.ref] && pathMapping[value.ref].length == 1) {
+        let a = document.createElement('a');
+        let resolvedRefAsPath = pathMapping[value.ref][0];
+        a.setAttribute('href', '#');
+        a.textContent = resolvedRefAsPath;
+        a.onclick = () => {
+          let prim = null;
+          const recurse = (n) => {
+            if (n.name === resolvedRefAsPath) {
+              prim = n;
+            } else {
+              (n.children || []).forEach(recurse);
+            }
+          }
+          recurse(root);
+          if (prim) { 
+            handleClick(prim, pathMapping, root);
+          }
+        }
+        return a;
+      } else {
+        return document.createTextNode(JSON.stringify(value));
+      }
+    } else {
+      return document.createTextNode(value);
+    }
+  };
+  entries.forEach(([key, value]) => {
+    const tr = document.createElement("tr");
+    const tdKey = document.createElement("td");
+    tdKey.textContent = encodeHtmlEntities(key);
+    const tdValue = document.createElement("td");
+    tdValue.appendChild(format(value));
+    tr.appendChild(tdKey);
+    tr.appendChild(tdValue);
+    table.appendChild(tr);
+  });
+  container.appendChild(table);
+}
+function buildDomTree(prim, node, pathMapping, root) {
   const elem = document.createElement("div");
   let span;
   elem.appendChild(document.createTextNode(prim.name ? prim.name.split("/").reverse()[0] : "root"));
@@ -573,12 +641,11 @@ function buildDomTree(prim, node) {
   Object.entries(icons).forEach(([k, v]) => span.innerText += (prim.attributes || {})[k] ? v : " ");
   span.className = "material-symbols-outlined";
   elem.onclick = (evt) => {
-    let rows = [["name", prim.name]].concat(Object.entries(prim.attributes)).map(([k, v]) => `<tr><td>${encodeHtmlEntities(k)}</td><td>${encodeHtmlEntities(typeof v === "object" ? JSON.stringify(v) : v)}</td>`).join("");
-    document.querySelector(".attributes .table").innerHTML = `<table border="0">${rows}</table>`;
+    handleClick(prim, pathMapping, root || prim);
     evt.stopPropagation();
   };
   node.appendChild(elem);
-  (prim.children || []).forEach((p) => buildDomTree(p, elem));
+  (prim.children || []).forEach((p) => buildDomTree(p, elem, pathMapping, root || prim));
 }
 function composeAndRender() {
   if (scene) {
@@ -596,7 +663,8 @@ function composeAndRender() {
       console.error("No result from composition");
       return;
     }
-    traverseTree([tree], scene || init());
+    let pathMapping = {};
+    traverseTree([tree], scene || init(), pathMapping);
     if (autoCamera) {
       const boundingBox = new THREE.Box3();
       boundingBox.setFromObject(scene);
@@ -611,7 +679,7 @@ function composeAndRender() {
         autoCamera = false;
       }
     }
-    buildDomTree(tree, document.querySelector(".tree"));
+    buildDomTree(tree, document.querySelector(".tree"), pathMapping);
     animate();
   });
 }
