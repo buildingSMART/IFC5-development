@@ -582,7 +582,8 @@ function buildDomTree(prim, node) {
 }
 function composeAndRender() {
   if (scene) {
-    scene.children = [];
+    // retain only the lights
+    scene.children = scene.children.filter(n => n instanceof THREE.Light);
   }
   document.querySelector(".tree").innerHTML = "";
   if (datas.length === 0) {
