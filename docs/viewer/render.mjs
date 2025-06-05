@@ -573,7 +573,7 @@ function buildDomTree(prim, node) {
   Object.entries(icons).forEach(([k, v]) => span.innerText += (prim.attributes || {})[k] ? v : " ");
   span.className = "material-symbols-outlined";
   elem.onclick = (evt) => {
-    let rows = [["name", prim.name]].concat(Object.entries(prim.attributes)).map(([k, v]) => `<tr><td>${encodeHtmlEntities(k)}</td><td>${encodeHtmlEntities(typeof v === "object" ? JSON.stringify(v) : v)}</td>`).join("");
+    let rows = [["name", prim.name]].concat(Object.entries(prim.attributes || {})).map(([k, v]) => `<tr><td>${encodeHtmlEntities(k)}</td><td>${encodeHtmlEntities(typeof v === "object" ? JSON.stringify(v) : v)}</td>`).join("");
     document.querySelector(".attributes .table").innerHTML = `<table border="0">${rows}</table>`;
     evt.stopPropagation();
   };
