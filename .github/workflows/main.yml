@@ -4,7 +4,6 @@ on:
   push:
     branches: 
       - "main"
-      - "repair-ts"
   workflow_dispatch:
 
 jobs:
