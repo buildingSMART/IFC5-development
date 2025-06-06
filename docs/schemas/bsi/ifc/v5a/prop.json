@@ -21,6 +21,11 @@
         "dataType": "Real",
         "quantityKind": "Length"
       }
+    },
+    "bsi::ifc::v5a::prop::station": {
+      "value": {
+        "dataType": "Real"
+      }
     }
   }
 }

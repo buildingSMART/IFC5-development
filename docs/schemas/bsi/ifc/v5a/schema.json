@@ -78,6 +78,122 @@
           }
         }
       }
+    },
+    "bsi::ifc::v5a::alignment": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "segments": {
+              "dataType": "Array",
+              "arrayRestrictions": {
+                "value": {
+                  "dataType": "Object",
+                  "objectRestrictions": {
+                    "values": {
+                      "ref": {
+                        "dataType": "String"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "bsi::ifc::v5a::alignmenthorizontalsegment": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "SegmentLength": {
+              "dataType": "Real"
+            },
+            "EndRadiusOfCurvature": {
+              "dataType": "Real"
+            },
+            "PredefinedType": {
+              "dataType": "String"
+            },
+            "StartRadiusOfCurvature": {
+              "dataType": "Real"
+            },
+            "StartPoint": {
+              "dataType": "Array",
+              "arrayRestrictions": {
+                "value": {
+                  "dataType": "Real"
+                }
+              }
+            },
+            "StartDirection": {
+              "dataType": "Real"
+            }
+          }
+        }
+      }
+    },
+    "bsi::ifc::v5a::alignmentverticalsegment": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "HorizontalLength": {
+              "dataType": "Real"
+            },
+            "RadiusOfCurvature": {
+              "dataType": "Real"
+            },
+            "EndGradient": {
+              "dataType": "Real"
+            },
+            "StartDistAlong": {
+              "dataType": "Real"
+            },
+            "PredefinedType": {
+              "dataType": "String"
+            },
+            "StartGradient": {
+              "dataType": "Real"
+            },
+            "StartHeight": {
+              "dataType": "Real"
+            }
+          }
+        }
+      }
+    },
+    "bsi::ifc::v5a::alignmentcantsegment": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "HorizontalLength": {
+              "dataType": "Real"
+            },
+            "EndCantLeft": {
+              "dataType": "Real"
+            },
+            "StartDistAlong": {
+              "dataType": "Real"
+            },
+            "PredefinedType": {
+              "dataType": "String"
+            },
+            "StartCantRight": {
+              "dataType": "Real"
+            },
+            "StartCantLeft": {
+              "dataType": "Real"
+            },
+            "EndCantRight": {
+              "dataType": "Real"
+            }
+          }
+        }
+      }
     }
   }
 }
