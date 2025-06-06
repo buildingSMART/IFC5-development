@@ -24,7 +24,7 @@
     },
     "bsi::ifc::v5a::prop::station": {
       "value": {
-        "dataType": "Boolean"
+        "dataType": "Real"
       }
     }
   }
