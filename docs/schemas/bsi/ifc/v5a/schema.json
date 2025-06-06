@@ -118,7 +118,7 @@
               "dataType": "String"
             },
             "StartRadiusOfCurvature": {
-              "dataType": "Integer"
+              "dataType": "Real"
             },
             "StartPoint": {
               "dataType": "Array",
