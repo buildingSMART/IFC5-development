@@ -73,11 +73,11 @@ function createMaterialFromParent(parent, root) {
         const materialNode = getChildByName(root, reference.ref);
         if (materialNode)
         {
-            let color = materialNode?.attributes['bsi::presentation::diffuseColor'];
+            let color = materialNode?.attributes['bsi::ifc::v5a::schema::presentation::diffuseColor'];
             material.color = new THREE.Color(...color);
-            if (materialNode?.attributes['bsi::presentation::opacity']) {
+            if (materialNode?.attributes['bsi::ifc::v5a::schema::presentation::opacity']) {
                 material!.transparent = true;
-                material!.opacity = materialNode.attributes['bsi::presentation::opacity'];
+                material!.opacity = materialNode.attributes['bsi::ifc::v5a::schema::presentation::opacity'];
             }
         }
     }
@@ -171,7 +171,7 @@ function buildDomTree(prim, node) {
     (prim.children || []).forEach(p => buildDomTree(p, elem));
 }
 
-export function composeAndRender() {
+export async function composeAndRender() {
     if (scene) {
         // @todo does this actually free up resources?
         scene.children = [];
@@ -186,7 +186,7 @@ export function composeAndRender() {
     let tree: null | ComposedObject = null;
     let dataArray = datas.map(arr => arr[1]);
     // alpha
-    tree = compose3(dataArray as IfcxFile[]);
+    tree = await compose3(dataArray as IfcxFile[]);
     if (!tree) {
         console.error("No result from composition");
         return;
@@ -236,6 +236,7 @@ function createLayerDom() {
                 } else if (cmd === 0) {
                     datas.splice(index, 1);
                 }
+                // TODO: await this
                 composeAndRender();
                 createLayerDom();
             }
@@ -246,10 +247,10 @@ function createLayerDom() {
     });
 }
 
-export default function addModel(name, m: IfcxFile) {
+export default async function addModel(name, m: IfcxFile) {
     datas.push([name, m]);
     createLayerDom();
-    composeAndRender();
+    await composeAndRender();
 }
 
 function animate() {
