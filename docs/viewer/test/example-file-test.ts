@@ -12,4 +12,9 @@ describe("example file", () => {
         await FetchRemoteSchemas(file);
         expect(() => LoadIfcxFile(file)).to.not.throw();
     });
+    it("signals validates properly", async () => {
+        let file = JSON.parse(fs.readFileSync("../../Linear placement of signals/linear-placement-of-signal.ifcx").toString()) as IfcxFile;
+        await FetchRemoteSchemas(file);
+        expect(() => LoadIfcxFile(file)).to.not.throw();
+    });
 });
