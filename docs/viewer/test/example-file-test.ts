@@ -9,6 +9,7 @@ type IfcxFile = components["schemas"]["IfcxFile"];
 describe("example file", () => {
     it("hello wall validates properly", async () => {
         let file = JSON.parse(fs.readFileSync("../../Hello Wall/hello-wall.ifcx").toString()) as IfcxFile;
+        await FetchRemoteSchemas(file);
         expect(() => LoadIfcxFile(file)).to.not.throw();
     });
 });
