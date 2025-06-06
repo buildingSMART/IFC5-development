@@ -17,6 +17,20 @@ let THREE = window["THREE"];
 
 function init() {
     scene = new THREE.Scene();
+    
+    // lights
+    const ambient = new THREE.AmbientLight(0xddeeff, 0.4);
+    scene.add(ambient);
+    const keyLight = new THREE.DirectionalLight(0xffffff, 1.0);
+    keyLight.position.set(5, -10, 7.5);
+    scene.add(keyLight);
+    const fillLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    fillLight.position.set(-5, 5, 5);
+    scene.add(fillLight);
+    const rimLight = new THREE.DirectionalLight(0xffffff, 0.3);
+    rimLight.position.set(0, 8, -10);
+    scene.add(rimLight);
+
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
 
     camera.up.set(0, 0, 1);
@@ -106,7 +120,7 @@ function createMeshFromJson(path: ComposedObject[]) {
   
   const material = createMaterialFromParent(path);
   
-  let meshMaterial = new THREE.MeshBasicMaterial({ ...material });
+  let meshMaterial = new THREE.MeshLambertMaterial({ ...material });
   return new THREE.Mesh(geometry, meshMaterial);
 }
 
