@@ -1,20 +1,3 @@
-// composed-object.ts
-function getChildByName(root, childName, skip = 0) {
-  let fragments = childName.replace(/^<\/|^\/|>$/g, "").split("/");
-  for (let i = 0; i < skip; ++i) {
-    fragments.shift();
-  }
-  let start = root;
-  while (fragments.length && start && start.children) {
-    console.log(start, fragments[0]);
-    let f = fragments.shift();
-    start = start.children.find((i) => i.name.split("/").reverse()[0] === f);
-  }
-  if (fragments.length == 0) {
-    return start;
-  }
-}
-
 // compose-alpha.ts
 function GetNode(node, path) {
   if (path === "") return node;
@@ -294,41 +277,41 @@ function Validate(schemas, inputNodes) {
     });
   });
 }
+async function FetchRemoteSchemas(file) {
+  async function fetchJson(url) {
+    let result = await fetch(url);
+    if (!result.ok) {
+      throw new Error(`Failed to fetch ${url}: ${result.status}`);
+    }
+    return result.json();
+  }
+  async function fetchAll(urls) {
+    const promises = urls.map(fetchJson);
+    return await Promise.all(promises);
+  }
+  let schemasURIs = Object.values(file.schemas).map((s) => s.uri).filter((s) => s);
+  let remoteSchemas = (await fetchAll(schemasURIs)).map((r) => r.schemas);
+  remoteSchemas.forEach((remoteSchema) => {
+    Object.keys(remoteSchema).forEach((schemaID) => {
+      file.schemas[schemaID] = remoteSchema[schemaID];
+    });
+  });
+}
 function LoadIfcxFile(file, checkSchemas = true, createArtificialRoot = false) {
   let inputNodes = ToInputNodes(file.data);
   let compositionNodes = ConvertNodes(inputNodes);
-  let P;
   try {
     if (checkSchemas) {
-      function fetchJson(url) {
-        return fetch(url)
-          .then(res => {
-            if (!res.ok) {
-              throw new Error(`Failed to fetch ${url}: ${res.status}`);
-            }
-            return res.json();
-          });
-      }
-      function fetchAll(urls) {
-        const promises = urls.map(fetchJson);
-        return Promise.all(promises);
-      }
-      P = fetchAll(Object.values(file.schemas).map(s => s.uri).filter(s => s)).then((results) => {
-        Validate([...results.map(r => r.schemas),file.schemas].reduce((a, b) => ({...a, ...b}), {}) , compositionNodes);
-      });
-    } else {
-      P = Promise.resolve();
+      Validate(file.schemas, compositionNodes);
     }
   } catch (e) {
     throw e;
   }
-  return P.then(() => {
-    if (createArtificialRoot) {
-      return CreateArtificialRoot(compositionNodes);
-    } else {
-      return ExpandFirstRootInInput(compositionNodes);
-    }
-  });
+  if (createArtificialRoot) {
+    return CreateArtificialRoot(compositionNodes);
+  } else {
+    return ExpandFirstRootInInput(compositionNodes);
+  }
 }
 function Federate(files) {
   let result = {
@@ -430,11 +413,11 @@ function TreeNodeToComposedObject(path, node, schemas) {
   if (Object.keys(co.attributes).length === 0) delete co.attributes;
   return co;
 }
-function compose3(files) {
+async function compose3(files) {
   let federated = Federate(files);
-  return LoadIfcxFile(federated, true, true).then(tree => {
-    return TreeNodeToComposedObject("", tree, federated.schemas);
-  });
+  await FetchRemoteSchemas(federated);
+  let tree = LoadIfcxFile(federated, true, true);
+  return TreeNodeToComposedObject("", tree, federated.schemas);
 }
 
 // render.ts
@@ -447,20 +430,17 @@ var autoCamera = true;
 var THREE = window["THREE"];
 function init() {
   scene = new THREE.Scene();
-
-  // lights
-  const ambient = new THREE.AmbientLight(0xddeeff, 0.4);
+  const ambient = new THREE.AmbientLight(14544639, 0.4);
   scene.add(ambient);
-  const keyLight = new THREE.DirectionalLight(0xffffff, 1.0);
+  const keyLight = new THREE.DirectionalLight(16777215, 1);
   keyLight.position.set(5, -10, 7.5);
   scene.add(keyLight);
-  const fillLight = new THREE.DirectionalLight(0xffffff, 0.5);
+  const fillLight = new THREE.DirectionalLight(16777215, 0.5);
   fillLight.position.set(-5, 5, 5);
   scene.add(fillLight);
-  const rimLight = new THREE.DirectionalLight(0xffffff, 0.3);
+  const rimLight = new THREE.DirectionalLight(16777215, 0.3);
   rimLight.position.set(0, 8, -10);
   scene.add(rimLight);
-
   camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
   camera.up.set(0, 0, 1);
   camera.position.set(50, 50, 50);
@@ -481,17 +461,8 @@ function HasAttr(node, attrName) {
   if (!node || !node.attributes) return false;
   return !!node.attributes[attrName];
 }
-function FindChildWithAttr(node, attrName) {
-  if (!node || !node.children) return void 0;
-  for (let i = 0; i < node.children.length; i++) {
-    if (HasAttr(node.children[i], attrName)) {
-      return node.children[i];
-    }
-  }
-  return void 0;
-}
 function createMaterialFromParent(path) {
-  const material = {
+  let material = {
     color: new THREE.Color(0.6, 0.6, 0.6),
     transparent: false,
     opacity: 1
@@ -530,20 +501,20 @@ function createMeshFromJson(path) {
   let meshMaterial = new THREE.MeshLambertMaterial({ ...material });
   return new THREE.Mesh(geometry, meshMaterial);
 }
-function traverseTree(nodes, parent) {
-  const node = nodes[0];
+function traverseTree(path, parent) {
+  const node = path[0];
   let elem = new THREE.Group();
   if (HasAttr(node, "usd::usdgeom::visibility::visibility")) {
     if (node.attributes["usd::usdgeom::visibility::visibility"] === "invisible") {
       return;
     }
   } else if (HasAttr(node, "usd::usdgeom::mesh::points")) {
-    elem = createMeshFromJson(nodes);
+    elem = createMeshFromJson(path);
   } else if (HasAttr(node, "usd::usdgeom::basiscurves::points")) {
-    elem = createCurveFromJson(nodes);
+    elem = createCurveFromJson(path);
   }
   parent.add(elem);
-  if (nodes.length > 1) {
+  if (path.length > 1) {
     elem.matrixAutoUpdate = false;
     let matrixNode = node.attributes && node.attributes["usd::xformop::transform"] ? node.attributes["usd::xformop::transform"].flat() : null;
     if (matrixNode) {
@@ -553,7 +524,7 @@ function traverseTree(nodes, parent) {
       elem.matrix = matrix;
     }
   }
-  (node.children || []).forEach((child) => traverseTree([child, ...nodes], elem || parent));
+  (node.children || []).forEach((child) => traverseTree([child, ...path], elem || parent));
 }
 function encodeHtmlEntities(str) {
   const div = document.createElement("div");
@@ -580,10 +551,9 @@ function buildDomTree(prim, node) {
   node.appendChild(elem);
   (prim.children || []).forEach((p) => buildDomTree(p, elem));
 }
-function composeAndRender() {
+async function composeAndRender() {
   if (scene) {
-    // retain only the lights
-    scene.children = scene.children.filter(n => n instanceof THREE.Light);
+    scene.children = scene.children.filter((n) => n instanceof THREE.Light);
   }
   document.querySelector(".tree").innerHTML = "";
   if (datas.length === 0) {
@@ -591,29 +561,28 @@ function composeAndRender() {
   }
   let tree = null;
   let dataArray = datas.map((arr) => arr[1]);
-  compose3(dataArray).then(tree => {
-    if (!tree) {
-      console.error("No result from composition");
-      return;
+  tree = await compose3(dataArray);
+  if (!tree) {
+    console.error("No result from composition");
+    return;
+  }
+  traverseTree([tree], scene || init());
+  if (autoCamera) {
+    const boundingBox = new THREE.Box3();
+    boundingBox.setFromObject(scene);
+    if (!boundingBox.isEmpty()) {
+      let avg = boundingBox.min.clone().add(boundingBox.max).multiplyScalar(0.5);
+      let ext = boundingBox.max.clone().sub(boundingBox.min).length();
+      camera.position.copy(avg.clone().add(new THREE.Vector3(1, 1, 1).normalize().multiplyScalar(ext)));
+      camera.far = ext * 3;
+      camera.updateProjectionMatrix();
+      controls.target.copy(avg);
+      controls.update();
+      autoCamera = false;
     }
-    traverseTree([tree], scene || init());
-    if (autoCamera) {
-      const boundingBox = new THREE.Box3();
-      boundingBox.setFromObject(scene);
-      if (!boundingBox.isEmpty()) {
-        let avg = boundingBox.min.clone().add(boundingBox.max).multiplyScalar(0.5);
-        let ext = boundingBox.max.clone().sub(boundingBox.min).length();
-        camera.position.copy(avg.clone().add(new THREE.Vector3(1, 1, 1).normalize().multiplyScalar(ext)));
-        camera.far = ext * 3;
-        camera.updateProjectionMatrix();
-        controls.target.copy(avg);
-        controls.update();
-        autoCamera = false;
-      }
-    }
-    buildDomTree(tree, document.querySelector(".tree"));
-    animate();
-  });
+  }
+  buildDomTree(tree, document.querySelector(".tree"));
+  animate();
 }
 function createLayerDom() {
   document.querySelector(".layers div").innerHTML = "";
@@ -644,10 +613,10 @@ function createLayerDom() {
     document.querySelector(".layers div").appendChild(elem);
   });
 }
-function addModel(name, m) {
+async function addModel(name, m) {
   datas.push([name, m]);
   createLayerDom();
-  composeAndRender();
+  await composeAndRender();
 }
 function animate() {
   requestAnimationFrame(animate);
