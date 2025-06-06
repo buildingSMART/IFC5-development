@@ -112,7 +112,7 @@
               "dataType": "Real"
             },
             "EndRadiusOfCurvature": {
-              "dataType": "Integer"
+              "dataType": "Real"
             },
             "PredefinedType": {
               "dataType": "String"
