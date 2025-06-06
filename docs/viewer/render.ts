@@ -17,6 +17,20 @@ let THREE = window["THREE"];
 
 function init() {
     scene = new THREE.Scene();
+    
+    // lights
+    const ambient = new THREE.AmbientLight(0xddeeff, 0.4);
+    scene.add(ambient);
+    const keyLight = new THREE.DirectionalLight(0xffffff, 1.0);
+    keyLight.position.set(5, -10, 7.5);
+    scene.add(keyLight);
+    const fillLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    fillLight.position.set(-5, 5, 5);
+    scene.add(fillLight);
+    const rimLight = new THREE.DirectionalLight(0xffffff, 0.3);
+    rimLight.position.set(0, 8, -10);
+    scene.add(rimLight);
+
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
 
     camera.up.set(0, 0, 1);
@@ -62,55 +76,56 @@ function FindChildWithAttr(node: ComposedObject | undefined, attrName: string)
     return undefined;
 }
 
-function createMaterialFromParent(parent, root) {
-    let reference = parent.attributes['usd::usdshade::materialbindingapi::material::binding'];
+function createMaterialFromParent(path: ComposedObject[]) {
     let material = {
         color: new THREE.Color(0.6, 0.6, 0.6),
         transparent: false,
         opacity: 1
     };
-    if (reference) {
-        const materialNode = getChildByName(root, reference.ref);
-        if (materialNode)
-        {
-            let color = materialNode?.attributes['bsi::presentation::diffuseColor'];
-            material.color = new THREE.Color(...color);
-            if (materialNode?.attributes['bsi::presentation::opacity']) {
-                material!.transparent = true;
-                material!.opacity = materialNode.attributes['bsi::presentation::opacity'];
-            }
+    for (let p of path) {
+        const color = p.attributes ? p.attributes["bsi::ifc::v5a::presentation::diffuseColor"] : null;
+        if (color) {
+        material.color = new THREE.Color(...color);
+        const opacity = p.attributes["bsi::ifc::v5a::presentation::opacity"];
+        if (opacity) {
+            material.transparent = true;
+            material.opacity = opacity;
+        }
+        break;
         }
     }
     return material;
 }
 
-function createCurveFromJson(node, parent, root) {
-    let points = new Float32Array(node.attributes['usd::usdgeom::basiscurves::points'].flat());
-    const geometry = new THREE.BufferGeometry();
-    geometry.setAttribute('position', new THREE.BufferAttribute(points, 3));
-    const material = createMaterialFromParent(parent, root);
-    let lineMaterial = new THREE.LineBasicMaterial({...material});
-    // Make lines a little darker, otherwise they have the same color as meshes
-    lineMaterial.color.multiplyScalar(0.8)
-    return new THREE.Line(geometry, lineMaterial);
+function createCurveFromJson(path: ComposedObject[]) {
+  let points = new Float32Array(path[0].attributes["usd::usdgeom::basiscurves::points"].flat());
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute("position", new THREE.BufferAttribute(points, 3));
+  
+  const material = createMaterialFromParent(path);
+  let lineMaterial = new THREE.LineBasicMaterial({ ...material });
+  lineMaterial.color.multiplyScalar(0.8);
+  
+  return new THREE.Line(geometry, lineMaterial);
 }
 
-function createMeshFromJson(node, parent, root) {
-    let points = new Float32Array(node.attributes['usd::usdgeom::mesh::points'].flat());
-    let indices = new Uint16Array(node.attributes['usd::usdgeom::mesh::faceVertexIndices']);
-
-    const geometry = new THREE.BufferGeometry();
-    geometry.setAttribute('position', new THREE.BufferAttribute(points, 3));
-    geometry.setIndex(new THREE.BufferAttribute(indices, 1));
-    geometry.computeVertexNormals();
-
-    const material = createMaterialFromParent(parent, root);
-    let meshMaterial = new THREE.MeshBasicMaterial({...material});
-
-    return new THREE.Mesh(geometry, meshMaterial);
+function createMeshFromJson(path: ComposedObject[]) {
+  let points = new Float32Array(path[0].attributes["usd::usdgeom::mesh::points"].flat());
+  let indices = new Uint16Array(path[0].attributes["usd::usdgeom::mesh::faceVertexIndices"]);
+  
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute("position", new THREE.BufferAttribute(points, 3));
+  geometry.setIndex(new THREE.BufferAttribute(indices, 1));
+  geometry.computeVertexNormals();
+  
+  const material = createMaterialFromParent(path);
+  
+  let meshMaterial = new THREE.MeshLambertMaterial({ ...material });
+  return new THREE.Mesh(geometry, meshMaterial);
 }
 
-function traverseTree(node: ComposedObject, parent, root: ComposedObject, parentNode: ComposedObject | undefined = undefined) {
+function traverseTree(path: ComposedObject[], parent) {
+    const node = path[0];
     let elem = new THREE.Group();
     if (HasAttr(node, "usd::usdgeom::visibility::visibility"))
     {
@@ -119,15 +134,15 @@ function traverseTree(node: ComposedObject, parent, root: ComposedObject, parent
         }
     } 
     else if (HasAttr(node, "usd::usdgeom::mesh::points")) {
-        elem = createMeshFromJson(node, parentNode, root);
+        elem = createMeshFromJson(path);
     } 
     else if (HasAttr(node, "usd::usdgeom::basiscurves::points"))
     {
-        elem = createCurveFromJson(node, parentNode, root);
+        elem = createCurveFromJson(path);
     } 
 
     parent.add(elem);
-    if (node !== root) {
+    if (path.length > 1) {
         elem.matrixAutoUpdate = false;
 
         let matrixNode = node.attributes && node.attributes['usd::xformop::transform'] ? node.attributes['usd::xformop::transform'].flat() : null;
@@ -140,7 +155,7 @@ function traverseTree(node: ComposedObject, parent, root: ComposedObject, parent
         }
     }
 
-    (node.children || []).forEach(child => traverseTree(child, elem || parent, root, node));
+    (node.children || []).forEach(child => traverseTree([child, ...path], elem || parent));
 }
 
 function encodeHtmlEntities(str) {
@@ -163,18 +178,18 @@ function buildDomTree(prim, node) {
     Object.entries(icons).forEach(([k, v]) => span.innerText += (prim.attributes || {})[k] ? v : ' ');
     span.className = "material-symbols-outlined";
     elem.onclick = (evt) => {
-        let rows = [['name', prim.name]].concat(Object.entries(prim.attributes)).map(([k, v]) => `<tr><td>${encodeHtmlEntities(k)}</td><td>${encodeHtmlEntities(typeof v === 'object' ? JSON.stringify(v) : v)}</td>`).join('');
-        document.querySelector('.attributes .table')!.innerHTML = `<table border="0">${rows}</table>`;
+        let rows = [["name", prim.name]].concat(Object.entries(prim.attributes || {})).map(([k, v]) => `<tr><td>${encodeHtmlEntities(k)}</td><td>${encodeHtmlEntities(typeof v === "object" ? JSON.stringify(v) : v)}</td>`).join("");document.querySelector('.attributes .table')!.innerHTML = `<table border="0">${rows}</table>`;
         evt.stopPropagation();
     };
     node.appendChild(elem);
     (prim.children || []).forEach(p => buildDomTree(p, elem));
 }
 
-export function composeAndRender() {
+export async function composeAndRender() {
     if (scene) {
         // @todo does this actually free up resources?
-        scene.children = [];
+        // retain only the lights
+        scene.children = scene.children.filter(n => n instanceof THREE.Light);
     }
 
     document.querySelector('.tree')!.innerHTML = '';
@@ -186,13 +201,13 @@ export function composeAndRender() {
     let tree: null | ComposedObject = null;
     let dataArray = datas.map(arr => arr[1]);
     // alpha
-    tree = compose3(dataArray as IfcxFile[]);
+    tree = await compose3(dataArray as IfcxFile[]);
     if (!tree) {
         console.error("No result from composition");
         return;
     }
 
-    traverseTree(tree, scene || init(), tree);
+    traverseTree([tree], scene || init());
 
     if (autoCamera) {
         const boundingBox = new THREE.Box3();
@@ -236,6 +251,7 @@ function createLayerDom() {
                 } else if (cmd === 0) {
                     datas.splice(index, 1);
                 }
+                // TODO: await this
                 composeAndRender();
                 createLayerDom();
             }
@@ -246,10 +262,10 @@ function createLayerDom() {
     });
 }
 
-export default function addModel(name, m: IfcxFile) {
+export default async function addModel(name, m: IfcxFile) {
     datas.push([name, m]);
     createLayerDom();
-    composeAndRender();
+    await composeAndRender();
 }
 
 function animate() {

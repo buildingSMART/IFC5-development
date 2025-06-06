@@ -23,11 +23,12 @@ class Test
             let totalMS = new Date().getTime() - startMS;
             console.log(`\x1b[31m --- [FAIL] --- ${this.path} \x1b[33m${totalMS}ms \x1b[0m`);
             console.log(e);
-            return;
+            return false;
         }   
         let totalMS = new Date().getTime() - startMS;
 
         console.log(`\x1b[32m [OK] ${this.path} \x1b[33m${totalMS}ms \x1b[0m `);
+        return true;
     }
 }
 
@@ -62,8 +63,14 @@ export function each(prefix: string, arr: string[], fn: any)
 
 export async function test()
 {
+    let ok = true;
     for (let i = 0; i < testlist.length; i++)
     {
-        await testlist[i].exec();
+        ok = await testlist[i].exec() && ok;
+    }
+
+    if (!ok)
+    {
+        process.exit(-1);
     }
 }

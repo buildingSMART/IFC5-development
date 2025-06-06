@@ -1,5 +1,5 @@
 import { components } from "../../schema/out/ts/ifcx";
-import { Federate, LoadIfcxFile } from "./workflow-alpha";
+import { Federate, FetchRemoteSchemas, LoadIfcxFile } from "./workflow-alpha";
 import { TreeNode } from "./compose-alpha";
 import { ComposedObject } from "./composed-object";
 
@@ -56,9 +56,10 @@ function TreeNodeToComposedObject(path: string, node: TreeNode, schemas: {[key: 
     return co;
 }
 
-export function compose3(files: IfcxFile[])
+export async function compose3(files: IfcxFile[])
 {
     let federated = Federate(files);
+    await FetchRemoteSchemas(federated);
     let tree = LoadIfcxFile(federated, true, true);
     return TreeNodeToComposedObject("", tree, federated.schemas);
 }
