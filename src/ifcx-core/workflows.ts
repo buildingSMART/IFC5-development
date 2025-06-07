@@ -1,4 +1,4 @@
-import { ConvertNodes, CreateArtificialRoot, ExpandFirstRootInInput } from "./composition/compose";
+import { FlattenCompositionInput, CreateArtificialRoot, ExpandFirstRootInInput } from "./composition/compose";
 import { CompositionInputNode } from "./composition/node";
 import { IfcxFile, IfcxNode } from "./schema/schema-helper";
 import { Validate } from "./schema/schema-validation";
@@ -52,7 +52,7 @@ export async function FetchRemoteSchemas(file: IfcxFile)
 export function LoadIfcxFile(file: IfcxFile, checkSchemas: boolean = true, createArtificialRoot: boolean = false)
 {
     let inputNodes = ToInputNodes(file.data);
-    let compositionNodes = ConvertNodes(inputNodes);
+    let compositionNodes = FlattenCompositionInput(inputNodes);
 
     try {
         if (checkSchemas)

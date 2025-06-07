@@ -1,9 +1,23 @@
 import { CycleError, FindRootsOrCycles } from "./cycles";
-import { CompositionInputNode, GetNode, MakeNode, PostCompositionNode, PreCompositionNode } from "./node";
+import { CompositionInputNode, GetChildNodeWithPath, MakePostCompositionNode, PostCompositionNode, PreCompositionNode } from "./node";
 import { GetHead, GetTail } from "./path";
 
+/* 
+    Doing composition on an ifcx file takes three phases:
+    1. Flattening: 
+        convert the ifcx input nodes (where many nodes can talk about the same path) 
+            to "pre-composition" nodes, where there is a unique node per path.
+            
+            This proces resolves the layer conflicts by having later nodes "win" over earlier nodes
+    
+    2. Composition
+        convert the pre-composition nodes in to post-composition nodes by expanding the inherits,
+            and recursively composing all children
+            
+            This proces resolves occurrence vs type level data
+*/
 
-function ConvertToPreCompositionNode(path: string, inputNodes: CompositionInputNode[])
+function FlattenPathToPreCompositionNode(path: string, inputNodes: CompositionInputNode[])
 {
     let compositionNode = {
         path,
@@ -37,26 +51,13 @@ function ConvertToPreCompositionNode(path: string, inputNodes: CompositionInputN
     return compositionNode;
 }
 
-// this is a helper function that makes a regular Map behave as a multi map
-function MMSet<A, B>(map: Map<A, B[]>, key: A, value: B)
-{
-    if (map.has(key))
-    {
-        map.get(key)?.push(value);
-    }
-    else
-    {
-        map.set(key, [value]);
-    }
-}
-
-export function ConvertNodes(input: Map<string, CompositionInputNode[]>)
+export function FlattenCompositionInput(input: Map<string, CompositionInputNode[]>)
 {
     let compositionNodes = new Map<string, PreCompositionNode>();
 
     for(let [path, inputNodes] of input)
     {
-        compositionNodes.set(path, ConvertToPreCompositionNode(path, inputNodes));
+        compositionNodes.set(path, FlattenPathToPreCompositionNode(path, inputNodes));
     }
 
     return compositionNodes;
@@ -69,7 +70,7 @@ export function ExpandFirstRootInInput(nodes: Map<string, PreCompositionNode>)
     {
         throw new CycleError();
     }
-    return ExpandNewNode([...roots.values()][0], nodes);
+    return ComposeNodeFromPath([...roots.values()][0], nodes);
 }
 
 export function CreateArtificialRoot(nodes: Map<string, PreCompositionNode>)
@@ -86,60 +87,60 @@ export function CreateArtificialRoot(nodes: Map<string, PreCompositionNode>)
     } as PostCompositionNode;
 
     roots.forEach((root) => {
-        pseudoRoot.children.set(root, ExpandNewNode(root, nodes));
+        pseudoRoot.children.set(root, ComposeNodeFromPath(root, nodes));
     });
 
     return pseudoRoot;
 }
 
-export function ExpandNodeWithInput(node: string, nodes: Map<string, CompositionInputNode[]>)
+export function ComposeNodeFromInput(path: string, compositionInputNodes: Map<string, CompositionInputNode[]>)
 {
-    return ExpandNodeWithCompositionInput(node, ConvertNodes(nodes));
+    return ExpandNodeWithCompositionInput(path, FlattenCompositionInput(compositionInputNodes));
 }
 
-export function ExpandNodeWithCompositionInput(node: string, nodes: Map<string, PreCompositionNode>)
+export function ExpandNodeWithCompositionInput(path: string, preCompositionNodes: Map<string, PreCompositionNode>)
 {
-    let roots = FindRootsOrCycles(nodes);
+    let roots = FindRootsOrCycles(preCompositionNodes);
     if (!roots)
     {
         throw new CycleError();
     }
-    return ExpandNewNode(node, nodes);
+    return ComposeNodeFromPath(path, preCompositionNodes);
 }
 
-export function ExpandNewNode(node: string, nodes: Map<string, PreCompositionNode>)
+export function ComposeNodeFromPath(path: string, preCompositionNodes: Map<string, PreCompositionNode>)
 {
-    return ExpandNode(node, MakeNode(node), nodes);
+    return ComposeNode(path, MakePostCompositionNode(path), preCompositionNodes);
 }
 
-export function ExpandNode(path: string, node: PostCompositionNode, nodes: Map<string, PreCompositionNode>)
+export function ComposeNode(path: string, postCompositionNode: PostCompositionNode, preCompositionNodes: Map<string, PreCompositionNode>)
 {
-    let input = nodes.get(path);
+    let preCompositionNode = preCompositionNodes.get(path);
 
-    if (input)
+    if (preCompositionNode)
     {
         // fill children from inherits/children on <class>
-        AddDataFromInput(input, node, nodes);
+        AddDataFromPreComposition(preCompositionNode, postCompositionNode, preCompositionNodes);
     }
 
     // bunch of children are now added, but this creates new prefixes for the children
     // must check these prefixes now
-    node.children.forEach((child, name) => {
-        ExpandNode(`${path}/${name}`, child, nodes);
+    postCompositionNode.children.forEach((child, name) => {
+        ComposeNode(`${path}/${name}`, child, preCompositionNodes);
     })
 
-    return node;
+    return postCompositionNode;
 }
 
-function AddDataFromInput(input: PreCompositionNode, node: PostCompositionNode, nodes: Map<string, PreCompositionNode>)
+function AddDataFromPreComposition(input: PreCompositionNode, node: PostCompositionNode, nodes: Map<string, PreCompositionNode>)
 {
-    Object.values(input.inherits).forEach((inherit) => {
+    Object.values(input.inherits).forEach((inheritPath) => {
         // inherit can be <class>/a/b
         // request <class>
-        let classNode = ExpandNewNode(GetHead(inherit), nodes);
+        let classNode = ComposeNodeFromPath(GetHead(inheritPath), nodes);
         // request /a/b
-        let subnode = GetNode(classNode, GetTail(inherit));
-        if (!subnode) throw new Error(`Unknown node ${inherit}`);
+        let subnode = GetChildNodeWithPath(classNode, GetTail(inheritPath));
+        if (!subnode) throw new Error(`Unknown node ${inheritPath}`);
         // add children of /a/b to this children
         subnode.children.forEach((child, childName) => {
             node.children.set(childName, child);
@@ -154,9 +155,9 @@ function AddDataFromInput(input: PreCompositionNode, node: PostCompositionNode, 
         if (child !== null)
         {
             // child is always a -> <class>/b/c
-            let classNode = ExpandNewNode(GetHead(child), nodes);
+            let classNode = ComposeNodeFromPath(GetHead(child), nodes);
             // request /b/c
-            let subnode = GetNode(classNode, GetTail(child));
+            let subnode = GetChildNodeWithPath(classNode, GetTail(child));
             if (!subnode) throw new Error(`Unknown node ${child}`);
             // add <node>/a/b/c
             node.children.set(childName, subnode);

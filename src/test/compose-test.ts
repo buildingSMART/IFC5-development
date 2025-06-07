@@ -1,4 +1,4 @@
-import { ExpandNodeWithInput } from "../ifcx-core/composition/compose";
+import { ComposeNodeFromInput } from "../ifcx-core/composition/compose";
 import { describe, it } from "./util/cappucino";
 import { expect } from "chai";
 import { SchemasToOpenAPI } from "../ifcx-core/schema/schema-export";
@@ -59,7 +59,7 @@ describe("composition expansion", () => {
 
         AddChild(nodes, "parentclass", "child", "childclass");
 
-        let root = NodeToJSON(ExpandNodeWithInput("parentclass", nodes));
+        let root = NodeToJSON(ComposeNodeFromInput("parentclass", nodes));
         expect(root.children.child).to.exist;
     });
 
@@ -69,7 +69,7 @@ describe("composition expansion", () => {
         AddInherits(nodes, "childclass", "ih", "parentclass");
         AddInherits(nodes, "parentclass", "ih", "childclass");
 
-        expect(() => ExpandNodeWithInput("parentclass", nodes)).to.throw(CycleError);
+        expect(() => ComposeNodeFromInput("parentclass", nodes)).to.throw(CycleError);
     });
 
     it("adds children of children", () => {
@@ -78,7 +78,7 @@ describe("composition expansion", () => {
         AddChild(nodes, "childclass", "child2", "otherchildclass");
         AddChild(nodes, "parentclass", "child1", "childclass");
 
-        let root = NodeToJSON(ExpandNodeWithInput("parentclass", nodes));
+        let root = NodeToJSON(ComposeNodeFromInput("parentclass", nodes));
         expect(root.children.child1.children.child2).to.exist;
     });
 
@@ -88,7 +88,7 @@ describe("composition expansion", () => {
         AddChild(nodes, "parentclass/child1", "child2", "otherchildclass");
         AddChild(nodes, "parentclass", "child1", "childclass");
 
-        let root = NodeToJSON(ExpandNodeWithInput("parentclass", nodes));
+        let root = NodeToJSON(ComposeNodeFromInput("parentclass", nodes));
         expect(root.children.child1.children.child2).to.exist;
     });
 
@@ -98,7 +98,7 @@ describe("composition expansion", () => {
         AddChild(nodes, "inheritedclass", "child", "otherchildclass");
         AddInherits(nodes, "parentclass", "inherit1", "inheritedclass");
 
-        let root = NodeToJSON(ExpandNodeWithInput("parentclass", nodes));
+        let root = NodeToJSON(ComposeNodeFromInput("parentclass", nodes));
         expect(root.children.child).to.exist;
     });
 
@@ -109,7 +109,7 @@ describe("composition expansion", () => {
         AddChild(nodes, "inheritedclass", "child", "otherchildclass");
         AddInherits(nodes, "parentclass", "inherit1", "inheritedclass");
 
-        let root = NodeToJSON(ExpandNodeWithInput("parentclass", nodes));
+        let root = NodeToJSON(ComposeNodeFromInput("parentclass", nodes));
         expect(root.children.child.children.child2).to.exist;
     });
 
@@ -120,7 +120,7 @@ describe("composition expansion", () => {
         AddInherits(nodes, "inheritedclass1", "inherit2", "inheritedclass2");
         AddInherits(nodes, "parentclass", "inherit1", "inheritedclass1");
 
-        let root = NodeToJSON(ExpandNodeWithInput("parentclass", nodes));
+        let root = NodeToJSON(ComposeNodeFromInput("parentclass", nodes));
         expect(root.children.child).to.exist;
     });
 
@@ -134,7 +134,7 @@ describe("composition expansion", () => {
         
         AddInherits(nodes, "parentclass", "inherit1", "inheritedclass1/child/child2");
 
-        let root = NodeToJSON(ExpandNodeWithInput("parentclass", nodes));
+        let root = NodeToJSON(ComposeNodeFromInput("parentclass", nodes));
         expect(root.children.child3).to.exist;
     });
 
@@ -148,7 +148,7 @@ describe("composition expansion", () => {
         
         AddInherits(nodes, "parentclass", "inherit1", "inheritedclass1/child/child2");
 
-        let root = NodeToJSON(ExpandNodeWithInput("parentclass", nodes));
+        let root = NodeToJSON(ComposeNodeFromInput("parentclass", nodes));
         expect(root.children.child3).to.exist;
     });
 
@@ -162,7 +162,7 @@ describe("composition expansion", () => {
         
         AddChild(nodes, "parentclass", "child1", "inheritedclass1/child/child2");
 
-        let root = NodeToJSON(ExpandNodeWithInput("parentclass", nodes));
+        let root = NodeToJSON(ComposeNodeFromInput("parentclass", nodes));
         expect(root.children.child1.children.child3).to.exist;
     });
 
@@ -176,7 +176,7 @@ describe("composition expansion", () => {
         
         AddChild(nodes, "parentclass", "child1", "inheritedclass1/child/child2");
 
-        let root = NodeToJSON(ExpandNodeWithInput("parentclass", nodes));
+        let root = NodeToJSON(ComposeNodeFromInput("parentclass", nodes));
         expect(root.children.child1.attributes.attr).to.exist;
     });
 
@@ -188,7 +188,7 @@ describe("composition expansion", () => {
 
         AddAttribute(nodes, "parentclass", "attr", 2);
 
-        let root = NodeToJSON(ExpandNodeWithInput("parentclass", nodes));
+        let root = NodeToJSON(ComposeNodeFromInput("parentclass", nodes));
         expect(root.attributes.attr).to.equal(2);
     });
 
@@ -200,7 +200,7 @@ describe("composition expansion", () => {
         AddChild(nodes, "parentclass", "c2", "child");
         AddChild(nodes, "parentclass", "c2", null);
 
-        let root = NodeToJSON(ExpandNodeWithInput("parentclass", nodes));
+        let root = NodeToJSON(ComposeNodeFromInput("parentclass", nodes));
         expect(root.children.c1).to.exist;
         expect(root.children.c2).to.not.exist;
     });
@@ -213,7 +213,7 @@ describe("composition expansion", () => {
         AddAttribute(nodes, "parentclass", "a2", "a");
         AddAttribute(nodes, "parentclass", "a2", null);
 
-        let root = NodeToJSON(ExpandNodeWithInput("parentclass", nodes));
+        let root = NodeToJSON(ComposeNodeFromInput("parentclass", nodes));
         expect(root.attributes.a1).to.exist;
         expect(root.attributes.a2).to.not.exist;
     });
@@ -228,8 +228,8 @@ describe("composition expansion", () => {
         AddInherits(nodes, "c2", "i2", "a");
         AddInherits(nodes, "c2", "i2", null);
 
-        let c1 = NodeToJSON(ExpandNodeWithInput("c1", nodes));
-        let c2 = NodeToJSON(ExpandNodeWithInput("c2", nodes));
+        let c1 = NodeToJSON(ComposeNodeFromInput("c1", nodes));
+        let c2 = NodeToJSON(ComposeNodeFromInput("c2", nodes));
 
         expect(c1.attributes.a1).to.exist;
         expect(c2.attributes.a1).to.not.exist;
@@ -250,7 +250,7 @@ describe("composition expansion", () => {
 
         AddChild(nodes, "a/c4", "c8", "obj5");
 
-        let root = NodeToJSON(ExpandNodeWithInput("a", nodes));
+        let root = NodeToJSON(ComposeNodeFromInput("a", nodes));
         expect(root.children.c3.children.c7).to.exist;
         expect(root.children.c4.children.c8).to.exist;
         expect(root.children.c1).to.exist;

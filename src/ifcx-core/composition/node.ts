@@ -24,7 +24,7 @@ export interface PostCompositionNode
 }
 
 
-export function MakeNode(node: string)
+export function MakePostCompositionNode(node: string)
 {
     return {
         node,
@@ -33,7 +33,7 @@ export function MakeNode(node: string)
     } as PostCompositionNode;   
 }
 
-export function GetNode(node: PostCompositionNode, path: string): PostCompositionNode | null
+export function GetChildNodeWithPath(node: PostCompositionNode, path: string): PostCompositionNode | null
 {
     if (path === "") return node;
     let parts = path.split("/");
@@ -44,7 +44,7 @@ export function GetNode(node: PostCompositionNode, path: string): PostCompositio
         {
             return child;
         }
-        return GetNode(child, GetTail(path));
+        return GetChildNodeWithPath(child, GetTail(path));
     }
     else
     {
