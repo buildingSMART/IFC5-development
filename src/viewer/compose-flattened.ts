@@ -1,10 +1,7 @@
-import { components } from "../../schema/out/ts/ifcx";
-import { Federate, FetchRemoteSchemas, LoadIfcxFile } from "./workflow-alpha";
-import { TreeNode } from "./compose-alpha";
+import { Federate, FetchRemoteSchemas, LoadIfcxFile } from "../ifcx-core/workflow-alpha";
+import { TreeNode } from "../ifcx-core/compose-alpha";
 import { ComposedObject } from "./composed-object";
-
-type IfcxFile = components["schemas"]["IfcxFile"];
-type IfcxSchema = components["schemas"]["IfcxSchema"];
+import { IfcxFile, IfcxSchema } from "../ifcx-core/schema-helper";
 
 function TreeNodeToComposedObject(path: string, node: TreeNode, schemas: {[key: string]: IfcxSchema}): ComposedObject
 {

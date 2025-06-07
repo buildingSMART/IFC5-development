@@ -1,6 +1,6 @@
 # IFC5 Viewer
 
-This directory contains the viewer source code, as well as the code that is deployed to the buildingsmart url.
+This directory contains the code for the ifc5 viewer, as well as the code that is deployed to the buildingsmart url.
 
 # Local viewing
 
@@ -14,4 +14,4 @@ Local development works as follows:
 3. run `npm install`
 4. Modify the typescript source files (`.ts`) as desired (*do not modify the render.mjs file directly*)
 5. run `npm test` to run tests
-6. run `npm build` to update the `render.mjs` file which is used by the viewer.
+6. run `npm build-viewer` to update the `render.mjs` file which is used by the viewer.

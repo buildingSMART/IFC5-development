@@ -1,6 +1,4 @@
-import { components } from "../../../schema/out/ts/ifcx";
-type IfcxFile = components["schemas"]["IfcxFile"];
-type DataType = components["schemas"]["DataType"];
+import { DataType, IfcxFile } from "../ifcx-core/schema-helper";
 
 export function ExampleFile(attribute: string = "example::string", value: any = "stringvalue")
 {

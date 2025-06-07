@@ -2,9 +2,8 @@
 // published under MIT license 
 
 import { ComposedObject, getChildByName } from './composed-object';
+import { IfcxFile } from '../ifcx-core/schema-helper';
 import { compose3 } from './compose-flattened';
-import { components } from "../../schema/out/ts/ifcx";
-type IfcxFile = components["schemas"]["IfcxFile"];
 
 
 let controls, renderer, scene, camera;
