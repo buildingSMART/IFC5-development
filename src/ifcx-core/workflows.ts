@@ -1,170 +1,24 @@
-import { CompositionInput, ConvertNodes, CreateArtificialRoot, ExpandFirstRootInInput, InputNode } from "./compose-alpha";
-import { IfcxFile, IfcxNode, IfcxSchema, IfcxValueDescription } from "./schema-helper";
-
-// this is a helper function that makes a regular Map behave as a multi map
-function MMSet<A, B>(map: Map<A, B[]>, key: A, value: B)
-{
-    if (map.has(key))
-    {
-        map.get(key)?.push(value);
-    }
-    else
-    {
-        map.set(key, [value]);
-    }
-}
+import { FlattenCompositionInput, CreateArtificialRoot, ExpandFirstRootInInput } from "./composition/compose";
+import { CompositionInputNode } from "./composition/node";
+import { IfcxFile, IfcxNode } from "./schema/schema-helper";
+import { Validate } from "./schema/schema-validation";
+import { MMSet } from "./util/mm";
 
 function ToInputNodes(data: IfcxNode[])
 {
-    let inputNodes = new Map<string, InputNode[]>();
+    let inputNodes = new Map<string, CompositionInputNode[]>();
     data.forEach((ifcxNode) => {
         let node = {
             path: ifcxNode.path,
             children: ifcxNode.children ? ifcxNode.children : {}, 
             inherits: ifcxNode.inherits ? ifcxNode.inherits : {},
             attributes: ifcxNode.attributes ? ifcxNode.attributes : {}
-        } as InputNode;
+        } as CompositionInputNode;
         MMSet(inputNodes, node.path, node);
     });
     return inputNodes;
 }
 
-export class SchemaValidationError extends Error
-{
-
-}
-
-function ValidateAttributeValue(desc: IfcxValueDescription, value: any, path: string, schemas: {[key: string]: IfcxSchema})
-{
-    if (desc.inherits)
-    {
-        desc.inherits.forEach((inheritedSchemaID) => {
-            let inheritedSchema = schemas[inheritedSchemaID];
-            if (!inheritedSchema)
-            {
-                throw new SchemaValidationError(`Unknown inherited schema id "${desc.inherits}"`);
-            }
-            ValidateAttributeValue(inheritedSchema.value, value, path, schemas);
-        });
-    }
-
-    if (desc.dataType === "Boolean")
-    {
-        if (typeof value !== "boolean")
-        {
-            throw new SchemaValidationError(`Expected "${value}" to be of type boolean`);
-        }
-    }
-    else if (desc.dataType === "String")
-    {
-        if (typeof value !== "string")
-        {
-            throw new SchemaValidationError(`Expected "${value}" to be of type string`);
-        }
-    }
-    else if (desc.dataType === "DateTime")
-    {
-        if (typeof value !== "string")
-        {
-            throw new SchemaValidationError(`Expected "${value}" to be of type date`);
-        }
-    }
-    else if (desc.dataType === "Enum")
-    {
-        if (typeof value !== "string")
-        {
-            throw new SchemaValidationError(`Expected "${value}" to be of type string`);
-        }
-        let found = desc.enumRestrictions!.options.filter(option => option === value).length === 1;
-        if (!found)
-        {
-            throw new SchemaValidationError(`Expected "${value}" to be one of [${desc.enumRestrictions!.options.join(",")}]`);
-        }
-    }
-    else if (desc.dataType === "Integer")
-    {
-        if (typeof value !== "number")
-        {
-            throw new SchemaValidationError(`Expected "${value}" to be of type int`);
-        }
-    }
-    else if (desc.dataType === "Real")
-    {
-        if (typeof value !== "number")
-        {
-            throw new SchemaValidationError(`Expected "${value}" to be of type real`);
-        }
-    }
-    else if (desc.dataType === "Relation")
-    {
-        if (typeof value !== "string")
-        {
-            throw new SchemaValidationError(`Expected "${value}" to be of type string`);
-        }
-    }
-    else if (desc.dataType === "Object")
-    {
-        if (typeof value !== "object")
-        {
-            throw new SchemaValidationError(`Expected "${value}" to be of type object`);
-        }
-        if (desc.objectRestrictions)
-        {
-            Object.keys(desc.objectRestrictions!.values).forEach(key => {
-                if (!Object.hasOwn(value, key))
-                {
-                    throw new SchemaValidationError(`Expected "${value}" to have key ${key}`);
-                }
-                ValidateAttributeValue(desc.objectRestrictions!.values[key], value[key], path + "." + key, schemas);
-            })
-        }
-    }
-    else if (desc.dataType === "Array")
-    {
-        if (!Array.isArray(value))
-        {
-            throw new SchemaValidationError(`Expected "${value}" to be of type array`);
-        }
-        value.forEach((entry) => {
-            ValidateAttributeValue(desc.arrayRestrictions!.value, entry, path + ".<array>.", schemas);
-        })
-    }
-    else
-    {
-        throw new SchemaValidationError(`Unexpected datatype ${desc.dataType}`);
-    }
-}
-
-// TODO: validate the schemas themselves
-export function Validate(schemas: {[key: string]: IfcxSchema}, inputNodes: Map<string, CompositionInput>)
-{
-    inputNodes.forEach((node) => {
-        Object.keys(node.attributes).forEach((schemaID) => {
-            if (!schemas[schemaID])
-            {
-                throw new SchemaValidationError(`Missing schema "${schemaID}" referenced by ["${node.path}"].attributes`);   
-            }
-            let schema = schemas[schemaID];
-            let value = node.attributes[schemaID];
-            
-            try
-            {
-                ValidateAttributeValue(schema.value, value, "", schemas);
-            } 
-            catch(e)
-            {
-                if (e instanceof SchemaValidationError)
-                {
-                    throw new SchemaValidationError(`Error validating ["${node.path}"].attributes["${schemaID}"]: ${e.message}`);
-                }
-                else
-                {
-                    throw e;
-                }
-            }
-        });
-    })
-}
 
 // TODO: don't directly fetch from here, inject a fetcher, this should not be optional in the validation loading flow, this should not be modifying the file
 export async function FetchRemoteSchemas(file: IfcxFile)
@@ -198,7 +52,7 @@ export async function FetchRemoteSchemas(file: IfcxFile)
 export function LoadIfcxFile(file: IfcxFile, checkSchemas: boolean = true, createArtificialRoot: boolean = false)
 {
     let inputNodes = ToInputNodes(file.data);
-    let compositionNodes = ConvertNodes(inputNodes);
+    let compositionNodes = FlattenCompositionInput(inputNodes);
 
     try {
         if (checkSchemas)
@@ -227,7 +81,7 @@ function MakeInputNode(path: string)
         children: {},
         inherits: {},
         attributes: {}
-    } as InputNode;
+    } as CompositionInputNode;
 }
 
 function DeepEqual(a: any, b: any)
@@ -237,7 +91,7 @@ function DeepEqual(a: any, b: any)
 }
 
 // Node 2 wins
-function DiffNodes(node1: InputNode, node2: InputNode): IfcxNode
+function DiffNodes(node1: CompositionInputNode, node2: CompositionInputNode): IfcxNode
 {
     let result = {
         path: node1.path,
@@ -284,7 +138,7 @@ export function Diff(file1: IfcxFile, file2: IfcxFile)
 
     for (let [path, nodes] of i1)
     {
-        let file2Node: InputNode | null = null;
+        let file2Node: CompositionInputNode | null = null;
         if (i2.has(path))
         {
             // diff
@@ -343,9 +197,9 @@ export function Federate(files: IfcxFile[])
     return Prune(result);
 }
 
-function Collapse(nodes: InputNode[], deleteEmpty: boolean = false): InputNode | null
+function Collapse(nodes: CompositionInputNode[], deleteEmpty: boolean = false): CompositionInputNode | null
 {
-    let result: InputNode = {
+    let result: CompositionInputNode = {
         path: nodes[0].path,
         children: {},
         inherits: {},

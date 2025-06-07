@@ -2,8 +2,8 @@ import * as fs from "fs";
 
 import { describe, it } from "./util/cappucino";
 import { expect } from "chai";
-import { FetchRemoteSchemas, LoadIfcxFile, SchemaValidationError } from "../ifcx-core/workflow-alpha";
-import { IfcxFile } from "../ifcx-core/schema-helper";
+import { FetchRemoteSchemas, LoadIfcxFile } from "../ifcx-core/workflows";
+import { IfcxFile } from "../ifcx-core/schema/schema-helper";
 
 let examplesFolderPath = "../examples"
 

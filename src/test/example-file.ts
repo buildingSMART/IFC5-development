@@ -1,4 +1,4 @@
-import { DataType, IfcxFile } from "../ifcx-core/schema-helper";
+import { DataType, IfcxFile } from "../ifcx-core/schema/schema-helper";
 
 export function ExampleFile(attribute: string = "example::string", value: any = "stringvalue")
 {

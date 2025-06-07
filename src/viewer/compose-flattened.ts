@@ -1,9 +1,9 @@
-import { Federate, FetchRemoteSchemas, LoadIfcxFile } from "../ifcx-core/workflow-alpha";
-import { TreeNode } from "../ifcx-core/compose-alpha";
+import { Federate, FetchRemoteSchemas, LoadIfcxFile } from "../ifcx-core/workflows";
 import { ComposedObject } from "./composed-object";
-import { IfcxFile, IfcxSchema } from "../ifcx-core/schema-helper";
+import { IfcxFile, IfcxSchema } from "../ifcx-core/schema/schema-helper";
+import { PostCompositionNode } from "../ifcx-core/composition/node";
 
-function TreeNodeToComposedObject(path: string, node: TreeNode, schemas: {[key: string]: IfcxSchema}): ComposedObject
+function TreeNodeToComposedObject(path: string, node: PostCompositionNode, schemas: {[key: string]: IfcxSchema}): ComposedObject
 {
     let co = {
         name: path, 
