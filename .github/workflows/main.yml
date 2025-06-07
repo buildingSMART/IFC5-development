@@ -18,8 +18,8 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Install dependencies and run tests in ./docs/viewer
-        working-directory: ./docs/viewer
+      - name: Install dependencies and run tests in ./src
+        working-directory: ./src
         run: |
           npm install
           npm run test
