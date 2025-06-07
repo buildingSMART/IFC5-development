@@ -1,57 +1,4 @@
-// ifcx-core/compose-alpha.ts
-function GetNode(node, path) {
-  if (path === "") return node;
-  let parts = path.split("/");
-  let child = node.children.get(parts[0]);
-  if (child) {
-    if (parts.length === 1) {
-      return child;
-    }
-    return GetNode(child, GetTail(path));
-  } else {
-    return null;
-  }
-}
-function GetHead(path) {
-  return path.split("/")[0];
-}
-function GetTail(path) {
-  let parts = path.split("/");
-  parts.shift();
-  return parts.join("/");
-}
-function MakeNode(node) {
-  return {
-    node,
-    children: /* @__PURE__ */ new Map(),
-    attributes: /* @__PURE__ */ new Map()
-  };
-}
-function ConvertToCompositionNode(path, inputNodes) {
-  let compositionNode = {
-    path,
-    children: {},
-    inherits: {},
-    attributes: {}
-  };
-  inputNodes.forEach((node) => {
-    Object.keys(node.children).forEach((childName) => {
-      compositionNode.children[childName] = node.children[childName];
-    });
-    Object.keys(node.inherits).forEach((inheritName) => {
-      let ih = node.inherits[inheritName];
-      if (ih === null) {
-        delete compositionNode.inherits[inheritName];
-      } else {
-        compositionNode.inherits[inheritName] = ih;
-      }
-    });
-    Object.keys(node.attributes).forEach((attrName) => {
-      compositionNode.attributes[attrName] = node.attributes[attrName];
-    });
-  });
-  return compositionNode;
-}
+// ifcx-core/util/mm.ts
 function MMSet(map, key, value) {
   if (map.has(key)) {
     map.get(key)?.push(value);
@@ -59,6 +6,10 @@ function MMSet(map, key, value) {
     map.set(key, [value]);
   }
 }
+
+// ifcx-core/composition/cycles.ts
+var CycleError = class extends Error {
+};
 function FindRootsOrCycles(nodes) {
   let dependencies = /* @__PURE__ */ new Map();
   let dependents = /* @__PURE__ */ new Map();
@@ -98,15 +49,72 @@ function FindRootsOrCycles(nodes) {
   }
   return roots;
 }
+
+// ifcx-core/composition/path.ts
+function GetHead(path) {
+  return path.split("/")[0];
+}
+function GetTail(path) {
+  let parts = path.split("/");
+  parts.shift();
+  return parts.join("/");
+}
+
+// ifcx-core/composition/node.ts
+function MakeNode(node) {
+  return {
+    node,
+    children: /* @__PURE__ */ new Map(),
+    attributes: /* @__PURE__ */ new Map()
+  };
+}
+function GetNode(node, path) {
+  if (path === "") return node;
+  let parts = path.split("/");
+  let child = node.children.get(parts[0]);
+  if (child) {
+    if (parts.length === 1) {
+      return child;
+    }
+    return GetNode(child, GetTail(path));
+  } else {
+    return null;
+  }
+}
+
+// ifcx-core/composition/compose.ts
+function ConvertToPreCompositionNode(path, inputNodes) {
+  let compositionNode = {
+    path,
+    children: {},
+    inherits: {},
+    attributes: {}
+  };
+  inputNodes.forEach((node) => {
+    Object.keys(node.children).forEach((childName) => {
+      compositionNode.children[childName] = node.children[childName];
+    });
+    Object.keys(node.inherits).forEach((inheritName) => {
+      let ih = node.inherits[inheritName];
+      if (ih === null) {
+        delete compositionNode.inherits[inheritName];
+      } else {
+        compositionNode.inherits[inheritName] = ih;
+      }
+    });
+    Object.keys(node.attributes).forEach((attrName) => {
+      compositionNode.attributes[attrName] = node.attributes[attrName];
+    });
+  });
+  return compositionNode;
+}
 function ConvertNodes(input) {
   let compositionNodes = /* @__PURE__ */ new Map();
   for (let [path, inputNodes] of input) {
-    compositionNodes.set(path, ConvertToCompositionNode(path, inputNodes));
+    compositionNodes.set(path, ConvertToPreCompositionNode(path, inputNodes));
   }
   return compositionNodes;
 }
-var CycleError = class extends Error {
-};
 function ExpandFirstRootInInput(nodes) {
   let roots = FindRootsOrCycles(nodes);
   if (!roots) {
@@ -169,27 +177,7 @@ function AddDataFromInput(input, node, nodes) {
   });
 }
 
-// ifcx-core/workflow-alpha.ts
-function MMSet2(map, key, value) {
-  if (map.has(key)) {
-    map.get(key)?.push(value);
-  } else {
-    map.set(key, [value]);
-  }
-}
-function ToInputNodes(data) {
-  let inputNodes = /* @__PURE__ */ new Map();
-  data.forEach((ifcxNode) => {
-    let node = {
-      path: ifcxNode.path,
-      children: ifcxNode.children ? ifcxNode.children : {},
-      inherits: ifcxNode.inherits ? ifcxNode.inherits : {},
-      attributes: ifcxNode.attributes ? ifcxNode.attributes : {}
-    };
-    MMSet2(inputNodes, node.path, node);
-  });
-  return inputNodes;
-}
+// ifcx-core/schema/schema-validation.ts
 var SchemaValidationError = class extends Error {
 };
 function ValidateAttributeValue(desc, value, path, schemas) {
@@ -276,6 +264,21 @@ function Validate(schemas, inputNodes) {
       }
     });
   });
+}
+
+// ifcx-core/workflows.ts
+function ToInputNodes(data) {
+  let inputNodes = /* @__PURE__ */ new Map();
+  data.forEach((ifcxNode) => {
+    let node = {
+      path: ifcxNode.path,
+      children: ifcxNode.children ? ifcxNode.children : {},
+      inherits: ifcxNode.inherits ? ifcxNode.inherits : {},
+      attributes: ifcxNode.attributes ? ifcxNode.attributes : {}
+    };
+    MMSet(inputNodes, node.path, node);
+  });
+  return inputNodes;
 }
 async function FetchRemoteSchemas(file) {
   async function fetchJson(url) {

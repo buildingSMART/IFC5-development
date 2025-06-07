@@ -1,4 +1,4 @@
-import { PostCompositionNode } from "../../ifcx-core/compose";
+import { PostCompositionNode } from "../../ifcx-core/composition/node";
 
 export function NodeToJSON(node: PostCompositionNode)
 {

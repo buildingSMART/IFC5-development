@@ -1,30 +1,19 @@
-import { PreCompositionNode, ConvertNodes, CreateArtificialRoot, ExpandFirstRootInInput, InputNode } from "./compose";
-import { IfcxFile, IfcxNode, IfcxSchema, IfcxValueDescription } from "./schema-helper";
-import { Validate } from "./schema-validation";
-
-// this is a helper function that makes a regular Map behave as a multi map
-function MMSet<A, B>(map: Map<A, B[]>, key: A, value: B)
-{
-    if (map.has(key))
-    {
-        map.get(key)?.push(value);
-    }
-    else
-    {
-        map.set(key, [value]);
-    }
-}
+import { ConvertNodes, CreateArtificialRoot, ExpandFirstRootInInput } from "./composition/compose";
+import { CompositionInputNode } from "./composition/node";
+import { IfcxFile, IfcxNode } from "./schema/schema-helper";
+import { Validate } from "./schema/schema-validation";
+import { MMSet } from "./util/mm";
 
 function ToInputNodes(data: IfcxNode[])
 {
-    let inputNodes = new Map<string, InputNode[]>();
+    let inputNodes = new Map<string, CompositionInputNode[]>();
     data.forEach((ifcxNode) => {
         let node = {
             path: ifcxNode.path,
             children: ifcxNode.children ? ifcxNode.children : {}, 
             inherits: ifcxNode.inherits ? ifcxNode.inherits : {},
             attributes: ifcxNode.attributes ? ifcxNode.attributes : {}
-        } as InputNode;
+        } as CompositionInputNode;
         MMSet(inputNodes, node.path, node);
     });
     return inputNodes;
@@ -92,7 +81,7 @@ function MakeInputNode(path: string)
         children: {},
         inherits: {},
         attributes: {}
-    } as InputNode;
+    } as CompositionInputNode;
 }
 
 function DeepEqual(a: any, b: any)
@@ -102,7 +91,7 @@ function DeepEqual(a: any, b: any)
 }
 
 // Node 2 wins
-function DiffNodes(node1: InputNode, node2: InputNode): IfcxNode
+function DiffNodes(node1: CompositionInputNode, node2: CompositionInputNode): IfcxNode
 {
     let result = {
         path: node1.path,
@@ -149,7 +138,7 @@ export function Diff(file1: IfcxFile, file2: IfcxFile)
 
     for (let [path, nodes] of i1)
     {
-        let file2Node: InputNode | null = null;
+        let file2Node: CompositionInputNode | null = null;
         if (i2.has(path))
         {
             // diff
@@ -208,9 +197,9 @@ export function Federate(files: IfcxFile[])
     return Prune(result);
 }
 
-function Collapse(nodes: InputNode[], deleteEmpty: boolean = false): InputNode | null
+function Collapse(nodes: CompositionInputNode[], deleteEmpty: boolean = false): CompositionInputNode | null
 {
-    let result: InputNode = {
+    let result: CompositionInputNode = {
         path: nodes[0].path,
         children: {},
         inherits: {},

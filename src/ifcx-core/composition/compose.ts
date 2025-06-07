@@ -1,68 +1,9 @@
+import { CycleError, FindRootsOrCycles } from "./cycles";
+import { CompositionInputNode, GetNode, MakeNode, PostCompositionNode, PreCompositionNode } from "./node";
+import { GetHead, GetTail } from "./path";
 
-export interface PreCompositionNode
-{
-    path: string;
-    children: {[key: string]: string | null};
-    inherits: {[key: string]: string};
-    attributes: {[key: string]: any | null};
-}
 
-export interface InputNode
-{
-    path: string;
-    children: {[key: string]: string | null};
-    inherits: {[key: string]: string | null};
-    attributes: {[key: string]: any | null};
-}
-
-export interface PostCompositionNode
-{
-    node: string;
-    attributes: Map<string, any>;
-    children: Map<string, PostCompositionNode>;
-}
-
-function GetNode(node: PostCompositionNode, path: string): PostCompositionNode | null
-{
-    if (path === "") return node;
-    let parts = path.split("/");
-    let child = node.children.get(parts[0]);
-    if (child)
-    {
-        if (parts.length === 1)
-        {
-            return child;
-        }
-        return GetNode(child, GetTail(path));
-    }
-    else
-    {
-        return null;
-    }
-}
-
-function GetHead(path: string)
-{
-    return path.split("/")[0];
-}
-
-function GetTail(path: string)
-{
-    let parts = path.split("/");
-    parts.shift();
-    return parts.join("/");
-}
-
-function MakeNode(node: string)
-{
-    return {
-        node,
-        children: new Map<string, PostCompositionNode>,
-        attributes: new Map<string, any>
-    } as PostCompositionNode;   
-}
-
-function ConvertToCompositionNode(path: string, inputNodes: InputNode[])
+function ConvertToPreCompositionNode(path: string, inputNodes: CompositionInputNode[])
 {
     let compositionNode = {
         path,
@@ -109,77 +50,16 @@ function MMSet<A, B>(map: Map<A, B[]>, key: A, value: B)
     }
 }
 
-// https://en.wikipedia.org/wiki/Topological_sorting
-function FindRootsOrCycles(nodes: Map<string, PreCompositionNode>)
-{
-    let dependencies = new Map<string, string[]>();
-    let dependents = new Map<string, string[]>();
-    nodes.forEach((node, path) => {
-        Object.keys(node.inherits).forEach((inheritName) => {
-            MMSet(dependencies, path, node.inherits[inheritName]);
-            MMSet(dependents, node.inherits[inheritName], path);
-        })
-        Object.keys(node.children).forEach((childName) => {
-            MMSet(dependencies, path, node.children[childName]);
-            MMSet(dependents, node.children[childName], path);
-        })
-    });
-    let paths = [...nodes.keys()];
-    let perm: {} = {};
-    let temp: {} = {};
-
-    function visit(path: string)
-    {
-        if (perm[path]) return;
-        if (temp[path]) throw new Error(`CYCLE!`);
-
-        temp[path] = true;
-
-        let deps = dependencies.get(path);
-        if (deps)
-        {
-            deps.forEach(dep => visit(dep));
-        }
-
-        perm[path] = true;
-
-        // if we wanted to toposort, this is where we would add the node to a sorted list
-    }
-
-    let roots = new Set<string>();
-    try {
-        paths.forEach((path) => {
-            // TODO: dirty check for "/", fix: look only at heads for dependencies and determining roots, should check
-            if (!dependents.has(path) && path.indexOf("/") === -1)
-            {
-                roots.add(path);
-            }
-            visit(path);
-        })    
-    } catch (e)
-    {
-        // cycle found, return
-        return null;
-    }
-
-    return roots;
-}
-
-export function ConvertNodes(input: Map<string, InputNode[]>)
+export function ConvertNodes(input: Map<string, CompositionInputNode[]>)
 {
     let compositionNodes = new Map<string, PreCompositionNode>();
 
     for(let [path, inputNodes] of input)
     {
-        compositionNodes.set(path, ConvertToCompositionNode(path, inputNodes));
+        compositionNodes.set(path, ConvertToPreCompositionNode(path, inputNodes));
     }
 
     return compositionNodes;
-}
-
-export class CycleError extends Error
-{
-    
 }
 
 export function ExpandFirstRootInInput(nodes: Map<string, PreCompositionNode>)
@@ -212,7 +92,7 @@ export function CreateArtificialRoot(nodes: Map<string, PreCompositionNode>)
     return pseudoRoot;
 }
 
-export function ExpandNodeWithInput(node: string, nodes: Map<string, InputNode[]>)
+export function ExpandNodeWithInput(node: string, nodes: Map<string, CompositionInputNode[]>)
 {
     return ExpandNodeWithCompositionInput(node, ConvertNodes(nodes));
 }

@@ -1,8 +1,8 @@
 // (C) buildingSMART International
 // published under MIT license 
 
-import { ComposedObject, getChildByName } from './composed-object';
-import { IfcxFile } from '../ifcx-core/schema-helper';
+import { ComposedObject } from './composed-object';
+import { IfcxFile } from '../ifcx-core/schema/schema-helper';
 import { compose3 } from './compose-flattened';
 
 

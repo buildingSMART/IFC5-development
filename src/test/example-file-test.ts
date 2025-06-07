@@ -3,7 +3,7 @@ import * as fs from "fs";
 import { describe, it } from "./util/cappucino";
 import { expect } from "chai";
 import { FetchRemoteSchemas, LoadIfcxFile } from "../ifcx-core/workflows";
-import { IfcxFile } from "../ifcx-core/schema-helper";
+import { IfcxFile } from "../ifcx-core/schema/schema-helper";
 
 let examplesFolderPath = "../examples"
 

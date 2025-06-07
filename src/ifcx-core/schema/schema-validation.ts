@@ -1,4 +1,4 @@
-import { PreCompositionNode } from "./compose";
+import { PreCompositionNode } from "../composition/node";
 import { IfcxSchema, IfcxValueDescription } from "./schema-helper";
 
 export class SchemaValidationError extends Error

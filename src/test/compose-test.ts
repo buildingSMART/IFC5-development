@@ -1,10 +1,12 @@
-import { CycleError, ExpandNodeWithInput, InputNode, PostCompositionNode } from "../ifcx-core/compose";
+import { ExpandNodeWithInput } from "../ifcx-core/composition/compose";
 import { describe, it } from "./util/cappucino";
 import { expect } from "chai";
-import { SchemasToOpenAPI } from "../ifcx-core/schema-export";
+import { SchemasToOpenAPI } from "../ifcx-core/schema/schema-export";
 import { ExampleFile, ExampleFileMissingSchema, ExampleFileWithSchema } from "./example-file";
-import { IfcxFile } from "../ifcx-core/schema-helper";
+import { IfcxFile } from "../ifcx-core/schema/schema-helper";
 import { NodeToJSON } from "./util/node2json";
+import { CompositionInputNode, PostCompositionNode } from "../ifcx-core/composition/node";
+import { CycleError } from "../ifcx-core/composition/cycles";
 
 
 function MakeInputNode(path: string)
@@ -14,10 +16,10 @@ function MakeInputNode(path: string)
         children: {},
         inherits: {},
         attributes: {}
-    } as InputNode;
+    } as CompositionInputNode;
 }
 
-function AddChild(nodes: Map<string, InputNode[]>, path: string, name: string, cs: string | null)
+function AddChild(nodes: Map<string, CompositionInputNode[]>, path: string, name: string, cs: string | null)
 {
     if (!nodes.has(path))
     {
@@ -26,7 +28,7 @@ function AddChild(nodes: Map<string, InputNode[]>, path: string, name: string, c
     nodes.get(path)![0].children[name] = cs;
 }
 
-function AddInherits(nodes: Map<string, InputNode[]>, path: string, name: string, cs: string | null)
+function AddInherits(nodes: Map<string, CompositionInputNode[]>, path: string, name: string, cs: string | null)
 {
     if (!nodes.has(path))
     {
@@ -35,7 +37,7 @@ function AddInherits(nodes: Map<string, InputNode[]>, path: string, name: string
     nodes.get(path)![0].inherits[name] = cs;
 }
 
-function AddAttribute(nodes: Map<string, InputNode[]>, path: string, name: string, attr: any)
+function AddAttribute(nodes: Map<string, CompositionInputNode[]>, path: string, name: string, attr: any)
 {
     if (!nodes.has(path))
     {
@@ -53,7 +55,7 @@ function PrintNode(node: PostCompositionNode)
 describe("composition expansion", () => {
 
     it("adds children", () => {
-        let nodes = new Map<string, InputNode[]>();
+        let nodes = new Map<string, CompositionInputNode[]>();
 
         AddChild(nodes, "parentclass", "child", "childclass");
 
@@ -62,7 +64,7 @@ describe("composition expansion", () => {
     });
 
     it("rejects cycles", () => {
-        let nodes = new Map<string, InputNode[]>();
+        let nodes = new Map<string, CompositionInputNode[]>();
 
         AddInherits(nodes, "childclass", "ih", "parentclass");
         AddInherits(nodes, "parentclass", "ih", "childclass");
@@ -71,7 +73,7 @@ describe("composition expansion", () => {
     });
 
     it("adds children of children", () => {
-        let nodes = new Map<string, InputNode[]>();
+        let nodes = new Map<string, CompositionInputNode[]>();
 
         AddChild(nodes, "childclass", "child2", "otherchildclass");
         AddChild(nodes, "parentclass", "child1", "childclass");
@@ -81,7 +83,7 @@ describe("composition expansion", () => {
     });
 
     it("adds children of child path", () => {
-        let nodes = new Map<string, InputNode[]>();
+        let nodes = new Map<string, CompositionInputNode[]>();
 
         AddChild(nodes, "parentclass/child1", "child2", "otherchildclass");
         AddChild(nodes, "parentclass", "child1", "childclass");
@@ -91,7 +93,7 @@ describe("composition expansion", () => {
     });
 
     it("adds children of inherit", () => {
-        let nodes = new Map<string, InputNode[]>();
+        let nodes = new Map<string, CompositionInputNode[]>();
 
         AddChild(nodes, "inheritedclass", "child", "otherchildclass");
         AddInherits(nodes, "parentclass", "inherit1", "inheritedclass");
@@ -101,7 +103,7 @@ describe("composition expansion", () => {
     });
 
     it("adds children of child path of inherit", () => {
-        let nodes = new Map<string, InputNode[]>();
+        let nodes = new Map<string, CompositionInputNode[]>();
 
         AddChild(nodes, "inheritedclass/child", "child2", "otherchildclass");
         AddChild(nodes, "inheritedclass", "child", "otherchildclass");
@@ -112,7 +114,7 @@ describe("composition expansion", () => {
     });
 
     it("adds children of nested inherit", () => {
-        let nodes = new Map<string, InputNode[]>();
+        let nodes = new Map<string, CompositionInputNode[]>();
 
         AddChild(nodes, "inheritedclass2", "child", "otherchildclass");
         AddInherits(nodes, "inheritedclass1", "inherit2", "inheritedclass2");
@@ -123,7 +125,7 @@ describe("composition expansion", () => {
     });
 
     it("adds children of deep inherit path", () => {
-        let nodes = new Map<string, InputNode[]>();
+        let nodes = new Map<string, CompositionInputNode[]>();
 
         AddChild(nodes, "otherchildclass2", "child3", "otherchildclass3");
         AddChild(nodes, "otherchildclass", "child2", "otherchildclass2");
@@ -137,7 +139,7 @@ describe("composition expansion", () => {
     });
 
     it("adds children of deep inherit path with nesting", () => {
-        let nodes = new Map<string, InputNode[]>();
+        let nodes = new Map<string, CompositionInputNode[]>();
 
         AddChild(nodes, "otherchildclass/child2", "child3", "otherchildclass3");
         AddChild(nodes, "otherchildclass", "child2", "otherchildclass2");
@@ -151,7 +153,7 @@ describe("composition expansion", () => {
     });
 
     it("adds children of deep child path with nesting", () => {
-        let nodes = new Map<string, InputNode[]>();
+        let nodes = new Map<string, CompositionInputNode[]>();
 
         AddChild(nodes, "otherchildclass/child2", "child3", "otherchildclass3");
         AddChild(nodes, "otherchildclass", "child2", "otherchildclass2");
@@ -165,7 +167,7 @@ describe("composition expansion", () => {
     });
 
     it("adds attributes of deep child path with nesting", () => {
-        let nodes = new Map<string, InputNode[]>();
+        let nodes = new Map<string, CompositionInputNode[]>();
 
         AddAttribute(nodes, "otherchildclass/child2", "attr", true);
         AddChild(nodes, "otherchildclass", "child2", "otherchildclass2");
@@ -179,7 +181,7 @@ describe("composition expansion", () => {
     });
 
     it("overrides inherited attributes with direct attributes", () => {
-        let nodes = new Map<string, InputNode[]>();
+        let nodes = new Map<string, CompositionInputNode[]>();
 
         AddAttribute(nodes, "otherchildclass", "attr", 1);
         AddInherits(nodes, "parentclass", "ih", "otherchildclass");
@@ -191,7 +193,7 @@ describe("composition expansion", () => {
     });
 
     it("delete removes children in order", () => {
-        let nodes = new Map<string, InputNode[]>();
+        let nodes = new Map<string, CompositionInputNode[]>();
 
         AddChild(nodes, "parentclass", "c1", null);
         AddChild(nodes, "parentclass", "c1", "child");
@@ -204,7 +206,7 @@ describe("composition expansion", () => {
     });
 
     it("delete removes attributes in order", () => {
-        let nodes = new Map<string, InputNode[]>();
+        let nodes = new Map<string, CompositionInputNode[]>();
 
         AddAttribute(nodes, "parentclass", "a1", null);
         AddAttribute(nodes, "parentclass", "a1", "a");
@@ -217,7 +219,7 @@ describe("composition expansion", () => {
     });
 
     it("delete removes inherits in order", () => {
-        let nodes = new Map<string, InputNode[]>();
+        let nodes = new Map<string, CompositionInputNode[]>();
 
         AddAttribute(nodes, "a", "a1", "a");
 
@@ -235,7 +237,7 @@ describe("composition expansion", () => {
 
     it("adds children of children", () => {
 
-        let nodes = new Map<string, InputNode[]>();
+        let nodes = new Map<string, CompositionInputNode[]>();
 
         AddChild(nodes, "obj1", "c3", "obj4");
         AddChild(nodes, "obj1", "c4", "obj5");
