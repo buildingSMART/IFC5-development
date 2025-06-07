@@ -1,4 +1,4 @@
-import { CompositionInput, ConvertNodes, CreateArtificialRoot, ExpandFirstRootInInput, InputNode } from "./compose-alpha";
+import { CompositionInput, ConvertNodes, CreateArtificialRoot, ExpandFirstRootInInput, InputNode } from "./compose";
 import { IfcxFile, IfcxNode, IfcxSchema, IfcxValueDescription } from "./schema-helper";
 
 // this is a helper function that makes a regular Map behave as a multi map

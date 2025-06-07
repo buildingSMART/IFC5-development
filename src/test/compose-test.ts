@@ -1,10 +1,10 @@
-import { CycleError, ExpandNodeWithInput, InputNode, TreeNode } from "../ifcx-core/compose-alpha";
+import { CycleError, ExpandNodeWithInput, InputNode, TreeNode } from "../ifcx-core/compose";
 import { describe, it } from "./util/cappucino";
 import { expect } from "chai";
-import { Diff, Federate, LoadIfcxFile, SchemaValidationError } from "../ifcx-core/workflow-alpha";
-import { SchemasToOpenAPI } from "../ifcx-core/schema-alpha";
+import { SchemasToOpenAPI } from "../ifcx-core/schema-export";
 import { ExampleFile, ExampleFileMissingSchema, ExampleFileWithSchema } from "./example-file";
 import { IfcxFile } from "../ifcx-core/schema-helper";
+import { NodeToJSON } from "./util/node2json";
 
 
 function MakeInputNode(path: string)
@@ -44,20 +44,6 @@ function AddAttribute(nodes: Map<string, InputNode[]>, path: string, name: strin
     nodes.get(path)![0].attributes[name] = attr;
 }
 
-function NodeToJSON(node: TreeNode)
-{
-    let obj: any = {};
-    obj.node = node.node;
-    obj.children = {};
-    obj.attributes = {};
-    [...node.children.entries()].forEach(c => {
-        obj.children[c[0]] = NodeToJSON(c[1]);
-    });
-    [...node.attributes.entries()].forEach(c => {
-        obj.attributes[c[0]] = c[1];
-    });
-    return obj;
-}
 
 function PrintNode(node: TreeNode)
 {
@@ -270,7 +256,7 @@ describe("composition expansion", () => {
     });
 })
 
-function DefaultFile(valueOfAttribute: any)
+export function DefaultFile(valueOfAttribute: any)
 {
     return {
         header: {
@@ -303,86 +289,3 @@ function DefaultFile(valueOfAttribute: any)
         }]
     } as IfcxFile;
 }
-
-describe("workflows", () => {
-    it("allow federation", () => {
-        let file1 = DefaultFile("a");
-        let file2 = DefaultFile("b");
-
-        let federated1 = Federate([file1, file2]);
-        let federated2 = Federate([file2, file1]);
-``
-        let root1 = NodeToJSON(LoadIfcxFile(federated1));
-        let root2 = NodeToJSON(LoadIfcxFile(federated2));
-
-        expect(root1.attributes.attribute).to.equal("b");
-        expect(root2.attributes.attribute).to.equal("a");
-        expect(root1.attributes.fixed_attribute).to.exist;
-        expect(root2.attributes.fixed_attribute).to.exist;
-    });
-
-    it("allow diffs", () => {
-        let file1 = DefaultFile("a");
-        let file2 = DefaultFile("b");
-
-        let diff = Diff(file1, file2);
-        let root = NodeToJSON(LoadIfcxFile(diff));
-
-        expect(diff.data.length).to.equal(1);
-        expect(root.attributes.attribute).to.equal("b");
-        expect(root.attributes.fixed_attribute).to.not.exist;
-    });
-    
-    it("allow federating diffs", () => {
-        let file1 = DefaultFile("a");
-        let file2 = DefaultFile("b");
-
-        let diff = Diff(file1, file2);
-        let federated = Federate([file1, diff]);
-
-        let root = NodeToJSON(LoadIfcxFile(federated));
-        expect(root.attributes.attribute).to.equal("b");
-        expect(root.attributes.fixed_attribute).to.exist;
-    });
-})
-
-describe("schemas", () => {
-    it("can generate openAPI", () => {
-        let openAPISchema = SchemasToOpenAPI(ExampleFile());
-
-        // TODO
-        expect(openAPISchema.length).to.equal(720);
-    });
-
-    it("throws error if attribute references unknown schema ID", () => {
-        expect(() => LoadIfcxFile(ExampleFileMissingSchema())).to.throw(SchemaValidationError);
-    });
-
-    it("throws error if attributes fail to validate", () => {
-        expect(() => LoadIfcxFile(ExampleFileWithSchema("Boolean", null))).to.throw(SchemaValidationError);
-        expect(() => LoadIfcxFile(ExampleFileWithSchema("String", null))).to.throw(SchemaValidationError);
-        expect(() => LoadIfcxFile(ExampleFileWithSchema("DateTime", null))).to.throw(SchemaValidationError);
-        
-        expect(() => LoadIfcxFile(ExampleFileWithSchema("Enum", null))).to.throw(SchemaValidationError);
-        expect(() => LoadIfcxFile(ExampleFile("example::enum", [null]))).to.throw(SchemaValidationError);
-        expect(() => LoadIfcxFile(ExampleFile("example::enum", "d"))).to.throw(SchemaValidationError);
-        expect(() => LoadIfcxFile(ExampleFile("example::enum", "c"))).to.not.throw(SchemaValidationError);
-        
-        expect(() => LoadIfcxFile(ExampleFileWithSchema("Integer", null))).to.throw(SchemaValidationError);
-        expect(() => LoadIfcxFile(ExampleFileWithSchema("Real", null))).to.throw(SchemaValidationError);
-        expect(() => LoadIfcxFile(ExampleFileWithSchema("Relation", null))).to.throw(SchemaValidationError);
-
-        expect(() => LoadIfcxFile(ExampleFileWithSchema("Object", false))).to.throw(SchemaValidationError);
-        expect(() => LoadIfcxFile(ExampleFile("example::object", [null]))).to.throw(SchemaValidationError);
-        expect(() => LoadIfcxFile(ExampleFile("example::object", {val1: ""}))).to.throw(SchemaValidationError);
-        expect(() => LoadIfcxFile(ExampleFile("example::object", {val1: "", val2: "d"}))).to.throw(SchemaValidationError);
-        expect(() => LoadIfcxFile(ExampleFile("example::object", {val1: false, val2: "a"}))).to.throw(SchemaValidationError);
-        expect(() => LoadIfcxFile(ExampleFile("example::object", {val1: "", val2: "a"}))).to.not.throw(SchemaValidationError);
-        
-        expect(() => LoadIfcxFile(ExampleFileWithSchema("Array", null))).to.throw(SchemaValidationError);
-        expect(() => LoadIfcxFile(ExampleFile("example::array", [false]))).to.throw(SchemaValidationError);
-        expect(() => LoadIfcxFile(ExampleFile("example::array", ["d"]))).to.throw(SchemaValidationError);
-        expect(() => LoadIfcxFile(ExampleFile("example::array", []))).to.not.throw(SchemaValidationError);
-        expect(() => LoadIfcxFile(ExampleFile("example::array", ["a"]))).to.not.throw(SchemaValidationError);
-    });
-});

@@ -1,0 +1,16 @@
+import { TreeNode } from "../../ifcx-core/compose";
+
+export function NodeToJSON(node: TreeNode)
+{
+    let obj: any = {};
+    obj.node = node.node;
+    obj.children = {};
+    obj.attributes = {};
+    [...node.children.entries()].forEach(c => {
+        obj.children[c[0]] = NodeToJSON(c[1]);
+    });
+    [...node.attributes.entries()].forEach(c => {
+        obj.attributes[c[0]] = c[1];
+    });
+    return obj;
+}
