@@ -1,10 +1,5 @@
-import { components } from "../../schema/out/ts/ifcx";
 import { CompositionInput, ConvertNodes, CreateArtificialRoot, ExpandFirstRootInInput, InputNode } from "./compose-alpha";
-
-type IfcxFile = components["schemas"]["IfcxFile"];
-type IfcxNode = components["schemas"]["IfcxNode"];
-type IfcxSchema = components["schemas"]["IfcxSchema"];
-type IfcxValueDescription = components["schemas"]["IfcxValueDescription"];
+import { IfcxFile, IfcxNode, IfcxSchema, IfcxValueDescription } from "./schema-helper";
 
 // this is a helper function that makes a regular Map behave as a multi map
 function MMSet<A, B>(map: Map<A, B[]>, key: A, value: B)

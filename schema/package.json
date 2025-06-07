@@ -1,5 +1,5 @@
 {
-  "name": "ifc5-schema",
+  "name": "ifcx-schema",
   "version": "0.1.0",
   "type": "module",
   "peerDependencies": {
@@ -13,7 +13,7 @@
     "openapi-typescript": "^7.6.1"
   },
   "scripts": {
-    "compile": "tsp compile ifc-alpha.tsp",
+    "compile": "tsp compile ifcx.tsp",
     "gen": "npx openapi-typescript ./out/@typespec/openapi3/openapi.yaml -o ./out/ts/ifcx.d.ts"
   },
   "private": true,

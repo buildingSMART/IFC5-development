@@ -1,4 +1,4 @@
-// compose-alpha.ts
+// ifcx-core/compose-alpha.ts
 function GetNode(node, path) {
   if (path === "") return node;
   let parts = path.split("/");
@@ -169,7 +169,7 @@ function AddDataFromInput(input, node, nodes) {
   });
 }
 
-// workflow-alpha.ts
+// ifcx-core/workflow-alpha.ts
 function MMSet2(map, key, value) {
   if (map.has(key)) {
     map.get(key)?.push(value);
@@ -379,7 +379,7 @@ function Prune(file, deleteEmpty = false) {
   return result;
 }
 
-// compose-flattened.ts
+// viewer/compose-flattened.ts
 function TreeNodeToComposedObject(path, node, schemas) {
   let co = {
     name: path,
@@ -420,7 +420,7 @@ async function compose3(files) {
   return TreeNodeToComposedObject("", tree, federated.schemas);
 }
 
-// render.ts
+// viewer/render.ts
 var controls;
 var renderer;
 var scene;

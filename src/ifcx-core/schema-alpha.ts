@@ -1,9 +1,4 @@
 
-import { components } from "../../schema/out/ts/ifcx";
-type IfcxFile = components["schemas"]["IfcxFile"];
-type IfcxSchema = components["schemas"]["IfcxSchema"];
-type IfcxValueDescription = components["schemas"]["IfcxValueDescription"];
-
 
 /*
 openapi: 3.0.0
@@ -16,6 +11,8 @@ components:
   schemas:
 
 */
+
+import { IfcxFile, IfcxValueDescription } from "./schema-helper";
 
 class yml
 {

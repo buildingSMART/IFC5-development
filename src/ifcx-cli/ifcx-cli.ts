@@ -2,9 +2,9 @@ import * as process from "process";
 import * as fs from "fs";
 
 import { components } from "../../schema/out/ts/ifcx";
-import { Diff, Federate } from "./workflow-alpha";
-import { ExampleFile } from "./test/example-file";
-import { SchemasToOpenAPI } from "./schema-alpha";
+import { Diff, Federate } from "../ifcx-core/workflow-alpha";
+import { ExampleFile } from "../test/example-file";
+import { SchemasToOpenAPI } from "../ifcx-core/schema-alpha";
 
 type IfcxFile = components["schemas"]["IfcxFile"];
 

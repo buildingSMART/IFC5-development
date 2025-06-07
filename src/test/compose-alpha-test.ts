@@ -1,6 +1,11 @@
-import { CycleError, ExpandNodeWithInput, InputNode, TreeNode } from "../compose-alpha";
-import { describe, each, it } from "./util/cappucino";
+import { CycleError, ExpandNodeWithInput, InputNode, TreeNode } from "../ifcx-core/compose-alpha";
+import { describe, it } from "./util/cappucino";
 import { expect } from "chai";
+import { Diff, Federate, LoadIfcxFile, SchemaValidationError } from "../ifcx-core/workflow-alpha";
+import { SchemasToOpenAPI } from "../ifcx-core/schema-alpha";
+import { ExampleFile, ExampleFileMissingSchema, ExampleFileWithSchema } from "./example-file";
+import { IfcxFile } from "../ifcx-core/schema-helper";
+
 
 function MakeInputNode(path: string)
 {
@@ -264,12 +269,6 @@ describe("composition expansion", () => {
         expect(root.children.c2).to.exist;
     });
 })
-
-import { components } from "../../../schema/out/ts/ifcx";
-import { Diff, Federate, LoadIfcxFile, SchemaValidationError } from "../workflow-alpha";
-import { SchemasToOpenAPI } from "../schema-alpha";
-import { ExampleFile, ExampleFileMissingSchema, ExampleFileWithSchema } from "./example-file";
-type IfcxFile = components["schemas"]["IfcxFile"];
 
 function DefaultFile(valueOfAttribute: any)
 {
