@@ -3,8 +3,14 @@ import { CompositionInputNode, GetChildNodeWithPath, MakePostCompositionNode, Po
 import { GetHead, GetTail } from "./path";
 
 /* 
-    Doing composition on an ifcx file takes three phases:
-    1. Flattening: 
+    Doing composition on ifcx files takes three phases:
+
+    1. Federation:
+        Merging all ifcx data into a single ifcx file, in layer order
+        
+        In the remaining proces, the layers or ifcx files are irrelevant, the only thing that matters is the order of the nodes.
+
+    2. Flattening: 
         convert the ifcx input nodes (where many nodes can talk about the same path) 
             to "pre-composition" nodes, where there is a unique node per path.
             
