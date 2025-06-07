@@ -1,5 +1,6 @@
 import { SchemasToOpenAPI } from "../ifcx-core/schema-export";
-import { LoadIfcxFile, SchemaValidationError } from "../ifcx-core/workflows";
+import { SchemaValidationError } from "../ifcx-core/schema-validation";
+import { LoadIfcxFile } from "../ifcx-core/workflows";
 import { ExampleFile, ExampleFileMissingSchema, ExampleFileWithSchema } from "./example-file";
 import { describe, it } from "./util/cappucino";
 import { expect } from "chai";

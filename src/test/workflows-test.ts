@@ -1,4 +1,4 @@
-import { Diff, Federate, LoadIfcxFile, SchemaValidationError } from "../ifcx-core/workflows";
+import { Diff, Federate, LoadIfcxFile } from "../ifcx-core/workflows";
 import { DefaultFile } from "./compose-test";
 import { describe, it } from "./util/cappucino";
 import { NodeToJSON } from "./util/node2json";
