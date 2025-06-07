@@ -1,5 +1,5 @@
 
-export interface CompositionInput
+export interface PreCompositionNode
 {
     path: string;
     children: {[key: string]: string | null};
@@ -15,14 +15,14 @@ export interface InputNode
     attributes: {[key: string]: any | null};
 }
 
-export interface TreeNode
+export interface PostCompositionNode
 {
     node: string;
     attributes: Map<string, any>;
-    children: Map<string, TreeNode>;
+    children: Map<string, PostCompositionNode>;
 }
 
-function GetNode(node: TreeNode, path: string): TreeNode | null
+function GetNode(node: PostCompositionNode, path: string): PostCompositionNode | null
 {
     if (path === "") return node;
     let parts = path.split("/");
@@ -57,9 +57,9 @@ function MakeNode(node: string)
 {
     return {
         node,
-        children: new Map<string, TreeNode>,
+        children: new Map<string, PostCompositionNode>,
         attributes: new Map<string, any>
-    } as TreeNode;   
+    } as PostCompositionNode;   
 }
 
 function ConvertToCompositionNode(path: string, inputNodes: InputNode[])
@@ -69,7 +69,7 @@ function ConvertToCompositionNode(path: string, inputNodes: InputNode[])
         children: {},
         inherits: {},
         attributes: {}
-    } as CompositionInput;
+    } as PreCompositionNode;
 
     inputNodes.forEach((node) => {
         Object.keys(node.children).forEach((childName) => {
@@ -110,7 +110,7 @@ function MMSet<A, B>(map: Map<A, B[]>, key: A, value: B)
 }
 
 // https://en.wikipedia.org/wiki/Topological_sorting
-function FindRootsOrCycles(nodes: Map<string, CompositionInput>)
+function FindRootsOrCycles(nodes: Map<string, PreCompositionNode>)
 {
     let dependencies = new Map<string, string[]>();
     let dependents = new Map<string, string[]>();
@@ -167,7 +167,7 @@ function FindRootsOrCycles(nodes: Map<string, CompositionInput>)
 
 export function ConvertNodes(input: Map<string, InputNode[]>)
 {
-    let compositionNodes = new Map<string, CompositionInput>();
+    let compositionNodes = new Map<string, PreCompositionNode>();
 
     for(let [path, inputNodes] of input)
     {
@@ -182,7 +182,7 @@ export class CycleError extends Error
     
 }
 
-export function ExpandFirstRootInInput(nodes: Map<string, CompositionInput>)
+export function ExpandFirstRootInInput(nodes: Map<string, PreCompositionNode>)
 {
     let roots = FindRootsOrCycles(nodes);
     if (!roots)
@@ -192,7 +192,7 @@ export function ExpandFirstRootInInput(nodes: Map<string, CompositionInput>)
     return ExpandNewNode([...roots.values()][0], nodes);
 }
 
-export function CreateArtificialRoot(nodes: Map<string, CompositionInput>)
+export function CreateArtificialRoot(nodes: Map<string, PreCompositionNode>)
 {
     let roots = FindRootsOrCycles(nodes);
     if (!roots)
@@ -202,8 +202,8 @@ export function CreateArtificialRoot(nodes: Map<string, CompositionInput>)
     let pseudoRoot = {
         node: "",
         attributes: new Map<string, any>(),
-        children: new Map<string, TreeNode>()
-    } as TreeNode;
+        children: new Map<string, PostCompositionNode>()
+    } as PostCompositionNode;
 
     roots.forEach((root) => {
         pseudoRoot.children.set(root, ExpandNewNode(root, nodes));
@@ -217,7 +217,7 @@ export function ExpandNodeWithInput(node: string, nodes: Map<string, InputNode[]
     return ExpandNodeWithCompositionInput(node, ConvertNodes(nodes));
 }
 
-export function ExpandNodeWithCompositionInput(node: string, nodes: Map<string, CompositionInput>)
+export function ExpandNodeWithCompositionInput(node: string, nodes: Map<string, PreCompositionNode>)
 {
     let roots = FindRootsOrCycles(nodes);
     if (!roots)
@@ -227,12 +227,12 @@ export function ExpandNodeWithCompositionInput(node: string, nodes: Map<string, 
     return ExpandNewNode(node, nodes);
 }
 
-export function ExpandNewNode(node: string, nodes: Map<string, CompositionInput>)
+export function ExpandNewNode(node: string, nodes: Map<string, PreCompositionNode>)
 {
     return ExpandNode(node, MakeNode(node), nodes);
 }
 
-export function ExpandNode(path: string, node: TreeNode, nodes: Map<string, CompositionInput>)
+export function ExpandNode(path: string, node: PostCompositionNode, nodes: Map<string, PreCompositionNode>)
 {
     let input = nodes.get(path);
 
@@ -251,7 +251,7 @@ export function ExpandNode(path: string, node: TreeNode, nodes: Map<string, Comp
     return node;
 }
 
-function AddDataFromInput(input: CompositionInput, node: TreeNode, nodes: Map<string, CompositionInput>)
+function AddDataFromInput(input: PreCompositionNode, node: PostCompositionNode, nodes: Map<string, PreCompositionNode>)
 {
     Object.values(input.inherits).forEach((inherit) => {
         // inherit can be <class>/a/b

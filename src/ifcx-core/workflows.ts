@@ -1,4 +1,4 @@
-import { CompositionInput, ConvertNodes, CreateArtificialRoot, ExpandFirstRootInInput, InputNode } from "./compose";
+import { PreCompositionNode, ConvertNodes, CreateArtificialRoot, ExpandFirstRootInInput, InputNode } from "./compose";
 import { IfcxFile, IfcxNode, IfcxSchema, IfcxValueDescription } from "./schema-helper";
 import { Validate } from "./schema-validation";
 

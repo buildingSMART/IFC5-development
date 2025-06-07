@@ -1,4 +1,4 @@
-import { CompositionInput } from "./compose";
+import { PreCompositionNode } from "./compose";
 import { IfcxSchema, IfcxValueDescription } from "./schema-helper";
 
 export class SchemaValidationError extends Error
@@ -108,7 +108,7 @@ function ValidateAttributeValue(desc: IfcxValueDescription, value: any, path: st
 }
 
 // TODO: validate the schemas themselves
-export function Validate(schemas: {[key: string]: IfcxSchema}, inputNodes: Map<string, CompositionInput>)
+export function Validate(schemas: {[key: string]: IfcxSchema}, inputNodes: Map<string, PreCompositionNode>)
 {
     inputNodes.forEach((node) => {
         Object.keys(node.attributes).forEach((schemaID) => {

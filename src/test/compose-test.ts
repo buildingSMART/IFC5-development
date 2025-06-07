@@ -1,4 +1,4 @@
-import { CycleError, ExpandNodeWithInput, InputNode, TreeNode } from "../ifcx-core/compose";
+import { CycleError, ExpandNodeWithInput, InputNode, PostCompositionNode } from "../ifcx-core/compose";
 import { describe, it } from "./util/cappucino";
 import { expect } from "chai";
 import { SchemasToOpenAPI } from "../ifcx-core/schema-export";
@@ -45,7 +45,7 @@ function AddAttribute(nodes: Map<string, InputNode[]>, path: string, name: strin
 }
 
 
-function PrintNode(node: TreeNode)
+function PrintNode(node: PostCompositionNode)
 {
     console.log(JSON.stringify(NodeToJSON(node), null, 4));
 }

@@ -1,6 +1,6 @@
-import { TreeNode } from "../../ifcx-core/compose";
+import { PostCompositionNode } from "../../ifcx-core/compose";
 
-export function NodeToJSON(node: TreeNode)
+export function NodeToJSON(node: PostCompositionNode)
 {
     let obj: any = {};
     obj.node = node.node;
