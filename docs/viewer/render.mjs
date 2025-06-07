@@ -61,14 +61,14 @@ function GetTail(path) {
 }
 
 // ifcx-core/composition/node.ts
-function MakeNode(node) {
+function MakePostCompositionNode(node) {
   return {
     node,
     children: /* @__PURE__ */ new Map(),
     attributes: /* @__PURE__ */ new Map()
   };
 }
-function GetNode(node, path) {
+function GetChildNodeWithPath(node, path) {
   if (path === "") return node;
   let parts = path.split("/");
   let child = node.children.get(parts[0]);
@@ -76,14 +76,14 @@ function GetNode(node, path) {
     if (parts.length === 1) {
       return child;
     }
-    return GetNode(child, GetTail(path));
+    return GetChildNodeWithPath(child, GetTail(path));
   } else {
     return null;
   }
 }
 
 // ifcx-core/composition/compose.ts
-function ConvertToPreCompositionNode(path, inputNodes) {
+function FlattenPathToPreCompositionNode(path, inputNodes) {
   let compositionNode = {
     path,
     children: {},
@@ -108,10 +108,10 @@ function ConvertToPreCompositionNode(path, inputNodes) {
   });
   return compositionNode;
 }
-function ConvertNodes(input) {
+function FlattenCompositionInput(input) {
   let compositionNodes = /* @__PURE__ */ new Map();
   for (let [path, inputNodes] of input) {
-    compositionNodes.set(path, ConvertToPreCompositionNode(path, inputNodes));
+    compositionNodes.set(path, FlattenPathToPreCompositionNode(path, inputNodes));
   }
   return compositionNodes;
 }
@@ -120,7 +120,7 @@ function ExpandFirstRootInInput(nodes) {
   if (!roots) {
     throw new CycleError();
   }
-  return ExpandNewNode([...roots.values()][0], nodes);
+  return ComposeNodeFromPath([...roots.values()][0], nodes);
 }
 function CreateArtificialRoot(nodes) {
   let roots = FindRootsOrCycles(nodes);
@@ -133,28 +133,28 @@ function CreateArtificialRoot(nodes) {
     children: /* @__PURE__ */ new Map()
   };
   roots.forEach((root) => {
-    pseudoRoot.children.set(root, ExpandNewNode(root, nodes));
+    pseudoRoot.children.set(root, ComposeNodeFromPath(root, nodes));
   });
   return pseudoRoot;
 }
-function ExpandNewNode(node, nodes) {
-  return ExpandNode(node, MakeNode(node), nodes);
+function ComposeNodeFromPath(path, preCompositionNodes) {
+  return ComposeNode(path, MakePostCompositionNode(path), preCompositionNodes);
 }
-function ExpandNode(path, node, nodes) {
-  let input = nodes.get(path);
-  if (input) {
-    AddDataFromInput(input, node, nodes);
+function ComposeNode(path, postCompositionNode, preCompositionNodes) {
+  let preCompositionNode = preCompositionNodes.get(path);
+  if (preCompositionNode) {
+    AddDataFromPreComposition(preCompositionNode, postCompositionNode, preCompositionNodes);
   }
-  node.children.forEach((child, name) => {
-    ExpandNode(`${path}/${name}`, child, nodes);
+  postCompositionNode.children.forEach((child, name) => {
+    ComposeNode(`${path}/${name}`, child, preCompositionNodes);
   });
-  return node;
+  return postCompositionNode;
 }
-function AddDataFromInput(input, node, nodes) {
-  Object.values(input.inherits).forEach((inherit) => {
-    let classNode = ExpandNewNode(GetHead(inherit), nodes);
-    let subnode = GetNode(classNode, GetTail(inherit));
-    if (!subnode) throw new Error(`Unknown node ${inherit}`);
+function AddDataFromPreComposition(input, node, nodes) {
+  Object.values(input.inherits).forEach((inheritPath) => {
+    let classNode = ComposeNodeFromPath(GetHead(inheritPath), nodes);
+    let subnode = GetChildNodeWithPath(classNode, GetTail(inheritPath));
+    if (!subnode) throw new Error(`Unknown node ${inheritPath}`);
     subnode.children.forEach((child, childName) => {
       node.children.set(childName, child);
     });
@@ -164,8 +164,8 @@ function AddDataFromInput(input, node, nodes) {
   });
   Object.entries(input.children).forEach(([childName, child]) => {
     if (child !== null) {
-      let classNode = ExpandNewNode(GetHead(child), nodes);
-      let subnode = GetNode(classNode, GetTail(child));
+      let classNode = ComposeNodeFromPath(GetHead(child), nodes);
+      let subnode = GetChildNodeWithPath(classNode, GetTail(child));
       if (!subnode) throw new Error(`Unknown node ${child}`);
       node.children.set(childName, subnode);
     } else {
@@ -302,7 +302,7 @@ async function FetchRemoteSchemas(file) {
 }
 function LoadIfcxFile(file, checkSchemas = true, createArtificialRoot = false) {
   let inputNodes = ToInputNodes(file.data);
-  let compositionNodes = ConvertNodes(inputNodes);
+  let compositionNodes = FlattenCompositionInput(inputNodes);
   try {
     if (checkSchemas) {
       Validate(file.schemas, compositionNodes);
