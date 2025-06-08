@@ -5,6 +5,20 @@ import { describe, it } from "./util/cappucino";
 import { NodeToJSON } from "./util/node2json";
 import { expect } from "chai";
 
+function ExampleInputLayers()
+{
+    let file1 = ExampleFileWithUsing("file1", "1", [{id: "file2"}, {id: "file3"}, {id: "file4"}]);
+    let file2 = ExampleFileWithUsing("file2", "2", [{id: "file4"}, {id: "file3"}, {id: "file1"}]);
+    let file3 = ExampleFileWithUsing("file3", "3");
+    let file4 = ExampleFileWithUsing("file4", "4");
+
+    return new InMemoryLayerProvider()
+        .add(file1)
+        .add(file2)
+        .add(file3)
+        .add(file4);
+}
+
 describe("project builder", () => {
     it("fetches dependencies with provider", async () => {
         let file1 = ExampleFileWithUsing("file1", "a", [{id: "file2"}]);
@@ -20,6 +34,32 @@ describe("project builder", () => {
         expect(project instanceof Error).to.be.false;
         let p = project as IfcxProject;
         expect(p.GetLayerIds().length).to.equal(2);
+    });
+
+    it("respects layer order of the main layer", async () => {
+        let provider = ExampleInputLayers();
+        let project = await new IfcxProjectBuilder(provider).FromId("file1").Build();
+
+        expect(project instanceof Error).to.be.false;
+        let p = project as IfcxProject;
+        expect(p.GetLayerIds().length).to.equal(4);
+        expect(p.GetLayerIds()[0]).to.equal("file1");
+        expect(p.GetLayerIds()[1]).to.equal("file2");
+        expect(p.GetLayerIds()[2]).to.equal("file3");
+        expect(p.GetLayerIds()[3]).to.equal("file4");
+    });
+    
+    it("respects layer order of the main layer #2", async () => {
+        let provider = ExampleInputLayers();
+        let project = await new IfcxProjectBuilder(provider).FromId("file2").Build();
+
+        expect(project instanceof Error).to.be.false;
+        let p = project as IfcxProject;
+        expect(p.GetLayerIds().length).to.equal(4);
+        expect(p.GetLayerIds()[0]).to.equal("file2");
+        expect(p.GetLayerIds()[1]).to.equal("file4");
+        expect(p.GetLayerIds()[2]).to.equal("file3");
+        expect(p.GetLayerIds()[3]).to.equal("file1");
     });
 })
 

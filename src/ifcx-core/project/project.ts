@@ -104,8 +104,10 @@ export class IfcxProjectBuilder
             return activeLayer;
         }
 
-        let layerSet: IfcxFile[] = [activeLayer];
-        let result = await this.SatisfyDependencies(activeLayer, new Map<string, boolean>(), layerSet);
+        let layerSet: IfcxFile[] = [activeLayer]; // TODO: remove
+        let placed = new Map<string, boolean>();
+        placed.set(activeLayer.header.id, true); // TODO: remove
+        let result = await this.SatisfyDependencies(activeLayer, placed, layerSet);
         if (result instanceof Error)
         {
             return result;
