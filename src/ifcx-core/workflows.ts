@@ -1,6 +1,6 @@
 import { FlattenCompositionInput, CreateArtificialRoot, ExpandFirstRootInInput } from "./composition/compose";
 import { CompositionInputNode } from "./composition/node";
-import { IfcxFile, IfcxNode } from "./schema/schema-helper";
+import { IfcxFile, IfcxNode, UsingNode } from "./schema/schema-helper";
 import { Validate } from "./schema/schema-validation";
 import { MMSet } from "./util/mm";
 
@@ -46,6 +46,38 @@ export async function FetchRemoteSchemas(file: IfcxFile)
             file.schemas[schemaID] = remoteSchema[schemaID];
         })
     })
+}
+async function FetchUsing(node: UsingNode): Promise<IfcxFile>
+{
+    return {} as IfcxFile;
+}
+
+// TODO: schema prefixes
+async function SatisfyDependencies(activeLayer: IfcxFile, placed: Map<string, boolean>, orderedLayers: IfcxFile[])
+{
+    let pending: IfcxFile[] = [];
+    for (const using of activeLayer.using) {
+        if (!placed.has(using.id))
+        {
+            let layer = await FetchUsing(using);
+            pending.push(layer);
+            placed.set(using.id, true);
+        }
+    }
+    let temp: IfcxFile[] = [];
+    for (const layer of pending) {
+        temp.push(layer);
+        temp.push(...(await SatisfyDependencies(layer, placed, orderedLayers)));
+    }
+
+    return temp;
+}
+
+async function BuildLayerSet(activeLayer: IfcxFile)
+{
+    let layerSet: IfcxFile[] = [];
+    await SatisfyDependencies(activeLayer, new Map<string, boolean>(), layerSet);
+    return layerSet;
 }
 
 // TODO: cleanup options by creating better API
@@ -129,6 +161,7 @@ export function Diff(file1: IfcxFile, file2: IfcxFile)
 {
     let result: IfcxFile = {
         header: file1.header,
+        using: [],
         schemas: {},
         data: []
     };
@@ -182,6 +215,7 @@ export function Federate(files: IfcxFile[])
 {
     let result: IfcxFile = {
         header: files[0].header,
+        using: [],
         schemas: {},
         data: []
     };
@@ -241,6 +275,7 @@ function Prune(file: IfcxFile, deleteEmpty: boolean = false)
 {
     let result: IfcxFile = {
         header: file.header,
+        using: [],
         schemas: file.schemas,
         data: []
     };

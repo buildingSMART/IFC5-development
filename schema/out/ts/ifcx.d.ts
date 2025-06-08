@@ -13,18 +13,20 @@ export interface components {
             value: components["schemas"]["IfcxValueDescription"];
         };
         /** @enum {string} */
-        DataType: "Real" | "Boolean" | "Integer" | "String" | "DateTime" | "Enum" | "Array" | "Object" | "Relation";
+        DataType: "Real" | "Boolean" | "Integer" | "String" | "DateTime" | "Enum" | "Array" | "Object" | "Relation" | "Blob";
         EnumRestrictions: {
             options: string[];
         };
         IfcxFile: {
             header: components["schemas"]["IfcxHeader"];
+            using: components["schemas"]["UsingNode"][];
             schemas: {
                 [key: string]: components["schemas"]["IfcxSchema"];
             };
             data: components["schemas"]["IfcxNode"][];
         };
         IfcxHeader: {
+            id: string;
             version: string;
             author: string;
             timestamp: string;
@@ -63,6 +65,10 @@ export interface components {
         QuantityKind: "Plane angle" | "Thermodynamic temperature" | "Electric current" | "Time" | "Frequency" | "Mass" | "Length" | "Linear velocity" | "Force" | "Pressure" | "Area" | "Energy" | "Power" | "Volume";
         RelationRestrictions: {
             type: string;
+        };
+        UsingNode: {
+            id: string;
+            schemaPrefix: components["schemas"]["path"];
         };
         code: string;
         path: string;

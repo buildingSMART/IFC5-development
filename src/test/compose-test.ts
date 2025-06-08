@@ -262,10 +262,12 @@ export function DefaultFile(valueOfAttribute: any)
 {
     return {
         header: {
+            id: "",
             version: "",
             author: "",
             timestamp: ""
         },
+        using: [],
         schemas: {
             "attribute": {
                 uri: "http://www.example.com/attribute",
