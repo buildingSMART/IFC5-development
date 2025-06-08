@@ -19,7 +19,7 @@ export class StackedLayerProvider implements RemoteLayerProvider
         let errorStack: Error[] = [];
         for (let provider of this.providers)
         {
-            let layer = provider.GetLayerByID(id);
+            let layer = await provider.GetLayerByID(id);
             if (!(layer instanceof Error))
             {
                 return layer;
@@ -32,7 +32,6 @@ export class StackedLayerProvider implements RemoteLayerProvider
 
         return new Error(JSON.stringify(errorStack));
     }
-
 }
 
 export class InMemoryLayerProvider implements RemoteLayerProvider

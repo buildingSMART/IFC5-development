@@ -69,7 +69,14 @@ export class IfcxProjectBuilder
             return layers;
         }
 
-        return new IfcxProject(layers);
+        try
+        {
+            return new IfcxProject(layers);
+        }
+        catch (e)
+        {
+            return e;
+        }
     }
 
     private async SatisfyDependencies(activeLayer: IfcxFile, placed: Map<string, boolean>, orderedLayers: IfcxFile[])
