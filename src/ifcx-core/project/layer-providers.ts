@@ -6,6 +6,35 @@ export interface RemoteLayerProvider
     GetLayerByID(id: string): Promise<IfcxFile | Error>;
 }
 
+export class StackedLayerProvider implements RemoteLayerProvider
+{
+    providers: RemoteLayerProvider[];
+    constructor(providers: RemoteLayerProvider[])
+    {
+        this.providers = providers;
+    }
+
+    async GetLayerByID(id: string): Promise<IfcxFile | Error> 
+    {
+        let errorStack: Error[] = [];
+        for (let provider of this.providers)
+        {
+            let layer = provider.GetLayerByID(id);
+            if (!(layer instanceof Error))
+            {
+                return layer;
+            }
+            else
+            {
+                errorStack.push(layer);
+            }
+        }
+
+        return new Error(JSON.stringify(errorStack));
+    }
+
+}
+
 export class InMemoryLayerProvider implements RemoteLayerProvider
 {
     layers: Map<string, IfcxFile>;
@@ -31,6 +60,12 @@ export class InMemoryLayerProvider implements RemoteLayerProvider
             throw new Error(`Inserting file with duplicate ID "${file.header.id}"`);
         }
         this.layers.set(file.header.id, file);
+        return this;
+    }
+    
+    AddAll(files: IfcxFile[])
+    {
+        files.forEach(f => this.add(f));
         return this;
     }
 }

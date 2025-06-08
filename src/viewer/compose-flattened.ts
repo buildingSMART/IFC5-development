@@ -2,6 +2,9 @@ import { Federate, FetchRemoteSchemas, LoadIfcxFile } from "../ifcx-core/workflo
 import { ComposedObject } from "./composed-object";
 import { IfcxFile, IfcxSchema } from "../ifcx-core/schema/schema-helper";
 import { PostCompositionNode } from "../ifcx-core/composition/node";
+import { InMemoryLayerProvider, StackedLayerProvider } from "../ifcx-core/project/layer-providers";
+import { FetchLayerProvider } from "../ifcx-core/project/fetch-layer-provider";
+import { IfcxProjectBuilder } from "../ifcx-core/project/project";
 
 function TreeNodeToComposedObject(path: string, node: PostCompositionNode, schemas: {[key: string]: IfcxSchema}): ComposedObject
 {
@@ -55,8 +58,16 @@ function TreeNodeToComposedObject(path: string, node: PostCompositionNode, schem
 
 export async function compose3(files: IfcxFile[])
 {
-    let federated = Federate(files);
-    await FetchRemoteSchemas(federated);
-    let tree = LoadIfcxFile(federated, true, true);
-    return TreeNodeToComposedObject("", tree, federated.schemas);
+    let memoryProvider = new InMemoryLayerProvider().AddAll(files);
+    let fetchProvider = new FetchLayerProvider();
+    let provider = new StackedLayerProvider([memoryProvider, fetchProvider]);
+
+    let project = await (new IfcxProjectBuilder(provider).FromId(files[0].header.id)).Build();
+
+    if (project instanceof Error)
+    {
+        throw project;
+    }
+
+    return TreeNodeToComposedObject("", project.GetFullTree(), project.GetSchemas());
 }

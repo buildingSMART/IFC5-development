@@ -1,5 +1,5 @@
 import { PostCompositionNode } from "../composition/node";
-import { IfcxFile } from "../schema/schema-helper";
+import { IfcxFile, IfcxSchema } from "../schema/schema-helper";
 import { Federate, LoadIfcxFile } from "../workflows";
 import { RemoteLayerProvider } from "./layer-providers";
 
@@ -9,6 +9,7 @@ export class IfcxProject
     // main layer at 0
     private layers: IfcxFile[];
     private tree: PostCompositionNode;
+    private schemas: {[key:string]:IfcxSchema};
 
     constructor(layers: IfcxFile[])
     {
@@ -25,6 +26,7 @@ export class IfcxProject
     {
         let federated = Federate(this.layers);
         // TODO: schema files
+        this.schemas = federated.schemas;
         this.tree = LoadIfcxFile(federated);
     }
 
@@ -32,6 +34,11 @@ export class IfcxProject
     {
         this.Compose();
         return this.tree;
+    }
+
+    public GetSchemas()
+    {
+        return this.schemas;
     }
 }
 
