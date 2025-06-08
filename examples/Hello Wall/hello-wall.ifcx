@@ -6,13 +6,13 @@
     "timestamp": "time string"
   },
   "using": [
-    { "id": "ifc5.technical.buildingsmart.org/schemas/bsi/ifc/v5a.ifcx", "schemaPrefix": "bsi::ifc" },
-    { "id": "ifc5.technical.buildingsmart.org/schemas/bsi/ifc/prop/v5a.ifcx", "schemaPrefix": "bsi::ifc::prop" },
-    { "id": "ifc5.technical.buildingsmart.org/schemas/bsi/ifc-mat/prop/v1.0.0.ifcx", "schemaPrefix": "bsi::ifc-mat::prop" },
-    { "id": "ifc5.technical.buildingsmart.org/schemas/usd/v1.ifcx", "schemaPrefix": "usd" },
-    { "id": "ifc5.technical.buildingsmart.org/schemas/nlsfb/v1.ifcx", "schemaPrefix": "nlsfb" },
+    { "id": "ifc5.technical.buildingsmart.org/schemas/bsi/ifc.ifcx@v5a", "schemaPrefix": "bsi::ifc" },
+    { "id": "ifc5.technical.buildingsmart.org/schemas/bsi/ifc/prop.ifcx@v5a", "schemaPrefix": "bsi::ifc::prop" },
+    { "id": "ifc5.technical.buildingsmart.org/schemas/bsi/ifc-mat/prop.ifcx@v1.0.0", "schemaPrefix": "bsi::ifc-mat::prop" },
+    { "id": "ifc5.technical.buildingsmart.org/schemas/usd.ifcx@v1", "schemaPrefix": "usd" },
+    { "id": "ifc5.technical.buildingsmart.org/schemas/nlsfb.ifcx@v1", "schemaPrefix": "nlsfb" },
     
-    { "id": "ifc5.technical.buildingsmart.org/schemas/catalog/v1.ifcx" }
+    { "id": "ifc5.technical.buildingsmart.org/schemas/catalog.ifcx@v1" }
   ],
   "schemas": {
     "customdata": {
