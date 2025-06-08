@@ -68,7 +68,7 @@ export interface components {
         };
         UsingNode: {
             id: string;
-            schemaPrefix: components["schemas"]["path"];
+            schemaPrefix?: components["schemas"]["path"];
         };
         code: string;
         path: string;

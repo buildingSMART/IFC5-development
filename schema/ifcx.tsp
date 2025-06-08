@@ -83,7 +83,7 @@ model IfcxSchema
 model UsingNode
 {
     id: string;
-    schemaPrefix: path;
+    schemaPrefix?: path;
 }
 
 model IfcxFile {

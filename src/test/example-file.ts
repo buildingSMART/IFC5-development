@@ -1,4 +1,6 @@
-import { DataType, IfcxFile } from "../ifcx-core/schema/schema-helper";
+import { DataType, IfcxFile, UsingNode } from "../ifcx-core/schema/schema-helper";
+
+// TODO: make builder
 
 export function ExampleFile(attribute: string = "example::string", value: any = "stringvalue")
 {
@@ -142,6 +144,34 @@ export function ExampleFileWithSchema(datatype: DataType, data: any)
             inherits: {},
             attributes: {
                 "example::attribute": data,
+            }
+        }]
+    } as IfcxFile;
+}
+
+export function ExampleFileWithUsing(id: string, value: string, using: UsingNode[] = [])
+{
+    return {
+        header: {
+            id: id,
+            version: "ifcx_alpha",
+            author: "tom",
+            timestamp: "now"
+        },
+        using: using,
+        schemas: {
+            "example::attribute": {
+                value: {
+                    dataType: "String"
+                }
+            },
+        },
+        data: [{
+            path: "root",
+            children: {},
+            inherits: {},
+            attributes: {
+                "example::attribute": value,
             }
         }]
     } as IfcxFile;

@@ -185,6 +185,11 @@ export function Diff(file1: IfcxFile, file2: IfcxFile)
 
 export function Federate(files: IfcxFile[])
 {
+    if (files.length === 0)
+    {
+        throw new Error(`Trying to federate empty set of files`);
+    }
+    
     let result: IfcxFile = {
         header: files[0].header,
         using: [],

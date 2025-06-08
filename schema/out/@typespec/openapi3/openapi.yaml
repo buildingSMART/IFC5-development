@@ -164,7 +164,6 @@ components:
       type: object
       required:
         - id
-        - schemaPrefix
       properties:
         id:
           type: string
