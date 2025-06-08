@@ -199,7 +199,7 @@ export async function composeAndRender() {
 
     let tree: null | ComposedObject = null;
     let dataArray = datas.map(arr => arr[1]);
-    // alpha
+    
     tree = await compose3(dataArray as IfcxFile[]);
     if (!tree) {
         console.error("No result from composition");
