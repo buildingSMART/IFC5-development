@@ -47,10 +47,6 @@ export async function FetchRemoteSchemas(file: IfcxFile)
         })
     })
 }
-async function FetchUsing(node: UsingNode): Promise<IfcxFile>
-{
-    return {} as IfcxFile;
-}
 
 // TODO: cleanup options by creating better API
 export function LoadIfcxFile(file: IfcxFile, checkSchemas: boolean = true, createArtificialRoot: boolean = false)
@@ -189,7 +185,7 @@ export function Federate(files: IfcxFile[])
     {
         throw new Error(`Trying to federate empty set of files`);
     }
-    
+
     let result: IfcxFile = {
         header: files[0].header,
         using: [],
