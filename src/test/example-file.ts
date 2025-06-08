@@ -1,4 +1,4 @@
-import { DataType, IfcxFile, UsingNode } from "../ifcx-core/schema/schema-helper";
+import { DataType, IfcxFile, IfcxNode, IfcxSchema, UsingNode } from "../ifcx-core/schema/schema-helper";
 
 // TODO: make builder
 
@@ -175,4 +175,80 @@ export function ExampleFileWithUsing(id: string, value: string, using: UsingNode
             }
         }]
     } as IfcxFile;
+}
+
+export function StringValueSchema()
+{
+    return {
+        value: {
+            dataType: "String"
+        }
+    } as IfcxSchema;
+}
+
+export function NodeWithAttr(id: string, attr: string, value: string)
+{
+    return {
+            path: id,
+            children: {},
+            inherits: {},
+            attributes: {
+                [attr]: value,
+            }
+        }
+}
+
+function EmptyFile()
+{
+    return {
+        header: {
+            id: "",
+            version: "ifcx_alpha",
+            author: "tom",
+            timestamp: "now"
+        },
+        using: [],
+        schemas: {
+        },
+        data: []
+    } as IfcxFile;
+}
+
+export class IfcxFileBuilder
+{
+    private file: IfcxFile;
+
+    constructor()
+    {
+        this.file = EmptyFile();
+    }
+
+    Id(id: string)
+    {
+        this.file.header.id = id;
+        return this;
+    }
+
+    Using(us: UsingNode)
+    {
+        this.file.using.push(us);
+        return this;
+    }
+
+    Schema(name: string, schema: IfcxSchema)
+    {
+        this.file.schemas[name] = schema;
+        return this;
+    }    
+
+    Node(node: IfcxNode)
+    {
+        this.file.data.push(node);
+        return this;
+    }
+
+    Build()
+    {
+        return this.file;
+    }
 }
