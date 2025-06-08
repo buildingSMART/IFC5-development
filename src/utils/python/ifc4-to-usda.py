@@ -143,7 +143,7 @@ def get_name(el):
     postfix = 0
     while True:
         unique_name = n + (f' {postfix:03d}' if postfix else '')
-        if unique_name not in names:
+        if re.sub(r'[^a-zA-Z0-9]', '_', unique_name) not in names:
             break
         postfix += 1
         
@@ -250,6 +250,9 @@ created_nodes = {}
 
 # traverse from project
 def process(el, path=(), parentPath=None, asclass=False):
+    if os.path.basename(fn) == 'domestic-hot-water.ifc' and el.is_a('IfcWall'):
+        return
+
     if el in visited:
         return
     visited.add(el)
@@ -388,6 +391,9 @@ def process(el, path=(), parentPath=None, asclass=False):
     return xf or xf2
 
 for typeobj in [t for t in f.by_type('IfcTypeObject') if t.Types and len(t.Types[0].RelatedObjects) > 1]:
+    if os.path.basename(fn) == 'domestic-hot-water.ifc' and typeobj.is_a('IfcWallType'):
+        continue
+
     xf = process(typeobj, ('TypeLibrary',), asclass=True)
     for occ in typeobj.Types[0].RelatedObjects:
         types[occ].append(xf.GetPath())
@@ -437,12 +443,13 @@ for system in f.by_type('IfcSystem'):
     xf = stage.CreateClassPrim(Sdf.Path(path_str))
     xf.SetTypeName('Xform')
     refs = system.ServicesBuildings + getattr(system, 'ServicesFacilities', ())
-    rel = xf.GetPrim().CreateRelationship(f'ifc5:system:servicesFacility')
-    for ref in refs:
-        elem = (getattr(ref, 'RelatedBuildings', ()) + getattr(ref, 'RelatingStructure', ()))[0]
-        rel.AddTarget(created_nodes[elem].GetPath().pathString)
+    if refs:
+        rel = xf.GetPrim().CreateRelationship(f'ifc5:system:servicesFacility')
+        for ref in refs:
+            elem = (getattr(ref, 'RelatedBuildings', ()) + getattr(ref, 'RelatingStructure', ()))[0]
+            rel.AddTarget(created_nodes[elem].GetPath().pathString)
     for ref in system.IsGroupedBy[0].RelatedObjects:
-        created_nodes[elem].GetPrim().CreateRelationship(f'ifc5:system:partOfSystem').AddTarget(path_str)
+        created_nodes[ref].GetPrim().CreateRelationship(f'ifc5:system:partOfSystem').AddTarget(path_str)
     
 
 for rel in f.by_type('IfcRelConnectsPorts'):

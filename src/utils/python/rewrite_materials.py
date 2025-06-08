@@ -25,7 +25,7 @@ def it():
                 d['attributes'] = mat_attrs
                 to_remove.add(mat_path)
             else:
-                d['inherits'] = {'material': next(iter(mat.values()))['ref']}
+                d['inherits'] = {'material': next(iter(mat.values()))[0]['ref']}
         yield d
 
 obj['data'] = [x for x in list(it()) if x.get('path') not in to_remove]
