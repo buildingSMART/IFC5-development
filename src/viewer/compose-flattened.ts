@@ -56,6 +56,12 @@ function TreeNodeToComposedObject(path: string, node: PostCompositionNode, schem
 export async function compose3(files: IfcxFile[])
 {
     let federated = Federate(files);
+    // Add local path to attributes for lookup
+    // @todo make this less insane
+    federated.data.forEach((n, i) => {
+      n.attributes = n.attributes || {};
+      n.attributes[`__internal_${i}`] = n.path;
+    });
     await FetchRemoteSchemas(federated);
     let tree = LoadIfcxFile(federated, true, true);
     return TreeNodeToComposedObject("", tree, federated.schemas);

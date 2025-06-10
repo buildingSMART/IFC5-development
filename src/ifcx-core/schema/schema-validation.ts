@@ -111,7 +111,7 @@ function ValidateAttributeValue(desc: IfcxValueDescription, value: any, path: st
 export function Validate(schemas: {[key: string]: IfcxSchema}, inputNodes: Map<string, PreCompositionNode>)
 {
     inputNodes.forEach((node) => {
-        Object.keys(node.attributes).forEach((schemaID) => {
+        Object.keys(node.attributes).filter(v => !v.startsWith('__internal')).forEach((schemaID) => {
             if (!schemas[schemaID])
             {
                 throw new SchemaValidationError(`Missing schema "${schemaID}" referenced by ["${node.path}"].attributes`);   
