@@ -20,12 +20,17 @@ describe("example file", () => {
         ]);
 
         let project = await (new IfcxProjectBuilder(provider).FromId(file.header.id)).Build();
-        console.log(project);
         expect(project instanceof Error).to.be.false;
     });
     it("signals validates properly", async () => {
         let file = JSON.parse(fs.readFileSync(`${examplesFolderPath}/Linear placement of signals/linear-placement-of-signal.ifcx`).toString()) as IfcxFile;
-        // await FetchRemoteSchemas(file);
-        expect(() => LoadIfcxFile(file)).to.not.throw();
+       
+        let provider = new StackedLayerProvider([
+            new InMemoryLayerProvider().AddAll([file]), 
+            new FetchLayerProvider()
+        ]);
+
+        let project = await (new IfcxProjectBuilder(provider).FromId(file.header.id)).Build();
+        expect(project instanceof Error).to.be.false;
     });
 });

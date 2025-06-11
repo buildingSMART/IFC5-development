@@ -1,16 +1,16 @@
 {
   "header": {
-    "id": "ifc5.technical.buildingsmart.org/schemas/example_model/v1.ifcx",
+    "id": "ifc5.technical.buildingsmart.org/examples/Hello Wall/hello-wall@v1.ifcx",
     "version": "ifcx_alpha",
     "author": "authorname",
     "timestamp": "time string"
   },
   "using": [
-    { "id": "https://ifcx.dev/@standards.buildingsmart.org/bsi/ifc/ifc@v5a.ifcx", "schemaPrefix": "bsi::ifc" },
-    { "id": "https://ifcx.dev/@standards.buildingsmart.org/bsi/ifc/prop@v5a.ifcx", "schemaPrefix": "bsi::ifc::prop" },
-    { "id": "https://ifcx.dev/@standards.buildingsmart.org/bsi/ifc-mat/prop@v1.0.0.ifcx", "schemaPrefix": "bsi::ifc-mat::prop" },
-    { "id": "https://ifcx.dev/@standards.buildingsmart.org/usd@v1.ifcx", "schemaPrefix": "usd" },
-    { "id": "https://ifcx.dev/@standards.buildingsmart.org/nlsfb@v1.ifcx", "schemaPrefix": "nlsfb" }
+    { "id": "https://ifcx.dev/@standards.buildingsmart.org/ifc/core/ifc@v5a.ifcx", "schemaPrefix": "bsi::ifc" },
+    { "id": "https://ifcx.dev/@standards.buildingsmart.org/ifc/core/prop@v5a.ifcx", "schemaPrefix": "bsi::ifc::prop" },
+    { "id": "https://ifcx.dev/@standards.buildingsmart.org/ifc/ifc-mat/prop@v1.0.0.ifcx", "schemaPrefix": "bsi::ifc-mat::prop" },
+    { "id": "https://ifcx.dev/@openusd.org/usd@v1.ifcx", "schemaPrefix": "usd" },
+    { "id": "https://ifcx.dev/@nlsfb/nlsfb@v1.ifcx", "schemaPrefix": "nlsfb" }
   ],
   "schemas": {
     "customdata": {
@@ -24,21 +24,6 @@
           }
         }
       }
-    },
-    "bsi::ifc::v5a": {
-      "uri": "https://ifc5.technical.buildingsmart.org/schemas/bsi/ifc/v5a/schema.json"
-    },
-    "usd": {
-      "uri": "https://ifc5.technical.buildingsmart.org/schemas/usd.json"
-    },
-    "bsi::ifc::v5a::prop": {
-      "uri": "https://ifc5.technical.buildingsmart.org/schemas/bsi/ifc/v5a/prop.json"
-    },
-    "bsi::ifc-mat::1.0.0::prop": {
-      "uri": "https://ifc5.technical.buildingsmart.org/schemas/bsi/ifc-mat/v1.0.0/prop.json"
-    },
-    "nlsfb": {
-      "uri": "https://ifc5.technical.buildingsmart.org/schemas/nlsfb.json"
     }
   },
   "data": [
@@ -134,13 +119,13 @@
     {
       "path": "7a187a90-3dcf-58cc-b3a6-51a9a407c55a",
       "attributes": {
-        "bsi::ifc::v5a::presentation::diffuseColor": [
+        "bsi::ifc::presentation::diffuseColor": [
           0.5,
           0.5,
           0.5
         ],
-        "bsi::ifc::v5a::presentation::opacity": 1,
-        "bsi::ifc::v5a::material": {
+        "bsi::ifc::presentation::opacity": 1,
+        "bsi::ifc::material": {
           "code": "CONCRETE",
           "uri": "https://identifier.buildingsmart.org/uri/fish/midas-materials/26/class/CONCRETE"
         }
@@ -157,7 +142,7 @@
     {
       "path": "25503984-6605-43a1-8597-eae657ff5bea",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcWindow",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcWindow"
         }
@@ -349,7 +334,7 @@
     {
       "path": "14adb22b-d474-48a2-8e8f-6d4c067c1953",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcProject",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcProject"
         }
@@ -366,7 +351,7 @@
     {
       "path": "e0834921-e095-40f0-8874-3c6bd1ec699e",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcSite",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcSite"
         }
@@ -383,7 +368,7 @@
     {
       "path": "e84dc79e-fe9d-4781-9f4b-54dd435cca91",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcBuilding",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcBuilding"
         }
@@ -400,7 +385,7 @@
     {
       "path": "44af358b-3160-4063-8a89-a868335ff3b5",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcBuildingStorey",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcBuildingStorey"
         }
@@ -417,7 +402,7 @@
     {
       "path": "e3035b71-bd9f-4cdc-86fd-b56e2f4605b6",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcSpace",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcSpace"
         }
@@ -426,12 +411,12 @@
     {
       "path": "e3035b71-bd9f-4cdc-86fd-b56e2f4605b6",
       "attributes": {
-        "bsi::ifc::v5a::presentation::diffuseColor": [
+        "bsi::ifc::presentation::diffuseColor": [
           0.6,
           0.7,
           0.8
         ],
-        "bsi::ifc::v5a::presentation::opacity": 0.3
+        "bsi::ifc::presentation::opacity": 0.3
       }
     },
     {
@@ -645,7 +630,7 @@
     {
       "path": "93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcWall",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcWall"
         }
@@ -654,7 +639,7 @@
     {
       "path": "93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b",
       "attributes": {
-        "bsi::ifc::v5a::prop::isexternal": true
+        "bsi::ifc::prop::isexternal": true
       }
     },
     {
@@ -1285,7 +1270,7 @@
     {
       "path": "2c2d549f-f9fe-4e22-8590-562fda81a690",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcWindow",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcWindow"
         }
@@ -1294,7 +1279,7 @@
     {
       "path": "2c2d549f-f9fe-4e22-8590-562fda81a690",
       "attributes": {
-        "bsi::ifc::v5a::prop::isexternal": true
+        "bsi::ifc::prop::isexternal": true
       }
     },
     {
@@ -1341,7 +1326,7 @@
     {
       "path": "592504dc-469a-44d6-9ae8-c801b591679b",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcWindow",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcWindow"
         }
@@ -1350,7 +1335,7 @@
     {
       "path": "592504dc-469a-44d6-9ae8-c801b591679b",
       "attributes": {
-        "bsi::ifc::v5a::prop::isexternal": true
+        "bsi::ifc::prop::isexternal": true
       }
     },
     {
@@ -1389,7 +1374,7 @@
     {
       "path": "c8ecbf4c-e37a-4489-9133-15163b8a904e",
       "attributes": {
-        "bsi::ifc::v5a::spaceBoundary": {
+        "bsi::ifc::spaceBoundary": {
           "relatedelement": {
             "ref": "93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b"
           },
@@ -1439,7 +1424,7 @@
     {
       "path": "cc40ef6e-950e-4b79-a802-4cc710294e3a",
       "attributes": {
-        "bsi::ifc::v5a::spaceBoundary": {
+        "bsi::ifc::spaceBoundary": {
           "relatedelement": {
             "ref": "2c2d549f-f9fe-4e22-8590-562fda81a690"
           },
@@ -1489,7 +1474,7 @@
     {
       "path": "7f2a3284-bf01-4b0a-85e4-e48d92ba56dd",
       "attributes": {
-        "bsi::ifc::v5a::spaceBoundary": {
+        "bsi::ifc::spaceBoundary": {
           "relatedelement": {
             "ref": "592504dc-469a-44d6-9ae8-c801b591679b"
           },
@@ -1539,40 +1524,40 @@
     {
       "path": "25503984-6605-43a1-8597-eae657ff5bea",
       "attributes": {
-        "bsi::ifc::v5a::prop::volume": 0.025999999592,
-        "bsi::ifc::v5a::prop::height": 1.2
+        "bsi::ifc::prop::volume": 0.025999999592,
+        "bsi::ifc::prop::height": 1.2
       }
     },
     {
       "path": "e3035b71-bd9f-4cdc-86fd-b56e2f4605b6",
       "attributes": {
-        "bsi::ifc::v5a::prop::volume": 150.0,
-        "bsi::ifc::v5a::prop::height": 3.0
+        "bsi::ifc::prop::volume": 150.0,
+        "bsi::ifc::prop::height": 3.0
       }
     },
     {
       "path": "93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b",
       "attributes": {
-        "bsi::ifc::v5a::prop::volume": 2.783999976,
-        "bsi::ifc::v5a::prop::height": 3.0
+        "bsi::ifc::prop::volume": 2.783999976,
+        "bsi::ifc::prop::height": 3.0
       }
     },
     {
       "path": "4549bada-a37e-5044-bb70-456516cca5a8",
       "attributes": {
-        "bsi::ifc::v5a::material": {
+        "bsi::ifc::material": {
           "code": "WOOD",
           "uri": "https://identifier.buildingsmart.org/uri/fish/midas-materials/26/class/WOOD"
         },
-        "bsi::ifc::v5a::presentation::diffuseColor": [
+        "bsi::ifc::presentation::diffuseColor": [
           0.8,
           0.7,
           0.6
         ],
-        "bsi::ifc-mat::v1.0.0::prop::strengthClass": "C24",
-        "bsi::ifc-mat::v1.0.0::prop::moistureContent": 0.56,
-        "bsi::ifc-mat::v1.0.0::prop::massDensity": 529.0,
-        "bsi::ifc-mat::v1.0.0::prop::GWP": {
+        "bsi::ifc-mat::prop::strengthClass": "C24",
+        "bsi::ifc-mat::prop::moistureContent": 0.56,
+        "bsi::ifc-mat::prop::massDensity": 529.0,
+        "bsi::ifc-mat::prop::GWP": {
           "A1-A3": -629.4,
           "A4": 0,
           "A5": 0,
@@ -2015,16 +2000,16 @@
     {
       "path": "d10e4eb4-6a35-5fbe-9491-7a6fb93f1691",
       "attributes": {
-        "bsi::ifc::v5a::material": {
+        "bsi::ifc::material": {
           "code": "GLASS",
           "uri": "https://identifier.buildingsmart.org/uri/fish/midas-materials/26/class/GLASS"
         },
-        "bsi::ifc::v5a::presentation::diffuseColor": [
+        "bsi::ifc::presentation::diffuseColor": [
           0.5,
           0.8,
           0.6
         ],
-        "bsi::ifc::v5a::presentation::opacity": 0.3
+        "bsi::ifc::presentation::opacity": 0.3
       }
     },
     {
