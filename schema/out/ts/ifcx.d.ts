@@ -69,6 +69,7 @@ export interface components {
         UsingNode: {
             id: string;
             schemaPrefix?: components["schemas"]["path"];
+            integrity?: string;
         };
         code: string;
         path: string;

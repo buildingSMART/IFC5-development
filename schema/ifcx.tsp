@@ -84,6 +84,7 @@ model UsingNode
 {
     id: string;
     schemaPrefix?: path;
+    integrity?: string;
 }
 
 model IfcxFile {

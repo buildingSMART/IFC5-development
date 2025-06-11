@@ -169,6 +169,8 @@ components:
           type: string
         schemaPrefix:
           $ref: '#/components/schemas/path'
+        integrity:
+          type: string
     code:
       type: string
       pattern: </[A-Za-z0-9]+>
