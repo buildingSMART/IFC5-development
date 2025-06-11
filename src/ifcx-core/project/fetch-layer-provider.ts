@@ -1,4 +1,5 @@
 import { IfcxFile } from "../schema/schema-helper";
+import { log } from "../util/log";
 import { RemoteLayerProvider } from "./layer-providers";
 
 export class FetchLayerProvider implements RemoteLayerProvider
@@ -15,7 +16,15 @@ export class FetchLayerProvider implements RemoteLayerProvider
         if (!result.ok) {
             return new Error(`Failed to fetch ${url}: ${result.status}`);
         }
-        return result.json();
+        try 
+        {
+            return await result.json();
+        }
+        catch(e)
+        {
+            log(url);
+            return new Error(`Failed to parse json at ${url}: ${e}`);
+        }
     }
 
     async GetLayerByID(id: string): Promise<IfcxFile | Error> {
