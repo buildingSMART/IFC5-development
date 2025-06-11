@@ -1,3 +1,86 @@
+// ifcx-core/project/layer-providers.ts
+var StackedLayerProvider = class {
+  providers;
+  constructor(providers) {
+    this.providers = providers;
+  }
+  async GetLayerByID(id) {
+    let errorStack = [];
+    for (let provider of this.providers) {
+      let layer = await provider.GetLayerByID(id);
+      if (!(layer instanceof Error)) {
+        return layer;
+      } else {
+        errorStack.push(layer);
+      }
+    }
+    return new Error(JSON.stringify(errorStack));
+  }
+};
+var InMemoryLayerProvider = class {
+  layers;
+  constructor() {
+    this.layers = /* @__PURE__ */ new Map();
+  }
+  async GetLayerByID(id) {
+    if (!this.layers.has(id)) {
+      return new Error(`File with id "${id}" not found`);
+    }
+    return this.layers.get(id);
+  }
+  add(file) {
+    if (this.layers.has(file.header.id)) {
+      throw new Error(`Inserting file with duplicate ID "${file.header.id}"`);
+    }
+    this.layers.set(file.header.id, file);
+    return this;
+  }
+  AddAll(files) {
+    files.forEach((f) => this.add(f));
+    return this;
+  }
+};
+
+// ifcx-core/util/log.ts
+var LOG_ENABLED = true;
+function log(bla) {
+  if (LOG_ENABLED) {
+    console.log(`${JSON.stringify(arguments)}`);
+  }
+}
+
+// ifcx-core/project/fetch-layer-provider.ts
+var FetchLayerProvider = class {
+  layers;
+  constructor() {
+    this.layers = /* @__PURE__ */ new Map();
+  }
+  async FetchJson(url) {
+    let result = await fetch(url);
+    if (!result.ok) {
+      return new Error(`Failed to fetch ${url}: ${result.status}`);
+    }
+    try {
+      return await result.json();
+    } catch (e) {
+      log(url);
+      return new Error(`Failed to parse json at ${url}: ${e}`);
+    }
+  }
+  async GetLayerByID(id) {
+    if (!this.layers.has(id)) {
+      let fetched = await this.FetchJson(id);
+      if (fetched instanceof Error) {
+        return new Error(`File with id "${id}" not found`);
+      }
+      let file = fetched;
+      this.layers.set(id, file);
+      return file;
+    }
+    return this.layers.get(id);
+  }
+};
+
 // ifcx-core/util/mm.ts
 function MMSet(map, key, value) {
   if (map.has(key)) {
@@ -280,26 +363,6 @@ function ToInputNodes(data) {
   });
   return inputNodes;
 }
-async function FetchRemoteSchemas(file) {
-  async function fetchJson(url) {
-    let result = await fetch(url);
-    if (!result.ok) {
-      throw new Error(`Failed to fetch ${url}: ${result.status}`);
-    }
-    return result.json();
-  }
-  async function fetchAll(urls) {
-    const promises = urls.map(fetchJson);
-    return await Promise.all(promises);
-  }
-  let schemasURIs = Object.values(file.schemas).map((s) => s.uri).filter((s) => s);
-  let remoteSchemas = (await fetchAll(schemasURIs)).map((r) => r.schemas);
-  remoteSchemas.forEach((remoteSchema) => {
-    Object.keys(remoteSchema).forEach((schemaID) => {
-      file.schemas[schemaID] = remoteSchema[schemaID];
-    });
-  });
-}
 function LoadIfcxFile(file, checkSchemas = true, createArtificialRoot = false) {
   let inputNodes = ToInputNodes(file.data);
   let compositionNodes = FlattenCompositionInput(inputNodes);
@@ -317,8 +380,12 @@ function LoadIfcxFile(file, checkSchemas = true, createArtificialRoot = false) {
   }
 }
 function Federate(files) {
+  if (files.length === 0) {
+    throw new Error(`Trying to federate empty set of files`);
+  }
   let result = {
     header: files[0].header,
+    using: [],
     schemas: {},
     data: []
   };
@@ -366,6 +433,7 @@ function Collapse(nodes, deleteEmpty = false) {
 function Prune(file, deleteEmpty = false) {
   let result = {
     header: file.header,
+    using: [],
     schemas: file.schemas,
     data: []
   };
@@ -381,6 +449,94 @@ function Prune(file, deleteEmpty = false) {
   });
   return result;
 }
+
+// ifcx-core/project/project.ts
+var IfcxProject = class {
+  // main layer at 0
+  layers;
+  tree;
+  schemas;
+  constructor(layers) {
+    this.layers = layers;
+    this.Compose();
+  }
+  GetLayerIds() {
+    return this.layers.map((l) => l.header.id);
+  }
+  Compose() {
+    let federated = Federate(this.layers);
+    this.schemas = federated.schemas;
+    this.tree = LoadIfcxFile(federated);
+  }
+  GetFullTree() {
+    this.Compose();
+    return this.tree;
+  }
+  GetSchemas() {
+    return this.schemas;
+  }
+};
+var IfcxProjectBuilder = class {
+  provider;
+  mainLayerId = null;
+  constructor(provider) {
+    this.provider = provider;
+  }
+  FromId(id) {
+    this.mainLayerId = id;
+    return this;
+  }
+  async Build() {
+    if (!this.mainLayerId) throw new Error(`no main layer ID specified`);
+    let layers = await this.BuildLayerSet(this.mainLayerId);
+    if (layers instanceof Error) {
+      return layers;
+    }
+    try {
+      return new IfcxProject(layers);
+    } catch (e) {
+      return e;
+    }
+  }
+  async SatisfyDependencies(activeLayer, placed, orderedLayers) {
+    let pending = [];
+    for (const using of activeLayer.using) {
+      if (!placed.has(using.id)) {
+        let layer = await this.provider.GetLayerByID(using.id);
+        if (layer instanceof Error) {
+          return layer;
+        }
+        pending.push(layer);
+        placed.set(using.id, true);
+      }
+    }
+    let temp = [];
+    for (const layer of pending) {
+      temp.push(layer);
+      let layers = await this.SatisfyDependencies(layer, placed, orderedLayers);
+      if (layers instanceof Error) {
+        return layers;
+      }
+      temp.push(...layers);
+    }
+    temp.forEach((t) => orderedLayers.push(t));
+    return temp;
+  }
+  async BuildLayerSet(activeLayerID) {
+    let activeLayer = await this.provider.GetLayerByID(activeLayerID);
+    if (activeLayer instanceof Error) {
+      return activeLayer;
+    }
+    let layerSet = [activeLayer];
+    let placed = /* @__PURE__ */ new Map();
+    placed.set(activeLayer.header.id, true);
+    let result = await this.SatisfyDependencies(activeLayer, placed, layerSet);
+    if (result instanceof Error) {
+      return result;
+    }
+    return layerSet;
+  }
+};
 
 // viewer/compose-flattened.ts
 function TreeNodeToComposedObject(path, node, schemas) {
@@ -417,10 +573,15 @@ function TreeNodeToComposedObject(path, node, schemas) {
   return co;
 }
 async function compose3(files) {
-  let federated = Federate(files);
-  await FetchRemoteSchemas(federated);
-  let tree = LoadIfcxFile(federated, true, true);
-  return TreeNodeToComposedObject("", tree, federated.schemas);
+  let provider = new StackedLayerProvider([
+    new InMemoryLayerProvider().AddAll(files),
+    new FetchLayerProvider()
+  ]);
+  let project = await new IfcxProjectBuilder(provider).FromId(files[0].header.id).Build();
+  if (project instanceof Error) {
+    throw project;
+  }
+  return TreeNodeToComposedObject("", project.GetFullTree(), project.GetSchemas());
 }
 
 // viewer/render.ts
@@ -471,10 +632,10 @@ function createMaterialFromParent(path) {
     opacity: 1
   };
   for (let p of path) {
-    const color = p.attributes ? p.attributes["bsi::ifc::v5a::presentation::diffuseColor"] : null;
+    const color = p.attributes ? p.attributes["bsi::ifc::presentation::diffuseColor"] : null;
     if (color) {
       material.color = new THREE.Color(...color);
-      const opacity = p.attributes["bsi::ifc::v5a::presentation::opacity"];
+      const opacity = p.attributes["bsi::ifc::presentation::opacity"];
       if (opacity) {
         material.transparent = true;
         material.opacity = opacity;

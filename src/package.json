@@ -6,7 +6,7 @@
     "build-viewer": "esbuild viewer/render.ts --bundle --outfile=../docs/viewer/render.mjs --external:three --format=esm",
     "test": "esbuild test/test.ts --bundle --outfile=test.js --external:three --platform=node && node test.js",
     "pkg-cli": "esbuild ifcx-cli/ifcx-cli.ts --bundle --outfile=ifcx-cli.js --external:three --platform=node && pkg -t node*-win-x64 --output ifcx.exe ./ifcx-cli.js",
-    "serve": "serve ../docs/viewer"
+    "serve": "npm run build-viewer && serve ../docs/viewer"
   },
   "author": "",
   "description": "",

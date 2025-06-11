@@ -82,10 +82,10 @@ function createMaterialFromParent(path: ComposedObject[]) {
         opacity: 1
     };
     for (let p of path) {
-        const color = p.attributes ? p.attributes["bsi::ifc::v5a::presentation::diffuseColor"] : null;
+        const color = p.attributes ? p.attributes["bsi::ifc::presentation::diffuseColor"] : null;
         if (color) {
         material.color = new THREE.Color(...color);
-        const opacity = p.attributes["bsi::ifc::v5a::presentation::opacity"];
+        const opacity = p.attributes["bsi::ifc::presentation::opacity"];
         if (opacity) {
             material.transparent = true;
             material.opacity = opacity;
