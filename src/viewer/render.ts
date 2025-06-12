@@ -108,7 +108,15 @@ function setHighlight(obj: any, highlight: boolean) {
     });
 }
 
-function selectPath(path: string) {
+function selectPath(path: string | null) {
+    if (!path) {
+        if (selectedObject) setHighlight(selectedObject, false);
+        if (selectedDom)    selectedDom.classList.remove('selected');
+        selectedObject = null;
+        selectedDom    = null;
+        return;
+    }
+
     if (selectedObject) {
         setHighlight(selectedObject, false);
     }
@@ -138,6 +146,9 @@ function onCanvasClick(event) {
             }
             selectPath(path);
         }
+    }
+    else {
+        selectPath(null);
     }
 }
 
