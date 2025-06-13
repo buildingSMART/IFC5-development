@@ -21,7 +21,7 @@ function ToInputNodes(data: IfcxNode[])
 
 
 // TODO: cleanup options by creating better API
-export function LoadIfcxFile(file: IfcxFile, checkSchemas: boolean = true, createArtificialRoot: boolean = false)
+export function LoadIfcxFile(file: IfcxFile, checkSchemas: boolean = true, createArtificialRoot: boolean = true)
 {
     let inputNodes = ToInputNodes(file.data);
     let compositionNodes = FlattenCompositionInput(inputNodes);
