@@ -11,8 +11,21 @@ type datastype = [string, IfcxFile][];
 let datas: datastype = [];
 let autoCamera = true;
 
+
+let objectMap: { [path: string]: any } = {};
+let domMap: { [path: string]: HTMLElement } = {};
+let primMap: { [path: string]: ComposedObject } = {};
+let currentPathMapping: any = null;
+let rootPrim: ComposedObject | null = null;
+
+let selectedObject: any = null;
+let selectedDom: HTMLElement | null = null;
+
+
 // hack
 let THREE = window["THREE"];
+let raycaster = new THREE.Raycaster();
+let mouse = new THREE.Vector2();
 
 function init() {
     scene = new THREE.Scene();
@@ -51,6 +64,7 @@ function init() {
     controls.dampingFactor = 0.25;
 
     nd!.appendChild(renderer.domElement);
+    renderer.domElement.addEventListener('click', onCanvasClick);
 
     return scene;
 }
@@ -74,6 +88,70 @@ function FindChildWithAttr(node: ComposedObject | undefined, attrName: string)
 
     return undefined;
 }
+
+function setHighlight(obj: any, highlight: boolean) {
+    if (!obj) return;
+    obj.traverse((o) => {
+        const mat = o.material;
+        if (mat && mat.color) {
+            if (highlight) {
+                if (!o.userData._origColor) {
+                    o.userData._origColor = mat.color.clone();
+                }
+                o.material = mat.clone();
+                o.material.color.set(0xff0000);
+            } else if (o.userData._origColor) {
+                mat.color.copy(o.userData._origColor);
+                delete o.userData._origColor;
+            }
+        }
+    });
+}
+
+function selectPath(path: string | null) {
+    if (!path) {
+        if (selectedObject) setHighlight(selectedObject, false);
+        if (selectedDom)    selectedDom.classList.remove('selected');
+        selectedObject = null;
+        selectedDom    = null;
+        return;
+    }
+
+    if (selectedObject) {
+        setHighlight(selectedObject, false);
+    }
+    if (selectedDom) {
+        selectedDom.classList.remove('selected');
+    }
+    selectedObject = objectMap[path] || null;
+    selectedDom = domMap[path] || null;
+    if (selectedObject) setHighlight(selectedObject, true);
+    if (selectedDom) selectedDom.classList.add('selected');
+}
+
+function onCanvasClick(event) {
+    const rect = renderer.domElement.getBoundingClientRect();
+    mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObjects(Object.values(objectMap), true);
+    if (intersects.length > 0) {
+        let obj = intersects[0].object;
+        while (obj && !obj.userData.path) obj = obj.parent;
+        if (obj && obj.userData.path) {
+            const path = obj.userData.path;
+            const prim = primMap[path];
+            if (prim) {
+                handleClick(prim, currentPathMapping, rootPrim || prim);
+            }
+            selectPath(path);
+        }
+    }
+    else {
+        selectPath(null);
+    }
+}
+
 
 function createMaterialFromParent(path: ComposedObject[]) {
     let material = {
@@ -125,7 +203,7 @@ function createMeshFromJson(path: ComposedObject[]) {
 
 function traverseTree(path: ComposedObject[], parent, pathMapping) {
     const node = path[0];
-    let elem = new THREE.Group();
+    let elem: any = new THREE.Group();
     if (HasAttr(node, "usd::usdgeom::visibility::visibility"))
     {
         if (node.attributes["usd::usdgeom::visibility::visibility"] === 'invisible') {
@@ -139,6 +217,10 @@ function traverseTree(path: ComposedObject[], parent, pathMapping) {
     {
         elem = createCurveFromJson(path);
     } 
+    
+    objectMap[node.name] = elem;
+    primMap[node.name] = node;
+    elem.userData.path = node.name;
 
     for (let path of Object.entries(node.attributes || {}).filter(([k, _]) => k.startsWith('__internal_')).map(([_, v]) => v)) {
       (pathMapping[String(path)] = pathMapping[String(path)] || []).push(node.name);
@@ -244,8 +326,11 @@ function buildDomTree(prim, node, pathMapping, root=null) {
     elem.appendChild(span = document.createElement('span'));
     Object.entries(icons).forEach(([k, v]) => span.innerText += (prim.attributes || {})[k] ? v : ' ');
     span.className = "material-symbols-outlined";
+    domMap[prim.name] = elem as HTMLElement;
+    elem.dataset.path = prim.name;
     elem.onclick = (evt) => {
         handleClick(prim, pathMapping, root || prim);
+        selectPath(prim.name);
         evt.stopPropagation();
     };
     node.appendChild(elem);
@@ -258,6 +343,12 @@ export async function composeAndRender() {
         // retain only the lights
         scene.children = scene.children.filter(n => n instanceof THREE.Light);
     }
+
+    objectMap = {};
+    domMap = {};
+    primMap = {};
+    currentPathMapping = null;
+    rootPrim = null;
 
     document.querySelector('.tree')!.innerHTML = '';
 
@@ -276,6 +367,8 @@ export async function composeAndRender() {
 
     let pathMapping = {};
     traverseTree([tree], scene || init(), pathMapping);
+    currentPathMapping = pathMapping;
+    rootPrim = tree;
 
     if (autoCamera) {
         const boundingBox = new THREE.Box3();
