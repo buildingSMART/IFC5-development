@@ -80,7 +80,7 @@ model IfcxSchema
     value: IfcxValueDescription;    
 }
 
-model UsingNode
+model ImportNode
 {
     uri: string;
     integrity?: string;
@@ -88,7 +88,7 @@ model UsingNode
 
 model IfcxFile {
     header: IfcxHeader;
-    "using": UsingNode[];
+    "imports": ImportNode[];
     schemas: Record<IfcxSchema>;
     data: IfcxNode[]
 }

@@ -43,16 +43,16 @@ components:
       type: object
       required:
         - header
-        - using
+        - imports
         - schemas
         - data
       properties:
         header:
           $ref: '#/components/schemas/IfcxHeader'
-        using:
+        imports:
           type: array
           items:
-            $ref: '#/components/schemas/UsingNode'
+            $ref: '#/components/schemas/ImportNode'
         schemas:
           type: object
           additionalProperties:
@@ -127,6 +127,15 @@ components:
           $ref: '#/components/schemas/ObjectRestrictions'
         relationRestrictions:
           $ref: '#/components/schemas/RelationRestrictions'
+    ImportNode:
+      type: object
+      required:
+        - uri
+      properties:
+        uri:
+          type: string
+        integrity:
+          type: string
     ObjectRestrictions:
       type: object
       required:
@@ -159,15 +168,6 @@ components:
         - type
       properties:
         type:
-          type: string
-    UsingNode:
-      type: object
-      required:
-        - uri
-      properties:
-        uri:
-          type: string
-        integrity:
           type: string
     code:
       type: string

@@ -19,7 +19,7 @@ export interface components {
         };
         IfcxFile: {
             header: components["schemas"]["IfcxHeader"];
-            using: components["schemas"]["UsingNode"][];
+            imports: components["schemas"]["ImportNode"][];
             schemas: {
                 [key: string]: components["schemas"]["IfcxSchema"];
             };
@@ -56,6 +56,10 @@ export interface components {
             objectRestrictions?: components["schemas"]["ObjectRestrictions"];
             relationRestrictions?: components["schemas"]["RelationRestrictions"];
         };
+        ImportNode: {
+            uri: string;
+            integrity?: string;
+        };
         ObjectRestrictions: {
             values: {
                 [key: string]: components["schemas"]["IfcxValueDescription"];
@@ -65,10 +69,6 @@ export interface components {
         QuantityKind: "Plane angle" | "Thermodynamic temperature" | "Electric current" | "Time" | "Frequency" | "Mass" | "Length" | "Linear velocity" | "Force" | "Pressure" | "Area" | "Energy" | "Power" | "Volume";
         RelationRestrictions: {
             type: string;
-        };
-        UsingNode: {
-            uri: string;
-            integrity?: string;
         };
         code: string;
         path: string;

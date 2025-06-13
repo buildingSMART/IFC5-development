@@ -267,7 +267,7 @@ export function DefaultFile(valueOfAttribute: any)
             author: "",
             timestamp: ""
         },
-        using: [],
+        imports: [],
         schemas: {
             "attribute": {
                 uri: "http://www.example.com/attribute",

@@ -1,6 +1,6 @@
 import { FlattenCompositionInput, CreateArtificialRoot, ExpandFirstRootInInput } from "./composition/compose";
 import { CompositionInputNode } from "./composition/node";
-import { IfcxFile, IfcxNode, UsingNode } from "./schema/schema-helper";
+import { IfcxFile, IfcxNode, ImportNode } from "./schema/schema-helper";
 import { Validate } from "./schema/schema-validation";
 import { MMSet } from "./util/mm";
 
@@ -101,7 +101,7 @@ export function Diff(file1: IfcxFile, file2: IfcxFile)
 {
     let result: IfcxFile = {
         header: file1.header,
-        using: [],
+        imports: [],
         schemas: {},
         data: []
     };
@@ -160,7 +160,7 @@ export function Federate(files: IfcxFile[])
 
     let result: IfcxFile = {
         header: files[0].header,
-        using: [],
+        imports: [],
         schemas: {},
         data: []
     };
@@ -220,7 +220,7 @@ function Prune(file: IfcxFile, deleteEmpty: boolean = false)
 {
     let result: IfcxFile = {
         header: file.header,
-        using: [],
+        imports: [],
         schemas: file.schemas,
         data: []
     };

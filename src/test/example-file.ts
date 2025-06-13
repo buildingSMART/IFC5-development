@@ -1,4 +1,4 @@
-import { DataType, IfcxFile, IfcxNode, IfcxSchema, UsingNode } from "../ifcx-core/schema/schema-helper";
+import { DataType, IfcxFile, IfcxNode, IfcxSchema, ImportNode } from "../ifcx-core/schema/schema-helper";
 
 // TODO: make builder
 
@@ -11,7 +11,7 @@ export function ExampleFile(attribute: string = "example::string", value: any = 
             author: "tom",
             timestamp: "now"
         },
-        using: [],
+        imports: [],
         schemas: {
             "example::string": {
                 uri: "http://www.example.com/string",
@@ -108,7 +108,7 @@ export function ExampleFileMissingSchema()
             author: "tom",
             timestamp: "now"
         },
-        using: [],
+        imports: [],
         schemas: {},
         data: [{
             path: "root",
@@ -130,7 +130,7 @@ export function ExampleFileWithSchema(datatype: DataType, data: any)
             author: "tom",
             timestamp: "now"
         },
-        using: [],
+        imports: [],
         schemas: {
             "example::attribute": {
                 value: {
@@ -149,7 +149,7 @@ export function ExampleFileWithSchema(datatype: DataType, data: any)
     } as IfcxFile;
 }
 
-export function ExampleFileWithUsing(id: string, value: string, using: UsingNode[] = [])
+export function ExampleFileWithImport(id: string, value: string, imports: ImportNode[] = [])
 {
     return {
         header: {
@@ -158,7 +158,7 @@ export function ExampleFileWithUsing(id: string, value: string, using: UsingNode
             author: "tom",
             timestamp: "now"
         },
-        using: using,
+        imports: imports,
         schemas: {
             "example::attribute": {
                 value: {
@@ -207,7 +207,7 @@ function EmptyFile()
             author: "tom",
             timestamp: "now"
         },
-        using: [],
+        imports: [],
         schemas: {
         },
         data: []
@@ -229,9 +229,9 @@ export class IfcxFileBuilder
         return this;
     }
 
-    Using(us: UsingNode)
+    Import(us: ImportNode)
     {
-        this.file.using.push(us);
+        this.file.imports.push(us);
         return this;
     }
 

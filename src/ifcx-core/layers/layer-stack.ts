@@ -82,16 +82,16 @@ export class IfcxLayerStackBuilder
     private async SatisfyDependencies(activeLayer: IfcxFile, placed: Map<string, boolean>, orderedLayers: IfcxFile[])
     {
         let pending: IfcxFile[] = [];
-        for (const using of activeLayer.using) {
-            if (!placed.has(using.uri))
+        for (const impt of activeLayer.imports) {
+            if (!placed.has(impt.uri))
             {
-                let layer = await this.provider.GetLayerByURI(using.uri);
+                let layer = await this.provider.GetLayerByURI(impt.uri);
                 if (layer instanceof Error)
                 {
                     return layer;
                 }
                 pending.push(layer);
-                placed.set(using.uri, true);
+                placed.set(impt.uri, true);
             }
         }
         let temp: IfcxFile[] = [];

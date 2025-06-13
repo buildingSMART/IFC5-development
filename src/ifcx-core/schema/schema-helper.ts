@@ -8,7 +8,7 @@ export type IfcxSchema = components["schemas"]["IfcxSchema"];
 export type IfcxValueDescription = components["schemas"]["IfcxValueDescription"];
 export type IfcxNode = components["schemas"]["IfcxNode"];
 export type DataType = components["schemas"]["DataType"];
-export type UsingNode = components["schemas"]["UsingNode"];
+export type ImportNode = components["schemas"]["ImportNode"];
 
 
 
