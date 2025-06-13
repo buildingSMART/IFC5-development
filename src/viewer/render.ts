@@ -123,7 +123,7 @@ function createMeshFromJson(path: ComposedObject[]) {
   return new THREE.Mesh(geometry, meshMaterial);
 }
 
-function traverseTree(path: ComposedObject[], parent) {
+function traverseTree(path: ComposedObject[], parent, pathMapping) {
     const node = path[0];
     let elem = new THREE.Group();
     if (HasAttr(node, "usd::usdgeom::visibility::visibility"))
@@ -140,6 +140,10 @@ function traverseTree(path: ComposedObject[], parent) {
         elem = createCurveFromJson(path);
     } 
 
+    for (let path of Object.entries(node.attributes || {}).filter(([k, _]) => k.startsWith('__internal_')).map(([_, v]) => v)) {
+      (pathMapping[String(path)] = pathMapping[String(path)] || []).push(node.name);
+    }
+
     parent.add(elem);
     if (path.length > 1) {
         elem.matrixAutoUpdate = false;
@@ -154,7 +158,7 @@ function traverseTree(path: ComposedObject[], parent) {
         }
     }
 
-    (node.children || []).forEach(child => traverseTree([child, ...path], elem || parent));
+    (node.children || []).forEach(child => traverseTree([child, ...path], elem || parent, pathMapping));
 }
 
 function encodeHtmlEntities(str) {
@@ -169,7 +173,71 @@ const icons = {
     'usd::usdshade::material::outputs::surface.connect': 'line_style'
 };
 
-function buildDomTree(prim, node) {
+function handleClick(prim, pathMapping, root) {
+  const container = document.querySelector(".attributes .table");
+  if (container !== null) {
+  container.innerHTML = "";
+  const table = document.createElement("table");
+  table.setAttribute("border", "0");
+  const entries = [["name", prim.name], ...Object.entries(prim.attributes).filter(([k, _]) => !k.startsWith('__internal_'))];
+  const format = (value) => {
+    if (Array.isArray(value)) {
+      let N = document.createElement('span');
+      N.appendChild(document.createTextNode('('));
+      let first = true;
+      for (let n of value.map(format)) {
+        if (!first) {
+          N.appendChild(document.createTextNode(','));
+        }
+        N.appendChild(n);
+        first = false;
+      }
+      N.appendChild(document.createTextNode(')'));
+      return N;
+    } else if (typeof value === "object") {
+      const ks = Object.keys(value);
+      if (ks.length == 1 && ks[0] === 'ref' && pathMapping[value.ref] && pathMapping[value.ref].length == 1) {
+        let a = document.createElement('a');
+        let resolvedRefAsPath = pathMapping[value.ref][0];
+        a.setAttribute('href', '#');
+        a.textContent = resolvedRefAsPath;
+        a.onclick = () => {
+          let prim = null;
+          const recurse = (n) => {
+            if (n.name === resolvedRefAsPath) {
+              prim = n;
+            } else {
+              (n.children || []).forEach(recurse);
+            }
+          }
+          recurse(root);
+          if (prim) { 
+            handleClick(prim, pathMapping, root);
+          }
+        }
+        return a;
+      } else {
+        return document.createTextNode(JSON.stringify(value));
+      }
+    } else {
+      return document.createTextNode(value);
+    }
+  };
+  entries.forEach(([key, value]) => {
+    const tr = document.createElement("tr");
+    const tdKey = document.createElement("td");
+    tdKey.textContent = encodeHtmlEntities(key);
+    const tdValue = document.createElement("td");
+    tdValue.appendChild(format(value));
+    tr.appendChild(tdKey);
+    tr.appendChild(tdValue);
+    table.appendChild(tr);
+  });
+  container.appendChild(table);
+  }
+}
+
+function buildDomTree(prim, node, pathMapping, root=null) {
     const elem = document.createElement('div');
     let span;
     elem.appendChild(document.createTextNode(prim.name ? prim.name.split('/').reverse()[0] : 'root'));
@@ -177,11 +245,11 @@ function buildDomTree(prim, node) {
     Object.entries(icons).forEach(([k, v]) => span.innerText += (prim.attributes || {})[k] ? v : ' ');
     span.className = "material-symbols-outlined";
     elem.onclick = (evt) => {
-        let rows = [["name", prim.name]].concat(Object.entries(prim.attributes || {})).map(([k, v]) => `<tr><td>${encodeHtmlEntities(k)}</td><td>${encodeHtmlEntities(typeof v === "object" ? JSON.stringify(v) : v)}</td>`).join("");document.querySelector('.attributes .table')!.innerHTML = `<table border="0">${rows}</table>`;
+        handleClick(prim, pathMapping, root || prim);
         evt.stopPropagation();
     };
     node.appendChild(elem);
-    (prim.children || []).forEach(p => buildDomTree(p, elem));
+    (prim.children || []).forEach(p => buildDomTree(p, elem, pathMapping, root || prim));
 }
 
 export async function composeAndRender() {
@@ -206,7 +274,8 @@ export async function composeAndRender() {
         return;
     }
 
-    traverseTree([tree], scene || init());
+    let pathMapping = {};
+    traverseTree([tree], scene || init(), pathMapping);
 
     if (autoCamera) {
         const boundingBox = new THREE.Box3();
@@ -225,8 +294,7 @@ export async function composeAndRender() {
         }
     }
 
-
-    buildDomTree(tree, document.querySelector('.tree'));
+    buildDomTree(tree, document.querySelector('.tree'), pathMapping);
     animate();
 }
 

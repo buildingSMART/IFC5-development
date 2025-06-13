@@ -77,6 +77,13 @@ export async function compose3(files: IfcxFile[])
     {
         throw layerStack;
     }
+    
+    // Add local path to attributes for lookup
+    // @todo make this less insane
+    layerStack.GetFederatedLayer().data.forEach((n, i) => {
+      n.attributes = n.attributes || {};
+      n.attributes[`__internal_${i}`] = n.path;
+    });
 
     return TreeNodeToComposedObject("", layerStack.GetFullTree(), layerStack.GetSchemas());
 }
