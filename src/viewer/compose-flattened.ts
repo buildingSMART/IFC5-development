@@ -57,12 +57,21 @@ function TreeNodeToComposedObject(path: string, node: PostCompositionNode, schem
 
 export async function compose3(files: IfcxFile[])
 {
+    let userDefinedOrder: IfcxFile = {
+        header: {...files[0].header},
+        imports: files.map(f => { return { uri: f.header.id }; }),
+        schemas: {},
+        data: []
+    }
+
+    userDefinedOrder.header.id = "USER_DEF";
+    
     let provider = new StackedLayerProvider([
-        new InMemoryLayerProvider().AddAll(files), 
+        new InMemoryLayerProvider().AddAll([userDefinedOrder, ...files]), 
         new FetchLayerProvider()
     ]);
 
-    let layerStack = await (new IfcxLayerStackBuilder(provider).FromId(files[0].header.id)).Build();
+    let layerStack = await (new IfcxLayerStackBuilder(provider).FromId(userDefinedOrder.header.id)).Build();
 
     if (layerStack instanceof Error)
     {

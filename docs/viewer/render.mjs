@@ -385,7 +385,7 @@ function Federate(files) {
   }
   let result = {
     header: files[0].header,
-    using: [],
+    imports: [],
     schemas: {},
     data: []
   };
@@ -433,7 +433,7 @@ function Collapse(nodes, deleteEmpty = false) {
 function Prune(file, deleteEmpty = false) {
   let result = {
     header: file.header,
-    using: [],
+    imports: [],
     schemas: file.schemas,
     data: []
   };
@@ -500,14 +500,14 @@ var IfcxLayerStackBuilder = class {
   }
   async SatisfyDependencies(activeLayer, placed, orderedLayers) {
     let pending = [];
-    for (const using of activeLayer.using) {
-      if (!placed.has(using.uri)) {
-        let layer = await this.provider.GetLayerByURI(using.uri);
+    for (const impt of activeLayer.imports) {
+      if (!placed.has(impt.uri)) {
+        let layer = await this.provider.GetLayerByURI(impt.uri);
         if (layer instanceof Error) {
           return layer;
         }
         pending.push(layer);
-        placed.set(using.uri, true);
+        placed.set(impt.uri, true);
       }
     }
     let temp = [];
@@ -573,11 +573,20 @@ function TreeNodeToComposedObject(path, node, schemas) {
   return co;
 }
 async function compose3(files) {
+  let userDefinedOrder = {
+    header: { ...files[0].header },
+    imports: files.map((f) => {
+      return { uri: f.header.id };
+    }),
+    schemas: {},
+    data: []
+  };
+  userDefinedOrder.header.id = "USER_DEF";
   let provider = new StackedLayerProvider([
-    new InMemoryLayerProvider().AddAll(files),
+    new InMemoryLayerProvider().AddAll([userDefinedOrder, ...files]),
     new FetchLayerProvider()
   ]);
-  let layerStack = await new IfcxLayerStackBuilder(provider).FromId(files[0].header.id).Build();
+  let layerStack = await new IfcxLayerStackBuilder(provider).FromId(userDefinedOrder.header.id).Build();
   if (layerStack instanceof Error) {
     throw layerStack;
   }
