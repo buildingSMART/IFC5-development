@@ -1,9 +1,17 @@
 {
   "header": {
+    "id": "ifc5.technical.buildingsmart.org/examples/Hello Wall/domestic-hot-water@v1.ifcx",
     "version": "ifcx_alpha",
     "author": "authorname",
     "timestamp": "time string"
   },
+  "imports": [
+    { "uri": "https://ifcx.dev/@standards.buildingsmart.org/ifc/core/ifc@v5a.ifcx" },
+    { "uri": "https://ifcx.dev/@standards.buildingsmart.org/ifc/core/prop@v5a.ifcx" },
+    { "uri": "https://ifcx.dev/@standards.buildingsmart.org/ifc/ifc-mat/prop@v1.0.0.ifcx" },
+    { "uri": "https://ifcx.dev/@openusd.org/usd@v1.ifcx" },
+    { "uri": "https://ifcx.dev/@nlsfb/nlsfb@v1.ifcx" }
+  ],
   "schemas": {
     "customdata": {
       "value": {
@@ -16,12 +24,6 @@
           }
         }
       }
-    },
-    "bsi::ifc::v5a": {
-      "uri": "https://ifc5.technical.buildingsmart.org/schemas/bsi/ifc/v5a/schema.json"
-    },
-    "usd": {
-      "uri": "https://ifc5.technical.buildingsmart.org/schemas/usd.json"
     }
   },
   "data": [
@@ -238,7 +240,7 @@
     {
       "path": "ce62bca4-a43c-4c14-9a11-eff58d055c9e",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcValve",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcValve"
         }
@@ -792,7 +794,7 @@
     {
       "path": "52021154-adda-4091-a7fd-43e3554d6c7f",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcPipeSegment",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcPipeSegment"
         }
@@ -934,7 +936,7 @@
     {
       "path": "250cab1a-49c5-4610-8d92-0ff04d539a37",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcPipeFitting",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcPipeFitting"
         }
@@ -1020,7 +1022,7 @@
     {
       "path": "2c9b0c05-d5cd-4b01-a769-41be68f6ac88",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -1029,11 +1031,11 @@
     {
       "path": "2c9b0c05-d5cd-4b01-a769-41be68f6ac88",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "d72c35b8-97cf-4d55-8dd4-3d8bddb3c810"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "NOTDEFINED"
+        "bsi::ifc::system::flowdirection": "NOTDEFINED"
       }
     },
     {
@@ -1059,7 +1061,7 @@
     {
       "path": "a984a5a9-d0c5-46e0-8282-e20206af0d54",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -1068,11 +1070,11 @@
     {
       "path": "a984a5a9-d0c5-46e0-8282-e20206af0d54",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "9ca5de9b-1a25-4800-bac9-9766106271be"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "NOTDEFINED"
+        "bsi::ifc::system::flowdirection": "NOTDEFINED"
       }
     },
     {
@@ -1098,7 +1100,7 @@
     {
       "path": "d1a62196-4f7f-421e-90dc-642efded6a72",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -1107,11 +1109,11 @@
     {
       "path": "d1a62196-4f7f-421e-90dc-642efded6a72",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "a3ede764-8bda-47f0-86f1-b0142ebcc7de"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "SOURCE"
+        "bsi::ifc::system::flowdirection": "SOURCE"
       }
     },
     {
@@ -1137,7 +1139,7 @@
     {
       "path": "5b477df7-581a-4bab-b94c-7ab539a932d1",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcPipeSegment",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcPipeSegment"
         }
@@ -1146,7 +1148,7 @@
     {
       "path": "5b477df7-581a-4bab-b94c-7ab539a932d1",
       "attributes": {
-        "bsi::ifc::v5a::system::partofsystem": [
+        "bsi::ifc::system::partofsystem": [
           {
             "ref": "2a22c4a4-48a6-54a1-bdc7-ccc1af978446"
           }]
@@ -1300,7 +1302,7 @@
     {
       "path": "6c41d028-9e72-4f27-81dd-0203721e977f",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -1309,11 +1311,11 @@
     {
       "path": "6c41d028-9e72-4f27-81dd-0203721e977f",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "5cca48b0-dcd9-49ce-9faa-b7a581752ac7"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "SINK"
+        "bsi::ifc::system::flowdirection": "SINK"
       }
     },
     {
@@ -1327,7 +1329,7 @@
     {
       "path": "7dcbc708-de56-42ff-bc82-7c59b586728c",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -1336,11 +1338,11 @@
     {
       "path": "7dcbc708-de56-42ff-bc82-7c59b586728c",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "a5244105-05f6-4c68-8d6d-0bec41598a5d"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "SOURCE"
+        "bsi::ifc::system::flowdirection": "SOURCE"
       }
     },
     {
@@ -1366,7 +1368,7 @@
     {
       "path": "66e2b50c-8fc1-4972-9c1b-81ba5d4e3b85",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcValve",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcValve"
         }
@@ -1395,7 +1397,7 @@
     {
       "path": "6cd029b0-02a2-4d1f-aa3f-f76fedc66220",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -1404,7 +1406,7 @@
     {
       "path": "6cd029b0-02a2-4d1f-aa3f-f76fedc66220",
       "attributes": {
-        "bsi::ifc::v5a::system::flowdirection": "SINK"
+        "bsi::ifc::system::flowdirection": "SINK"
       }
     },
     {
@@ -1430,7 +1432,7 @@
     {
       "path": "1e31d662-e830-4b1f-8e5d-10e783eab771",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -1439,11 +1441,11 @@
     {
       "path": "1e31d662-e830-4b1f-8e5d-10e783eab771",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "f7c6b083-c362-41bb-950a-dd3541d098bc"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "SOURCE"
+        "bsi::ifc::system::flowdirection": "SOURCE"
       }
     },
     {
@@ -1469,7 +1471,7 @@
     {
       "path": "daaf6583-34ea-47e2-bc2f-5b5bfa752ab9",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -1478,11 +1480,11 @@
     {
       "path": "daaf6583-34ea-47e2-bc2f-5b5bfa752ab9",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "ad044381-c183-4c75-8fd3-464870103cc7"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "NOTDEFINED"
+        "bsi::ifc::system::flowdirection": "NOTDEFINED"
       }
     },
     {
@@ -1508,7 +1510,7 @@
     {
       "path": "956926b2-2bb5-4b74-bb51-c81a7dd6256b",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -1517,11 +1519,11 @@
     {
       "path": "956926b2-2bb5-4b74-bb51-c81a7dd6256b",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "e94b5873-52de-45c3-86b3-9873cc4606d1"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "SOURCE"
+        "bsi::ifc::system::flowdirection": "SOURCE"
       }
     },
     {
@@ -1547,7 +1549,7 @@
     {
       "path": "5eff3937-b7e3-478f-a4ca-b61b012c52f8",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcSanitaryTerminal",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcSanitaryTerminal"
         }
@@ -1837,7 +1839,7 @@
     {
       "path": "dd9cbadc-be6a-4756-b2d6-a2469b592559",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -1846,11 +1848,11 @@
     {
       "path": "dd9cbadc-be6a-4756-b2d6-a2469b592559",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "98178032-c6cf-41fc-9b20-53d4c4bfdd7a"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "SINK"
+        "bsi::ifc::system::flowdirection": "SINK"
       }
     },
     {
@@ -1876,7 +1878,7 @@
     {
       "path": "2a8eacfd-f79e-4e16-a734-1ca60547ba3f",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -1885,11 +1887,11 @@
     {
       "path": "2a8eacfd-f79e-4e16-a734-1ca60547ba3f",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "c867eb75-3e74-44d6-81d9-5e3a2de54e0f"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "SINK"
+        "bsi::ifc::system::flowdirection": "SINK"
       }
     },
     {
@@ -1915,7 +1917,7 @@
     {
       "path": "0baa07f8-3833-4911-893c-57d0a5e0bb28",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcBoiler",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcBoiler"
         }
@@ -2493,7 +2495,7 @@
     {
       "path": "8bfae6d8-79eb-43d5-b300-bca42b276c9c",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -2502,7 +2504,7 @@
     {
       "path": "8bfae6d8-79eb-43d5-b300-bca42b276c9c",
       "attributes": {
-        "bsi::ifc::v5a::system::flowdirection": "SINK"
+        "bsi::ifc::system::flowdirection": "SINK"
       }
     },
     {
@@ -2528,7 +2530,7 @@
     {
       "path": "5cca48b0-dcd9-49ce-9faa-b7a581752ac7",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -2537,11 +2539,11 @@
     {
       "path": "5cca48b0-dcd9-49ce-9faa-b7a581752ac7",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "6c41d028-9e72-4f27-81dd-0203721e977f"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "SOURCE"
+        "bsi::ifc::system::flowdirection": "SOURCE"
       }
     },
     {
@@ -2567,7 +2569,7 @@
     {
       "path": "1fff93af-f514-40dd-8e1c-deaf0d149369",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcPipeSegment",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcPipeSegment"
         }
@@ -2576,7 +2578,7 @@
     {
       "path": "1fff93af-f514-40dd-8e1c-deaf0d149369",
       "attributes": {
-        "bsi::ifc::v5a::system::partofsystem": [
+        "bsi::ifc::system::partofsystem": [
           {
             "ref": "2a22c4a4-48a6-54a1-bdc7-ccc1af978446"
           }]
@@ -2730,7 +2732,7 @@
     {
       "path": "ad044381-c183-4c75-8fd3-464870103cc7",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -2739,11 +2741,11 @@
     {
       "path": "ad044381-c183-4c75-8fd3-464870103cc7",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "daaf6583-34ea-47e2-bc2f-5b5bfa752ab9"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "NOTDEFINED"
+        "bsi::ifc::system::flowdirection": "NOTDEFINED"
       }
     },
     {
@@ -2757,7 +2759,7 @@
     {
       "path": "7ac87a20-38aa-4688-9b71-57c837c4e371",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -2766,11 +2768,11 @@
     {
       "path": "7ac87a20-38aa-4688-9b71-57c837c4e371",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "62bbc690-117a-4a4b-9860-fd32f0690a49"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "SINK"
+        "bsi::ifc::system::flowdirection": "SINK"
       }
     },
     {
@@ -2796,7 +2798,7 @@
     {
       "path": "3d077d38-9576-4a33-ab77-f72e3bbf06a4",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcSlab",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcSlab"
         }
@@ -2846,7 +2848,7 @@
     {
       "path": "b2209217-fe3d-4fb1-b9be-e6ea63f4ff98",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcPipeSegment",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcPipeSegment"
         }
@@ -2855,7 +2857,7 @@
     {
       "path": "b2209217-fe3d-4fb1-b9be-e6ea63f4ff98",
       "attributes": {
-        "bsi::ifc::v5a::system::partofsystem": [
+        "bsi::ifc::system::partofsystem": [
           {
             "ref": "2a22c4a4-48a6-54a1-bdc7-ccc1af978446"
           }]
@@ -3009,7 +3011,7 @@
     {
       "path": "50704c71-6fcc-4386-b0a4-302df34468e0",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -3018,11 +3020,11 @@
     {
       "path": "50704c71-6fcc-4386-b0a4-302df34468e0",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "caf17949-9926-4913-ab33-8d42d5dcbcad"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "SINK"
+        "bsi::ifc::system::flowdirection": "SINK"
       }
     },
     {
@@ -3036,7 +3038,7 @@
     {
       "path": "62bbc690-117a-4a4b-9860-fd32f0690a49",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -3045,11 +3047,11 @@
     {
       "path": "62bbc690-117a-4a4b-9860-fd32f0690a49",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "7ac87a20-38aa-4688-9b71-57c837c4e371"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "SOURCE"
+        "bsi::ifc::system::flowdirection": "SOURCE"
       }
     },
     {
@@ -3075,7 +3077,7 @@
     {
       "path": "d0edbeda-8e56-490e-9148-cb07a24d28a8",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcPipeSegment",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcPipeSegment"
         }
@@ -3084,7 +3086,7 @@
     {
       "path": "d0edbeda-8e56-490e-9148-cb07a24d28a8",
       "attributes": {
-        "bsi::ifc::v5a::system::partofsystem": [
+        "bsi::ifc::system::partofsystem": [
           {
             "ref": "2a22c4a4-48a6-54a1-bdc7-ccc1af978446"
           }]
@@ -3238,7 +3240,7 @@
     {
       "path": "d72c35b8-97cf-4d55-8dd4-3d8bddb3c810",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -3247,11 +3249,11 @@
     {
       "path": "d72c35b8-97cf-4d55-8dd4-3d8bddb3c810",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "2c9b0c05-d5cd-4b01-a769-41be68f6ac88"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "NOTDEFINED"
+        "bsi::ifc::system::flowdirection": "NOTDEFINED"
       }
     },
     {
@@ -3265,7 +3267,7 @@
     {
       "path": "caf17949-9926-4913-ab33-8d42d5dcbcad",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -3274,11 +3276,11 @@
     {
       "path": "caf17949-9926-4913-ab33-8d42d5dcbcad",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "50704c71-6fcc-4386-b0a4-302df34468e0"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "SOURCE"
+        "bsi::ifc::system::flowdirection": "SOURCE"
       }
     },
     {
@@ -3304,7 +3306,7 @@
     {
       "path": "7ee6bac9-3941-454d-8a77-0bf4f8e6e1fb",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcPipeSegment",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcPipeSegment"
         }
@@ -3313,7 +3315,7 @@
     {
       "path": "7ee6bac9-3941-454d-8a77-0bf4f8e6e1fb",
       "attributes": {
-        "bsi::ifc::v5a::system::partofsystem": [
+        "bsi::ifc::system::partofsystem": [
           {
             "ref": "2a22c4a4-48a6-54a1-bdc7-ccc1af978446"
           }]
@@ -3467,7 +3469,7 @@
     {
       "path": "a3ede764-8bda-47f0-86f1-b0142ebcc7de",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -3476,11 +3478,11 @@
     {
       "path": "a3ede764-8bda-47f0-86f1-b0142ebcc7de",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "d1a62196-4f7f-421e-90dc-642efded6a72"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "SINK"
+        "bsi::ifc::system::flowdirection": "SINK"
       }
     },
     {
@@ -3494,7 +3496,7 @@
     {
       "path": "f033557e-7054-4ff5-a5e4-59f2983f6eaf",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -3503,11 +3505,11 @@
     {
       "path": "f033557e-7054-4ff5-a5e4-59f2983f6eaf",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "9b75deed-7059-4e57-8f3a-75aed92ada95"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "SOURCE"
+        "bsi::ifc::system::flowdirection": "SOURCE"
       }
     },
     {
@@ -3533,7 +3535,7 @@
     {
       "path": "1b13d140-6f12-4a79-94fd-2e96d1a5ae23",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcValve",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcValve"
         }
@@ -3562,7 +3564,7 @@
     {
       "path": "98178032-c6cf-41fc-9b20-53d4c4bfdd7a",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -3571,11 +3573,11 @@
     {
       "path": "98178032-c6cf-41fc-9b20-53d4c4bfdd7a",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "dd9cbadc-be6a-4756-b2d6-a2469b592559"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "SOURCE"
+        "bsi::ifc::system::flowdirection": "SOURCE"
       }
     },
     {
@@ -3601,7 +3603,7 @@
     {
       "path": "580f711c-c843-45dc-bdb4-8a1b97cfff8d",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -3610,7 +3612,7 @@
     {
       "path": "580f711c-c843-45dc-bdb4-8a1b97cfff8d",
       "attributes": {
-        "bsi::ifc::v5a::system::flowdirection": "SINK"
+        "bsi::ifc::system::flowdirection": "SINK"
       }
     },
     {
@@ -3636,7 +3638,7 @@
     {
       "path": "7eaadba0-85a0-4e80-8d3b-2dcef2ab0e58",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -3645,11 +3647,11 @@
     {
       "path": "7eaadba0-85a0-4e80-8d3b-2dcef2ab0e58",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "616d4662-cd20-4f21-9c2e-6bd497e4f7aa"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "NOTDEFINED"
+        "bsi::ifc::system::flowdirection": "NOTDEFINED"
       }
     },
     {
@@ -3675,7 +3677,7 @@
     {
       "path": "c867eb75-3e74-44d6-81d9-5e3a2de54e0f",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -3684,11 +3686,11 @@
     {
       "path": "c867eb75-3e74-44d6-81d9-5e3a2de54e0f",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "2a8eacfd-f79e-4e16-a734-1ca60547ba3f"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "SOURCE"
+        "bsi::ifc::system::flowdirection": "SOURCE"
       }
     },
     {
@@ -3714,7 +3716,7 @@
     {
       "path": "8d440f31-0c7b-431c-ab6f-91baad883623",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcSanitaryTerminal",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcSanitaryTerminal"
         }
@@ -3904,7 +3906,7 @@
     {
       "path": "f7c6b083-c362-41bb-950a-dd3541d098bc",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -3913,11 +3915,11 @@
     {
       "path": "f7c6b083-c362-41bb-950a-dd3541d098bc",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "1e31d662-e830-4b1f-8e5d-10e783eab771"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "SINK"
+        "bsi::ifc::system::flowdirection": "SINK"
       }
     },
     {
@@ -3943,7 +3945,7 @@
     {
       "path": "e94b5873-52de-45c3-86b3-9873cc4606d1",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -3952,11 +3954,11 @@
     {
       "path": "e94b5873-52de-45c3-86b3-9873cc4606d1",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "956926b2-2bb5-4b74-bb51-c81a7dd6256b"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "SINK"
+        "bsi::ifc::system::flowdirection": "SINK"
       }
     },
     {
@@ -3982,7 +3984,7 @@
     {
       "path": "ab641f43-49b8-4e33-bfe7-df813a06abaa",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcPipeSegment",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcPipeSegment"
         }
@@ -3991,7 +3993,7 @@
     {
       "path": "ab641f43-49b8-4e33-bfe7-df813a06abaa",
       "attributes": {
-        "bsi::ifc::v5a::system::partofsystem": [
+        "bsi::ifc::system::partofsystem": [
           {
             "ref": "2a22c4a4-48a6-54a1-bdc7-ccc1af978446"
           }]
@@ -4030,7 +4032,7 @@
     {
       "path": "f50c8589-5205-468b-99cc-ad580d9c5d8f",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -4039,7 +4041,7 @@
     {
       "path": "f50c8589-5205-468b-99cc-ad580d9c5d8f",
       "attributes": {
-        "bsi::ifc::v5a::system::flowdirection": "NOTDEFINED"
+        "bsi::ifc::system::flowdirection": "NOTDEFINED"
       }
     },
     {
@@ -4053,7 +4055,7 @@
     {
       "path": "40325fd8-9d55-4186-873d-102825b7a0ab",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -4062,7 +4064,7 @@
     {
       "path": "40325fd8-9d55-4186-873d-102825b7a0ab",
       "attributes": {
-        "bsi::ifc::v5a::system::flowdirection": "NOTDEFINED"
+        "bsi::ifc::system::flowdirection": "NOTDEFINED"
       }
     },
     {
@@ -4088,7 +4090,7 @@
     {
       "path": "b0a153c6-32ba-4f40-a8d8-db7ce06ff4a1",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcPipeSegment",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcPipeSegment"
         }
@@ -4097,7 +4099,7 @@
     {
       "path": "b0a153c6-32ba-4f40-a8d8-db7ce06ff4a1",
       "attributes": {
-        "bsi::ifc::v5a::system::partofsystem": [
+        "bsi::ifc::system::partofsystem": [
           {
             "ref": "2a22c4a4-48a6-54a1-bdc7-ccc1af978446"
           }]
@@ -4251,7 +4253,7 @@
     {
       "path": "a5244105-05f6-4c68-8d6d-0bec41598a5d",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -4260,11 +4262,11 @@
     {
       "path": "a5244105-05f6-4c68-8d6d-0bec41598a5d",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "7dcbc708-de56-42ff-bc82-7c59b586728c"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "SINK"
+        "bsi::ifc::system::flowdirection": "SINK"
       }
     },
     {
@@ -4290,7 +4292,7 @@
     {
       "path": "88f8a3e0-bd57-4096-b6c9-bb169a944f6b",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -4299,11 +4301,11 @@
     {
       "path": "88f8a3e0-bd57-4096-b6c9-bb169a944f6b",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "29b715e5-985a-456d-9c3e-30410f23b9ef"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "SOURCE"
+        "bsi::ifc::system::flowdirection": "SOURCE"
       }
     },
     {
@@ -4329,7 +4331,7 @@
     {
       "path": "878a46c8-c43d-4873-beb6-ca2b720279ae",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcPipeSegment",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcPipeSegment"
         }
@@ -4338,7 +4340,7 @@
     {
       "path": "878a46c8-c43d-4873-beb6-ca2b720279ae",
       "attributes": {
-        "bsi::ifc::v5a::system::partofsystem": [
+        "bsi::ifc::system::partofsystem": [
           {
             "ref": "2a22c4a4-48a6-54a1-bdc7-ccc1af978446"
           }]
@@ -4492,7 +4494,7 @@
     {
       "path": "9b75deed-7059-4e57-8f3a-75aed92ada95",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -4501,11 +4503,11 @@
     {
       "path": "9b75deed-7059-4e57-8f3a-75aed92ada95",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "f033557e-7054-4ff5-a5e4-59f2983f6eaf"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "SINK"
+        "bsi::ifc::system::flowdirection": "SINK"
       }
     },
     {
@@ -4519,7 +4521,7 @@
     {
       "path": "616d4662-cd20-4f21-9c2e-6bd497e4f7aa",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -4528,11 +4530,11 @@
     {
       "path": "616d4662-cd20-4f21-9c2e-6bd497e4f7aa",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "7eaadba0-85a0-4e80-8d3b-2dcef2ab0e58"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "NOTDEFINED"
+        "bsi::ifc::system::flowdirection": "NOTDEFINED"
       }
     },
     {
@@ -4558,7 +4560,7 @@
     {
       "path": "d5d5c7d9-a495-4e9b-acbf-942aeb388fab",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcPipeSegment",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcPipeSegment"
         }
@@ -4567,7 +4569,7 @@
     {
       "path": "d5d5c7d9-a495-4e9b-acbf-942aeb388fab",
       "attributes": {
-        "bsi::ifc::v5a::system::partofsystem": [
+        "bsi::ifc::system::partofsystem": [
           {
             "ref": "2a22c4a4-48a6-54a1-bdc7-ccc1af978446"
           }]
@@ -4596,7 +4598,7 @@
     {
       "path": "29b715e5-985a-456d-9c3e-30410f23b9ef",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -4605,11 +4607,11 @@
     {
       "path": "29b715e5-985a-456d-9c3e-30410f23b9ef",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "88f8a3e0-bd57-4096-b6c9-bb169a944f6b"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "SINK"
+        "bsi::ifc::system::flowdirection": "SINK"
       }
     },
     {
@@ -4623,7 +4625,7 @@
     {
       "path": "9ca5de9b-1a25-4800-bac9-9766106271be",
       "attributes": {
-        "bsi::ifc::v5a::class": {
+        "bsi::ifc::class": {
           "code": "IfcDistributionPort",
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionPort"
         }
@@ -4632,11 +4634,11 @@
     {
       "path": "9ca5de9b-1a25-4800-bac9-9766106271be",
       "attributes": {
-        "bsi::ifc::v5a::system::connectsto": [
+        "bsi::ifc::system::connectsto": [
           {
             "ref": "a984a5a9-d0c5-46e0-8282-e20206af0d54"
           }],
-        "bsi::ifc::v5a::system::flowdirection": "NOTDEFINED"
+        "bsi::ifc::system::flowdirection": "NOTDEFINED"
       }
     },
     {
