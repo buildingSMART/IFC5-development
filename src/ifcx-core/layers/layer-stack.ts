@@ -10,6 +10,7 @@ export class IfcxLayerStack
     private layers: IfcxFile[];
     private tree: PostCompositionNode;
     private schemas: {[key:string]:IfcxSchema};
+    private federated: IfcxFile;
 
     constructor(layers: IfcxFile[])
     {
@@ -24,16 +25,21 @@ export class IfcxLayerStack
 
     private Compose()
     {
-        let federated = Federate(this.layers);
+        this.federated = Federate(this.layers);
         // TODO: schema files
-        this.schemas = federated.schemas;
-        this.tree = LoadIfcxFile(federated);
+        this.schemas = this.federated.schemas;
+        this.tree = LoadIfcxFile(this.federated);
     }
 
     public GetFullTree()
     {
         this.Compose();
         return this.tree;
+    }
+
+    public GetFederatedLayer()
+    {
+        return this.federated;
     }
 
     public GetSchemas()
