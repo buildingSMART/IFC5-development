@@ -1,9 +1,9 @@
 import { ComposedObject } from "./composed-object";
 import { IfcxFile, IfcxSchema } from "../ifcx-core/schema/schema-helper";
 import { PostCompositionNode } from "../ifcx-core/composition/node";
-import { InMemoryLayerProvider, StackedLayerProvider } from "../ifcx-core/project/layer-providers";
-import { FetchLayerProvider } from "../ifcx-core/project/fetch-layer-provider";
-import { IfcxProjectBuilder } from "../ifcx-core/project/project";
+import { InMemoryLayerProvider, StackedLayerProvider } from "../ifcx-core/layers/layer-providers";
+import { FetchLayerProvider } from "../ifcx-core/layers/fetch-layer-provider";
+import { IfcxLayerStackBuilder } from "../ifcx-core/layers/layer-stack";
 
 function TreeNodeToComposedObject(path: string, node: PostCompositionNode, schemas: {[key: string]: IfcxSchema}): ComposedObject
 {
@@ -62,12 +62,12 @@ export async function compose3(files: IfcxFile[])
         new FetchLayerProvider()
     ]);
 
-    let project = await (new IfcxProjectBuilder(provider).FromId(files[0].header.id)).Build();
+    let layerStack = await (new IfcxLayerStackBuilder(provider).FromId(files[0].header.id)).Build();
 
-    if (project instanceof Error)
+    if (layerStack instanceof Error)
     {
-        throw project;
+        throw layerStack;
     }
 
-    return TreeNodeToComposedObject("", project.GetFullTree(), project.GetSchemas());
+    return TreeNodeToComposedObject("", layerStack.GetFullTree(), layerStack.GetSchemas());
 }

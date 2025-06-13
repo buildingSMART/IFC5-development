@@ -4,7 +4,7 @@ import { Federate, LoadIfcxFile } from "../workflows";
 import { RemoteLayerProvider } from "./layer-providers";
 
 
-export class IfcxProject
+export class IfcxLayerStack
 {
     // main layer at 0
     private layers: IfcxFile[];
@@ -42,7 +42,7 @@ export class IfcxProject
     }
 }
 
-export class IfcxProjectBuilder
+export class IfcxLayerStackBuilder
 {
     provider: RemoteLayerProvider;
     mainLayerId: string | null = null;
@@ -58,7 +58,7 @@ export class IfcxProjectBuilder
         return this;
     }
 
-    async Build(): Promise<IfcxProject | Error>
+    async Build(): Promise<IfcxLayerStack | Error>
     {
         if (!this.mainLayerId) throw new Error(`no main layer ID specified`);
 
@@ -71,7 +71,7 @@ export class IfcxProjectBuilder
 
         try
         {
-            return new IfcxProject(layers);
+            return new IfcxLayerStack(layers);
         }
         catch (e)
         {

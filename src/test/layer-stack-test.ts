@@ -1,5 +1,5 @@
-import { InMemoryLayerProvider } from "../ifcx-core/project/layer-providers";
-import { IfcxProject, IfcxProjectBuilder } from "../ifcx-core/project/project";
+import { InMemoryLayerProvider } from "../ifcx-core/layers/layer-providers";
+import { IfcxLayerStack, IfcxLayerStackBuilder } from "../ifcx-core/layers/layer-stack";
 import { ExampleFile, ExampleFileWithUsing, IfcxFileBuilder, NodeWithAttr, StringValueSchema } from "./example-file";
 import { describe, it } from "./util/cappucino";
 import { NodeToJSON } from "./util/node2json";
@@ -19,7 +19,7 @@ function ExampleInputLayers()
         .add(file4);
 }
 
-describe("project builder", () => {
+describe("layerStack builder", () => {
     it("fetches dependencies with provider", async () => {
         let file1 = ExampleFileWithUsing("file1", "a", [{uri: "file2"}]);
         let file2 = ExampleFileWithUsing("file2", "b");
@@ -29,19 +29,19 @@ describe("project builder", () => {
                 .add(file1)
                 .add(file2);
 
-        let project = await new IfcxProjectBuilder(provider).FromId(file1.header.id).Build();
+        let layerStack = await new IfcxLayerStackBuilder(provider).FromId(file1.header.id).Build();
 
-        expect(project instanceof Error).to.be.false;
-        let p = project as IfcxProject;
+        expect(layerStack instanceof Error).to.be.false;
+        let p = layerStack as IfcxLayerStack;
         expect(p.GetLayerIds().length).to.equal(2);
     });
 
     it("respects layer order of the main layer", async () => {
         let provider = ExampleInputLayers();
-        let project = await new IfcxProjectBuilder(provider).FromId("file1").Build();
+        let layerStack = await new IfcxLayerStackBuilder(provider).FromId("file1").Build();
 
-        expect(project instanceof Error).to.be.false;
-        let p = project as IfcxProject;
+        expect(layerStack instanceof Error).to.be.false;
+        let p = layerStack as IfcxLayerStack;
         expect(p.GetLayerIds().length).to.equal(4);
         expect(p.GetLayerIds()[0]).to.equal("file1");
         expect(p.GetLayerIds()[1]).to.equal("file2");
@@ -51,10 +51,10 @@ describe("project builder", () => {
     
     it("respects layer order of the main layer #2", async () => {
         let provider = ExampleInputLayers();
-        let project = await new IfcxProjectBuilder(provider).FromId("file2").Build();
+        let layerStack = await new IfcxLayerStackBuilder(provider).FromId("file2").Build();
 
-        expect(project instanceof Error).to.be.false;
-        let p = project as IfcxProject;
+        expect(layerStack instanceof Error).to.be.false;
+        let p = layerStack as IfcxLayerStack;
         expect(p.GetLayerIds().length).to.equal(4);
         expect(p.GetLayerIds()[0]).to.equal("file2");
         expect(p.GetLayerIds()[1]).to.equal("file4");
@@ -71,10 +71,10 @@ describe("project builder", () => {
                 .add(file1)
                 .add(file2);
 
-        let project = await new IfcxProjectBuilder(provider).FromId(file1.header.id).Build();
+        let layerStack = await new IfcxLayerStackBuilder(provider).FromId(file1.header.id).Build();
 
-        expect(project instanceof Error).to.be.false;
-        let p = project as IfcxProject;
+        expect(layerStack instanceof Error).to.be.false;
+        let p = layerStack as IfcxLayerStack;
         expect(p.GetLayerIds().length).to.equal(2);
     });
 })

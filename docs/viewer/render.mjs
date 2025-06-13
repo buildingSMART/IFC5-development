@@ -1,13 +1,13 @@
-// ifcx-core/project/layer-providers.ts
+// ifcx-core/layers/layer-providers.ts
 var StackedLayerProvider = class {
   providers;
   constructor(providers) {
     this.providers = providers;
   }
-  async GetLayerByID(id) {
+  async GetLayerByURI(uri) {
     let errorStack = [];
     for (let provider of this.providers) {
-      let layer = await provider.GetLayerByID(id);
+      let layer = await provider.GetLayerByURI(uri);
       if (!(layer instanceof Error)) {
         return layer;
       } else {
@@ -22,11 +22,11 @@ var InMemoryLayerProvider = class {
   constructor() {
     this.layers = /* @__PURE__ */ new Map();
   }
-  async GetLayerByID(id) {
-    if (!this.layers.has(id)) {
-      return new Error(`File with id "${id}" not found`);
+  async GetLayerByURI(uri) {
+    if (!this.layers.has(uri)) {
+      return new Error(`File with uri "${uri}" not found`);
     }
-    return this.layers.get(id);
+    return this.layers.get(uri);
   }
   add(file) {
     if (this.layers.has(file.header.id)) {
@@ -49,7 +49,7 @@ function log(bla) {
   }
 }
 
-// ifcx-core/project/fetch-layer-provider.ts
+// ifcx-core/layers/fetch-layer-provider.ts
 var FetchLayerProvider = class {
   layers;
   constructor() {
@@ -67,17 +67,17 @@ var FetchLayerProvider = class {
       return new Error(`Failed to parse json at ${url}: ${e}`);
     }
   }
-  async GetLayerByID(id) {
-    if (!this.layers.has(id)) {
-      let fetched = await this.FetchJson(id);
+  async GetLayerByURI(uri) {
+    if (!this.layers.has(uri)) {
+      let fetched = await this.FetchJson(uri);
       if (fetched instanceof Error) {
-        return new Error(`File with id "${id}" not found`);
+        return new Error(`File with id "${uri}" not found`);
       }
       let file = fetched;
-      this.layers.set(id, file);
+      this.layers.set(uri, file);
       return file;
     }
-    return this.layers.get(id);
+    return this.layers.get(uri);
   }
 };
 
@@ -450,8 +450,8 @@ function Prune(file, deleteEmpty = false) {
   return result;
 }
 
-// ifcx-core/project/project.ts
-var IfcxProject = class {
+// ifcx-core/layers/layer-stack.ts
+var IfcxLayerStack = class {
   // main layer at 0
   layers;
   tree;
@@ -476,7 +476,7 @@ var IfcxProject = class {
     return this.schemas;
   }
 };
-var IfcxProjectBuilder = class {
+var IfcxLayerStackBuilder = class {
   provider;
   mainLayerId = null;
   constructor(provider) {
@@ -493,7 +493,7 @@ var IfcxProjectBuilder = class {
       return layers;
     }
     try {
-      return new IfcxProject(layers);
+      return new IfcxLayerStack(layers);
     } catch (e) {
       return e;
     }
@@ -501,13 +501,13 @@ var IfcxProjectBuilder = class {
   async SatisfyDependencies(activeLayer, placed, orderedLayers) {
     let pending = [];
     for (const using of activeLayer.using) {
-      if (!placed.has(using.id)) {
-        let layer = await this.provider.GetLayerByID(using.id);
+      if (!placed.has(using.uri)) {
+        let layer = await this.provider.GetLayerByURI(using.uri);
         if (layer instanceof Error) {
           return layer;
         }
         pending.push(layer);
-        placed.set(using.id, true);
+        placed.set(using.uri, true);
       }
     }
     let temp = [];
@@ -523,7 +523,7 @@ var IfcxProjectBuilder = class {
     return temp;
   }
   async BuildLayerSet(activeLayerID) {
-    let activeLayer = await this.provider.GetLayerByID(activeLayerID);
+    let activeLayer = await this.provider.GetLayerByURI(activeLayerID);
     if (activeLayer instanceof Error) {
       return activeLayer;
     }
@@ -577,11 +577,11 @@ async function compose3(files) {
     new InMemoryLayerProvider().AddAll(files),
     new FetchLayerProvider()
   ]);
-  let project = await new IfcxProjectBuilder(provider).FromId(files[0].header.id).Build();
-  if (project instanceof Error) {
-    throw project;
+  let layerStack = await new IfcxLayerStackBuilder(provider).FromId(files[0].header.id).Build();
+  if (layerStack instanceof Error) {
+    throw layerStack;
   }
-  return TreeNodeToComposedObject("", project.GetFullTree(), project.GetSchemas());
+  return TreeNodeToComposedObject("", layerStack.GetFullTree(), layerStack.GetSchemas());
 }
 
 // viewer/render.ts
