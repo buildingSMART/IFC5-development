@@ -19,6 +19,7 @@ model IfcxNode {
 }
 
 model IfcxHeader {
+    id: string;
     version: string;
     author: string;
     timestamp: string;
@@ -34,7 +35,8 @@ enum DataType
     Enum: "Enum",
     Array: "Array",
     Object: "Object",
-    Relation: "Relation"
+    Relation: "Relation",
+    Blob: "Blob"
 }
 
 model EnumRestrictions
@@ -78,8 +80,15 @@ model IfcxSchema
     value: IfcxValueDescription;    
 }
 
+model ImportNode
+{
+    uri: string;
+    integrity?: string;
+}
+
 model IfcxFile {
     header: IfcxHeader;
+    "imports": ImportNode[];
     schemas: Record<IfcxSchema>;
     data: IfcxNode[]
 }

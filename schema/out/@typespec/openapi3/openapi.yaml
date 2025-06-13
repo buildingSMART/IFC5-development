@@ -29,6 +29,7 @@ components:
         - Array
         - Object
         - Relation
+        - Blob
     EnumRestrictions:
       type: object
       required:
@@ -42,11 +43,16 @@ components:
       type: object
       required:
         - header
+        - imports
         - schemas
         - data
       properties:
         header:
           $ref: '#/components/schemas/IfcxHeader'
+        imports:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImportNode'
         schemas:
           type: object
           additionalProperties:
@@ -58,10 +64,13 @@ components:
     IfcxHeader:
       type: object
       required:
+        - id
         - version
         - author
         - timestamp
       properties:
+        id:
+          type: string
         version:
           type: string
         author:
@@ -118,6 +127,15 @@ components:
           $ref: '#/components/schemas/ObjectRestrictions'
         relationRestrictions:
           $ref: '#/components/schemas/RelationRestrictions'
+    ImportNode:
+      type: object
+      required:
+        - uri
+      properties:
+        uri:
+          type: string
+        integrity:
+          type: string
     ObjectRestrictions:
       type: object
       required:

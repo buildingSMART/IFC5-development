@@ -13,18 +13,20 @@ export interface components {
             value: components["schemas"]["IfcxValueDescription"];
         };
         /** @enum {string} */
-        DataType: "Real" | "Boolean" | "Integer" | "String" | "DateTime" | "Enum" | "Array" | "Object" | "Relation";
+        DataType: "Real" | "Boolean" | "Integer" | "String" | "DateTime" | "Enum" | "Array" | "Object" | "Relation" | "Blob";
         EnumRestrictions: {
             options: string[];
         };
         IfcxFile: {
             header: components["schemas"]["IfcxHeader"];
+            imports: components["schemas"]["ImportNode"][];
             schemas: {
                 [key: string]: components["schemas"]["IfcxSchema"];
             };
             data: components["schemas"]["IfcxNode"][];
         };
         IfcxHeader: {
+            id: string;
             version: string;
             author: string;
             timestamp: string;
@@ -53,6 +55,10 @@ export interface components {
             arrayRestrictions?: components["schemas"]["ArrayRestrictions"];
             objectRestrictions?: components["schemas"]["ObjectRestrictions"];
             relationRestrictions?: components["schemas"]["RelationRestrictions"];
+        };
+        ImportNode: {
+            uri: string;
+            integrity?: string;
         };
         ObjectRestrictions: {
             values: {

@@ -1,6 +1,6 @@
 import { FlattenCompositionInput, CreateArtificialRoot, ExpandFirstRootInInput } from "./composition/compose";
 import { CompositionInputNode } from "./composition/node";
-import { IfcxFile, IfcxNode } from "./schema/schema-helper";
+import { IfcxFile, IfcxNode, ImportNode } from "./schema/schema-helper";
 import { Validate } from "./schema/schema-validation";
 import { MMSet } from "./util/mm";
 
@@ -19,34 +19,6 @@ function ToInputNodes(data: IfcxNode[])
     return inputNodes;
 }
 
-
-// TODO: don't directly fetch from here, inject a fetcher, this should not be optional in the validation loading flow, this should not be modifying the file
-export async function FetchRemoteSchemas(file: IfcxFile)
-{
-    async function fetchJson(url) {
-        let result = await fetch(url);
-        if (!result.ok) {
-        throw new Error(`Failed to fetch ${url}: ${result.status}`);
-        }
-        return result.json();
-    }
-
-    async function fetchAll(urls) {
-        const promises = urls.map(fetchJson);
-        return await Promise.all(promises);
-    }
-
-    // fetch the remote schemas
-    let schemasURIs = Object.values(file.schemas).map(s => s.uri).filter(s => s);
-    let remoteSchemas = (await fetchAll(schemasURIs)).map(r => r.schemas);
-
-    // modify the file to include the remote schemas
-    remoteSchemas.forEach((remoteSchema) => {
-        Object.keys(remoteSchema).forEach((schemaID) => {
-            file.schemas[schemaID] = remoteSchema[schemaID];
-        })
-    })
-}
 
 // TODO: cleanup options by creating better API
 export function LoadIfcxFile(file: IfcxFile, checkSchemas: boolean = true, createArtificialRoot: boolean = false)
@@ -129,6 +101,7 @@ export function Diff(file1: IfcxFile, file2: IfcxFile)
 {
     let result: IfcxFile = {
         header: file1.header,
+        imports: [],
         schemas: {},
         data: []
     };
@@ -180,8 +153,14 @@ export function Diff(file1: IfcxFile, file2: IfcxFile)
 
 export function Federate(files: IfcxFile[])
 {
+    if (files.length === 0)
+    {
+        throw new Error(`Trying to federate empty set of files`);
+    }
+
     let result: IfcxFile = {
         header: files[0].header,
+        imports: [],
         schemas: {},
         data: []
     };
@@ -241,6 +220,7 @@ function Prune(file: IfcxFile, deleteEmpty: boolean = false)
 {
     let result: IfcxFile = {
         header: file.header,
+        imports: [],
         schemas: file.schemas,
         data: []
     };

@@ -1,13 +1,17 @@
-import { DataType, IfcxFile } from "../ifcx-core/schema/schema-helper";
+import { DataType, IfcxFile, IfcxNode, IfcxSchema, ImportNode } from "../ifcx-core/schema/schema-helper";
+
+// TODO: make builder
 
 export function ExampleFile(attribute: string = "example::string", value: any = "stringvalue")
 {
     return {
         header: {
+            id: "",
             version: "ifcx_alpha",
             author: "tom",
             timestamp: "now"
         },
+        imports: [],
         schemas: {
             "example::string": {
                 uri: "http://www.example.com/string",
@@ -99,10 +103,12 @@ export function ExampleFileMissingSchema()
 {
     return {
         header: {
+            id: "",
             version: "ifcx_alpha",
             author: "tom",
             timestamp: "now"
         },
+        imports: [],
         schemas: {},
         data: [{
             path: "root",
@@ -119,10 +125,12 @@ export function ExampleFileWithSchema(datatype: DataType, data: any)
 {
     return {
         header: {
+            id: "",
             version: "ifcx_alpha",
             author: "tom",
             timestamp: "now"
         },
+        imports: [],
         schemas: {
             "example::attribute": {
                 value: {
@@ -139,4 +147,108 @@ export function ExampleFileWithSchema(datatype: DataType, data: any)
             }
         }]
     } as IfcxFile;
+}
+
+export function ExampleFileWithImport(id: string, value: string, imports: ImportNode[] = [])
+{
+    return {
+        header: {
+            id: id,
+            version: "ifcx_alpha",
+            author: "tom",
+            timestamp: "now"
+        },
+        imports: imports,
+        schemas: {
+            "example::attribute": {
+                value: {
+                    dataType: "String"
+                }
+            },
+        },
+        data: [{
+            path: "root",
+            children: {},
+            inherits: {},
+            attributes: {
+                "example::attribute": value,
+            }
+        }]
+    } as IfcxFile;
+}
+
+export function StringValueSchema()
+{
+    return {
+        value: {
+            dataType: "String"
+        }
+    } as IfcxSchema;
+}
+
+export function NodeWithAttr(id: string, attr: string, value: string)
+{
+    return {
+            path: id,
+            children: {},
+            inherits: {},
+            attributes: {
+                [attr]: value,
+            }
+        }
+}
+
+function EmptyFile()
+{
+    return {
+        header: {
+            id: "",
+            version: "ifcx_alpha",
+            author: "tom",
+            timestamp: "now"
+        },
+        imports: [],
+        schemas: {
+        },
+        data: []
+    } as IfcxFile;
+}
+
+export class IfcxFileBuilder
+{
+    private file: IfcxFile;
+
+    constructor()
+    {
+        this.file = EmptyFile();
+    }
+
+    Id(id: string)
+    {
+        this.file.header.id = id;
+        return this;
+    }
+
+    Import(us: ImportNode)
+    {
+        this.file.imports.push(us);
+        return this;
+    }
+
+    Schema(name: string, schema: IfcxSchema)
+    {
+        this.file.schemas[name] = schema;
+        return this;
+    }    
+
+    Node(node: IfcxNode)
+    {
+        this.file.data.push(node);
+        return this;
+    }
+
+    Build()
+    {
+        return this.file;
+    }
 }

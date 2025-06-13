@@ -1,7 +1,9 @@
-import { Federate, FetchRemoteSchemas, LoadIfcxFile } from "../ifcx-core/workflows";
 import { ComposedObject } from "./composed-object";
 import { IfcxFile, IfcxSchema } from "../ifcx-core/schema/schema-helper";
 import { PostCompositionNode } from "../ifcx-core/composition/node";
+import { InMemoryLayerProvider, StackedLayerProvider } from "../ifcx-core/layers/layer-providers";
+import { FetchLayerProvider } from "../ifcx-core/layers/fetch-layer-provider";
+import { IfcxLayerStackBuilder } from "../ifcx-core/layers/layer-stack";
 
 function TreeNodeToComposedObject(path: string, node: PostCompositionNode, schemas: {[key: string]: IfcxSchema}): ComposedObject
 {
@@ -55,14 +57,33 @@ function TreeNodeToComposedObject(path: string, node: PostCompositionNode, schem
 
 export async function compose3(files: IfcxFile[])
 {
-    let federated = Federate(files);
+    let userDefinedOrder: IfcxFile = {
+        header: {...files[0].header},
+        imports: files.map(f => { return { uri: f.header.id }; }),
+        schemas: {},
+        data: []
+    }
+
+    userDefinedOrder.header.id = "USER_DEF";
+    
+    let provider = new StackedLayerProvider([
+        new InMemoryLayerProvider().AddAll([userDefinedOrder, ...files]), 
+        new FetchLayerProvider()
+    ]);
+
+    let layerStack = await (new IfcxLayerStackBuilder(provider).FromId(userDefinedOrder.header.id)).Build();
+
+    if (layerStack instanceof Error)
+    {
+        throw layerStack;
+    }
+    
     // Add local path to attributes for lookup
     // @todo make this less insane
-    federated.data.forEach((n, i) => {
+    layerStack.GetFederatedLayer().data.forEach((n, i) => {
       n.attributes = n.attributes || {};
       n.attributes[`__internal_${i}`] = n.path;
     });
-    await FetchRemoteSchemas(federated);
-    let tree = LoadIfcxFile(federated, true, true);
-    return TreeNodeToComposedObject("", tree, federated.schemas);
+
+    return TreeNodeToComposedObject("", layerStack.GetFullTree(), layerStack.GetSchemas());
 }
