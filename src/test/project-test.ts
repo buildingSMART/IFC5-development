@@ -7,8 +7,8 @@ import { expect } from "chai";
 
 function ExampleInputLayers()
 {
-    let file1 = ExampleFileWithUsing("file1", "1", [{id: "file2"}, {id: "file3"}, {id: "file4"}]);
-    let file2 = ExampleFileWithUsing("file2", "2", [{id: "file4"}, {id: "file3"}, {id: "file1"}]);
+    let file1 = ExampleFileWithUsing("file1", "1", [{uri: "file2"}, {uri: "file3"}, {uri: "file4"}]);
+    let file2 = ExampleFileWithUsing("file2", "2", [{uri: "file4"}, {uri: "file3"}, {uri: "file1"}]);
     let file3 = ExampleFileWithUsing("file3", "3");
     let file4 = ExampleFileWithUsing("file4", "4");
 
@@ -21,7 +21,7 @@ function ExampleInputLayers()
 
 describe("project builder", () => {
     it("fetches dependencies with provider", async () => {
-        let file1 = ExampleFileWithUsing("file1", "a", [{id: "file2"}]);
+        let file1 = ExampleFileWithUsing("file1", "a", [{uri: "file2"}]);
         let file2 = ExampleFileWithUsing("file2", "b");
 
         let provider = 
@@ -63,7 +63,7 @@ describe("project builder", () => {
     });
     
     it("schemas are found in using", async () => {
-        let file1 = new IfcxFileBuilder().Id("file1").Using({id:"file2"}).Node(NodeWithAttr("root", "attr", "1")).Build();
+        let file1 = new IfcxFileBuilder().Id("file1").Using({uri:"file2"}).Node(NodeWithAttr("root", "attr", "1")).Build();
         let file2 = new IfcxFileBuilder().Id("file2").Schema("attr", StringValueSchema()).Build();
 
         let provider = 

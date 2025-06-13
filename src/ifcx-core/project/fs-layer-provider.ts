@@ -43,16 +43,16 @@ export class FSLayerProvider implements RemoteLayerProvider
         }
     }
 
-    async GetLayerByID(id: string): Promise<IfcxFile | Error> {
+    async GetLayerByURI(uri: string): Promise<IfcxFile | Error> {
         
-        if (!this.layers.has(id))
+        if (!this.layers.has(uri))
         {
             await this.BuildMap();
-            if (!this.layers.has(id))
+            if (!this.layers.has(uri))
             {
-                return new Error(`File with id "${id}" not found`);
+                return new Error(`File with id "${uri}" not found`);
             }
         }
-        return this.layers.get(id)!; 
+        return this.layers.get(uri)!; 
     }
 }

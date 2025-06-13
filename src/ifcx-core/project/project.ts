@@ -83,15 +83,15 @@ export class IfcxProjectBuilder
     {
         let pending: IfcxFile[] = [];
         for (const using of activeLayer.using) {
-            if (!placed.has(using.id))
+            if (!placed.has(using.uri))
             {
-                let layer = await this.provider.GetLayerByID(using.id);
+                let layer = await this.provider.GetLayerByURI(using.uri);
                 if (layer instanceof Error)
                 {
                     return layer;
                 }
                 pending.push(layer);
-                placed.set(using.id, true);
+                placed.set(using.uri, true);
             }
         }
         let temp: IfcxFile[] = [];
@@ -112,7 +112,7 @@ export class IfcxProjectBuilder
 
     private async BuildLayerSet(activeLayerID: string)
     {
-        let activeLayer = await this.provider.GetLayerByID(activeLayerID);
+        let activeLayer = await this.provider.GetLayerByURI(activeLayerID);
         if (activeLayer instanceof Error)
         {
             return activeLayer;

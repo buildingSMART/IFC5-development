@@ -67,8 +67,7 @@ export interface components {
             type: string;
         };
         UsingNode: {
-            id: string;
-            schemaPrefix?: components["schemas"]["path"];
+            uri: string;
             integrity?: string;
         };
         code: string;

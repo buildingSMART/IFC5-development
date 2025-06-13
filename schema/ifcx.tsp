@@ -82,8 +82,7 @@ model IfcxSchema
 
 model UsingNode
 {
-    id: string;
-    schemaPrefix?: path;
+    uri: string;
     integrity?: string;
 }
 

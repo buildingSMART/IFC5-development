@@ -3,7 +3,7 @@ import { log } from "../util/log";
 
 export interface RemoteLayerProvider
 {
-    GetLayerByID(id: string): Promise<IfcxFile | Error>;
+    GetLayerByURI(uri: string): Promise<IfcxFile | Error>;
 }
 
 export class StackedLayerProvider implements RemoteLayerProvider
@@ -14,12 +14,12 @@ export class StackedLayerProvider implements RemoteLayerProvider
         this.providers = providers;
     }
 
-    async GetLayerByID(id: string): Promise<IfcxFile | Error> 
+    async GetLayerByURI(uri: string): Promise<IfcxFile | Error> 
     {
         let errorStack: Error[] = [];
         for (let provider of this.providers)
         {
-            let layer = await provider.GetLayerByID(id);
+            let layer = await provider.GetLayerByURI(uri);
             if (!(layer instanceof Error))
             {
                 return layer;
@@ -43,13 +43,13 @@ export class InMemoryLayerProvider implements RemoteLayerProvider
         this.layers = new Map<string, IfcxFile>();
     }
 
-    async GetLayerByID(id: string): Promise<IfcxFile | Error> {
+    async GetLayerByURI(uri: string): Promise<IfcxFile | Error> {
         
-        if (!this.layers.has(id))
+        if (!this.layers.has(uri))
         {
-            return new Error(`File with id "${id}" not found`);
+            return new Error(`File with uri "${uri}" not found`);
         }
-        return this.layers.get(id)!; 
+        return this.layers.get(uri)!; 
     }
 
     add(file: IfcxFile)

@@ -27,20 +27,20 @@ export class FetchLayerProvider implements RemoteLayerProvider
         }
     }
 
-    async GetLayerByID(id: string): Promise<IfcxFile | Error> {
+    async GetLayerByURI(uri: string): Promise<IfcxFile | Error> {
         
-        if (!this.layers.has(id))
+        if (!this.layers.has(uri))
         {
-            let fetched = await this.FetchJson(id);
+            let fetched = await this.FetchJson(uri);
             if (fetched instanceof Error)
             {
-                return new Error(`File with id "${id}" not found`);
+                return new Error(`File with id "${uri}" not found`);
             }
             // TODO: validation, integrity?
             let file = fetched as IfcxFile;
-            this.layers.set(id, file);
+            this.layers.set(uri, file);
             return file;
         }
-        return this.layers.get(id)!; 
+        return this.layers.get(uri)!; 
     }
 }

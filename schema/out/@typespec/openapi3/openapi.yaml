@@ -163,12 +163,10 @@ components:
     UsingNode:
       type: object
       required:
-        - id
+        - uri
       properties:
-        id:
+        uri:
           type: string
-        schemaPrefix:
-          $ref: '#/components/schemas/path'
         integrity:
           type: string
     code:

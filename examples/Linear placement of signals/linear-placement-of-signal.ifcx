@@ -6,9 +6,9 @@
     "timestamp": "time string"
   },
   "using": [
-    { "id": "https://ifcx.dev/@standards.buildingsmart.org/ifc/core/ifc@v5a.ifcx", "schemaPrefix": "bsi::ifc" },
-    { "id": "https://ifcx.dev/@standards.buildingsmart.org/ifc/core/prop@v5a.ifcx", "schemaPrefix": "bsi::ifc::prop" },
-    { "id": "https://ifcx.dev/@openusd.org/usd@v1.ifcx", "schemaPrefix": "usd" }
+    { "uri": "https://ifcx.dev/@standards.buildingsmart.org/ifc/core/ifc@v5a.ifcx" },
+    { "uri": "https://ifcx.dev/@standards.buildingsmart.org/ifc/core/prop@v5a.ifcx" },
+    { "uri": "https://ifcx.dev/@openusd.org/usd@v1.ifcx" }
   ],
   "schemas": {
     "customdata": {
