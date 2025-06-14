@@ -67,7 +67,7 @@ function ValidateAttributeValue(desc: IfcxValueDescription, value: any, path: st
             throw new SchemaValidationError(`Expected "${value}" to be of type real`);
         }
     }
-    else if (desc.dataType === "Relation")
+    else if (desc.dataType === "Reference")
     {
         if (typeof value !== "string")
         {
