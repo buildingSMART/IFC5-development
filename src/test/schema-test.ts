@@ -10,7 +10,7 @@ describe("schemas", () => {
         let openAPISchema = SchemasToOpenAPI(ExampleFile());
 
         // TODO
-        expect(openAPISchema.length).to.equal(720);
+        expect(openAPISchema.length).to.equal(926);
     });
 
     it("throws error if attribute references unknown schema ID", () => {
@@ -38,6 +38,8 @@ describe("schemas", () => {
         expect(() => LoadIfcxFile(ExampleFile("example::object", {val1: false, val2: "a"}))).to.throw(SchemaValidationError);
         expect(() => LoadIfcxFile(ExampleFile("example::object", {val1: "", val2: "a"}))).to.not.throw(SchemaValidationError);
         
+        expect(() => LoadIfcxFile(ExampleFile("example::optional_object", {val1: null, val2: "a"}))).to.not.throw(SchemaValidationError);
+
         expect(() => LoadIfcxFile(ExampleFileWithSchema("Array", null))).to.throw(SchemaValidationError);
         expect(() => LoadIfcxFile(ExampleFile("example::array", [false]))).to.throw(SchemaValidationError);
         expect(() => LoadIfcxFile(ExampleFile("example::array", ["d"]))).to.throw(SchemaValidationError);

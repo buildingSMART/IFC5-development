@@ -72,6 +72,26 @@ export function ExampleFile(attribute: string = "example::string", value: any = 
                     }
                 }
             },
+            "example::optional_object": {
+                uri: "http://www.example.com/object",
+                value: {
+                    dataType: "Object",
+                    objectRestrictions: {
+                        values: {
+                            "val1": {
+                                dataType: "String",
+                                optional: true
+                            },
+                            "val2": {
+                                dataType: "Enum",
+                                enumRestrictions: {
+                                    options: ["a", "b", "c"]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "example::array": {
                 uri: "http://www.example.com/array",
                 value: {
