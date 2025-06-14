@@ -35,7 +35,7 @@ enum DataType
     Enum: "Enum",
     Array: "Array",
     Object: "Object",
-    Relation: "Relation",
+    Reference: "Reference",
     Blob: "Blob"
 }
 
@@ -57,21 +57,16 @@ model ObjectRestrictions
     values: Record<IfcxValueDescription>;
 }
 
-model RelationRestrictions
-{
-    type: string;
-}
-
 model IfcxValueDescription
 {
     dataType: DataType;
+    optional?: boolean;
     inherits?: string[];
     quantityKind?: QuantityKind;
 
     enumRestrictions?: EnumRestrictions;
     arrayRestrictions?: ArrayRestrictions;
     objectRestrictions?: ObjectRestrictions;
-    relationRestrictions?: RelationRestrictions;
 }
 
 model IfcxSchema

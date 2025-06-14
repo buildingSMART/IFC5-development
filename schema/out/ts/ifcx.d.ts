@@ -13,7 +13,7 @@ export interface components {
             value: components["schemas"]["IfcxValueDescription"];
         };
         /** @enum {string} */
-        DataType: "Real" | "Boolean" | "Integer" | "String" | "DateTime" | "Enum" | "Array" | "Object" | "Relation" | "Blob";
+        DataType: "Real" | "Boolean" | "Integer" | "String" | "DateTime" | "Enum" | "Array" | "Object" | "Reference" | "Blob";
         EnumRestrictions: {
             options: string[];
         };
@@ -49,12 +49,12 @@ export interface components {
         };
         IfcxValueDescription: {
             dataType: components["schemas"]["DataType"];
+            optional?: boolean;
             inherits?: string[];
             quantityKind?: components["schemas"]["QuantityKind"];
             enumRestrictions?: components["schemas"]["EnumRestrictions"];
             arrayRestrictions?: components["schemas"]["ArrayRestrictions"];
             objectRestrictions?: components["schemas"]["ObjectRestrictions"];
-            relationRestrictions?: components["schemas"]["RelationRestrictions"];
         };
         ImportNode: {
             uri: string;
@@ -67,9 +67,6 @@ export interface components {
         };
         /** @enum {string} */
         QuantityKind: "Plane angle" | "Thermodynamic temperature" | "Electric current" | "Time" | "Frequency" | "Mass" | "Length" | "Linear velocity" | "Force" | "Pressure" | "Area" | "Energy" | "Power" | "Volume";
-        RelationRestrictions: {
-            type: string;
-        };
         code: string;
         path: string;
     };

@@ -28,7 +28,7 @@ components:
         - Enum
         - Array
         - Object
-        - Relation
+        - Reference
         - Blob
     EnumRestrictions:
       type: object
@@ -113,6 +113,8 @@ components:
       properties:
         dataType:
           $ref: '#/components/schemas/DataType'
+        optional:
+          type: boolean
         inherits:
           type: array
           items:
@@ -125,8 +127,6 @@ components:
           $ref: '#/components/schemas/ArrayRestrictions'
         objectRestrictions:
           $ref: '#/components/schemas/ObjectRestrictions'
-        relationRestrictions:
-          $ref: '#/components/schemas/RelationRestrictions'
     ImportNode:
       type: object
       required:
@@ -162,13 +162,6 @@ components:
         - Energy
         - Power
         - Volume
-    RelationRestrictions:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
     code:
       type: string
       pattern: </[A-Za-z0-9]+>

@@ -29,7 +29,7 @@ describe("schemas", () => {
         
         expect(() => LoadIfcxFile(ExampleFileWithSchema("Integer", null))).to.throw(SchemaValidationError);
         expect(() => LoadIfcxFile(ExampleFileWithSchema("Real", null))).to.throw(SchemaValidationError);
-        expect(() => LoadIfcxFile(ExampleFileWithSchema("Relation", null))).to.throw(SchemaValidationError);
+        expect(() => LoadIfcxFile(ExampleFileWithSchema("Reference", null))).to.throw(SchemaValidationError);
 
         expect(() => LoadIfcxFile(ExampleFileWithSchema("Object", false))).to.throw(SchemaValidationError);
         expect(() => LoadIfcxFile(ExampleFile("example::object", [null]))).to.throw(SchemaValidationError);
