@@ -8,6 +8,12 @@ export class SchemaValidationError extends Error
 
 function ValidateAttributeValue(desc: IfcxValueDescription, value: any, path: string, schemas: {[key: string]: IfcxSchema})
 {
+    if (desc.optional && value === null)
+    {
+        // we're good
+        return;
+    }
+
     if (desc.inherits)
     {
         desc.inherits.forEach((inheritedSchemaID) => {
