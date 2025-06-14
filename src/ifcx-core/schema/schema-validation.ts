@@ -8,7 +8,7 @@ export class SchemaValidationError extends Error
 
 function ValidateAttributeValue(desc: IfcxValueDescription, value: any, path: string, schemas: {[key: string]: IfcxSchema})
 {
-    if (desc.optional && value === null)
+    if (desc.optional && value === undefined)
     {
         // we're good
         return;
@@ -89,7 +89,11 @@ function ValidateAttributeValue(desc: IfcxValueDescription, value: any, path: st
         if (desc.objectRestrictions)
         {
             Object.keys(desc.objectRestrictions!.values).forEach(key => {
-                if (!Object.hasOwn(value, key))
+                let optional = desc.objectRestrictions!.values[key].optional;
+                let hasOwn = Object.hasOwn(value, key);
+                if (optional && !hasOwn) return; // missing, but optional
+
+                if (!hasOwn)
                 {
                     throw new SchemaValidationError(`Expected "${value}" to have key ${key}`);
                 }
