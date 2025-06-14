@@ -38,7 +38,9 @@ describe("schemas", () => {
         expect(() => LoadIfcxFile(ExampleFile("example::object", {val1: false, val2: "a"}))).to.throw(SchemaValidationError);
         expect(() => LoadIfcxFile(ExampleFile("example::object", {val1: "", val2: "a"}))).to.not.throw(SchemaValidationError);
         
+        expect(() => LoadIfcxFile(ExampleFile("example::optional_object", {val1: "", val2: "a"}))).to.not.throw(SchemaValidationError);
         expect(() => LoadIfcxFile(ExampleFile("example::optional_object", {val1: null, val2: "a"}))).to.not.throw(SchemaValidationError);
+        expect(() => LoadIfcxFile(ExampleFile("example::optional_object", {val1: null, val2: null}))).to.throw(SchemaValidationError);
 
         expect(() => LoadIfcxFile(ExampleFileWithSchema("Array", null))).to.throw(SchemaValidationError);
         expect(() => LoadIfcxFile(ExampleFile("example::array", [false]))).to.throw(SchemaValidationError);
