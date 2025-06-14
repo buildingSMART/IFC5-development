@@ -12,8 +12,8 @@ describe("workflows", () => {
         let federated1 = Federate([file1, file2]);
         let federated2 = Federate([file2, file1]);
 ``
-        let root1 = NodeToJSON(LoadIfcxFile(federated1));
-        let root2 = NodeToJSON(LoadIfcxFile(federated2));
+        let root1 = NodeToJSON(LoadIfcxFile(federated1, true, false));
+        let root2 = NodeToJSON(LoadIfcxFile(federated2, true, false));
 
         expect(root1.attributes.attribute).to.equal("b");
         expect(root2.attributes.attribute).to.equal("a");
@@ -26,7 +26,7 @@ describe("workflows", () => {
         let file2 = DefaultFile("b");
 
         let diff = Diff(file1, file2);
-        let root = NodeToJSON(LoadIfcxFile(diff));
+        let root = NodeToJSON(LoadIfcxFile(diff, true, false));
 
         expect(diff.data.length).to.equal(1);
         expect(root.attributes.attribute).to.equal("b");
@@ -40,7 +40,7 @@ describe("workflows", () => {
         let diff = Diff(file1, file2);
         let federated = Federate([file1, diff]);
 
-        let root = NodeToJSON(LoadIfcxFile(federated));
+        let root = NodeToJSON(LoadIfcxFile(federated, true, false));
         expect(root.attributes.attribute).to.equal("b");
         expect(root.attributes.fixed_attribute).to.exist;
     });
