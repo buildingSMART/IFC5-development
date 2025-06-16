@@ -28,7 +28,7 @@ function ValidateAttributeValue(desc: IfcxValueDescription, value: any, path: st
             let referencedSchema = schemas[referencedSchemaID];
             if (!referencedSchema)
             {
-                throw new SchemaValidationError(`Unknown referenced schema id "${desc.inherits}"`);
+                throw new SchemaValidationError(`Unknown referenced schema id "${desc.allOf}"`);
             }
             ValidateAttributeValue(referencedSchema.value, value, path, schemas);
         });
@@ -41,7 +41,7 @@ function ValidateAttributeValue(desc: IfcxValueDescription, value: any, path: st
             let referencedSchema = schemas[referencedSchemaID];
             if (!referencedSchema)
             {
-                throw new SchemaValidationError(`Unknown referenced schema id "${desc.allOf}"`);
+                throw new SchemaValidationError(`Unknown referenced schema id "${desc.oneOf}"`);
             }
             try
             {
