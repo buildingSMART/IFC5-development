@@ -14,16 +14,50 @@ function ValidateAttributeValue(desc: IfcxValueDescription, value: any, path: st
         return;
     }
 
+    // backwards compatibility
+    //@ts-ignore
     if (desc.inherits)
     {
-        desc.inherits.forEach((inheritedSchemaID) => {
-            let inheritedSchema = schemas[inheritedSchemaID];
-            if (!inheritedSchema)
+        //@ts-ignore
+        desc.allOf = desc.inherits;
+    }
+    
+    if (desc.allOf)
+    {
+        desc.allOf.forEach((referencedSchemaID) => {
+            let referencedSchema = schemas[referencedSchemaID];
+            if (!referencedSchema)
             {
-                throw new SchemaValidationError(`Unknown inherited schema id "${desc.inherits}"`);
+                throw new SchemaValidationError(`Unknown referenced schema id "${desc.inherits}"`);
             }
-            ValidateAttributeValue(inheritedSchema.value, value, path, schemas);
+            ValidateAttributeValue(referencedSchema.value, value, path, schemas);
         });
+    }
+
+    if (desc.oneOf)
+    {
+        let errors: Error[] = [];
+        desc.oneOf.forEach((referencedSchemaID) => {
+            let referencedSchema = schemas[referencedSchemaID];
+            if (!referencedSchema)
+            {
+                throw new SchemaValidationError(`Unknown referenced schema id "${desc.allOf}"`);
+            }
+            try
+            {
+                ValidateAttributeValue(referencedSchema.value, value, path, schemas);
+            }
+            catch(e)
+            {
+                errors.push(e);
+            }
+        });
+
+        // oh god
+        if (errors.length === desc.oneOf.length)
+        {
+            throw new SchemaValidationError(`No match in oneOf: ${JSON.stringify(errors)}`);
+        }
     }
 
     if (desc.dataType === "Boolean")

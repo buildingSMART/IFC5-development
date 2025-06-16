@@ -115,7 +115,11 @@ components:
           $ref: '#/components/schemas/DataType'
         optional:
           type: boolean
-        inherits:
+        oneOf:
+          type: array
+          items:
+            type: string
+        allOf:
           type: array
           items:
             type: string

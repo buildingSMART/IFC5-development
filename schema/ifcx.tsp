@@ -61,7 +61,8 @@ model IfcxValueDescription
 {
     dataType: DataType;
     optional?: boolean;
-    inherits?: string[];
+    oneOf?: string[];
+    allOf?: string[];
     quantityKind?: QuantityKind;
 
     enumRestrictions?: EnumRestrictions;

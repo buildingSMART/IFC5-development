@@ -50,7 +50,8 @@ export interface components {
         IfcxValueDescription: {
             dataType: components["schemas"]["DataType"];
             optional?: boolean;
-            inherits?: string[];
+            oneOf?: string[];
+            allOf?: string[];
             quantityKind?: components["schemas"]["QuantityKind"];
             enumRestrictions?: components["schemas"]["EnumRestrictions"];
             arrayRestrictions?: components["schemas"]["ArrayRestrictions"];
