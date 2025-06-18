@@ -8274,8 +8274,7 @@
           "PredefinedType": "CONSTANTGRADIENT",
           "StartDistAlong": 0,
           "StartGradient": 8.8287435e-17,
-          "StartHeight": 5,
-          "RadiusOfCurvature": 0
+          "StartHeight": 5
         }
       }
     },
@@ -9413,8 +9412,7 @@
           "PredefinedType": "CONSTANTGRADIENT",
           "StartDistAlong": 528.002,
           "StartGradient": -0.01,
-          "StartHeight": 4.7500186,
-          "RadiusOfCurvature": 0
+          "StartHeight": 4.7500186
         }
       }
     },
@@ -10096,8 +10094,7 @@
           "PredefinedType": "CONSTANTGRADIENT",
           "StartDistAlong": 828.00323,
           "StartGradient": 4.2404316e-15,
-          "StartHeight": 2,
-          "RadiusOfCurvature": 0
+          "StartHeight": 2
         }
       }
     },
@@ -10540,8 +10537,7 @@
           "PredefinedType": "CONSTANTGRADIENT",
           "StartDistAlong": 1029.3721,
           "StartGradient": 4.2404316e-15,
-          "StartHeight": 2,
-          "RadiusOfCurvature": 0
+          "StartHeight": 2
         }
       }
     },
