@@ -11,7 +11,7 @@
     { "uri": "https://ifcx.dev/@openusd.org/usd@v1.ifcx" }
   ],
   "schemas": {
-    "ags4::geol":{
+    "ags::ags4::geol":{
       "value": {
         "dataType": "Object",
         "objectRestrictions": {
@@ -94,7 +94,7 @@
     {
       "path": "b330122f-800c-4b8c-b8b3-941628ac5cc7",
       "attributes": {
-        "ags4::geol": {
+        "ags::ags4::geol": {
           "LOCA_ID": "WH_011",
           "GEOL_GEOL": "Alluvium",
           "GEOL_DESC": "Stratified gravelly sand ALLUVIUM",
@@ -121,7 +121,7 @@
     {
       "path": "eb9e55bb-9295-4e68-9773-a7b99c1adfc5",
       "attributes": {
-        "ags4::geol": {
+        "ags::ags4::geol": {
           "LOCA_ID": "WH_011",
           "GEOL_GEOL": "Siltstone",
           "GEOL_DESC": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
@@ -165,7 +165,7 @@
     {
       "path": "b21a3c3d-bd52-453c-a580-749ee6933aab",
       "attributes": {
-        "ags4::geol": {
+        "ags::ags4::geol": {
           "LOCA_ID": "WH_012",
           "GEOL_GEOL": "Alluvium",
           "GEOL_DESC": "Very weak thinly bedded clay-fine sand ALLUVIUM with fractures",
@@ -192,7 +192,7 @@
     {
       "path": "db62dff2-49f1-48fb-bd14-22ee4b7287d4",
       "attributes": {
-        "ags4::geol": {
+        "ags::ags4::geol": {
           "LOCA_ID": "WH_012",
           "GEOL_GEOL": "Siltstone",
           "GEOL_DESC": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
@@ -219,7 +219,7 @@
     {
       "path": "8033e166-acde-426e-aab9-482e0453bfcb",
       "attributes": {
-        "ags4::geol": {
+        "ags::ags4::geol": {
           "LOCA_ID": "WH_012",
           "GEOL_GEOL": "Basement",
           "GEOL_DESC": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
@@ -263,7 +263,7 @@
     {
       "path": "b5fad5e4-4803-42aa-8dfa-1516570f80a9",
       "attributes": {
-        "ags4::geol": {
+        "ags::ags4::geol": {
           "LOCA_ID": "WH_016",
           "GEOL_GEOL": "Limestone",
           "GEOL_DESC": "Weak medium bedded light grey LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
@@ -290,7 +290,7 @@
     {
       "path": "fd2cbfad-4d83-4569-90f6-dbf33f7542e7",
       "attributes": {
-        "ags4::geol": {
+        "ags::ags4::geol": {
           "LOCA_ID": "WH_016",
           "GEOL_GEOL": "Siltstone",
           "GEOL_DESC": "Med-strong very thinly bedded brown slightly calcareous SILTSTONE",
@@ -317,7 +317,7 @@
     {
       "path": "37e96565-4ecb-4ec6-8166-5faf701334a1",
       "attributes": {
-        "ags4::geol": {
+        "ags::ags4::geol": {
           "LOCA_ID": "WH_016",
           "GEOL_GEOL": "Granodiorite",
           "GEOL_DESC": "Very strong massive pale crystalline micro-GRANODIORITE",
