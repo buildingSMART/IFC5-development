@@ -67,6 +67,60 @@
       }
     },
     {
+      "path": "b330122f-800c-4b8c-b8b3-941628ac5cc7",
+      "attributes": {
+        "ags4::geol": {
+          "LOCA_ID": "WH_011",
+          "GEOL_GEOL": "Alluvium",
+          "GEOL_DESC": "Stratified gravelly sand ALLUVIUM",
+          "GEOL_TOP": 0.228,
+          "GEOL_BASE": 28.894
+        }
+      }
+    },
+    {
+      "path": "b330122f-800c-4b8c-b8b3-941628ac5cc7",
+      "attributes": {
+        "usd::usdgeom::basiscurves": {
+          "curveVertexCounts": [2],
+          "points": [
+            [1166184.11, 4888296.167, 546.00963],
+            [1166184.11, 4888296.167, 517.34363]
+          ]
+        },
+        "inherits": {
+          "material":"18f42bad-915d-4a9c-8df0-2225c5ba361b"
+        }
+      }
+    },
+    {
+      "path": "eb9e55bb-9295-4e68-9773-a7b99c1adfc5",
+      "attributes": {
+        "ags4::geol": {
+          "LOCA_ID": "WH_011",
+          "GEOL_GEOL": "Siltstone",
+          "GEOL_DESC": "Med-strong medium bedded brown sandy SILTSTONE with occasional subangular to subrounded pebbles",
+          "GEOL_TOP": 28.894,
+          "GEOL_BASE": 50
+        }
+      }
+    },
+    {
+      "path": "eb9e55bb-9295-4e68-9773-a7b99c1adfc5",
+      "attributes": {
+        "usd::usdgeom::basiscurves": {
+          "curveVertexCounts": [2],
+          "points": [
+            [1166184.11, 4888296.167, 517.34363],
+            [1166184.11, 4888296.167, 496.23763]
+          ]
+        }
+      },
+      "inherits": {
+        "material":"8e8be7ce-ed8e-482a-a48f-e23f8a5b5979"
+      }
+    },
+    {
       "path": "c4eb3a42-b099-47dd-8df4-18d71b6babe6",
       "attributes": {
         "bsi::ifc::class": {
@@ -98,6 +152,18 @@
         "Limestone": "b5fad5e4-4803-42aa-8dfa-1516570f80a9",
         "Siltstone": "fd2cbfad-4d83-4569-90f6-dbf33f7542e7",
         "Granodiorite": "37e96565-4ecb-4ec6-8166-5faf701334a1"
+      }
+    },
+    {
+      "path": "18f42bad-915d-4a9c-8df0-2225c5ba361b",
+      "attributes": {
+        "bsi::ifc::presentation::diffuseColor": [1, 0.835, 0.02]
+      }
+    },
+    {
+      "path": "8e8be7ce-ed8e-482a-a48f-e23f8a5b5979",
+      "attributes": {
+        "bsi::ifc::presentation::diffuseColor": [0.3, 0.6, 0.45]
       }
     }
   ]
