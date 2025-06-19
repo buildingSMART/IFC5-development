@@ -261,6 +261,87 @@
       }
     },
     {
+      "path": "b5fad5e4-4803-42aa-8dfa-1516570f80a9",
+      "attributes": {
+        "ags4::geol": {
+          "LOCA_ID": "WH_016",
+          "GEOL_GEOL": "Limestone",
+          "GEOL_DESC": "Weak medium bedded light grey LIMESTONE with rare interbeds of dark grey argillaceous LIMESTONE",
+          "GEOL_TOP": 0,
+          "GEOL_BASE": 41.868
+        }
+      }
+    },
+    {
+      "path": "b5fad5e4-4803-42aa-8dfa-1516570f80a9",
+      "attributes": {
+        "usd::usdgeom::basiscurves": {
+          "curveVertexCounts": [2],
+          "points": [
+            [1165762.475, 4888326.462, 610.18681],
+            [1165762.475, 4888326.462, 568.31881]
+          ]
+        }
+      },
+      "inherits": {
+        "material":"47cb8d39-d3dd-41f3-a7a7-89ad4bb3e4a1"
+      }
+    },
+    {
+      "path": "fd2cbfad-4d83-4569-90f6-dbf33f7542e7",
+      "attributes": {
+        "ags4::geol": {
+          "LOCA_ID": "WH_016",
+          "GEOL_GEOL": "Siltstone",
+          "GEOL_DESC": "Med-strong very thinly bedded brown slightly calcareous SILTSTONE",
+          "GEOL_TOP": 41.868,
+          "GEOL_BASE": 70.691
+        }
+      }
+    },
+    {
+      "path": "fd2cbfad-4d83-4569-90f6-dbf33f7542e7",
+      "attributes": {
+        "usd::usdgeom::basiscurves": {
+          "curveVertexCounts": [2],
+          "points": [
+            [1165762.475, 4888326.462, 568.31881],
+            [1165762.475, 4888326.462, 539.49581]
+          ]
+        }
+      },
+      "inherits": {
+        "material":"8e8be7ce-ed8e-482a-a48f-e23f8a5b5979"
+      }
+    },
+    {
+      "path": "37e96565-4ecb-4ec6-8166-5faf701334a1",
+      "attributes": {
+        "ags4::geol": {
+          "LOCA_ID": "WH_016",
+          "GEOL_GEOL": "Granodiorite",
+          "GEOL_DESC": "Very strong massive pale crystalline micro-GRANODIORITE",
+          "GEOL_TOP": 70.691,
+          "GEOL_BASE": 300
+        }
+      }
+    },
+    {
+      "path": "37e96565-4ecb-4ec6-8166-5faf701334a1",
+      "attributes": {
+        "usd::usdgeom::basiscurves": {
+          "curveVertexCounts": [2],
+          "points": [
+            [1165762.475, 4888326.462, 539.49581],
+            [1165762.475, 4888326.462, 310.18681]
+          ]
+        }
+      },
+      "inherits": {
+        "material":"0900859c-4229-4c17-8414-2c0cfb1147bd"
+      }
+    },
+    {
       "path": "18f42bad-915d-4a9c-8df0-2225c5ba361b",
       "attributes": {
         "bsi::ifc::presentation::diffuseColor": [1, 0.835, 0.02]
@@ -276,6 +357,18 @@
       "path": "6ce5d1bc-6566-4cba-b6c0-6d46acac0ebe",
       "attributes": {
         "bsi::ifc::presentation::diffuseColor": [0.52, 0.18, 0.78]
+      }
+    },
+    {
+      "path": "47cb8d39-d3dd-41f3-a7a7-89ad4bb3e4a1",
+      "attributes": {
+        "bsi::ifc::presentation::diffuseColor": [0.63, 0.87, 0.98]
+      }
+    },
+    {
+      "path": "0900859c-4229-4c17-8414-2c0cfb1147bd",
+      "attributes": {
+        "bsi::ifc::presentation::diffuseColor": [0.57, 0.98, 0.61]
       }
     }
   ]
