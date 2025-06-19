@@ -1,0 +1,104 @@
+{
+  "header": {
+    "id": "weka-hills-ground-investigation@v1.ifcx",
+    "version": "ifcx_alpha",
+    "author": "Joost Gevaert",
+    "timestamp": "2025-06-19T11:19:08+02:00"
+  },
+  "imports": [
+    { "uri": "https://ifcx.dev/@standards.buildingsmart.org/ifc/core/ifc@v5a.ifcx" },
+    { "uri": "https://ifcx.dev/@standards.buildingsmart.org/ifc/core/prop@v5a.ifcx" },
+    { "uri": "https://ifcx.dev/@openusd.org/usd@v1.ifcx" }
+  ],
+  "schemas": {},
+  "data": [
+    {
+      "path": "3d8b1a43-9845-4362-93d0-fda5127848fb",
+      "children": {
+        "WekaHillsLeapfrogDemo": "613ae64b-2ddd-4577-aff3-a0f722868e76"
+      }
+    },
+    {
+      "path": "613ae64b-2ddd-4577-aff3-a0f722868e76",
+      "attributes": {
+        "bsi::ifc::class": {
+          "code": "IfcProject",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcProject"
+        }
+      }
+    },
+    {
+      "path": "613ae64b-2ddd-4577-aff3-a0f722868e76",
+      "children": {
+        "WekaHills": "a9b7d219-d5a0-4fc7-bf32-fb0a7d57a8dd"
+      }
+    },
+    {
+      "path": "a9b7d219-d5a0-4fc7-bf32-fb0a7d57a8dd",
+      "attributes": {
+        "bsi::ifc::class": {
+          "code": "IfcSite",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcSite"
+        }
+      }
+    },
+    {
+      "path": "a9b7d219-d5a0-4fc7-bf32-fb0a7d57a8dd",
+      "children": {
+        "WH_011": "8e6ea9ea-0f4a-4d22-819c-6136d5f892e0",
+        "WH_012": "c4eb3a42-b099-47dd-8df4-18d71b6babe6",
+        "WH_016": "65e27410-0131-4e1d-a58f-972d6535e0db"
+      }
+    },
+    {
+      "path": "8e6ea9ea-0f4a-4d22-819c-6136d5f892e0",
+      "attributes": {
+        "bsi::ifc::class": {
+          "code": "IfcBorehole",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcBorehole"
+        }
+      }
+    },
+    {
+      "path": "8e6ea9ea-0f4a-4d22-819c-6136d5f892e0",
+      "children": {
+        "Alluvium": "b330122f-800c-4b8c-b8b3-941628ac5cc7",
+        "Siltstone": "eb9e55bb-9295-4e68-9773-a7b99c1adfc5"
+      }
+    },
+    {
+      "path": "c4eb3a42-b099-47dd-8df4-18d71b6babe6",
+      "attributes": {
+        "bsi::ifc::class": {
+          "code": "IfcBorehole",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcBorehole"
+        }
+      }
+    },
+    {
+      "path": "c4eb3a42-b099-47dd-8df4-18d71b6babe6",
+      "children": {
+        "Alluvium": "b21a3c3d-bd52-453c-a580-749ee6933aab",
+        "Siltstone": "db62dff2-49f1-48fb-bd14-22ee4b7287d4",
+        "Basement": "8033e166-acde-426e-aab9-482e0453bfcb"
+      }
+    },
+    {
+      "path": "65e27410-0131-4e1d-a58f-972d6535e0db",
+      "attributes": {
+        "bsi::ifc::class": {
+          "code": "IfcBorehole",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcBorehole"
+        }
+      }
+    },
+    {
+      "path": "65e27410-0131-4e1d-a58f-972d6535e0db",
+      "children": {
+        "Limestone": "b5fad5e4-4803-42aa-8dfa-1516570f80a9",
+        "Siltstone": "fd2cbfad-4d83-4569-90f6-dbf33f7542e7",
+        "Granodiorite": "37e96565-4ecb-4ec6-8166-5faf701334a1"
+      }
+    }
+  ]
+}
