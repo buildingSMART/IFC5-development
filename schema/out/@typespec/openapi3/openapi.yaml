@@ -1,0 +1,170 @@
+openapi: 3.0.0
+info:
+  title: (title)
+  version: 0.0.0
+tags: []
+paths: {}
+components:
+  schemas:
+    ArrayRestrictions:
+      type: object
+      required:
+        - value
+      properties:
+        min:
+          type: number
+        max:
+          type: number
+        value:
+          $ref: '#/components/schemas/IfcxValueDescription'
+    DataType:
+      type: string
+      enum:
+        - Real
+        - Boolean
+        - Integer
+        - String
+        - DateTime
+        - Enum
+        - Array
+        - Object
+        - Reference
+        - Blob
+    EnumRestrictions:
+      type: object
+      required:
+        - options
+      properties:
+        options:
+          type: array
+          items:
+            type: string
+    IfcxFile:
+      type: object
+      required:
+        - header
+        - imports
+        - schemas
+        - data
+      properties:
+        header:
+          $ref: '#/components/schemas/IfcxHeader'
+        imports:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImportNode'
+        schemas:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/IfcxSchema'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/IfcxNode'
+    IfcxHeader:
+      type: object
+      required:
+        - id
+        - version
+        - author
+        - timestamp
+      properties:
+        id:
+          type: string
+        version:
+          type: string
+        author:
+          type: string
+        timestamp:
+          type: string
+    IfcxNode:
+      type: object
+      required:
+        - path
+      properties:
+        path:
+          $ref: '#/components/schemas/path'
+        children:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+        inherits:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+        attributes:
+          type: object
+          additionalProperties: {}
+    IfcxSchema:
+      type: object
+      required:
+        - value
+      properties:
+        uri:
+          type: string
+        value:
+          $ref: '#/components/schemas/IfcxValueDescription'
+    IfcxValueDescription:
+      type: object
+      required:
+        - dataType
+      properties:
+        dataType:
+          $ref: '#/components/schemas/DataType'
+        optional:
+          type: boolean
+        inherits:
+          type: array
+          items:
+            type: string
+        quantityKind:
+          $ref: '#/components/schemas/QuantityKind'
+        enumRestrictions:
+          $ref: '#/components/schemas/EnumRestrictions'
+        arrayRestrictions:
+          $ref: '#/components/schemas/ArrayRestrictions'
+        objectRestrictions:
+          $ref: '#/components/schemas/ObjectRestrictions'
+    ImportNode:
+      type: object
+      required:
+        - uri
+      properties:
+        uri:
+          type: string
+        integrity:
+          type: string
+    ObjectRestrictions:
+      type: object
+      required:
+        - values
+      properties:
+        values:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/IfcxValueDescription'
+    QuantityKind:
+      type: string
+      enum:
+        - Plane angle
+        - Thermodynamic temperature
+        - Electric current
+        - Time
+        - Frequency
+        - Mass
+        - Length
+        - Linear velocity
+        - Force
+        - Pressure
+        - Area
+        - Energy
+        - Power
+        - Volume
+    code:
+      type: string
+      pattern: </[A-Za-z0-9]+>
+    path:
+      type: string
+      pattern: </[A-Za-z0-9_/.:]+>

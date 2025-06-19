@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: 
+      - "main"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies and run tests in ./src
+        working-directory: ./src
+        run: |
+          npm install
+          npm run test

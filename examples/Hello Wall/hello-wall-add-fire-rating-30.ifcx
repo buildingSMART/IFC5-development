@@ -1,0 +1,28 @@
+{
+  "header": {
+    "id": "ifc5.technical.buildingsmart.org/examples/Hello Wall/hello-wall-add-fire-rating-30@v1.ifcx",
+    "version": "ifcx_alpha",
+    "author": "authorname",
+    "timestamp": "time string"
+  },
+  "imports": [],
+  "schemas": {
+    "bsi::ifc::v5a::prop::firerating": {
+      "value": {
+          "dataType": "Enum",
+          "enumRestrictions": {
+            "options": ["R30", "R60"]
+          }
+      }
+    }
+  },
+  "data": [
+    {
+      "path":"93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b",
+      "attributes": {
+        "bsi::ifc::v5a::prop::firerating": "R30"
+      }
+    }
+  ]
+
+}

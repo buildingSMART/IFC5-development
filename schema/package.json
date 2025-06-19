@@ -1,5 +1,5 @@
 {
-  "name": "ifc5-schema",
+  "name": "ifcx-schema",
   "version": "0.1.0",
   "type": "module",
   "peerDependencies": {
@@ -9,11 +9,12 @@
   "devDependencies": {
     "@typespec/compiler": "latest",
     "@typespec/openapi3": "latest",
-    "json-schema-to-typescript": "^15.0.3"
+    "json-schema-to-typescript": "^15.0.3",
+    "openapi-typescript": "^7.6.1"
   },
   "scripts": {
-    "compile": "tsp compile .",
-    "gen": "cd ./out/@typespec/json-schema/ && json2ts Ifc5File.json ./ts/ifc5file.d.ts --no-additionalProperties"
+    "compile": "tsp compile ifcx.tsp",
+    "gen": "npx openapi-typescript ./out/@typespec/openapi3/openapi.yaml -o ./out/ts/ifcx.d.ts"
   },
   "private": true,
   "dependencies": {
