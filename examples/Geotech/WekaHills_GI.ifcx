@@ -10,7 +10,32 @@
     { "uri": "https://ifcx.dev/@standards.buildingsmart.org/ifc/core/prop@v5a.ifcx" },
     { "uri": "https://ifcx.dev/@openusd.org/usd@v1.ifcx" }
   ],
-  "schemas": {},
+  "schemas": {
+    "ags4::geol":{
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "LOCA_ID": {
+              "dataType": "String"
+            },
+            "GEOL_GEOL": {
+              "dataType": "String"
+            },
+            "GEOL_DESC": {
+              "dataType": "String"
+            },
+            "GEOL_TOP": {
+              "dataType": "Real"
+            },
+            "GEOL_BASE": {
+              "dataType": "Real"
+            }
+          }
+        }
+      }
+    }
+  },
   "data": [
     {
       "path": "3d8b1a43-9845-4362-93d0-fda5127848fb",
@@ -87,11 +112,11 @@
             [1166184.11, 4888296.167, 546.00963],
             [1166184.11, 4888296.167, 517.34363]
           ]
-        },
-        "inherits": {
-          "material":"18f42bad-915d-4a9c-8df0-2225c5ba361b"
         }
-      }
+      },
+      "inherits": {
+        "material":"18f42bad-915d-4a9c-8df0-2225c5ba361b"
+        }
     },
     {
       "path": "eb9e55bb-9295-4e68-9773-a7b99c1adfc5",
