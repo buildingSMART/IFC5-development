@@ -1,0 +1,99 @@
+{
+  "header": {
+    "id": "weka-hills-geology-model@v1.ifcx",
+    "version": "ifcx_alpha",
+    "author": "Joost Gevaert",
+    "timestamp": "2025-06-19T11:19:08+02:00"
+  },
+  "imports": [],
+  "schemas": {
+    "ags::agsi::agsiModelElement": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "elementName": {
+              "dataType": "String"
+            },
+            "elementType": {
+              "dataType": "String"
+            }
+          }
+        }
+      }
+    }
+  },
+  "data": [
+    {
+      "path": "a9b7d219-d5a0-4fc7-bf32-fb0a7d57a8dd",
+      "children": {
+        "GeologicalModel": "4b44a542-9b8a-4515-b409-53394f5cf65b"
+      }
+    },
+    {
+      "path": "4b44a542-9b8a-4515-b409-53394f5cf65b",
+      "attributes": {
+        "bsi::ifc::class": {
+          "code": "IfcGeomodel",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcGeomodel"
+        }
+      }
+    },
+    {
+      "path": "4b44a542-9b8a-4515-b409-53394f5cf65b",
+      "children": {
+        "Alluvium": "615c1257-a0e5-4eb6-bac9-606024a12f89",
+        "Limestone": "a4b9f35e-7e3c-4b7f-9db1-b1a4d4c1f8e6",
+        "Siltstone": "4c88b4f7-742f-45e2-83d1-4cba2f53132e",
+        "Granodiorite": "23cc5801-6792-4b34-8518-c561c87b7941",
+        "Basement": "c92ea537-01b0-420e-a201-2c4aebb1803e"
+      }
+    },
+    {
+      "path": "615c1257-a0e5-4eb6-bac9-606024a12f89",
+      "attributes": {
+        "ags::agsi::agsiModelElement": {
+         "elementName": "Alluvium",
+         "elementType": "Geological unit" 
+        }
+      }
+    },
+    {
+      "path": "a4b9f35e-7e3c-4b7f-9db1-b1a4d4c1f8e6",
+      "attributes": {
+        "ags::agsi::agsiModelElement": {
+         "elementName": "Limestone",
+         "elementType": "Geological unit" 
+        }
+      }
+    },
+    {
+      "path": "4c88b4f7-742f-45e2-83d1-4cba2f53132e",
+      "attributes": {
+        "ags::agsi::agsiModelElement": {
+         "elementName": "Siltstone",
+         "elementType": "Geological unit" 
+        }
+      }
+    },
+    {
+      "path": "23cc5801-6792-4b34-8518-c561c87b7941",
+      "attributes": {
+        "ags::agsi::agsiModelElement": {
+         "elementName": "Granodiorite",
+         "elementType": "Geological unit" 
+        }
+      }
+    },
+    {
+      "path": "c92ea537-01b0-420e-a201-2c4aebb1803e",
+      "attributes": {
+        "ags::agsi::agsiModelElement": {
+         "elementName": "Basement",
+         "elementType": "Geological unit" 
+        }
+      }
+    }
+
+  ]
+}
