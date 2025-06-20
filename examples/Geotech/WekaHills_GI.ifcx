@@ -38,36 +38,6 @@
   },
   "data": [
     {
-      "path": "3d8b1a43-9845-4362-93d0-fda5127848fb",
-      "children": {
-        "WekaHillsLeapfrogDemo": "613ae64b-2ddd-4577-aff3-a0f722868e76"
-      }
-    },
-    {
-      "path": "613ae64b-2ddd-4577-aff3-a0f722868e76",
-      "attributes": {
-        "bsi::ifc::class": {
-          "code": "IfcProject",
-          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcProject"
-        }
-      }
-    },
-    {
-      "path": "613ae64b-2ddd-4577-aff3-a0f722868e76",
-      "children": {
-        "WekaHills": "a9b7d219-d5a0-4fc7-bf32-fb0a7d57a8dd"
-      }
-    },
-    {
-      "path": "a9b7d219-d5a0-4fc7-bf32-fb0a7d57a8dd",
-      "attributes": {
-        "bsi::ifc::class": {
-          "code": "IfcSite",
-          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcSite"
-        }
-      }
-    },
-    {
       "path": "a9b7d219-d5a0-4fc7-bf32-fb0a7d57a8dd",
       "children": {
         "WH_011": "8e6ea9ea-0f4a-4d22-819c-6136d5f892e0",
@@ -187,7 +157,7 @@
       },
       "inherits": {
         "material":"18f42bad-915d-4a9c-8df0-2225c5ba361b"
-        }
+      }
     },
     {
       "path": "db62dff2-49f1-48fb-bd14-22ee4b7287d4",
@@ -339,36 +309,6 @@
       },
       "inherits": {
         "material":"0900859c-4229-4c17-8414-2c0cfb1147bd"
-      }
-    },
-    {
-      "path": "18f42bad-915d-4a9c-8df0-2225c5ba361b",
-      "attributes": {
-        "bsi::ifc::presentation::diffuseColor": [1, 0.835, 0.02]
-      }
-    },
-    {
-      "path": "8e8be7ce-ed8e-482a-a48f-e23f8a5b5979",
-      "attributes": {
-        "bsi::ifc::presentation::diffuseColor": [0.3, 0.6, 0.45]
-      }
-    },
-    {
-      "path": "6ce5d1bc-6566-4cba-b6c0-6d46acac0ebe",
-      "attributes": {
-        "bsi::ifc::presentation::diffuseColor": [0.52, 0.18, 0.78]
-      }
-    },
-    {
-      "path": "47cb8d39-d3dd-41f3-a7a7-89ad4bb3e4a1",
-      "attributes": {
-        "bsi::ifc::presentation::diffuseColor": [0.63, 0.87, 0.98]
-      }
-    },
-    {
-      "path": "0900859c-4229-4c17-8414-2c0cfb1147bd",
-      "attributes": {
-        "bsi::ifc::presentation::diffuseColor": [0.57, 0.98, 0.61]
       }
     }
   ]
