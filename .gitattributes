@@ -1,0 +1,9 @@
+# The .gitattributes file can be used to set default behavior to automatically normalize line endings.
+# 1. The way to do it: https://code.visualstudio.com/docs/remote/troubleshooting#_resolving-git-line-ending-issues-in-containers-resulting-in-many-modified-files
+# 2. Another example .gitattributes file from pygimli: https://github.com/JoostGevaert/gimli/blob/master/.gitattributes
+# 3. Great article: https://adaptivepatchwork.com/2012/03/01/mind-the-end-of-your-line/
+# 4. Fix line ending .sh gist: https://gist.github.com/ajdruff/16427061a41ca8c08c05992a6c74f59e
+
+* text=auto eol=lf
+*.{cmd,[cC][mM][dD]} text eol=crlf
+*.{bat,[bB][aA][tT]} text eol=crlf
