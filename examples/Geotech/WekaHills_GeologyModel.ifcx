@@ -12,6 +12,30 @@
   "schemas": {
     "bsi::ifc::prop::name": {
       "value": {"dataType": "String"}
+    },
+    "bsi::ifc::geotechnicalStratum": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "observations": {
+              "dataType": "Array",
+              "arrayRestrictions": {
+                "value": {
+                  "dataType": "Object",
+                  "objectRestrictions": {
+                    "values": {
+                      "ref": {
+                        "dataType": "String"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "data": [
@@ -48,6 +72,17 @@
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcGeotechnicalStratum" 
         },
         "bsi::ifc::prop::name": "Alluvium"
+      }
+    },
+    {
+      "path": "615c1257-a0e5-4eb6-bac9-606024a12f89",
+      "attributes": {
+        "bsi::ifc::geotechnicalStratum": {
+          "observations": [
+            {"ref": "b330122f-800c-4b8c-b8b3-941628ac5cc7"},
+            {"ref": "b21a3c3d-bd52-453c-a580-749ee6933aab"}
+          ]
+        }
       }
     },
     {
@@ -10080,6 +10115,16 @@
     {
       "path": "a4b9f35e-7e3c-4b7f-9db1-b1a4d4c1f8e6",
       "attributes": {
+        "bsi::ifc::geotechnicalStratum": {
+          "observations": [
+            {"ref": "b5fad5e4-4803-42aa-8dfa-1516570f80a9"}
+          ]
+        }
+      }
+    },
+    {
+      "path": "a4b9f35e-7e3c-4b7f-9db1-b1a4d4c1f8e6",
+      "attributes": {
         "usd::usdgeom::mesh": {
           "faceVertexIndices": [
             0,1,2,
@@ -19737,6 +19782,18 @@
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcGeotechnicalStratum" 
         },
         "bsi::ifc::prop::name": "Siltstone"
+      }
+    },
+    {
+      "path": "4c88b4f7-742f-45e2-83d1-4cba2f53132e",
+      "attributes": {
+        "bsi::ifc::geotechnicalStratum": {
+          "observations": [
+            {"ref": "eb9e55bb-9295-4e68-9773-a7b99c1adfc5"},
+            {"ref": "db62dff2-49f1-48fb-bd14-22ee4b7287d4"},
+            {"ref": "fd2cbfad-4d83-4569-90f6-dbf33f7542e7"}
+          ]
+        }
       }
     },
     {
@@ -41230,6 +41287,16 @@
     {
       "path": "23cc5801-6792-4b34-8518-c561c87b7941",
       "attributes": {
+        "bsi::ifc::geotechnicalStratum": {
+          "observations": [
+            {"ref": "37e96565-4ecb-4ec6-8166-5faf701334a1"}
+          ]
+        }
+      }
+    },
+    {
+      "path": "23cc5801-6792-4b34-8518-c561c87b7941",
+      "attributes": {
         "usd::usdgeom::mesh": {
           "faceVertexIndices": [
             2195,2181,2184,
@@ -48504,6 +48571,16 @@
           "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcGeotechnicalStratum" 
         },
         "bsi::ifc::prop::name": "Basement"
+      }
+    },
+    {
+      "path": "c92ea537-01b0-420e-a201-2c4aebb1803e",
+      "attributes": {
+        "bsi::ifc::geotechnicalStratum": {
+          "observations": [
+            {"ref": "8033e166-acde-426e-aab9-482e0453bfcb"}
+          ]
+        }
       }
     },
     {
