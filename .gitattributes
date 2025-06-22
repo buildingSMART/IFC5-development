@@ -1,0 +1,7 @@
+# The .gitattributes file can be used to set default behavior to automatically normalize line endings.
+# 1. Great article: https://adaptivepatchwork.com/2012/03/01/mind-the-end-of-your-line/
+# 2. An example .gitattributes file from pygimli: https://github.com/gimli-org/gimli/blob/master/.gitattributes
+
+* text=auto eol=lf
+*.{cmd,[cC][mM][dD]} text eol=crlf
+*.{bat,[bB][aA][tT]} text eol=crlf
