@@ -1,0 +1,41 @@
+{
+  "header": {
+    "id": "04_TopHeading 3-4.ifcx",
+    "version": "ifcx_alpha",
+    "author": "Dan Vlasceanu",
+    "timestamp": "2025-06-25"
+  },
+  "imports": [],
+  "schemas": {},
+  "data": [
+    {
+      "path": "5a26bd1d-fa44-4aaa-9a5e-91a06eed2e52",
+      "children": {
+        "IfcEarthworksCut_003": "IfcEarthworksCut_003"
+      }
+    },
+    {
+      "path": "IfcEarthworksCut_003",
+      "attributes": {
+        "bsi::ifc::v5a::prop::volume": 79.62,
+        "bsi::ifc::v5a::prop::StartMeter": 3,
+        "bsi::ifc::v5a::prop::EndMeter": 4,
+        "bsi::ifc::v5a::prop::DateTime": "2023-10-04",
+        "usd::xformop": {
+          "transform": [
+            [1, 0, 0, 0],
+            [0, 1, 0, 0],
+            [0, 0, 1, 0],
+            [3, 0, 0, 1]
+          ]
+        }
+      }
+    },
+    {
+    "path": "IfcEarthworksCut_003",
+      "inherits": {
+        "IfcEarthworksCut_002": "IfcEarthworksCut_002"
+      }
+    }
+  ]
+}
