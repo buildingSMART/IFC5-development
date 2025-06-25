@@ -102,7 +102,7 @@
         "bsi::ifc::v5a::prop::StartMeter": 0,
         "bsi::ifc::v5a::prop::EndMeter": 1,
         "bsi::ifc::v5a::prop::DateTime": "2023-10-03",
-        "bsi::ifc::presentation::diffuseColor": [0.94, 0.60, 0.34]
+        "bsi::ifc::presentation::diffuseColor": [0.098, 0.31, 0.635]
       }
     }
   ]
