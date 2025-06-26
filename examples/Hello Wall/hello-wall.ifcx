@@ -645,7 +645,7 @@
     {
       "path": "93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b",
       "attributes": {
-        "bsi::ifc::prop::isexternal": true
+        "bsi::ifc::prop::IsExternal": true
       }
     },
     {
@@ -1285,7 +1285,7 @@
     {
       "path": "2c2d549f-f9fe-4e22-8590-562fda81a690",
       "attributes": {
-        "bsi::ifc::prop::isexternal": true
+        "bsi::ifc::prop::IsExternal": true
       }
     },
     {
@@ -1341,7 +1341,7 @@
     {
       "path": "592504dc-469a-44d6-9ae8-c801b591679b",
       "attributes": {
-        "bsi::ifc::prop::isexternal": true
+        "bsi::ifc::prop::IsExternal": true
       }
     },
     {
@@ -1530,22 +1530,22 @@
     {
       "path": "25503984-6605-43a1-8597-eae657ff5bea",
       "attributes": {
-        "bsi::ifc::prop::volume": 0.025999999592,
-        "bsi::ifc::prop::height": 1.2
+        "bsi::ifc::prop::Volume": 0.025999999592,
+        "bsi::ifc::prop::Height": 1.2
       }
     },
     {
       "path": "e3035b71-bd9f-4cdc-86fd-b56e2f4605b6",
       "attributes": {
-        "bsi::ifc::prop::volume": 120.0,
-        "bsi::ifc::prop::height": 3.0
+        "bsi::ifc::prop::Volume": 120.0,
+        "bsi::ifc::prop::Height": 3.0
       }
     },
     {
       "path": "93791d5d-5beb-437b-b8ec-2f1f0ba4bf3b",
       "attributes": {
-        "bsi::ifc::prop::volume": 2.783999976,
-        "bsi::ifc::prop::height": 3.0
+        "bsi::ifc::prop::Volume": 2.783999976,
+        "bsi::ifc::prop::Height": 3.0
       }
     },
     {
@@ -1560,9 +1560,9 @@
           0.7,
           0.6
         ],
-        "bsi::ifc-mat::prop::strengthClass": "C24",
-        "bsi::ifc-mat::prop::moistureContent": 0.56,
-        "bsi::ifc-mat::prop::massDensity": 529.0,
+        "bsi::ifc-mat::prop::StrengthClass": "C24",
+        "bsi::ifc-mat::prop::MoistureContent": 0.56,
+        "bsi::ifc-mat::prop::MassDensity": 529.0,
         "bsi::ifc-mat::prop::GWP": {
           "A1-A3": -629.4,
           "A4": 0,
