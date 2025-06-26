@@ -17,7 +17,7 @@
           "quantityKind": "Volume"
       }
     },
-    "bsi::ifc::v5a::prop::StartMeter": {
+    "bsi::ifc::v5a::prop::StartDistanceAlong": {
       "value": {
         "dataType": "Real"
       }
