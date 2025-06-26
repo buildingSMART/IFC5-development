@@ -273,7 +273,10 @@
                         document.querySelector('.error-modal').style.display = 'block';
                     }
                     if (json) {
-                        addModel(file.name, json);
+                        addModel(file.name, json).catch(e => {
+                            document.querySelector('.error-modal .message').innerHTML = e.message;
+                            document.querySelector('.error-modal').style.display = 'block';
+                        });
                     }
                 };
                 reader.readAsText(file);
