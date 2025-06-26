@@ -149,6 +149,12 @@
       }
     },
     {
+      "path": "25503984-6605-43a1-8597-eae657ff5bea",
+      "attributes": {
+        "bsi::ifc::prop::TypeName": "WT01"
+      }
+    },
+    {
       "path": "8fada721-cff8-590b-8d0b-9300b5fe8e18",
       "attributes": {
         "usd::usdgeom::mesh": {
