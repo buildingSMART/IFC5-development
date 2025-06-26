@@ -17,7 +17,7 @@
     {
       "path": "IfcEarthworksCut_002",
       "attributes": {
-        "bsi::ifc::v5a::prop::volume": 79.62,
+        "bsi::ifc::v5a::prop::Volume": 79.62,
         "bsi::ifc::v5a::prop::StartMeter": 2,
         "bsi::ifc::v5a::prop::EndMeter": 3,
         "bsi::ifc::v5a::prop::DateTime": "2023-10-04",

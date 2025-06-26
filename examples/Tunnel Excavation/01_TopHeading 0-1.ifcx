@@ -92,7 +92,7 @@
     {
       "path":"13168941-10d9-4c6a-8c63-505cc302312c",
       "attributes": {
-        "bsi::ifc::v5a::prop::volume": 79.62,
+        "bsi::ifc::v5a::prop::Volume": 79.62,
         "bsi::ifc::v5a::prop::StartMeter": 0,
         "bsi::ifc::v5a::prop::EndMeter": 1,
         "bsi::ifc::v5a::prop::DateTime": "2023-10-03",
