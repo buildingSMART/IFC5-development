@@ -6,27 +6,12 @@
     "timestamp": "2025-06-25"
   },
   "imports": [
-    { "uri": "https://ifcx.dev/@standards.buildingsmart.org/ifc/core/ifc@v5a.ifcx" },
-    { "uri": "https://ifcx.dev/@standards.buildingsmart.org/ifc/core/prop@v5a.ifcx" },
-    { "uri": "https://ifcx.dev/@openusd.org/usd@v1.ifcx" }
+    {"uri": "https://ifcx.dev/@standards.buildingsmart.org/ifc/core/ifc@v5a.ifcx"},
+    {"uri": "https://ifcx.dev/@standards.buildingsmart.org/ifc/core/prop@v5a.ifcx"},
+    {"uri": "https://ifcx.dev/@standards.buildingsmart.org/ifc/ifc-infra/infra@v1.0.0.ifcx"},
+    {"uri": "https://ifcx.dev/@openusd.org/usd@v1.ifcx"}
   ],
-  "schemas": {
-    "bsi::ifc::prop::StartDistanceAlong": {
-      "value": {
-        "dataType": "Real"
-      }
-    },
-     "bsi::ifc::prop::EndMeter": {
-      "value": {
-        "dataType": "Real"
-      }
-    },
-    "bsi::ifc::prop::ExcavationDate": {
-      "value": {
-        "dataType": "DateTime"
-      }
-    }
-  },
+  "schemas": {},
   "data": [
     {
       "path": "3f7e57a2-1b80-466f-9880-c70fdc6de0a6",
