@@ -227,7 +227,7 @@
             <h2>Layer browser (lower takes priority)</h2>
             <div></div>
             <form id="fileForm">
-                <input type="file" id="fileInput" required><button class="file-upload-submit" type="submit">view ></button>
+                <input type="file" id="fileInput" multiple="true" required><button class="file-upload-submit" type="submit">view ></button>
             </form>
             <form id="urlForm">
                 <input type="text" placeholder="url" id="urlInput" name="urlInput" required><button class="url-submit" type="submit">view ></button>
@@ -261,8 +261,7 @@
             event.preventDefault();
 
             const fileInput = document.getElementById('fileInput');
-            const file = fileInput.files[0];
-            if (file) {
+            for (const file of fileInput.files) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     let json = null;
