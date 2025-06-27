@@ -11,16 +11,16 @@
     {
       "path": "5a26bd1d-fa44-4aaa-9a5e-91a06eed2e52",
       "children": {
-        "IfcEarthworksCut_008": "IfcEarthworksCut_008"
+        "IfcEarthworksCut_008": "7ac8b679-1f32-4b2b-a04f-cdf9f2de5d83"
       }
     },
     {
-      "path": "IfcEarthworksCut_008",
+      "path": "7ac8b679-1f32-4b2b-a04f-cdf9f2de5d83",
       "attributes": {
-        "bsi::ifc::v5a::prop::Volume": 79.62,
-        "bsi::ifc::v5a::prop::StartMeter": 6,
-        "bsi::ifc::v5a::prop::EndMeter": 7,
-        "bsi::ifc::v5a::prop::DateTime": "2023-10-10",
+        "bsi::ifc::prop::Volume": 79.62,
+        "bsi::ifc::prop::StartDistanceAlong": 6,
+        "bsi::ifc::prop::EndMeter": 7,
+        "bsi::ifc::prop::ExcavationDate": "2023-10-10",
         "usd::xformop": {
           "transform": [
             [1, 0, 0, 0],
@@ -32,9 +32,9 @@
       }
     },
     {
-    "path": "IfcEarthworksCut_008",
+    "path": "7ac8b679-1f32-4b2b-a04f-cdf9f2de5d83",
       "inherits": {
-        "IfcEarthworksCut_007": "IfcEarthworksCut_007"
+        "IfcEarthworksCut_007": "3e922a2a-1d08-4c0d-a92b-b2ddda1b9cd6"
       }
     }
   ]

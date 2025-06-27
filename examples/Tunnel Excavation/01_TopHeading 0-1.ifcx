@@ -11,17 +11,17 @@
     { "uri": "https://ifcx.dev/@openusd.org/usd@v1.ifcx" }
   ],
   "schemas": {
-    "bsi::ifc::v5a::prop::StartDistanceAlong": {
+    "bsi::ifc::prop::StartDistanceAlong": {
       "value": {
         "dataType": "Real"
       }
     },
-     "bsi::ifc::v5a::prop::EndMeter": {
+     "bsi::ifc::prop::EndMeter": {
       "value": {
         "dataType": "Real"
       }
     },
-    "bsi::ifc::v5a::prop::DateTime": {
+    "bsi::ifc::prop::ExcavationDate": {
       "value": {
         "dataType": "DateTime"
       }
@@ -29,29 +29,29 @@
   },
   "data": [
     {
-      "path": "a9b7d219-d5a0-4fc7-bf32-fb0a7d57a8dd",
+      "path": "3f7e57a2-1b80-466f-9880-c70fdc6de0a6",
       "children": {
-        "IFC5 Tunnel Exacavation testing": "4b44a542-9b8a-4515-b409-53394f5cf65b"
+        "Tunnel Exacavation Project": "9e3b6df7-6b99-4ad2-8a2a-9e2c9050e38e"
       }
     },
     {
-      "path": "4b44a542-9b8a-4515-b409-53394f5cf65b",
+      "path": "9e3b6df7-6b99-4ad2-8a2a-9e2c9050e38e",
       "children": {
-        "SP4": "e0834921-e095-40f0-8874-3c6bd1ec699e"
+        "SP4": "c1a7465a-9cf5-4db1-bb18-2d88e0381b9c"
       }
     },
     {
-      "path": "e0834921-e095-40f0-8874-3c6bd1ec699e",
+      "path": "c1a7465a-9cf5-4db1-bb18-2d88e0381b9c",
       "children": {
-        "North Tunnel": "e84dc79e-fe9d-4781-9f4b-54dd435cca91"
+        "North Tunnel": "ad2f0d1e-caf1-4652-8ae3-78d6565c10cc"
       }
     },
     {
-      "path": "e84dc79e-fe9d-4781-9f4b-54dd435cca91",
+      "path": "ad2f0d1e-caf1-4652-8ae3-78d6565c10cc",
       "children": {
         "01_Top Heading": "5a26bd1d-fa44-4aaa-9a5e-91a06eed2e52",
-        "02_Bench": "5a26bd1d-fa44-4aaa-9a5e-91a06eed2e53",
-        "03_Invert": "5a26bd1d-fa44-4aaa-9a5e-91a06eed2e54"
+        "02_Bench": "8033e166-acde-426e-aab9-482e0453bfcb",
+        "03_Invert": "44af358b-3160-4063-8a89-a868335ff2nd"
       }
     },
     {
@@ -92,11 +92,69 @@
     {
       "path":"13168941-10d9-4c6a-8c63-505cc302312c",
       "attributes": {
-        "bsi::ifc::v5a::prop::Volume": 79.62,
-        "bsi::ifc::v5a::prop::StartMeter": 0,
-        "bsi::ifc::v5a::prop::EndMeter": 1,
-        "bsi::ifc::v5a::prop::DateTime": "2023-10-03",
-        "bsi::ifc::presentation::diffuseColor": [0.098, 0.31, 0.635]
+        "bsi::ifc::prop::Volume": 79.62,
+        "bsi::ifc::prop::StartDistanceAlong": 0,
+        "bsi::ifc::prop::EndMeter": 1,
+        "bsi::ifc::prop::ExcavationDate": "2023-10-03",
+        "bsi::ifc::presentation::diffuseColor": [0.098, 0.31, 0.635],
+        "bsi::ifc::class": {
+          "code": "IfcEarthworksCut",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcEarthworksCut"
+        }
+      }
+    },
+    {
+      "path": "9e3b6df7-6b99-4ad2-8a2a-9e2c9050e38e",
+      "attributes":{
+        "bsi::ifc::class": {
+          "code": "IfcProject",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcProject"
+        }
+      }
+    },
+    {
+      "path": "c1a7465a-9cf5-4db1-bb18-2d88e0381b9c",
+      "attributes": {
+        "bsi::ifc::class": {
+          "code": "IfcSite",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcSite"
+        }
+      }
+    },
+    {
+      "path": "ad2f0d1e-caf1-4652-8ae3-78d6565c10cc",
+      "attributes": {
+        "bsi::ifc::class": {
+          "code": "IfcFacility",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcFacility"
+        }
+      }
+    },
+    {
+      "path": "5a26bd1d-fa44-4aaa-9a5e-91a06eed2e52",
+      "attributes": {
+        "bsi::ifc::class": {
+          "code": "IfcFacilityPartCommon",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcFacilityPartCommon"
+        }
+      }
+    },
+    {
+      "path": "8033e166-acde-426e-aab9-482e0453bfcb",
+      "attributes": {
+        "bsi::ifc::class": {
+          "code": "IfcFacilityPartCommon",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcFacilityPartCommon"
+        }
+      }
+    },
+    {
+      "path": "44af358b-3160-4063-8a89-a868335ff2nd",
+      "attributes": {
+        "bsi::ifc::class": {
+          "code": "IfcFacilityPartCommon",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcFacilityPartCommon"
+        }
       }
     }
   ]
