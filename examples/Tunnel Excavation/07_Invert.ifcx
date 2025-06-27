@@ -23,7 +23,7 @@
     {
       "path": "9a4bbf36-3373-4765-9322-cbba88d91d4b",
       "attributes": {
-        "bsi::ifc::prop::volume": 182.1,
+        "bsi::ifc::prop::Volume": 182.1,
         "bsi::ifc::prop::StartDistanceAlong": 0,
         "bsi::ifc::prop::EndMeter": 4,
         "bsi::ifc::prop::ExcavationDate": "2023-10-06",

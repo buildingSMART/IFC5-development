@@ -5775,7 +5775,7 @@
       "attributes": {
         "bsi::ifc::alignmenthorizontalsegment": {
           "EndRadiusOfCurvature": 0,
-          "PredefinedType": "LINE",
+          "GeometryType": "LINE",
           "SegmentLength": 387.72327,
           "StartDirection": 0.34992415,
           "StartPoint": [0,0,0],
@@ -6591,7 +6591,7 @@
       "attributes": {
         "bsi::ifc::alignmenthorizontalsegment": {
           "EndRadiusOfCurvature": 1000,
-          "PredefinedType": "CLOTHOID",
+          "GeometryType": "CLOTHOID",
           "SegmentLength": 40,
           "StartDirection": 0.34992415,
           "StartPoint": [364.226749636,132.92183356080204,0],
@@ -6711,7 +6711,7 @@
       "attributes": {
         "bsi::ifc::alignmenthorizontalsegment": {
           "EndRadiusOfCurvature": 1000,
-          "PredefinedType": "CIRCULARARC",
+          "GeometryType": "CIRCULARARC",
           "SegmentLength": 193.46448,
           "StartDirection": 0.36992416,
           "StartPoint": [401.7097776409937,146.8848462505266,0],
@@ -7138,7 +7138,7 @@
       "attributes": {
         "bsi::ifc::alignmenthorizontalsegment": {
           "EndRadiusOfCurvature": 0,
-          "PredefinedType": "CLOTHOID",
+          "GeometryType": "CLOTHOID",
           "SegmentLength": 40,
           "StartDirection": 0.56338865,
           "StartPoint": [574.2192331340048,233.78935553040355,0],
@@ -7258,7 +7258,7 @@
       "attributes": {
         "bsi::ifc::alignmenthorizontalsegment": {
           "EndRadiusOfCurvature": 0,
-          "PredefinedType": "LINE",
+          "GeometryType": "LINE",
           "SegmentLength": 38.981514,
           "StartDirection": 0.5833886,
           "StartPoint": [607.7488206530106,255.6001297608018,0],
@@ -7376,7 +7376,7 @@
       "attributes": {
         "bsi::ifc::alignmenthorizontalsegment": {
           "EndRadiusOfCurvature": -1000,
-          "PredefinedType": "CLOTHOID",
+          "GeometryType": "CLOTHOID",
           "SegmentLength": 40,
           "StartDirection": 0.5833886,
           "StartPoint": [640.2828250250313,277.0733017101884,0],
@@ -7497,7 +7497,7 @@
       "attributes": {
         "bsi::ifc::alignmenthorizontalsegment": {
           "EndRadiusOfCurvature": -1000,
-          "PredefinedType": "CIRCULARARC",
+          "GeometryType": "CIRCULARARC",
           "SegmentLength": 109.43175,
           "StartDirection": 0.56338865,
           "StartPoint": [673.8124125450267,298.8840759508312,0],
@@ -7756,7 +7756,7 @@
       "attributes": {
         "bsi::ifc::alignmenthorizontalsegment": {
           "EndRadiusOfCurvature": 0,
-          "PredefinedType": "CLOTHOID",
+          "GeometryType": "CLOTHOID",
           "SegmentLength": 40,
           "StartDirection": 0.45395687,
           "StartPoint": [769.3415091120405,352.1527694100514,0],
@@ -7877,7 +7877,7 @@
       "attributes": {
         "bsi::ifc::alignmenthorizontalsegment": {
           "EndRadiusOfCurvature": 0,
-          "PredefinedType": "LINE",
+          "GeometryType": "LINE",
           "SegmentLength": 139.77106,
           "StartDirection": 0.43395686,
           "StartPoint": [805.5203023130307,369.2126063099131,0],
@@ -8197,7 +8197,7 @@
       "attributes": {
         "bsi::ifc::alignmenthorizontalsegment": {
           "EndRadiusOfCurvature": 0,
-          "PredefinedType": "LINE",
+          "GeometryType": "LINE",
           "SegmentLength": 0,
           "StartDirection": 0.43395686,
           "StartPoint": [932.3358610360301,427.9813278308138,0],
@@ -8271,7 +8271,7 @@
         "bsi::ifc::alignmentverticalsegment": {
           "EndGradient": 8.8287435e-17,
           "HorizontalLength": 478.0045,
-          "PredefinedType": "CONSTANTGRADIENT",
+          "GeometryType": "CONSTANTGRADIENT",
           "StartDistAlong": 0,
           "StartGradient": 8.8287435e-17,
           "StartHeight": 5
@@ -9268,7 +9268,7 @@
         "bsi::ifc::alignmentverticalsegment": {
           "EndGradient": -0.01,
           "HorizontalLength": 49.9975,
-          "PredefinedType": "CIRCULARARC",
+          "GeometryType": "CIRCULARARC",
           "RadiusOfCurvature": -5000,
           "StartDistAlong": 478.0045,
           "StartGradient": 8.8287435e-17,
@@ -9409,7 +9409,7 @@
         "bsi::ifc::alignmentverticalsegment": {
           "EndGradient": -0.01,
           "HorizontalLength": 250.00375,
-          "PredefinedType": "CONSTANTGRADIENT",
+          "GeometryType": "CONSTANTGRADIENT",
           "StartDistAlong": 528.002,
           "StartGradient": -0.01,
           "StartHeight": 4.7500186
@@ -9950,7 +9950,7 @@
         "bsi::ifc::alignmentverticalsegment": {
           "EndGradient": 4.2404316e-15,
           "HorizontalLength": 49.9975,
-          "PredefinedType": "CIRCULARARC",
+          "GeometryType": "CIRCULARARC",
           "RadiusOfCurvature": 5000,
           "StartDistAlong": 778.00574,
           "StartGradient": -0.01,
@@ -10091,7 +10091,7 @@
         "bsi::ifc::alignmentverticalsegment": {
           "EndGradient": 4.2404316e-15,
           "HorizontalLength": 201.36882,
-          "PredefinedType": "CONSTANTGRADIENT",
+          "GeometryType": "CONSTANTGRADIENT",
           "StartDistAlong": 828.00323,
           "StartGradient": 4.2404316e-15,
           "StartHeight": 2
@@ -10534,7 +10534,7 @@
         "bsi::ifc::alignmentverticalsegment": {
           "EndGradient": 4.2404316e-15,
           "HorizontalLength": 0,
-          "PredefinedType": "CONSTANTGRADIENT",
+          "GeometryType": "CONSTANTGRADIENT",
           "StartDistAlong": 1029.3721,
           "StartGradient": 4.2404316e-15,
           "StartHeight": 2
@@ -10620,7 +10620,7 @@
           "EndCantLeft": 0,
           "EndCantRight": 0,
           "HorizontalLength": 387.72327,
-          "PredefinedType": "CONSTANTCANT",
+          "GeometryType": "CONSTANTCANT",
           "StartCantLeft": 0,
           "StartCantRight": 0,
           "StartDistAlong": 0
@@ -11437,7 +11437,7 @@
           "EndCantLeft": -0.03,
           "EndCantRight": 0.03,
           "HorizontalLength": 40,
-          "PredefinedType": "LINEARTRANSITION",
+          "GeometryType": "LINEARTRANSITION",
           "StartCantLeft": 0,
           "StartCantRight": 0,
           "StartDistAlong": 387.72327
@@ -11558,7 +11558,7 @@
           "EndCantLeft": -0.03,
           "EndCantRight": 0.03,
           "HorizontalLength": 193.46448,
-          "PredefinedType": "CONSTANTCANT",
+          "GeometryType": "CONSTANTCANT",
           "StartCantLeft": -0.03,
           "StartCantRight": 0.03,
           "StartDistAlong": 427.72327
@@ -11986,7 +11986,7 @@
           "EndCantLeft": 0,
           "EndCantRight": 0,
           "HorizontalLength": 40,
-          "PredefinedType": "LINEARTRANSITION",
+          "GeometryType": "LINEARTRANSITION",
           "StartCantLeft": -0.03,
           "StartCantRight": 0.03,
           "StartDistAlong": 621.18774
@@ -12107,7 +12107,7 @@
           "EndCantLeft": 0,
           "EndCantRight": 0,
           "HorizontalLength": 38.981514,
-          "PredefinedType": "CONSTANTCANT",
+          "GeometryType": "CONSTANTCANT",
           "StartCantLeft": 0,
           "StartCantRight": 0,
           "StartDistAlong": 661.18774
@@ -12226,7 +12226,7 @@
           "EndCantLeft": 0.03,
           "EndCantRight": -0.03,
           "HorizontalLength": 40,
-          "PredefinedType": "LINEARTRANSITION",
+          "GeometryType": "LINEARTRANSITION",
           "StartCantLeft": 0,
           "StartCantRight": 0,
           "StartDistAlong": 700.16925
@@ -12348,7 +12348,7 @@
           "EndCantLeft": 0.03,
           "EndCantRight": -0.03,
           "HorizontalLength": 109.43175,
-          "PredefinedType": "CONSTANTCANT",
+          "GeometryType": "CONSTANTCANT",
           "StartCantLeft": 0.03,
           "StartCantRight": -0.03,
           "StartDistAlong": 740.16925
@@ -12608,7 +12608,7 @@
           "EndCantLeft": 0,
           "EndCantRight": 0,
           "HorizontalLength": 40,
-          "PredefinedType": "LINEARTRANSITION",
+          "GeometryType": "LINEARTRANSITION",
           "StartCantLeft": 0.03,
           "StartCantRight": -0.03,
           "StartDistAlong": 849.601
@@ -12730,7 +12730,7 @@
           "EndCantLeft": 0,
           "EndCantRight": 0,
           "HorizontalLength": 139.77106,
-          "PredefinedType": "CONSTANTCANT",
+          "GeometryType": "CONSTANTCANT",
           "StartCantLeft": 0,
           "StartCantRight": 0,
           "StartDistAlong": 889.601
@@ -13051,7 +13051,7 @@
           "EndCantLeft": 0,
           "EndCantRight": 0,
           "HorizontalLength": 0,
-          "PredefinedType": "CONSTANTCANT",
+          "GeometryType": "CONSTANTCANT",
           "StartCantLeft": 0,
           "StartCantRight": 0,
           "StartDistAlong": 1029.3721
