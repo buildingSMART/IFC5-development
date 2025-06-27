@@ -5,7 +5,12 @@
     "author": "Dan Vlasceanu",
     "timestamp": "2025-06-25"
   },
-  "imports": [],
+  "imports": [
+    {"uri": "https://ifcx.dev/@standards.buildingsmart.org/ifc/core/ifc@v5a.ifcx"},
+    {"uri": "https://ifcx.dev/@standards.buildingsmart.org/ifc/core/prop@v5a.ifcx"},
+    {"uri": "https://ifcx.dev/@standards.buildingsmart.org/ifc/ifc-infra/infra@v1.0.0.ifcx"},
+    {"uri": "https://ifcx.dev/@openusd.org/usd@v1.ifcx"}
+  ],
   "schemas": {},
   "data": [
     {
