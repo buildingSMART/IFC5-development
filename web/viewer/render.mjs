@@ -1,3 +1,86 @@
+// ifcx-core/layers/layer-providers.ts
+var StackedLayerProvider = class {
+  providers;
+  constructor(providers) {
+    this.providers = providers;
+  }
+  async GetLayerByURI(uri) {
+    let errorStack = [];
+    for (let provider of this.providers) {
+      let layer = await provider.GetLayerByURI(uri);
+      if (!(layer instanceof Error)) {
+        return layer;
+      } else {
+        errorStack.push(layer);
+      }
+    }
+    return new Error(JSON.stringify(errorStack));
+  }
+};
+var InMemoryLayerProvider = class {
+  layers;
+  constructor() {
+    this.layers = /* @__PURE__ */ new Map();
+  }
+  async GetLayerByURI(uri) {
+    if (!this.layers.has(uri)) {
+      return new Error(`File with uri "${uri}" not found`);
+    }
+    return this.layers.get(uri);
+  }
+  add(file) {
+    if (this.layers.has(file.header.id)) {
+      throw new Error(`Inserting file with duplicate ID "${file.header.id}"`);
+    }
+    this.layers.set(file.header.id, file);
+    return this;
+  }
+  AddAll(files) {
+    files.forEach((f) => this.add(f));
+    return this;
+  }
+};
+
+// ifcx-core/util/log.ts
+var LOG_ENABLED = true;
+function log(bla) {
+  if (LOG_ENABLED) {
+    console.log(`${JSON.stringify(arguments)}`);
+  }
+}
+
+// ifcx-core/layers/fetch-layer-provider.ts
+var FetchLayerProvider = class {
+  layers;
+  constructor() {
+    this.layers = /* @__PURE__ */ new Map();
+  }
+  async FetchJson(url) {
+    let result = await fetch(url);
+    if (!result.ok) {
+      return new Error(`Failed to fetch ${url}: ${result.status}`);
+    }
+    try {
+      return await result.json();
+    } catch (e) {
+      log(url);
+      return new Error(`Failed to parse json at ${url}: ${e}`);
+    }
+  }
+  async GetLayerByURI(uri) {
+    if (!this.layers.has(uri)) {
+      let fetched = await this.FetchJson(uri);
+      if (fetched instanceof Error) {
+        return new Error(`File with id "${uri}" not found`);
+      }
+      let file = fetched;
+      this.layers.set(uri, file);
+      return file;
+    }
+    return this.layers.get(uri);
+  }
+};
+
 // ifcx-core/util/mm.ts
 function MMSet(map, key, value) {
   if (map.has(key)) {
@@ -181,6 +264,9 @@ function AddDataFromPreComposition(input, node, nodes) {
 var SchemaValidationError = class extends Error {
 };
 function ValidateAttributeValue(desc, value, path, schemas) {
+  if (desc.optional && value === void 0) {
+    return;
+  }
   if (desc.inherits) {
     desc.inherits.forEach((inheritedSchemaID) => {
       let inheritedSchema = schemas[inheritedSchemaID];
@@ -218,7 +304,7 @@ function ValidateAttributeValue(desc, value, path, schemas) {
     if (typeof value !== "number") {
       throw new SchemaValidationError(`Expected "${value}" to be of type real`);
     }
-  } else if (desc.dataType === "Relation") {
+  } else if (desc.dataType === "Reference") {
     if (typeof value !== "string") {
       throw new SchemaValidationError(`Expected "${value}" to be of type string`);
     }
@@ -228,7 +314,10 @@ function ValidateAttributeValue(desc, value, path, schemas) {
     }
     if (desc.objectRestrictions) {
       Object.keys(desc.objectRestrictions.values).forEach((key) => {
-        if (!Object.hasOwn(value, key)) {
+        let optional = desc.objectRestrictions.values[key].optional;
+        let hasOwn = Object.hasOwn(value, key);
+        if (optional && !hasOwn) return;
+        if (!hasOwn) {
           throw new SchemaValidationError(`Expected "${value}" to have key ${key}`);
         }
         ValidateAttributeValue(desc.objectRestrictions.values[key], value[key], path + "." + key, schemas);
@@ -280,27 +369,7 @@ function ToInputNodes(data) {
   });
   return inputNodes;
 }
-async function FetchRemoteSchemas(file) {
-  async function fetchJson(url) {
-    let result = await fetch(url);
-    if (!result.ok) {
-      throw new Error(`Failed to fetch ${url}: ${result.status}`);
-    }
-    return result.json();
-  }
-  async function fetchAll(urls) {
-    const promises = urls.map(fetchJson);
-    return await Promise.all(promises);
-  }
-  let schemasURIs = Object.values(file.schemas).map((s) => s.uri).filter((s) => s);
-  let remoteSchemas = (await fetchAll(schemasURIs)).map((r) => r.schemas);
-  remoteSchemas.forEach((remoteSchema) => {
-    Object.keys(remoteSchema).forEach((schemaID) => {
-      file.schemas[schemaID] = remoteSchema[schemaID];
-    });
-  });
-}
-function LoadIfcxFile(file, checkSchemas = true, createArtificialRoot = false) {
+function LoadIfcxFile(file, checkSchemas = true, createArtificialRoot = true) {
   let inputNodes = ToInputNodes(file.data);
   let compositionNodes = FlattenCompositionInput(inputNodes);
   try {
@@ -317,8 +386,12 @@ function LoadIfcxFile(file, checkSchemas = true, createArtificialRoot = false) {
   }
 }
 function Federate(files) {
+  if (files.length === 0) {
+    throw new Error(`Trying to federate empty set of files`);
+  }
   let result = {
     header: files[0].header,
+    imports: [],
     schemas: {},
     data: []
   };
@@ -366,6 +439,7 @@ function Collapse(nodes, deleteEmpty = false) {
 function Prune(file, deleteEmpty = false) {
   let result = {
     header: file.header,
+    imports: [],
     schemas: file.schemas,
     data: []
   };
@@ -381,6 +455,98 @@ function Prune(file, deleteEmpty = false) {
   });
   return result;
 }
+
+// ifcx-core/layers/layer-stack.ts
+var IfcxLayerStack = class {
+  // main layer at 0
+  layers;
+  tree;
+  schemas;
+  federated;
+  constructor(layers) {
+    this.layers = layers;
+    this.Compose();
+  }
+  GetLayerIds() {
+    return this.layers.map((l) => l.header.id);
+  }
+  Compose() {
+    this.federated = Federate(this.layers);
+    this.schemas = this.federated.schemas;
+    this.tree = LoadIfcxFile(this.federated);
+  }
+  GetFullTree() {
+    this.Compose();
+    return this.tree;
+  }
+  GetFederatedLayer() {
+    return this.federated;
+  }
+  GetSchemas() {
+    return this.schemas;
+  }
+};
+var IfcxLayerStackBuilder = class {
+  provider;
+  mainLayerId = null;
+  constructor(provider) {
+    this.provider = provider;
+  }
+  FromId(id) {
+    this.mainLayerId = id;
+    return this;
+  }
+  async Build() {
+    if (!this.mainLayerId) throw new Error(`no main layer ID specified`);
+    let layers = await this.BuildLayerSet(this.mainLayerId);
+    if (layers instanceof Error) {
+      return layers;
+    }
+    try {
+      return new IfcxLayerStack(layers);
+    } catch (e) {
+      return e;
+    }
+  }
+  async SatisfyDependencies(activeLayer, placed, orderedLayers) {
+    let pending = [];
+    for (const impt of activeLayer.imports) {
+      if (!placed.has(impt.uri)) {
+        let layer = await this.provider.GetLayerByURI(impt.uri);
+        if (layer instanceof Error) {
+          return layer;
+        }
+        pending.push(layer);
+        placed.set(impt.uri, true);
+      }
+    }
+    let temp = [];
+    for (const layer of pending) {
+      temp.push(layer);
+      let layers = await this.SatisfyDependencies(layer, placed, orderedLayers);
+      if (layers instanceof Error) {
+        return layers;
+      }
+      temp.push(...layers);
+    }
+    temp.forEach((t) => orderedLayers.push(t));
+    return temp;
+  }
+  async BuildLayerSet(activeLayerID) {
+    let activeLayer = await this.provider.GetLayerByURI(activeLayerID);
+    if (activeLayer instanceof Error) {
+      return activeLayer;
+    }
+    let layerSet = [activeLayer];
+    let placed = /* @__PURE__ */ new Map();
+    placed.set(activeLayer.header.id, true);
+    let result = await this.SatisfyDependencies(activeLayer, placed, layerSet);
+    if (result instanceof Error) {
+      return result;
+    }
+    return layerSet;
+  }
+};
 
 // viewer/compose-flattened.ts
 function TreeNodeToComposedObject(path, node, schemas) {
@@ -417,14 +583,28 @@ function TreeNodeToComposedObject(path, node, schemas) {
   return co;
 }
 async function compose3(files) {
-  let federated = Federate(files);
-  federated.data.forEach((n, i) => {
+  let userDefinedOrder = {
+    header: { ...files[0].header },
+    imports: files.map((f) => {
+      return { uri: f.header.id };
+    }),
+    schemas: {},
+    data: []
+  };
+  userDefinedOrder.header.id = "USER_DEF";
+  let provider = new StackedLayerProvider([
+    new InMemoryLayerProvider().AddAll([userDefinedOrder, ...files]),
+    new FetchLayerProvider()
+  ]);
+  let layerStack = await new IfcxLayerStackBuilder(provider).FromId(userDefinedOrder.header.id).Build();
+  if (layerStack instanceof Error) {
+    throw layerStack;
+  }
+  layerStack.GetFederatedLayer().data.forEach((n, i) => {
     n.attributes = n.attributes || {};
     n.attributes[`__internal_${i}`] = n.path;
   });
-  await FetchRemoteSchemas(federated);
-  let tree = LoadIfcxFile(federated, true, true);
-  return TreeNodeToComposedObject("", tree, federated.schemas);
+  return TreeNodeToComposedObject("", layerStack.GetFullTree(), layerStack.GetSchemas());
 }
 
 // viewer/render.ts
@@ -543,10 +723,10 @@ function createMaterialFromParent(path) {
     opacity: 1
   };
   for (let p of path) {
-    const color = p.attributes ? p.attributes["bsi::ifc::v5a::presentation::diffuseColor"] : null;
+    const color = p.attributes ? p.attributes["bsi::ifc::presentation::diffuseColor"] : null;
     if (color) {
       material.color = new THREE.Color(...color);
-      const opacity = p.attributes["bsi::ifc::v5a::presentation::opacity"];
+      const opacity = p.attributes["bsi::ifc::presentation::opacity"];
       if (opacity) {
         material.transparent = true;
         material.opacity = opacity;
