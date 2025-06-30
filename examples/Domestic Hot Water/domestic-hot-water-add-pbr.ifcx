@@ -1,0 +1,135 @@
+{
+  "header": {
+    "id": "ifc5.technical.buildingsmart.org/examples/Hello Wall/domestic-hot-water-pbr@v1.ifcx",
+    "version": "ifcx_alpha",
+    "author": "authorname",
+    "timestamp": "time string"
+  },
+  "imports": [
+    { "uri": "https://ifcx.dev/@standards.buildingsmart.org/ifc/core/ifc@v5a.ifcx" }
+  ],
+  "schemas": {
+    "gltf::material": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "pbrMetallicRoughness": {
+              "dataType": "Object",
+              "objectRestrictions": {
+                "values": {
+                  "baseColorFactor": {
+                    "dataType": "Array",
+                    "arrayRestrictions": {
+                      "min": 4,
+                      "max": 4,
+                      "value": {
+                        "dataType": "Real"
+                      }
+                    }
+                  },
+                  "baseColorTexture": {
+                    "dataType": "String"
+                  },
+                  "metallicFactor": {
+                    "dataType": "Real"
+                  },
+                  "roughnessFactor": {
+                    "dataType": "Real"
+                  },
+                  "metallicRoughnessTexture": {
+                    "dataType": "String"
+                  }
+                }
+              }
+            }
+          },
+          "normalTexture": {
+            "dataType": "Object",
+            "objectRestrictions": {
+              "values": {
+                "texture": {
+                  "dataType": "String"
+                },
+                "scale": {
+                  "dataType": "Real"
+                }
+              }
+            }
+          },
+          "occlusionTexture": {
+            "dataType": "Object",
+            "objectRestrictions": {
+              "values": {
+                "texture": {
+                  "dataType": "String"
+                },
+                "strength": {
+                  "dataType": "Real"
+                }
+              }
+            }
+          },
+          "emissiveTexture": {
+            "dataType": "String"
+          },
+          "emissiveFactor": {
+            "dataType": "Array",
+            "arrayRestrictions": {
+              "min": 3,
+              "max": 3,
+              "value": {
+                "dataType": "Real"
+              }
+            }
+          },
+          "alphaMode": {
+            "dataType": "Enum",
+            "enumRestrictions": {
+              "options": [
+                "OPAQUE",
+                "MASK",
+                "BLEND"
+              ]
+            }
+          },
+          "alphaCutoff": {
+            "dataType": "Real"
+          },
+          "doubleSided": {
+            "dataType": "Boolean"
+          }
+        }
+      }
+    }
+  },
+  "data": [
+    {
+      "path": "121ccdc4-1832-5f08-8f46-fb39f8f3cfeb",
+      "attributes": {
+        "gltf::material": {
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [1, 1, 1, 1],
+            "baseColorTexture": "/some/url/here.webp",
+            "metallicFactor": 0.5,
+            "roughnessFactor": 0.5,
+            "metallicRoughnessTexture": "/some/url/here.webp"
+          },
+          "normalTexture": {
+            "texture": "/some/url/here.webp",
+            "scale": 1.0
+          },
+          "occlusionTexture": {
+            "texture": "/some/url/here.webp",
+            "strength": 1.0
+          },
+          "emissiveTexture": "/some/url/here.webp",
+          "emissiveFactor": [0.5, 0.5, 1.0],
+          "alphaMode": "OPAQUE",
+          "alphaCutoff": 0.5,
+          "doubleSided": false
+        }
+      }
+    }
+  ]
+}
