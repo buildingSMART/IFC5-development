@@ -4,6 +4,9 @@
 import { ComposedObject } from './composed-object';
 import { IfcxFile } from '../ifcx-core/schema/schema-helper';
 import { compose3 } from './compose-flattened';
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 
 let controls, renderer, scene, camera;
 type datastype = [string, IfcxFile][];
@@ -22,7 +25,7 @@ let selectedDom: HTMLElement | null = null;
 
 
 // hack
-let THREE = window["THREE"];
+// let THREE = window["THREE"];
 let raycaster = new THREE.Raycaster();
 let mouse = new THREE.Vector2();
 
@@ -54,11 +57,26 @@ function init() {
         logarithmicDepthBuffer: true
     });
 
+    // for GLTF PBR rendering, create environment map using PMREMGenerator:
+    // see https://threejs.org/docs/#api/en/extras/PMREMGenerator
+    
+    let pmremGenerator = new THREE.PMREMGenerator(renderer);
+    pmremGenerator.compileEquirectangularShader();
+    const skybox = new RGBELoader().load("images/wildflower_field_1k.hdr");
+    //skybox.mapping = THREE.EquirectangularReflectionMapping;
+    //skybox.colorSpace = THREE.SRGBColorSpace;
+    console.log(skybox);
+    let pmrem = pmremGenerator.fromEquirectangular(skybox);
+    console.log(pmrem);
+    scene.background = skybox
+    scene.environment = skybox
+
+
     //@ts-ignore
     renderer.setSize(nd.offsetWidth, nd.offsetHeight);
 
     //@ts-ignore
-    controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.25;
 
@@ -260,8 +278,6 @@ function createMeshFromJson(path: ComposedObject[]) {
     const m = createMaterialFromParent(path);
     meshMaterial = new THREE.MeshLambertMaterial({ ...m });
   }
-
-  
 
   return new THREE.Mesh(geometry, meshMaterial);
 }
