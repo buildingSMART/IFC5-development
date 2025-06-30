@@ -109,10 +109,10 @@
       "attributes": {
         "gltf::material": {
           "pbrMetallicRoughness": {
-            "baseColorFactor": [0, 1, 1, 1],
+            "baseColorFactor": [1, 0.9, 0.9, 1],
             "baseColorTexture": "/some/url/here.webp",
-            "metallicFactor": 1.0,
-            "roughnessFactor": 0.0,
+            "metallicFactor": 0.3,
+            "roughnessFactor": 0.15,
             "metallicRoughnessTexture": "/some/url/here.webp"
           },
           "normalTexture": {
