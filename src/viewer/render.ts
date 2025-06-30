@@ -5,7 +5,6 @@ import { ComposedObject } from './composed-object';
 import { IfcxFile } from '../ifcx-core/schema/schema-helper';
 import { compose3 } from './compose-flattened';
 
-
 let controls, renderer, scene, camera;
 type datastype = [string, IfcxFile][];
 let datas: datastype = [];
@@ -152,8 +151,63 @@ function onCanvasClick(event) {
     }
 }
 
+function tryCreateMeshGltfMaterial(path: ComposedObject[]) {
+
+    // check for PBR defined by the gltf::material schema
+    for (let p of path) {
+        if (!p.attributes) {
+            continue;
+        }
+        const pbrMetallicRoughness = p.attributes["gltf::material::pbrMetallicRoughness"];
+        const normalTexture = p.attributes["gltf::material::normalTexture"];
+        const occlusionTexture = p.attributes["gltf::material::occlusionTexture"];
+        const emissiveTexture = p.attributes["gltf::material::emissiveTexture"];
+        const emissiveFactor = p.attributes["gltf::material::emissiveFactor"];
+        const alphaMode = p.attributes["gltf::material::alphaMode"];
+        const alphaCutoff = p.attributes["gltf::material::alphaCutoff"];
+        const doubleSided = p.attributes["gltf::material::doubleSided"];
+        if (!pbrMetallicRoughness && !normalTexture && !occlusionTexture && !emissiveTexture && !emissiveFactor && !alphaMode && !alphaCutoff && !doubleSided) {
+            // if none of the gltf::material properties are defined, we don't use pbr rendering, but default to the bsi::ifc::presentation definitions
+            continue;
+        }
+
+        // otherwise, we know that we want a PBR material. If a property is null, we use the default defined by the gltf specification:
+        // see https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html#reference-material
+
+        let material = new THREE.MeshStandardMaterial();
+
+        // define defaults:
+        material.color = new THREE.Color(1.0, 1.0, 1.0);
+        material.metalness = 1.0;
+        material.roughness = 1.0;
+        
+        if (pbrMetallicRoughness) {
+            let baseColorFactor = pbrMetallicRoughness["baseColorFactor"];
+            if (baseColorFactor) {
+                material.color = new THREE.Color(baseColorFactor[0], baseColorFactor[1], baseColorFactor[2]);
+            }
+
+            let metallicFactor = pbrMetallicRoughness["metallicFactor"];
+            if (metallicFactor) {
+                material.metalness = metallicFactor;
+            }
+
+            let roughnessFactor = pbrMetallicRoughness["roughnessFactor"];
+            if (roughnessFactor) {
+                material.roughness = roughnessFactor;
+            }
+        }
+
+        return material;
+    }
+
+    return undefined
+}
 
 function createMaterialFromParent(path: ComposedObject[]) {
+
+    
+
     let material = {
         color: new THREE.Color(0.6, 0.6, 0.6),
         transparent: false,
@@ -195,9 +249,20 @@ function createMeshFromJson(path: ComposedObject[]) {
   geometry.setIndex(new THREE.BufferAttribute(indices, 1));
   geometry.computeVertexNormals();
   
-  const material = createMaterialFromParent(path);
   
-  let meshMaterial = new THREE.MeshLambertMaterial({ ...material });
+  var meshMaterial;
+  
+  let gltfPbrMaterial = tryCreateMeshGltfMaterial(path);
+  if (gltfPbrMaterial) {
+    meshMaterial = gltfPbrMaterial
+    console.log(meshMaterial)
+  } else {
+    const m = createMaterialFromParent(path);
+    meshMaterial = new THREE.MeshLambertMaterial({ ...m });
+  }
+
+  
+
   return new THREE.Mesh(geometry, meshMaterial);
 }
 
