@@ -202,6 +202,9 @@ function tryCreateMeshGltfMaterial(path: ComposedObject[]) {
         material.metalness = 1.0;
         material.roughness = 1.0;
         
+        // note that not all GLTF properties are converted here yet to the THREE.MeshStandardMaterial PBR material, 
+        // such as reading the texture URLs or from base64, this should be added. 
+
         if (pbrMetallicRoughness) {
             let baseColorFactor = pbrMetallicRoughness["baseColorFactor"];
             if (baseColorFactor) {
