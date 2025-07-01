@@ -16,10 +16,12 @@
           "values": {
             "pbrMetallicRoughness": {
               "dataType": "Object",
+              "optional": false,
               "objectRestrictions": {
                 "values": {
                   "baseColorFactor": {
                     "dataType": "Array",
+                    "optional": true,
                     "arrayRestrictions": {
                       "min": 4,
                       "max": 4,
@@ -29,16 +31,20 @@
                     }
                   },
                   "baseColorTexture": {
-                    "dataType": "String"
+                    "dataType": "String",
+                    "optional": true
                   },
                   "metallicFactor": {
-                    "dataType": "Real"
+                    "dataType": "Real",
+                    "optional": true
                   },
                   "roughnessFactor": {
-                    "dataType": "Real"
+                    "dataType": "Real",
+                    "optional": true
                   },
                   "metallicRoughnessTexture": {
-                    "dataType": "String"
+                    "dataType": "String",
+                    "optional": true
                   }
                 }
               }
@@ -46,35 +52,43 @@
           },
           "normalTexture": {
             "dataType": "Object",
+            "optional": true,
             "objectRestrictions": {
               "values": {
                 "texture": {
-                  "dataType": "String"
+                  "dataType": "String",
+                  "optional": false
                 },
                 "scale": {
-                  "dataType": "Real"
+                  "dataType": "Real",
+                  "optional": true
                 }
               }
             }
           },
           "occlusionTexture": {
             "dataType": "Object",
+            "optional": true,
             "objectRestrictions": {
               "values": {
                 "texture": {
-                  "dataType": "String"
+                  "dataType": "String",
+                  "optional": false
                 },
                 "strength": {
-                  "dataType": "Real"
+                  "dataType": "Real",
+                  "optional": true
                 }
               }
             }
           },
           "emissiveTexture": {
-            "dataType": "String"
+            "dataType": "String",
+            "optional": true
           },
           "emissiveFactor": {
             "dataType": "Array",
+            "optional": true,
             "arrayRestrictions": {
               "min": 3,
               "max": 3,
@@ -85,6 +99,7 @@
           },
           "alphaMode": {
             "dataType": "Enum",
+            "optional": true,
             "enumRestrictions": {
               "options": [
                 "OPAQUE",
@@ -94,10 +109,12 @@
             }
           },
           "alphaCutoff": {
-            "dataType": "Real"
+            "dataType": "Real",
+            "optional": true
           },
           "doubleSided": {
-            "dataType": "Boolean"
+            "dataType": "Boolean",
+            "optional": true
           }
         }
       }
@@ -111,8 +128,8 @@
           "pbrMetallicRoughness": {
             "baseColorFactor": [1, 0.9, 0.9, 1],
             "baseColorTexture": "/some/url/here.webp",
-            "metallicFactor": 0.3,
-            "roughnessFactor": 0.15,
+            "metallicFactor": 0.2,
+            "roughnessFactor": 0.2,
             "metallicRoughnessTexture": "/some/url/here.webp"
           },
           "normalTexture": {
@@ -128,6 +145,18 @@
           "alphaMode": "OPAQUE",
           "alphaCutoff": 0.5,
           "doubleSided": false
+        }
+      }
+    },
+    {
+      "path": "16f44595-547e-572c-88fb-ca5178de317f",
+      "attributes": {
+        "gltf::material": {
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [0.95, 0.95, 0.95, 1.0],
+            "metallicFactor": 0.9,
+            "roughnessFactor": 0.1
+          }
         }
       }
     }
