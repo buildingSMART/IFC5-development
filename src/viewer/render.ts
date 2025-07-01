@@ -232,9 +232,6 @@ function tryCreateMeshGltfMaterial(path: ComposedObject[]) {
 }
 
 function createMaterialFromParent(path: ComposedObject[]) {
-
-    
-
     let material = {
         color: new THREE.Color(0.6, 0.6, 0.6),
         transparent: false,
