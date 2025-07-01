@@ -66,8 +66,9 @@ async function init() {
         .load("images/wildflower_field_1k.hdr", function (texture) {
             envMap = pmremGenerator.fromEquirectangular(texture).texture;
             
-            scene.background = envMap;
-            scene.backgroundRotation.x = 0.5 * Math.PI
+            // uncomment to also show the skybox on screen, instead of only in PBR reflections:
+            //scene.background = envMap;
+            //scene.backgroundRotation.x = 0.5 * Math.PI
             scene.environment = envMap;
     
             texture.dispose();
