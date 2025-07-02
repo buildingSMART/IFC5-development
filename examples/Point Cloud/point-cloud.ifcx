@@ -10,15 +10,82 @@
     { "uri": "https://ifcx.dev/@standards.buildingsmart.org/ifc/core/prop@v5a.ifcx" }
   ],
   "schemas": {
-    
+    "pcd::base64": {
+        "value": {
+            "dataType": "String"
+        }
+    },
+    "points::position::array": {
+        "value": {
+            "dataType": "Array",
+            "arrayRestrictions": {
+                "value": {
+                    "dataType": "Array",
+                    "arrayRestrictions": {
+                        "min": 3,
+                        "max": 3,
+                        "value": {
+                            "dataType": "Real"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "points::position::base64": {
+        "value": {
+            "dataType": "String"
+        }
+    },
+    "points::position_color::array": {
+        "value": {
+            "dataType": "Array",
+            "arrayRestrictions": {
+                "value": {
+                    "dataType": "Object",
+                    "objectRestrictions": {
+                        "values": {
+                            "pos": {
+                                "dataType": "Array",
+                                "arrayRestrictions": {
+                                    "min": 3,
+                                    "max": 3,
+                                    "value": {
+                                        "dataType": "Real"
+                                    }
+                                }
+                            },
+                            "color": {
+                                "dataType": "Array",
+                                "arrayRestrictions": {
+                                    "min": 3,
+                                    "max": 3,
+                                    "value": {
+                                        "dataType": "Real"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "points::position_color::base64": {
+        "value": {
+            "dataType": "String"
+        }
+    }
   },
   "data": [
     {
       "path": "25503984-6605-43a1-8597-eae657ff5bea",
       "children": {
         "Point Cloud PCD - base64": "2dd905c1-07e1-4128-bdc6-070ae1d22478",
-        "Point Cloud json array": "c8834822-676c-4e4c-a3c2-93fb29010969",
-        "Point Cloud base64": "3b861760-6af4-4538-abc3-b6982e819d53"
+        "Point Cloud Position - array": "c8834822-676c-4e4c-a3c2-93fb29010969",
+        "Point Cloud Position - base64": "3b861760-6af4-4538-abc3-b6982e819d53",
+        "Point Cloud Position and color - array": "6438b2a7-2912-4c15-82bd-c348de0e669e",
+        "Point Cloud Position and color - base64": "ea6e5435-d50c-419b-a571-865d010d9e90"
       }
     },
     {
@@ -29,6 +96,12 @@
     },
     {
         "path": "3b861760-6af4-4538-abc3-b6982e819d53"
+    },
+    {
+        "path": "6438b2a7-2912-4c15-82bd-c348de0e669e"
+    },
+    {
+        "path": "ea6e5435-d50c-419b-a571-865d010d9e90"
     }
   ]
 }
