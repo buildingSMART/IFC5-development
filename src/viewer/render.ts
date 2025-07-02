@@ -224,7 +224,7 @@ function tryCreateMeshGltfMaterial(path: ComposedObject[]) {
         material.envMap = envMap
         material.needsUpdate = true
         material.envMapRotation = new THREE.Euler(0.5 * Math.PI, 0, 0);
-        console.log(material)
+        // console.log(material)
         return material;
     }
 
@@ -279,7 +279,7 @@ function createMeshFromJson(path: ComposedObject[]) {
   let gltfPbrMaterial = tryCreateMeshGltfMaterial(path);
   if (gltfPbrMaterial) {
     meshMaterial = gltfPbrMaterial
-    console.log(meshMaterial)
+    // console.log(meshMaterial)
   } else {
     const m = createMaterialFromParent(path);
     meshMaterial = new THREE.MeshLambertMaterial({ ...m });
