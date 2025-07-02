@@ -294,16 +294,27 @@ function createPointsFromJsonPcdBase64(path: ComposedObject[]) {
 }
 
 function createPointsFromJsonArray(path: ComposedObject[]) {
-    let points = new Float32Array(path[0].attributes["points::array::positions"].flat());
-
     const geometry = new THREE.BufferGeometry();
-    geometry.setAttribute("position", new THREE.BufferAttribute(points, 3));
+
+    const positions = new Float32Array(path[0].attributes["points::array::positions"].flat());
+    geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+
+    const colors = path[0].attributes["points::array::colors"];
+    if (colors) {
+        const colors_ = new Float32Array(colors.flat());
+        geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors_, 3));
+    }
 
     const material = new THREE.PointsMaterial();
-    material.sizeAttenuation = true;
+    material.sizeAttenuation = false;
     material.fog = true;
-    material.color = new THREE.Color(0.0, 0.0, 0.0);
-    material.size = 0.01;
+    material.size = 5;
+    material.color = new THREE.Color(colors ? 0xffffff : 0x000000);
+
+    if (colors) {
+        material.vertexColors = true;
+        console.log("vertex colors hell yeah")
+    }
 
     return new THREE.Points(geometry, material);
 }
