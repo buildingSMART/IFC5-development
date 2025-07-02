@@ -339,7 +339,12 @@ function encodeHtmlEntities(str) {
 const icons = {
     'usd::usdgeom::mesh::points': 'deployed_code', 
     'usd::usdgeom::basiscurves::points': 'line_curve',
-    'usd::usdshade::material::outputs::surface.connect': 'line_style'
+    'usd::usdshade::material::outputs::surface.connect': 'line_style',
+    'pcd::base64': 'grain',
+    'points::position::array': 'grain',
+    'points::position::base64': 'grain',
+    'points::position_color::array': 'grain',
+    'points::position_color::base64': 'grain'
 };
 
 function handleClick(prim, pathMapping, root) {

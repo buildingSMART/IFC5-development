@@ -89,19 +89,34 @@
       }
     },
     {
-        "path": "2dd905c1-07e1-4128-bdc6-070ae1d22478"
+        "path": "2dd905c1-07e1-4128-bdc6-070ae1d22478",
+        "attributes": {
+            "pcd::base64": "base64 encoded pcd file"
+        }
     },
     {
-        "path": "c8834822-676c-4e4c-a3c2-93fb29010969"
+        "path": "c8834822-676c-4e4c-a3c2-93fb29010969",
+        "attributes": {
+            "points::position::array": []
+        }
     },
     {
-        "path": "3b861760-6af4-4538-abc3-b6982e819d53"
+        "path": "3b861760-6af4-4538-abc3-b6982e819d53",
+        "attributes": {
+            "points::position::base64": "base64 encoded array of points"
+        }
     },
     {
-        "path": "6438b2a7-2912-4c15-82bd-c348de0e669e"
+        "path": "6438b2a7-2912-4c15-82bd-c348de0e669e",
+        "attributes": {
+            "points::position_color::array": []
+        }
     },
     {
-        "path": "ea6e5435-d50c-419b-a571-865d010d9e90"
+        "path": "ea6e5435-d50c-419b-a571-865d010d9e90",
+        "attributes": {
+            "points::position_color::base64": "base64 encoded array of points with colors"
+        }
     }
   ]
 }
