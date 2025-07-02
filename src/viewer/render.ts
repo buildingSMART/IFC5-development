@@ -302,7 +302,7 @@ function createPointsFromJsonArray(path: ComposedObject[]) {
     const material = new THREE.PointsMaterial();
     material.sizeAttenuation = true;
     material.fog = true;
-    material.color = new THREE.Color(0.5, 0.5, 0.5, 1.0);
+    material.color = new THREE.Color(0.0, 0.0, 0.0);
     material.size = 0.01;
 
     return new THREE.Points(geometry, material);
@@ -321,7 +321,8 @@ function traverseTree(path: ComposedObject[], parent, pathMapping) {
             return;
         }
     }
-    else if (HasAttr(node, "usd::usdgeom::mesh::points")) {
+    else if (HasAttr(node, "usd::usdgeom::mesh::points")) 
+    {
         elem = createMeshFromJson(path);
     } 
     else if (HasAttr(node, "usd::usdgeom::basiscurves::points"))
@@ -333,11 +334,11 @@ function traverseTree(path: ComposedObject[], parent, pathMapping) {
     {
         elem = createPointsFromJsonPcdBase64(path);
     }
-    else if (HasAttr(node, "points::array"))
+    else if (HasAttr(node, "points::array::positions"))
     {
         elem = createPointsFromJsonArray(path);
     }
-    else if (HasAttr(node, "points::base64"))
+    else if (HasAttr(node, "points::base64::positions"))
     {
         elem = createPointsFromJsonPositionBase64(path);
     }
