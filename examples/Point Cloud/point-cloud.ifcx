@@ -16,37 +16,16 @@
             "dataType": "String"
         }
     },
-    "points::position::array": {
+    "points::array": {
         "value": {
-            "dataType": "Array",
-            "arrayRestrictions": {
-                "value": {
-                    "dataType": "Array",
-                    "arrayRestrictions": {
-                        "min": 3,
-                        "max": 3,
-                        "value": {
-                            "dataType": "Real"
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "points::position::base64": {
-        "value": {
-            "dataType": "String"
-        }
-    },
-    "points::position_color::array": {
-        "value": {
-            "dataType": "Array",
-            "arrayRestrictions": {
-                "value": {
-                    "dataType": "Object",
-                    "objectRestrictions": {
-                        "values": {
-                            "pos": {
+            "dataType": "Object",
+            "objectRestrictions": {
+                "values": {
+                    "positions": {
+                        "dataType": "Array",
+                        "optional": false,
+                        "arrayRestrictions": {
+                            "value": {
                                 "dataType": "Array",
                                 "arrayRestrictions": {
                                     "min": 3,
@@ -55,8 +34,14 @@
                                         "dataType": "Real"
                                     }
                                 }
-                            },
-                            "color": {
+                            }
+                        }
+                    },
+                    "colors": {
+                        "dataType": "Array",
+                        "optional": true,
+                        "arrayRestrictions": {
+                            "value": {
                                 "dataType": "Array",
                                 "arrayRestrictions": {
                                     "min": 3,
@@ -72,9 +57,21 @@
             }
         }
     },
-    "points::position_color::base64": {
+    "points::base64": {
         "value": {
-            "dataType": "String"
+            "dataType": "Object",
+            "objectRestrictions": {
+                "values": {
+                    "positions": {
+                        "dataType": "String",
+                        "optional": false
+                    },
+                    "colors": {
+                        "dataType": "String",
+                        "optional": true
+                    }
+                }
+            }
         }
     }
   },
@@ -83,10 +80,10 @@
       "path": "25503984-6605-43a1-8597-eae657ff5bea",
       "children": {
         "Point Cloud PCD - base64": "2dd905c1-07e1-4128-bdc6-070ae1d22478",
-        "Point Cloud Position - array": "c8834822-676c-4e4c-a3c2-93fb29010969",
-        "Point Cloud Position - base64": "3b861760-6af4-4538-abc3-b6982e819d53",
-        "Point Cloud Position and color - array": "6438b2a7-2912-4c15-82bd-c348de0e669e",
-        "Point Cloud Position and color - base64": "ea6e5435-d50c-419b-a571-865d010d9e90"
+        "Point Cloud Array": "c8834822-676c-4e4c-a3c2-93fb29010969",
+        "Point Cloud Array - with color": "6438b2a7-2912-4c15-82bd-c348de0e669e",
+        "Point Cloud base64": "3b861760-6af4-4538-abc3-b6982e819d53",
+        "Point Cloud base64 - with color": "ea6e5435-d50c-419b-a571-865d010d9e90"
       }
     },
     {
@@ -114,7 +111,8 @@
                     [10, 0, 0, 1]
                 ]
             },
-            "points::position::array": [
+            "points::array": {
+                "positions": [
 [-4.515432028932662295e-02,-3.833010286758894384e-03,1.556089379035021369e-01],
 [-2.512684497502375991e-01,-1.493718813718075342e-02,-6.783065007475178043e-03],
 [-1.483911181915458510e-01,-9.462274297979325621e-02,-8.206052652321563223e-02],
@@ -533,21 +531,8 @@
 [1.185110974550330210e-01,4.173712451245766009e-02,-9.766234970631940127e-02],
 [8.755451101874178743e-02,1.314296277429348181e-01,-7.086196339252989751e-02],
 [-6.503814383459957660e-02,1.281614706069247878e-01,9.097961578618621314e-02]
-            ]
-        }
-    },
-    {
-        "path": "3b861760-6af4-4538-abc3-b6982e819d53",
-        "attributes": {
-            "usd::xformop": {
-                "transform": [
-                    [1, 0, 0, 0],
-                    [0, 1, 0, 0],
-                    [0, 0, 1, 0],
-                    [20, 0, 0, 1]
                 ]
-            },
-            "points::position::base64": "base64 encoded array of points"
+            }
         }
     },
     {
@@ -561,12 +546,30 @@
                     [30, 0, 0, 1]
                 ]
             },
-            "points::position_color::array": [
-                {
-                    "pos": [10.0, 11.0, 12.0],
-                    "color": [1.0, 0.0, 1.0]
-                }
-            ]
+            "points::array": {
+                "positions": [
+                    [10.0, 11.0, 12.0]
+                ],
+                "colors": [
+                    [1.0, 0.0, 1.0]
+                ]
+            }
+        }
+    },
+    {
+        "path": "3b861760-6af4-4538-abc3-b6982e819d53",
+        "attributes": {
+            "usd::xformop": {
+                "transform": [
+                    [1, 0, 0, 0],
+                    [0, 1, 0, 0],
+                    [0, 0, 1, 0],
+                    [20, 0, 0, 1]
+                ]
+            },
+            "points::base64": {
+                "positions": "base64 encoded array of positions"
+            }
         }
     },
     {
@@ -580,7 +583,10 @@
                     [40, 0, 0, 1]
                 ]
             },
-            "points::position_color::base64": "base64 encoded array of points with colors"
+            "points::base64": {
+                "positions": "base64 encoded array of positions",
+                "colors": "base64 encoded array of colors"
+            }
         }
     }
   ]
