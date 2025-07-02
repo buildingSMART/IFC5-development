@@ -293,8 +293,8 @@ function createPointsFromJsonPcdBase64(path: ComposedObject[]) {
     return new THREE.Points();
 }
 
-function createPointsFromJsonPositionArray(path: ComposedObject[]) {
-    let points = new Float32Array(path[0].attributes["points::position::array"].flat());
+function createPointsFromJsonArray(path: ComposedObject[]) {
+    let points = new Float32Array(path[0].attributes["points::array::positions"].flat());
 
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute("position", new THREE.BufferAttribute(points, 3));
@@ -309,14 +309,6 @@ function createPointsFromJsonPositionArray(path: ComposedObject[]) {
 }
 
 function createPointsFromJsonPositionBase64(path: ComposedObject[]) {
-    return new THREE.Points();
-}
-
-function createPointsFromJsonPositionColorArray(path: ComposedObject[]) {
-    return new THREE.Points();
-}
-
-function createPointsFromJsonPositionColorBase64(path: ComposedObject[]) {
     return new THREE.Points();
 }
 
@@ -341,21 +333,13 @@ function traverseTree(path: ComposedObject[], parent, pathMapping) {
     {
         elem = createPointsFromJsonPcdBase64(path);
     }
-    else if (HasAttr(node, "points::position::array"))
+    else if (HasAttr(node, "points::array"))
     {
-        elem = createPointsFromJsonPositionArray(path);
+        elem = createPointsFromJsonArray(path);
     }
-    else if (HasAttr(node, "points::position::base64"))
+    else if (HasAttr(node, "points::base64"))
     {
         elem = createPointsFromJsonPositionBase64(path);
-    }
-    else if (HasAttr(node, "points::position_color::array"))
-    {
-        elem = createPointsFromJsonPositionColorArray(path);
-    }
-    else if (HasAttr(node, "points::position_color::base64"))
-    {
-        elem = createPointsFromJsonPositionColorBase64(path);
     }
     
     objectMap[node.name] = elem;
@@ -394,10 +378,8 @@ const icons = {
     'usd::usdgeom::basiscurves::points': 'line_curve',
     'usd::usdshade::material::outputs::surface.connect': 'line_style',
     'pcd::base64': 'grain',
-    'points::position::array': 'grain',
-    'points::position::base64': 'grain',
-    'points::position_color::array': 'grain',
-    'points::position_color::base64': 'grain'
+    'points::array::positions': 'grain',
+    'points::base64::positions': 'grain',
 };
 
 function handleClick(prim, pathMapping, root) {
