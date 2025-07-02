@@ -294,7 +294,17 @@ function createPointsFromJsonPcdBase64(path: ComposedObject[]) {
 }
 
 function createPointsFromJsonPositionArray(path: ComposedObject[]) {
-    return new THREE.Points();
+    let points = new Float32Array(path[0].attributes["points::position::array"].flat());
+
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute("position", new THREE.BufferAttribute(points, 3));
+
+    const material = new THREE.PointsMaterial();
+    material.sizeAttenuation = false;
+    material.color = new THREE.Color(0.5, 0.5, 0.5, 1.0);
+    material.size = 4;
+
+    return new THREE.Points(geometry, material);
 }
 
 function createPointsFromJsonPositionBase64(path: ComposedObject[]) {
