@@ -4,7 +4,9 @@
 import { ComposedObject } from './composed-object';
 import { IfcxFile } from '../ifcx-core/schema/schema-helper';
 import { compose3 } from './compose-flattened';
-
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 
 let controls, renderer, scene, camera;
 type datastype = [string, IfcxFile][];
@@ -22,12 +24,12 @@ let selectedObject: any = null;
 let selectedDom: HTMLElement | null = null;
 
 
-// hack
-let THREE = window["THREE"];
 let raycaster = new THREE.Raycaster();
 let mouse = new THREE.Vector2();
 
-function init() {
+var envMap;
+
+async function init() {
     scene = new THREE.Scene();
     
     // lights
@@ -55,11 +57,29 @@ function init() {
         logarithmicDepthBuffer: true
     });
 
+    // for GLTF PBR rendering, create environment map using PMREMGenerator:
+    // see https://threejs.org/docs/#api/en/extras/PMREMGenerator
+    
+    const pmremGenerator = new THREE.PMREMGenerator(renderer);
+    pmremGenerator.compileEquirectangularShader();
+    new RGBELoader()
+        .load("images/wildflower_field_1k.hdr", function (texture) {
+            envMap = pmremGenerator.fromEquirectangular(texture).texture;
+            
+            // uncomment to also show the skybox on screen, instead of only in PBR reflections:
+            //scene.background = envMap;
+            //scene.backgroundRotation.x = 0.5 * Math.PI
+            scene.environment = envMap;
+    
+            texture.dispose();
+            pmremGenerator.dispose();
+        });
+
     //@ts-ignore
     renderer.setSize(nd.offsetWidth, nd.offsetHeight);
 
     //@ts-ignore
-    controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.25;
 
@@ -152,6 +172,64 @@ function onCanvasClick(event) {
     }
 }
 
+function tryCreateMeshGltfMaterial(path: ComposedObject[]) {
+
+    // check for PBR defined by the gltf::material schema
+    for (let p of path) {
+        if (!p.attributes) {
+            continue;
+        }
+        const pbrMetallicRoughness = p.attributes["gltf::material::pbrMetallicRoughness"];
+        const normalTexture = p.attributes["gltf::material::normalTexture"];
+        const occlusionTexture = p.attributes["gltf::material::occlusionTexture"];
+        const emissiveTexture = p.attributes["gltf::material::emissiveTexture"];
+        const emissiveFactor = p.attributes["gltf::material::emissiveFactor"];
+        const alphaMode = p.attributes["gltf::material::alphaMode"];
+        const alphaCutoff = p.attributes["gltf::material::alphaCutoff"];
+        const doubleSided = p.attributes["gltf::material::doubleSided"];
+        if (!pbrMetallicRoughness && !normalTexture && !occlusionTexture && !emissiveTexture && !emissiveFactor && !alphaMode && !alphaCutoff && !doubleSided) {
+            // if none of the gltf::material properties are defined, we don't use pbr rendering, but default to the bsi::ifc::presentation definitions
+            continue;
+        }
+
+        // otherwise, we know that we want a PBR material. If a property is null, we use the default defined by the gltf specification:
+        // see https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html#reference-material
+
+        let material = new THREE.MeshStandardMaterial();
+
+        // define defaults:
+        material.color = new THREE.Color(1.0, 1.0, 1.0);
+        material.metalness = 1.0;
+        material.roughness = 1.0;
+        
+        // note that not all GLTF properties are converted here yet to the THREE.MeshStandardMaterial PBR material, 
+        // such as reading the texture URLs or from base64, this should be added. 
+
+        if (pbrMetallicRoughness) {
+            let baseColorFactor = pbrMetallicRoughness["baseColorFactor"];
+            if (baseColorFactor) {
+                material.color = new THREE.Color(baseColorFactor[0], baseColorFactor[1], baseColorFactor[2]);
+            }
+
+            let metallicFactor = pbrMetallicRoughness["metallicFactor"];
+            if (metallicFactor !== undefined) {
+                material.metalness = metallicFactor;
+            }
+
+            let roughnessFactor = pbrMetallicRoughness["roughnessFactor"];
+            if (roughnessFactor !== undefined) {
+                material.roughness = roughnessFactor;
+            }
+        }
+        material.envMap = envMap
+        material.needsUpdate = true
+        material.envMapRotation = new THREE.Euler(0.5 * Math.PI, 0, 0);
+        // console.log(material)
+        return material;
+    }
+
+    return undefined
+}
 
 function createMaterialFromParent(path: ComposedObject[]) {
     let material = {
@@ -195,9 +273,18 @@ function createMeshFromJson(path: ComposedObject[]) {
   geometry.setIndex(new THREE.BufferAttribute(indices, 1));
   geometry.computeVertexNormals();
   
-  const material = createMaterialFromParent(path);
   
-  let meshMaterial = new THREE.MeshLambertMaterial({ ...material });
+  var meshMaterial;
+  
+  let gltfPbrMaterial = tryCreateMeshGltfMaterial(path);
+  if (gltfPbrMaterial) {
+    meshMaterial = gltfPbrMaterial
+    // console.log(meshMaterial)
+  } else {
+    const m = createMaterialFromParent(path);
+    meshMaterial = new THREE.MeshLambertMaterial({ ...m });
+  }
+
   return new THREE.Mesh(geometry, meshMaterial);
 }
 
@@ -423,8 +510,12 @@ export async function composeAndRender() {
         return;
     }
 
+    if (!scene) {
+        await init()
+    }
+
     let pathMapping = {};
-    traverseTree([tree], scene || init(), pathMapping);
+    traverseTree([tree], scene, pathMapping);
     currentPathMapping = pathMapping;
     rootPrim = tree;
 
