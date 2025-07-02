@@ -300,9 +300,10 @@ function createPointsFromJsonPositionArray(path: ComposedObject[]) {
     geometry.setAttribute("position", new THREE.BufferAttribute(points, 3));
 
     const material = new THREE.PointsMaterial();
-    material.sizeAttenuation = false;
+    material.sizeAttenuation = true;
+    material.fog = true;
     material.color = new THREE.Color(0.5, 0.5, 0.5, 1.0);
-    material.size = 4;
+    material.size = 0.01;
 
     return new THREE.Points(geometry, material);
 }
