@@ -201,6 +201,27 @@ function createMeshFromJson(path: ComposedObject[]) {
   return new THREE.Mesh(geometry, meshMaterial);
 }
 
+// functions for creating point clouds
+function createPointsFromJsonPcdBase64(path: ComposedObject[]) {
+    return new THREE.Points();
+}
+
+function createPointsFromJsonPositionArray(path: ComposedObject[]) {
+    return new THREE.Points();
+}
+
+function createPointsFromJsonPositionBase64(path: ComposedObject[]) {
+    return new THREE.Points();
+}
+
+function createPointsFromJsonPositionColorArray(path: ComposedObject[]) {
+    return new THREE.Points();
+}
+
+function createPointsFromJsonPositionColorBase64(path: ComposedObject[]) {
+    return new THREE.Points();
+}
+
 function traverseTree(path: ComposedObject[], parent, pathMapping) {
     const node = path[0];
     let elem: any = new THREE.Group();
@@ -209,14 +230,35 @@ function traverseTree(path: ComposedObject[], parent, pathMapping) {
         if (node.attributes["usd::usdgeom::visibility::visibility"] === 'invisible') {
             return;
         }
-    } 
+    }
     else if (HasAttr(node, "usd::usdgeom::mesh::points")) {
         elem = createMeshFromJson(path);
     } 
     else if (HasAttr(node, "usd::usdgeom::basiscurves::points"))
     {
         elem = createCurveFromJson(path);
-    } 
+    }
+    // point cloud data types:
+    else if (HasAttr(node, "pcd::base64"))
+    {
+        elem = createPointsFromJsonPcdBase64(path);
+    }
+    else if (HasAttr(node, "points::position::array"))
+    {
+        elem = createPointsFromJsonPositionArray(path);
+    }
+    else if (HasAttr(node, "points::position::base64"))
+    {
+        elem = createPointsFromJsonPositionBase64(path);
+    }
+    else if (HasAttr(node, "points::position_color::array"))
+    {
+        elem = createPointsFromJsonPositionColorArray(path);
+    }
+    else if (HasAttr(node, "points::position_color::base64"))
+    {
+        elem = createPointsFromJsonPositionColorBase64(path);
+    }
     
     objectMap[node.name] = elem;
     primMap[node.name] = node;
