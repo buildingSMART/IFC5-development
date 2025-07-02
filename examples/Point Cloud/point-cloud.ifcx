@@ -1,0 +1,34 @@
+{
+  "header": {
+    "id": "ifc5.technical.buildingsmart.org/examples/Point Cloud/point-cloud@v1.ifcx",
+    "version": "ifcx_alpha",
+    "author": "authorname",
+    "timestamp": "time string"
+  },
+  "imports": [
+    { "uri": "https://ifcx.dev/@standards.buildingsmart.org/ifc/core/ifc@v5a.ifcx" },
+    { "uri": "https://ifcx.dev/@standards.buildingsmart.org/ifc/core/prop@v5a.ifcx" }
+  ],
+  "schemas": {
+    
+  },
+  "data": [
+    {
+      "path": "25503984-6605-43a1-8597-eae657ff5bea",
+      "children": {
+        "Point Cloud PCD - base64": "2dd905c1-07e1-4128-bdc6-070ae1d22478",
+        "Point Cloud json array": "c8834822-676c-4e4c-a3c2-93fb29010969",
+        "Point Cloud base64": "3b861760-6af4-4538-abc3-b6982e819d53"
+      }
+    },
+    {
+        "path": "2dd905c1-07e1-4128-bdc6-070ae1d22478"
+    },
+    {
+        "path": "c8834822-676c-4e4c-a3c2-93fb29010969"
+    },
+    {
+        "path": "3b861760-6af4-4538-abc3-b6982e819d53"
+    }
+  ]
+}
