@@ -7,6 +7,7 @@ import { compose3 } from './compose-flattened';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
+import { PCDLoader } from 'three/addons/loaders/PCDLoader.js';
 
 let controls, renderer, scene, camera;
 type datastype = [string, IfcxFile][];
@@ -290,7 +291,15 @@ function createMeshFromJson(path: ComposedObject[]) {
 
 // functions for creating point clouds
 function createPointsFromJsonPcdBase64(path: ComposedObject[]) {
-    return new THREE.Points();
+    const base64_string = path[0].attributes["pcd::base64"];
+    const decoded = atob(base64_string);
+    // convert string to ArrayBuffer
+    const buffer = new TextEncoder().encode(decoded)
+    const loader = new PCDLoader();
+    const points = loader.parse(buffer.buffer);
+    points.material.sizeAttenuation = false;
+    points.material.size = 5;
+    return points;
 }
 
 function createPointsFromJsonArray(path: ComposedObject[]) {
