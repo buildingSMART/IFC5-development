@@ -313,7 +313,6 @@ function createPointsFromJsonArray(path: ComposedObject[]) {
 
     if (colors) {
         material.vertexColors = true;
-        console.log("vertex colors hell yeah")
     }
 
     return new THREE.Points(geometry, material);
