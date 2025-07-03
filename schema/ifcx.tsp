@@ -19,10 +19,11 @@ model IfcxNode {
 }
 
 model IfcxHeader {
-    id: string;
-    version: string;
-    author: string;
-    timestamp: string;
+    id: string;             // identifier of the dataset; name or path e.g. "ifc5.technical.buildingsmart.org/examples/example@v1.ifcx"
+    ifcxVersion: string;    // "ifcx_alpha"
+    dataVersion: string;    // "1.0.0"
+    author: string;         // who created the dataset, e.g. "John.Doe@mail.com"
+    timestamp: string;      // ISO 8601 datetime e.g. "2025-06-25"
 }
 
 enum DataType
