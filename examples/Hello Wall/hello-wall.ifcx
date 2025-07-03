@@ -9,7 +9,7 @@
   "imports": [
     { "uri": "https://ifcx.dev/@standards.buildingsmart.org/ifc/core/ifc@v5a.ifcx" },
     { "uri": "https://ifcx.dev/@standards.buildingsmart.org/ifc/core/prop@v5a.ifcx" },
-    { "uri": "https://ifcx.dev/@standards.buildingsmart.org/ifc/ifc-mat/prop@v1.0.0.ifcx" },
+    { "uri": "https://ifcx.dev/@standards.buildingsmart.org/ifc/ifc-mat/ifc-mat@v1.0.0.ifcx" },
     { "uri": "https://ifcx.dev/@openusd.org/usd@v1.ifcx" },
     { "uri": "https://ifcx.dev/@nlsfb/nlsfb@v1.ifcx" }
   ],
