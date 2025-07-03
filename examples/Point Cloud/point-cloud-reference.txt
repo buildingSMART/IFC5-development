@@ -1,3 +1,7 @@
 Data used:
 teapot_unoccluded from https://data.nrel.gov/submissions/153
 Raghupathi, Sunand, Nicholas Brunhart-Lupo, and Kenny Gruchalla. 2020. "Caerbannog Point Clouds." NREL Data Catalog. Golden, CO: National Renewable Energy Laboratory. Last updated: January 21, 2025. DOI: 10.7799/1729892.
+
+PCD point cloud:
+Example file from https://pointclouds.org/documentation/tutorials/pcd_file_format.html
+Converted to base64 using https://www.base64encode.org
