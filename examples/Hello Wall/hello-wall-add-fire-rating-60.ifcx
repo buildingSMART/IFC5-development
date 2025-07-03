@@ -1,8 +1,9 @@
 {
   "header": {
     "id": "ifc5.technical.buildingsmart.org/examples/Hello Wall/hello-wall-add-fire-rating-60@v1.ifcx",
-    "version": "0.1.2",
-    "author": "authorname",
+    "ifcxVersion": "ifcx_alpha",
+    "dataVersion": "0.1.2",
+    "author": "technical@buildingsmart.org",
     "timestamp": "2025-06-27"
   },
   "imports": [],

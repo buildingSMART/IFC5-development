@@ -1,7 +1,8 @@
 {
   "header": {
     "id": "05_TopHeading 4-5.ifcx",
-    "version": "ifcx_alpha",
+    "ifcxVersion": "ifcx_alpha",
+    "dataVersion": "1.0.0",
     "author": "Dan Vlasceanu",
     "timestamp": "2025-06-25"
   },
