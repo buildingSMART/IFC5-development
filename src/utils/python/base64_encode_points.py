@@ -21,5 +21,7 @@ def main():
     base64_str = base64.b64encode(binary).decode('ascii')
     print(base64_str)
 
+    # print(base64.b64decode(base64_str, validate=True))
+
 if __name__ == '__main__':
     main()

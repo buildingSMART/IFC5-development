@@ -302,6 +302,19 @@ function createPointsFromJsonPcdBase64(path: ComposedObject[]) {
     return points;
 }
 
+function createPoints(geometry: THREE.BufferGeometry, withColors: boolean): THREE.Points {
+    const material = new THREE.PointsMaterial();
+    material.sizeAttenuation = false;
+    material.fog = true;
+    material.size = 5;
+    material.color = new THREE.Color(withColors ? 0xffffff : 0x000000);
+
+    if (withColors) {
+        material.vertexColors = true;
+    }
+    return new THREE.Points(geometry, material);
+}
+
 function createPointsFromJsonArray(path: ComposedObject[]) {
     const geometry = new THREE.BufferGeometry();
 
@@ -313,22 +326,44 @@ function createPointsFromJsonArray(path: ComposedObject[]) {
         const colors_ = new Float32Array(colors.flat());
         geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors_, 3));
     }
+    return createPoints(geometry, colors);
+}
 
-    const material = new THREE.PointsMaterial();
-    material.sizeAttenuation = false;
-    material.fog = true;
-    material.size = 5;
-    material.color = new THREE.Color(colors ? 0xffffff : 0x000000);
-
-    if (colors) {
-        material.vertexColors = true;
+function base64ToArrayBuffer(str): ArrayBuffer | undefined {
+    let binary;
+    try {
+        binary = atob(str);
     }
-
-    return new THREE.Points(geometry, material);
+    catch(e) {
+        throw new Error("base64 encoded string is invalid");
+    }
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; ++i) {
+        bytes[i] = binary.charCodeAt(i);
+    }
+    return bytes.buffer;
 }
 
 function createPointsFromJsonPositionBase64(path: ComposedObject[]) {
-    return new THREE.Points();
+    const geometry = new THREE.BufferGeometry();
+
+    const positions_base64 = path[0].attributes["points::base64::positions"];
+    const positions_bytes = base64ToArrayBuffer(positions_base64);
+    if (!positions_bytes) {
+        return null;
+    }
+    const positions = new Float32Array(positions_bytes!);
+    geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+    
+    const colors_base64 = path[0].attributes["points::base64::colors"];
+    if (colors_base64) {
+        const colors_bytes = base64ToArrayBuffer(colors_base64);
+        if (colors_bytes) {
+            const colors = new Float32Array(colors_bytes!);
+            geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
+        }
+    }
+    return createPoints(geometry, colors_base64);
 }
 
 function traverseTree(path: ComposedObject[], parent, pathMapping) {
