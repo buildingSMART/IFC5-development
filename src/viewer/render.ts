@@ -293,12 +293,15 @@ function createMeshFromJson(path: ComposedObject[]) {
 function createPointsFromJsonPcdBase64(path: ComposedObject[]) {
     const base64_string = path[0].attributes["pcd::base64"];
     const decoded = atob(base64_string);
-    // convert string to ArrayBuffer
-    const buffer = new TextEncoder().encode(decoded)
+    const len = decoded.length;
+    const bytes = new Uint8Array(len);
+    for (let i = 0; i < len; i++) {
+        bytes[i] = decoded.charCodeAt(i);
+    }
     const loader = new PCDLoader();
-    const points = loader.parse(buffer.buffer);
+    const points = loader.parse(bytes.buffer);
     points.material.sizeAttenuation = false;
-    points.material.size = 5;
+    points.material.size = 2;
     return points;
 }
 
