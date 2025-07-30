@@ -13087,7 +13087,7 @@
     {
       "path": "f7fa0fb5-8eae-4ca5-affd-d825422f8fc9",
       "attributes": {
-        "bsi::ifc::prop::station": -153.1
+        "bsi::ifc::prop::Station": -153.1
       }
     },
     {
@@ -13317,7 +13317,7 @@
     {
       "path": "1bed3e86-ecf8-4553-b89d-33a596f1cad9",
       "attributes": {
-        "bsi::ifc::prop::station": 876.2721
+        "bsi::ifc::prop::Station": 876.2721
       }
     },
     {
@@ -13352,7 +13352,7 @@
     {
       "path": "2ef5faa4-6e25-4491-8183-22dad1a43c7a",
       "attributes": {
-        "bsi::ifc::prop::station": -150
+        "bsi::ifc::prop::Station": -150
       }
     },
     {
@@ -13387,7 +13387,7 @@
     {
       "path": "4bf56217-7e6d-43e5-bab9-5fc6b3324840",
       "attributes": {
-        "bsi::ifc::prop::station": -100
+        "bsi::ifc::prop::Station": -100
       }
     },
     {
@@ -13422,7 +13422,7 @@
     {
       "path": "cebe215d-2cd7-4486-8c07-44df6ce38c61",
       "attributes": {
-        "bsi::ifc::prop::station": -50
+        "bsi::ifc::prop::Station": -50
       }
     },
     {
@@ -13457,7 +13457,7 @@
     {
       "path": "c3f68346-9fc2-482f-adaa-a3b36cca9a7d",
       "attributes": {
-        "bsi::ifc::prop::station": 0
+        "bsi::ifc::prop::Station": 0
       }
     },
     {
@@ -13492,7 +13492,7 @@
     {
       "path": "738fafa5-0a56-42a8-b8a0-66496f4ea7c1",
       "attributes": {
-        "bsi::ifc::prop::station": 50
+        "bsi::ifc::prop::Station": 50
       }
     },
     {
@@ -13527,7 +13527,7 @@
     {
       "path": "4a10b33d-c6cb-4fe8-bf45-7f01a476e54c",
       "attributes": {
-        "bsi::ifc::prop::station": 100
+        "bsi::ifc::prop::Station": 100
       }
     },
     {
@@ -13562,7 +13562,7 @@
     {
       "path": "3587a835-0f68-4d98-9021-6792fdbf1c38",
       "attributes": {
-        "bsi::ifc::prop::station": 150
+        "bsi::ifc::prop::Station": 150
       }
     },
     {
@@ -13597,7 +13597,7 @@
     {
       "path": "aa2a04f2-66ed-44bf-9db2-255bb6523fff",
       "attributes": {
-        "bsi::ifc::prop::station": 200
+        "bsi::ifc::prop::Station": 200
       }
     },
     {
@@ -13632,7 +13632,7 @@
     {
       "path": "b49072de-3e21-44f6-bc78-015fd1c8c01f",
       "attributes": {
-        "bsi::ifc::prop::station": 250
+        "bsi::ifc::prop::Station": 250
       }
     },
     {
@@ -13667,7 +13667,7 @@
     {
       "path": "ad35a1b5-8f68-4cbd-9336-861e2ef397b7",
       "attributes": {
-        "bsi::ifc::prop::station": 300
+        "bsi::ifc::prop::Station": 300
       }
     },
     {
@@ -13702,7 +13702,7 @@
     {
       "path": "36fdcb46-4e00-4920-b36c-0c636cc7c12f",
       "attributes": {
-        "bsi::ifc::prop::station": 350
+        "bsi::ifc::prop::Station": 350
       }
     },
     {
@@ -13737,7 +13737,7 @@
     {
       "path": "81fe4ead-e59b-48e3-95f2-3645a3fb6648",
       "attributes": {
-        "bsi::ifc::prop::station": 400
+        "bsi::ifc::prop::Station": 400
       }
     },
     {
@@ -13772,7 +13772,7 @@
     {
       "path": "df0ea44e-c850-4891-8315-16ac3ff2a051",
       "attributes": {
-        "bsi::ifc::prop::station": 450
+        "bsi::ifc::prop::Station": 450
       }
     },
     {
@@ -13807,7 +13807,7 @@
     {
       "path": "fbb4b9a2-3126-45d3-999d-133c194f8afc",
       "attributes": {
-        "bsi::ifc::prop::station": 500
+        "bsi::ifc::prop::Station": 500
       }
     },
     {
@@ -13842,7 +13842,7 @@
     {
       "path": "aced08ae-90fe-4abc-b415-5e59ae5060ef",
       "attributes": {
-        "bsi::ifc::prop::station": 550
+        "bsi::ifc::prop::Station": 550
       }
     },
     {
@@ -13877,7 +13877,7 @@
     {
       "path": "7923cb07-f23e-44d3-9f86-5d58fb2ae9ea",
       "attributes": {
-        "bsi::ifc::prop::station": 600
+        "bsi::ifc::prop::Station": 600
       }
     },
     {
@@ -13912,7 +13912,7 @@
     {
       "path": "c29be2ef-7443-475f-841e-a77200f1b219",
       "attributes": {
-        "bsi::ifc::prop::station": 650
+        "bsi::ifc::prop::Station": 650
       }
     },
     {
@@ -13947,7 +13947,7 @@
     {
       "path": "6e885b02-f7a9-4298-9439-492fb95b1a5e",
       "attributes": {
-        "bsi::ifc::prop::station": 700
+        "bsi::ifc::prop::Station": 700
       }
     },
     {
@@ -13982,7 +13982,7 @@
     {
       "path": "5b1cf5e2-c10a-4fef-aae9-efc301dfe7ed",
       "attributes": {
-        "bsi::ifc::prop::station": 750
+        "bsi::ifc::prop::Station": 750
       }
     },
     {
@@ -14017,7 +14017,7 @@
     {
       "path": "c040c20e-18e6-4f4a-911e-e213fa18806f",
       "attributes": {
-        "bsi::ifc::prop::station": 800
+        "bsi::ifc::prop::Station": 800
       }
     },
     {
@@ -14052,7 +14052,7 @@
     {
       "path": "255aa8b8-9216-4ef5-a921-d78907718e6e",
       "attributes": {
-        "bsi::ifc::prop::station": 850
+        "bsi::ifc::prop::Station": 850
       }
     },
     {
