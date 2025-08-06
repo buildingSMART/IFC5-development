@@ -1,9 +1,10 @@
 {
   "header": {
     "id": "ifc5.technical.buildingsmart.org/examples/Hello Wall/domestic-hot-water-pbr@v1.ifcx",
-    "version": "ifcx_alpha",
-    "author": "authorname",
-    "timestamp": "time string"
+    "ifcxVersion": "ifcx_alpha",
+    "dataVersion": "1.0.0",
+    "author": "@ArjoNagelhout",
+    "timestamp": "2025-06-01"
   },
   "imports": [
     { "uri": "https://ifcx.dev/@standards.buildingsmart.org/ifc/core/ifc@v5a.ifcx" }
