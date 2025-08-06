@@ -151,7 +151,7 @@
           "StartRadiusOfCurvature":0,
           "EndRadiusOfCurvature":0,
           "SegmentLength":387.72327629691,
-          "PredefinedType":"LINE"
+          "GeometryType":"LINE"
         }
       },
       "children":
@@ -182,7 +182,7 @@
           "StartRadiusOfCurvature":0,
           "EndRadiusOfCurvature":1000.00000000019,
           "SegmentLength":39.9999999999925,
-          "PredefinedType":"CLOTHOID"
+          "GeometryType":"CLOTHOID"
         }
       },
       "children":
@@ -213,7 +213,7 @@
           "StartRadiusOfCurvature":1000.00000000019,
           "EndRadiusOfCurvature":1000.00000000019,
           "SegmentLength":193.464470837218,
-          "PredefinedType":"CIRCULARARC"
+          "GeometryType":"CIRCULARARC"
         }
       },
       "children":
@@ -244,7 +244,7 @@
           "StartRadiusOfCurvature":1000.00000000019,
           "EndRadiusOfCurvature":0,
           "SegmentLength":39.9999999999925,
-          "PredefinedType":"CLOTHOID"
+          "GeometryType":"CLOTHOID"
         }
       },
       "children":
@@ -275,7 +275,7 @@
           "StartRadiusOfCurvature":0,
           "EndRadiusOfCurvature":0,
           "SegmentLength":38.9815155434665,
-          "PredefinedType":"LINE"
+          "GeometryType":"LINE"
         }
       },
       "children":
@@ -306,7 +306,7 @@
           "StartRadiusOfCurvature":0,
           "EndRadiusOfCurvature":-999.999999999703,
           "SegmentLength":40.0000000000119,
-          "PredefinedType":"CLOTHOID"
+          "GeometryType":"CLOTHOID"
         }
       },
       "children":
@@ -337,7 +337,7 @@
           "StartRadiusOfCurvature":-999.999999999703,
           "EndRadiusOfCurvature":-999.999999999703,
           "SegmentLength":109.431749923896,
-          "PredefinedType":"CIRCULARARC"
+          "GeometryType":"CIRCULARARC"
         }
       },
       "children":
@@ -368,7 +368,7 @@
           "StartRadiusOfCurvature":-999.999999999703,
           "EndRadiusOfCurvature":0,
           "SegmentLength":40.0000000000119,
-          "PredefinedType":"CLOTHOID"
+          "GeometryType":"CLOTHOID"
         }
       },
       "children":
@@ -399,7 +399,7 @@
           "StartRadiusOfCurvature":0,
           "EndRadiusOfCurvature":0,
           "SegmentLength":139.771058670046,
-          "PredefinedType":"LINE"
+          "GeometryType":"LINE"
         }
       },
       "children":
@@ -430,7 +430,7 @@
           "StartGradient":0,
           "EndGradient":0,
           "RadiusOfCurvature":0,
-          "PredefinedType":"CONSTANTGRADIENT"
+          "GeometryType":"CONSTANTGRADIENT"
         }
       }
     },
@@ -446,7 +446,7 @@
           "StartGradient":0,
           "EndGradient":-0.00999999999989658,
           "RadiusOfCurvature":-5000,
-          "PredefinedType":"CIRCULARARC"
+          "GeometryType":"CIRCULARARC"
         }
       }
     },
@@ -462,7 +462,7 @@
           "StartGradient":-0.00999999999988502,
           "EndGradient":-0.00999999999988502,
           "RadiusOfCurvature":0,
-          "PredefinedType":"CONSTANTGRADIENT"
+          "GeometryType":"CONSTANTGRADIENT"
         }
       }
     },
@@ -478,7 +478,7 @@
           "StartGradient":-0.00999999999989127,
           "EndGradient":-2.44929359829471E-16,
           "RadiusOfCurvature":5000,
-          "PredefinedType":"CIRCULARARC"
+          "GeometryType":"CIRCULARARC"
         }
       }
     },
@@ -494,7 +494,7 @@
           "StartGradient":0,
           "EndGradient":0,
           "RadiusOfCurvature":0,
-          "PredefinedType":"CONSTANTGRADIENT"
+          "GeometryType":"CONSTANTGRADIENT"
         }
       }
     },
@@ -525,7 +525,7 @@
           "EndCantLeft":0,
           "StartCantRight":0,
           "EndCantRight":0,
-          "PredefinedType":"LINEARTRANSITION"
+          "GeometryType":"LINEARTRANSITION"
         }
       }
     },
@@ -541,7 +541,7 @@
           "EndCantLeft":0,
           "StartCantRight":0,
           "EndCantRight":0.06,
-          "PredefinedType":"LINEARTRANSITION"
+          "GeometryType":"LINEARTRANSITION"
         }
       }
     },
@@ -557,7 +557,7 @@
           "EndCantLeft":0,
           "StartCantRight":0.06,
           "EndCantRight":0.06,
-          "PredefinedType":"LINEARTRANSITION"
+          "GeometryType":"LINEARTRANSITION"
         }
       }
     },
@@ -573,7 +573,7 @@
           "EndCantLeft":0,
           "StartCantRight":0.06,
           "EndCantRight":0,
-          "PredefinedType":"LINEARTRANSITION"
+          "GeometryType":"LINEARTRANSITION"
         }
       }
     },
@@ -589,7 +589,7 @@
           "EndCantLeft":0,
           "StartCantRight":0,
           "EndCantRight":0,
-          "PredefinedType":"LINEARTRANSITION"
+          "GeometryType":"LINEARTRANSITION"
         }
       }
     },
@@ -605,7 +605,7 @@
           "EndCantLeft":0.06,
           "StartCantRight":0,
           "EndCantRight":0,
-          "PredefinedType":"LINEARTRANSITION"
+          "GeometryType":"LINEARTRANSITION"
         }
       }
     },
@@ -621,7 +621,7 @@
           "EndCantLeft":0.06,
           "StartCantRight":0,
           "EndCantRight":0,
-          "PredefinedType":"LINEARTRANSITION"
+          "GeometryType":"LINEARTRANSITION"
         }
       }
     },
@@ -637,7 +637,7 @@
           "EndCantLeft":0,
           "StartCantRight":0,
           "EndCantRight":0,
-          "PredefinedType":"LINEARTRANSITION"
+          "GeometryType":"LINEARTRANSITION"
         }
       }
     },
@@ -653,7 +653,7 @@
           "EndCantLeft":0,
           "StartCantRight":0,
           "EndCantRight":0,
-          "PredefinedType":"LINEARTRANSITION"
+          "GeometryType":"LINEARTRANSITION"
         }
       }
     },
