@@ -19,7 +19,7 @@
     }
   ],
   "schemas":  {
-    "SierraSoft::ifc::alignment": {
+    "bsi::ifc::alignmentAlternativeBySierraSoft": {
       "value": {
         "dataType": "Object",
         "objectRestrictions": {
@@ -34,108 +34,7 @@
         }
       }
     },
-	"SierraSoft::ifc::alignmenthorizontalsegment": {
-      "value": {
-        "dataType": "Object",
-        "objectRestrictions": {
-          "values": {
-            "StartPoint": {
-              "dataType": "Array",
-              "arrayRestrictions": {
-                "value": {
-                  "dataType": "Real"
-                }
-              }
-            },
-            "StartDirection": {
-              "dataType": "Real"
-            },
-            "StartRadiusOfCurvature": {
-              "dataType": "Real"
-            },
-            "EndRadiusOfCurvature": {
-              "dataType": "Real"
-            },
-            "SegmentLength": {
-              "dataType": "Real"
-            },
-            "PredefinedType": {
-              "dataType": "Enum",
-              "enumRestrictions": {
-                "options": ["BLOSSCURVE","CIRCULARARC","CLOTHOID","COSINECURVE","CUBIC","HELMERTCURVE","LINE","SINECURVE","VIENNESEBEND"]
-              }
-            }
-          }
-        }
-      }
-    },
-    "SierraSoft::ifc::alignmentverticalsegment": {
-      "value": {
-        "dataType": "Object",
-        "objectRestrictions": {
-          "values": {
-            "StartDistAlong": {
-              "dataType": "Real"
-            },
-            "HorizontalLength": {
-              "dataType": "Real"
-            },
-            "StartHeight": {
-              "dataType": "Real"
-            },
-            "StartGradient": {
-              "dataType": "Real"
-            },
-            "EndGradient": {
-              "dataType": "Real"
-            },            
-            "RadiusOfCurvature": {
-              "dataType": "Real"
-            },
-            "PredefinedType": {
-              "dataType": "Enum",
-              "enumRestrictions": {
-                "options": ["CIRCULARARC","CONSTANTGRADIENT","PARABOLICARC"]
-              }
-            }
-          }
-        }
-      }
-    },
-    "SierraSoft::ifc::alignmentcantsegment": {
-      "value": {
-        "dataType": "Object",
-        "objectRestrictions": {
-          "values": {
-            "StartDistAlong": {
-              "dataType": "Real"
-            },
-            "HorizontalLength": {
-              "dataType": "Real"
-            },
-            "StartCantLeft": {
-              "dataType": "Real"
-            },
-            "EndCantLeft": {
-              "dataType": "Real"
-            },
-            "StartCantRight": {
-              "dataType": "Real"
-            },            
-            "EndCantRight": {
-              "dataType": "Real"
-            },
-            "PredefinedType": {
-              "dataType": "Enum",
-              "enumRestrictions": {
-                "options": ["BLOSSCURVE","CONSTANTCANT","COSINECURVE","HELMERTCURVE","LINEARTRANSITION","SINECURVE","VIENNESEBEND"]
-			  }
-            }
-          }
-        }
-      }
-    },	
-	"SierraSoft::ifc::linearreference": {
+	"bsi::ifc::linearreference": {
       "value": {
         "dataType": "Object",
         "objectRestrictions": {
@@ -199,7 +98,7 @@
       "path":"0ATWXUmzv30BEPOxLx7uSU",
       "attributes":
       {
-        "SierraSoft::ifc::alignment":
+        "bsi::ifc::alignmentAlternativeBySierraSoft":
         {
           "StartStation":-153.1,
           "Length":1029.37207127155
@@ -245,7 +144,7 @@
       "path":"1vilt0X5nBGQxC5$AQ$dlq",
       "attributes":
       {
-        "SierraSoft::ifc::alignmenthorizontalsegment":
+        "bsi::ifc::alignmenthorizontalsegment":
         {
           "StartPoint":[-623.8117490359,-266.052637829445,0],
           "StartDirection":0.349924145684617,
@@ -276,7 +175,7 @@
       "path":"3HBKPWbTT9XQPVdCug0xXz",
       "attributes":
       {
-        "SierraSoft::ifc::alignmenthorizontalsegment":
+        "bsi::ifc::alignmenthorizontalsegment":
         {
           "StartPoint":[-259.584999400191,-133.1308042733,0],
           "StartDirection":0.349924145685269,
@@ -307,7 +206,7 @@
       "path":"3Rb16eI092YvJbuxUCFh_c",
       "attributes":
       {
-        "SierraSoft::ifc::alignmenthorizontalsegment":
+        "bsi::ifc::alignmenthorizontalsegment":
         {
           "StartPoint":[-222.101971394964,-119.167791577987,0],
           "StartDirection":6.65310945286485,
@@ -338,7 +237,7 @@
       "path":"3EM5LUl4j3HR1xuUeKOXNr",
       "attributes":
       {
-        "SierraSoft::ifc::alignmenthorizontalsegment":
+        "bsi::ifc::alignmenthorizontalsegment":
         {
           "StartPoint":[-49.5925159022445,-32.2632823018357,0],
           "StartDirection":0.563388616522548,
@@ -369,7 +268,7 @@
       "path":"2g41DfgHj2dh$9PHPYEwwC",
       "attributes":
       {
-        "SierraSoft::ifc::alignmenthorizontalsegment":
+        "bsi::ifc::alignmenthorizontalsegment":
         {
           "StartPoint":[-16.0629283829476,-10.4525080667809,0],
           "StartDirection":0.583388616530347,
@@ -400,7 +299,7 @@
       "path":"1GJYO9QEbBExLfzfBtAELl",
       "attributes":
       {
-        "SierraSoft::ifc::alignmenthorizontalsegment":
+        "bsi::ifc::alignmenthorizontalsegment":
         {
           "StartPoint":[16.4710759902955,11.0206638826057,0],
           "StartDirection":0.583388616525518,
@@ -431,7 +330,7 @@
       "path":"0gPzEyzPX6iQmMMKYolY$C",
       "attributes":
       {
-        "SierraSoft::ifc::alignmenthorizontalsegment":
+        "bsi::ifc::alignmenthorizontalsegment":
         {
           "StartPoint":[50.0006635093014,32.8314381185919,0],
           "StartDirection":0.563388616525506,
@@ -462,7 +361,7 @@
       "path":"0MdTUym6n5rfSJPjOYRPJJ",
       "attributes":
       {
-        "SierraSoft::ifc::alignmenthorizontalsegment":
+        "bsi::ifc::alignmenthorizontalsegment":
         {
           "StartPoint":[145.529760076024,86.1001315824687,0],
           "StartDirection":0.453956866601724,
@@ -493,7 +392,7 @@
       "path":"1gtuJu6FbDOxAqyWw5lAaJ",
       "attributes":
       {
-        "SierraSoft::ifc::alignmenthorizontalsegment":
+        "bsi::ifc::alignmenthorizontalsegment":
         {
           "StartPoint":[181.708553277305,103.159968477674,0],
           "StartDirection":0.433956866598294,
@@ -523,7 +422,7 @@
       "path":"03TAP6zFH11OUNj3bBF7at",
       "attributes":
       {
-        "SierraSoft::ifc::alignmentverticalsegment":
+        "bsi::ifc::alignmentverticalsegment":
         {
           "StartDistAlong":2.8421709430404E-14,
           "HorizontalLength":478.004489216298,
@@ -539,7 +438,7 @@
       "path":"3XujYQQsbAdxtNgDPInvXi",
       "attributes":
       {
-        "SierraSoft::ifc::alignmentverticalsegment":
+        "bsi::ifc::alignmentverticalsegment":
         {
           "StartDistAlong":478.004489216298,
           "HorizontalLength":49.9975001869673,
@@ -555,7 +454,7 @@
       "path":"15qcXR8Gr7muqzkOcpMtpr",
       "attributes":
       {
-        "SierraSoft::ifc::alignmentverticalsegment":
+        "bsi::ifc::alignmentverticalsegment":
         {
           "StartDistAlong":528.001989403264,
           "HorizontalLength":250.003749691564,
@@ -571,7 +470,7 @@
       "path":"0OTRGVFUfA4BRZb9jL8rQc",
       "attributes":
       {
-        "SierraSoft::ifc::alignmentverticalsegment":
+        "bsi::ifc::alignmentverticalsegment":
         {
           "StartDistAlong":778.005739094828,
           "HorizontalLength":49.9975001869396,
@@ -587,7 +486,7 @@
       "path":"0PwxbZjxX9HQl7Bco8$P_U",
       "attributes":
       {
-        "SierraSoft::ifc::alignmentverticalsegment":
+        "bsi::ifc::alignmentverticalsegment":
         {
           "StartDistAlong":828.003239281795,
           "HorizontalLength":201.368831989751,
@@ -618,7 +517,7 @@
       "path":"2S2S4e1$z769$$DCD85zUZ",
       "attributes":
       {
-        "SierraSoft::ifc::alignmentcantsegment":
+        "bsi::ifc::alignmentcantsegment":
         {
           "StartDistAlong":0,
           "HorizontalLength":387.723276296965,
@@ -634,7 +533,7 @@
       "path":"1lYcHAMsb8xeb0gXxi$csR",
       "attributes":
       {
-        "SierraSoft::ifc::alignmentcantsegment":
+        "bsi::ifc::alignmentcantsegment":
         {
           "StartDistAlong":387.723276296965,
           "HorizontalLength":39.9999999999926,
@@ -650,7 +549,7 @@
       "path":"2mid3qgbX0uvCAIse5zcKR",
       "attributes":
       {
-        "SierraSoft::ifc::alignmentcantsegment":
+        "bsi::ifc::alignmentcantsegment":
         {
           "StartDistAlong":427.723276296957,
           "HorizontalLength":193.4644708377,
@@ -666,7 +565,7 @@
       "path":"0aC9FGYKnE_8hRaqHe62aL",
       "attributes":
       {
-        "SierraSoft::ifc::alignmentcantsegment":
+        "bsi::ifc::alignmentcantsegment":
         {
           "StartDistAlong":621.187747134657,
           "HorizontalLength":39.9999999999925,
@@ -682,7 +581,7 @@
       "path":"1vegqYBX96QgEiSyWq2tpP",
       "attributes":
       {
-        "SierraSoft::ifc::alignmentcantsegment":
+        "bsi::ifc::alignmentcantsegment":
         {
           "StartDistAlong":661.18774713465,
           "HorizontalLength":38.9815155434666,
@@ -698,7 +597,7 @@
       "path":"1QllFZLIrFwe$X8TtO5GlN",
       "attributes":
       {
-        "SierraSoft::ifc::alignmentcantsegment":
+        "bsi::ifc::alignmentcantsegment":
         {
           "StartDistAlong":700.169262678116,
           "HorizontalLength":40.0000000000118,
@@ -714,7 +613,7 @@
       "path":"3bI7JBT85ALv_MQDlQ4dHR",
       "attributes":
       {
-        "SierraSoft::ifc::alignmentcantsegment":
+        "bsi::ifc::alignmentcantsegment":
         {
           "StartDistAlong":740.169262678128,
           "HorizontalLength":109.431749924283,
@@ -730,7 +629,7 @@
       "path":"2$kIFkz4bBqg0hiRwl0YCq",
       "attributes":
       {
-        "SierraSoft::ifc::alignmentcantsegment":
+        "bsi::ifc::alignmentcantsegment":
         {
           "StartDistAlong":849.601012602411,
           "HorizontalLength":40.0000000000117,
@@ -746,7 +645,7 @@
       "path":"2zDlXZyXX6Af2_dfi8d04f",
       "attributes":
       {
-        "SierraSoft::ifc::alignmentcantsegment":
+        "bsi::ifc::alignmentcantsegment":
         {
           "StartDistAlong":889.601012602423,
           "HorizontalLength":139.771058670099,
@@ -782,7 +681,7 @@
       "path":"0J8HAKfGH0uvLNBn2hi9Kq",
       "attributes":
       {
-        "SierraSoft::ifc::linearreference":
+        "bsi::ifc::linearreference":
         {
           "Station":853.099999999817,
           "OffsetLateral":-2.99999999988507,
@@ -893,7 +792,7 @@
       "path":"16BIMs$tLBjw7ZENg6RrNS",
       "attributes":
       {
-        "SierraSoft::ifc::linearreference":
+        "bsi::ifc::linearreference":
         {
           "Station":353.099999999956,
           "OffsetLateral":3.00000000019835,
