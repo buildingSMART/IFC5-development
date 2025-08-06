@@ -7,6 +7,7 @@ import { compose3 } from './compose-flattened';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
+import { PCDLoader } from 'three/addons/loaders/PCDLoader.js';
 
 let controls, renderer, scene, camera;
 type datastype = [string, IfcxFile][];
@@ -288,6 +289,86 @@ function createMeshFromJson(path: ComposedObject[]) {
   return new THREE.Mesh(geometry, meshMaterial);
 }
 
+// functions for creating point clouds
+function createPointsFromJsonPcdBase64(path: ComposedObject[]) {
+    const base64_string = path[0].attributes["pcd::base64"];
+    const decoded = atob(base64_string);
+    const len = decoded.length;
+    const bytes = new Uint8Array(len);
+    for (let i = 0; i < len; i++) {
+        bytes[i] = decoded.charCodeAt(i);
+    }
+    const loader = new PCDLoader();
+    const points = loader.parse(bytes.buffer);
+    points.material.sizeAttenuation = false;
+    points.material.size = 2;
+    return points;
+}
+
+function createPoints(geometry: THREE.BufferGeometry, withColors: boolean): THREE.Points {
+    const material = new THREE.PointsMaterial();
+    material.sizeAttenuation = false;
+    material.fog = true;
+    material.size = 5;
+    material.color = new THREE.Color(withColors ? 0xffffff : 0x000000);
+
+    if (withColors) {
+        material.vertexColors = true;
+    }
+    return new THREE.Points(geometry, material);
+}
+
+function createPointsFromJsonArray(path: ComposedObject[]) {
+    const geometry = new THREE.BufferGeometry();
+
+    const positions = new Float32Array(path[0].attributes["points::array::positions"].flat());
+    geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+
+    const colors = path[0].attributes["points::array::colors"];
+    if (colors) {
+        const colors_ = new Float32Array(colors.flat());
+        geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors_, 3));
+    }
+    return createPoints(geometry, colors);
+}
+
+function base64ToArrayBuffer(str): ArrayBuffer | undefined {
+    let binary;
+    try {
+        binary = atob(str);
+    }
+    catch(e) {
+        throw new Error("base64 encoded string is invalid");
+    }
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; ++i) {
+        bytes[i] = binary.charCodeAt(i);
+    }
+    return bytes.buffer;
+}
+
+function createPointsFromJsonPositionBase64(path: ComposedObject[]) {
+    const geometry = new THREE.BufferGeometry();
+
+    const positions_base64 = path[0].attributes["points::base64::positions"];
+    const positions_bytes = base64ToArrayBuffer(positions_base64);
+    if (!positions_bytes) {
+        return null;
+    }
+    const positions = new Float32Array(positions_bytes!);
+    geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+    
+    const colors_base64 = path[0].attributes["points::base64::colors"];
+    if (colors_base64) {
+        const colors_bytes = base64ToArrayBuffer(colors_base64);
+        if (colors_bytes) {
+            const colors = new Float32Array(colors_bytes!);
+            geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
+        }
+    }
+    return createPoints(geometry, colors_base64);
+}
+
 function traverseTree(path: ComposedObject[], parent, pathMapping) {
     const node = path[0];
     let elem: any = new THREE.Group();
@@ -296,14 +377,28 @@ function traverseTree(path: ComposedObject[], parent, pathMapping) {
         if (node.attributes["usd::usdgeom::visibility::visibility"] === 'invisible') {
             return;
         }
-    } 
-    else if (HasAttr(node, "usd::usdgeom::mesh::points")) {
+    }
+    else if (HasAttr(node, "usd::usdgeom::mesh::points")) 
+    {
         elem = createMeshFromJson(path);
     } 
     else if (HasAttr(node, "usd::usdgeom::basiscurves::points"))
     {
         elem = createCurveFromJson(path);
-    } 
+    }
+    // point cloud data types:
+    else if (HasAttr(node, "pcd::base64"))
+    {
+        elem = createPointsFromJsonPcdBase64(path);
+    }
+    else if (HasAttr(node, "points::array::positions"))
+    {
+        elem = createPointsFromJsonArray(path);
+    }
+    else if (HasAttr(node, "points::base64::positions"))
+    {
+        elem = createPointsFromJsonPositionBase64(path);
+    }
     
     objectMap[node.name] = elem;
     primMap[node.name] = node;
@@ -339,7 +434,10 @@ function encodeHtmlEntities(str) {
 const icons = {
     'usd::usdgeom::mesh::points': 'deployed_code', 
     'usd::usdgeom::basiscurves::points': 'line_curve',
-    'usd::usdshade::material::outputs::surface.connect': 'line_style'
+    'usd::usdshade::material::outputs::surface.connect': 'line_style',
+    'pcd::base64': 'grain',
+    'points::array::positions': 'grain',
+    'points::base64::positions': 'grain',
 };
 
 function handleClick(prim, pathMapping, root) {
