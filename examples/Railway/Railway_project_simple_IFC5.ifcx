@@ -2,7 +2,8 @@
   "header":
   {
     "id":"Railway_project_simple_IFC5.ifcx",
-    "version":"ifcx_alpha",
+    "ifcxVersion": "ifcx_alpha",
+    "dataVersion": "1.0.0",
     "author":"SierraSoft",
     "timestamp":"2025-07-31T12:52:10"
   },
