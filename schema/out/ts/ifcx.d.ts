@@ -24,6 +24,8 @@ export interface components {
                 [key: string]: components["schemas"]["IfcxSchema"];
             };
             data: components["schemas"]["IfcxNode"][];
+            // hack hack hack
+            src?: string;
         };
         IfcxHeader: {
             id: string;
