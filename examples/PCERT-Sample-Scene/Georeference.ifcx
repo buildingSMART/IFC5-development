@@ -1,0 +1,73 @@
+{
+  "header": {
+    "id": "Georeference.ifcx",
+    "version": "ifcx_alpha",
+    "author": "authorname",
+    "timestamp": "time string"
+  },
+  "imports": [],
+  "schemas": {
+    "mapConversion": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "targetCRS": {
+              "dataType": "String"
+            },
+            "eastings": {
+              "dataType": "Real"
+            },
+            "northings": {
+              "dataType": "Real"
+            },
+            "orthogonalHeight": {
+              "dataType": "Real"
+            },
+            "xAxisAbscissa": {
+              "dataType": "Real"
+            },
+            "yAxisOrdinate": {
+              "dataType": "Real"
+            },
+            "scale": {
+              "dataType": "Real"
+            }
+          }
+        }
+      }
+    }
+  },
+  "data": [
+    {
+      "comment": "Geo-reference Building",
+      "path": "8f104696-d1c4-4375-8b96-fdc8f2d0c2e8",
+      "attributes": {
+        "mapConversion": {
+          "targetCRS": "PROJCS[\"WGS 84 / UTM zone 60S\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Transverse_Mercator\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",177],PARAMETER[\"scale_factor\",0.9996],PARAMETER[\"false_easting\",500000],PARAMETER[\"false_northing\",10000000],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"32760\"]]",
+          "eastings": 729013348.8297004,
+          "northings": 9063992684.697363,
+          "orthogonalHeight": 1300,
+          "xAxisAbscissa": 0.5,
+          "yAxisOrdinate": 0.8660254037844387,
+          "scale": 1
+        }
+      }
+    },
+    {
+      "comment": "Geo-reference Infra",
+      "path": "cfb3708f-9272-42f6-90a9-1a48274f73c5",
+      "attributes": {
+        "mapConversion": {
+          "targetCRS": "PROJCS[\"WGS 84 / UTM zone 60S\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Transverse_Mercator\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",177],PARAMETER[\"scale_factor\",0.9996],PARAMETER[\"false_easting\",500000],PARAMETER[\"false_northing\",10000000],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"32760\"]]",
+          "eastings": 729011225.8823584,
+          "northings": 9063960607.644705,
+          "orthogonalHeight": 0,
+          "xAxisAbscissa": 1,
+          "yAxisOrdinate": 0,
+          "scale": 1
+        }
+      }
+    }
+  ]
+}
