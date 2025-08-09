@@ -61,6 +61,12 @@ When the CCI classification file is active, you will notice the tree is also cla
 
 Every instance in the model inherits from a type definition that contains all attributes and properties. Geometries are children of the instance, and quantities are assigned directly to the instance. This approach supports possible instance-level scaling and ensures that all relevant data is accessible at the instance level.
 
+### Georeferencing
+
+Georeferencing is handled in a separate `Georeference.ifcx` file, which uses full Well-Known Text (WKT) strings to describe Coordinate Reference Systems (CRS) as published by EPSG, following OGC standard.
+
+This file provides CRS definitions for two reference objects included in all models: one for infrastructure (north aligned at the main site level) and one for the building site (aligned with the building).
+
 ## How to Use
 
 To view and interact with the models:
