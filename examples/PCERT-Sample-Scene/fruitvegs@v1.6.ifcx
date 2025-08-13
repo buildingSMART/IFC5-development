@@ -1,0 +1,37 @@
+{
+  "header": {
+    "id": "https://identifier.buildingsmart.org/uri/bs-agri/fruitvegs/1.6",
+    "version": "ifcx_alpha",
+    "author": "authorname",
+    "timestamp": "time string"
+  },
+  "imports": [],
+  "schemas": {
+    "Fruitandvegetables::class": {
+      "value": {
+        "dataType": "Object",
+        "objectRestrictions": {
+          "values": {
+            "code": {
+              "dataType": "String"
+            },
+            "uri": {
+              "dataType": "String"
+            }
+          }
+        }
+      }
+    }
+  },
+  "data": [
+    {
+      "path": "2d7f24d3-acd9-4a9a-968e-b5e51a76e063",
+      "attributes": {
+        "Fruitandvegetables::class": {
+          "code": "apple",
+          "uri": "https://identifier.buildingsmart.org/uri/bs-agri/fruitvegs/1.6/class/apple"
+        }
+      }
+    }
+  ]
+}
