@@ -1,17 +1,12 @@
 {
   "header": {
-    "id": "ifc5.technical.buildingsmart.org/examples/Point Cloud/point-cloud@v1.ifcx",
-    "version": "ifcx_alpha",
-    "author": "authorname",
-    "timestamp": "time string"
+    "id": "ifc5.technical.buildingsmart.org/examples/Point Cloud/S1-pointcloud.ifcx",
+    "ifcxVersion": "ifcx_alpha",
+    "dataVersion": "1.0.0",
+    "author": "Arjo Nagelhout",
+    "timestamp": "2025-06-30"
   },
   "imports": [
-    {
-      "uri": "https://ifcx.dev/@standards.buildingsmart.org/ifc/core/ifc@v5a.ifcx"
-    },
-    {
-      "uri": "https://ifcx.dev/@standards.buildingsmart.org/ifc/core/prop@v5a.ifcx"
-    },
     {
       "uri": "https://ifcx.dev/@openusd.org/usd@v1.ifcx"
     }

@@ -1,6 +1,6 @@
 {
   "header": {
-    "id": "ifc5.technical.buildingsmart.org/examples/Hello Wall/hello-wall@v1.ifcx",
+    "id": "ifc5.technical.buildingsmart.org/examples/Hello Wall/hello-wall.ifcx",
     "ifcxVersion": "ifcx_alpha",
     "dataVersion": "1.0.0",
     "author": "technical@buildingsmart.org",
