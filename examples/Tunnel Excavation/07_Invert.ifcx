@@ -30,9 +30,9 @@
       "path": "9a4bbf36-3373-4765-9322-cbba88d91d4b",
       "attributes": {
         "bsi::ifc::prop::Volume": 182.1,
-        "bsi::ifc::prop::StartDistanceAlong": 0,
-        "bsi::ifc::prop::EndMeter": 4,
-        "bsi::ifc::prop::ExcavationDate": "2023-10-06",
+        "bsi::ifc-infra::prop::StartDistanceAlong": 0,
+        "bsi::ifc-infra::prop::EndMeter": 4,
+        "bsi::ifc-infra::prop::ExcavationDate": "2023-10-06",
         "bsi::ifc::presentation::diffuseColor": [0.2, 0.486, 0.608],
         "bsi::ifc::class": {
           "code": "IfcEarthworksCut",
