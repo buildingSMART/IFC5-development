@@ -314,6 +314,48 @@ def process(el, path=(), parentPath=None, asclass=False):
 
         if getattr(el, 'Representation', None):
             for r in [r for r in el.Representation.Representations if r.RepresentationIdentifier == 'Body']:
+                if os.path.basename(fn) == 'georeferenced-bridge-deck.ifc':
+                    shp = ifcopenshell.geom.create_shape(ifcopenshell.geom.settings(USE_WORLD_COORDS=True), el)
+                    xs,ys,zs = np.array(shp.geometry.verts).reshape((-1, 3)).T
+                    for i, x in enumerate((xs.min(), xs.max())):
+                        prim = stage.CreateClassPrim(f"/refpoint{i}")
+                        prim.SetTypeName("Points")
+                        pointclass = UsdGeom.Points(prim)
+                        pointclass.GetPointsAttr().Set(Vt.Vec3fArray([(0., 0., 0.)]))
+                        pointdef = UsdGeom.Points.Define(stage, xf.GetPath().pathString + f"/ReferencePoint{i}")
+                        pointdef.GetPrim().GetInherits().AddInherit(pointclass.GetPath())
+
+                        mapc = f.by_type('IfcMapConversion')[0]
+
+                        crs2d = mapc.TargetCRS.Name
+                        crsh = mapc.TargetCRS.VerticalDatum
+
+                        M4 = np.eye(4)
+                        xyz = (x, 0., zs.min())
+                        M4[0:2,3] = xyz[0:2]
+
+                        UsdGeom.Xform(prim).AddTransformOp().Set(Gf.Matrix4d((M4.T)))
+
+                        the = np.arctan2(mapc.XAxisAbscissa, mapc.XAxisOrdinate)
+                        scm = np.zeros((3, 3))
+                        np.fill_diagonal(scm, mapc.Scale or 1)
+                        rot = np.array([
+                            [np.cos(the), -np.sin(the), 0],
+                            [np.sin(the), -np.cos(the), 0],
+                            [0,0,1]
+                        ])
+                        e,n,h = (rot @ scm @ xyz + (mapc.Eastings, mapc.Northings, mapc.OrthogonalHeight))
+
+                        from pyproj import Transformer
+                        to_latlon = Transformer.from_crs("EPSG:32610", "EPSG:4326")
+                        lat, lon = to_latlon.transform(e,n,h)[0:2]
+
+                        prim.CreateAttribute(f'{crs2d.lower().replace(":", "")}:eastings', Sdf.ValueTypeNames.Double).Set(e)
+                        prim.CreateAttribute(f'{crs2d.lower().replace(":", "")}:northings', Sdf.ValueTypeNames.Double).Set(n)
+                        prim.CreateAttribute(f'{crsh.lower().replace(":", "")}:height', Sdf.ValueTypeNames.Double).Set(h)
+                        prim.CreateAttribute(f'epsg4326:latitude', Sdf.ValueTypeNames.Double).Set(lat)
+                        prim.CreateAttribute(f'epsg4326:longitude', Sdf.ValueTypeNames.Double).Set(lon)
+
                 if r.Items[0].is_a('IfcExtrudedAreaSolid') and os.path.basename(fn) == 'bonsai-wall.ifc':
                     B = ifcopenshell.ifcopenshell_wrapper.map_shape(ifcopenshell.geom.settings(), r.Items[0].wrapped_data)
                     V = np.array(B.direction.components) * B.depth

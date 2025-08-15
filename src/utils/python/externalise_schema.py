@@ -4,14 +4,15 @@ import shutil
 import sys
 
 obj = json.load(open(sys.argv[1]))
+obj["imports"] = []
 
-prefix = 'https://ifc5.technical.buildingsmart.org'
+prefix = 'https://ifcx.dev'
 
 mapping = {
-    'bsi::ifc::v5a::prop': 'schemas/bsi/ifc/v5a/prop.json',
-    'bsi::ifc::v5a': 'schemas/bsi/ifc/v5a/schema.json',
-    'usd': 'schemas/usd.json',
-    'nlsfb': 'schemas/nlsfb.json'
+    'bsi::ifc::prop': '@standards.buildingsmart.org/ifc/core/prop@v5a.ifcx',
+    'bsi::ifc': '@standards.buildingsmart.org/ifc/core/ifc@v5a.ifcx',
+    'usd': '@openusd.org/usd@v1.ifcx',
+    'nlsfb': '@nlsfb/nlsfb@v1.ifcx'
 }
 
 def w(path, name, schema):
@@ -38,10 +39,10 @@ for k, v in list(obj["schemas"].items()):
         if k.startswith(m):
             w('../../../web/' + n, k, v)
             del obj["schemas"][k]
-            if m not in obj["schemas"]:
-                obj["schemas"][m] = {
+            if m not in (x['uri'] for x in obj["imports"]):
+                obj["imports"].append({
                     "uri": f'{prefix}/{n}'
-                }
+                })
             break
 
 

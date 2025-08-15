@@ -26,8 +26,8 @@ def transform_attributes(d):
         "info:id": None,
         "outputs:surface": None,
         "outputs:surface.connect": None,
-        "inputs:diffuseColor": "bsi:ifc:v5a:presentation:diffuseColor",
-        "inputs:opacity": "bsi:ifc:v5a:presentation:opacity",
+        "inputs:diffuseColor": "bsi:ifc:presentation:diffuseColor",
+        "inputs:opacity": "bsi:ifc:presentation:opacity",
     }
 
     def transform(k, v):
@@ -53,7 +53,7 @@ def transform_attributes(d):
                 parts[i] = parts[i].lower()
 
             if parts and parts[0] == 'ifc5':
-                parts[0:1] = ['bsi', 'ifc', 'v5a']
+                parts[0:1] = ['bsi', 'ifc']
                 if 'properties' in parts or 'system' in parts:
                     if 'properties' in parts:
                         parts[parts.index('properties')] = 'prop'
