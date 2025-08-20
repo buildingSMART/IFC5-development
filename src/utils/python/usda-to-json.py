@@ -138,7 +138,7 @@ ignored_attributes = {
 namespace_binding = {
     'faceVertexIndices': 'UsdGeom:Mesh',
     'faceVertexCounts': 'UsdGeom:Mesh',
-    'points': lambda attrs: 'UsdGeom:Mesh' if 'faceVertexIndices' in attrs else 'UsdGeom:BasisCurves',
+    'points': lambda attrs: 'UsdGeom:Mesh' if 'faceVertexIndices' in attrs else 'UsdGeom:BasisCurves' if 'curveVertexCounts' in attrs else 'points:array',
     "curveVertexCounts": 'UsdGeom:BasisCurves',
     'visibility': 'UsdGeom:VisibilityAPI:visibility',
     'info:id': "UsdShade:Shader",
@@ -186,6 +186,9 @@ for node in di['children']:
                 ch['type'] = namespace_binding[ch['type']]
             elif ch.get('type', False) is None:
                 del ch['type']
+        if 'points:array' in grouped_attrs:
+            # @todo rename to stay consistent with USD?
+            grouped_attrs['points:array'] = {'positions': grouped_attrs['points:array']['points']}
         for ns, ats in grouped_attrs.items():
             overs.append({
                 'def': 'over',
