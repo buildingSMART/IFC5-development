@@ -1,7 +1,9 @@
 {
   "header": {
-    "version": "ifcx_alpha",
-    "author": "authorname",
+    "id": "ifc5.technical.buildingsmart.org/examples/Georeferencing/georeferenced-bridge-deck.ifcx",
+    "ifcxVersion": "ifcx_alpha",
+    "dataVersion": "1.0.0",
+    "author": "technical@buildingsmart.org",
     "timestamp": "time string"
   },
   "imports": [
