@@ -1,8 +1,9 @@
 {
   "header": {
     "id": "ifc5.technical.buildingsmart.org/examples/Hello Wall/advanced/add-2nd-storey@v1.ifcx",
-    "version": "ifcx_alpha",
-    "author": "authorname",
+    "ifcxVersion": "ifcx_alpha",
+    "dataVersion": "1.0.0",
+    "author": "technical@buildingsmart.org",
     "timestamp": "time string"
   },
   "imports": [
