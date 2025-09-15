@@ -1,7 +1,8 @@
 {
   "header": {
     "id": "https://identifier.buildingsmart.org/uri/bs-agri/fruitvegs/1.6",
-    "version": "ifcx_alpha",
+    "ifcxVersion": "ifcx_alpha",
+    "dataVersion": "1.0.0",
     "author": "authorname",
     "timestamp": "time string"
   },
