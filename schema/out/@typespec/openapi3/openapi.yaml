@@ -30,6 +30,7 @@ components:
         - Object
         - Reference
         - Blob
+        - Union
     EnumRestrictions:
       type: object
       required:
@@ -65,13 +66,16 @@ components:
       type: object
       required:
         - id
-        - version
+        - ifcxVersion
+        - dataVersion
         - author
         - timestamp
       properties:
         id:
           type: string
-        version:
+        ifcxVersion:
+          type: string
+        dataVersion:
           type: string
         author:
           type: string
@@ -108,8 +112,6 @@ components:
           $ref: '#/components/schemas/IfcxValueDescription'
     IfcxValueDescription:
       type: object
-      required:
-        - dataType
       properties:
         dataType:
           $ref: '#/components/schemas/DataType'
@@ -127,6 +129,10 @@ components:
           $ref: '#/components/schemas/ArrayRestrictions'
         objectRestrictions:
           $ref: '#/components/schemas/ObjectRestrictions'
+        unionRestrictions:
+          $ref: '#/components/schemas/UnionRestrictions'
+        ref:
+          type: string
     ImportNode:
       type: object
       required:
@@ -162,6 +168,15 @@ components:
         - Energy
         - Power
         - Volume
+    UnionRestrictions:
+      type: object
+      required:
+        - values
+      properties:
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/IfcxValueDescription'
     code:
       type: string
       pattern: </[A-Za-z0-9]+>
