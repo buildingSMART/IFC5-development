@@ -6,6 +6,44 @@ export class SchemaValidationError extends Error
 
 }
 
+function TryValidateAttributeValue(desc: IfcxValueDescription, value: any, path: string, schemas: {[key: string]: IfcxSchema})
+{
+    try {
+        ValidateAttributeValue(desc, value, path, schemas);
+        return null;
+    } catch (e) {
+        return e;
+    }
+}
+
+function stringifyWithDepthLimit(value, maxDepth=3) {
+    const seen = new WeakSet();
+  
+    function traverse(val, depth) {
+      if (depth > maxDepth) {
+        return Array.isArray(val) ? [] : (typeof val === "object" && val !== null ? {} : val);
+      }
+  
+      if (val && typeof val === "object") {
+        if (seen.has(val)) return; // prevent cycles
+        seen.add(val);
+  
+        if (Array.isArray(val)) {
+          return val.map(v => traverse(v, depth + 1));
+        } else {
+          const out = {};
+          for (const [k, v] of Object.entries(val)) {
+            out[k] = traverse(v, depth + 1);
+          }
+          return out;
+        }
+      }
+      return val;
+    }
+  
+    return JSON.stringify(traverse(value, 1));
+  }
+
 function ValidateAttributeValue(desc: IfcxValueDescription, value: any, path: string, schemas: {[key: string]: IfcxSchema})
 {
     if (desc.optional && value === undefined)
@@ -24,6 +62,21 @@ function ValidateAttributeValue(desc: IfcxValueDescription, value: any, path: st
             }
             ValidateAttributeValue(inheritedSchema.value, value, path, schemas);
         });
+    }
+
+    while (desc.ref) {
+        const oldRef = desc.ref;
+        console.log(oldRef, ...Object.keys(value));
+        if (typeof value === "object" && Object.keys(value).length == 1 && Object.keys(value)[0] === oldRef) {
+            // @todo this is a nasty hack out of utter laziness and uncertainty whether to use a
+            // *tagged* union or not, but for now, when (union) refs are observed and similar keys
+            // are found in the *data*, then the data is traversed accordingly.
+            value = Object.values(value)[0];
+        }
+        desc = schemas[desc.ref].value;
+        if (!desc) {
+            throw new SchemaValidationError(`Reference to undefined schema type ${oldRef}`);
+        }
     }
 
     if (desc.dataType === "Boolean")
@@ -95,7 +148,7 @@ function ValidateAttributeValue(desc: IfcxValueDescription, value: any, path: st
 
                 if (!hasOwn)
                 {
-                    throw new SchemaValidationError(`Expected "${value}" to have key ${key}`);
+                    throw new SchemaValidationError(`Expected "${typeof value === 'object' ? JSON.stringify(value) : value}" to have key ${key}`);
                 }
                 ValidateAttributeValue(desc.objectRestrictions!.values[key], value[key], path + "." + key, schemas);
             })
@@ -110,6 +163,14 @@ function ValidateAttributeValue(desc: IfcxValueDescription, value: any, path: st
         value.forEach((entry) => {
             ValidateAttributeValue(desc.arrayRestrictions!.value, entry, path + ".<array>.", schemas);
         })
+    }
+    else if (desc.dataType === "Union")
+    {
+        const nonFailures = desc.unionRestrictions ? desc.unionRestrictions.values.map(v => TryValidateAttributeValue(v, value, path + ".<union>.", schemas)).filter(v => v === null) : [];
+        console.log("Union", stringifyWithDepthLimit(value), ...(desc.unionRestrictions ? desc.unionRestrictions.values.map(a => stringifyWithDepthLimit(a)) : []), nonFailures.length)
+        if (nonFailures.length == 0) {
+            throw new SchemaValidationError(`Expected "${stringifyWithDepthLimit(value)}" to be match any of the types ${stringifyWithDepthLimit(desc.unionRestrictions?.values)}`);
+        }
     }
     else
     {

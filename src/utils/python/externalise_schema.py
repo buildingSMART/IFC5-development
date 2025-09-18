@@ -7,6 +7,7 @@ obj = json.load(open(sys.argv[1]))
 obj["imports"] = []
 
 prefix = 'https://ifcx.dev'
+local_path = '../../../../ifcx.dev/'
 
 mapping = {
     'bsi::ifc::prop': '@standards.buildingsmart.org/ifc/core/prop@v5a.ifcx',
@@ -37,7 +38,7 @@ def w(path, name, schema):
 for k, v in list(obj["schemas"].items()):
     for m, n in mapping.items():
         if k.startswith(m):
-            w('../../../web/' + n, k, v)
+            w(local_path + n, k, v)
             del obj["schemas"][k]
             if m not in (x['uri'] for x in obj["imports"]):
                 obj["imports"].append({
