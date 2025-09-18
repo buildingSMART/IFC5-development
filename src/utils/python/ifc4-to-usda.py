@@ -139,6 +139,9 @@ def get_name(el):
     if el in name_mapping:
         return name_mapping[el]
     n = el.Name or f'Unnamed {el.is_a()[3:]}'
+
+    if n[0].isdigit():
+        n = "N" + n
     
     postfix = 0
     while True:
@@ -398,6 +401,175 @@ def process(el, path=(), parentPath=None, asclass=False):
                     basisdef = UsdGeom.Mesh.Define(stage, xf.GetPath().pathString + "/Basis")
                     basisdef.GetPrim().GetInherits().AddInherit(basisclass.GetPath())
 
+                if r.Items[0].is_a('IfcBooleanClippingResult') and os.path.basename(fn) == 'window-frame.ifc':
+                    def is_rectangle(pts, tol=1e-8):
+                        if pts.shape != (4, pts.shape[1]):
+                            return False
+                        for i in range(4):
+                            p0 = pts[i]
+                            p1 = pts[(i-1) % 4]
+                            p2 = pts[(i+1) % 4]
+                            v1 = p1 - p0
+                            v2 = p2 - p0
+                            if not np.isclose(np.dot(v1, v2), 0.0, atol=tol):
+                                return False
+                        cent = np.average([pts.min(axis=0), pts.max(axis=0)], axis=0)
+                        width, height = (pts.max(axis=0) - pts.min(axis=0))[0:2].tolist()
+                        return cent, (width, height)
+                    def is_linear(e):
+                        if e.basis is None:
+                            return True
+                        elif e.basis.kind() == ifcopenshell.ifcopenshell_wrapper.LINE:
+                            return True
+                        else:
+                            return False
+                    def group_consecutive_linear(edges):
+                        groups = []
+                        current_group = []
+
+                        for lin, edge in zip(map(is_linear, edges), edges):
+                            if lin:
+                                current_group.append(edge)
+                            else:
+                                if current_group:
+                                    groups.append(current_group)
+                                    current_group = []
+                                groups.append(edge)
+                        if current_group:
+                            groups.append(current_group)
+                        return groups
+                    def format_polyline(edges):
+                        if is_loop := isinstance(edges, ifcopenshell.ifcopenshell_wrapper.loop):
+                            edges = edges.children
+                        points = [p.start.components[0:2] for p in edges]
+                        # if not is_loop:
+                        points += [edges[-1].end.components[0:2]]
+                        return {"ifc5:geometry:procedural:polyline": {
+                            "Points": points
+                        }}
+                    def format_circular_arc(edge):
+                        ccw = True
+                        if edge.curve_sense is False:
+                            # ?
+                            ccw = False
+                        start = np.array(edge.start.components[0:2])
+                        end = np.array(edge.end.components[0:2])
+                        center = np.array([r[3] for r in edge.basis.matrix.components[0:2]])
+                        r = edge.basis.radius
+                        theta1 = np.arctan2(start[1] - center[1], start[0] - center[0])
+                        theta2 = np.arctan2(end[1] - center[1], end[0] - center[0])
+                        theta1 = theta1 % (2*np.pi)
+                        theta2 = theta2 % (2*np.pi)
+                        if ccw:
+                            if theta2 < theta1:
+                                theta2 += 2*np.pi
+                        else:
+                            if theta2 > theta1:
+                                theta2 -= 2*np.pi
+                        mid_theta = (theta1 + theta2) / 2.0
+                        midpoint = center + r * np.array([np.cos(mid_theta), np.sin(mid_theta)])
+                        return {"ifc5:geometry:procedural:circular_arc": {
+                            "Points": np.concatenate((start[np.newaxis,:], midpoint[np.newaxis,:], end[np.newaxis,:])).tolist()
+                        }}
+
+                    itm = r.Items[0]
+
+                    halfspaces = [itm.FirstOperand.SecondOperand, itm.SecondOperand]
+                    extrusion = itm.FirstOperand.FirstOperand
+                    I = ifcopenshell.ifcopenshell_wrapper.map_shape(ifcopenshell.geom.settings(), extrusion.wrapped_data)
+                    depth = I.children[0].depth
+                    drc = I.children[0].direction.components
+                    face1, face2 = sorted((ext.basis for ext in I.children), key=lambda ch:len(ch.children))
+                    ps1 = np.array([p.start.components for p in face1.children[0].children])
+                    assert is_rectangle(ps1)
+                    cent, (width, height) = is_rectangle(ps1)
+
+                    # first profile is just a rectangle
+                    profiles = [{"ifc5:geometry:procedural:rectangle": {
+                        "Position": {
+                            "Location": cent[0:2].tolist()
+                        },
+                        "Width": width,
+                        "Height": height
+                    }}]
+
+                    # second profile is with voids
+                    exterior = None
+                    interior = []
+
+                    for lp in face2.children:
+
+                        if all(map(is_linear, lp.children)):
+                            ps2 = np.array([p.start.components[0:2] for p in lp.children])
+                            if cwh := is_rectangle(ps2):
+                                cent, (width, height) = cwh
+                                profile = {"ifc5:geometry:procedural:rectangle": {
+                                    "Position": {
+                                        "Location": cent[0:2].tolist()
+                                    },
+                                    "Width": width,
+                                    "Height": height
+                                }}
+                            else:
+                                # breakpoint()
+                                profile = format_polyline(lp)
+                        else:
+                            # breakpoint()
+                            groups = group_consecutive_linear(lp)
+                            segments = []
+                            for grp in groups:
+                                if isinstance(grp, list):
+                                    segments.append(format_polyline(grp))
+                                else:
+                                    segments.append(format_circular_arc(grp))
+                            profile = {"ifc5:geometry:procedural:composite_curve": {
+                                "Segments": segments,
+                            }}
+                        
+                        if lp.external:
+                            exterior = profile
+                        else:
+                            interior.append(profile)
+
+                    profiles.append(
+                        {"ifc5:geometry:procedural:profile_with_voids": {
+                            "Exterior": exterior,
+                            "Interior": interior
+                        }}
+                    )
+
+                    comp = {"ifc5:geometry:procedural:composite_profile": {
+                        "Profiles": profiles
+                    }}
+
+                    verts, edges, faces = [], [], []
+
+                    for fa in r.Items[0][1][1][0][2]:
+                        geom = ifcopenshell.geom.create_shape(ifcopenshell.geom.settings(), fa)
+                        num_verts = sum(map(len, verts))
+                        edges.append(np.array(geom.edges).reshape((-1, 2)) + num_verts)
+                        faces.append(np.array(geom.faces).reshape((-1, 3)) + num_verts)
+                        verts.append(np.array(geom.verts).reshape((-1, 3)))                        
+                        
+                    for arr in (verts, edges, faces):
+                        arr[:] = [np.concatenate(arr)]
+
+
+                    UsdGeom.Mesh.Define(stage, "/Profiles").GetPrim().GetInherits().AddInherit("/ProfilesClass")
+                    profiledefclass = stage.CreateClassPrim("/WindowFrameProfile")
+                    profiledefclass.SetTypeName("Mesh")
+                    profiledef = UsdGeom.Mesh(profiledefclass)                    
+                    UsdGeom.Mesh.Define(stage, "/ProfilesClass/WindowFrameProfile").GetPrim().GetInherits().AddInherit("/WindowFrameProfile")
+
+                    write_geom_2(profiledef, "Body", verts[0], faces[0], edges[0])
+                    profiledef.GetPrim().CreateAttribute(f'ifc5:procedural_geometry:has_profile', Sdf.ValueTypeNames.String).Set(
+                        json.dumps(comp)
+                    )
+
+                    basisdef = UsdGeom.Mesh.Define(stage, xf.GetPath().pathString + "/Basis")
+                    basisdef.GetPrim().GetInherits().AddInherit(profiledef.GetPath())
+
+
         if el.is_a('IfcAlignmentSegment'):
             args = el.DesignParameters.get_info(recursive=True, include_identifier=False)
             args.pop('type')
@@ -432,21 +604,24 @@ def process(el, path=(), parentPath=None, asclass=False):
 
     return xf or xf2
 
-for typeobj in [t for t in f.by_type('IfcTypeObject') if t.Types and len(t.Types[0].RelatedObjects) > 1]:
+first_or_none = lambda agg: agg[0] if agg else None
+get_occurence_of_type = lambda tobj: first_or_none(getattr(tobj, 'ObjectTypeOf', ()) + getattr(tobj, 'Types', ()))
+
+for typeobj in []: # [t for t in f.by_type('IfcTypeObject') if get_occurence_of_type(t) and len(get_occurence_of_type(t).RelatedObjects) > 1]:
     if os.path.basename(fn) == 'domestic-hot-water.ifc' and typeobj.is_a('IfcWallType'):
         continue
 
     xf = process(typeobj, ('TypeLibrary',), asclass=True)
-    for occ in typeobj.Types[0].RelatedObjects:
+    for occ in get_occurence_of_type(typeobj).RelatedObjects:
         types[occ].append(xf.GetPath())
-    occ = typeobj.Types[0].RelatedObjects[0]
+    occ = get_occurence_of_type(typeobj).RelatedObjects[0]
     if occ.FillsVoids:
         write_geom(occ.FillsVoids[0].RelatingOpeningElement, xf, override='Void', istype=True)
     write_geom(occ, xf, istype=True)
 
 DIRECT_PROPS = True
 
-for typeobj in f.by_type('IfcPropertySet'):
+for typeobj in []: #  f.by_type('IfcPropertySet'):
     if typeobj.Name.startswith('EPset_'): continue
     if DIRECT_PROPS:
         continue
@@ -500,18 +675,18 @@ for rel in f.by_type('IfcRelConnectsPorts'):
         created_nodes[a].GetPrim().CreateRelationship(f'ifc5:system:connectsTo').AddTarget(created_nodes[b].GetPath().pathString)
 
 
-for typeobj in f.by_type('IfcPropertySet'):
+for typeobj in []: # f.by_type('IfcPropertySet'):
     if typeobj.Name.startswith('EPset_'): continue
     if DIRECT_PROPS:
-        for rel in typeobj.DefinesOccurrence:
+        for rel in (getattr(typeobj, 'DefinesOccurrence', ()) + getattr(typeobj, 'PropertyDefinitionOf', ())):
             for el in rel.RelatedObjects:
-                for p in typeobj.HasProperties:
+                for p in (_ for _ in typeobj.HasProperties if _.Name):
                     def val():
                         try:
                             return p.NominalValue[0]
                         except:
                             return p.EnumerationValues[0][0]
-                    created_nodes[el].GetPrim().CreateAttribute(f'ifc5:properties:{p.Name}', getSdfType(val())).Set(
+                    created_nodes[el].GetPrim().CreateAttribute(f'ifc5:properties:{p.Name.replace(" ", "").replace("-", "_").replace("/", "_").replace("(", "").replace(")", "")}', getSdfType(val())).Set(
                         val()
                     )
 
