@@ -1,10 +1,16 @@
-[
 {
-	"disclaimer": "2024-09-25 publication of the examples. (C) buildingSMART International. Published under CC BY-ND 4.0."
-},
+    "header": {
+      "version": "ifcx_alpha",
+      "id": "urn:uuid:25322b1b-8cf8-446e-a924-1a6a7bb874a0",
+      "version": "0.1.0",
+      "status": "Preliminary",
+      "createdDateTime": "2025-11-11T09:31:29+01:00",
+      "author": "Bob <bob@questionable-engineers.com>"
+    },
+    "schemas": {},
+    "data": [
  {
-  "def": "over",
-  "name": "N93791d5d5beb437bb8ec2f1f0ba4bf3b",
+  "identifier": "8134f9ec-2e87-4b70-a538-9b6dc7ba94b1",
   "attributes": {
    "ifc5:properties": {
     "firerating": "I don't know"
@@ -12,8 +18,7 @@
   }
  },
  {
-  "def": "over",
-  "name": "N2c2d549ff9fe4e228590562fda81a690",
+  "identifier": "82966dcf-41fc-4776-97f1-71d9cb52ab7e",
   "attributes": {
    "ifc5:properties": {
     "firerating": "Who can tell me"
@@ -21,8 +26,7 @@
   }
  },
  {
-  "def": "over",
-  "name": "N592504dc469a44d69ae8c801b591679b",
+  "identifier": "13168941-10d9-4c6a-8c63-505cc302312c",
   "attributes": {
    "ifc5:properties": {
     "firerating": "I shouldn't be authoring these prims"
@@ -30,3 +34,4 @@
   }
  }
 ]
+}

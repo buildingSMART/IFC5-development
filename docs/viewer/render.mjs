@@ -325,23 +325,42 @@ function buildDomTree(headers, prim, node) {
     span.className = "material-symbols-outlined";
     function renderValue(v) {
         if (typeof v === 'object') {
-            if (v.value && v.opinions) {
-                let numDistinctValues = [...new Set(Object.values(v.opinions))].length;
-                let opinionList;
-                if (numDistinctValues > 1) {
-                    opinionList = Object.entries(v.opinions).map(([k, v]) => `${headers[k].name}: ${v}`).join(', ');
-                } else {
-                    opinionList = Object.keys(v.opinions).map(v => headers[v].name).join(', ');
-                }
-                let postfix = (Object.keys(v.opinions).length > 1) ? ` <span class='material-symbols-outlined' title='opinions: ${opinionList}' style='cursor:pointer'>${numDistinctValues === 1 ? 'warning' : 'error'}</span>` : "";
-                return encodeHtmlEntities(renderValue(v.value)) + postfix;
-            } else {
-                return encodeHtmlEntities(JSON.stringify(v));
+          if (v.value && v.opinions) {
+            const distinct = [...new Set(Object.values(v.opinions))];
+            const multiVal = distinct.length > 1;
+            const entries = Object.entries(v.opinions);
+            const tooltip = entries.map(([k, val]) =>
+              `<div style='margin:2px 0;'><b style='color:#222;'>${encodeHtmlEntities(headers[k].author)} (${headers[k].createdDateTime}) v${headers[k].version}</b><br>
+               <span style='color:${multiVal ? "#d93025" : "#f9ab00"}'>${encodeHtmlEntities(val)} (${headers[k].status})</span></div>`
+            ).join('');
+            const badgeColor = multiVal ? '#d93025' : '#f9ab00'; // red vs yellow
+            const icon = multiVal ? 'error' : 'warning';
+            const tooltipBox = `
+              <div style="background:#fff;border:1px solid #ccc;
+                   box-shadow:0 2px 6px rgba(0,0,0,.15);padding:6px 8px;border-radius:8px;
+                   font-size:12px;z-index:100;">${tooltip}</div>`;
+            const container = `
+              <span style="position:relative;cursor:pointer;">
+                <span class="material-symbols-outlined"
+                  style="vertical-align:middle;font-size:18px;color:${badgeColor};
+                         background:${badgeColor}20;border-radius:50%;padding:2px 4px;">
+                  ${icon}
+                </span>
+                ${tooltipBox}
+              </span>`;
+            let html = encodeHtmlEntities(renderValue(v.value));
+            if (entries.length > 1) {
+                html += container;
             }
+            return html;
+          } else {
+            return encodeHtmlEntities(JSON.stringify(v));
+          }
         } else {
-            return encodeHtmlEntities(v);
+          return encodeHtmlEntities(v);
         }
-    }
+      }
+      
     elem.onclick = (evt) => {
         let rows = [['name', prim.name]].concat(Object.entries(prim.attributes || {})).map(([k, v]) => `<tr><td>${encodeHtmlEntities(k)}</td><td>${renderValue(v)}</td>`).join('');
         document.querySelector('.attributes .table').innerHTML = `<table border="0">${rows}</table>`;

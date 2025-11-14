@@ -1,8 +1,11 @@
 {
   "header": {
     "version": "ifcx_alpha",
-    "author": "authorname",
-    "timestamp": "time string"
+    "id": "urn:uuid:3a2f6d9e-3c7e-4f1a-9a15-6d1ef6f78b22",
+    "version": "1.3.0",
+    "status": "Published",
+    "createdDateTime": "2025-11-09T10:30:00+01:00",
+    "author": "Thomas <thomas@aecgeeks.com>"
   },
   "schemas": {
     "bsi::name": {
