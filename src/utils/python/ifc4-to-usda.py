@@ -484,7 +484,8 @@ for system in f.by_type('IfcSystem'):
     path_str = f"/{fmt_guid(system.GlobalId)}"
     xf = stage.CreateClassPrim(Sdf.Path(path_str))
     xf.SetTypeName('Xform')
-    xf.CreateAttribute('ifc5:class:uri', Sdf.ValueTypeNames.String).Set(f'https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/{system.is_a().replace("Type", "")}')
+    xf.CreateAttribute('ifc5:class:uri', Sdf.ValueTypeNames.String).Set(f'https://identifier.buildingsmart.org/uri/buildingsmart/ifc/5/class/{system.is_a().replace("Type", "")}')
+    xf.CreateAttribute('ifc5:class:code', Sdf.ValueTypeNames.String).Set(system.is_a().replace("Type", ""))
 
     targets = []
     refs = system.ServicesBuildings + getattr(system, 'ServicesFacilities', ())

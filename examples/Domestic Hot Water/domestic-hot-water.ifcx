@@ -4664,7 +4664,8 @@
       "path": "6832774b-b948-43cc-9b7e-4bb2024e162a",
       "attributes": {
         "bsi::ifc::class": {
-          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionSystem"
+          "code": "IfcDistributionSystem",
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/5/class/IfcDistributionSystem"
         }
       }
     },
