@@ -231,6 +231,12 @@
       }
     },
     {
+      "path": "2a22c4a4-48a6-54a1-bdc7-ccc1af978446",
+      "children": {
+        "water_supply": "6832774b-b948-43cc-9b7e-4bb2024e162a"
+      }
+    },
+    {
       "path": "ce62bca4-a43c-4c14-9a11-eff58d055c9e",
       "attributes": {
         "customdata": {
@@ -1151,7 +1157,7 @@
       "attributes": {
         "bsi::ifc::system::partofsystem": [
           {
-            "ref": "2a22c4a4-48a6-54a1-bdc7-ccc1af978446"
+            "ref": "6832774b-b948-43cc-9b7e-4bb2024e162a"
           }]
       }
     },
@@ -2581,7 +2587,7 @@
       "attributes": {
         "bsi::ifc::system::partofsystem": [
           {
-            "ref": "2a22c4a4-48a6-54a1-bdc7-ccc1af978446"
+            "ref": "6832774b-b948-43cc-9b7e-4bb2024e162a"
           }]
       }
     },
@@ -2860,7 +2866,7 @@
       "attributes": {
         "bsi::ifc::system::partofsystem": [
           {
-            "ref": "2a22c4a4-48a6-54a1-bdc7-ccc1af978446"
+            "ref": "6832774b-b948-43cc-9b7e-4bb2024e162a"
           }]
       }
     },
@@ -3089,7 +3095,7 @@
       "attributes": {
         "bsi::ifc::system::partofsystem": [
           {
-            "ref": "2a22c4a4-48a6-54a1-bdc7-ccc1af978446"
+            "ref": "6832774b-b948-43cc-9b7e-4bb2024e162a"
           }]
       }
     },
@@ -3318,7 +3324,7 @@
       "attributes": {
         "bsi::ifc::system::partofsystem": [
           {
-            "ref": "2a22c4a4-48a6-54a1-bdc7-ccc1af978446"
+            "ref": "6832774b-b948-43cc-9b7e-4bb2024e162a"
           }]
       }
     },
@@ -3996,7 +4002,7 @@
       "attributes": {
         "bsi::ifc::system::partofsystem": [
           {
-            "ref": "2a22c4a4-48a6-54a1-bdc7-ccc1af978446"
+            "ref": "6832774b-b948-43cc-9b7e-4bb2024e162a"
           }]
       }
     },
@@ -4102,7 +4108,7 @@
       "attributes": {
         "bsi::ifc::system::partofsystem": [
           {
-            "ref": "2a22c4a4-48a6-54a1-bdc7-ccc1af978446"
+            "ref": "6832774b-b948-43cc-9b7e-4bb2024e162a"
           }]
       }
     },
@@ -4343,7 +4349,7 @@
       "attributes": {
         "bsi::ifc::system::partofsystem": [
           {
-            "ref": "2a22c4a4-48a6-54a1-bdc7-ccc1af978446"
+            "ref": "6832774b-b948-43cc-9b7e-4bb2024e162a"
           }]
       }
     },
@@ -4572,7 +4578,7 @@
       "attributes": {
         "bsi::ifc::system::partofsystem": [
           {
-            "ref": "2a22c4a4-48a6-54a1-bdc7-ccc1af978446"
+            "ref": "6832774b-b948-43cc-9b7e-4bb2024e162a"
           }]
       }
     },
@@ -4652,6 +4658,23 @@
             [3.4410713482206e-22,2.64697796016969e-23,1,0],
             [2.46587454899583e-08,-1.14657007888042e-07,1.41566729545597,1]]
         }
+      }
+    },
+    {
+      "path": "6832774b-b948-43cc-9b7e-4bb2024e162a",
+      "attributes": {
+        "bsi::ifc::class": {
+          "uri": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcDistributionSystem"
+        }
+      }
+    },
+    {
+      "path": "6832774b-b948-43cc-9b7e-4bb2024e162a",
+      "attributes": {
+        "bsi::ifc::system::servicesfacility": [
+          {
+            "ref": "e84dc79e-fe9d-4781-9f4b-54dd435cca91"
+          }]
       }
     }]
 }

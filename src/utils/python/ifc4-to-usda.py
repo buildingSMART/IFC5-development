@@ -481,18 +481,32 @@ for rel in f.by_type('IfcRelSpaceBoundary'):
 
 
 for system in f.by_type('IfcSystem'):
-    path_str = f"/{get_name(system)}"
+    path_str = f"/{fmt_guid(system.GlobalId)}"
     xf = stage.CreateClassPrim(Sdf.Path(path_str))
     xf.SetTypeName('Xform')
+    xf.CreateAttribute('ifc5:class:uri', Sdf.ValueTypeNames.String).Set(f'https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/{system.is_a().replace("Type", "")}')
+
+    targets = []
     refs = system.ServicesBuildings + getattr(system, 'ServicesFacilities', ())
-    if refs:
-        rel = xf.GetPrim().CreateRelationship(f'ifc5:system:servicesFacility')
-        for ref in refs:
-            elem = (getattr(ref, 'RelatedBuildings', ()) + getattr(ref, 'RelatingStructure', ()))[0]
-            rel.AddTarget(created_nodes[elem].GetPath().pathString)
+    for rel in refs:
+        elem = (getattr(ref, 'RelatedBuildings', ()) + getattr(ref, 'RelatingStructure', ()))[0]
+        targets.append(elem)
+    if not targets:
+        targets.append(f.by_type('IfcBuilding')[0])
+
+    rel = xf.GetPrim().CreateRelationship(f'ifc5:system:servicesFacility')
+    for elem in targets:
+        rel.AddTarget(created_nodes[elem].GetPath().pathString)
+
     for ref in system.IsGroupedBy[0].RelatedObjects:
         created_nodes[ref].GetPrim().CreateRelationship(f'ifc5:system:partOfSystem').AddTarget(path_str)
-    
+
+    # if system.is_a('IfcDistributionSystem'):
+    #     if pt := system.PredefinedType:
+    #         xf.CreateAttribute('ifc5:system:systemType', Sdf.ValueTypeNames.String).Set(pt)
+
+    stage.DefinePrim(f"/{get_name(system)}").GetInherits().AddInherit(path_str)
+
 
 for rel in f.by_type('IfcRelConnectsPorts'):
     cons = (rel.RelatedPort, rel.RelatingPort)
