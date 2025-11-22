@@ -7,30 +7,25 @@ export type paths = Record<string, never>;
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
-        ArrayRestrictions: {
-            min?: number;
-            max?: number;
-            value: components["schemas"]["IfcxValueDescription"];
-        };
         /** @enum {string} */
-        DataType: "Real" | "Boolean" | "Integer" | "String" | "DateTime" | "Enum" | "Array" | "Object" | "Reference" | "Blob";
-        EnumRestrictions: {
-            options: string[];
+        AttributeFileType: "JSON" | "PARQUET";
+        AttributeTableReference: {
+            filename: components["schemas"]["attribute_file_name"];
+            type: components["schemas"]["AttributeFileType"];
+            schema: components["schemas"]["attribute_schema_namespace"];
+        };
+        IfcxDataSection: {
+            header: components["schemas"]["IfcxProvenanceHeader"];
+            nodes: components["schemas"]["IfcxNode"][];
         };
         IfcxFile: {
-            header: components["schemas"]["IfcxHeader"];
+            header: components["schemas"]["IfcxFileHeader"];
             imports: components["schemas"]["ImportNode"][];
-            schemas: {
-                [key: string]: components["schemas"]["IfcxSchema"];
-            };
-            data: components["schemas"]["IfcxNode"][];
+            attributeTables: components["schemas"]["AttributeTableReference"][];
+            sections: components["schemas"]["IfcxDataSection"][];
         };
-        IfcxHeader: {
-            id: string;
+        IfcxFileHeader: {
             ifcxVersion: string;
-            dataVersion: string;
-            author: string;
-            timestamp: string;
         };
         IfcxNode: {
             path: components["schemas"]["path"];
@@ -56,27 +51,15 @@ export interface components {
                 } | components["schemas"]["OpinionPassthrough"] | components["schemas"]["OpinionDelete"];
             };
         };
-        IfcxSchema: {
-            uri?: string;
-            value: components["schemas"]["IfcxValueDescription"];
-        };
-        IfcxValueDescription: {
-            dataType: components["schemas"]["DataType"];
-            optional?: boolean;
-            inherits?: string[];
-            quantityKind?: components["schemas"]["QuantityKind"];
-            enumRestrictions?: components["schemas"]["EnumRestrictions"];
-            arrayRestrictions?: components["schemas"]["ArrayRestrictions"];
-            objectRestrictions?: components["schemas"]["ObjectRestrictions"];
+        IfcxProvenanceHeader: {
+            id: string;
+            dataVersion: string;
+            author: string;
+            timestamp: string;
         };
         ImportNode: {
             uri: string;
             integrity?: string;
-        };
-        ObjectRestrictions: {
-            values: {
-                [key: string]: components["schemas"]["IfcxValueDescription"];
-            };
         };
         OpinionDelete: {
             /** @enum {string} */
@@ -87,9 +70,11 @@ export interface components {
             opinion: "PASS_THROUGH";
         };
         /** @enum {string} */
-        OpinionType: "PASS_THROUGH" | "VALUE" | "DELETE";
+        OpinionType: "PASS_THROUGH" | "DELETE" | "VALUE";
         /** @enum {string} */
         QuantityKind: "Plane angle" | "Thermodynamic temperature" | "Electric current" | "Time" | "Frequency" | "Mass" | "Length" | "Linear velocity" | "Force" | "Pressure" | "Area" | "Energy" | "Power" | "Volume";
+        attribute_file_name: string;
+        attribute_schema_namespace: string;
         attribute_uri: string;
         path: string;
     };

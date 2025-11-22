@@ -6,79 +6,64 @@ tags: []
 paths: {}
 components:
   schemas:
-    ArrayRestrictions:
-      type: object
-      required:
-        - value
-      properties:
-        min:
-          type: number
-        max:
-          type: number
-        value:
-          $ref: '#/components/schemas/IfcxValueDescription'
-    DataType:
+    AttributeFileType:
       type: string
       enum:
-        - Real
-        - Boolean
-        - Integer
-        - String
-        - DateTime
-        - Enum
-        - Array
-        - Object
-        - Reference
-        - Blob
-    EnumRestrictions:
+        - JSON
+        - PARQUET
+    AttributeTableReference:
       type: object
       required:
-        - options
+        - filename
+        - type
+        - schema
       properties:
-        options:
+        filename:
+          $ref: '#/components/schemas/attribute_file_name'
+        type:
+          $ref: '#/components/schemas/AttributeFileType'
+        schema:
+          $ref: '#/components/schemas/attribute_schema_namespace'
+    IfcxDataSection:
+      type: object
+      required:
+        - header
+        - nodes
+      properties:
+        header:
+          $ref: '#/components/schemas/IfcxProvenanceHeader'
+        nodes:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/IfcxNode'
     IfcxFile:
       type: object
       required:
         - header
         - imports
-        - schemas
-        - data
+        - attributeTables
+        - sections
       properties:
         header:
-          $ref: '#/components/schemas/IfcxHeader'
+          $ref: '#/components/schemas/IfcxFileHeader'
         imports:
           type: array
           items:
             $ref: '#/components/schemas/ImportNode'
-        schemas:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/IfcxSchema'
-        data:
+        attributeTables:
           type: array
           items:
-            $ref: '#/components/schemas/IfcxNode'
-    IfcxHeader:
+            $ref: '#/components/schemas/AttributeTableReference'
+        sections:
+          type: array
+          items:
+            $ref: '#/components/schemas/IfcxDataSection'
+    IfcxFileHeader:
       type: object
       required:
-        - id
         - ifcxVersion
-        - dataVersion
-        - author
-        - timestamp
       properties:
-        id:
-          type: string
         ifcxVersion:
-          type: string
-        dataVersion:
-          type: string
-        author:
-          type: string
-        timestamp:
           type: string
     IfcxNode:
       type: object
@@ -138,36 +123,22 @@ components:
                     $ref: '#/components/schemas/attribute_uri'
               - $ref: '#/components/schemas/OpinionPassthrough'
               - $ref: '#/components/schemas/OpinionDelete'
-    IfcxSchema:
+    IfcxProvenanceHeader:
       type: object
       required:
-        - value
+        - id
+        - dataVersion
+        - author
+        - timestamp
       properties:
-        uri:
+        id:
           type: string
-        value:
-          $ref: '#/components/schemas/IfcxValueDescription'
-    IfcxValueDescription:
-      type: object
-      required:
-        - dataType
-      properties:
-        dataType:
-          $ref: '#/components/schemas/DataType'
-        optional:
-          type: boolean
-        inherits:
-          type: array
-          items:
-            type: string
-        quantityKind:
-          $ref: '#/components/schemas/QuantityKind'
-        enumRestrictions:
-          $ref: '#/components/schemas/EnumRestrictions'
-        arrayRestrictions:
-          $ref: '#/components/schemas/ArrayRestrictions'
-        objectRestrictions:
-          $ref: '#/components/schemas/ObjectRestrictions'
+        dataVersion:
+          type: string
+        author:
+          type: string
+        timestamp:
+          type: string
     ImportNode:
       type: object
       required:
@@ -177,15 +148,6 @@ components:
           type: string
         integrity:
           type: string
-    ObjectRestrictions:
-      type: object
-      required:
-        - values
-      properties:
-        values:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/IfcxValueDescription'
     OpinionDelete:
       type: object
       required:
@@ -208,8 +170,8 @@ components:
       type: string
       enum:
         - PASS_THROUGH
-        - VALUE
         - DELETE
+        - VALUE
     QuantityKind:
       type: string
       enum:
@@ -227,6 +189,12 @@ components:
         - Energy
         - Power
         - Volume
+    attribute_file_name:
+      type: string
+      pattern: </[A-Za-z0-9.]+
+    attribute_schema_namespace:
+      type: string
+      pattern: </[a-z0-9.]+
     attribute_uri:
       type: string
       pattern: </[A-Za-z0-9.]+:[A-Za-z0-9]+>
