@@ -65,13 +65,16 @@ components:
       type: object
       required:
         - id
-        - version
+        - ifcxVersion
+        - dataVersion
         - author
         - timestamp
       properties:
         id:
           type: string
-        version:
+        ifcxVersion:
+          type: string
+        dataVersion:
           type: string
         author:
           type: string
@@ -87,16 +90,54 @@ components:
         children:
           type: object
           additionalProperties:
-            type: string
-            nullable: true
+            anyOf:
+              - type: object
+                required:
+                  - opinion
+                  - value
+                properties:
+                  opinion:
+                    type: string
+                    enum:
+                      - VALUE
+                  value:
+                    $ref: '#/components/schemas/path'
+              - $ref: '#/components/schemas/OpinionPassthrough'
+              - $ref: '#/components/schemas/OpinionDelete'
         inherits:
           type: object
           additionalProperties:
-            type: string
-            nullable: true
+            anyOf:
+              - type: object
+                required:
+                  - opinion
+                  - value
+                properties:
+                  opinion:
+                    type: string
+                    enum:
+                      - VALUE
+                  value:
+                    $ref: '#/components/schemas/path'
+              - $ref: '#/components/schemas/OpinionPassthrough'
+              - $ref: '#/components/schemas/OpinionDelete'
         attributes:
           type: object
-          additionalProperties: {}
+          additionalProperties:
+            anyOf:
+              - type: object
+                required:
+                  - opinion
+                  - value
+                properties:
+                  opinion:
+                    type: string
+                    enum:
+                      - VALUE
+                  value:
+                    $ref: '#/components/schemas/attribute_uri'
+              - $ref: '#/components/schemas/OpinionPassthrough'
+              - $ref: '#/components/schemas/OpinionDelete'
     IfcxSchema:
       type: object
       required:
@@ -145,6 +186,30 @@ components:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/IfcxValueDescription'
+    OpinionDelete:
+      type: object
+      required:
+        - opinion
+      properties:
+        opinion:
+          type: string
+          enum:
+            - DELETE
+    OpinionPassthrough:
+      type: object
+      required:
+        - opinion
+      properties:
+        opinion:
+          type: string
+          enum:
+            - PASS_THROUGH
+    OpinionType:
+      type: string
+      enum:
+        - PASS_THROUGH
+        - VALUE
+        - DELETE
     QuantityKind:
       type: string
       enum:
@@ -162,9 +227,9 @@ components:
         - Energy
         - Power
         - Volume
-    code:
+    attribute_uri:
       type: string
-      pattern: </[A-Za-z0-9]+>
+      pattern: </[A-Za-z0-9.]+:[A-Za-z0-9]+>
     path:
       type: string
-      pattern: </[A-Za-z0-9_/.:]+>
+      pattern: </(\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})[0-9a-zA-Z\/]+>

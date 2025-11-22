@@ -14,7 +14,9 @@
   },
   "scripts": {
     "compile": "tsp compile ifcx.tsp",
-    "gen": "npx openapi-typescript ./out/@typespec/openapi3/openapi.yaml -o ./out/ts/ifcx.d.ts"
+    "compile-post-alpha": "tsp compile ifcx-post-alpha.tsp",
+    "gen": "npx openapi-typescript ./out/@typespec/openapi3/openapi.yaml -o ./out/ts/ifcx.d.ts",
+    "gen-post-alpha": "npx openapi-typescript ./out/@typespec/openapi3/openapi.yaml -o ./out/ts/ifcx-post-alpha.d.ts"
   },
   "private": true,
   "dependencies": {
