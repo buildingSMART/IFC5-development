@@ -46,12 +46,16 @@ model IfcxNode {
     attributes?: Record<OpinionatedValue<attribute_uri>>;
 }
 
-model IfcxHeader {
-    id: string;             // identifier of the dataset; name or path e.g. "ifc5.technical.buildingsmart.org/examples/example@v1.ifcx"
-    ifcxVersion: string;    // "ifcx_post_alpha"
+model IfcxProvenanceHeader
+{
+    id: string;             // identifier of the full dataset; name or path e.g. "ifc5.technical.buildingsmart.org/examples/example@v1.ifcx"
     dataVersion: string;    // "1.0.0"
     author: string;         // who created the dataset, e.g. "John.Doe@mail.com"
     timestamp: string;      // ISO 8601 datetime e.g. "2025-06-25"
+}
+
+model IfcxFileHeader {
+    ifcxVersion: string;    // "ifcx_post_alpha"
 }
 
 model ImportNode
@@ -73,9 +77,15 @@ model AttributeTableReference
     schema: attribute_schema_namespace;
 }
 
+model IfcxDataSection
+{
+    header: IfcxProvenanceHeader;
+    nodes: IfcxNode[];
+}
+
 model IfcxFile {
-    header: IfcxHeader;
+    header: IfcxFileHeader;
     "imports": ImportNode[];
     attributeTables: AttributeTableReference[];
-    nodes: IfcxNode[]
+    sections: IfcxDataSection[];
 }
