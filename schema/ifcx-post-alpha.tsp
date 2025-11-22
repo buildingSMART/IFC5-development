@@ -11,6 +11,9 @@ scalar attribute_uri extends string;
 @pattern("</[A-Za-z0-9.]+")
 scalar attribute_file_name extends string;
 
+@pattern("</[a-z0-9.]+")
+scalar attribute_schema_namespace extends string;
+
 enum OpinionType
 {
     PASS_THROUGH, // I have no opinion
@@ -51,56 +54,6 @@ model IfcxHeader {
     timestamp: string;      // ISO 8601 datetime e.g. "2025-06-25"
 }
 
-enum DataType
-{
-    Real: "Real",
-    Boolean: "Boolean",
-    Integer: "Integer",
-    String: "String",
-    DateTime: "DateTime",
-    Enum: "Enum",
-    Array: "Array",
-    Object: "Object",
-    Reference: "Reference",
-    Blob: "Blob"
-}
-
-model EnumRestrictions
-{
-    options: string[];
-}
-
-model ArrayRestrictions
-{
-    min?: numeric;
-    max?: numeric;
-
-    value: IfcxValueDescription;
-}
-
-model ObjectRestrictions
-{
-    values: Record<IfcxValueDescription>;
-}
-
-model IfcxValueDescription
-{
-    dataType: DataType;
-    optional?: boolean;
-    inherits?: string[];
-    quantityKind?: QuantityKind;
-
-    enumRestrictions?: EnumRestrictions;
-    arrayRestrictions?: ArrayRestrictions;
-    objectRestrictions?: ObjectRestrictions;
-}
-
-model IfcxSchema
-{
-    uri?: string;
-    value: IfcxValueDescription;    
-}
-
 model ImportNode
 {
     uri: string;
@@ -117,7 +70,7 @@ model AttributeTableReference
 {
     filename: attribute_file_name;
     type: AttributeFileType;
-    schema: IfcxSchema;
+    schema: attribute_schema_namespace;
 }
 
 model IfcxFile {
