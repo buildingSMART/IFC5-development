@@ -33,14 +33,175 @@ function TreeNodeToComposedObject(path: string, node: PostCompositionNode, schem
             {
                 let postfix = "";
                 let quantityKind = schema.value.quantityKind;
-                if (quantityKind === "Length")
+
+                if (quantityKind === "Plane angle")                     // Added
+                {
+                    postfix = String.fromCodePoint(0x00B0);
+                }
+                else if (quantityKind === "Thermodynamic temperature")  // Added
+                {
+                    postfix = String.fromCodePoint(0x00B0) + "K";
+                }
+                else if (quantityKind === "Celsius temperature")        // Added
+                {
+                    postfix = String.fromCodePoint(0x00B0) + "C";
+                }
+                else if (quantityKind === "Electric current")           // Added
+                {
+                    postfix = "A";
+                }
+                else if (quantityKind === "Time")                       // Added
+                {
+                    postfix = "s";
+                }
+                else if (quantityKind === "Frequency")                  // Added
+                {
+                    postfix = "Hz";
+                }
+                else if (quantityKind === "Mass")                       // Added
+                {                                   // Though the prefix "Kilo" starts with an uppercase letter,
+                    postfix = "kg";                 // the respective abbreviation/ SI-symbol doesn't/ isn't one
+                }                                   // (unlike presented in 'quantity-kinds_source_table.xlsx')
+                else if (quantityKind === "Length")
                 {
                     postfix = "m";
+                }
+                else if (quantityKind === "Linear velocity")            // Added
+                {
+                    postfix = "m/s";
+                }
+                else if (quantityKind === "Force")                      // Added
+                {
+                    postfix = "N";
+                }
+                else if (quantityKind === "Pressure")                   // Added
+                {
+                    postfix = "Pa";
+                }
+                else if (quantityKind === "Area")                       // Added
+                {
+                    postfix = "m" + String.fromCodePoint(0x00B2);
+                }
+                else if (quantityKind === "Energy")                     // Added
+                {
+                    postfix = "J";
+                }
+                else if (quantityKind === "Power")                      // Added
+                {
+                    postfix = "W";
                 }
                 else if (quantityKind === "Volume")
                 {
                     postfix = "m" + String.fromCodePoint(0x00B3);
                 }
+                else if (quantityKind === "Mass density")               // Added
+                {
+                    postfix = "kg/m" + String.fromCodePoint(0x00B3);
+                }
+                else if (quantityKind === "Thermal conductivity")       // Added
+                {
+                    postfix = "W/mK";
+                }
+                else if (quantityKind === "Thermal transmittance")      // Added
+                {
+                    postfix = "W/m" + String.fromCodePoint(0x00B2) + "K";
+                }
+
+/*              // Other option to the many "else if" - statements above
+
+                switch(quantityKind) { 
+                    case "Plane angle":
+                    { 
+                        postfix = String.fromCodePoint(0x00B0);
+                        break;
+                    }
+                    case "Thermodynamic temperature":
+                    { 
+                        postfix = String.fromCodePoint(0x00B0) + "K";
+                        break;
+                    }
+                    case "Celsius temperature":
+                    { 
+                        postfix = String.fromCodePoint(0x00B0) + "C";
+                        break;
+                    }
+                    case "Electric current":
+                    { 
+                        postfix = "A";
+                        break;
+                    }
+                    case "Time":
+                    { 
+                        postfix = "s";
+                        break;
+                    }
+                    case "Frequency":
+                    { 
+                        postfix = "Hz";
+                        break;
+                    }
+                    case "Mass":
+                    { 
+                        postfix = "kg";         // Though the prefix "Kilo" starts with an uppercase letter,
+                        break;                  // the respective abbreviation/ SI-symbol doesn't/ isn't one
+                    }                           // (unlike presented in 'quantity-kinds_source_table.xlsx')
+                    case "Length":
+                    { 
+                        postfix = "m"; 
+                        break;
+                    }
+                    case "Linear velocity":
+                    { 
+                        postfix = "m/s"; 
+                        break;
+                    }
+                    case "Force":
+                    { 
+                        postfix = "N"; 
+                        break;
+                    }
+                    case "Pressure":
+                    { 
+                        postfix = "Pa"; 
+                        break;
+                    }
+                    case "Area":
+                    { 
+                        postfix = "m" + String.fromCodePoint(0x00B2); 
+                        break; 
+                    }
+                    case "Energy":
+                    { 
+                        postfix = "J"; 
+                        break; 
+                    }
+                    case "Power":
+                    { 
+                        postfix = "W"; 
+                        break; 
+                    }
+                    case "Volume":
+                    { 
+                        postfix = "m" + String.fromCodePoint(0x00B3); 
+                        break;
+                    }
+                    case "Mass density":
+                    { 
+                        postfix = "kg/m" + String.fromCodePoint(0x00B3); 
+                        break;  
+                    }
+                    case "Thermal conductivity":
+                    { 
+                        postfix = "W/mK"; 
+                        break;
+                    }
+                    case "Thermal transmittance":
+                    { 
+                        postfix = "W/m" + String.fromCodePoint(0x00B2) + "K"; 
+                        break; 
+                    }
+                }
+*/             
                 co.attributes[attrName] = `${attr} ${postfix}`;
             }
             else
