@@ -3,8 +3,22 @@ import sys
 
 obj = json.load(open(sys.argv[1]))
 known_quants = {
-    "volume": {"quantityKind": "Volume"},
-    "height": {"quantityKind": "Length"}
+        "planeAngle": {"quantityKind": "Plane angle"},                              # Added
+        "thermodynamicTemperatue": {"quantityKind": "Thermodynamic temperatue"},    # Added
+        "celsiusTemperature": {"quantityKind": "Celsius temperature"},              # Added
+        "electricCurrent": {"quantityKind": "Electric current"},                    # Added
+        "time": {"quantityKind": "Time"},                                           # Added
+        "frequency": {"quantityKind": "Frequency"},                                 # Added
+        "mass": {"quantityKind": "Mass"},                                           # Added
+        "length": {"quantityKind": "Length"},       # Changed "height" into "length" !
+        "linearVelocity": {"quantityKind": "Linear velocity"},                      # Added
+        "force": {"quantityKind": "Force"},                                         # Added
+        "pressure": {"quantityKind": "Pressure"},                                   # Added
+        "area": {"quantityKind": "Area"},                                           # Added
+        "volume": {"quantityKind": "Volume"},
+        "massDensity": {"quantityKind": "Mass density"},                            # Added
+        "thermalConductivity": {"quantityKind": "Thermal conductivity"},            # Added
+        "thermalTransmittance": {"quantityKind": "Thermal transmittance"}           # Added
 }
 
 def make_schema(v, path=[]):

@@ -150,6 +150,7 @@ components:
       enum:
         - Plane angle
         - Thermodynamic temperature
+        - Celsius temperature
         - Electric current
         - Time
         - Frequency
@@ -162,6 +163,9 @@ components:
         - Energy
         - Power
         - Volume
+        - Mass density
+        - Thermal conductivity
+        - Thermal transmittance
     code:
       type: string
       pattern: </[A-Za-z0-9]+>
