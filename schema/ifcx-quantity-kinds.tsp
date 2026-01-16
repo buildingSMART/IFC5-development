@@ -2,7 +2,7 @@
 enum QuantityKind
 {
     PlaneAngle: "Plane angle";
-    ThermodynamicTemperatue: "Thermodynamic temperature",
+    ThermodynamicTemperature: "Thermodynamic temperature",
     ElectricCurrent: "Electric current",
     Time: "Time",
     Frequency: "Frequency",
