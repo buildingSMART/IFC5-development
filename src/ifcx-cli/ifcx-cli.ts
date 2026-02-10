@@ -2,9 +2,13 @@ import * as process from "process";
 import * as fs from "fs";
 
 import { components } from "../../schema/out/ts/ifcx";
-import { Diff, Federate } from "../ifcx-core/workflows";
+import { Diff, Federate, LoadIfcxFile } from "../ifcx-core/workflows";
 import { ExampleFile } from "../test/example-file";
 import { SchemasToOpenAPI } from "../ifcx-core/schema/schema-export";
+import { PostCompositionNode } from "../ifcx-core/composition/node";
+import { InMemoryLayerProvider, StackedLayerProvider } from "../ifcx-core/layers/layer-providers";
+import { FetchLayerProvider } from "../ifcx-core/layers/fetch-layer-provider";
+import { IfcxLayerStackBuilder } from "../ifcx-core/layers/layer-stack";
 
 type IfcxFile = components["schemas"]["IfcxFile"];
 
@@ -14,7 +18,7 @@ console.log("running ifcx [alpha]...", JSON.stringify(args));
 console.log();
 
 
-function processArgs(args: string[])
+async function processArgs(args: string[])
 {
     let operation = args[0];
 
@@ -50,6 +54,62 @@ function processArgs(args: string[])
 
         fs.writeFileSync(outputPath, JSON.stringify(result, null, 4));
     }
+    else if (operation === "compose")
+    {
+        const parseFlags = (args: string[]) => {
+            let fetch = true;
+            let validate = true;
+            let rest: string[] = [];
+
+            args.forEach((arg) => {
+                if (arg === "--no-fetch") {
+                    fetch = false;
+                } else if (arg === "--no-validate") {
+                    validate = false;
+                } else if (arg.startsWith("-")) {
+                    throw Error(`Unsupported flag ${arg}`);
+                } else {
+                    rest.push(arg);
+                }
+            });
+
+            return { fetch, validate, rest };
+        }
+
+        let { fetch, validate, rest } = parseFlags(args.slice(1));
+
+        if (rest.length < 2) throw new Error(`expected at least 2 arguments`);
+
+        let outputPath = rest[rest.length - 1];
+        if (fs.existsSync(outputPath)) throw new Error(`Output file already exists: ${outputPath}`);
+
+        let inputPaths = rest.slice(0, -1);
+        let files = inputPaths.map(p => JSON.parse(fs.readFileSync(p).toString()) as IfcxFile);
+
+        let userDefinedOrder: IfcxFile = {
+            header: {...files[0].header},
+            imports: files.map(f => { return { uri: f.header.id }; }),
+            schemas: {},
+            data: []
+        }
+        userDefinedOrder.header.id = "_cli";
+
+        const providers = fetch ? [new FetchLayerProvider()] : [];
+        let provider = new StackedLayerProvider([
+            new InMemoryLayerProvider().AddAll([userDefinedOrder, ...files]), 
+            ...providers
+        ]);
+        let layerStack = await (new IfcxLayerStackBuilder(provider).FromId(userDefinedOrder.header.id)).Build();
+        if (layerStack instanceof Error)
+        {
+            throw layerStack;
+        }
+
+        let federated = layerStack.GetFederatedLayer();
+        let composed = LoadIfcxFile(federated, validate, true);
+
+        fs.writeFileSync(outputPath, JSON.stringify(NodeToJSON(composed), null, 4));
+    }
     else if (operation === "make_default_file")
     {
         let path = args[1];
@@ -61,6 +121,8 @@ function processArgs(args: string[])
         console.log(`schema_to_openapi`);
         console.log(`diff`);
         console.log(`federate`);
+        console.log(`compose`);
+        console.log(`compose [--no-fetch] [--no-validate] <input1> <input2> ... <output>`);
         console.log(`make_default_file`);
         console.log(`help`);
     }
@@ -70,4 +132,22 @@ function processArgs(args: string[])
     }
 }
 
-processArgs(args);
+function NodeToJSON(node: PostCompositionNode)
+{
+    let obj: any = {};
+    obj.node = node.node;
+    obj.children = {};
+    obj.attributes = {};
+    [...node.children.entries()].forEach(c => {
+        obj.children[c[0]] = NodeToJSON(c[1]);
+    });
+    [...node.attributes.entries()].forEach(c => {
+        obj.attributes[c[0]] = c[1];
+    });
+    return obj;
+}
+
+processArgs(args).catch((e) => {
+    console.error(e);
+    process.exit(1);
+});
