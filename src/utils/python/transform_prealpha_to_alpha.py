@@ -1,3 +1,4 @@
+import ast
 import functools
 import itertools
 import operator
@@ -75,6 +76,11 @@ def transform_attributes(d):
             if k.startswith("usd") and not k.startswith("usd::"):
                 k = "usd::" + k
 
+            try:
+                v = json.loads(ast.literal_eval(v))
+            except:
+                pass
+                
             if isinstance(v, dict):
                 v = transform_attributes(v)
                 if not v:
