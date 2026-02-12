@@ -1,0 +1,7 @@
+{
+"header": {"id":"ACCA_6_add_simple_mesh_geometry","ifcxVersion":"ifcx_alpha","dataVersion":"1.0.0","author":"michelangelo.cianciulli@acca.it","timestamp":"time string"},
+"imports": [{"uri":"https://gist.githubusercontent.com/michelangelo-acca/7d8caf4efc5dfde3c8a814edc4bd3cc2/raw/ACCA_2_add_mesh_geometry.ifcx"}],
+"schemas": {},
+"data": [
+]
+}

@@ -1,0 +1,7 @@
+{
+"header": {"id":"ACCA_4_open_existing_hello_wall_model","ifcxVersion":"ifcx_alpha","dataVersion":"1.0.0","author":"michelangelo.cianciulli@acca.it","timestamp":"time string"},
+"imports": [{"uri":"https://raw.githubusercontent.com/buildingSMART/IFC5-development/main/examples/Hello%20Wall/hello-wall.ifcx"}],
+"schemas": {},
+"data": [
+]
+}

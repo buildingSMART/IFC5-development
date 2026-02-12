@@ -1,0 +1,10 @@
+{
+"header": {"id":"ACCA_3_add_some_IFC_and_some_ETIM_data_with_ref_to_bSDD","ifcxVersion":"ifcx_alpha","dataVersion":"1.0.0","author":"michelangelo.cianciulli@acca.it","timestamp":"time string"},
+"imports": [{"uri":"https://ifcx.dev/@standards.buildingsmart.org/ifc/core/ifc@v5a.ifcx"},{"uri":"https://ifcx.dev/@standards.buildingsmart.org/ifc/core/prop@v5a.ifcx"},{"uri":"https://ifcx.dev/@standards.buildingsmart.org/ifc/ifc-mat/ifc-mat@v1.0.0.ifcx"},{"uri":"https://ifcx.dev/@openusd.org/usd@v1.ifcx"},{"uri":"https://ifcx.dev/@nlsfb/nlsfb@v1.ifcx"}],
+"schemas": {"etim::class":{"value":{"dataType":"Object","objectRestrictions":{"values":{"code":{"dataType":"String"},"uri":{"dataType":"String"}}}}}},
+"data": [
+{"path":"25503984-6605-43a1-8597-765db","attributes":{"bsi::ifc::class":{"code":"IfcLightFixture","uri":"https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/class/IfcLightFixture"}}},
+{"path":"25503984-6605-43a1-8597-765db","attributes":{"etim::class":{"code":"EC002892","uri":"https://identifier.buildingsmart.org/uri/etim/etim/10.1/class/EC002892"}}},
+{"path":"25503984-6605-43a1-8597-765db","attributes":{"bsi::ifc::prop::Width":0.6,"bsi::ifc::prop::Name":"ALP-P370 1000 DALI C2"}}
+]
+}

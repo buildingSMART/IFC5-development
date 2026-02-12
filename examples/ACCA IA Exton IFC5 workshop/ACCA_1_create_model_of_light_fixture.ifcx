@@ -1,0 +1,8 @@
+{
+"header": {"id":"ACCA_1_create_model_of_light_fixture","ifcxVersion":"ifcx_alpha","dataVersion":"1.0.0","author":"michelangelo.cianciulli@acca.it","timestamp":"time string"},
+"imports": [{"uri":"https://ifcx.dev/@standards.buildingsmart.org/ifc/core/ifc@v5a.ifcx"},{"uri":"https://ifcx.dev/@standards.buildingsmart.org/ifc/core/prop@v5a.ifcx"},{"uri":"https://ifcx.dev/@standards.buildingsmart.org/ifc/ifc-mat/ifc-mat@v1.0.0.ifcx"},{"uri":"https://ifcx.dev/@openusd.org/usd@v1.ifcx"},{"uri":"https://ifcx.dev/@nlsfb/nlsfb@v1.ifcx"}],
+"schemas": {},
+"data": [
+{"path":"1edb099f-a041-494d-b627-9628240a6153","children":{"Light Fixture type":"25503984-6605-43a1-8597-765db"}}
+]
+}
