@@ -2,24 +2,18 @@
   "name": "ifcx-schema",
   "version": "0.1.0",
   "type": "module",
-  "peerDependencies": {
-    "@typespec/compiler": "latest",
-    "@typespec/openapi3": "latest"
-  },
   "devDependencies": {
-    "@typespec/compiler": "latest",
-    "@typespec/openapi3": "latest",
-    "json-schema-to-typescript": "^15.0.3",
-    "openapi-typescript": "^7.6.1"
+    "@typespec/compiler": "^1.9.0",
+    "@typespec/json-schema": "^1.9.0",
+    "@typespec/openapi3": "^1.9.0",
+    "quicktype": "^23.2.6"
   },
   "scripts": {
-    "compile": "tsp compile ifcx.tsp",
-    "compile-post-alpha": "tsp compile ifcx-post-alpha.tsp",
-    "gen": "npx openapi-typescript ./out/@typespec/openapi3/openapi.yaml -o ./out/ts/ifcx.d.ts",
-    "gen-post-alpha": "npx openapi-typescript ./out/@typespec/openapi3/openapi.yaml -o ./out/ts/ifcx-post-alpha.d.ts"
+    "compile-alpha": "tsp compile ifcx.tsp",
+    "compile-ifcx-index-file": "tsp compile ifcx-index-file.tsp --emit @typespec/json-schema --output-dir ../standard/ifcxfile/",
+    "compile-ifcx-api": "tsp compile ifcx-api.tsp --emit @typespec/openapi3 --output-dir ../standard/api/",
+    "gen-code-index-cs": "quicktype -s schema ../standard/ifcxfile/IfcxIndexFile.json -l csharp -o ../sdk/cs/IfcIndexFile.cs --framework SystemTextJson",
+    "gen-code-index-ts": "quicktype -s schema ../standard/ifcxfile/IfcxIndexFile.json -l ts -o ../sdk/ts/IfcIndexFile.ts"
   },
-  "private": true,
-  "dependencies": {
-    "@typespec/json-schema": "^0.63.0"
-  }
+  "private": true
 }

@@ -1,6 +1,8 @@
 // @note This is a schema that attempts to depart from the current Alpha schema without breaking backwards compatibility of the viewer, examples & tooling
 
-import "./ifcx-quantity-kinds.tsp";
+import "@typespec/json-schema";
+
+using JsonSchema;
 
 @pattern("</(\\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\\}{0,1})[0-9a-zA-Z\\/]+>")
 scalar path extends string;
@@ -11,9 +13,6 @@ scalar attribute_uri extends string;
 @pattern("</[A-Za-z0-9.]+")
 scalar attribute_file_name extends string;
 
-@pattern("</[a-z0-9.]+")
-scalar attribute_schema_namespace extends string;
-
 enum OpinionType
 {
     PASS_THROUGH, // I have no opinion
@@ -21,29 +20,24 @@ enum OpinionType
     VALUE // my opinion is that the attribute should have a value
 }
 
-model OpinionWithValue<T>
+model AttributeReference
 {
-    opinion: OpinionType.VALUE;
+    fileIndex: uint32;
+    componentIndex: uint32;
+}
+
+model OpinionatedValue<T>
+{
+    opinion: OpinionType;
+    name: string; // may make this guid
     value: T;
 }
 
-model OpinionPassthrough
-{
-    opinion: OpinionType.PASS_THROUGH;
-}
-
-model OpinionDelete
-{
-    opinion: OpinionType.DELETE;
-}
-
-alias OpinionatedValue<T> = OpinionWithValue<T> | OpinionPassthrough | OpinionDelete;
-
 model IfcxNode {
     path: path;
-    children?: Record<OpinionatedValue<path>>;
-    inherits?: Record<OpinionatedValue<path>>;
-    attributes?: Record<OpinionatedValue<attribute_uri>>;
+    children?: OpinionatedValue<path>[];
+    inherits?: OpinionatedValue<path>[];
+    attributes?: OpinionatedValue<AttributeReference>[];
 }
 
 model IfcxProvenanceHeader
@@ -66,7 +60,7 @@ model ImportNode
 
 enum AttributeFileType
 {
-    JSON,
+    NDJSON,
     PARQUET
 }
 
@@ -74,7 +68,7 @@ model AttributeTableReference
 {
     filename: attribute_file_name;
     type: AttributeFileType;
-    schema: attribute_schema_namespace;
+    schema: unknown;
 }
 
 model IfcxDataSection
@@ -83,7 +77,8 @@ model IfcxDataSection
     nodes: IfcxNode[];
 }
 
-model IfcxFile {
+@jsonSchema
+model IfcxIndexFile {
     header: IfcxFileHeader;
     "imports": ImportNode[];
     attributeTables: AttributeTableReference[];

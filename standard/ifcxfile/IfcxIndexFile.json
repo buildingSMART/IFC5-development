@@ -1,0 +1,228 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "IfcxIndexFile.json",
+    "type": "object",
+    "properties": {
+        "header": {
+            "$ref": "#/$defs/IfcxFileHeader"
+        },
+        "imports": {
+            "type": "array",
+            "items": {
+                "$ref": "#/$defs/ImportNode"
+            }
+        },
+        "attributeTables": {
+            "type": "array",
+            "items": {
+                "$ref": "#/$defs/AttributeTableReference"
+            }
+        },
+        "sections": {
+            "type": "array",
+            "items": {
+                "$ref": "#/$defs/IfcxDataSection"
+            }
+        }
+    },
+    "required": [
+        "header",
+        "imports",
+        "attributeTables",
+        "sections"
+    ],
+    "$defs": {
+        "IfcxFileHeader": {
+            "type": "object",
+            "properties": {
+                "ifcxVersion": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "ifcxVersion"
+            ]
+        },
+        "ImportNode": {
+            "type": "object",
+            "properties": {
+                "uri": {
+                    "type": "string"
+                },
+                "integrity": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "uri"
+            ]
+        },
+        "AttributeTableReference": {
+            "type": "object",
+            "properties": {
+                "filename": {
+                    "$ref": "#/$defs/attribute_file_name"
+                },
+                "type": {
+                    "$ref": "#/$defs/AttributeFileType"
+                },
+                "schema": {}
+            },
+            "required": [
+                "filename",
+                "type",
+                "schema"
+            ]
+        },
+        "IfcxDataSection": {
+            "type": "object",
+            "properties": {
+                "header": {
+                    "$ref": "#/$defs/IfcxProvenanceHeader"
+                },
+                "nodes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/IfcxNode"
+                    }
+                }
+            },
+            "required": [
+                "header",
+                "nodes"
+            ]
+        },
+        "attribute_file_name": {
+            "type": "string",
+            "pattern": "</[A-Za-z0-9.]+"
+        },
+        "AttributeFileType": {
+            "type": "string",
+            "enum": [
+                "NDJSON",
+                "PARQUET"
+            ]
+        },
+        "IfcxProvenanceHeader": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "dataVersion": {
+                    "type": "string"
+                },
+                "author": {
+                    "type": "string"
+                },
+                "timestamp": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "dataVersion",
+                "author",
+                "timestamp"
+            ]
+        },
+        "IfcxNode": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "$ref": "#/$defs/path"
+                },
+                "children": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/OpinionatedValuePath"
+                    }
+                },
+                "inherits": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/OpinionatedValuePath"
+                    }
+                },
+                "attributes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/OpinionatedValueAttributeReference"
+                    }
+                }
+            },
+            "required": [
+                "path"
+            ]
+        },
+        "path": {
+            "type": "string",
+            "pattern": "</(\\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\\}{0,1})[0-9a-zA-Z\\/]+>"
+        },
+        "OpinionatedValuePath": {
+            "type": "object",
+            "properties": {
+                "opinion": {
+                    "$ref": "#/$defs/OpinionType"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "value": {
+                    "$ref": "#/$defs/path"
+                }
+            },
+            "required": [
+                "opinion",
+                "name",
+                "value"
+            ]
+        },
+        "OpinionatedValueAttributeReference": {
+            "type": "object",
+            "properties": {
+                "opinion": {
+                    "$ref": "#/$defs/OpinionType"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "value": {
+                    "$ref": "#/$defs/AttributeReference"
+                }
+            },
+            "required": [
+                "opinion",
+                "name",
+                "value"
+            ]
+        },
+        "OpinionType": {
+            "type": "string",
+            "enum": [
+                "PASS_THROUGH",
+                "DELETE",
+                "VALUE"
+            ]
+        },
+        "AttributeReference": {
+            "type": "object",
+            "properties": {
+                "fileIndex": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 4294967295
+                },
+                "componentIndex": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 4294967295
+                }
+            },
+            "required": [
+                "fileIndex",
+                "componentIndex"
+            ]
+        }
+    }
+}

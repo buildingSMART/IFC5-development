@@ -1,0 +1,57 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "(title)",
+    "version": "0.0.0"
+  },
+  "tags": [],
+  "paths": {
+    "/ifcx-api": {
+      "get": {
+        "operationId": "IfcxApi_list",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "attribute_file_name": {
+        "type": "string",
+        "pattern": "</[A-Za-z0-9.]+"
+      },
+      "attribute_uri": {
+        "type": "string",
+        "pattern": "</[A-Za-z0-9.]+:[A-Za-z0-9]+>"
+      },
+      "path": {
+        "type": "string",
+        "pattern": "</(\\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\\}{0,1})[0-9a-zA-Z\\/]+>"
+      }
+    }
+  }
+}
