@@ -1,15 +1,15 @@
 // To parse this data:
 //
-//   import { Convert, IfcIndexFile } from "./file";
+//   import { Convert, IfcxIndexFile } from "./file";
 //
-//   const ifcIndexFile = Convert.toIfcIndexFile(json);
+//   const ifcxIndexFile = Convert.toIfcxIndexFile(json);
 //
 // These functions will throw an error if the JSON doesn't
 // match the expected interface, even if the JSON is valid.
 
-export interface IfcIndexFile {
+export interface IfcxIndexFile {
     attributeTables: AttributeTableElement[];
-    header:          IfcIndexFileHeader;
+    header:          IfcxIndexFileHeader;
     imports:         ImportElement[];
     sections:        SectionElement[];
     [property: string]: any;
@@ -27,7 +27,7 @@ export enum Type {
     Parquet = "PARQUET",
 }
 
-export interface IfcIndexFileHeader {
+export interface IfcxIndexFileHeader {
     ifcxVersion: string;
     [property: string]: any;
 }
@@ -89,12 +89,12 @@ export interface ChildElement {
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toIfcIndexFile(json: string): IfcIndexFile {
-        return cast(JSON.parse(json), r("IfcIndexFile"));
+    public static toIfcxIndexFile(json: string): IfcxIndexFile {
+        return cast(JSON.parse(json), r("IfcxIndexFile"));
     }
 
-    public static ifcIndexFileToJson(value: IfcIndexFile): string {
-        return JSON.stringify(uncast(value, r("IfcIndexFile")), null, 2);
+    public static ifcxIndexFileToJson(value: IfcxIndexFile): string {
+        return JSON.stringify(uncast(value, r("IfcxIndexFile")), null, 2);
     }
 }
 
@@ -251,9 +251,9 @@ function r(name: string) {
 }
 
 const typeMap: any = {
-    "IfcIndexFile": o([
+    "IfcxIndexFile": o([
         { json: "attributeTables", js: "attributeTables", typ: a(r("AttributeTableElement")) },
-        { json: "header", js: "header", typ: r("IfcIndexFileHeader") },
+        { json: "header", js: "header", typ: r("IfcxIndexFileHeader") },
         { json: "imports", js: "imports", typ: a(r("ImportElement")) },
         { json: "sections", js: "sections", typ: a(r("SectionElement")) },
     ], "any"),
@@ -262,7 +262,7 @@ const typeMap: any = {
         { json: "schema", js: "schema", typ: "any" },
         { json: "type", js: "type", typ: r("Type") },
     ], "any"),
-    "IfcIndexFileHeader": o([
+    "IfcxIndexFileHeader": o([
         { json: "ifcxVersion", js: "ifcxVersion", typ: "" },
     ], "any"),
     "ImportElement": o([

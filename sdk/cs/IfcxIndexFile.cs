@@ -4,7 +4,7 @@
 //
 //    using QuickType;
 //
-//    var ifcIndexFile = IfcIndexFile.FromJson(jsonString);
+//    var ifcxIndexFile = IfcxIndexFile.FromJson(jsonString);
 #nullable enable
 #pragma warning disable CS8618
 #pragma warning disable CS8601
@@ -19,13 +19,13 @@ namespace QuickType
     using System.Text.Json.Serialization;
     using System.Globalization;
 
-    public partial class IfcIndexFile
+    public partial class IfcxIndexFile
     {
         [JsonPropertyName("attributeTables")]
         public AttributeTableElement[] AttributeTables { get; set; }
 
         [JsonPropertyName("header")]
-        public IfcIndexFileHeader Header { get; set; }
+        public IfcxIndexFileHeader Header { get; set; }
 
         [JsonPropertyName("imports")]
         public ImportElement[] Imports { get; set; }
@@ -46,7 +46,7 @@ namespace QuickType
         public TypeEnum Type { get; set; }
     }
 
-    public partial class IfcIndexFileHeader
+    public partial class IfcxIndexFileHeader
     {
         [JsonPropertyName("ifcxVersion")]
         public string IfcxVersion { get; set; }
@@ -141,14 +141,14 @@ namespace QuickType
 
     public enum Opinion { Delete, PassThrough, Value };
 
-    public partial class IfcIndexFile
+    public partial class IfcxIndexFile
     {
-        public static IfcIndexFile FromJson(string json) => JsonSerializer.Deserialize<IfcIndexFile>(json, QuickType.Converter.Settings);
+        public static IfcxIndexFile FromJson(string json) => JsonSerializer.Deserialize<IfcxIndexFile>(json, QuickType.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this IfcIndexFile self) => JsonSerializer.Serialize(self, QuickType.Converter.Settings);
+        public static string ToJson(this IfcxIndexFile self) => JsonSerializer.Serialize(self, QuickType.Converter.Settings);
     }
 
     internal static class Converter

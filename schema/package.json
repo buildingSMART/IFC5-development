@@ -6,14 +6,16 @@
     "@typespec/compiler": "^1.9.0",
     "@typespec/json-schema": "^1.9.0",
     "@typespec/openapi3": "^1.9.0",
+    "pkg": "^5.8.1",
     "quicktype": "^23.2.6"
   },
   "scripts": {
     "compile-alpha": "tsp compile ifcx.tsp",
     "compile-ifcx-index-file": "tsp compile ifcx-index-file.tsp --emit @typespec/json-schema --output-dir ../standard/ifcxfile/",
     "compile-ifcx-api": "tsp compile ifcx-api.tsp --emit @typespec/openapi3 --output-dir ../standard/api/",
-    "gen-code-index-cs": "quicktype -s schema ../standard/ifcxfile/IfcxIndexFile.json -l csharp -o ../sdk/cs/IfcIndexFile.cs --framework SystemTextJson",
-    "gen-code-index-ts": "quicktype -s schema ../standard/ifcxfile/IfcxIndexFile.json -l ts -o ../sdk/ts/IfcIndexFile.ts"
+    "gen-code-index-cs": "quicktype -s schema ../standard/ifcxfile/IfcxIndexFile.json -l csharp -o ../sdk/cs/IfcxIndexFile.cs --framework SystemTextJson",
+    "gen-code-index-ts": "quicktype -s schema ../standard/ifcxfile/IfcxIndexFile.json -l ts -o ../sdk/ts/IfcxIndexFile.ts",
+    "pkg-codegen-tool": "pkg -t node*-win-x64 --output ../sdk/ifcx-codegen.exe ./ifcx-codegen.js"
   },
   "private": true
 }
