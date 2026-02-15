@@ -32,13 +32,23 @@ function decapitalize(word) {
   return word.charAt(0).toLowerCase() + word.slice(1);
 }
 
+// !!! pkg does not support recursive readdirsync !!!
 function getAllFiles(dir) {
-  return fs.readdirSync(dir, { recursive: true })
-    .filter(file => {
-        const fullPath = path.join(dir, file);
-        return fs.statSync(fullPath).isFile();
-    })
-    .map(file => path.join(dir, file));
+  let results = [];
+
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+
+    if (entry.isDirectory()) {
+      results = results.concat(getAllFiles(fullPath));
+    } else {
+      results.push(fullPath);
+    }
+  }
+
+  return results;
 }
 
 async function ConvertFile(input_path, output_path)
@@ -67,20 +77,28 @@ async function ConvertFile(input_path, output_path)
 async function main(input_dir, output_dir, language)
 {
     if (!fs.existsSync(input_dir)) throw new Error(`Dir ${input_dir} does not exist`);
-    if (!fs.existsSync(output_dir)) throw new Error(`Dir ${output_dir} does not exist`);
     if (language !== "ts") throw new Error(`Unknown language ${language}`);
 
     let files = getAllFiles(input_dir);
+    console.log(files);
     files = files.filter(f => f.endsWith(".schema.json"));
 
+    console.log();
     console.log(`Files (looking for .schema.json):`);
     files.forEach(filepath => {
-        console.log(filepath);
+        console.log(` - ${filepath}`);
     });
+    console.log();
+
+    if (files.length === 0)
+    {
+        throw new Error(`No files found!`);
+    }
 
     files.forEach(filepath => {
         let input_path = filepath;
-        let output_path =  path.join(output_dir, path.basename(filepath).replace(".schema.json", `.${language}`));
+        let output_path =  path.join(output_dir, filepath.replace(input_dir, "").replace(".schema.json", `.${language}`));
+        fs.mkdirSync(path.dirname(output_path), { recursive: true })
         ConvertFile(input_path, output_path);
     })
 
