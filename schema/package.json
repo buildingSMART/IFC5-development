@@ -1,7 +1,6 @@
 {
   "name": "ifcx-schema",
   "version": "0.1.0",
-  "type": "module",
   "devDependencies": {
     "@typespec/compiler": "^1.9.0",
     "@typespec/json-schema": "^1.9.0",
