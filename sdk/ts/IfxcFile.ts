@@ -1,5 +1,5 @@
 import JSZip from "jszip";
-import { IfcxIndexFile, Convert } from "./IfcxIndexFile";
+import { IfcxIndexFile, Convert, SectionElement, ImportElement, Type } from "./IfcxIndexFile";
 
 interface TypeIdentity<T> {
     typeID: string;
@@ -50,7 +50,7 @@ export async function WriteIfcxFile(file: IfcxFile)
 {
     const zip = new JSZip();
 
-    await zip.file("index.json", JSON.stringify(file.index));
+    await zip.file("index.json", JSON.stringify(file.index, null, 4));
     for (let [typeID, components] of file.serializedComponents)
     {
         await zip.file(`${typeID}.ndjson`, components.join("\n"));
@@ -77,11 +77,28 @@ export class IfcxFile
         };
     }
 
+    public AddImport(imp: ImportElement)
+    {
+        this.index.imports.push(imp);
+    }
+
+    public AddSection(section: SectionElement)
+    {
+        this.index.sections.push(section);
+    }
+
     private GetSerializedComponentsArray<T>(identity: TypeIdentity<T>): string[]
     {
         if (!this.serializedComponents.has(identity.typeID))
         {
             this.serializedComponents.set(identity.typeID, []);
+            
+            // init attr table entry
+            this.index.attributeTables.push({
+                type: Type.Ndjson,
+                filename: `${identity.typeID}.ndjson`,
+                schema: JSON.parse(identity.originSchemaSrc),
+            });
         }
         return this.serializedComponents.get(identity.typeID)!;
     }

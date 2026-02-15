@@ -22,7 +22,7 @@ enum OpinionType
 
 model AttributeReference
 {
-    fileIndex: uint32;
+    typeID: string;
     componentIndex: uint32;
 }
 
@@ -30,7 +30,7 @@ model OpinionatedValue<T>
 {
     opinion: OpinionType;
     name: string; // may make this guid
-    value: T;
+    value?: T;
 }
 
 model IfcxNode {

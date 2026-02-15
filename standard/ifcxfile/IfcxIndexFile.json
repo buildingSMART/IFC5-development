@@ -174,8 +174,7 @@
             },
             "required": [
                 "opinion",
-                "name",
-                "value"
+                "name"
             ]
         },
         "OpinionatedValueAttributeReference": {
@@ -193,8 +192,7 @@
             },
             "required": [
                 "opinion",
-                "name",
-                "value"
+                "name"
             ]
         },
         "OpinionType": {
@@ -208,10 +206,8 @@
         "AttributeReference": {
             "type": "object",
             "properties": {
-                "fileIndex": {
-                    "type": "integer",
-                    "minimum": 0,
-                    "maximum": 4294967295
+                "typeID": {
+                    "type": "string"
                 },
                 "componentIndex": {
                     "type": "integer",
@@ -220,7 +216,7 @@
                 }
             },
             "required": [
-                "fileIndex",
+                "typeID",
                 "componentIndex"
             ]
         }

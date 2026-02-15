@@ -112,6 +112,7 @@ namespace QuickType
         [JsonPropertyName("opinion")]
         public Opinion Opinion { get; set; }
 
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("value")]
         public Value Value { get; set; }
     }
@@ -121,8 +122,8 @@ namespace QuickType
         [JsonPropertyName("componentIndex")]
         public long ComponentIndex { get; set; }
 
-        [JsonPropertyName("fileIndex")]
-        public long FileIndex { get; set; }
+        [JsonPropertyName("typeID")]
+        public string TypeId { get; set; }
     }
 
     public partial class ChildElement
@@ -133,6 +134,7 @@ namespace QuickType
         [JsonPropertyName("opinion")]
         public Opinion Opinion { get; set; }
 
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("value")]
         public string Value { get; set; }
     }

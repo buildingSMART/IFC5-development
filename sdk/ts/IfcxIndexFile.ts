@@ -63,7 +63,7 @@ export interface NodeElement {
 export interface AttributeElement {
     name:    string;
     opinion: Opinion;
-    value:   Value;
+    value?:  Value;
     [property: string]: any;
 }
 
@@ -75,14 +75,14 @@ export enum Opinion {
 
 export interface Value {
     componentIndex: number;
-    fileIndex:      number;
+    typeID:         string;
     [property: string]: any;
 }
 
 export interface ChildElement {
     name:    string;
     opinion: Opinion;
-    value:   string;
+    value?:  string;
     [property: string]: any;
 }
 
@@ -288,16 +288,16 @@ const typeMap: any = {
     "AttributeElement": o([
         { json: "name", js: "name", typ: "" },
         { json: "opinion", js: "opinion", typ: r("Opinion") },
-        { json: "value", js: "value", typ: r("Value") },
+        { json: "value", js: "value", typ: u(undefined, r("Value")) },
     ], "any"),
     "Value": o([
         { json: "componentIndex", js: "componentIndex", typ: 0 },
-        { json: "fileIndex", js: "fileIndex", typ: 0 },
+        { json: "typeID", js: "typeID", typ: "" },
     ], "any"),
     "ChildElement": o([
         { json: "name", js: "name", typ: "" },
         { json: "opinion", js: "opinion", typ: r("Opinion") },
-        { json: "value", js: "value", typ: "" },
+        { json: "value", js: "value", typ: u(undefined, "") },
     ], "any"),
     "Type": [
         "NDJSON",
