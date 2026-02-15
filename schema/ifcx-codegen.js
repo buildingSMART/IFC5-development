@@ -51,14 +51,17 @@ function getAllFiles(dir) {
   return results;
 }
 
-async function ConvertFile(input_path, output_path)
+async function ConvertFile(input_path, output_path, language)
 {
     console.log(`Converting: ${input_path} -> ${output_path}`);
 
     let schema = fs.readFileSync(input_path).toString();
     let userSpecifiedId = JSON.parse(schema)["x-ifc5-id"];
     let className = capitalize(userSpecifiedId.split("::").at(-1));
-    const { lines: cscode } = await quicktypeJSONSchema("ts", className, schema);
+
+    if (language === "ts")
+    {
+        const { lines: cscode } = await quicktypeJSONSchema("ts", className, schema);
 
         let code = cscode;
         code.push("\t// start insert");
@@ -70,14 +73,35 @@ async function ConvertFile(input_path, output_path)
         code.push(`\t\t }`);
         code.push("\t// end insert");
 
+        fs.writeFileSync(output_path, cscode.join("\n"));
+    }
+    else
+    {
+        const { lines: cscode } = await quicktypeJSONSchema("cs", className, schema);
+        
+        // TODO: this code is good, but injected without namespace + partial class
+        // TODO: namespace needs to be fixed, currently "QuickType", which clashes with other generated code
+        // TODO: using newtonsoft json instead of system.text
+        let code = cscode;
+        code.push("\t// start insert");
+        code.push(`\tpublic ifcx_sdk.IfcxIdentity<${className}> Identity() {`);
+        code.push(`\t\treturn new ifcx_sdk.IfcxIdentity<${className}> {`);
+        code.push(`\t\t     typeID = "${userSpecifiedId}",`);
+        code.push(`\t\t     originSchemaSrc = ${JSON.stringify(schema)},`);
+        code.push(`\t\t     fromJSONString = str => ${className}.FromJson(str),`);
+        code.push(`\t\t     toJSONString = obj => Serialize.ToJson(obj)`);
+        code.push(`\t\t};`);
+        code.push(`\t}`);
+        code.push("\t// end insert");
 
-    fs.writeFileSync(output_path, cscode.join("\n"));
+        fs.writeFileSync(output_path, cscode.join("\n"));
+    }
 }
 
 async function main(input_dir, output_dir, language)
 {
     if (!fs.existsSync(input_dir)) throw new Error(`Dir ${input_dir} does not exist`);
-    if (language !== "ts") throw new Error(`Unknown language ${language}`);
+    if (["ts", "cs"].indexOf(language) === -1) throw new Error(`Unknown language ${language}, only support: [ts,cs]`);
 
     let files = getAllFiles(input_dir);
     console.log(files);
@@ -99,7 +123,7 @@ async function main(input_dir, output_dir, language)
         let input_path = filepath;
         let output_path =  path.join(output_dir, filepath.replace(input_dir, "").replace(".schema.json", `.${language}`));
         fs.mkdirSync(path.dirname(output_path), { recursive: true })
-        ConvertFile(input_path, output_path);
+        ConvertFile(input_path, output_path, language);
     })
 
 }
