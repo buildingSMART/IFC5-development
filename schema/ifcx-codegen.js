@@ -7,7 +7,7 @@ let  {
 let fs = require("fs");
 let path = require("path");
 
-async function quicktypeJSONSchema(targetLanguage, typeName, jsonSchemaString) {
+async function quicktypeJSONSchema(targetLanguage, typeName, jsonSchemaString, options) {
     const schemaInput = new JSONSchemaInput(new FetchingJSONSchemaStore());
 
     // We could add multiple schemas for multiple types,
@@ -21,6 +21,7 @@ async function quicktypeJSONSchema(targetLanguage, typeName, jsonSchemaString) {
         inputData,
         lang: targetLanguage,
         rendererOptions: {
+          ...options
         }
     });
 }
@@ -61,7 +62,7 @@ async function ConvertFile(input_path, output_path, language)
 
     if (language === "ts")
     {
-        const { lines: cscode } = await quicktypeJSONSchema("ts", className, schema);
+        const { lines: cscode } = await quicktypeJSONSchema("ts", className, schema, {});
 
         let code = cscode;
         code.push("\t// start insert");
@@ -77,22 +78,28 @@ async function ConvertFile(input_path, output_path, language)
     }
     else
     {
-        const { lines: cscode } = await quicktypeJSONSchema("cs", className, schema);
+        let ns = `${userSpecifiedId.replaceAll("::", "_")}`;
+        const { lines: cscode } = await quicktypeJSONSchema("cs", className, schema, {
+          namespace: ns,
+          framework: "SystemTextJson",
+
+        });
         
-        // TODO: this code is good, but injected without namespace + partial class
-        // TODO: namespace needs to be fixed, currently "QuickType", which clashes with other generated code
-        // TODO: using newtonsoft json instead of system.text
         let code = cscode;
-        code.push("\t// start insert");
-        code.push(`\tpublic ifcx_sdk.IfcxIdentity<${className}> Identity() {`);
-        code.push(`\t\treturn new ifcx_sdk.IfcxIdentity<${className}> {`);
-        code.push(`\t\t     typeID = "${userSpecifiedId}",`);
-        code.push(`\t\t     originSchemaSrc = ${JSON.stringify(schema)},`);
-        code.push(`\t\t     fromJSONString = str => ${className}.FromJson(str),`);
-        code.push(`\t\t     toJSONString = obj => Serialize.ToJson(obj)`);
-        code.push(`\t\t};`);
+        code.push("// start insert");
+        code.push(`namespace ${ns} {`);
+        code.push(`\tpartial class ${className} {`);
+        code.push(`\t\tpublic static ifcx_sdk.IfcxIdentity<${className}> Identity() {`);
+        code.push(`\t\t\treturn new ifcx_sdk.IfcxIdentity<${className}> {`);
+        code.push(`\t\t\t     typeID = "${userSpecifiedId}",`);
+        code.push(`\t\t\t     originSchemaSrc = ${JSON.stringify(schema)},`);
+        code.push(`\t\t\t     fromJSONString = str => ${className}.FromJson(str),`);
+        code.push(`\t\t\t     toJSONString = obj => Serialize.ToJson(obj)`);
+        code.push(`\t\t\t};`);
+        code.push(`\t\t}`);
         code.push(`\t}`);
-        code.push("\t// end insert");
+        code.push(`}`);
+        code.push("// end insert");
 
         fs.writeFileSync(output_path, cscode.join("\n"));
     }
