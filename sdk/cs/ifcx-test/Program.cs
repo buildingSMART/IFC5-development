@@ -1,10 +1,15 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using examples_ifc5_mycomponent;
-using QuickType;
+using ifcx_sdk;
 
 Console.WriteLine("Hello, World!");
 
+byte[] bytes = File.ReadAllBytes("./../../../../output.ifcx");
 
-var comp = new Mycomponent();
+MemoryStream memoryStream = new MemoryStream(bytes);
 
-var id = Mycomponent.Identity();
+var file = IfcxFile.ReadIfcxFile(memoryStream);
+
+var comp = file.ReadComponent<Mycomponent>(Mycomponent.Identity(), 1);
+
+Console.WriteLine(comp.FirstName);
