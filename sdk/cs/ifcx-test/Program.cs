@@ -10,6 +10,6 @@ MemoryStream memoryStream = new MemoryStream(bytes);
 
 var file = IfcxFile.ReadIfcxFile(memoryStream);
 
-var comp = file.ReadComponent<Mycomponent>(Mycomponent.Identity(), 1);
+var comp = file.ReadComponent(Mycomponent.Identity(), 1);
 
 Console.WriteLine(comp.FirstName);
