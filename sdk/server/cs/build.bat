@@ -3,7 +3,7 @@
 
 @echo off
 
-dotnet restore src\Org.OpenAPITools
-dotnet build src\Org.OpenAPITools
-echo Now, run the following to start the project: dotnet run -p src\Org.OpenAPITools\Org.OpenAPITools.csproj --launch-profile web.
+dotnet restore src\IfcxApi.Server
+dotnet build src\IfcxApi.Server
+echo Now, run the following to start the project: dotnet run -p src\IfcxApi.Server\IfcxApi.Server.csproj --launch-profile web.
 echo.
