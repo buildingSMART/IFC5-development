@@ -107,7 +107,7 @@ namespace IfcxApi {
             @query downloadType: IfcxFileDownloadType
           ): LayerVersionIfcxFile;
 
-          @route("query")
+          @route("/query")
           op query is IfcxQueryApi.query;
         }
       }
