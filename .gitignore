@@ -5,3 +5,5 @@
 *.js
 *.exe
 temp
+web/viewer/render.mjs
+web/src/package-lock.json
