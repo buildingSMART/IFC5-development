@@ -45,6 +45,7 @@ export interface SectionElement {
 }
 
 export interface SectionHeader {
+    application: string;
     author:      string;
     dataVersion: string;
     id:          string;
@@ -274,6 +275,7 @@ const typeMap: any = {
         { json: "nodes", js: "nodes", typ: a(r("NodeElement")) },
     ], "any"),
     "SectionHeader": o([
+        { json: "application", js: "application", typ: "" },
         { json: "author", js: "author", typ: "" },
         { json: "dataVersion", js: "dataVersion", typ: "" },
         { json: "id", js: "id", typ: "" },

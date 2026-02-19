@@ -24,21 +24,35 @@ namespace IfcxApi.Server.Models
     /// 
     /// </summary>
     [DataContract]
-    public partial class CreateLayerCommand : IEquatable<CreateLayerCommand>
+    public partial class LayerVersion : IEquatable<LayerVersion>
     {
         /// <summary>
-        /// Gets or Sets Id
+        /// Gets or Sets LayerId
         /// </summary>
         [Required]
-        [DataMember(Name="id", EmitDefaultValue=false)]
-        public string Id { get; set; }
+        [DataMember(Name="layerId", EmitDefaultValue=true)]
+        public Guid LayerId { get; set; }
 
         /// <summary>
-        /// Gets or Sets Name
+        /// Gets or Sets VersionId
         /// </summary>
         [Required]
-        [DataMember(Name="name", EmitDefaultValue=false)]
-        public string Name { get; set; }
+        [DataMember(Name="versionId", EmitDefaultValue=true)]
+        public Guid VersionId { get; set; }
+
+        /// <summary>
+        /// Gets or Sets PreviousVersionId
+        /// </summary>
+        [Required]
+        [DataMember(Name="previousVersionId", EmitDefaultValue=true)]
+        public Guid PreviousVersionId { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Provenance
+        /// </summary>
+        [Required]
+        [DataMember(Name="provenance", EmitDefaultValue=false)]
+        public IfcxProvenanceData Provenance { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -47,9 +61,11 @@ namespace IfcxApi.Server.Models
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class CreateLayerCommand {\n");
-            sb.Append("  Id: ").Append(Id).Append("\n");
-            sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("class LayerVersion {\n");
+            sb.Append("  LayerId: ").Append(LayerId).Append("\n");
+            sb.Append("  VersionId: ").Append(VersionId).Append("\n");
+            sb.Append("  PreviousVersionId: ").Append(PreviousVersionId).Append("\n");
+            sb.Append("  Provenance: ").Append(Provenance).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -77,29 +93,39 @@ namespace IfcxApi.Server.Models
         {
             if (obj is null) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((CreateLayerCommand)obj);
+            return obj.GetType() == GetType() && Equals((LayerVersion)obj);
         }
 
         /// <summary>
-        /// Returns true if CreateLayerCommand instances are equal
+        /// Returns true if LayerVersion instances are equal
         /// </summary>
-        /// <param name="other">Instance of CreateLayerCommand to be compared</param>
+        /// <param name="other">Instance of LayerVersion to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(CreateLayerCommand other)
+        public bool Equals(LayerVersion other)
         {
             if (other is null) return false;
             if (ReferenceEquals(this, other)) return true;
 
             return 
                 (
-                    Id == other.Id ||
-                    Id != null &&
-                    Id.Equals(other.Id)
+                    LayerId == other.LayerId ||
+                    
+                    LayerId.Equals(other.LayerId)
                 ) && 
                 (
-                    Name == other.Name ||
-                    Name != null &&
-                    Name.Equals(other.Name)
+                    VersionId == other.VersionId ||
+                    
+                    VersionId.Equals(other.VersionId)
+                ) && 
+                (
+                    PreviousVersionId == other.PreviousVersionId ||
+                    
+                    PreviousVersionId.Equals(other.PreviousVersionId)
+                ) && 
+                (
+                    Provenance == other.Provenance ||
+                    Provenance != null &&
+                    Provenance.Equals(other.Provenance)
                 );
         }
 
@@ -113,10 +139,14 @@ namespace IfcxApi.Server.Models
             {
                 var hashCode = 41;
                 // Suitable nullity checks etc, of course :)
-                    if (Id != null)
-                    hashCode = hashCode * 59 + Id.GetHashCode();
-                    if (Name != null)
-                    hashCode = hashCode * 59 + Name.GetHashCode();
+                    
+                    hashCode = hashCode * 59 + LayerId.GetHashCode();
+                    
+                    hashCode = hashCode * 59 + VersionId.GetHashCode();
+                    
+                    hashCode = hashCode * 59 + PreviousVersionId.GetHashCode();
+                    if (Provenance != null)
+                    hashCode = hashCode * 59 + Provenance.GetHashCode();
                 return hashCode;
             }
         }
@@ -124,12 +154,12 @@ namespace IfcxApi.Server.Models
         #region Operators
         #pragma warning disable 1591
 
-        public static bool operator ==(CreateLayerCommand left, CreateLayerCommand right)
+        public static bool operator ==(LayerVersion left, LayerVersion right)
         {
             return Equals(left, right);
         }
 
-        public static bool operator !=(CreateLayerCommand left, CreateLayerCommand right)
+        public static bool operator !=(LayerVersion left, LayerVersion right)
         {
             return !Equals(left, right);
         }

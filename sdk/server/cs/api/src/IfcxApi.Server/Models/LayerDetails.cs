@@ -30,15 +30,22 @@ namespace IfcxApi.Server.Models
         /// Gets or Sets Id
         /// </summary>
         [Required]
-        [DataMember(Name="id", EmitDefaultValue=false)]
-        public string Id { get; set; }
+        [DataMember(Name="id", EmitDefaultValue=true)]
+        public Guid Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets LatestVersion
+        /// Gets or Sets Name
         /// </summary>
         [Required]
-        [DataMember(Name="latestVersion", EmitDefaultValue=false)]
-        public string LatestVersion { get; set; }
+        [DataMember(Name="name", EmitDefaultValue=false)]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or Sets History
+        /// </summary>
+        [Required]
+        [DataMember(Name="history", EmitDefaultValue=false)]
+        public List<LayerVersion> History { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -49,7 +56,8 @@ namespace IfcxApi.Server.Models
             var sb = new StringBuilder();
             sb.Append("class LayerDetails {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
-            sb.Append("  LatestVersion: ").Append(LatestVersion).Append("\n");
+            sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  History: ").Append(History).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -93,13 +101,19 @@ namespace IfcxApi.Server.Models
             return 
                 (
                     Id == other.Id ||
-                    Id != null &&
+                    
                     Id.Equals(other.Id)
                 ) && 
                 (
-                    LatestVersion == other.LatestVersion ||
-                    LatestVersion != null &&
-                    LatestVersion.Equals(other.LatestVersion)
+                    Name == other.Name ||
+                    Name != null &&
+                    Name.Equals(other.Name)
+                ) && 
+                (
+                    History == other.History ||
+                    History != null &&
+                    other.History != null &&
+                    History.SequenceEqual(other.History)
                 );
         }
 
@@ -113,10 +127,12 @@ namespace IfcxApi.Server.Models
             {
                 var hashCode = 41;
                 // Suitable nullity checks etc, of course :)
-                    if (Id != null)
+                    
                     hashCode = hashCode * 59 + Id.GetHashCode();
-                    if (LatestVersion != null)
-                    hashCode = hashCode * 59 + LatestVersion.GetHashCode();
+                    if (Name != null)
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                    if (History != null)
+                    hashCode = hashCode * 59 + History.GetHashCode();
                 return hashCode;
             }
         }

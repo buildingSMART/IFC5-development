@@ -1,4 +1,3 @@
-.openapi-generator-ignore
 IfcxApi.Server.sln
 README.md
 build.bat
@@ -13,18 +12,17 @@ src/IfcxApi.Server/Filters/BasePathFilter.cs
 src/IfcxApi.Server/Filters/GeneratePathParamsValidationFilter.cs
 src/IfcxApi.Server/Formatters/InputFormatterStream.cs
 src/IfcxApi.Server/IfcxApi.Server.csproj
+src/IfcxApi.Server/Models/BlobResponse.cs
 src/IfcxApi.Server/Models/CreateLayerCommand.cs
 src/IfcxApi.Server/Models/CreateLayerVersionCommand.cs
+src/IfcxApi.Server/Models/CreateLayerVersionResponse.cs
+src/IfcxApi.Server/Models/CreateLayerVersionResponseState.cs
 src/IfcxApi.Server/Models/IfcxFileDownloadType.cs
+src/IfcxApi.Server/Models/IfcxProvenanceData.cs
 src/IfcxApi.Server/Models/LayerDetails.cs
-src/IfcxApi.Server/Models/LayerHistory.cs
-src/IfcxApi.Server/Models/LayerRoutesUpdateLayerRequest.cs
 src/IfcxApi.Server/Models/LayerStatus.cs
 src/IfcxApi.Server/Models/LayerVersion.cs
 src/IfcxApi.Server/Models/LayerVersionIfcxFile.cs
-src/IfcxApi.Server/Models/LayersCreateLayerRequest.cs
-src/IfcxApi.Server/Models/UpdateLayerCommand.cs
-src/IfcxApi.Server/Models/VersionsRoutesCreateLayerVersionRequest.cs
 src/IfcxApi.Server/OpenApi/TypeExtensions.cs
 src/IfcxApi.Server/Program.cs
 src/IfcxApi.Server/Properties/launchSettings.json

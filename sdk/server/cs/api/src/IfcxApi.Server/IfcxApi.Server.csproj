@@ -9,10 +9,13 @@
         <Version>1.0.0</Version>
         <AssemblyName>IfcxApi.Server</AssemblyName>
         <PackageId>IfcxApi.Server</PackageId>
-        <UserSecretsId>be129a65-fae5-4309-a3df-4dc0a8df7ce7</UserSecretsId>
+        <UserSecretsId>218f1a7f-06c3-4543-a86c-45b089cc5a97</UserSecretsId>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
         <DockerfileContext>..\..</DockerfileContext>
     </PropertyGroup>
+    <ItemGroup>
+      <Compile Include="..\..\..\ApiController.cs" Link="Controllers\ApiController.cs" />
+    </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
         <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.8" />
@@ -21,6 +24,6 @@
         <PackageReference Include="JsonSubTypes" Version="1.8.0" />
     </ItemGroup>
     <ItemGroup>
-        <!--<DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0" />-->
+      <ProjectReference Include="..\..\..\Application\Application.csproj" />
     </ItemGroup>
 </Project>

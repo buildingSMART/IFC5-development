@@ -21,17 +21,6 @@ namespace QuickType
 
     public partial class IfcxIndexFile
     {
-        public ifcx_sdk.IfcxIdentity<IfcxIndexFile> Get()
-        {
-            return new ifcx_sdk.IfcxIdentity<IfcxIndexFile>
-            {
-                typeID = "",
-                originSchemaSrc = "",
-                fromJSONString = x => new IfcxIndexFile(),
-                toJSONString = x => ""
-            };
-        }
-
         [JsonPropertyName("attributeTables")]
         public AttributeTableElement[] AttributeTables { get; set; }
 
@@ -84,6 +73,9 @@ namespace QuickType
 
     public partial class SectionHeader
     {
+        [JsonPropertyName("application")]
+        public string Application { get; set; }
+
         [JsonPropertyName("author")]
         public string Author { get; set; }
 

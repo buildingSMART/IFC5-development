@@ -13,29 +13,36 @@ scalar attribute_uri extends string;
 @pattern("</[A-Za-z0-9.]+")
 scalar attribute_file_name extends string;
 
+@format("uuid")
+scalar uuid extends string;
+
 model LayerStatus
 {
-  id: string;
-  latestVersion: string;
+  id: uuid;
+  name: string;
+  latestVersion: uuid;
 }
 
 model LayerDetails
 {
-  id: string;
-  latestVersion: string;
+  id: uuid;
+  name: string;
+  history: LayerVersion[]
 }
 
-model LayerHistory
+model IfcxProvenanceData
 {
-  id: string;
-  versions: string[];
+  author: string;
+  timestamp: string;
+  application: string;
 }
 
 model LayerVersion
 {
-  layerId: string;
-  versionId: string;
-  previousVersionId: string;
+  layerId: uuid;
+  versionId: uuid;
+  previousVersionId: uuid;
+  provenance: IfcxProvenanceData;
 }
 
 model LayerVersionIfcxFile
@@ -45,7 +52,7 @@ model LayerVersionIfcxFile
 
 model CreateLayerCommand
 {
-  id: string;
+  id: uuid;
   name: string;
 }
 
@@ -56,9 +63,15 @@ model UpdateLayerCommand
 
 model CreateLayerVersionCommand
 {
-  layerId: string;
-  previousLayerVersionId: string;
-  blobId: string;
+  id: uuid;
+  previousLayerVersionId: uuid;
+  blobId: uuid;
+}
+
+model BlobResponse
+{
+  blobId: uuid;
+  putURL: string;
 }
 
 enum IfcxFileDownloadType
@@ -69,41 +82,55 @@ enum IfcxFileDownloadType
   whole_layer_and_imports_history_condensed
 }
 
+enum CreateLayerVersionResponseState
+{
+  OK,
+  OUT_OF_DATE
+}
+
+model CreateLayerVersionResponse
+{
+  state: CreateLayerVersionResponseState;
+}
+
 @service
 @route("/ifcx-api")
 namespace IfcxApi {
+    
+  @route("/upload/{blobId}")
+  @put op upload(@path blobId: uuid, @bodyRoot file: File): OkResponse;
+  
+  @route("/download/{blobId}")
+  @put op download(@path blobId: uuid): File;
+  
   @route("/layers")
   namespace Layers
   {
     @get op layers(): LayerStatus[];
 
-    @post op createLayer(version: CreateLayerCommand): OkResponse;
+    @post op createLayer(@body cmd: CreateLayerCommand): OkResponse;
 
     @route("/{layerId}")
     namespace LayerRoutes {
-      @get op get_layer(@path layerId: string): LayerDetails;
-      @put op updateLayer(@path layerId: string, version: UpdateLayerCommand): OkResponse;
-      @delete op delete_layer(@path layerId: string): OkResponse;
+      @get op get_layer(@path layerId: uuid): LayerDetails;
+      @delete op delete_layer(@path layerId: uuid): OkResponse;
       
-      @route("/history")
-      @get op get_layer_history(@path layerId: string): LayerHistory;
-
       @route("/upload-ifcx-blob-url")
-      @post op uploadIfcxBlobUrl(@path layerId: string): string;
+      @post op uploadIfcxBlobUrl(@path layerId: uuid): BlobResponse;
 
       @route("/versions")
       namespace VersionsRoutes {
-        @post op createLayerVersion(@path layerId: string, version: CreateLayerVersionCommand): OkResponse;
+        @post op createLayerVersion(@path layerId: uuid, @body version: CreateLayerVersionCommand): CreateLayerVersionResponse;
 
         @route("/{versionId}")
         namespace LayerVersionRoutes
         {
-          @get op get_layer_version(@path layerId: string, @path versionId: string): LayerVersion;
+          @get op get_layer_version(@path layerId: uuid, @path versionId: uuid): LayerVersion;
 
           @route("/download-ifcx")
           @put op layer_ifcx(
-            @path layerId: string, 
-            @path versionId: string,
+            @path layerId: uuid, 
+            @path versionId: uuid,
             @query downloadType: IfcxFileDownloadType
           ): LayerVersionIfcxFile;
 
@@ -122,8 +149,8 @@ model IfcxQueryApiResponse
 
 interface IfcxQueryApi {
   @get op query(
-    @path layerId: string,
-    @path versionId: string,
+    @path layerId: uuid,
+    @path versionId: uuid,
     @query path: string;
     @query provenance: boolean;
     @query expandChildren: boolean;

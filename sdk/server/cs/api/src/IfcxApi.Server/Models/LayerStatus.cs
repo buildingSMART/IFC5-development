@@ -24,28 +24,28 @@ namespace IfcxApi.Server.Models
     /// 
     /// </summary>
     [DataContract]
-    public partial class CreateLayerVersionCommand : IEquatable<CreateLayerVersionCommand>
+    public partial class LayerStatus : IEquatable<LayerStatus>
     {
         /// <summary>
-        /// Gets or Sets LayerId
+        /// Gets or Sets Id
         /// </summary>
         [Required]
-        [DataMember(Name="layerId", EmitDefaultValue=false)]
-        public string LayerId { get; set; }
+        [DataMember(Name="id", EmitDefaultValue=true)]
+        public Guid Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets PreviousLayerVersionId
+        /// Gets or Sets Name
         /// </summary>
         [Required]
-        [DataMember(Name="previousLayerVersionId", EmitDefaultValue=false)]
-        public string PreviousLayerVersionId { get; set; }
+        [DataMember(Name="name", EmitDefaultValue=false)]
+        public string Name { get; set; }
 
         /// <summary>
-        /// Gets or Sets BlobId
+        /// Gets or Sets LatestVersion
         /// </summary>
         [Required]
-        [DataMember(Name="blobId", EmitDefaultValue=false)]
-        public string BlobId { get; set; }
+        [DataMember(Name="latestVersion", EmitDefaultValue=true)]
+        public Guid LatestVersion { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -54,10 +54,10 @@ namespace IfcxApi.Server.Models
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class CreateLayerVersionCommand {\n");
-            sb.Append("  LayerId: ").Append(LayerId).Append("\n");
-            sb.Append("  PreviousLayerVersionId: ").Append(PreviousLayerVersionId).Append("\n");
-            sb.Append("  BlobId: ").Append(BlobId).Append("\n");
+            sb.Append("class LayerStatus {\n");
+            sb.Append("  Id: ").Append(Id).Append("\n");
+            sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  LatestVersion: ").Append(LatestVersion).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,34 +85,34 @@ namespace IfcxApi.Server.Models
         {
             if (obj is null) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((CreateLayerVersionCommand)obj);
+            return obj.GetType() == GetType() && Equals((LayerStatus)obj);
         }
 
         /// <summary>
-        /// Returns true if CreateLayerVersionCommand instances are equal
+        /// Returns true if LayerStatus instances are equal
         /// </summary>
-        /// <param name="other">Instance of CreateLayerVersionCommand to be compared</param>
+        /// <param name="other">Instance of LayerStatus to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(CreateLayerVersionCommand other)
+        public bool Equals(LayerStatus other)
         {
             if (other is null) return false;
             if (ReferenceEquals(this, other)) return true;
 
             return 
                 (
-                    LayerId == other.LayerId ||
-                    LayerId != null &&
-                    LayerId.Equals(other.LayerId)
+                    Id == other.Id ||
+                    
+                    Id.Equals(other.Id)
                 ) && 
                 (
-                    PreviousLayerVersionId == other.PreviousLayerVersionId ||
-                    PreviousLayerVersionId != null &&
-                    PreviousLayerVersionId.Equals(other.PreviousLayerVersionId)
+                    Name == other.Name ||
+                    Name != null &&
+                    Name.Equals(other.Name)
                 ) && 
                 (
-                    BlobId == other.BlobId ||
-                    BlobId != null &&
-                    BlobId.Equals(other.BlobId)
+                    LatestVersion == other.LatestVersion ||
+                    
+                    LatestVersion.Equals(other.LatestVersion)
                 );
         }
 
@@ -126,12 +126,12 @@ namespace IfcxApi.Server.Models
             {
                 var hashCode = 41;
                 // Suitable nullity checks etc, of course :)
-                    if (LayerId != null)
-                    hashCode = hashCode * 59 + LayerId.GetHashCode();
-                    if (PreviousLayerVersionId != null)
-                    hashCode = hashCode * 59 + PreviousLayerVersionId.GetHashCode();
-                    if (BlobId != null)
-                    hashCode = hashCode * 59 + BlobId.GetHashCode();
+                    
+                    hashCode = hashCode * 59 + Id.GetHashCode();
+                    if (Name != null)
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                    
+                    hashCode = hashCode * 59 + LatestVersion.GetHashCode();
                 return hashCode;
             }
         }
@@ -139,12 +139,12 @@ namespace IfcxApi.Server.Models
         #region Operators
         #pragma warning disable 1591
 
-        public static bool operator ==(CreateLayerVersionCommand left, CreateLayerVersionCommand right)
+        public static bool operator ==(LayerStatus left, LayerStatus right)
         {
             return Equals(left, right);
         }
 
-        public static bool operator !=(CreateLayerVersionCommand left, CreateLayerVersionCommand right)
+        public static bool operator !=(LayerStatus left, LayerStatus right)
         {
             return !Equals(left, right);
         }

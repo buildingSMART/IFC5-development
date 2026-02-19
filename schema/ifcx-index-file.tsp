@@ -46,6 +46,7 @@ model IfcxProvenanceHeader
     dataVersion: string;    // "1.0.0"
     author: string;         // who created the dataset, e.g. "John.Doe@mail.com"
     timestamp: string;      // ISO 8601 datetime e.g. "2025-06-25"
+    application: string;
 }
 
 model IfcxFileHeader {

@@ -1,1 +1,1 @@
-java -jar openapi-generator-cli.jar generate -g aspnetcore -i ../standard/api/openapi.json -o ./server/cs/ --additional-properties=useNewtonsoft=false --additional-properties=packageName=IfcxApi.Server
+java -jar openapi-generator-cli.jar generate -g aspnetcore -i ../standard/api/openapi.json -o ./server/cs/api --additional-properties=useNewtonsoft=false --additional-properties=packageName=IfcxApi.Server --additional-properties=generateBody=false --additional-properties=operationModifier=abstract --additional-properties=classModifier=abstract

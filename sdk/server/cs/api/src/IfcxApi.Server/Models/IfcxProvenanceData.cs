@@ -24,28 +24,28 @@ namespace IfcxApi.Server.Models
     /// 
     /// </summary>
     [DataContract]
-    public partial class LayerVersion : IEquatable<LayerVersion>
+    public partial class IfcxProvenanceData : IEquatable<IfcxProvenanceData>
     {
         /// <summary>
-        /// Gets or Sets LayerId
+        /// Gets or Sets Author
         /// </summary>
         [Required]
-        [DataMember(Name="layerId", EmitDefaultValue=false)]
-        public string LayerId { get; set; }
+        [DataMember(Name="author", EmitDefaultValue=false)]
+        public string Author { get; set; }
 
         /// <summary>
-        /// Gets or Sets VersionId
+        /// Gets or Sets Timestamp
         /// </summary>
         [Required]
-        [DataMember(Name="versionId", EmitDefaultValue=false)]
-        public string VersionId { get; set; }
+        [DataMember(Name="timestamp", EmitDefaultValue=false)]
+        public string Timestamp { get; set; }
 
         /// <summary>
-        /// Gets or Sets PreviousVersionId
+        /// Gets or Sets Application
         /// </summary>
         [Required]
-        [DataMember(Name="previousVersionId", EmitDefaultValue=false)]
-        public string PreviousVersionId { get; set; }
+        [DataMember(Name="application", EmitDefaultValue=false)]
+        public string Application { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -54,10 +54,10 @@ namespace IfcxApi.Server.Models
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class LayerVersion {\n");
-            sb.Append("  LayerId: ").Append(LayerId).Append("\n");
-            sb.Append("  VersionId: ").Append(VersionId).Append("\n");
-            sb.Append("  PreviousVersionId: ").Append(PreviousVersionId).Append("\n");
+            sb.Append("class IfcxProvenanceData {\n");
+            sb.Append("  Author: ").Append(Author).Append("\n");
+            sb.Append("  Timestamp: ").Append(Timestamp).Append("\n");
+            sb.Append("  Application: ").Append(Application).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,34 +85,34 @@ namespace IfcxApi.Server.Models
         {
             if (obj is null) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((LayerVersion)obj);
+            return obj.GetType() == GetType() && Equals((IfcxProvenanceData)obj);
         }
 
         /// <summary>
-        /// Returns true if LayerVersion instances are equal
+        /// Returns true if IfcxProvenanceData instances are equal
         /// </summary>
-        /// <param name="other">Instance of LayerVersion to be compared</param>
+        /// <param name="other">Instance of IfcxProvenanceData to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(LayerVersion other)
+        public bool Equals(IfcxProvenanceData other)
         {
             if (other is null) return false;
             if (ReferenceEquals(this, other)) return true;
 
             return 
                 (
-                    LayerId == other.LayerId ||
-                    LayerId != null &&
-                    LayerId.Equals(other.LayerId)
+                    Author == other.Author ||
+                    Author != null &&
+                    Author.Equals(other.Author)
                 ) && 
                 (
-                    VersionId == other.VersionId ||
-                    VersionId != null &&
-                    VersionId.Equals(other.VersionId)
+                    Timestamp == other.Timestamp ||
+                    Timestamp != null &&
+                    Timestamp.Equals(other.Timestamp)
                 ) && 
                 (
-                    PreviousVersionId == other.PreviousVersionId ||
-                    PreviousVersionId != null &&
-                    PreviousVersionId.Equals(other.PreviousVersionId)
+                    Application == other.Application ||
+                    Application != null &&
+                    Application.Equals(other.Application)
                 );
         }
 
@@ -126,12 +126,12 @@ namespace IfcxApi.Server.Models
             {
                 var hashCode = 41;
                 // Suitable nullity checks etc, of course :)
-                    if (LayerId != null)
-                    hashCode = hashCode * 59 + LayerId.GetHashCode();
-                    if (VersionId != null)
-                    hashCode = hashCode * 59 + VersionId.GetHashCode();
-                    if (PreviousVersionId != null)
-                    hashCode = hashCode * 59 + PreviousVersionId.GetHashCode();
+                    if (Author != null)
+                    hashCode = hashCode * 59 + Author.GetHashCode();
+                    if (Timestamp != null)
+                    hashCode = hashCode * 59 + Timestamp.GetHashCode();
+                    if (Application != null)
+                    hashCode = hashCode * 59 + Application.GetHashCode();
                 return hashCode;
             }
         }
@@ -139,12 +139,12 @@ namespace IfcxApi.Server.Models
         #region Operators
         #pragma warning disable 1591
 
-        public static bool operator ==(LayerVersion left, LayerVersion right)
+        public static bool operator ==(IfcxProvenanceData left, IfcxProvenanceData right)
         {
             return Equals(left, right);
         }
 
-        public static bool operator !=(LayerVersion left, LayerVersion right)
+        public static bool operator !=(IfcxProvenanceData left, IfcxProvenanceData right)
         {
             return !Equals(left, right);
         }

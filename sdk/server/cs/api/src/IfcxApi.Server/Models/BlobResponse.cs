@@ -24,21 +24,21 @@ namespace IfcxApi.Server.Models
     /// 
     /// </summary>
     [DataContract]
-    public partial class LayerStatus : IEquatable<LayerStatus>
+    public partial class BlobResponse : IEquatable<BlobResponse>
     {
         /// <summary>
-        /// Gets or Sets Id
+        /// Gets or Sets BlobId
         /// </summary>
         [Required]
-        [DataMember(Name="id", EmitDefaultValue=false)]
-        public string Id { get; set; }
+        [DataMember(Name="blobId", EmitDefaultValue=true)]
+        public Guid BlobId { get; set; }
 
         /// <summary>
-        /// Gets or Sets LatestVersion
+        /// Gets or Sets PutURL
         /// </summary>
         [Required]
-        [DataMember(Name="latestVersion", EmitDefaultValue=false)]
-        public string LatestVersion { get; set; }
+        [DataMember(Name="putURL", EmitDefaultValue=false)]
+        public string PutURL { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -47,9 +47,9 @@ namespace IfcxApi.Server.Models
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class LayerStatus {\n");
-            sb.Append("  Id: ").Append(Id).Append("\n");
-            sb.Append("  LatestVersion: ").Append(LatestVersion).Append("\n");
+            sb.Append("class BlobResponse {\n");
+            sb.Append("  BlobId: ").Append(BlobId).Append("\n");
+            sb.Append("  PutURL: ").Append(PutURL).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -77,29 +77,29 @@ namespace IfcxApi.Server.Models
         {
             if (obj is null) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((LayerStatus)obj);
+            return obj.GetType() == GetType() && Equals((BlobResponse)obj);
         }
 
         /// <summary>
-        /// Returns true if LayerStatus instances are equal
+        /// Returns true if BlobResponse instances are equal
         /// </summary>
-        /// <param name="other">Instance of LayerStatus to be compared</param>
+        /// <param name="other">Instance of BlobResponse to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(LayerStatus other)
+        public bool Equals(BlobResponse other)
         {
             if (other is null) return false;
             if (ReferenceEquals(this, other)) return true;
 
             return 
                 (
-                    Id == other.Id ||
-                    Id != null &&
-                    Id.Equals(other.Id)
+                    BlobId == other.BlobId ||
+                    
+                    BlobId.Equals(other.BlobId)
                 ) && 
                 (
-                    LatestVersion == other.LatestVersion ||
-                    LatestVersion != null &&
-                    LatestVersion.Equals(other.LatestVersion)
+                    PutURL == other.PutURL ||
+                    PutURL != null &&
+                    PutURL.Equals(other.PutURL)
                 );
         }
 
@@ -113,10 +113,10 @@ namespace IfcxApi.Server.Models
             {
                 var hashCode = 41;
                 // Suitable nullity checks etc, of course :)
-                    if (Id != null)
-                    hashCode = hashCode * 59 + Id.GetHashCode();
-                    if (LatestVersion != null)
-                    hashCode = hashCode * 59 + LatestVersion.GetHashCode();
+                    
+                    hashCode = hashCode * 59 + BlobId.GetHashCode();
+                    if (PutURL != null)
+                    hashCode = hashCode * 59 + PutURL.GetHashCode();
                 return hashCode;
             }
         }
@@ -124,12 +124,12 @@ namespace IfcxApi.Server.Models
         #region Operators
         #pragma warning disable 1591
 
-        public static bool operator ==(LayerStatus left, LayerStatus right)
+        public static bool operator ==(BlobResponse left, BlobResponse right)
         {
             return Equals(left, right);
         }
 
-        public static bool operator !=(LayerStatus left, LayerStatus right)
+        public static bool operator !=(BlobResponse left, BlobResponse right)
         {
             return !Equals(left, right);
         }
