@@ -74,9 +74,23 @@ namespace Application
             return Ok(response);
         }
 
-        public override Task<IActionResult> LayerVersionRoutesGetLayerVersion([FromRoute(Name = "layerId"), Required] Guid layerId, [FromRoute(Name = "versionId"), Required] Guid versionId)
+        public override async Task<IActionResult> LayerVersionRoutesGetLayerVersion([FromRoute(Name = "layerId"), Required] Guid layerId, [FromRoute(Name = "versionId"), Required] Guid versionId)
         {
-            throw new NotImplementedException();
+            var layer = await layerService.GetLayerAsync(layerId);
+            var v = layer.versions.FirstOrDefault(x => x.id == versionId);
+            if (v == null)
+                return NotFound();
+
+            var result = new LayerVersion();
+            result.LayerId = v.layerId;
+            result.VersionId = v.id;
+            result.PreviousVersionId = v.previousVersionId;
+            result.Provenance = new();
+            result.Provenance.Author = v.provenance.author;
+            result.Provenance.Timestamp = v.provenance.timestamp;
+            result.Provenance.Application = v.provenance.application;
+
+            return Ok(result);
         }
 
         public override Task<IActionResult> LayerVersionRoutesLayerIfcx([FromRoute(Name = "layerId"), Required] Guid layerId, [FromRoute(Name = "versionId"), Required] Guid versionId, [FromQuery(Name = "downloadType"), Required] IfcxFileDownloadType downloadType)
