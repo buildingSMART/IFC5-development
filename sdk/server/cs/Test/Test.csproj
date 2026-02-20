@@ -17,7 +17,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />
+    <ProjectReference Include="..\api\src\IfcxApi.Server\IfcxApi.Server.csproj" />
   </ItemGroup>
 
   <ItemGroup>
