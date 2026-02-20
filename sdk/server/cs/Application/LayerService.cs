@@ -1,4 +1,4 @@
-﻿using Application.model;
+using Application.model;
 using ifcx_sdk;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Application
 {
@@ -27,33 +26,29 @@ namespace Application
             this.basePath = basePath;
         }
 
-        public void DeleteLayer(Guid layerId) {
-            this.fs.Delete(Path.Combine(basePath, LAYERS_PATH, layerId.ToString()));
+        public async Task DeleteLayerAsync(Guid layerId)
+        {
+            await this.fs.DeleteAsync(Path.Combine(basePath, LAYERS_PATH, layerId.ToString()));
         }
+
         public Stream ToStream<T>(T obj)
         {
             var text = JsonSerializer.Serialize(obj);
-
             byte[] bytes = Encoding.UTF8.GetBytes(text);
-
-            // Wrap in a MemoryStream
-            Stream stream = new MemoryStream(bytes);
-
-            return stream;
+            return new MemoryStream(bytes);
         }
 
-        public T FromStream<T>(Stream stream)
+        public async Task<T> FromStreamAsync<T>(Stream stream)
         {
             using var reader = new StreamReader(stream, Encoding.UTF8);
-            string text = reader.ReadToEnd();
-
+            string text = await reader.ReadToEndAsync();
             return JsonSerializer.Deserialize<T>(text);
         }
 
-        public void CreateLayer(string name, Guid id)
+        public async Task CreateLayerAsync(string name, Guid id)
         {
             Layer l = new Layer(name, id, new());
-            this.fs.WriteFile(Path.Combine(this.basePath, LAYERS_PATH, id.ToString()), ToStream(l));
+            await this.fs.WriteFileAsync(Path.Combine(this.basePath, LAYERS_PATH, id.ToString()), ToStream(l));
         }
 
         public enum CreateLayerVersionResponse
@@ -62,54 +57,34 @@ namespace Application
             OUT_OF_DATE
         }
 
-
-        public CreateLayerVersionResponse CreateLayerVersion(Guid layerId, Guid id, Guid previousLayerVersionId, Guid blobId)
+        public async Task<CreateLayerVersionResponse> CreateLayerVersionAsync(Guid layerId, Guid id, Guid previousLayerVersionId, Guid blobId)
         {
-            // check layer
-            var layer = this.GetLayer(layerId);
+            var layer = await this.GetLayerAsync(layerId);
 
-            // check previous version
             if (previousLayerVersionId != Guid.Empty)
             {
-                // check if any versions exists
                 if (layer.versions.Count == 0)
-                {
                     throw new Exception($"previousLayerVersionId specified but layer has no versions");
-                }
 
-                // check if previous exists
-                if (!layer.versions.Exists(x => x.id ==  previousLayerVersionId))
-                {
+                if (!layer.versions.Exists(x => x.id == previousLayerVersionId))
                     throw new Exception($"previousLayerVersionId {previousLayerVersionId} not found");
-                }
 
-                // check if previous matches server previous
                 if (layer.versions.Last().id != previousLayerVersionId)
-                {
                     return CreateLayerVersionResponse.OUT_OF_DATE;
-                }
             }
 
-            // check blob file
-            if (!this.fs.Exists(Path.Combine(this.basePath, BLOB_PATH, blobId.ToString())))
-            {
+            if (!await this.fs.ExistsAsync(Path.Combine(this.basePath, BLOB_PATH, blobId.ToString())))
                 throw new Exception($"Blobid {blobId} not found");
-            }
 
-            // read blob file, validate
-            var stream = this.fs.ReadFile(Path.Combine(this.basePath, BLOB_PATH, blobId.ToString()));
+            var stream = await this.fs.ReadFileAsync(Path.Combine(this.basePath, BLOB_PATH, blobId.ToString()));
             var memoryStream = new MemoryStream();
-            stream.CopyTo(memoryStream); // ???? the original stream is obviously not in memory but on the planet jupiter
+            await stream.CopyToAsync(memoryStream);
             memoryStream.Position = 0;
             var ifcxFile = IfcxFile.ReadIfcxFile(memoryStream);
 
-            // check if there's at least 1 data section
             if (ifcxFile.index.Sections.Length == 0)
-            {
                 throw new Exception("Expected at least one data section in the IfcxFile");
-            }
 
-            // read provenance from ifcxFile
             var firstSection = ifcxFile.index.Sections[0];
             var provenance = new LayerProvenance(
                 author: firstSection.Header.Author,
@@ -117,37 +92,41 @@ namespace Application
                 application: firstSection.Header.Application
             );
 
-            // update
             LayerVersion layerVersion = new LayerVersion(id, layerId, previousLayerVersionId, blobId, provenance);
-
             layer.versions.Add(layerVersion);
 
-            this.fs.WriteFile(Path.Combine(this.basePath, LAYERS_PATH, layerId.ToString()), ToStream(layer));
+            await this.fs.WriteFileAsync(Path.Combine(this.basePath, LAYERS_PATH, layerId.ToString()), ToStream(layer));
 
             return CreateLayerVersionResponse.OK;
         }
 
-        public Layer GetLayer(Guid id)
+        public async Task<Layer> GetLayerAsync(Guid id)
         {
-            var bytes = this.fs.ReadFile(Path.Combine(this.basePath, LAYERS_PATH, id.ToString()));
-            return FromStream<Layer>(bytes);
+            var stream = await this.fs.ReadFileAsync(Path.Combine(this.basePath, LAYERS_PATH, id.ToString()));
+            return await FromStreamAsync<Layer>(stream);
         }
 
-        public List<Layer> ListLayers()
+        public async Task<List<Layer>> ListLayersAsync()
         {
-            var files = this.fs.ListFiles(Path.Combine(this.basePath, LAYERS_PATH));
+            var files = await this.fs.ListFilesAsync(Path.Combine(this.basePath, LAYERS_PATH));
 
-            return files.Select(file => this.fs.ReadFile(file)).Select(str => FromStream<Layer>(str)).ToList();
+            var layers = new List<Layer>();
+            foreach (var file in files)
+            {
+                var stream = await this.fs.ReadFileAsync(file);
+                layers.Add(await FromStreamAsync<Layer>(stream));
+            }
+            return layers;
         }
 
-        public void UploadFile(Guid blobId, Stream file)
+        public async Task UploadFileAsync(Guid blobId, Stream file)
         {
-            this.fs.WriteFile(Path.Combine(this.basePath, BLOB_PATH, blobId.ToString()), file);
+            await this.fs.WriteFileAsync(Path.Combine(this.basePath, BLOB_PATH, blobId.ToString()), file);
         }
 
-        public Stream DownloadFile(Guid blobId)
+        public async Task<Stream> DownloadFileAsync(Guid blobId)
         {
-            return this.fs.ReadFile(Path.Combine(this.basePath, BLOB_PATH, blobId.ToString()));
+            return await this.fs.ReadFileAsync(Path.Combine(this.basePath, BLOB_PATH, blobId.ToString()));
         }
     }
 }

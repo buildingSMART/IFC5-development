@@ -5,15 +5,14 @@ namespace Test
     public class Roundtrip
     {
         [Fact]
-        public void CreateLayer()
+        public async Task CreateLayer()
         {
             var fs = new InMemoryFileSystem();
             var svc = new LayerService(fs, "::in_mem");
 
-
             Guid layer_guid = Guid.NewGuid();
-            svc.CreateLayer("My Layer", layer_guid);
-            var layer = svc.GetLayer(layer_guid);
+            await svc.CreateLayerAsync("My Layer", layer_guid);
+            var layer = await svc.GetLayerAsync(layer_guid);
 
             Assert.NotNull(layer);
             Assert.Equal(layer_guid, layer.id);
@@ -22,21 +21,20 @@ namespace Test
         }
 
         [Fact]
-        public void CreateLayerVersion()
+        public async Task CreateLayerVersion()
         {
             var fs = new InMemoryFileSystem();
             var svc = new LayerService(fs, "::in_mem");
-            using var stream = File.OpenRead("../../../data/example.ifcx");
+            await using var stream = File.OpenRead("../../../data/example.ifcx");
             var blobId = Guid.NewGuid();
-            svc.UploadFile(blobId, stream);
-
+            await svc.UploadFileAsync(blobId, stream);
 
             Guid layer_guid = Guid.NewGuid();
             Guid version_guid = Guid.NewGuid();
-            svc.CreateLayer("My Layer", layer_guid);
-            svc.CreateLayerVersion(layer_guid, version_guid, Guid.Empty, blobId);
+            await svc.CreateLayerAsync("My Layer", layer_guid);
+            await svc.CreateLayerVersionAsync(layer_guid, version_guid, Guid.Empty, blobId);
 
-            var version = svc.GetLayer(layer_guid).versions[0];
+            var version = (await svc.GetLayerAsync(layer_guid)).versions[0];
 
             Assert.Equal(blobId, version.uploadedBlobId);
         }

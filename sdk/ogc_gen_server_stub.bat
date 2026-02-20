@@ -1,1 +1,3 @@
 java -jar openapi-generator-cli.jar generate -g aspnetcore -i ../standard/api/openapi.json -o ./server/cs/api --additional-properties=useNewtonsoft=false --additional-properties=packageName=IfcxApi.Server --additional-properties=generateBody=false --additional-properties=operationModifier=abstract --additional-properties=classModifier=abstract
+
+powershell -Command "$file = '.\server\cs\api\src\IfcxApi.Server\Controllers\DefaultApi.cs'; $content = Get-Content $file -Raw; $content = $content -replace 'using System.ComponentModel.DataAnnotations;', \"using System.ComponentModel.DataAnnotations;`r`nusing System.Threading.Tasks;\"; $content = $content -replace 'public abstract IActionResult', 'public abstract Task<IActionResult>'; Set-Content $file $content"

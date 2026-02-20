@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
@@ -38,7 +39,7 @@ namespace IfcxApi.Server.Controllers
         [ValidateModelState]
         [SwaggerOperation("Download")]
         [SwaggerResponse(statusCode: 200, type: typeof(System.IO.Stream), description: "The request has succeeded.")]
-        public abstract IActionResult Download([FromRoute (Name = "blobId")][Required]Guid blobId);
+        public abstract Task<IActionResult> Download([FromRoute (Name = "blobId")][Required]Guid blobId);
 
         /// <summary>
         /// 
@@ -49,7 +50,7 @@ namespace IfcxApi.Server.Controllers
         [Route("/ifcx-api/layers/{layerId}")]
         [ValidateModelState]
         [SwaggerOperation("LayerRoutesDeleteLayer")]
-        public abstract IActionResult LayerRoutesDeleteLayer([FromRoute (Name = "layerId")][Required]Guid layerId);
+        public abstract Task<IActionResult> LayerRoutesDeleteLayer([FromRoute (Name = "layerId")][Required]Guid layerId);
 
         /// <summary>
         /// 
@@ -61,7 +62,7 @@ namespace IfcxApi.Server.Controllers
         [ValidateModelState]
         [SwaggerOperation("LayerRoutesGetLayer")]
         [SwaggerResponse(statusCode: 200, type: typeof(LayerDetails), description: "The request has succeeded.")]
-        public abstract IActionResult LayerRoutesGetLayer([FromRoute (Name = "layerId")][Required]Guid layerId);
+        public abstract Task<IActionResult> LayerRoutesGetLayer([FromRoute (Name = "layerId")][Required]Guid layerId);
 
         /// <summary>
         /// 
@@ -73,7 +74,7 @@ namespace IfcxApi.Server.Controllers
         [ValidateModelState]
         [SwaggerOperation("LayerRoutesUploadIfcxBlobUrl")]
         [SwaggerResponse(statusCode: 200, type: typeof(BlobResponse), description: "The request has succeeded.")]
-        public abstract IActionResult LayerRoutesUploadIfcxBlobUrl([FromRoute (Name = "layerId")][Required]Guid layerId);
+        public abstract Task<IActionResult> LayerRoutesUploadIfcxBlobUrl([FromRoute (Name = "layerId")][Required]Guid layerId);
 
         /// <summary>
         /// 
@@ -86,7 +87,7 @@ namespace IfcxApi.Server.Controllers
         [ValidateModelState]
         [SwaggerOperation("LayerVersionRoutesGetLayerVersion")]
         [SwaggerResponse(statusCode: 200, type: typeof(LayerVersion), description: "The request has succeeded.")]
-        public abstract IActionResult LayerVersionRoutesGetLayerVersion([FromRoute (Name = "layerId")][Required]Guid layerId, [FromRoute (Name = "versionId")][Required]Guid versionId);
+        public abstract Task<IActionResult> LayerVersionRoutesGetLayerVersion([FromRoute (Name = "layerId")][Required]Guid layerId, [FromRoute (Name = "versionId")][Required]Guid versionId);
 
         /// <summary>
         /// 
@@ -100,7 +101,7 @@ namespace IfcxApi.Server.Controllers
         [ValidateModelState]
         [SwaggerOperation("LayerVersionRoutesLayerIfcx")]
         [SwaggerResponse(statusCode: 200, type: typeof(LayerVersionIfcxFile), description: "The request has succeeded.")]
-        public abstract IActionResult LayerVersionRoutesLayerIfcx([FromRoute (Name = "layerId")][Required]Guid layerId, [FromRoute (Name = "versionId")][Required]Guid versionId, [FromQuery (Name = "downloadType")][Required()]IfcxFileDownloadType downloadType);
+        public abstract Task<IActionResult> LayerVersionRoutesLayerIfcx([FromRoute (Name = "layerId")][Required]Guid layerId, [FromRoute (Name = "versionId")][Required]Guid versionId, [FromQuery (Name = "downloadType")][Required()]IfcxFileDownloadType downloadType);
 
         /// <summary>
         /// 
@@ -116,7 +117,7 @@ namespace IfcxApi.Server.Controllers
         [Route("/ifcx-api/layers/{layerId}/versions/{versionId}/query")]
         [ValidateModelState]
         [SwaggerOperation("LayerVersionRoutesQuery")]
-        public abstract IActionResult LayerVersionRoutesQuery([FromRoute (Name = "layerId")][Required]Guid layerId, [FromRoute (Name = "versionId")][Required]Guid versionId, [FromQuery (Name = "path")][Required()]string path, [FromQuery (Name = "provenance")][Required()]bool provenance, [FromQuery (Name = "expandChildren")][Required()]bool expandChildren, [FromQuery (Name = "expandChildrenRecursive")][Required()]bool expandChildrenRecursive);
+        public abstract Task<IActionResult> LayerVersionRoutesQuery([FromRoute (Name = "layerId")][Required]Guid layerId, [FromRoute (Name = "versionId")][Required]Guid versionId, [FromQuery (Name = "path")][Required()]string path, [FromQuery (Name = "provenance")][Required()]bool provenance, [FromQuery (Name = "expandChildren")][Required()]bool expandChildren, [FromQuery (Name = "expandChildrenRecursive")][Required()]bool expandChildrenRecursive);
 
         /// <summary>
         /// 
@@ -128,7 +129,7 @@ namespace IfcxApi.Server.Controllers
         [Consumes("application/json")]
         [ValidateModelState]
         [SwaggerOperation("LayersCreateLayer")]
-        public abstract IActionResult LayersCreateLayer([FromBody]CreateLayerCommand createLayerCommand);
+        public abstract Task<IActionResult> LayersCreateLayer([FromBody]CreateLayerCommand createLayerCommand);
 
         /// <summary>
         /// 
@@ -139,7 +140,7 @@ namespace IfcxApi.Server.Controllers
         [ValidateModelState]
         [SwaggerOperation("LayersLayers")]
         [SwaggerResponse(statusCode: 200, type: typeof(List<LayerStatus>), description: "The request has succeeded.")]
-        public abstract IActionResult LayersLayers();
+        public abstract Task<IActionResult> LayersLayers();
 
         /// <summary>
         /// 
@@ -151,7 +152,7 @@ namespace IfcxApi.Server.Controllers
         [Route("/ifcx-api/upload/{blobId}")]
         [ValidateModelState]
         [SwaggerOperation("Upload")]
-        public abstract IActionResult Upload([FromRoute (Name = "blobId")][Required]Guid blobId, [FromBody]System.IO.Stream body);
+        public abstract Task<IActionResult> Upload([FromRoute (Name = "blobId")][Required]Guid blobId, [FromBody]System.IO.Stream body);
 
         /// <summary>
         /// 
@@ -165,6 +166,6 @@ namespace IfcxApi.Server.Controllers
         [ValidateModelState]
         [SwaggerOperation("VersionsRoutesCreateLayerVersion")]
         [SwaggerResponse(statusCode: 200, type: typeof(CreateLayerVersionResponse), description: "The request has succeeded.")]
-        public abstract IActionResult VersionsRoutesCreateLayerVersion([FromRoute (Name = "layerId")][Required]Guid layerId, [FromBody]CreateLayerVersionCommand createLayerVersionCommand);
+        public abstract Task<IActionResult> VersionsRoutesCreateLayerVersion([FromRoute (Name = "layerId")][Required]Guid layerId, [FromBody]CreateLayerVersionCommand createLayerVersionCommand);
     }
 }

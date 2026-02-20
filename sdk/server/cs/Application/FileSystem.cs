@@ -1,22 +1,20 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Application
 {
     public interface IFileSystem
     {
-        public void WriteFile(string path, Stream s);
-        public Stream ReadFile(string path);
-
-        public string[] ListFiles(string path);
-
-        public bool Exists(string path);
-
-        public void Delete(string path);
+        public Task WriteFileAsync(string path, Stream s, CancellationToken cancellationToken = default);
+        public Task<Stream> ReadFileAsync(string path, CancellationToken cancellationToken = default);
+        public Task<string[]> ListFilesAsync(string path, CancellationToken cancellationToken = default);
+        public Task<bool> ExistsAsync(string path, CancellationToken cancellationToken = default);
+        public Task DeleteAsync(string path, CancellationToken cancellationToken = default);
     }
 
 
@@ -24,7 +22,7 @@ namespace Application
     {
         private readonly ConcurrentDictionary<string, byte[]> _files = new();
 
-        public void WriteFile(string path, Stream s)
+        public async Task WriteFileAsync(string path, Stream s, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(path))
                 throw new ArgumentException("Path cannot be null or empty.", nameof(path));
@@ -33,12 +31,12 @@ namespace Application
                 throw new ArgumentNullException(nameof(s));
 
             using var ms = new MemoryStream();
-            s.CopyTo(ms);
+            await s.CopyToAsync(ms, cancellationToken);
 
             _files[NormalizePath(path)] = ms.ToArray();
         }
 
-        public Stream ReadFile(string path)
+        public Task<Stream> ReadFileAsync(string path, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(path))
                 throw new ArgumentException("Path cannot be null or empty.", nameof(path));
@@ -46,33 +44,42 @@ namespace Application
             if (!_files.TryGetValue(NormalizePath(path), out var bytes))
                 throw new FileNotFoundException($"File not found: {path}");
 
-            // Always return a new stream instance
-            return new MemoryStream(bytes, writable: false);
+            return Task.FromResult<Stream>(new MemoryStream(bytes, writable: false));
         }
 
-        public string[] ListFiles(string path)
+        public Task<string[]> ListFilesAsync(string path, CancellationToken cancellationToken = default)
         {
             var prefix = NormalizeDirectoryPrefix(path);
 
-            return _files.Keys
+            var result = _files.Keys
                 .Where(k => k.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
                 .ToArray();
+
+            return Task.FromResult(result);
         }
 
-        public bool Exists(string path)
+        public Task<bool> ExistsAsync(string path, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(path))
-                return false;
+                return Task.FromResult(false);
 
             var normalized = NormalizePath(path);
 
-            // Exact file match
             if (_files.ContainsKey(normalized))
-                return true;
+                return Task.FromResult(true);
 
-            // Virtual directory match
             var dirPrefix = NormalizeDirectoryPrefix(path);
-            return _files.Keys.Any(k => k.StartsWith(dirPrefix, StringComparison.OrdinalIgnoreCase));
+            return Task.FromResult(_files.Keys.Any(k => k.StartsWith(dirPrefix, StringComparison.OrdinalIgnoreCase)));
+        }
+
+        public Task DeleteAsync(string path, CancellationToken cancellationToken = default)
+        {
+            var normalized = NormalizePath(path);
+            if (!_files.ContainsKey(normalized))
+                throw new Exception($"Couldn't delete {path} it does not exist");
+
+            _files.TryRemove(normalized, out _);
+            return Task.CompletedTask;
         }
 
         private static string NormalizePath(string path)
@@ -91,20 +98,11 @@ namespace Application
                 ? normalized
                 : normalized + "/";
         }
-
-        public void Delete(string path)
-        {
-            if (!this.Exists(path))
-            {
-                throw new Exception($"Couldn't delete {path} it does not exist");
-            }
-            this._files.TryRemove(path, value: out byte[] bla);
-        }
     }
 
     public class RealFileSystem : IFileSystem
     {
-        public void WriteFile(string path, Stream s)
+        public async Task WriteFileAsync(string path, Stream s, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(path))
                 throw new ArgumentException("Path cannot be null or empty.", nameof(path));
@@ -114,24 +112,22 @@ namespace Application
 
             var fullPath = Path.GetFullPath(path);
 
-            // Ensure directory exists
             var directory = Path.GetDirectoryName(fullPath);
             if (!string.IsNullOrEmpty(directory))
-            {
                 Directory.CreateDirectory(directory);
-            }
 
-            // Write file (overwrite if exists)
-            using var fileStream = new FileStream(
+            await using var fileStream = new FileStream(
                 fullPath,
                 FileMode.Create,
                 FileAccess.Write,
-                FileShare.None);
+                FileShare.None,
+                bufferSize: 4096,
+                useAsync: true);
 
-            s.CopyTo(fileStream);
+            await s.CopyToAsync(fileStream, cancellationToken);
         }
 
-        public Stream ReadFile(string path)
+        public Task<Stream> ReadFileAsync(string path, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(path))
                 throw new ArgumentException("Path cannot be null or empty.", nameof(path));
@@ -141,40 +137,44 @@ namespace Application
             if (!File.Exists(fullPath))
                 throw new FileNotFoundException($"File not found: {path}");
 
-            return new FileStream(
+            Stream stream = new FileStream(
                 fullPath,
                 FileMode.Open,
                 FileAccess.Read,
-                FileShare.Read);
+                FileShare.Read,
+                bufferSize: 4096,
+                useAsync: true);
+
+            return Task.FromResult(stream);
         }
 
-        public string[] ListFiles(string path)
+        public Task<string[]> ListFilesAsync(string path, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(path))
-                return Array.Empty<string>();
+                return Task.FromResult(Array.Empty<string>());
 
             var fullPath = Path.GetFullPath(path);
 
             if (!Directory.Exists(fullPath))
-                return Array.Empty<string>();
+                return Task.FromResult(Array.Empty<string>());
 
-            return Directory.GetFiles(fullPath);
+            return Task.FromResult(Directory.GetFiles(fullPath));
         }
 
-        public bool Exists(string path)
+        public Task<bool> ExistsAsync(string path, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(path))
-                return false;
+                return Task.FromResult(false);
 
             var fullPath = Path.GetFullPath(path);
 
-            return File.Exists(fullPath) || Directory.Exists(fullPath);
+            return Task.FromResult(File.Exists(fullPath) || Directory.Exists(fullPath));
         }
 
-        public void Delete(string path)
+        public Task DeleteAsync(string path, CancellationToken cancellationToken = default)
         {
             File.Delete(path);
+            return Task.CompletedTask;
         }
     }
-
 }

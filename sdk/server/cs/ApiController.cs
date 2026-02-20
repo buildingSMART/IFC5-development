@@ -1,10 +1,11 @@
-﻿using IfcxApi.Server.Controllers;
+using IfcxApi.Server.Controllers;
 using IfcxApi.Server.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Application
 {
@@ -13,15 +14,15 @@ namespace Application
         static LayerService layerService = new LayerService(new InMemoryFileSystem(), "::in_mem");
 
 
-        public override IActionResult LayerRoutesDeleteLayer([FromRoute(Name = "layerId"), Required] Guid layerId)
+        public override async Task<IActionResult> LayerRoutesDeleteLayer([FromRoute(Name = "layerId"), Required] Guid layerId)
         {
-            layerService.DeleteLayer(layerId);
+            await layerService.DeleteLayerAsync(layerId);
             return Ok();
         }
 
-        public override IActionResult LayerRoutesGetLayer([FromRoute(Name = "layerId"), Required] Guid layerId)
+        public override async Task<IActionResult> LayerRoutesGetLayer([FromRoute(Name = "layerId"), Required] Guid layerId)
         {
-            var layer = layerService.GetLayer(layerId);
+            var layer = await layerService.GetLayerAsync(layerId);
 
             LayerDetails layerDetails = new LayerDetails();
             layerDetails.Id = layerId;
@@ -41,25 +42,25 @@ namespace Application
 
                 return prov;
             }).ToList();
-            
+
             return Ok(layerDetails);
         }
 
 
-        public override IActionResult LayerRoutesUploadIfcxBlobUrl([FromRoute(Name = "layerId"), Required] Guid layerId)
+        public override Task<IActionResult> LayerRoutesUploadIfcxBlobUrl([FromRoute(Name = "layerId"), Required] Guid layerId)
         {
             throw new NotImplementedException();
         }
 
-        public override IActionResult LayersCreateLayer([FromBody] CreateLayerCommand createLayerCommand)
+        public override async Task<IActionResult> LayersCreateLayer([FromBody] CreateLayerCommand createLayerCommand)
         {
-            layerService.CreateLayer(createLayerCommand.Name, createLayerCommand.Id);
+            await layerService.CreateLayerAsync(createLayerCommand.Name, createLayerCommand.Id);
             return Ok();
         }
 
-        public override IActionResult LayersLayers()
+        public override async Task<IActionResult> LayersLayers()
         {
-            var layers = layerService.ListLayers();
+            var layers = await layerService.ListLayersAsync();
 
             var response = layers.Select(layer =>
             {
@@ -73,40 +74,40 @@ namespace Application
             return Ok(response);
         }
 
-        public override IActionResult LayerVersionRoutesGetLayerVersion([FromRoute(Name = "layerId"), Required] Guid layerId, [FromRoute(Name = "versionId"), Required] Guid versionId)
+        public override Task<IActionResult> LayerVersionRoutesGetLayerVersion([FromRoute(Name = "layerId"), Required] Guid layerId, [FromRoute(Name = "versionId"), Required] Guid versionId)
         {
             throw new NotImplementedException();
         }
 
-        public override IActionResult LayerVersionRoutesLayerIfcx([FromRoute(Name = "layerId"), Required] Guid layerId, [FromRoute(Name = "versionId"), Required] Guid versionId, [FromQuery(Name = "downloadType"), Required] IfcxFileDownloadType downloadType)
+        public override Task<IActionResult> LayerVersionRoutesLayerIfcx([FromRoute(Name = "layerId"), Required] Guid layerId, [FromRoute(Name = "versionId"), Required] Guid versionId, [FromQuery(Name = "downloadType"), Required] IfcxFileDownloadType downloadType)
         {
             throw new NotImplementedException();
         }
 
-        public override IActionResult LayerVersionRoutesQuery([FromRoute(Name = "layerId"), Required] Guid layerId, [FromRoute(Name = "versionId"), Required] Guid versionId, [FromQuery(Name = "path"), Required] string path, [FromQuery(Name = "provenance"), Required] bool provenance, [FromQuery(Name = "expandChildren"), Required] bool expandChildren, [FromQuery(Name = "expandChildrenRecursive"), Required] bool expandChildrenRecursive)
+        public override Task<IActionResult> LayerVersionRoutesQuery([FromRoute(Name = "layerId"), Required] Guid layerId, [FromRoute(Name = "versionId"), Required] Guid versionId, [FromQuery(Name = "path"), Required] string path, [FromQuery(Name = "provenance"), Required] bool provenance, [FromQuery(Name = "expandChildren"), Required] bool expandChildren, [FromQuery(Name = "expandChildrenRecursive"), Required] bool expandChildrenRecursive)
         {
             throw new NotImplementedException();
         }
 
-        public override IActionResult Upload([FromRoute(Name = "blobId"), Required] Guid blobId, [FromBody] Stream body)
+        public override async Task<IActionResult> Upload([FromRoute(Name = "blobId"), Required] Guid blobId, [FromBody] Stream body)
         {
-            layerService.UploadFile(blobId, body);
+            await layerService.UploadFileAsync(blobId, body);
             return Ok();
         }
 
-        public override IActionResult Download([FromRoute(Name = "blobId"), Required] Guid blobId)
+        public override async Task<IActionResult> Download([FromRoute(Name = "blobId"), Required] Guid blobId)
         {
-            var stream = layerService.DownloadFile(blobId);
+            var stream = await layerService.DownloadFileAsync(blobId);
             return File(stream, "application/octet-stream");
         }
 
-        public override IActionResult VersionsRoutesCreateLayerVersion([FromRoute(Name = "layerId"), Required] Guid layerId, [FromBody] CreateLayerVersionCommand createLayerVersionCommand)
+        public override async Task<IActionResult> VersionsRoutesCreateLayerVersion([FromRoute(Name = "layerId"), Required] Guid layerId, [FromBody] CreateLayerVersionCommand createLayerVersionCommand)
         {
-            var result = layerService.CreateLayerVersion(layerId, createLayerVersionCommand.Id, createLayerVersionCommand.PreviousLayerVersionId, createLayerVersionCommand.BlobId);
+            var result = await layerService.CreateLayerVersionAsync(layerId, createLayerVersionCommand.Id, createLayerVersionCommand.PreviousLayerVersionId, createLayerVersionCommand.BlobId);
 
             var response = new CreateLayerVersionResponse();
             response.State = result == LayerService.CreateLayerVersionResponse.OUT_OF_DATE ? CreateLayerVersionResponseState.OUTOFDATEEnum : CreateLayerVersionResponseState.OKEnum;
-            
+
             return Ok(response);
         }
     }
