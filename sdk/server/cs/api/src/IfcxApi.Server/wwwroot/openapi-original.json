@@ -1,0 +1,578 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "(title)",
+    "version" : "0.0.0"
+  },
+  "servers" : [ {
+    "url" : "/"
+  } ],
+  "paths" : {
+    "/ifcx-api/download/{blobId}" : {
+      "put" : {
+        "operationId" : "download",
+        "parameters" : [ {
+          "explode" : false,
+          "in" : "path",
+          "name" : "blobId",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/uuid"
+          },
+          "style" : "simple"
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "format" : "binary",
+                  "type" : "string"
+                }
+              }
+            },
+            "description" : "The request has succeeded."
+          }
+        }
+      }
+    },
+    "/ifcx-api/layers" : {
+      "get" : {
+        "operationId" : "Layers_layers",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/LayerStatus"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "The request has succeeded."
+          }
+        }
+      },
+      "post" : {
+        "operationId" : "Layers_createLayer",
+        "parameters" : [ ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateLayerCommand"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "The request has succeeded."
+          }
+        }
+      }
+    },
+    "/ifcx-api/layers/{layerId}" : {
+      "delete" : {
+        "operationId" : "LayerRoutes_delete_layer",
+        "parameters" : [ {
+          "explode" : false,
+          "in" : "path",
+          "name" : "layerId",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/uuid"
+          },
+          "style" : "simple"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The request has succeeded."
+          }
+        }
+      },
+      "get" : {
+        "operationId" : "LayerRoutes_get_layer",
+        "parameters" : [ {
+          "explode" : false,
+          "in" : "path",
+          "name" : "layerId",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/uuid"
+          },
+          "style" : "simple"
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/LayerDetails"
+                }
+              }
+            },
+            "description" : "The request has succeeded."
+          }
+        }
+      }
+    },
+    "/ifcx-api/layers/{layerId}/upload-ifcx-blob-url" : {
+      "post" : {
+        "operationId" : "LayerRoutes_uploadIfcxBlobUrl",
+        "parameters" : [ {
+          "explode" : false,
+          "in" : "path",
+          "name" : "layerId",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/uuid"
+          },
+          "style" : "simple"
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BlobResponse"
+                }
+              }
+            },
+            "description" : "The request has succeeded."
+          }
+        }
+      }
+    },
+    "/ifcx-api/layers/{layerId}/versions" : {
+      "post" : {
+        "operationId" : "VersionsRoutes_createLayerVersion",
+        "parameters" : [ {
+          "explode" : false,
+          "in" : "path",
+          "name" : "layerId",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/uuid"
+          },
+          "style" : "simple"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateLayerVersionCommand"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CreateLayerVersionResponse"
+                }
+              }
+            },
+            "description" : "The request has succeeded."
+          }
+        }
+      }
+    },
+    "/ifcx-api/layers/{layerId}/versions/{versionId}" : {
+      "get" : {
+        "operationId" : "LayerVersionRoutes_get_layer_version",
+        "parameters" : [ {
+          "explode" : false,
+          "in" : "path",
+          "name" : "layerId",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/uuid"
+          },
+          "style" : "simple"
+        }, {
+          "explode" : false,
+          "in" : "path",
+          "name" : "versionId",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/uuid"
+          },
+          "style" : "simple"
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/LayerVersion"
+                }
+              }
+            },
+            "description" : "The request has succeeded."
+          }
+        }
+      }
+    },
+    "/ifcx-api/layers/{layerId}/versions/{versionId}/download-ifcx" : {
+      "put" : {
+        "operationId" : "LayerVersionRoutes_layer_ifcx",
+        "parameters" : [ {
+          "explode" : false,
+          "in" : "path",
+          "name" : "layerId",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/uuid"
+          },
+          "style" : "simple"
+        }, {
+          "explode" : false,
+          "in" : "path",
+          "name" : "versionId",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/uuid"
+          },
+          "style" : "simple"
+        }, {
+          "explode" : false,
+          "in" : "query",
+          "name" : "downloadType",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/IfcxFileDownloadType"
+          },
+          "style" : "form"
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/LayerVersionIfcxFile"
+                }
+              }
+            },
+            "description" : "The request has succeeded."
+          }
+        }
+      }
+    },
+    "/ifcx-api/layers/{layerId}/versions/{versionId}/query" : {
+      "get" : {
+        "operationId" : "LayerVersionRoutes_query",
+        "parameters" : [ {
+          "explode" : false,
+          "in" : "path",
+          "name" : "layerId",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/uuid"
+          },
+          "style" : "simple"
+        }, {
+          "explode" : false,
+          "in" : "path",
+          "name" : "versionId",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/uuid"
+          },
+          "style" : "simple"
+        }, {
+          "explode" : false,
+          "in" : "query",
+          "name" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : false,
+          "in" : "query",
+          "name" : "provenance",
+          "required" : true,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "style" : "form"
+        }, {
+          "explode" : false,
+          "in" : "query",
+          "name" : "expandChildren",
+          "required" : true,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "style" : "form"
+        }, {
+          "explode" : false,
+          "in" : "query",
+          "name" : "expandChildrenRecursive",
+          "required" : true,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "style" : "form"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The request has succeeded."
+          }
+        }
+      }
+    },
+    "/ifcx-api/upload/{blobId}" : {
+      "put" : {
+        "operationId" : "upload",
+        "parameters" : [ {
+          "explode" : false,
+          "in" : "path",
+          "name" : "blobId",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/uuid"
+          },
+          "style" : "simple"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "format" : "binary",
+                "type" : "string"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "The request has succeeded."
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "BlobResponse" : {
+        "example" : {
+          "putURL" : "putURL",
+          "blobId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+        },
+        "properties" : {
+          "blobId" : {
+            "format" : "uuid",
+            "type" : "string"
+          },
+          "putURL" : {
+            "type" : "string"
+          }
+        },
+        "required" : [ "blobId", "putURL" ],
+        "type" : "object"
+      },
+      "CreateLayerCommand" : {
+        "example" : {
+          "name" : "name",
+          "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+        },
+        "properties" : {
+          "id" : {
+            "format" : "uuid",
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          }
+        },
+        "required" : [ "id", "name" ],
+        "type" : "object"
+      },
+      "CreateLayerVersionCommand" : {
+        "example" : {
+          "blobId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+          "previousLayerVersionId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+          "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+        },
+        "properties" : {
+          "id" : {
+            "format" : "uuid",
+            "type" : "string"
+          },
+          "previousLayerVersionId" : {
+            "format" : "uuid",
+            "type" : "string"
+          },
+          "blobId" : {
+            "format" : "uuid",
+            "type" : "string"
+          }
+        },
+        "required" : [ "blobId", "id", "previousLayerVersionId" ],
+        "type" : "object"
+      },
+      "CreateLayerVersionResponse" : {
+        "example" : {
+          "state" : "OK"
+        },
+        "properties" : {
+          "state" : {
+            "$ref" : "#/components/schemas/CreateLayerVersionResponseState"
+          }
+        },
+        "required" : [ "state" ],
+        "type" : "object"
+      },
+      "CreateLayerVersionResponseState" : {
+        "enum" : [ "OK", "OUT_OF_DATE" ],
+        "type" : "string"
+      },
+      "IfcxFileDownloadType" : {
+        "enum" : [ "just_this_version", "whole_layer_history_intact", "whole_layer_history_condensed", "whole_layer_and_imports_history_condensed" ],
+        "type" : "string"
+      },
+      "IfcxProvenanceData" : {
+        "example" : {
+          "application" : "application",
+          "author" : "author",
+          "timestamp" : "timestamp"
+        },
+        "properties" : {
+          "author" : {
+            "type" : "string"
+          },
+          "timestamp" : {
+            "type" : "string"
+          },
+          "application" : {
+            "type" : "string"
+          }
+        },
+        "required" : [ "application", "author", "timestamp" ],
+        "type" : "object"
+      },
+      "LayerDetails" : {
+        "example" : {
+          "name" : "name",
+          "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+          "history" : [ {
+            "previousVersionId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+            "versionId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+            "layerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+            "provenance" : {
+              "application" : "application",
+              "author" : "author",
+              "timestamp" : "timestamp"
+            }
+          }, {
+            "previousVersionId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+            "versionId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+            "layerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+            "provenance" : {
+              "application" : "application",
+              "author" : "author",
+              "timestamp" : "timestamp"
+            }
+          } ]
+        },
+        "properties" : {
+          "id" : {
+            "format" : "uuid",
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "history" : {
+            "items" : {
+              "$ref" : "#/components/schemas/LayerVersion"
+            },
+            "type" : "array"
+          }
+        },
+        "required" : [ "history", "id", "name" ],
+        "type" : "object"
+      },
+      "LayerStatus" : {
+        "example" : {
+          "latestVersion" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+          "name" : "name",
+          "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+        },
+        "properties" : {
+          "id" : {
+            "format" : "uuid",
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "latestVersion" : {
+            "format" : "uuid",
+            "type" : "string"
+          }
+        },
+        "required" : [ "id", "latestVersion", "name" ],
+        "type" : "object"
+      },
+      "LayerVersion" : {
+        "example" : {
+          "previousVersionId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+          "versionId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+          "layerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+          "provenance" : {
+            "application" : "application",
+            "author" : "author",
+            "timestamp" : "timestamp"
+          }
+        },
+        "properties" : {
+          "layerId" : {
+            "format" : "uuid",
+            "type" : "string"
+          },
+          "versionId" : {
+            "format" : "uuid",
+            "type" : "string"
+          },
+          "previousVersionId" : {
+            "format" : "uuid",
+            "type" : "string"
+          },
+          "provenance" : {
+            "$ref" : "#/components/schemas/IfcxProvenanceData"
+          }
+        },
+        "required" : [ "layerId", "previousVersionId", "provenance", "versionId" ],
+        "type" : "object"
+      },
+      "LayerVersionIfcxFile" : {
+        "example" : {
+          "blobUrl" : "blobUrl"
+        },
+        "properties" : {
+          "blobUrl" : {
+            "type" : "string"
+          }
+        },
+        "required" : [ "blobUrl" ],
+        "type" : "object"
+      },
+      "uuid" : {
+        "format" : "uuid",
+        "type" : "string"
+      }
+    }
+  }
+}
