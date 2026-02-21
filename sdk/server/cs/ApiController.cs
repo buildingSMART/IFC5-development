@@ -11,7 +11,7 @@ namespace Application
 {
     public class ApiController : DefaultApiController
     {
-        static LayerService layerService = new LayerService(new InMemoryFileSystem(), "::in_mem");
+        public static LayerService layerService = new LayerService(new InMemoryFileSystem(), "::in_mem");
 
 
         public override async Task<IActionResult> LayerRoutesDeleteLayer([FromRoute(Name = "layerId"), Required] Guid layerId)
