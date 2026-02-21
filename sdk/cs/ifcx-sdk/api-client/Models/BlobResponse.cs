@@ -9,41 +9,37 @@ namespace ApiSdk.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class LayerVersion : IAdditionalDataHolder, IParsable
+    public partial class BlobResponse : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The layerId property</summary>
-        public Guid? LayerId { get; set; }
-        /// <summary>The previousVersionId property</summary>
-        public Guid? PreviousVersionId { get; set; }
-        /// <summary>The provenance property</summary>
+        /// <summary>The blobId property</summary>
+        public Guid? BlobId { get; set; }
+        /// <summary>The putURL property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::ApiSdk.Models.IfcxProvenanceData? Provenance { get; set; }
+        public string? PutURL { get; set; }
 #nullable restore
 #else
-        public global::ApiSdk.Models.IfcxProvenanceData Provenance { get; set; }
+        public string PutURL { get; set; }
 #endif
-        /// <summary>The versionId property</summary>
-        public Guid? VersionId { get; set; }
         /// <summary>
-        /// Instantiates a new <see cref="global::ApiSdk.Models.LayerVersion"/> and sets the default values.
+        /// Instantiates a new <see cref="global::ApiSdk.Models.BlobResponse"/> and sets the default values.
         /// </summary>
-        public LayerVersion()
+        public BlobResponse()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::ApiSdk.Models.LayerVersion"/></returns>
+        /// <returns>A <see cref="global::ApiSdk.Models.BlobResponse"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::ApiSdk.Models.LayerVersion CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::ApiSdk.Models.BlobResponse CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::ApiSdk.Models.LayerVersion();
+            return new global::ApiSdk.Models.BlobResponse();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -53,10 +49,8 @@ namespace ApiSdk.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "layerId", n => { LayerId = n.GetGuidValue(); } },
-                { "previousVersionId", n => { PreviousVersionId = n.GetGuidValue(); } },
-                { "provenance", n => { Provenance = n.GetObjectValue<global::ApiSdk.Models.IfcxProvenanceData>(global::ApiSdk.Models.IfcxProvenanceData.CreateFromDiscriminatorValue); } },
-                { "versionId", n => { VersionId = n.GetGuidValue(); } },
+                { "blobId", n => { BlobId = n.GetGuidValue(); } },
+                { "putURL", n => { PutURL = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -66,10 +60,8 @@ namespace ApiSdk.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteGuidValue("layerId", LayerId);
-            writer.WriteGuidValue("previousVersionId", PreviousVersionId);
-            writer.WriteObjectValue<global::ApiSdk.Models.IfcxProvenanceData>("provenance", Provenance);
-            writer.WriteGuidValue("versionId", VersionId);
+            writer.WriteGuidValue("blobId", BlobId);
+            writer.WriteStringValue("putURL", PutURL);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

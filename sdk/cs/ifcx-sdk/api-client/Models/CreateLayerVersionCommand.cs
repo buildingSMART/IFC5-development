@@ -15,29 +15,11 @@ namespace ApiSdk.Models
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The blobId property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? BlobId { get; set; }
-#nullable restore
-#else
-        public string BlobId { get; set; }
-#endif
-        /// <summary>The layerId property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? LayerId { get; set; }
-#nullable restore
-#else
-        public string LayerId { get; set; }
-#endif
+        public Guid? BlobId { get; set; }
+        /// <summary>The id property</summary>
+        public Guid? Id { get; set; }
         /// <summary>The previousLayerVersionId property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? PreviousLayerVersionId { get; set; }
-#nullable restore
-#else
-        public string PreviousLayerVersionId { get; set; }
-#endif
+        public Guid? PreviousLayerVersionId { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::ApiSdk.Models.CreateLayerVersionCommand"/> and sets the default values.
         /// </summary>
@@ -63,9 +45,9 @@ namespace ApiSdk.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "blobId", n => { BlobId = n.GetStringValue(); } },
-                { "layerId", n => { LayerId = n.GetStringValue(); } },
-                { "previousLayerVersionId", n => { PreviousLayerVersionId = n.GetStringValue(); } },
+                { "blobId", n => { BlobId = n.GetGuidValue(); } },
+                { "id", n => { Id = n.GetGuidValue(); } },
+                { "previousLayerVersionId", n => { PreviousLayerVersionId = n.GetGuidValue(); } },
             };
         }
         /// <summary>
@@ -75,9 +57,9 @@ namespace ApiSdk.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("blobId", BlobId);
-            writer.WriteStringValue("layerId", LayerId);
-            writer.WriteStringValue("previousLayerVersionId", PreviousLayerVersionId);
+            writer.WriteGuidValue("blobId", BlobId);
+            writer.WriteGuidValue("id", Id);
+            writer.WriteGuidValue("previousLayerVersionId", PreviousLayerVersionId);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

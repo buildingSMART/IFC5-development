@@ -14,21 +14,23 @@ namespace ApiSdk.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The id property</summary>
+        /// <summary>The history property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public List<global::ApiSdk.Models.LayerVersion>? History { get; set; }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public List<global::ApiSdk.Models.LayerVersion> History { get; set; }
 #endif
-        /// <summary>The latestVersion property</summary>
+        /// <summary>The id property</summary>
+        public Guid? Id { get; set; }
+        /// <summary>The name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? LatestVersion { get; set; }
+        public string? Name { get; set; }
 #nullable restore
 #else
-        public string LatestVersion { get; set; }
+        public string Name { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::ApiSdk.Models.LayerDetails"/> and sets the default values.
@@ -55,8 +57,9 @@ namespace ApiSdk.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "id", n => { Id = n.GetStringValue(); } },
-                { "latestVersion", n => { LatestVersion = n.GetStringValue(); } },
+                { "history", n => { History = n.GetCollectionOfObjectValues<global::ApiSdk.Models.LayerVersion>(global::ApiSdk.Models.LayerVersion.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "id", n => { Id = n.GetGuidValue(); } },
+                { "name", n => { Name = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -66,8 +69,9 @@ namespace ApiSdk.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("id", Id);
-            writer.WriteStringValue("latestVersion", LatestVersion);
+            writer.WriteCollectionOfObjectValues<global::ApiSdk.Models.LayerVersion>("history", History);
+            writer.WriteGuidValue("id", Id);
+            writer.WriteStringValue("name", Name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

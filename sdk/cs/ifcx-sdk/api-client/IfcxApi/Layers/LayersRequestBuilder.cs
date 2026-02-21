@@ -21,12 +21,25 @@ namespace ApiSdk.IfcxApi.Layers
         /// <summary>Gets an item from the ApiSdk.ifcxApi.layers.item collection</summary>
         /// <param name="position">Unique identifier of the item</param>
         /// <returns>A <see cref="global::ApiSdk.IfcxApi.Layers.Item.WithLayerItemRequestBuilder"/></returns>
-        public global::ApiSdk.IfcxApi.Layers.Item.WithLayerItemRequestBuilder this[string position]
+        public global::ApiSdk.IfcxApi.Layers.Item.WithLayerItemRequestBuilder this[Guid position]
         {
             get
             {
                 var urlTplParams = new Dictionary<string, object>(PathParameters);
                 urlTplParams.Add("layerId", position);
+                return new global::ApiSdk.IfcxApi.Layers.Item.WithLayerItemRequestBuilder(urlTplParams, RequestAdapter);
+            }
+        }
+        /// <summary>Gets an item from the ApiSdk.ifcxApi.layers.item collection</summary>
+        /// <param name="position">Unique identifier of the item</param>
+        /// <returns>A <see cref="global::ApiSdk.IfcxApi.Layers.Item.WithLayerItemRequestBuilder"/></returns>
+        [Obsolete("This indexer is deprecated and will be removed in the next major version. Use the one with the typed parameter instead.")]
+        public global::ApiSdk.IfcxApi.Layers.Item.WithLayerItemRequestBuilder this[string position]
+        {
+            get
+            {
+                var urlTplParams = new Dictionary<string, object>(PathParameters);
+                if (!string.IsNullOrWhiteSpace(position)) urlTplParams.Add("layerId", position);
                 return new global::ApiSdk.IfcxApi.Layers.Item.WithLayerItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
@@ -68,11 +81,11 @@ namespace ApiSdk.IfcxApi.Layers
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<Stream?> PostAsync(global::ApiSdk.IfcxApi.Layers.LayersPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<Stream?> PostAsync(global::ApiSdk.Models.CreateLayerCommand body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<Stream> PostAsync(global::ApiSdk.IfcxApi.Layers.LayersPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<Stream> PostAsync(global::ApiSdk.Models.CreateLayerCommand body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -100,11 +113,11 @@ namespace ApiSdk.IfcxApi.Layers
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPostRequestInformation(global::ApiSdk.IfcxApi.Layers.LayersPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::ApiSdk.Models.CreateLayerCommand body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPostRequestInformation(global::ApiSdk.IfcxApi.Layers.LayersPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::ApiSdk.Models.CreateLayerCommand body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
