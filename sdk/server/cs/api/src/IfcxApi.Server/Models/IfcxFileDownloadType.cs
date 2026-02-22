@@ -28,27 +28,27 @@ namespace IfcxApi.Server.Models
         {
             
             /// <summary>
-            /// Enum JustThisVersionEnum for just_this_version
+            /// Enum JustThisVersion for just_this_version
             /// </summary>
             [EnumMember(Value = "just_this_version")]
-            JustThisVersionEnum = 1,
+            JustThisVersion = 1,
             
             /// <summary>
-            /// Enum WholeLayerHistoryIntactEnum for whole_layer_history_intact
+            /// Enum WholeLayerHistoryIntact for whole_layer_history_intact
             /// </summary>
             [EnumMember(Value = "whole_layer_history_intact")]
-            WholeLayerHistoryIntactEnum = 2,
+            WholeLayerHistoryIntact = 2,
             
             /// <summary>
-            /// Enum WholeLayerHistoryCondensedEnum for whole_layer_history_condensed
+            /// Enum WholeLayerHistoryCondensed for whole_layer_history_condensed
             /// </summary>
             [EnumMember(Value = "whole_layer_history_condensed")]
-            WholeLayerHistoryCondensedEnum = 3,
+            WholeLayerHistoryCondensed = 3,
             
             /// <summary>
-            /// Enum WholeLayerAndImportsHistoryCondensedEnum for whole_layer_and_imports_history_condensed
+            /// Enum WholeLayerAndImportsHistoryCondensed for whole_layer_and_imports_history_condensed
             /// </summary>
             [EnumMember(Value = "whole_layer_and_imports_history_condensed")]
-            WholeLayerAndImportsHistoryCondensedEnum = 4
+            WholeLayerAndImportsHistoryCondensed = 4
         }
 }

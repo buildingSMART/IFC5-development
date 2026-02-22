@@ -28,15 +28,15 @@ namespace IfcxApi.Server.Models
         {
             
             /// <summary>
-            /// Enum OKEnum for OK
+            /// Enum OK for OK
             /// </summary>
             [EnumMember(Value = "OK")]
-            OKEnum = 1,
+            OK = 1,
             
             /// <summary>
-            /// Enum OUTOFDATEEnum for OUT_OF_DATE
+            /// Enum OUTOFDATE for OUT_OF_DATE
             /// </summary>
             [EnumMember(Value = "OUT_OF_DATE")]
-            OUTOFDATEEnum = 2
+            OUTOFDATE = 2
         }
 }
