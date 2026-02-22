@@ -16,6 +16,11 @@ namespace Test
     {
         ApiController controller;
 
+        private static readonly JsonSerializerOptions _options = new JsonSerializerOptions
+        {
+            Converters = { new EnumMemberConverterFactory() }
+        };
+
         public ApiBridge(ApiController controller)
         {
             this.controller = controller;
@@ -70,8 +75,8 @@ namespace Test
             var serverCmd = JsonSerializer.Deserialize<IfcxApi.Server.Models.CreateLayerVersionCommand>(JsonSerializer.Serialize(clientCmd));
             var result = await this.controller.VersionsRoutesCreateLayerVersion(layerId, serverCmd);
             var ok = (OkObjectResult)result;
-            var temp = JsonSerializer.Serialize(ok.Value);
-            return JsonSerializer.Deserialize<ApiSdk.Models.CreateLayerVersionResponse>(temp);
+            var temp = JsonSerializer.Serialize(ok.Value, _options);
+            return JsonSerializer.Deserialize<ApiSdk.Models.CreateLayerVersionResponse>(temp, _options);
         }
     }
 }

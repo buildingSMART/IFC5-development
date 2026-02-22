@@ -120,7 +120,7 @@ namespace Application
             var result = await layerService.CreateLayerVersionAsync(layerId, createLayerVersionCommand.Id, createLayerVersionCommand.PreviousLayerVersionId, createLayerVersionCommand.BlobId);
 
             var response = new CreateLayerVersionResponse();
-            response.State = result == LayerService.CreateLayerVersionResponse.OUT_OF_DATE ? CreateLayerVersionResponseState.OUTOFDATEEnum : CreateLayerVersionResponseState.OKEnum;
+            response.State = result == LayerService.CreateLayerVersionResponse.OUT_OF_DATE ? CreateLayerVersionResponseState.OUTOFDATE : CreateLayerVersionResponseState.OK;
 
             return Ok(response);
         }

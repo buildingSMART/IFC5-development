@@ -85,7 +85,7 @@ public class ApiControllerTests
 
         var ok = Assert.IsType<OkObjectResult>(result);
         var response = Assert.IsType<CreateLayerVersionResponse>(ok.Value);
-        Assert.Equal(CreateLayerVersionResponseState.OKEnum, response.State);
+        Assert.Equal(CreateLayerVersionResponseState.OK, response.State);
     }
 
     [Fact]
@@ -137,6 +137,6 @@ public class ApiControllerTests
 
         var ok = Assert.IsType<OkObjectResult>(result);
         var response = Assert.IsType<CreateLayerVersionResponse>(ok.Value);
-        Assert.Equal(CreateLayerVersionResponseState.OUTOFDATEEnum, response.State);
+        Assert.Equal(CreateLayerVersionResponseState.OUTOFDATE, response.State);
     }
 }
