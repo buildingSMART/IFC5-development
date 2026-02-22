@@ -54,6 +54,7 @@ model CreateLayerCommand
 {
   id: uuid;
   name: string;
+   ...Record<never>; // make additionalProperties = false show up
 }
 
 model UpdateLayerCommand
