@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Test
@@ -20,10 +21,13 @@ namespace Test
 
         public async Task CreateLayer(ApiSdk.Models.CreateLayerCommand clientCmd)
         {
-            var serverCmd = new IfcxApi.Server.Models.CreateLayerCommand();
-            serverCmd.Id = (Guid)clientCmd.Id; // kiota doesn't understand required fields
-            serverCmd.Name = clientCmd.Name;
+            var serverCmd = JsonSerializer.Deserialize<IfcxApi.Server.Models.CreateLayerCommand>(JsonSerializer.Serialize(clientCmd));
             await this.controller.LayersCreateLayer(serverCmd);
+        }
+
+        public async Task DeleteLayer(Guid layerId)
+        {
+            await this.controller.LayerRoutesDeleteLayer(layerId);
         }
     }
 }

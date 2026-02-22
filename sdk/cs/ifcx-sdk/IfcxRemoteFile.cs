@@ -24,5 +24,10 @@ namespace ifcx_sdk
             cmd.Id = guid;
             await this.conn.CreateLayer(cmd);
         }
+
+        public async Task DeleteLayer(Guid layerId)
+        {
+            await this.conn.DeleteLayer(layerId);
+        }
     }
 }

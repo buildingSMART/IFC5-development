@@ -12,6 +12,7 @@ namespace ifcx_sdk
     public interface IIfcxApiConnection
     {
         public Task CreateLayer(ApiSdk.Models.CreateLayerCommand cmd);
+        public Task DeleteLayer(Guid layerId);
     }
 
     public class IfcxApiConnection : IIfcxApiConnection
@@ -32,6 +33,11 @@ namespace ifcx_sdk
         public async Task CreateLayer(ApiSdk.Models.CreateLayerCommand cmd)
         {
             var result = await this.client.IfcxApi.Layers.PostAsync(cmd);
+        }
+
+        public async Task DeleteLayer(Guid layerId)
+        {
+            await this.client.IfcxApi.Layers[layerId].DeleteAsync();
         }
     }
 }

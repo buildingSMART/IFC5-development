@@ -12,7 +12,7 @@ namespace Test
     {
 
         [Fact]
-        public async Task TestClientServerBridge()
+        public async Task TestClientServerBridgeCreateLayer()
         {
             var ctrl = new ApiController();
             var bridge = new ApiBridge(ctrl);
@@ -25,6 +25,21 @@ namespace Test
             var layer = await ApiController.layerService.GetLayerAsync(layerId);
 
             Assert.NotNull(layer);
+        }
+
+        [Fact]
+        public async Task TestClientServerBridgeDeleteLayer()
+        {
+            var ctrl = new ApiController();
+            var bridge = new ApiBridge(ctrl);
+
+            var file = new IfcxRemoteFile(bridge);
+
+            var layerId = Guid.NewGuid();
+            await file.CreateLayer("my layer", layerId);
+            await file.DeleteLayer(layerId);
+
+            await Assert.ThrowsAsync<FileNotFoundException>(() => ApiController.layerService.GetLayerAsync(layerId));
         }
     }
 
