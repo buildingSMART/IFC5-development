@@ -1,4 +1,5 @@
 using Application;
+using Optional.Unsafe;
 
 namespace Test
 {
@@ -12,9 +13,10 @@ namespace Test
 
             Guid layer_guid = Guid.NewGuid();
             await svc.CreateLayerAsync("My Layer", layer_guid);
-            var layer = await svc.GetLayerAsync(layer_guid);
+            var layerOpt = await svc.GetLayerAsync(layer_guid);
 
-            Assert.NotNull(layer);
+            Assert.True(layerOpt.HasValue);
+            var layer = layerOpt.ValueOrDefault();
             Assert.Equal(layer_guid, layer.id);
             Assert.Equal("My Layer", layer.name);
             Assert.Empty(layer.versions);
@@ -34,7 +36,7 @@ namespace Test
             await svc.CreateLayerAsync("My Layer", layer_guid);
             await svc.CreateLayerVersionAsync(layer_guid, version_guid, Guid.Empty, blobId);
 
-            var version = (await svc.GetLayerAsync(layer_guid)).versions[0];
+            var version = (await svc.GetLayerAsync(layer_guid)).ValueOrDefault().versions[0];
 
             Assert.Equal(blobId, version.uploadedBlobId);
         }

@@ -1,5 +1,6 @@
 using ApiSdk.Models;
 using Application;
+using Optional.Unsafe;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -30,7 +31,8 @@ namespace Test
             await bridge.CreateLayer(new CreateLayerCommand { Id = layerId, Name = "my layer" });
             await bridge.DeleteLayer(layerId);
 
-            await Assert.ThrowsAsync<FileNotFoundException>(() => ApiController.layerService.GetLayerAsync(layerId));
+            var layerOpt = await ApiController.layerService.GetLayerAsync(layerId);
+            Assert.False(layerOpt.HasValue);
         }
 
         [Fact]
@@ -41,9 +43,10 @@ namespace Test
             var layerId = Guid.NewGuid();
             await bridge.CreateLayer(new CreateLayerCommand { Id = layerId, Name = "my layer" });
 
-            var layer = await bridge.GetLayer(layerId);
+            var layerOpt = await bridge.GetLayer(layerId);
 
-            Assert.NotNull(layer);
+            Assert.True(layerOpt.HasValue);
+            var layer = layerOpt.ValueOrDefault();
             Assert.Equal(layerId, layer.Id);
             Assert.Equal("my layer", layer.Name);
         }

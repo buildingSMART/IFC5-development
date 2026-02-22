@@ -2,6 +2,7 @@ using ApiSdk.Models;
 using Application;
 using ifcx_sdk;
 using Microsoft.AspNetCore.Mvc;
+using Optional;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -37,11 +38,15 @@ namespace Test
             await this.controller.LayerRoutesDeleteLayer(layerId);
         }
 
-        public async Task<ApiSdk.Models.LayerDetails> GetLayer(Guid layerId)
+        public async Task<Option<ApiSdk.Models.LayerDetails>> GetLayer(Guid layerId)
         {
             var result = await this.controller.LayerRoutesGetLayer(layerId);
+            if (result == null)
+            {
+                return Option.None<LayerDetails>();
+            }
             var ok = (OkObjectResult)result;
-            return JsonSerializer.Deserialize<ApiSdk.Models.LayerDetails>(JsonSerializer.Serialize(ok.Value));
+            return Option.Some(JsonSerializer.Deserialize<ApiSdk.Models.LayerDetails>(JsonSerializer.Serialize(ok.Value)));
         }
 
         public async Task<List<ApiSdk.Models.LayerStatus>> ListLayers()

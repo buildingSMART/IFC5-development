@@ -1,6 +1,7 @@
 using IfcxApi.Server.Controllers;
 using IfcxApi.Server.Models;
 using Microsoft.AspNetCore.Mvc;
+using Optional.Unsafe;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
@@ -22,7 +23,11 @@ namespace Application
 
         public override async Task<IActionResult> LayerRoutesGetLayer([FromRoute(Name = "layerId"), Required] Guid layerId)
         {
-            var layer = await layerService.GetLayerAsync(layerId);
+            var layerOpt = await layerService.GetLayerAsync(layerId);
+
+            if (!layerOpt.HasValue) return NotFound();
+
+            var layer = layerOpt.ValueOrDefault();
 
             LayerDetails layerDetails = new LayerDetails();
             layerDetails.Id = layerId;
@@ -76,7 +81,12 @@ namespace Application
 
         public override async Task<IActionResult> LayerVersionRoutesGetLayerVersion([FromRoute(Name = "layerId"), Required] Guid layerId, [FromRoute(Name = "versionId"), Required] Guid versionId)
         {
-            var layer = await layerService.GetLayerAsync(layerId);
+            var layerOpt = await layerService.GetLayerAsync(layerId);
+
+            if (!layerOpt.HasValue) return NotFound();
+
+            var layer = layerOpt.ValueOrDefault();
+
             var v = layer.versions.FirstOrDefault(x => x.id == versionId);
             if (v == null)
                 return NotFound();

@@ -1,5 +1,7 @@
 using Application.model;
 using ifcx_sdk;
+using Optional;
+using Optional.Unsafe;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -59,7 +61,14 @@ namespace Application
 
         public async Task<CreateLayerVersionResponse> CreateLayerVersionAsync(Guid layerId, Guid id, Guid previousLayerVersionId, Guid blobId)
         {
-            var layer = await this.GetLayerAsync(layerId);
+            var layerOpt = (await this.GetLayerAsync(layerId));
+
+            if (!layerOpt.HasValue)
+            {
+                throw new Exception($"Layer {layerId} not found");
+            }
+
+            var layer = layerOpt.ValueOrDefault();
 
             if (previousLayerVersionId != Guid.Empty)
             {
@@ -100,10 +109,16 @@ namespace Application
             return CreateLayerVersionResponse.OK;
         }
 
-        public async Task<Layer> GetLayerAsync(Guid id)
+        public async Task<Option<Layer>> GetLayerAsync(Guid id)
         {
-            var stream = await this.fs.ReadFileAsync(Path.Combine(this.basePath, LAYERS_PATH, id.ToString()));
-            return await FromStreamAsync<Layer>(stream);
+            var path = Path.Combine(this.basePath, LAYERS_PATH, id.ToString());
+            if (!(await this.fs.ExistsAsync(path)))
+            {
+                return Option.None<Layer>();
+            }
+
+            var stream = await this.fs.ReadFileAsync(path);
+            return Option.Some(await FromStreamAsync<Layer>(stream));
         }
 
         public async Task<List<Layer>> ListLayersAsync()

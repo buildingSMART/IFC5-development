@@ -1,6 +1,7 @@
 using ApiSdk;
 using Microsoft.Kiota.Abstractions.Authentication;
 using Microsoft.Kiota.Http.HttpClientLibrary;
+using Optional;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,7 +15,7 @@ namespace ifcx_sdk
     {
         public Task CreateLayer(ApiSdk.Models.CreateLayerCommand cmd);
         public Task DeleteLayer(Guid layerId);
-        public Task<ApiSdk.Models.LayerDetails> GetLayer(Guid layerId);
+        public Task<Option<ApiSdk.Models.LayerDetails>> GetLayer(Guid layerId);
         public Task<List<ApiSdk.Models.LayerStatus>> ListLayers();
         public Task<ApiSdk.Models.LayerVersion> GetLayerVersion(Guid layerId, Guid versionId);
         public Task Upload(Guid blobId, Stream body);
@@ -47,9 +48,14 @@ namespace ifcx_sdk
             await this.client.IfcxApi.Layers[layerId].DeleteAsync();
         }
 
-        public async Task<ApiSdk.Models.LayerDetails> GetLayer(Guid layerId)
+        public async Task<Option<ApiSdk.Models.LayerDetails>> GetLayer(Guid layerId)
         {
-            return await this.client.IfcxApi.Layers[layerId].GetAsync();
+            var layerDetails = await this.client.IfcxApi.Layers[layerId].GetAsync();
+            if (layerDetails == null)
+            {
+                return Option.None<ApiSdk.Models.LayerDetails>();
+            }
+            return Option.Some(layerDetails);
         }
 
         public async Task<List<ApiSdk.Models.LayerStatus>> ListLayers()
