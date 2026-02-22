@@ -1,11 +1,7 @@
 using ApiSdk.Models;
 using Application;
-using ifcx_sdk;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Test
@@ -15,12 +11,10 @@ namespace Test
         [Fact]
         public async Task TestClientServerBridgeCreateLayer()
         {
-            var ctrl = new ApiController();
-            var bridge = new ApiBridge(ctrl);
-            var file = new IfcxRemoteFile(bridge);
+            var bridge = new ApiBridge(new ApiController());
 
             var layerId = Guid.NewGuid();
-            await file.CreateLayer("my layer", layerId);
+            await bridge.CreateLayer(new CreateLayerCommand { Id = layerId, Name = "my layer" });
 
             var layer = await ApiController.layerService.GetLayerAsync(layerId);
 
@@ -30,13 +24,11 @@ namespace Test
         [Fact]
         public async Task TestClientServerBridgeDeleteLayer()
         {
-            var ctrl = new ApiController();
-            var bridge = new ApiBridge(ctrl);
-            var file = new IfcxRemoteFile(bridge);
+            var bridge = new ApiBridge(new ApiController());
 
             var layerId = Guid.NewGuid();
-            await file.CreateLayer("my layer", layerId);
-            await file.DeleteLayer(layerId);
+            await bridge.CreateLayer(new CreateLayerCommand { Id = layerId, Name = "my layer" });
+            await bridge.DeleteLayer(layerId);
 
             await Assert.ThrowsAsync<FileNotFoundException>(() => ApiController.layerService.GetLayerAsync(layerId));
         }
@@ -44,14 +36,12 @@ namespace Test
         [Fact]
         public async Task TestClientServerBridgeGetLayer()
         {
-            var ctrl = new ApiController();
-            var bridge = new ApiBridge(ctrl);
-            var file = new IfcxRemoteFile(bridge);
+            var bridge = new ApiBridge(new ApiController());
 
             var layerId = Guid.NewGuid();
-            await file.CreateLayer("my layer", layerId);
+            await bridge.CreateLayer(new CreateLayerCommand { Id = layerId, Name = "my layer" });
 
-            var layer = await file.GetLayer(layerId);
+            var layer = await bridge.GetLayer(layerId);
 
             Assert.NotNull(layer);
             Assert.Equal(layerId, layer.Id);
@@ -61,14 +51,12 @@ namespace Test
         [Fact]
         public async Task TestClientServerBridgeListLayers()
         {
-            var ctrl = new ApiController();
-            var bridge = new ApiBridge(ctrl);
-            var file = new IfcxRemoteFile(bridge);
+            var bridge = new ApiBridge(new ApiController());
 
             var layerId = Guid.NewGuid();
-            await file.CreateLayer("listed layer", layerId);
+            await bridge.CreateLayer(new CreateLayerCommand { Id = layerId, Name = "listed layer" });
 
-            var layers = await file.ListLayers();
+            var layers = await bridge.ListLayers();
 
             Assert.NotNull(layers);
             Assert.Contains(layers, l => l.Id == layerId && l.Name == "listed layer");
@@ -77,23 +65,20 @@ namespace Test
         [Fact]
         public async Task TestClientServerBridgeGetLayerVersion()
         {
-            var ctrl = new ApiController();
-            var bridge = new ApiBridge(ctrl);
-            var file = new IfcxRemoteFile(bridge);
+            var bridge = new ApiBridge(new ApiController());
 
             var layerId = Guid.NewGuid();
             var versionId = Guid.NewGuid();
             var blobId = Guid.NewGuid();
 
-            await file.CreateLayer("versioned layer", layerId);
+            await bridge.CreateLayer(new CreateLayerCommand { Id = layerId, Name = "versioned layer" });
 
             await using var stream = File.OpenRead("../../../data/example.ifcx");
-            await file.Upload(blobId, stream);
+            await bridge.Upload(blobId, stream);
 
-            var cmd = new CreateLayerVersionCommand { Id = versionId, PreviousLayerVersionId = Guid.Empty, BlobId = blobId };
-            await file.CreateLayerVersion(layerId, cmd);
+            await bridge.CreateLayerVersion(layerId, new CreateLayerVersionCommand { Id = versionId, PreviousLayerVersionId = Guid.Empty, BlobId = blobId });
 
-            var version = await file.GetLayerVersion(layerId, versionId);
+            var version = await bridge.GetLayerVersion(layerId, versionId);
 
             Assert.NotNull(version);
             Assert.Equal(versionId, version.VersionId);
@@ -103,16 +88,14 @@ namespace Test
         [Fact]
         public async Task TestClientServerBridgeUploadAndDownload()
         {
-            var ctrl = new ApiController();
-            var bridge = new ApiBridge(ctrl);
-            var file = new IfcxRemoteFile(bridge);
+            var bridge = new ApiBridge(new ApiController());
 
             var blobId = Guid.NewGuid();
             var originalBytes = await File.ReadAllBytesAsync("../../../data/example.ifcx");
 
-            await file.Upload(blobId, new MemoryStream(originalBytes));
+            await bridge.Upload(blobId, new MemoryStream(originalBytes));
 
-            var downloadedStream = await file.Download(blobId);
+            var downloadedStream = await bridge.Download(blobId);
             using var ms = new MemoryStream();
             await downloadedStream.CopyToAsync(ms);
 
@@ -122,21 +105,18 @@ namespace Test
         [Fact]
         public async Task TestClientServerBridgeCreateLayerVersion()
         {
-            var ctrl = new ApiController();
-            var bridge = new ApiBridge(ctrl);
-            var file = new IfcxRemoteFile(bridge);
+            var bridge = new ApiBridge(new ApiController());
 
             var layerId = Guid.NewGuid();
             var versionId = Guid.NewGuid();
             var blobId = Guid.NewGuid();
 
-            await file.CreateLayer("versioned layer", layerId);
+            await bridge.CreateLayer(new CreateLayerCommand { Id = layerId, Name = "versioned layer" });
 
             await using var stream = File.OpenRead("../../../data/example.ifcx");
-            await file.Upload(blobId, stream);
+            await bridge.Upload(blobId, stream);
 
-            var cmd = new CreateLayerVersionCommand { Id = versionId, PreviousLayerVersionId = Guid.Empty, BlobId = blobId };
-            var response = await file.CreateLayerVersion(layerId, cmd);
+            var response = await bridge.CreateLayerVersion(layerId, new CreateLayerVersionCommand { Id = versionId, PreviousLayerVersionId = Guid.Empty, BlobId = blobId });
 
             Assert.NotNull(response);
             Assert.Equal(CreateLayerVersionResponseState.OK, response.State);
