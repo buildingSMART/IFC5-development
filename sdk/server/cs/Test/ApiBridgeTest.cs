@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Test
 {
-    public class ClientServerBridge
+    public class ApiBridgeTest
     {
         [Fact]
         public async Task TestClientServerBridgeCreateLayer()
