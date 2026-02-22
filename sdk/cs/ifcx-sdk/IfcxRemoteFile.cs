@@ -1,5 +1,7 @@
 ﻿using ApiSdk;
 using ApiSdk.Models;
+using Optional.Collections;
+using Optional.Unsafe;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,53 +14,66 @@ namespace ifcx_sdk
     public class IfcxRemoteFile
     {
         IIfcxApiConnection conn;
+        Guid id;
+        Guid lastVersionId;
 
-        public IfcxRemoteFile(IIfcxApiConnection conn)
+        public IfcxRemoteFile(IIfcxApiConnection conn, Guid id, Guid lastVersionId)
         {
             this.conn = conn;
+            this.id = id;
+            this.lastVersionId = lastVersionId;
         }
 
-        public async Task CreateLayer(string name, Guid guid)
+        public enum SyncOutcome
         {
-            var cmd = new CreateLayerCommand();
-            cmd.Name = name;
-            cmd.Id = guid;
-            await this.conn.CreateLayer(cmd);
+            UpToDate,
+            PleaseCatchUp,
+            RequestFullExport
         }
 
-        public async Task DeleteLayer(Guid layerId)
+        public async Task<SyncOutcome> Sync()
         {
-            await this.conn.DeleteLayer(layerId);
+            var layerOpt = await this.conn.GetLayer(this.id);
+
+            if (!layerOpt.HasValue)
+            {
+                // layer does not exist, lets create it
+                await this.conn.CreateLayer(new CreateLayerCommand() { Id=this.id, Name = "My Layer" });
+
+                // done
+                return SyncOutcome.RequestFullExport;
+            }
+
+            var layer = layerOpt.ValueOrDefault();
+
+            // figure out how we relate to history
+            var currentVersionOpt = layer.History.FirstOrNone(h => h.VersionId == this.lastVersionId);
+
+            if (!currentVersionOpt.HasValue)
+            {
+                // somehow we have gotten off track, request a full re-export so server can diff
+
+                return SyncOutcome.RequestFullExport;
+            }
+
+            // walk back and apply
+            int latestVersionAccordingToLayer = -1;
+            for (int i = 0; i < layer.History.Count; i++)
+            {
+                if (layer.History[i].VersionId == this.lastVersionId)
+                {
+                    latestVersionAccordingToLayer = i;
+                    break;
+                }
+            }
+
+            if (latestVersionAccordingToLayer == layer.History.Count - 1)
+            {
+                return SyncOutcome.UpToDate;
+            }
+
+            return SyncOutcome.PleaseCatchUp;
         }
 
-        public async Task<LayerDetails> GetLayer(Guid layerId)
-        {
-            return await this.conn.GetLayer(layerId);
-        }
-
-        public async Task<List<LayerStatus>> ListLayers()
-        {
-            return await this.conn.ListLayers();
-        }
-
-        public async Task<LayerVersion> GetLayerVersion(Guid layerId, Guid versionId)
-        {
-            return await this.conn.GetLayerVersion(layerId, versionId);
-        }
-
-        public async Task Upload(Guid blobId, Stream body)
-        {
-            await this.conn.Upload(blobId, body);
-        }
-
-        public async Task<Stream> Download(Guid blobId)
-        {
-            return await this.conn.Download(blobId);
-        }
-
-        public async Task<CreateLayerVersionResponse> CreateLayerVersion(Guid layerId, CreateLayerVersionCommand cmd)
-        {
-            return await this.conn.CreateLayerVersion(layerId, cmd);
-        }
     }
 }
