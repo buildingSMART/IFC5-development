@@ -16,13 +16,11 @@ namespace ifcx_sdk
     {
         IIfcxApiConnection conn;
         Guid id;
-        Guid lastVersionId;
 
-        public IfcxRemoteFile(IIfcxApiConnection conn, Guid id, Guid lastVersionId)
+        public IfcxRemoteFile(IIfcxApiConnection conn, Guid id)
         {
             this.conn = conn;
             this.id = id;
-            this.lastVersionId = lastVersionId;
         }
 
         public enum SyncState
@@ -34,7 +32,7 @@ namespace ifcx_sdk
 
         public record SyncResult(SyncState state, List<Guid> versionsBehind);
 
-        public async Task<SyncResult> Sync()
+        public async Task<SyncResult> Sync(Guid currentVersionId)
         {
             var layerOpt = await this.conn.GetLayer(this.id);
 
@@ -50,7 +48,7 @@ namespace ifcx_sdk
             var layer = layerOpt.ValueOrDefault();
 
             // figure out how we relate to history
-            var currentVersionOpt = layer.History.FirstOrNone(h => h.VersionId == this.lastVersionId);
+            var currentVersionOpt = layer.History.FirstOrNone(h => h.VersionId == currentVersionId);
 
             if (!currentVersionOpt.HasValue)
             {
@@ -64,7 +62,7 @@ namespace ifcx_sdk
             List<Guid> catchUp = new List<Guid>();
             for (int i = 0; i < layer.History.Count; i++)
             {
-                if (layer.History[i].VersionId == this.lastVersionId)
+                if (layer.History[i].VersionId == currentVersionId)
                 {
                     latestVersionAccordingToLayer = i;
                 }
@@ -82,12 +80,47 @@ namespace ifcx_sdk
             return new SyncResult(SyncState.RequestFullExport, catchUp);
         }
 
-        public async Task<IfcxFile> GetVersion(Guid version)
+        public static async Task<MemoryStream> ToMemoryStreamAsync(Stream input)
+        {
+            var memory = new MemoryStream();
+            await input.CopyToAsync(memory);
+            memory.Position = 0; // rewind
+            return memory;
+        }
+
+        public async Task<IfcxFile> GetVersionDiff(Guid version)
         {
             Guid blobId = Guid.Empty;
-            var versionDiffBlob = this.conn.Download(blobId);
-            var diffIfcxFile = IfcxFile.ReadIfcxFile(versionDiffBlob);
-        }   
+            var versionDiffBlob = await this.conn.Download(blobId);
+            return IfcxFile.ReadIfcxFile(await ToMemoryStreamAsync(versionDiffBlob));
+        }
+
+        public enum CreateVersionResponse
+        {
+            OK,
+            OUT_OF_DATE
+        }
+
+        public async Task<CreateVersionResponse> CreateNextVersion(Guid currentVersionId, IfcxFile file)
+        {
+            var blob = IfcxFile.WriteIfcxFile(file);
+            Guid blobId = Guid.NewGuid();
+            await this.conn.Upload(blobId, new MemoryStream(blob));
+
+            var cmd = new CreateLayerVersionCommand();
+            cmd.PreviousLayerVersionId = currentVersionId;
+            cmd.BlobId = blobId;
+            cmd.Id = Guid.NewGuid();
+
+            var response = await this.conn.CreateLayerVersion(this.id, cmd);
+
+            if (response.State == CreateLayerVersionResponseState.OUT_OF_DATE)
+            {
+                return CreateVersionResponse.OUT_OF_DATE;
+            }
+
+            return CreateVersionResponse.OK;
+        }
 
     }
 }
