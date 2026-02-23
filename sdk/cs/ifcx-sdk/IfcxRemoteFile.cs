@@ -2,6 +2,7 @@
 using ApiSdk.Models;
 using Optional.Collections;
 using Optional.Unsafe;
+using QuickType;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,14 +25,16 @@ namespace ifcx_sdk
             this.lastVersionId = lastVersionId;
         }
 
-        public enum SyncOutcome
+        public enum SyncState
         {
             UpToDate,
             PleaseCatchUp,
             RequestFullExport
         }
 
-        public async Task<SyncOutcome> Sync()
+        public record SyncResult(SyncState state, List<Guid> versionsBehind);
+
+        public async Task<SyncResult> Sync()
         {
             var layerOpt = await this.conn.GetLayer(this.id);
 
@@ -41,7 +44,7 @@ namespace ifcx_sdk
                 await this.conn.CreateLayer(new CreateLayerCommand() { Id=this.id, Name = "My Layer" });
 
                 // done
-                return SyncOutcome.RequestFullExport;
+                return new SyncResult(SyncState.RequestFullExport, new());
             }
 
             var layer = layerOpt.ValueOrDefault();
@@ -53,27 +56,38 @@ namespace ifcx_sdk
             {
                 // somehow we have gotten off track, request a full re-export so server can diff
 
-                return SyncOutcome.RequestFullExport;
+                return new SyncResult(SyncState.RequestFullExport, new());
             }
 
             // walk back and apply
             int latestVersionAccordingToLayer = -1;
+            List<Guid> catchUp = new List<Guid>();
             for (int i = 0; i < layer.History.Count; i++)
             {
                 if (layer.History[i].VersionId == this.lastVersionId)
                 {
                     latestVersionAccordingToLayer = i;
-                    break;
+                }
+                if (i > latestVersionAccordingToLayer)
+                {
+                    catchUp.Append(layer.History[i].VersionId.Value);
                 }
             }
 
-            if (latestVersionAccordingToLayer == layer.History.Count - 1)
+            if (catchUp.Count == 0)
             {
-                return SyncOutcome.UpToDate;
+                return new SyncResult(SyncState.UpToDate, new());
             }
 
-            return SyncOutcome.PleaseCatchUp;
+            return new SyncResult(SyncState.RequestFullExport, catchUp);
         }
+
+        public async Task<IfcxFile> GetVersion(Guid version)
+        {
+            Guid blobId = Guid.Empty;
+            var versionDiffBlob = this.conn.Download(blobId);
+            var diffIfcxFile = IfcxFile.ReadIfcxFile(versionDiffBlob);
+        }   
 
     }
 }
