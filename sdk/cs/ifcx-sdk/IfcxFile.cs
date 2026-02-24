@@ -24,6 +24,18 @@ namespace ifcx_sdk
             index.Header.IfcxVersion = "post-alpha";
         }
 
+        public Dictionary<string, int> ComponentTypeCounts()
+        {
+            Dictionary<string, int> counts = new();
+
+            foreach (var item in serializedComponents)
+            {
+                counts.Add(item.Key, item.Value.Count);
+            }
+
+            return counts;
+        }
+
         public void AddImport(ImportElement imp)
         {
             this.index.Imports.Append(imp);
@@ -48,6 +60,19 @@ namespace ifcx_sdk
             }
             return this.serializedComponents.GetValueOrDefault(identity.typeID)!;
         }
+        public int AddSerializedComponent(string typeID, string data)
+        {
+            if (!this.serializedComponents.ContainsKey(typeID))
+            {
+                this.serializedComponents.Add(typeID, new List<string>());
+            }
+
+            var arr = this.serializedComponents.GetValueOrDefault(typeID)!;
+
+            var index = arr.Count;
+            arr.Append(data);
+            return index;
+        }
 
 
         public int AddComponent<T>(IfcxIdentity<T> id, T component)
@@ -66,6 +91,17 @@ namespace ifcx_sdk
                 throw new Exception($"No component with index ${ index }");
             }
             return id.fromJSONString(arr[index]);
+        }
+
+        public string ReadRawComponent(string typeID, int index)
+        {
+            var arr = this.serializedComponents.GetValueOrDefault(typeID)!;
+
+            if (arr.Count <= index)
+            {
+                throw new Exception($"No component with index ${index}");
+            }
+            return arr[index];
         }
 
         public static byte[] WriteIfcxFile(IfcxFile file)
