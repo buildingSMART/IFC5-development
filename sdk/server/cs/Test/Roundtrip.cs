@@ -1,5 +1,7 @@
 using Application;
+using ifcx_sdk;
 using Optional.Unsafe;
+using System.IO;
 
 namespace Test
 {
@@ -39,6 +41,47 @@ namespace Test
             var version = (await svc.GetLayerAsync(layer_guid)).ValueOrDefault().versions[0];
 
             Assert.Equal(blobId, version.uploadedBlobId);
+        }
+
+        [Fact]
+        public async Task CommitAndQuery()
+        {
+            var fs = new InMemoryFileSystem();
+            var svc = new LayerService(fs, "::in_mem");
+
+            var ifcxFile1 = new IfcxFileBuilder()
+                .AddSection("v1", 
+                    new NodeElementBuilder().
+                        AddChild(QuickType.Opinion.Value, "child", "c1").
+                        Build()
+                ).
+                Build();
+
+             var ifcxFile2 = new IfcxFileBuilder()
+                .AddSection("v2",
+                    new NodeElementBuilder().
+                        AddChild(QuickType.Opinion.Value, "child", "c2").
+                        Build()
+                ).
+                Build();
+
+            var blobId1 = Guid.NewGuid();
+            await svc.UploadFileAsync(blobId1, new MemoryStream(IfcxFile.WriteIfcxFile(ifcxFile1)));
+            
+            var blobId2 = Guid.NewGuid();
+            await svc.UploadFileAsync(blobId2, new MemoryStream(IfcxFile.WriteIfcxFile(ifcxFile2)));
+
+            Guid layer_guid = Guid.NewGuid();
+            await svc.CreateLayerAsync("My Layer", layer_guid);
+
+            Guid version_guid_1 = Guid.NewGuid();
+            Guid version_guid_2 = Guid.NewGuid();
+
+            await svc.CreateLayerVersionAsync(layer_guid, version_guid_1, Guid.Empty, blobId1);
+            await svc.CreateLayerVersionAsync(layer_guid, version_guid_2, version_guid_1, blobId2);
+
+
+
         }
     }
 }

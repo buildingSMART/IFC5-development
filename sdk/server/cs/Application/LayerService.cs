@@ -18,6 +18,9 @@ namespace Application
     {
         static string BLOB_PATH = "blobs";
         static string LAYERS_PATH = "layers";
+        static string LAYER_LATEST_PATH= "layer_latest";
+        static string LAYER_VERSION_DIFF_PATH = "layer_diff";
+
 
         IFileSystem fs;
         string basePath = "";
@@ -58,6 +61,13 @@ namespace Application
             OK,
             OUT_OF_DATE
         }
+        public static async Task<MemoryStream> ToMemoryStreamAsync(Stream input)
+        {
+            var memory = new MemoryStream();
+            await input.CopyToAsync(memory);
+            memory.Position = 0; // rewind
+            return memory;
+        }
 
         public async Task<CreateLayerVersionResponse> CreateLayerVersionAsync(Guid layerId, Guid id, Guid previousLayerVersionId, Guid blobId)
         {
@@ -89,12 +99,12 @@ namespace Application
             var memoryStream = new MemoryStream();
             await stream.CopyToAsync(memoryStream);
             memoryStream.Position = 0;
-            var ifcxFile = IfcxFile.ReadIfcxFile(memoryStream);
+            var newIfcxFile = IfcxFile.ReadIfcxFile(memoryStream);
 
-            if (ifcxFile.index.Sections.Count == 0)
+            if (newIfcxFile.index.Sections.Count == 0)
                 throw new Exception("Expected at least one data section in the IfcxFile");
 
-            var firstSection = ifcxFile.index.Sections[0];
+            var firstSection = newIfcxFile.index.Sections[0];
             var provenance = new LayerProvenance(
                 author: firstSection.Header.Author,
                 timestamp: firstSection.Header.Timestamp,
@@ -104,7 +114,25 @@ namespace Application
             LayerVersion layerVersion = new LayerVersion(id, layerId, previousLayerVersionId, blobId, provenance);
             layer.versions.Add(layerVersion);
 
+            var latestPath = Path.Combine(this.basePath, LAYER_LATEST_PATH, $"{layerId.ToString()}_latest");
+            
+            if (await fs.ExistsAsync(latestPath))
+            {
+                var currentFederatedBlob = await this.fs.ReadFileAsync(latestPath);
+                var currentFederatedIfcx = IfcxFile.ReadIfcxFile(await ToMemoryStreamAsync(currentFederatedBlob));
+                var nextFederatedIfcx = IfcxFileOperations.Federate(currentFederatedIfcx, newIfcxFile, false);
+                var nextFederatedBlob = IfcxFile.WriteIfcxFile(nextFederatedIfcx);
+                await this.fs.WriteFileAsync(latestPath, new MemoryStream(nextFederatedBlob));
+            }
+            else
+            {
+                // version is federated
+                var newFileBlob = IfcxFile.WriteIfcxFile(newIfcxFile);
+                await this.fs.WriteFileAsync(latestPath, new MemoryStream(newFileBlob));
+            }
+
             await this.fs.WriteFileAsync(Path.Combine(this.basePath, LAYERS_PATH, layerId.ToString()), ToStream(layer));
+            await this.fs.WriteFileAsync(Path.Combine(this.basePath, LAYER_VERSION_DIFF_PATH, $"{layerId.ToString()}_{firstSection.Header.Id}"), stream);
 
             return CreateLayerVersionResponse.OK;
         }

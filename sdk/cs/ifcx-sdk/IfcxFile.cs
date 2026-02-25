@@ -119,7 +119,8 @@ namespace ifcx_sdk
 
                     using (var writer = new StreamWriter(indexFile.Open(), Encoding.UTF8))
                     {
-                        writer.Write(JsonSerializer.Serialize(file));
+                        // questionable namespace
+                        writer.Write(Serialize.ToJson(file.index));
                     }
 
                     foreach (var id_comps in file.serializedComponents)
@@ -128,7 +129,8 @@ namespace ifcx_sdk
 
                         using (var writer = new StreamWriter(componentsFile.Open(), Encoding.UTF8))
                         {
-                            writer.Write(string.Join("\n", id_comps));
+                            var str = string.Join("\n", id_comps.Value.ToArray());
+                            writer.Write(str);
                         }
                     }
                 }
@@ -161,7 +163,8 @@ namespace ifcx_sdk
                 files.Add(entry.FullName, content);
             }
 
-            file.index = IfcxIndexFile.FromJson(files.GetValueOrDefault("index.json"));
+            var indexJSON = files.GetValueOrDefault("index.json");
+            file.index = IfcxIndexFile.FromJson(indexJSON);
 
             foreach(var entry in files)
             {
