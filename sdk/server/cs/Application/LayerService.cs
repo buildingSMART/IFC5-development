@@ -2,6 +2,7 @@ using Application.model;
 using ifcx_sdk;
 using Optional;
 using Optional.Unsafe;
+using QuickType;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -165,6 +166,30 @@ namespace Application
         public async Task UploadFileAsync(Guid blobId, Stream file)
         {
             await this.fs.WriteFileAsync(Path.Combine(this.basePath, BLOB_PATH, blobId.ToString()), file);
+        }
+
+        public async Task<Option<NodeElement>> Query(Guid layerId, Guid versionId, string path)
+        {
+            if (versionId == Guid.Empty)
+            {
+                var latestPath = Path.Combine(this.basePath, LAYER_LATEST_PATH, $"{layerId.ToString()}_latest");
+                var versionFileBlob = await fs.ReadFileAsync(latestPath);
+                var ifcxFileLatest = IfcxFile.ReadIfcxFile(await ToMemoryStreamAsync(versionFileBlob));
+                var nodes = IfcxFileOperations.CollapseNodesByPath(ifcxFileLatest);
+
+                if (nodes.ContainsKey(path))
+                {
+                    return Option.Some(nodes[path]);
+                }
+                else
+                {
+                    return Option.None<NodeElement>();
+                }
+            }
+            else
+            {
+                throw new Exception("Not implemented");
+            }
         }
 
         public async Task<Stream> DownloadFileAsync(Guid blobId)

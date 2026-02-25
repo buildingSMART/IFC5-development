@@ -11,10 +11,10 @@ namespace ifcx_sdk
     {
         NodeElement node;
 
-        public NodeElementBuilder()
+        public NodeElementBuilder(string path)
         {
             this.node = new NodeElement();
-            this.node.Path = "NOT SET";
+            this.node.Path = path;
             this.node.Inherits = new();
             this.node.Attributes = new();
             this.node.Children = new();

@@ -51,7 +51,7 @@ namespace Test
 
             var ifcxFile1 = new IfcxFileBuilder()
                 .AddSection("v1", 
-                    new NodeElementBuilder().
+                    new NodeElementBuilder("my_object").
                         AddChild(QuickType.Opinion.Value, "child", "c1").
                         Build()
                 ).
@@ -59,7 +59,7 @@ namespace Test
 
              var ifcxFile2 = new IfcxFileBuilder()
                 .AddSection("v2",
-                    new NodeElementBuilder().
+                    new NodeElementBuilder("my_object").
                         AddChild(QuickType.Opinion.Value, "child", "c2").
                         Build()
                 ).
@@ -78,9 +78,22 @@ namespace Test
             Guid version_guid_2 = Guid.NewGuid();
 
             await svc.CreateLayerVersionAsync(layer_guid, version_guid_1, Guid.Empty, blobId1);
+
+            var result1 = await svc.Query(layer_guid, Guid.Empty, "my_object");
+
             await svc.CreateLayerVersionAsync(layer_guid, version_guid_2, version_guid_1, blobId2);
 
+            var result2 = await svc.Query(layer_guid, Guid.Empty, "my_object");
 
+            Assert.True(result1.HasValue);
+            Assert.Equal("my_object", result1.ValueOrDefault().Path);
+            Assert.NotEmpty(result1.ValueOrDefault().Children);
+            Assert.Equal("c1", result1.ValueOrDefault().Children[0].Value);
+
+            Assert.True(result2.HasValue);
+            Assert.Equal("my_object", result2.ValueOrDefault().Path);
+            Assert.NotEmpty(result2.ValueOrDefault().Children);
+            Assert.Equal("c2", result2.ValueOrDefault().Children[0].Value);
 
         }
     }

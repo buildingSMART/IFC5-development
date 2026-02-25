@@ -121,7 +121,7 @@ namespace ifcx_sdk
             }
         }
 
-        private static Dictionary<string, NodeElement> CollapseNodesByPath(IfcxFile file)
+        public static Dictionary<string, NodeElement> CollapseNodesByPath(IfcxFile file)
         {
             Dictionary<string, NodeElement> nodes = new();
 
@@ -149,7 +149,7 @@ namespace ifcx_sdk
         private static NodeElement DiffNodes(NodeElement oldNode, NodeElement newNode, bool markMissingFromNewAsDelete)
         {
             NodeElement result = new();
-            result.Path = oldNode.Path;
+            result.Path = oldNode.Path != null ? oldNode.Path : newNode.Path;
             result.Children = new();
             result.Inherits = new();
             result.Attributes = new();
@@ -439,6 +439,7 @@ namespace ifcx_sdk
                         var node = lineage.node;
 
                         var resultNodeForThisLineage = new NodeElement();
+                        resultNodeForThisLineage.Path = node.Path;
                         resultNodeForThisLineage.Children = new();
                         resultNodeForThisLineage.Attributes = new();
                         resultNodeForThisLineage.Inherits = new();
