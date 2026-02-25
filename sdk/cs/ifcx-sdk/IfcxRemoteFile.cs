@@ -68,7 +68,7 @@ namespace ifcx_sdk
                 }
                 if (i > latestVersionAccordingToLayer)
                 {
-                    catchUp.Append(layer.History[i].VersionId.Value);
+                    catchUp.Add(layer.History[i].VersionId.Value);
                 }
             }
 

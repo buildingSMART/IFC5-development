@@ -22,16 +22,16 @@ namespace QuickType
     public partial class IfcxIndexFile
     {
         [JsonPropertyName("attributeTables")]
-        public AttributeTableElement[] AttributeTables { get; set; }
+        public List<AttributeTableElement> AttributeTables { get; set; }
 
         [JsonPropertyName("header")]
         public IfcxIndexFileHeader Header { get; set; }
 
         [JsonPropertyName("imports")]
-        public ImportElement[] Imports { get; set; }
+        public List<ImportElement> Imports { get; set; }
 
         [JsonPropertyName("sections")]
-        public SectionElement[] Sections { get; set; }
+        public List<SectionElement> Sections { get; set; }
     }
 
     public partial class AttributeTableElement
@@ -68,7 +68,7 @@ namespace QuickType
         public SectionHeader Header { get; set; }
 
         [JsonPropertyName("nodes")]
-        public NodeElement[] Nodes { get; set; }
+        public List<NodeElement> Nodes { get; set; }
     }
 
     public partial class SectionHeader
@@ -93,15 +93,15 @@ namespace QuickType
     {
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("attributes")]
-        public AttributeElement[] Attributes { get; set; }
+        public List<AttributeElement> Attributes { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("children")]
-        public ChildElement[] Children { get; set; }
+        public List<ChildElement> Children { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("inherits")]
-        public ChildElement[] Inherits { get; set; }
+        public List<ChildElement> Inherits { get; set; }
 
         [JsonPropertyName("path")]
         public string Path { get; set; }

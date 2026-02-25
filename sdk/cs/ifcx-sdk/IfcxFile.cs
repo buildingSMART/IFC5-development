@@ -22,6 +22,9 @@ namespace ifcx_sdk
         {
             index.Header = new();
             index.Header.IfcxVersion = "post-alpha";
+            index.Sections = new();
+            index.Imports = new();
+            index.AttributeTables = new();
         }
 
         public Dictionary<string, int> ComponentTypeCounts()
@@ -38,12 +41,12 @@ namespace ifcx_sdk
 
         public void AddImport(ImportElement imp)
         {
-            this.index.Imports.Append(imp);
+            this.index.Imports.Add(imp);
         }
 
         public void AddSection(SectionElement se)
         {
-            this.index.Sections.Append(se);
+            this.index.Sections.Add(se);
         }
 
         private List<string> GetSerializedComponentsArray<T>(IfcxIdentity<T> identity)
@@ -56,7 +59,7 @@ namespace ifcx_sdk
                 table.Filename = $"{identity.typeID}.ndjson";
                 table.Type = TypeEnum.Ndjson;
                 table.Schema = identity.originSchemaSrc;
-                this.index.AttributeTables.Append(table);
+                this.index.AttributeTables.Add(table);
             }
             return this.serializedComponents.GetValueOrDefault(identity.typeID)!;
         }
@@ -70,7 +73,7 @@ namespace ifcx_sdk
             var arr = this.serializedComponents.GetValueOrDefault(typeID)!;
 
             var index = arr.Count;
-            arr.Append(data);
+            arr.Add(data);
             return index;
         }
 
@@ -80,7 +83,7 @@ namespace ifcx_sdk
             var arr = this.GetSerializedComponentsArray(id);
             var index = arr.Count;
             var indentedStr = id.toJSONString(component);
-            arr.Append(JsonSerializer.Serialize(JsonSerializer.Deserialize<JsonElement>(indentedStr))); // this dance is due to quicktype pretty printing...
+            arr.Add(JsonSerializer.Serialize(JsonSerializer.Deserialize<JsonElement>(indentedStr))); // this dance is due to quicktype pretty printing...
             return index;
         }
         public T ReadComponent<T>(IfcxIdentity<T> id, int index)

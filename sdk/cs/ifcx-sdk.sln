@@ -5,7 +5,7 @@ VisualStudioVersion = 17.13.35919.96
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ifcx-sdk", "ifcx-sdk\ifcx-sdk.csproj", "{034ADBE2-D459-4278-B14E-C19630E20E66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ifcx-test", "ifcx-test\ifcx-test.csproj", "{7C0900E9-24E1-4365-8645-EE8323820FF7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ifcx-test", "ifcx-test\ifcx-test.csproj", "{32E73D67-CB24-4BE2-8FFC-F5B63801F182}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{034ADBE2-D459-4278-B14E-C19630E20E66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{034ADBE2-D459-4278-B14E-C19630E20E66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{034ADBE2-D459-4278-B14E-C19630E20E66}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7C0900E9-24E1-4365-8645-EE8323820FF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7C0900E9-24E1-4365-8645-EE8323820FF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7C0900E9-24E1-4365-8645-EE8323820FF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7C0900E9-24E1-4365-8645-EE8323820FF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32E73D67-CB24-4BE2-8FFC-F5B63801F182}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32E73D67-CB24-4BE2-8FFC-F5B63801F182}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32E73D67-CB24-4BE2-8FFC-F5B63801F182}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32E73D67-CB24-4BE2-8FFC-F5B63801F182}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

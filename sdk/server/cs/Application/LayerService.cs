@@ -91,7 +91,7 @@ namespace Application
             memoryStream.Position = 0;
             var ifcxFile = IfcxFile.ReadIfcxFile(memoryStream);
 
-            if (ifcxFile.index.Sections.Length == 0)
+            if (ifcxFile.index.Sections.Count == 0)
                 throw new Exception("Expected at least one data section in the IfcxFile");
 
             var firstSection = ifcxFile.index.Sections[0];
