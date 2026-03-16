@@ -19,7 +19,7 @@ The viewer source code is MIT licensed. The intent is to help users understand t
 
 ## Schema
 
-The schema sourece is defined using typespec and can be found under /schema.
+The schema source is defined using typespec and can be found under /schema.
 The JSON schema of IFC, and extensions will be published on ifcx.dev
 
 ## Future Development
