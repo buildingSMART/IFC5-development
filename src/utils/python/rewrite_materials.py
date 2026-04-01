@@ -13,7 +13,7 @@ def it():
             mat = d['attributes']['usd::usdshade::materialbindingapi']
             assert len(d['attributes']) == 1
             del d['attributes']
-            entity_type = next(filter(None, (x.get('attributes', {}).get('bsi::ifc::v5a::class', {}).get('code') for x in obj['data'] if x['path'] == d['path'])))
+            entity_type = next(filter(None, (x.get('attributes', {}).get('bsi::ifc::v5a::class', {}).get('code') for x in obj['data'] if x['path'] == d['path'])), None)
             if entity_type == 'IfcWindow':
                 # skip the window material associations, split_window_bodies takes care of those in an aggregation
                 to_remove.add(next(iter(mat.values()))['ref'])
