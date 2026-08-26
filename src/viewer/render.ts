@@ -4,6 +4,7 @@
 import { ComposedObject } from './composed-object';
 import { IfcxFile } from '../ifcx-core/schema/schema-helper';
 import { compose3 } from './compose-flattened';
+import { ENVIRONMENT_HDR_DATA_URI } from './environment-hdr.generated';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
@@ -64,7 +65,7 @@ async function init() {
     const pmremGenerator = new THREE.PMREMGenerator(renderer);
     pmremGenerator.compileEquirectangularShader();
     new RGBELoader()
-        .load("images/wildflower_field_1k.hdr", function (texture) {
+        .load(ENVIRONMENT_HDR_DATA_URI, function (texture) {
             envMap = pmremGenerator.fromEquirectangular(texture).texture;
             
             // uncomment to also show the skybox on screen, instead of only in PBR reflections:

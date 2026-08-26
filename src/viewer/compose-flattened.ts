@@ -2,7 +2,8 @@ import { ComposedObject } from "./composed-object";
 import { IfcxFile, IfcxSchema } from "../ifcx-core/schema/schema-helper";
 import { PostCompositionNode } from "../ifcx-core/composition/node";
 import { InMemoryLayerProvider, StackedLayerProvider } from "../ifcx-core/layers/layer-providers";
-import { FetchLayerProvider } from "../ifcx-core/layers/fetch-layer-provider";
+import { BuiltinLayerProvider } from "../ifcx-core/layers/builtin-layer-provider";
+import { BUILTIN_LAYERS } from "./builtin-layers.generated";
 import { IfcxLayerStackBuilder } from "../ifcx-core/layers/layer-stack";
 
 function TreeNodeToComposedObject(path: string, node: PostCompositionNode, schemas: {[key: string]: IfcxSchema}): ComposedObject
@@ -67,8 +68,8 @@ export async function compose3(files: IfcxFile[])
     userDefinedOrder.header.id = "USER_DEF";
     
     let provider = new StackedLayerProvider([
-        new InMemoryLayerProvider().AddAll([userDefinedOrder, ...files]), 
-        new FetchLayerProvider()
+        new InMemoryLayerProvider().AddAll([userDefinedOrder, ...files]),
+        new BuiltinLayerProvider(BUILTIN_LAYERS)
     ]);
 
     let layerStack = await (new IfcxLayerStackBuilder(provider).FromId(userDefinedOrder.header.id)).Build();
