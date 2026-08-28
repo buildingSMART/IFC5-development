@@ -107,6 +107,10 @@ function ValidateAttributeValue(desc: IfcxValueDescription, value: any, path: st
         {
             throw new SchemaValidationError(`Expected "${value}" to be of type array`);
         }
+        if (!desc.arrayRestrictions)
+        {
+            throw new SchemaValidationError(`Expected arrayRestrictions to be present on a schema of dataType "Array"`);
+        }
         value.forEach((entry) => {
             ValidateAttributeValue(desc.arrayRestrictions!.value, entry, path + ".<array>.", schemas);
         })
