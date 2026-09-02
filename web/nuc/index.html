@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.10.2" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="robots" content="noindex" />
+  <title>IFCX_NUC</title>
+  <style>
+
+html {
+color: #1a1a1a;
+background-color: #fdfdfd;
+}
+body {
+margin: 0 auto;
+max-width: 36em;
+padding-left: 50px;
+padding-right: 50px;
+padding-top: 50px;
+padding-bottom: 50px;
+hyphens: auto;
+overflow-wrap: break-word;
+text-rendering: optimizeLegibility;
+font-kerning: normal;
+}
+@media (max-width: 600px) {
+body {
+font-size: 0.9em;
+padding: 12px;
+}
+h1 {
+font-size: 1.8em;
+}
+}
+@media print {
+html {
+background-color: white;
+}
+body {
+background-color: transparent;
+color: black;
+}
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+h2, h3, h4 {
+page-break-after: avoid;
+}
+}
+p {
+margin: 1em 0;
+}
+a {
+color: #1a1a1a;
+}
+a:visited {
+color: #1a1a1a;
+}
+img {
+max-width: 100%;
+}
+svg {
+height: auto;
+max-width: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+margin-top: 1.4em;
+}
+h5, h6 {
+font-size: 1em;
+font-style: italic;
+}
+h6 {
+font-weight: normal;
+}
+ol, ul {
+padding-left: 1.7em;
+margin-top: 1em;
+}
+li > ol, li > ul {
+margin-top: 0;
+}
+blockquote {
+margin: 1em 0 1em 1.7em;
+padding-left: 1em;
+border-left: 2px solid #e6e6e6;
+color: #606060;
+}
+code {
+white-space: pre-wrap;
+font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+font-size: 85%;
+margin: 0;
+hyphens: manual;
+}
+pre {
+margin: 1em 0;
+overflow: auto;
+}
+pre code {
+padding: 0;
+overflow: visible;
+overflow-wrap: normal;
+}
+.sourceCode {
+background-color: transparent;
+overflow: visible;
+}
+hr {
+border: none;
+border-top: 1px solid #1a1a1a;
+height: 1px;
+margin: 1em 0;
+}
+table {
+margin: 1em 0;
+border-collapse: collapse;
+width: 100%;
+overflow-x: auto;
+display: block;
+font-variant-numeric: lining-nums tabular-nums;
+}
+table caption {
+margin-bottom: 0.75em;
+}
+tbody {
+margin-top: 0.5em;
+border-top: 1px solid #1a1a1a;
+border-bottom: 1px solid #1a1a1a;
+}
+th {
+border-top: 1px solid #1a1a1a;
+padding: 0.25em 0.5em 0.25em 0.5em;
+}
+td {
+padding: 0.125em 0.5em 0.25em 0.5em;
+}
+header {
+margin-bottom: 4em;
+text-align: center;
+}
+#TOC li {
+list-style: none;
+}
+#TOC ul {
+padding-left: 1.3em;
+}
+#TOC > ul {
+padding-left: 0;
+}
+#TOC a:not(:hover) {
+text-decoration: none;
+}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+
+
+/* ===== Added: fixed sidebar TOC, back-to-top, progress bar, mobile nav ===== */
+:root {
+  --sidebar-width: 290px;
+  --accent: #1a56db;
+}
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: none !important;
+}
+.layout {
+  display: flex;
+  align-items: flex-start;
+}
+#toc-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 28px 18px 28px 26px;
+  border-right: 1px solid #e6e6e6;
+  background: #fdfdfd;
+  font-size: 0.86em;
+  z-index: 50;
+}
+#toc-sidebar .toc-title {
+  font-size: 0.85em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #888;
+  margin: 0 0 14px 2px;
+}
+#toc-sidebar ul {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+#toc-sidebar ul ul {
+  padding-left: 14px;
+}
+#toc-sidebar li {
+  margin: 1px 0;
+}
+#toc-sidebar a {
+  display: block;
+  text-decoration: none;
+  color: #444;
+  padding: 4px 8px;
+  border-radius: 5px;
+  line-height: 1.35;
+  border-left: 2px solid transparent;
+}
+#toc-sidebar a:hover {
+  background: #f1f1f1;
+  color: #1a1a1a;
+}
+#toc-sidebar a.active {
+  background: #eef3ff;
+  color: var(--accent);
+  border-left: 2px solid var(--accent);
+  font-weight: 600;
+}
+#toc-sidebar li.toc-h3 a {
+  font-size: 0.94em;
+  color: #666;
+}
+.main-wrap {
+  margin-left: var(--sidebar-width);
+  flex: 1;
+  min-width: 0;
+}
+#content {
+  max-width: 50em;
+  margin: 0 auto;
+  padding: 50px;
+  box-sizing: border-box;
+  hyphens: auto;
+  overflow-wrap: break-word;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+}
+#readingProgress {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-width);
+  right: 0;
+  height: 3px;
+  background: var(--accent);
+  width: 0%;
+  z-index: 70;
+}
+#backToTop {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #1a1a1a;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+}
+#backToTop.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+#backToTop:hover {
+  background: #f5f5f5;
+}
+#toc-toggle {
+  display: flex;
+  position: fixed;
+  top: 50px;
+  left: 14px;
+  ...
+}
+#toc-overlay {
+  display: none;
+}
+.details-toolbar {
+  display: flex;
+  gap: 10px;
+  margin: 4px 0 24px 0;
+}
+.details-toolbar button {
+  font-size: 0.8em;
+  padding: 5px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #f7f7f7;
+  color: #333;
+  cursor: pointer;
+}
+.details-toolbar button:hover {
+  background: #ececec;
+}
+html {
+  scroll-behavior: smooth;
+}
+:target {
+  scroll-margin-top: 20px;
+}
+
+@media (max-width: 900px) {
+  #toc-sidebar {
+    top: 0;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    z-index: 90;
+    box-shadow: 3px 0 16px rgba(0, 0, 0, 0.2);
+    width: min(80vw, 320px);
+  }
+  #toc-sidebar.open {
+    transform: translateX(0);
+  }
+  .main-wrap {
+    margin-left: 0;
+  }
+  #content {
+    padding: 60px 20px 40px 20px;
+  }
+  #readingProgress {
+    left: 0;
+  }
+  #toc-toggle {
+    display: flex;
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    z-index: 95;
+    align-items: center;
+    gap: 6px;
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    padding: 9px 13px;
+    font-size: 0.85em;
+    cursor: pointer;
+  }
+  #toc-overlay.open {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 85;
+  }
+}
+@media (max-width: 600px) {
+  #content {
+    font-size: 0.9em;
+  }
+  #content h1 {
+    font-size: 1.8em;
+  }
+}
+
+details {
+  background: #f7f8fa;
+  border-left: 3px solid #d0d5dd;
+  border-radius: 4px;
+  padding: 0.6em 1em;
+  margin: 1em 0;
+}
+details summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: #333;
+}
+details summary:hover {
+  color: var(--accent);
+}
+details[open] summary {
+  margin-bottom: 0.6em;
+}
+
+#draftBanner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 36px;
+  background: #b91c1c;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85em;
+  z-index: 100;
+}
+
+body {
+  padding-top: 36px !important;
+}
+#toc-sidebar {
+  top: 36px;
+  height: calc(100vh - 36px);
+}
+#readingProgress {
+  top: 36px;
+}
+
+body::before {
+  content: "DRAFT";
+  position: fixed;
+  top: 45%;
+  left: 60%;
+  transform: translate(-50%, -50%) rotate(-30deg);
+  font-size: 15em;
+  font-weight: 800;
+  color: rgba(185, 28, 28, 0.08);
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ===== end additions ===== */
+</style>
+</head>
+<body>
+<div id="draftBanner">⚠ DRAFT — Not Final — For Review Only</div>
+<div id="readingProgress"></div>
+<button id="toc-toggle" aria-label="Toggle table of contents">&#9776; Contents</button>
+<div id="toc-overlay"></div>
+<div class="layout">
+<nav id="toc-sidebar" aria-label="Table of contents">
+<div class="toc-title">On this page</div>
+<ul id="toc-list"></ul>
+</nav>
+<div class="main-wrap">
+<main id="content">
+<h1 id="ifcx-not-use-cases-nuc">IFCX Not-Use-Cases (NUC)</h1>
+
+<p>This document presents a set of not-use-cases, each one is organised
+into five parts:</p>
+<ol type="1">
+<li><strong>Problem Statement</strong> - the practical interoperability
+or workflow problem that motivates the case.</li>
+<li><strong>IFCX Approach</strong> - a concise, technically grounded
+description of the IFCX capability.</li>
+<li><strong>Success Criteria</strong> - [:construction: coming soon]
+observable, measurable and implementation-independent criteria to be
+used to score pass/fail against a prototype.</li>
+<li><strong>IFC/STEP Limitations</strong> - an explanation of the
+relevant constraints in the existing IFC/STEP architecture. This content
+is collapsed by default to keep the document easy to scan.</li>
+<li><strong>Business Scenarios</strong> - concrete examples showing how
+the capability could be applied in practice. Scenario content is also
+collapsed by default.</li>
+</ol>
+<p>Use the table of contents below to jump directly to a specific
+NUC.</p>
+<h2 id="note-from-the-editor">Note from the editor</h2>
+<p><strong>Why not-use-cases?</strong> Use case is an extremely
+overloaded term, with as many meanings and interpretations as the number
+of use case experts. In this way, anyone can argue that <em>these are
+not use cases</em>. They’d be right — and that’s the point: now the
+focus moves to what these do, not what they’re called. Happy
+reading!</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#nuc-1">NUC 1: Layered collaborative authoring with
+non-destructive overrides definition</a></li>
+<li><a href="#nuc-2">NUC 2: Collaboration in a decentralized, low-trust
+data environment with evolving and partial information</a></li>
+<li><a href="#nuc-3">NUC 3: In-browser streaming and selective node
+loading</a></li>
+<li><a href="#nuc-4">NUC 4: Third-party typed domain extensions without
+schema governance</a></li>
+<li><a href="#nuc-5">NUC 5: Direct integration with game engine and web
+rendering pipelines</a></li>
+<li><a href="#nuc-6">NUC 6: Stable object identity through the full
+asset lifecycle</a></li>
+<li><a href="#nuc-7">NUC 7: Standardised delta and incremental update
+exchange</a></li>
+<li><a href="#nuc-8">NUC 8: Dereferenceable semantic linking to external
+data</a></li>
+<li><a href="#nuc-9">NUC 9: Formal assembly type instantiation</a></li>
+</ul>
+<hr />
+<h2 id="value-adding-ranking-editorial-note-and-hint-for-reviewers">Value-adding
+ranking (editorial note and hint for reviewers)</h2>
+<p>The NUC below are ranked by overall value-add, from most to least
+significant.</p>
+<details>
+<summary>
+Show ranking
+</summary>
+<p>This ranking reflects how pervasive and costly the underlying
+IFC/STEP limitation is in real practice, and how foundational each
+capability is to unlocking the others - it does not reflect the
+numbering or sequence used elsewhere in this document.</p>
+<ol type="1">
+<li><p><strong>NUC 7 — Standardised delta and incremental update
+exchange.</strong> No standardised delta format is arguably the single
+biggest practical bottleneck in (open)BIM workflows today (full
+re-export/re-import cycles, unusable CI/CD). Fixing this unlocks nearly
+everything else (streaming, IoT writes, layered collaboration) to
+actually work at scale.</p></li>
+<li><p><strong>NUC 2 — Collaboration in decentralized, low-trust
+environments with partial/evolving information.</strong> Real pain in
+highly collaborative scenario. Overlaps conceptually with UC 1’s
+layering.</p></li>
+<li><p><strong>NUC 1 — Layered collaborative authoring with
+non-destructive overrides.</strong> Multi-discipline coordination via
+full-model federation exports is a daily, expensive pain point on every
+serious project. Non-destructive layering with provenance is a
+structural fix, not just an optimization.</p></li>
+<li><p><strong>NUC 6 — Stable object identity through the full asset
+lifecycle.</strong> Identity loss (GlobalId regeneration) quietly breaks
+BCF issues, IDS reports, FM registers - it’s a foundational dependency
+for UC 7, UC 1, and UC 8 to be trustworthy. Without stable identity,
+deltas and links are unreliable.</p></li>
+<li><p><strong>NUC 9 — Formal assembly type instantiation.</strong> The
+data redundancy problem (3,400 copies of the same beam) is real and
+costly for modular/prefab/manufacturer-driven construction, which is a
+growing share of the industry. High value where it applies, though
+narrower in scope than 1/6/7.</p></li>
+<li><p><strong>NUC 8 — Dereferenceable semantic linking to external
+data.</strong> Genuinely useful (bSDD, EPDs, live O&amp;M links), but
+IFC already has a partial, working mechanism at the
+object-classification level - this UC mainly extends it to properties
+and makes it two-way. Meaningful but incremental relative to
+1/6/7.</p></li>
+<li><p><strong>NUC 3 — In-browser streaming and selective node
+loading.</strong> High value for viewer/portal use cases and large
+models, but it’s more of a performance/UX win than a workflow-structural
+one - and is partly a downstream benefit of UC 6/7 (stable, addressable
+nodes).</p></li>
+<li><p><strong>NUC 4 — Third-party typed domain extensions without
+schema governance.</strong> Solves a real slow-moving-standards-body
+problem, but IfcPropertySet already gives a (weaker) workaround today,
+so the pain is more “friction and lack of type safety” than
+“impossible.”</p></li>
+<li><p><strong>NUC 5 — Direct integration with game engine and web
+rendering pipelines.</strong> Valuable for visualization-heavy
+workflows, but narrower audience (design review, digital twins) and the
+geometry-kernel workaround, while heavy, is a solved problem in
+practice.</p></li>
+</ol>
+</details>
+<hr />
+<p><a id="nuc-1"></a></p>
+<h2 id="nuc-1-layered-collaborative-authoring-with-non-destructive-overrides-definition">NUC
+1: Layered collaborative authoring with non-destructive overrides
+definition</h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>Multi-discipline BIM projects involve multiple organisations editing
+shared data in parallel. Today there is no standard mechanism for
+concurrent authoring without overwriting: every synchronisation point
+requires a full model export, a manual federation step, and a merge that
+destroys any record of who contributed what. Coordination is always
+behind reality.</p>
+<h3 id="ifcx-approach">IFCX Approach</h3>
+<p>IFCX models are not monolithic files - they are stacks of independent
+layers, each owned by a different author or discipline. Layers can add
+data, override specific attributes, or extend existing nodes without
+modifying the layers beneath them. The composed result is computed at
+runtime from the stack; each layer remains independently editable,
+auditable, and revocable. No author can accidentally overwrite another’s
+data. The provenance of every value - which layer it came from, who owns
+that layer - is always traceable.</p>
+<h3 id="success-criteria">Success Criteria</h3>
+<details>
+<summary>
+Show success criteria
+</summary>
+<p>A prototype demonstrates this NUC only if it satisfies all of the
+following:</p>
+<ol type="1">
+<li><p><strong>Criterion AAA</strong> Description of the criterion.
+<em>Test: description of the test to execute.</em></p></li>
+<li><p><strong>Criterion BBB</strong> Description of the criterion.
+<em>Test: description of the test to execute.</em></p></li>
+<li><p>…</p></li>
+</ol>
+</details>
+<h3 id="ifcstep-limitations">IFC/STEP Limitations</h3>
+<details>
+<summary>
+Show IFC/STEP Limitations
+</summary>
+<p>The conformance level “4;2” (currently not allowed because IFC uses
+an older SPF version) introduces an external reference mechanism
+resolves external entity instances into the local graph before
+processing. The mechanism consists of a section by which entity instance
+in the model are nominated for external visibility (ANCHORS) and a
+section of REFERENCES towards anchors from other models. This works on
+the level of individual entity instances; there is no mechanism to
+override a single attribute value. There is also no mechanism for
+deletion. The required naming and nomination of references mean there is
+a lot of need for up-front coordination to establish links. Contemporary
+IFC4 has no native concept of a persistent layer stack where overrides
+remain independently editable, and the composed result is computed on
+demand. In practice, multi-discipline coordination in IFC requires
+full-model exports at every sync point, manual federation by a BIM
+coordinator, and a merge process that produces a single snapshot with no
+record of which discipline contributed which value. Delta files and
+partial model server exports exist as proprietary workarounds but are
+not standardised, not portable between platforms, and do not preserve
+layer provenance.</p>
+</details>
+<h3 id="business-scenarios">Business Scenarios</h3>
+<details>
+<summary>
+Show scenarios
+</summary>
+<h4 id="multi-discipline-design-coordination-on-a-high-rise">1.
+Multi-discipline design coordination on a high-rise</h4>
+<p>A 40-storey mixed-use tower is in design development. Structural and
+architectural teams work in parallel. Under IFC, every morning begins
+with a 2-hour federated model rebuild: export, merge, clash detect,
+circulate BCF. A single grid shift at Level 20 triggers the full chain
+again. Under IFCX, the structural team’s layer holds the grid change.
+The architectural layer reads it immediately through the composition
+stack. Neither team touches the other’s layer. The coordination meeting
+focuses on design decisions, not file management.</p>
+<h4 id="cross-organisational-infrastructure-federation-with-data-sovereignty">2.
+Cross-organisational infrastructure federation with data
+sovereignty</h4>
+<p>A rail electrification programme involves seven asset-owning
+organisations. Each maintains its own IFCX dataset as a persistent,
+independently governed layer. The programme’s federated view is the
+composed result of all seven layers, assembled on demand. When the
+utility company revises a cable route, their layer is updated. Every
+other organisation’s composed view reflects the change immediately -
+without receiving a new file, without a coordinator manually assembling
+a federated model, and without any organisation gaining write access to
+another’s data.</p>
+<h4 id="client-opinion-layer-without-authoring-tool-access">3. Client
+opinion layer without authoring tool access</h4>
+<p>A project client wants to attach status flags, approval notes, and
+funding-stage markers to model objects throughout design. Under IFC,
+this requires either write access to the contractor’s model or a
+parallel spreadsheet maintained out of sync. Under IFCX, the client
+maintains a thin opinion layer that sits above the design layers in the
+stack. Their annotations reference design objects by URI without
+modifying them. The contractor’s model is unchanged; the client’s data
+is always current; both are visible in any tool that resolves the full
+layer stack.</p>
+</details>
+<hr />
+<p><a id="nuc-2"></a></p>
+<h2 id="nuc-2-collaboration-in-a-decentralized-low-trust-data-environment-with-evolving-and-partial-information">NUC
+2: Collaboration in a decentralized, low-trust data environment with
+evolving and partial information</h2>
+<p><strong>Nickname</strong>: Parallel authoring against incomplete and
+access-restricted data</p>
+<h3 id="problem-statement-1">Problem Statement</h3>
+<p>Large projects involve multiple organisations contributing data
+simultaneously, often with different levels of access, incomplete
+information, and evolving definitions. Today’s IFC model is a closed,
+fully-resolved snapshot: every object must be completely defined before
+exchange, partial definitions are invalid, and there is no mechanism for
+one party to extend or specialise another party’s data without taking
+ownership of it. This forces sequential workflows where parallel
+contribution would be both possible and preferable, and makes federated
+authoring across trust boundaries structurally impractical.</p>
+<h3 id="ifcx-approach-1">IFCX Approach</h3>
+<p>Work in contemporary practice is often more sequential than necessary
+because open-ended collaboration where data can be extended
+simultaneously by different parties. IFCX data inheritance
+(broadcasting) allows inheriting from concepts while leaving the exact
+definition of typical instances open-ended to further updates or with
+partial visibility due to access rights. At the same time
+re-instantiable trees allow to modularize development of assemblies or
+spatial subsections of the artefact.</p>
+<h3 id="ifcstep-limitations-1">IFC/STEP Limitations</h3>
+<details>
+<summary>
+Show IFC/STEP Limitations
+</summary>
+<p>While IFC has, on a schema level, support for typical objects and
+occurrences, there is no mechanism by which children of typical objects
+are instantiated under its occurrences. Also, while there is textual
+guidance in the spec on how property inheritance and overrides works
+from typical objects to occurrences there is no exact formulation and
+implementation is therefore inconsistent and error-prone. Lastly, there
+is no mechanism for higher order typical objects (types of types).</p>
+</details>
+<h3 id="business-scenarios-1">Business Scenarios</h3>
+<details>
+<summary>
+Show scenarios
+</summary>
+<h4 id="infrastructure-corridor-with-partial-visibility-across-asset-owners">1.
+Infrastructure corridor with partial visibility across asset owners</h4>
+<p>A highway authority, a utility company, and a rail operator are each
+responsible for different assets within the same physical corridor. Each
+party has full visibility of their own data and partial, read-only
+visibility of others. Under IFC4, federation requires a coordinator to
+assemble a complete, fully-resolved file - every object fully defined,
+every relationship explicit - before any party can see the composed
+picture. Partial definitions or access-controlled data have no place in
+a valid IFC file. Under IFCX, each organisation publishes their dataset
+as a layer with explicit visibility boundaries. A drainage culvert
+defined by the highway authority is visible to the rail operator as a
+partially resolved object - its geometry present, its internal asset
+data withheld. Both parties work in parallel against a live composed
+view without either requiring full access to the other’s definitions or
+waiting for a coordination export.</p>
+<h4 id="evolving-type-definitions-during-design-development">2. Evolving
+type definitions during design development</h4>
+<p>A facade engineer is developing a curtain wall system in parallel
+with the architect specifying individual panel placements. The type
+definition - glazing unit, framing profile, drainage detail - is
+incomplete and still evolving. Under IFC4, an incomplete type cannot be
+validly exchanged: occurrences must resolve to a fully defined type, and
+children of a typical object are not automatically instantiated under
+its occurrences - they must be manually redefined at each placement. The
+architect cannot place instances of an evolving assembly without the
+facade engineer first completing and exporting a fully resolved
+definition. Under IFCX, the type tree is broadcast in its current
+partial state. The architect’s instances inherit the current definition
+and automatically receive updates as the facade engineer refines it.
+Neither party blocks the other. When the glazing unit specification is
+finalised, all placements resolve to the updated definition without
+manual intervention.</p>
+</details>
+<hr />
+<p><a id="nuc-3"></a></p>
+<h2 id="nuc-3-in-browser-streaming-and-selective-node-loading">NUC 3:
+In-browser streaming and selective node loading</h2>
+<h3 id="problem-statement-2">Problem Statement</h3>
+<p>BIM models grow continuously in size and complexity, yet the only
+standard exchange unit is the complete file. Accessing a single floor, a
+single system, or a single changed element requires downloading and
+parsing everything. This makes web-native tooling, mobile access, and
+targeted automation prohibitively expensive to build and slow to
+operate.</p>
+<h3 id="ifcx-approach-2">IFCX Approach</h3>
+<p>IFCX nodes are individually addressable by stable UUID path. Because
+the format is JSON and every node has a globally unique identifier, a
+client can request a specific node, a named subtree, or a filtered
+subset of the model over standard HTTP - without downloading or parsing
+the full file. There is no mandatory sequential read, no full-file
+dependency resolution before traversal, and no requirement for dedicated
+IFC middleware. Any HTTP-capable client, including a web browser, can
+consume IFCX data incrementally and progressively.</p>
+<h3 id="ifcstep-limitations-2">IFC/STEP Limitations</h3>
+<details>
+<summary>
+Show IFC/STEP Limitations
+</summary>
+<p>A Part 21 .ifc file is a sequential flat text stream in which every
+entity is addressed by a local integer (#N) that is meaningful only
+within that file. No instance can be read in isolation because its
+references - to geometry, relationships, properties - all point to other
+#N values that may appear anywhere in the file. The entire file must be
+parsed before any instance graph traversal is possible. There is no
+random-access index, no pagination primitive, and no HTTP-native
+addressing. Splitting a model across multiple “4;2” files reduces file
+size per unit but does not eliminate the requirement for a full
+reference-resolution pass per file before use. Every current IFC
+visualisation pipeline therefore requires either a complete file
+download and parse, or a purpose-built server-side middleware that
+maintains its own index and serves pre-processed subsets -
+infrastructure that is non-standardised, expensive to operate, and a
+barrier to lightweight web-native tooling.</p>
+</details>
+<h3 id="business-scenarios-2">Business Scenarios</h3>
+<details>
+<summary>
+Show scenarios
+</summary>
+<h4 id="progressive-loading-of-a-large-hospital-model-in-a-browser">1.
+Progressive loading of a large hospital model in a browser</h4>
+<p>A 500,000-node hospital model is served over HTTP. A facilities
+manager opens it in a browser-based viewer. Under IFC, the viewer must
+download and parse the full 2 GB file before rendering anything - a
+process that takes minutes and fails entirely on a mobile connection.
+Under IFCX, the viewer requests only the spatial structure first: the
+site, building, and storey nodes load in seconds. The manager navigates
+to Level 3 and requests only that storey’s nodes. Individual room
+geometries load on demand as she drills in. No middleware, no
+pre-processing, no desktop application required.</p>
+<h4 id="cicd-quality-pipeline-querying-only-changed-elements">2. CI/CD
+quality pipeline querying only changed elements</h4>
+<p>A large design practice runs automated clash detection on every model
+commit. Under IFC, the checking pipeline must re-parse the full model on
+every run - 45 minutes for a large project, which makes continuous
+checking impractical. Under IFCX, the pipeline requests only the nodes
+that changed since the last commit, identified by their stable UUID
+paths. A typical commit touches 20-200 nodes. Each check completes in
+under 2 minutes. Quality feedback reaches designers before the next
+stand-up, not the next day.</p>
+<h4 id="urban-planning-platform-querying-multiple-submitted-models">3.
+Urban planning platform querying multiple submitted models</h4>
+<p>A metropolitan council assesses 14 development applications
+simultaneously. Each applicant’s IFCX model is an addressable endpoint.
+The council’s urban simulation platform queries volume, floor area, and
+use classification attributes directly from each model via API - without
+downloading any complete file. Shadow, transport, and wind assessments
+run against live data. All 14 assessments complete within 3 days of
+submission. Under IFC, the urban modelling team spends two weeks
+converting and integrating each submitted file before any assessment can
+begin.</p>
+</details>
+<hr />
+<p><a id="nuc-4"></a></p>
+<h2 id="nuc-4-third-party-typed-domain-extensions-without-schema-governance">NUC
+4: Third-party typed domain extensions without schema governance</h2>
+<h3 id="problem-statement-3">Problem Statement</h3>
+<p>Built assets accumulate data from dozens of disciplines, each with
+its own classification systems, attribute vocabularies, and regulatory
+frameworks. IFC’s schema can only be extended through a centralised,
+years-long standards process. Organisations that need to attach typed,
+semantically governed domain data today have no standard path to do
+so.</p>
+<h3 id="ifcx-approach-3">IFCX Approach</h3>
+<p>Any organisation can define a typed attribute namespace - a
+structured, versioned, machine-readable schema - and attach attributes
+from that namespace to any IFCX node, without modifying the core IFC
+schema and without approval from any standards body. Tools that
+understand the namespace process the attributes with full type safety.
+Tools that do not simply ignore them. The namespace URI is owned and
+maintained by whoever published it. Multiple namespaces from different
+organisations can coexist on the same node without conflict.</p>
+<h3 id="ifcstep-limitations-3">IFC/STEP Limitations</h3>
+<details>
+<summary>
+Show IFC/STEP Limitations
+</summary>
+<p>EXPRESS is a closed-world schema language. Every entity type and
+attribute must be declared in the schema before it can appear in a valid
+file. The sanctioned extension mechanism in IFC is IfcPropertySet - an
+untyped key-value bag with no namespace and no formal type definition. A
+documented convention allows a property to carry an external bSDD
+reference as a plain string inside a field never designed for
+identification, but this is unenforced by the schema and rarely adopted
+in practice, so most property sets remain semantically opaque to any
+tool not already aware of their specific naming convention. A
+geotechnical firm, a fire safety authority, or a facility management
+platform that wants typed, structured, semantically defined extensions
+must therefore either wait years for a bSI working group to incorporate
+their domain into the core schema, or rely on a convention most tooling
+neither produces nor checks. There is no schema-level path to open,
+typed, independently governed extension within the STEP/EXPRESS
+architecture - reliable extension still requires centralised schema
+governance, which is both slow and a structural barrier to
+domain-specific innovation.</p>
+</details>
+<h3 id="business-scenarios-3">Business Scenarios</h3>
+<details>
+<summary>
+Show scenarios
+</summary>
+<h4 id="geotechnical-data-on-infrastructure-models">1. Geotechnical data
+on infrastructure models</h4>
+<p>A geotechnical firm needs to attach borehole log data, soil
+classification attributes, and groundwater table references to IFCX
+nodes representing site terrain. They publish a geotec:: namespace
+schema on their own domain. Any tool that understands geotec:: reads the
+attributes with full type safety. Tools that do not simply skip them. No
+modification to the IFC core schema is required; no bSI working group
+approval is needed. Under IFC, the same data would live in
+IfcPropertySet entries with informal string names - untyped,
+unvalidatable, and interpretable only by tools that were specifically
+programmed to recognise that particular property set convention.</p>
+<h4 id="jurisdiction-specific-regulatory-extensions">2.
+Jurisdiction-specific regulatory extensions</h4>
+<p>A national planning authority needs to attach jurisdiction-specific
+compliance attributes to building elements - fire compartment ratings,
+energy performance classifications, accessibility grades - structured to
+their national regulatory framework. Under IFC, these either wait for
+the next IFC release cycle or live in untyped property sets with no
+formal link to the regulatory schema. Under IFCX, the authority
+publishes a reg-dk:: namespace schema aligned to their national
+framework. Applicants’ tools attach the attributes. The authority’s
+validation platform checks them against the live schema. Any
+IFC-compliant tool that has not implemented reg-dk:: ignores the
+attributes gracefully without failing.</p>
+<h4 id="machine-interpretable-ids-requirements-as-validation-gates">3.
+Machine-interpretable IDS requirements as validation gates</h4>
+<p>A client’s data requirements are expressed as an IDS file referencing
+IFCX core concepts and domain-specific namespace attributes. Contractors
+validate continuously throughout construction - every model commit
+triggers a check against the IDS. At handover, the client runs a final
+automated check: every maintainable asset carries a maintenance
+interval, warranty expiry, linked supplier record, and geometry, all
+typed and validated against their namespace schemas. Under IFC, IDS can
+reference property set names but cannot enforce type correctness on
+untyped property set values - validation catches presence, not semantic
+correctness.</p>
+</details>
+<hr />
+<p><a id="nuc-5"></a></p>
+<h2 id="nuc-5-direct-integration-with-game-engine-and-web-rendering-pipelines">NUC
+5: Direct integration with game engine and web rendering pipelines</h2>
+<h3 id="problem-statement-4">Problem Statement</h3>
+<p>Every visualisation of an IFC model requires a geometry kernel to
+tessellate STEP B-rep geometry into renderable meshes. This is a heavy,
+proprietary dependency that raises the implementation cost of any
+viewer, breaks the connection between rendered output and semantic model
+data, and puts native web and real-time rendering permanently out of
+reach.</p>
+<h3 id="ifcx-approach-4">IFCX Approach</h3>
+<p>IFCX geometry is (in current prototype) expressed using USD geometry
+semantics and glTF material definitions - representations native to the
+mesh-based pipelines that game engines and web renderers already
+consume, rather than the B-rep/NURBS solids of STEP geometry. This
+removes the tessellation and geometry-kernel dependency that every
+current IFC visualisation pipeline requires. It does not mean an IFCX
+file is natively readable by Unreal, Unity, or three.js out of the box -
+none of these tools have a built-in IFCX parser, and IFCX’s composition
+model (layers, overrides, separate placement and geometry nodes) still
+requires a loader that resolves the composed result before handing mesh
+data to the renderer. What IFCX removes is the heavy, proprietary
+geometry-kernel step; a renderer-side import layer is still bespoke
+work, but a substantially lighter one.</p>
+<h3 id="ifcstep-limitations-4">IFC/STEP Limitations</h3>
+<details>
+<summary>
+Show IFC/STEP Limitations
+</summary>
+<p>STEP geometry is defined in Parts 42, 511, and related application
+protocols using B-rep surfaces, NURBS, and procedural solid definitions.
+No game engine or web renderer natively understands these
+representations. Every current IFC visualisation pipeline requires a
+geometry kernel - Open CASCADE or equivalent - to tessellate STEP
+geometry into triangle meshes before any rendering can occur. This is a
+heavy, slow, proprietary dependency that raises the implementation
+barrier, introduces tessellation artefacts, and severs the connection
+between the rendered geometry and the original semantic data. The two
+representation models are architecturally incompatible: STEP geometry is
+an exact, boundary-evaluated solid; USD/glTF geometry is a tessellated
+mesh optimised for real-time rasterisation. There is no convergence path
+that preserves both the STEP formal geometry model and native renderer
+compatibility - adopting one forecloses the other.</p>
+</details>
+<h3 id="business-scenarios-4">Business Scenarios</h3>
+<details>
+<summary>
+Show scenarios
+</summary>
+<h4 id="real-time-design-review-in-a-game-engine">1. Real-time design
+review in a game engine</h4>
+<p>An architect wants to walk through a proposed hospital ward in Unreal
+Engine with a client during a design review. Under IFC, the process is:
+export IFC, run through a geometry kernel to tessellate, export to FBX
+or glTF, import into Unreal, lose all semantic data in the process.
+Total pipeline time: hours. Semantic link to the model: none. Under
+IFCX, an importer resolves the composed model and hands USD-described
+meshes and glTF materials to the engine - a thin translation layer
+rather than a full geometry-kernel tessellation pipeline. The architect
+can select a wall in the engine and query its IFC classification, fire
+rating, and specification reference, because the semantic data never
+left the node.</p>
+<h4 id="web-based-project-portal-without-plugin-or-middleware">2.
+Web-based project portal without plugin or middleware</h4>
+<p>A contractor’s project portal needs to display the current federated
+model in a browser for subcontractors who do not have authoring tools.
+Under IFC, this requires either a dedicated IFC web viewer with a
+built-in geometry kernel (heavy, slow, expensive to operate) or a
+pre-baked geometry conversion pipeline that produces a separate
+visualisation file disconnected from the live model. Under IFCX, the
+portal’s loader resolves USD geometry from the IFCX endpoint and renders
+it in three.js. Subcontractors see the current model state, select
+elements, and read their properties - from a standard browser, with no
+plugin, no conversion, no middleware.</p>
+<h4 id="continuous-rendering-in-a-digital-twin-dashboard">3. Continuous
+rendering in a digital twin dashboard</h4>
+<p>A facilities management team operates a dashboard that displays the
+live state of a building - occupancy, fault alerts, energy readings -
+overlaid on a 3D model. Under IFC, the 3D model in the dashboard is a
+pre-baked static mesh, regenerated periodically from IFC exports, always
+slightly out of date. Under IFCX, the dashboard renders geometry
+directly from the live IFCX endpoint. When a fault alert is written to
+an AHU node by the BMS, the dashboard highlights that object in the
+rendered model immediately - because the geometry, the semantic data,
+and the live operational attributes all live on the same node.</p>
+</details>
+<hr />
+<p><a id="nuc-6"></a></p>
+<h2 id="nuc-6-stable-object-identity-through-the-full-asset-lifecycle">NUC
+6: Stable object identity through the full asset lifecycle</h2>
+<h3 id="problem-statement-5">Problem Statement</h3>
+<p>A built asset exists for decades, passing through design,
+construction, handover, operation, and eventual demolition — touching
+dozens of tools and organisations along the way. IFC provides no
+reliable mechanism for an object to carry the same identifier through
+that journey. Every tool transition, model server operation, or file
+re-export is a potential identity break that silently severs BCF
+references, asset register links, and compliance records.</p>
+<h3 id="ifcx-approach-5">IFCX Approach</h3>
+<p>Every IFCX node has a UUID-based path identifier that is globally
+unique, hierarchically composable, and stable across model
+modifications, federation into larger models, and handover between
+organisations. Identity is a first-class design requirement in IFCX, not
+a property that tools are expected to preserve on a best-effort
+basis.</p>
+<h3 id="ifcstep-limitations-5">IFC/STEP Limitations</h3>
+<details>
+<summary>
+Show IFC/STEP Limitations
+</summary>
+<p>IFC GlobalIds are 22-character compressed GUIDs that are locally
+meaningful but have no hierarchical structure, no namespace, and no
+guaranteed stability across model server operations. Especially in the
+past, tools would regenerate GlobalIds on export , and on certain model
+transformations. “4;2” anchors address cross-file referencing within a
+STEP exchange context but provide no stability guarantee across model
+transformations and are not URIs resolvable by arbitrary external
+systems. The result is that identity in IFC is a persistent source of
+data loss at every transition point in the asset lifecycle.</p>
+</details>
+<h3 id="business-scenarios-5">Business Scenarios</h3>
+<details>
+<summary>
+Show scenarios
+</summary>
+<h4 id="element-identity-surviving-a-design-change-and-bcf-reference">1.
+Element identity surviving a design change and BCF reference</h4>
+<p>A structural column is created during schematic design, referenced in
+a BCF issue during coordination, cited in an IDS validation report
+during detailed design, and linked from the FM asset register at
+handover - all using the same identifier. Midway through detailed
+design, the column is moved from one structural frame to another (a
+re-parenting operation). Under IFC, many tools issue a new GlobalId at
+this point, silently breaking the BCF issue reference, the IDS report
+link, and the FM asset register entry. Under IFCX, the UUID path
+identifier is stable through re-parenting. Every downstream reference
+continues to resolve correctly.</p>
+<h4 id="progressive-as-built-record-tied-to-design-objects">2.
+Progressive as-built record tied to design objects</h4>
+<p>A motorway project has 1,400 drainage structures. Each structure is
+created in the design model with a stable IFCX UUID path. As each is
+installed on site, the supervisor’s app pushes a status update against
+that same UUID - no lookup table, no manual matching of as-built to
+design, no risk of mis-assignment. At handover, the client’s asset
+management system already holds live references to all 1,400 objects.
+The design identity and the as-built record are the same node,
+continuously updated throughout construction.</p>
+<h4 id="multi-organisation-lifecycle-traceability">3. Multi-organisation
+lifecycle traceability</h4>
+<p>A building product is specified by an architect, procured by a
+contractor from a different manufacturer than originally specified,
+installed by a subcontractor, commissioned by an MEP engineer, and
+registered in the FM asset register by the facilities manager - five
+organisations, five tools, one asset lifecycle. Under IFC, each
+transition risks a GlobalId change, a property set mismatch, or a COBie
+mapping error that severs the chain. Under IFCX, the product instance
+carries a stable URI from specification through end-of-life. Every
+organisation that touches it reads and writes against the same
+identifier. The full lifecycle record is continuously traceable without
+a reconciliation exercise at any handover point.</p>
+</details>
+<hr />
+<p><a id="nuc-7"></a></p>
+<h2 id="nuc-7-standardised-delta-and-incremental-update-exchange">NUC 7:
+Standardised delta and incremental update exchange</h2>
+<h3 id="problem-statement-6">Problem Statement</h3>
+<p>Construction and operation generate continuous, high-frequency
+changes to model data — status updates, sensor readings, design
+revisions, as-built records. The only standard IFC exchange mechanism is
+a complete file snapshot. Transmitting what changed, rather than
+everything, is not a supported concept, making real-time and
+near-real-time data workflows impossible to standardise.</p>
+<h3 id="ifcx-approach-6">IFCX Approach</h3>
+<p>An IFCX delta is a structurally valid IFCX document that contains
+only the nodes that changed, were added, or were deleted since a
+previous state. Deletions are represented as explicit tombstone nodes.
+Because every node has a stable UUID path, a receiving system can apply
+a delta unambiguously to its existing copy of the model without
+receiving the full dataset. A delta document is not a special format or
+a secondary protocol - it is an ordinary IFCX file that happens to
+contain a subset of the full node set. Any IFCX-compliant tool can
+produce and consume deltas without additional capability. Because each
+delta carries authorship and timestamp metadata, a sequence of deltas
+forms a natural, replayable change history - closer to an append-only
+event log than to source-control diffing. This is a narrower claim than
+saying IFCX models work well in Git or similar version control systems:
+whether general-purpose VCS tooling is a good operational fit for large,
+composed BIM datasets is untested, and large binary or composed files
+are a known weak point for systems like Git regardless of the underlying
+schema. The reliable capability is the replayable delta history itself,
+not any tool built on top of it.</p>
+<h3 id="success-criteria-1">Success Criteria</h3>
+<details>
+<summary>
+Show success criteria
+</summary>
+<p>A prototype demonstrates this NUC only if it satisfies all of the
+following:</p>
+<ol type="1">
+<li><p><strong>Node-level change is detectable.</strong> A consumer can
+determine that a specific node changed without a full field-by-field
+comparison of its content. <em>One sufficient mechanism is a canonical
+content hash per node, where two semantically-equal records hash equal
+regardless of key order and any content change flips the hash. Test:
+hash a node; re-serialise it with permuted key order and confirm an
+identical hash; alter one value and confirm a different
+hash.</em></p></li>
+<li><p><strong>Partial documents are valid documents.</strong> A
+document containing only a subset of nodes (added or changed) plus
+explicit deletion markers (tombstones) is itself a structurally valid
+document of the same format, requiring no non-included node to resolve.
+<em>Test: emit a strict subset of a model’s nodes plus one tombstone;
+validate against the schema and load it in isolation; both
+succeed.</em></p></li>
+<li><p><strong>Unambiguous application by stable identity.</strong> A
+receiver holding state A can apply a delta to reach state B using only
+stable node identifiers, without possessing the full state-B dataset.
+<em>Test: given A and a delta of adds/changes/tombstones, apply it and
+confirm the result is semantically equal to an independently produced
+B.</em></p></li>
+<li><p><strong>Change-set derivable without full retrieval.</strong> A
+consumer holding a compact per-node indicator for state A and state B
+(e.g. {identifier, content-hash} pairs) can compute exactly the set of
+added/changed/deleted identifiers without retrieving any unchanged
+node’s body. <em>Test: from two such manifests, derive the
+changed-identifier set, confirm it equals ground truth, and assert no
+unchanged node body was read.</em></p></li>
+<li><p><strong>Replayable, attributed history.</strong> Each delta
+carries author and timestamp, and an ordered sequence of deltas replays
+deterministically to any intermediate or final state. <em>Test: apply
+deltas d₁…dₙ in order and confirm the result equals the directly
+authored state; confirm each records author and timestamp.</em></p></li>
+</ol>
+<blockquote>
+<p><strong>Scope.</strong> Criteria 2, 3 and 5 map onto NUC 7’s current
+text (changed subset + stable paths + tombstones + author/timestamp).
+Criteria 1 and 4 additionally propose <em>per-node
+content-addressing</em> — flagged as a deliberate scope suggestion,
+since NUC 7 as written doesn’t require it, and content-hashing is one
+sufficient mechanism rather than the only one. These define
+change-detection and partial-exchange primitives, not a specific merge /
+conflict-resolution algorithm. Because JCS-style canonical JSON
+preserves array order, hashing is order-sensitive for arrays by design —
+criterion 1 is <em>record</em> equality, not <em>set</em> equality.</p>
+</blockquote>
+</details>
+<h3 id="ifcstep-limitations-6">IFC/STEP Limitations</h3>
+<details>
+<summary>
+Show IFC/STEP Limitations
+</summary>
+<p>There is no standardised delta format in the STEP/IFC ecosystem. Part
+21’s #N instance numbering is local and ephemeral - tools routinely
+regenerate instance numbers on every export, making file-to-file diffing
+unreliable as a basis for change detection even when GlobalIds are
+present. GlobalIds identify which top-level entity changed but carry no
+information about what changed, do not cover relationships, property
+sets, or geometry modifications, and have no native tombstone mechanism
+for representing deletion. The closest practical approaches - BIMserver
+change detection, proprietary model server delta APIs, sending two full
+files for external diffing - are all non-standardised, produce outputs
+no other tool is obligated to consume, and require full-file processing
+on both ends. A truly partial IFC file - containing only changed
+entities - is structurally invalid unless it also includes every entity
+referenced by the changed ones, which in practice means including most
+of the model anyway.</p>
+</details>
+<h3 id="business-scenarios-6">Business Scenarios</h3>
+<details>
+<summary>
+Show scenarios
+</summary>
+<h4 id="structural-grid-change-propagated-as-a-12-node-delta">1.
+Structural grid change propagated as a 12-node delta</h4>
+<p>A structural engineer shifts a column grid at Level 20 of a 40-storey
+tower. Under IFC, this change triggers a full model re-export,
+redistribution to all disciplines, re-import, and clash detection cycle
+- a process that takes hours and blocks other coordination work. Under
+IFCX, the engineer pushes a delta containing the 12 modified nodes: the
+affected columns, their updated placements, and the revised grid
+reference. The architectural tool consumes the delta within minutes. The
+CI/CD pipeline runs clash detection on only the affected elements. The
+change is fully attributed: author, timestamp, and the specific nodes
+modified.</p>
+<h4 id="per-object-as-built-status-updates-from-a-site-app">2.
+Per-object as-built status updates from a site app</h4>
+<p>A civil contractor installs 47 of 200 piles in a single day. Each
+installation is recorded by a lightweight site app that pushes a minimal
+delta per pile: status changed to installed, date, inspector ID, and a
+URI to the linked inspection certificate. The client’s platform
+aggregates these deltas in real time. No full model re-export is
+required; no spreadsheet reconciliation follows. The live record of
+installed versus planned piles is always current. Under IFC,
+transmitting the same information requires either a full IFC re-export
+or a parallel spreadsheet that must be manually reconciled with the
+model at milestone intervals.</p>
+<h4 id="incremental-iot-attribute-writes-as-micro-deltas">3. Incremental
+IoT attribute writes as micro-deltas</h4>
+<p>A building management system writes energy meter readings against
+HVAC nodes every 15 minutes. Each write is a minimal IFCX delta: one
+node, one updated attribute, one timestamp. The FM platform applies each
+delta to its live model state. The audit trail of attribute changes is
+the delta history - a complete, timestamped record of every value every
+sensor ever wrote to every node. Under IFC, there is no mechanism for
+any external system to transmit even a single attribute update to a
+specific model object without producing a new complete file export.</p>
+</details>
+<hr />
+<p><a id="nuc-8"></a></p>
+<h2 id="nuc-8-dereferenceable-semantic-linking-to-external-data">NUC 8:
+Dereferenceable semantic linking to external data</h2>
+<h3 id="problem-statement-7">Problem Statement</h3>
+<p>Building data is increasingly expected to connect to external systems
+— classification dictionaries, product databases, regulatory registers,
+facility management platforms, IoT endpoints. IFC provides no standard,
+schema-enforced mechanism for an attribute to be a live, typed pointer
+to an external resource. External references exist but are stored as
+plain strings in fields designed for other purposes, leaving resolution
+entirely to bilateral convention.</p>
+<h3 id="ifcx-approach-7">IFCX Approach</h3>
+<p>In IFCX, an attribute can be schema-typed to hold a URI value - a
+pointer to an external resource rather than an embedded literal. This
+applies to classification references, product data, regulatory
+certifications, facility management records, and sensor endpoints. This
+is not linked data in the RDF sense: the URI itself carries no inherent
+semantics, and resolving it is a convention a consuming tool chooses to
+implement, not a protocol the format enforces. What IFCX changes
+relative to IFC4 is where that convention lives: the URI sits in a field
+whose schema-declared type is a reference, in a namespace the consuming
+tool can recognise, rather than being smuggled into a free-text field
+designed for something else. The improvement is structural clarity and
+namespace addressability, not an inherent resolution guarantee.</p>
+<h3 id="ifcstep-limitations-7">IFC/STEP Limitations</h3>
+<details>
+<summary>
+Show IFC/STEP Limitations
+</summary>
+<p>IFC provides a genuine, schema-native mechanism for object-level
+classification: IfcClassificationReference together with
+IfcRelAssociatesClassification formally links an object to an external
+classification entry, and where that entry is a bSDD class, the
+reference is a dereferenceable URI resolvable via bSDD’s API.
+Property-level linking is weaker. There is no equivalent relationship
+entity connecting an individual property to an external definition; the
+documented convention is to place the bSDD property URI as a plain
+string inside a field never designed to carry a reference
+(IfcPropertySingleValue.Specification in IFC4x3, or
+IfcPropertySingleValue.Description in IFC4 and IFC2x3, both fields whose
+schema-declared purpose is free-text documentation). Schema does not
+mark it as URI, the pattern works only if every implementer knows
+bSDD-IFC mapping and follows it by convention. The vast majority of
+IfcPropertySingleValue instances in real-world models carry no such
+reference at all and remain an opaque name-value pair with no path to
+external semantics. Even where the convention is followed correctly, the
+link is read-mostly and point-in-time: there is no standard mechanism
+for an external system to write back to a property or object once a file
+has been exchanged.</p>
+</details>
+<h3 id="business-scenarios-7">Business Scenarios</h3>
+<details>
+<summary>
+Show scenarios
+</summary>
+<h4 id="digital-handover-with-validated-external-references">1. Digital
+handover with validated external references</h4>
+<p>A 60,000 m² hospital is handed over to the FM team. 3,200
+maintainable assets must carry O&amp;M data structured to the client’s
+data dictionary, linked via bSDD. Under IFC, the contractor delivers a 2
+GB IFC file and a 400-sheet COBie spreadsheet. Neither import correctly;
+three months of manual data entry follows. Under IFCX, every asset
+attribute referencing a bSDD classification resolves to a
+machine-readable definition at the bSDD URI. Warranty documents and
+supplier records are live URI references, not embedded text. At
+handover, the CAFM system ingests the IFCX model directly: every
+classification is validated against the live bSDD schema, every external
+link is verified as resolvable. Data completeness is confirmed before
+the FM team opens the building, not three months after.</p>
+<h4 id="progressive-as-built-records-with-linked-evidence">2.
+Progressive as-built records with linked evidence</h4>
+<p>A motorway widening project has 1,400 drainage structures to install
+over 18 months. As each is installed, the supervisor’s app pushes a
+minimal delta: status, date, inspector ID, and a URI pointing to the
+externally stored inspection certificate. Any party - client,
+contractor, regulator - can dereference that URI at any time and
+retrieve the current certificate. If the certificate is superseded, the
+updated document is available at the same URI without any model update.
+Under IFC, the certificate reference would be an embedded string in a
+property set: untyped, unverifiable, and gone stale the moment the
+document moves.</p>
+<h4 id="cross-organisational-infrastructure-federation-by-reference">3.
+Cross-organisational infrastructure federation by reference</h4>
+<p>A rail electrification programme spans assets owned by seven
+organisations. Under IFCX, each organisation’s dataset is a live,
+addressable endpoint. When the utility company updates a diversion
+route, highway designers hold a live URI reference to that object - the
+update is visible immediately by reference resolution, not by file
+redistribution. No organisation holds a copy of another’s data; all hold
+pointers. The semantic content at each pointer is governed by the owning
+organisation’s namespace schema, machine-readable to any party that
+dereferences it.</p>
+<h4 id="digital-product-passport-with-live-epd-resolution">4. Digital
+Product Passport with live EPD resolution</h4>
+<p>A 200-unit residential development targets a circular economy rating.
+Every product instance in the IFCX model carries a persistent URI to its
+Digital Product Passport, hosted by the manufacturer or a certification
+body. When a manufacturer updates an EPD, all referencing building
+models resolve the updated data on demand - no manual model corrections,
+no stale property sets. At practical completion, the investor’s ESG
+platform queries the live IFCX model and generates the material passport
+with verified carbon data for each product, directly traceable to the
+manufacturer’s live certification endpoint.</p>
+<h4 id="live-iot-and-bms-writes-against-model-objects">5. Live IoT and
+BMS writes against model objects</h4>
+<p>A district council operates 34 municipal buildings. Each has HVAC,
+fire safety, and access control systems from different vendors. Under
+IFCX, the model is not a read-only handover artifact - it is a writable
+data endpoint. The HVAC controller pushes energy readings against each
+AHU’s URI every 15 minutes. When a fire damper fails its weekly test,
+the BMS writes a fault status directly to the corresponding IFCX object.
+Any authorised platform - the council’s FM dashboard, a compliance
+auditor’s tool, a maintenance contractor’s app - reads the same live
+data from the same URIs. No bespoke integration, no vendor-specific API
+mapping.</p>
+</details>
+<hr />
+<p><a id="nuc-9"></a></p>
+<h2 id="nuc-9-formal-assembly-type-instantiation">NUC 9: Formal assembly
+type instantiation</h2>
+<h3 id="problem-statement-8">Problem Statement</h3>
+<p>Modular, prefabricated, and repetitive construction is growing
+rapidly, yet IFC has no mechanism to define a component assembly once
+and instantiate it many times by reference. Every placement of a
+repeated component requires a full copy of all its sub-components and
+properties. Global specification changes must be propagated manually to
+every copy, making large-scale prefabrication workflows data-intensive,
+error-prone, and disconnected from live manufacturer information.</p>
+<h3 id="ifcx-approach-8">IFCX Approach</h3>
+<p>IFCX supports formal assembly instantiation: a typed component
+assembly - including its sub-components, their internal structure,
+relationships, and typed attributes - is defined once and referenced by
+every instance. Instances hold a URI pointer to the type definition, not
+a copy of it. The composed result is resolved at read time from the live
+type definition. When the type changes, all instances reflect the update
+automatically. Manufacturers can publish versioned IFCX type libraries
+as standard endpoints that design tools reference directly, with no
+static file export required.</p>
+<h3 id="ifcstep-limitations-8">IFC/STEP Limitations</h3>
+<details>
+<summary>
+Show IFC/STEP Limitations
+</summary>
+<p>IFC’s IfcTypeObject provides a limited form of type-instance
+separation for single objects, but it cannot be applied to assemblies -
+typed groups of sub-components with their own internal structure and
+relationships. There is no IFC mechanism to define a
+beam-with-connections-and-reinforcement, or a facade
+panel-with-framing-and-insulation, as a reusable typed unit and
+instantiate it by reference rather than by copying every sub-component
+into every occurrence. In practice, modular and prefabricated
+construction in IFC requires full redefinition of every sub-component at
+every instance, producing massive data redundancy. A project with 3,400
+beam placements carries 3,400 complete copies of the reinforcement cage
+geometry and property sets. A specification change must propagate to
+every copy individually - manually or through bespoke scripting that is
+neither standardised nor portable between tools. Manufacturer product
+libraries in IFC exist as static file exports with no mechanism for a
+design tool to hold a live reference to a current specification.</p>
+</details>
+<h3 id="business-scenarios-8">Business Scenarios</h3>
+<details>
+<summary>
+Show scenarios
+</summary>
+<h4 id="precast-beam-library-with-live-specification-propagation">1.
+Precast beam library with live specification propagation</h4>
+<p>A precast concrete manufacturer defines a double-T beam assembly:
+beam body, two connection plates, reinforcement cage, four lifting
+anchors - each sub-component carrying typed attributes including section
+profile, concrete grade, and fire rating. A structural engineer places
+3,400 instances across a car park. Each instance references the type
+definition by URI. When the manufacturer revises the shear stud
+specification to meet a revised Eurocode requirement, the change is made
+once. All 3,400 instances reflect the update immediately, in every
+project referencing that library. Under IFC, the same change requires
+touching 3,400 individual objects - manually or through a script that
+must be written, tested, and run separately for each project.</p>
+<h4 id="mass-timber-housing-with-22-panel-types-across-500-homes">2.
+Mass timber housing with 22 panel types across 500 homes</h4>
+<p>A developer builds 500 homes using 22 standard structural panel
+types. Under IFC, 500 homes × 80 panels = 40,000 individual panel
+objects, each carrying its own property sets. Updating a fire rating
+specification means modifying all 40,000. Under IFCX, the 22 panel types
+are defined once in a manufacturer-hosted library. Each home contains 80
+instance references. Updating Panel Type 7’s fire rating propagates to
+all 3,200 instances across all 500 homes in a single edit. The
+fabrication system reads the live library directly - the CNC programming
+team receives updated specifications automatically, with no manual data
+transfer.</p>
+<h4 id="manufacturer-library-as-a-live-design-tool-endpoint">3.
+Manufacturer library as a live design tool endpoint</h4>
+<p>A curtain wall manufacturer publishes their full product range as a
+versioned IFCX type library at a stable URI. An architect’s design tool
+subscribes to the library. When the manufacturer releases a new glazing
+unit with improved U-values, the tool reflects the update in the product
+selector immediately. When the architect places a unit, the instance
+references the manufacturer’s live type definition - not a static import
+from last year’s product catalogue. At tender stage, the quantity
+surveyor queries the instance count of each type directly from the
+model. The manufacturer receives confirmed specification data without a
+separate data transfer exercise.</p>
+</details>
+</main>
+</div>
+</div>
+<button id="backToTop" title="Back to top" aria-label="Back to top">&uarr;</button>
+<script>
+(function () {
+  "use strict";
+
+  var content = document.getElementById("content");
+  var tocList = document.getElementById("toc-list");
+  var sidebar = document.getElementById("toc-sidebar");
+  var toggleBtn = document.getElementById("toc-toggle");
+  var overlay = document.getElementById("toc-overlay");
+  var backToTop = document.getElementById("backToTop");
+  var progress = document.getElementById("readingProgress");
+
+  // ---- 1. Build the sidebar Table of Contents from h2 in #content ----
+  var headings = content.querySelectorAll("h2");
+  var tocLinks = [];
+ 
+  headings.forEach(function (h) {
+    if (!h.id) return;
+ 
+    var li = document.createElement("li");
+    var a = document.createElement("a");
+    a.href = "#" + h.id;
+    a.textContent = h.textContent.replace(/\s+/g, " ").trim();
+    li.appendChild(a);
+    tocLinks.push({ link: a, target: h });
+ 
+    tocList.appendChild(li);
+  });
+
+  // Close sidebar (mobile) after clicking a link
+  tocLinks.forEach(function (item) {
+    item.link.addEventListener("click", function () {
+      sidebar.classList.remove("open");
+      overlay.classList.remove("open");
+    });
+  });
+
+  // ---- 2. Scrollspy: highlight the active section link ----
+  var activeLink = null;
+  function setActive(link) {
+    if (activeLink) activeLink.classList.remove("active");
+    activeLink = link;
+    if (activeLink) activeLink.classList.add("active");
+  }
+
+  if ("IntersectionObserver" in window) {
+    var observer = new IntersectionObserver(
+      function (entries) {
+        // pick the entry closest to the top that's currently intersecting
+        var visible = entries.filter(function (e) {
+          return e.isIntersecting;
+        });
+        if (visible.length > 0) {
+          visible.sort(function (a, b) {
+            return a.boundingClientRect.top - b.boundingClientRect.top;
+          });
+          var id = visible[0].target.id;
+          var match = tocLinks.find(function (item) {
+            return item.target.id === id;
+          });
+          if (match) setActive(match.link);
+        }
+      },
+      { rootMargin: "-10% 0px -70% 0px", threshold: [0, 1] }
+    );
+    headings.forEach(function (h) {
+      if (h.id) observer.observe(h);
+    });
+  }
+
+  // ---- 3. Back-to-top button + reading progress bar ----
+  function onScroll() {
+    var scrollTop = window.scrollY || document.documentElement.scrollTop;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progress.style.width = pct + "%";
+
+    if (scrollTop > 400) {
+      backToTop.classList.add("visible");
+    } else {
+      backToTop.classList.remove("visible");
+    }
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  backToTop.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  // ---- 4. Mobile sidebar toggle ----
+  function openSidebar() {
+    sidebar.classList.add("open");
+    overlay.classList.add("open");
+  }
+  function closeSidebar() {
+    sidebar.classList.remove("open");
+    overlay.classList.remove("open");
+  }
+  toggleBtn.addEventListener("click", function () {
+    if (sidebar.classList.contains("open")) {
+      closeSidebar();
+    } else {
+      openSidebar();
+    }
+  });
+  overlay.addEventListener("click", closeSidebar);
+
+})();
+
+</script>
+</body>
+</html>
