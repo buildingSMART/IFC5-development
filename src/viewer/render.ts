@@ -21,6 +21,10 @@ let primMap: { [path: string]: ComposedObject } = {};
 let currentPathMapping: any = null;
 let rootPrim: ComposedObject | null = null;
 
+export function getPostCompositionJson() {
+    return rootPrim;
+}
+
 let selectedObject: any = null;
 let selectedDom: HTMLElement | null = null;
 
