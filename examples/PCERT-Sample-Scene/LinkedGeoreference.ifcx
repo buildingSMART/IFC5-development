@@ -1,0 +1,131 @@
+{
+  "header": {
+    "id": "LinkedGeoreference.ifcx",
+    "ifcxVersion": "ifcx_alpha",
+    "dataVersion": "1.0.0",
+    "author": "On-Track",
+    "timestamp": "time string"
+  },
+  "imports": [],
+    "schemas": {
+        "crsType::GeographicCRS": {
+            "value": {
+            "dataType": "Object",
+            "objectRestrictions": {
+                "values": {
+                "crsRef": { "dataType": "String" },
+                "uri": { "dataType": "String" },
+                "latitude":  { "dataType": "Real", "quantityKind": "Angle" },
+                "longitude": { "dataType": "Real", "quantityKind": "Angle" }
+                }
+            }
+            }
+        },
+        "crsType::ProjectedCRS": {
+            "value": {
+            "dataType": "Object",
+            "objectRestrictions": {
+                "values": {
+                "crsRef":   { "dataType": "String" },
+                "uri": { "dataType": "String" },
+                "eastings": { "dataType": "Real", "quantityKind": "Length" },
+                "northings":{ "dataType": "Real", "quantityKind": "Length" }
+                }
+            }
+            }
+        },
+        "crsType::VerticalCRS": {
+            "value": {
+            "dataType": "Object",
+            "objectRestrictions": {
+                "values": {
+                "crsRef": { "dataType": "String" },
+                "uri": { "dataType": "String" },
+                "height": { "dataType": "Real", "quantityKind": "Length" }
+                }
+            }
+            }
+        },
+            "crsType::CompoundCRS": {
+            "value": {
+            "dataType": "Object",
+            "objectRestrictions": {
+                "values": {
+                "crsRef":   { "dataType": "String" },
+                "uri": { "dataType": "String" },
+                "eastings": { "dataType": "Real", "quantityKind": "Length" },
+                "northings":{ "dataType": "Real", "quantityKind": "Length" },
+                "height":   { "dataType": "Real", "quantityKind": "Length" }
+                }
+            }
+            }
+        }
+
+        },
+  "data": [
+    {
+      "path": "8f104696-d1c4-4375-8b96-fdc8f2d0c2e8",
+      "attributes": {
+        "crsType::ProjectedCRS": {
+          "crsRef": "EPSG:32760",
+          "uri": "https://spatialreference.org/ref/epsg/32760/projjson.json",
+          "eastings": 729013.349,
+          "northings": 9063992.685
+        }
+      }
+    },
+    {
+      "path": "8f104696-d1c4-4375-8b96-fdc8f2d0c2e8",
+      "attributes": {
+        "crsType::GeographicCRS": {
+        "crsRef": "EPSG:4326",
+        "uri": "https://spatialreference.org/ref/epsg/4326/projjson.json",
+        "latitude": -8.46219994,
+        "longitude": 179.08014672
+        }
+      }
+    },
+    {
+      "path": "8f104696-d1c4-4375-8b96-fdc8f2d0c2e8",
+      "attributes": {
+        "crsType::VerticalCRS": {
+          "crsRef": "EPSG:3855",
+          "uri": "https://spatialreference.org/ref/epsg/3855/projjson.json",
+          "height": 1.3
+        }
+      }
+    },
+    {
+      "path": "cfb3708f-9272-42f6-90a9-1a48274f73c5",
+      "attributes": {
+        "crsType::ProjectedCRS": {
+          "crsRef": "EPSG:32760",
+          "uri": "https://spatialreference.org/ref/epsg/32760/projjson.json",
+          "eastings": 729011.226,
+          "northings": 9063960.608
+        }
+      }
+    },
+    {
+      "path": "cfb3708f-9272-42f6-90a9-1a48274f73c5",
+      "attributes": {
+        "crsType::GeographicCRS": {
+          "crsRef": "EPSG:4326",
+          "uri": "https://spatialreference.org/ref/epsg/4326/projjson.json",
+          "latitude": -8.46249,
+          "longitude": 179.080129
+        }
+      }
+    },
+    {
+      "path": "cfb3708f-9272-42f6-90a9-1a48274f73c5",
+      "attributes": {
+        "crsType::VerticalCRS": {
+          "crsRef": "EPSG:3855",
+          "uri": "https://spatialreference.org/ref/epsg/3855/projjson.json",
+          "height": 0
+        }
+      }
+    }
+  ]
+}
