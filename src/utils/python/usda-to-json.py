@@ -25,6 +25,7 @@ usda_grammar = r"""
     REFERENCE: /<[^>]+>/
 
     value: STRING
+          | SQUOTSTRING
           | NUMBER
           | REFERENCE
           | "true" -> true
@@ -34,6 +35,7 @@ usda_grammar = r"""
 
     NAME: /[A-Za-z_][A-Za-z_:\.\d]*/
     STRING: /".*?"/
+    SQUOTSTRING: /'.*?'/
     NUMBER: /-?\d+(\.\d+)?([eE][+-]?\d+)?/
 
     meta: "(" (STRING | (/[A-Za-z_]+/ "=" value))+ ")"
@@ -107,7 +109,12 @@ class USDAtoJSON(Transformer):
 
     @v_args(inline=True)
     def STRING(self, s):
-        return s.strip('"')
+        if s.startswith('"'):
+            return s.strip('"')
+        elif s.startswith("'"):
+            return s.strip("'")
+        else:
+            return s
     
     @v_args(inline=True)
     def NUMBER(self, n):
@@ -190,6 +197,10 @@ for node in di['children']:
             # @todo rename to stay consistent with USD?
             grouped_attrs['points:array'] = {'positions': grouped_attrs['points:array']['points']}
         for ns, ats in grouped_attrs.items():
+            if ns == 'ifc5' and len(ats) == 1:
+                kk, vv = next(iter(ats.items()))
+                ns = f'{ns}:{kk}'
+                ats = vv
             overs.append({
                 'def': 'over',
                 'name': node['name'],

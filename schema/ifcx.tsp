@@ -37,7 +37,8 @@ enum DataType
     Array: "Array",
     Object: "Object",
     Reference: "Reference",
-    Blob: "Blob"
+    Blob: "Blob",
+    Union: "Union"
 }
 
 model EnumRestrictions
@@ -58,9 +59,14 @@ model ObjectRestrictions
     values: Record<IfcxValueDescription>;
 }
 
+model UnionRestrictions
+{
+    values: IfcxValueDescription[];
+}
+
 model IfcxValueDescription
 {
-    dataType: DataType;
+    dataType?: DataType;
     optional?: boolean;
     inherits?: string[];
     quantityKind?: QuantityKind;
@@ -68,6 +74,8 @@ model IfcxValueDescription
     enumRestrictions?: EnumRestrictions;
     arrayRestrictions?: ArrayRestrictions;
     objectRestrictions?: ObjectRestrictions;
+    unionRestrictions?: UnionRestrictions;
+    ref?: string;
 }
 
 model IfcxSchema

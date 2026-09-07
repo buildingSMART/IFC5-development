@@ -8,6 +8,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 import { PCDLoader } from 'three/addons/loaders/PCDLoader.js';
+import { buildSVGFromProceduralGeometry, Profile } from './profile';
 
 let controls, renderer, scene, camera;
 type datastype = [string, IfcxFile][];
@@ -210,6 +211,11 @@ function tryCreateMeshGltfMaterial(path: ComposedObject[]) {
             let baseColorFactor = pbrMetallicRoughness["baseColorFactor"];
             if (baseColorFactor) {
                 material.color = new THREE.Color(baseColorFactor[0], baseColorFactor[1], baseColorFactor[2]);
+            }
+
+            if (baseColorFactor && baseColorFactor.length >= 4 && baseColorFactor[3] < 1.0) {
+                material.opacity = baseColorFactor[3];
+                material.transparent = true;
             }
 
             let metallicFactor = pbrMetallicRoughness["metallicFactor"];
@@ -438,6 +444,7 @@ const icons = {
     'pcd::base64': 'grain',
     'points::array::positions': 'grain',
     'points::base64::positions': 'grain',
+    'bsi::ifc::procedural_geometry::has_profile': 'format_italic',
 };
 
 function handleClick(prim, pathMapping, root) {
@@ -446,7 +453,7 @@ function handleClick(prim, pathMapping, root) {
   container.innerHTML = "";
   const table = document.createElement("table");
   table.setAttribute("border", "0");
-  const entries = [["name", prim.name], ...Object.entries(prim.attributes).filter(([k, _]) => !k.startsWith('__internal_'))];
+  const entries = [["name", prim.name], ...Object.entries(prim.attributes || {}).filter(([k, _]) => !k.startsWith('__internal_'))];
   const format = (value) => {
     if (Array.isArray(value)) {
       let N = document.createElement('span');
@@ -483,6 +490,20 @@ function handleClick(prim, pathMapping, root) {
           }
         }
         return a;
+      } else if (ks.length == 1 && ks[0].indexOf("procedural") !== -1) {
+        const svgString = buildSVGFromProceduralGeometry(value as Profile, { pixelSize: 240, stroke: "#222", strokeWidth: 0.001 });
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(svgString, "image/svg+xml");
+        let container = document.createElement('div');
+        let left = document.createElement('div');
+        left.style.float = 'left';
+        left.appendChild(doc.documentElement);
+        let right = document.createElement('div');
+        right.innerHTML = `<span style="white-space:pre;float:right">${JSON.stringify(value, null, 4).replace(/\n\s+([\-\+\d\.e]+|\])(,?)(?=\n)/g, '$1$2')}</pre>`
+        right.style.float = 'right';
+        container.appendChild(left);
+        container.appendChild(right);
+        return container;
       } else {
         return document.createTextNode(JSON.stringify(value));
       }
