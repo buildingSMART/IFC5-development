@@ -510,6 +510,12 @@ exchange</a></li>
 <li><a href="#nuc-8">NUC 8: Dereferenceable semantic linking to external
 data</a></li>
 <li><a href="#nuc-9">NUC 9: Formal assembly type instantiation</a></li>
+<li><a href="#nuc-10">NUC 10: Arbitrary spatial structures</a></li>
+<li><a href="#nuc-11">NUC 11: Goal-specific relative placement</a></li>
+<li><a href="#nuc-12">NUC 12: First-class options without
+duplication</a></li>
+<li><a href="#nuc-13">NUC 13: Reference-first distributed
+access</a></li>
 </ul>
 <hr />
 <h2 id="value-adding-ranking-editorial-note-and-hint-for-reviewers">Value-adding
@@ -1428,6 +1434,532 @@ from last year’s product catalogue. At tender stage, the quantity
 surveyor queries the instance count of each type directly from the
 model. The manufacturer receives confirmed specification data without a
 separate data transfer exercise.</p>
+</details>
+<hr />
+<p><a id="nuc-10"></a></p>
+<h2 id="nuc-10-arbitrary-spatial-structures">NUC 10: Arbitrary spatial
+structures</h2>
+<p><strong>Related NUCs:</strong> <a href="#nuc-2">NUC 2</a> addresses
+partial and evolving information, <a href="#nuc-12">NUC 12</a> addresses
+first-class options, and <a href="#nuc-13">NUC 13</a> addresses
+reference-first access to distributed data.</p>
+<h3 id="problem-statement-9">Problem Statement</h3>
+<p>Building and infrastructure data has no single natural hierarchy. How
+people need to organise and navigate the same information depends on
+their discipline, responsibility, project type, task, and lifecycle
+phase. A designer, contractor, operator, and renovation team may each
+require a different structure, none of which should determine the
+intrinsic shape of the underlying data. When a spatial hierarchy or
+scene graph is baked into that data, every other useful view requires
+duplication, restructuring, or bespoke cross-linking. A scene graph,
+where one is needed, should therefore be one arbitrary view of the data
+rather than its one canonical structure.</p>
+<h3 id="ifcx-approach-9">IFCX Approach</h3>
+<p>IFCX needs to separate the data from the structures used to organise
+it. The data should exist independently of a container file or mandatory
+hierarchy, while separately authored structures should reference that
+data and arrange it for a particular purpose. This would allow multiple
+spatial hierarchies or scene graphs to be composed over the same
+underlying data without copying it. A consumer could then select or
+create the structure appropriate to its current use and resolve that
+structure at read time. This separation would also provide a basis for
+first-class options and for composing referenced datasets that remain at
+their source locations.</p>
+<h3 id="success-criteria-2">Success Criteria</h3>
+<details>
+<summary>
+Show success criteria
+</summary>
+<p>A prototype demonstrates this NUC only if it satisfies all of the
+following:</p>
+<ol type="1">
+<li><p><strong>Independent data and structure.</strong> Removing or
+replacing an organisational structure does not remove, copy, or modify
+the data it references. <em>Test: replace one structure with another and
+confirm that the referenced data records remain unchanged.</em></p></li>
+<li><p><strong>Multiple simultaneous structures.</strong> Designers,
+contractors, operators, and renovation teams can each organise and
+traverse the same dataset differently. <em>Test: compose at least four
+distinct role- or phase-specific structures over one shared dataset and
+confirm that each resolves correctly.</em></p></li>
+<li><p><strong>No canonical scene graph.</strong> A consumer can compose
+materially different navigation hierarchies or scene graphs from the
+same data without one being treated as the authoritative shape of that
+data. <em>Test: resolve the same objects through two different
+parent-child structures and confirm that both views preserve access to
+the same underlying information.</em></p></li>
+<li><p><strong>Shared updates without structural duplication.</strong> A
+change to shared data is visible through every structure that references
+it without propagating copies. <em>Test: update one referenced object
+and confirm that all composed structures expose the update while only
+one data record is changed.</em></p></li>
+</ol>
+</details>
+<h3 id="ifcstep-limitations-9">IFC/STEP Limitations</h3>
+<details>
+<summary>
+Show IFC/STEP Limitations
+</summary>
+<p>An IFC exchange embeds object data, decomposition and containment
+relationships, and relative placement chains in the same instance graph.
+IFC groups and systems can provide additional associations, but the
+commonly consumed project-site-facility-storey decomposition remains
+closely coupled to navigation, containment, and geometry resolution.
+Alternative discipline- or task-specific hierarchies must be added as
+more relationships within that graph, maintained through external
+conventions, or delivered as separately restructured models. IFC/STEP
+does not provide a standard mechanism for publishing the object data
+independently and then applying interchangeable, separately authored
+spatial structures or scene graphs over it without duplication.</p>
+</details>
+<h3 id="business-scenarios-9">Business Scenarios</h3>
+<details>
+<summary>
+Show scenarios
+</summary>
+<h4 id="concurrent-lifecycle-views-of-one-building">1. Concurrent
+lifecycle views of one building</h4>
+<p>A building is being designed, operated, constructed, and renovated at
+the same time. Designers navigate it by design discipline and building
+system, the contractor by work package and installation sequence, the
+operator by maintainable system, and the renovation team by intervention
+zone and phase. Each party composes its own structure over the same
+data. No party’s hierarchy becomes the required shape of the model, and
+no duplicate model is created for any view.</p>
+<h4 id="track-assets-crossing-a-building-structure">2. Track assets
+crossing a building structure</h4>
+<p>A rail project contains track assets and relationships that pass
+through stations and other buildings. A building-oriented view places
+those objects within the facility and storey hierarchy. A track engineer
+instead needs to navigate every relevant object and relationship as part
+of the track, regardless of which building contains it. Both structures
+reference the same assets, allowing each user to see a hierarchy suited
+to the task without reorganising or copying the underlying data.</p>
+<h4 id="electronic-door-hardware-viewed-through-the-door">3. Electronic
+door hardware viewed through the door</h4>
+<p>An electrical engineer needs to find electronic locks, contacts,
+readers, and their connections through the doors they serve rather than
+only through a separate electrical-system hierarchy. Other users may
+organise the same devices by system, procurement package, space, or
+maintenance route. IFCX permits each structure to reference the same
+door and hardware data, so navigation can follow the relationship most
+useful to the current user.</p>
+</details>
+<hr />
+<p><a id="nuc-11"></a></p>
+<h2 id="nuc-11-goal-specific-relative-placement">NUC 11: Goal-specific
+relative placement</h2>
+<p><strong>Related NUCs:</strong> <a href="#nuc-10">NUC 10</a> separates
+data from any one hierarchy or scene graph, <a href="#nuc-6">NUC 6</a>
+addresses stable identity through change, and <a href="#nuc-9">NUC 9</a>
+addresses placement of reusable assemblies.</p>
+<h3 id="problem-statement-10">Problem Statement</h3>
+<p>A single authoritative placement graph is no more sufficient than a
+single authoritative spatial hierarchy. World coordinates describe where
+an object resolves, but not necessarily the relative placement intent by
+which it should be dimensioned, constructed, surveyed, or evaluated.
+Depending on the task, a window may need to be evaluated relative to its
+wall, a wall relative to a floor or the preceding wall, mechanical
+equipment relative to connected equipment, or a rail asset relative to
+an alignment or an already surveyed installation. When only one resolved
+placement is available, these relationships and their tolerances are
+displaced into drawings or authoring-tool logic and cannot be evaluated
+reliably from the exchanged data.</p>
+<p>An open design question is whether placement should be represented as
+an authored transform, derived from relationships and constraints, or
+support both models. In every case, the intended placement basis and its
+evaluation logic need to be explicit rather than inferred from a single
+scene graph.</p>
+<h3 id="ifcx-approach-10">IFCX Approach</h3>
+<p>IFCX does not currently support arbitrary placement: it relies
+principally on one scene-graph-based placement, alongside other
+data-modelling techniques whose interaction and semantics need
+clarification. IFCX needs to separate placement definitions from any
+canonical spatial structure and allow them to be specified externally
+over the same underlying data. A consumer could then use whole-world
+coordinates where appropriate or select a project-, user-, task-, or
+phase-specific relative-placement graph. Each graph would make its
+reference basis explicit and resolve deterministically without requiring
+the objects themselves to be copied or reorganised. The design must also
+clarify how direct placement, relationships, and constraints interact,
+including whether a resolved placement can be derived from constraint
+logic while retaining the intent used to evaluate it.</p>
+<h3 id="success-criteria-3">Success Criteria</h3>
+<details>
+<summary>
+Show success criteria
+</summary>
+<p>A prototype demonstrates this NUC only if it satisfies all of the
+following:</p>
+<ol type="1">
+<li><p><strong>Absolute and relative placement coexist.</strong> The
+same object data can be resolved through whole-world coordinates or
+through a selected relative-placement graph. <em>Test: resolve one
+dataset both ways and confirm that each produces the expected transforms
+without duplicating the objects.</em></p></li>
+<li><p><strong>Arbitrary reference bases are explicit.</strong>
+Placement can be defined relative to a context suited to the task rather
+than only to the spatial hierarchy. <em>Test: place a window relative to
+a wall, a wall relative to a floor or preceding wall, and a rail asset
+relative to an alignment or surveyed asset.</em></p></li>
+<li><p><strong>Placement logic can be overlaid.</strong> A party can add
+or select placement logic without modifying the underlying object data
+or another party’s placement graph. <em>Test: overlay construction and
+operational placement graphs on the same world-based dataset and
+evaluate each independently.</em></p></li>
+<li><p><strong>Tolerance effects are evaluable.</strong> A change in one
+relative placement propagates through its declared dependencies and can
+be checked against dimensional or regulatory criteria. <em>Test: offset
+one installed wall by 25 mm, resolve a subsequent wall placed relative
+to it, and detect whether the resulting condition violates a stated
+tolerance or clearance.</em></p></li>
+<li><p><strong>Placement intent is distinguishable.</strong> A consumer
+can determine whether a result was directly placed, relatively
+transformed, or derived from relationships or constraints. <em>Test:
+exchange examples of each supported method and confirm that the
+receiving implementation identifies the method and reproduces the same
+result.</em></p></li>
+</ol>
+</details>
+<h3 id="ifcstep-limitations-10">IFC/STEP Limitations</h3>
+<details>
+<summary>
+Show IFC/STEP Limitations
+</summary>
+<p>IFC supports several placement constructs, including local, grid, and
+infrastructure-oriented linear placement, and local placements can form
+relative chains. However, an occurrence exposes one object placement in
+a given model state, and implementations commonly resolve that chain
+into one world-space result tied to the model’s containment and
+decomposition structure. IFC/STEP does not provide first-class,
+interchangeable placement graphs that different users or phases can
+author over the same occurrence data and select for a particular
+evaluation. A relative transform also does not by itself communicate the
+dimensioning rule, tolerance, dependency, or constraint that motivated
+it. That intent therefore tends to remain in drawings, native parametric
+models, or application-specific data, while alternative placement
+schemes require duplicated occurrences or separately maintained
+models.</p>
+</details>
+<h3 id="business-scenarios-10">Business Scenarios</h3>
+<details>
+<summary>
+Show scenarios
+</summary>
+<h4 id="window-and-wall-dimensional-intent">1. Window and wall
+dimensional intent</h4>
+<p>A designer places a window relative to its host wall and the wall
+relative to a floor datum. The resolved world coordinates are useful for
+rendering, but the relative placement chain communicates how the opening
+should be dimensioned and checked. A contractor can evaluate the
+installed window against the wall rather than against a distant project
+origin, while both parties continue to reference the same object
+data.</p>
+<h4 id="tolerance-propagation-during-robotic-layout">2. Tolerance
+propagation during robotic layout</h4>
+<p>An installed wall is surveyed 25 mm from its intended position. The
+next wall was designed relative to the first, but following the measured
+offset may violate a required clearance or compound the error across the
+building. Explicit placement dependencies allow a layout robot or field
+application to compare the design datum, the as-built wall, and the
+downstream relative placement before work continues. A world-coordinate
+result alone cannot communicate which reference should govern that
+decision.</p>
+<h4 id="mechanical-installation-relative-to-installed-work">3.
+Mechanical installation relative to installed work</h4>
+<p>A mechanical contractor initially lays out equipment from the
+building grid, then needs to coordinate a connecting run relative to
+equipment and supports already installed in the field. A
+construction-specific placement graph can use the surveyed components as
+reference bases, while the designer retains the design placement graph
+and the operator later selects a service-oriented one. All three resolve
+the same equipment data for different purposes.</p>
+<h4 id="rail-assets-re-referenced-after-survey">4. Rail assets
+re-referenced after survey</h4>
+<p>A rail asset is designed relative to an alignment. After installation
+and survey, another asset must be positioned relative to that installed
+object rather than directly from the alignment because their
+relationship controls performance. IFCX should allow the placement basis
+to change or coexist without duplicating either asset, while retaining
+enough intent to compare the design, survey, and operational
+conditions.</p>
+</details>
+<hr />
+<p><a id="nuc-12"></a></p>
+<h2 id="nuc-12-first-class-options-without-duplication">NUC 12:
+First-class options without duplication</h2>
+<p><strong>Related NUCs:</strong> <a href="#nuc-1">NUC 1</a> addresses
+layered overrides, <a href="#nuc-6">NUC 6</a> addresses stable identity,
+and <a href="#nuc-7">NUC 7</a> addresses changes between versions. Like
+the external structures in <a href="#nuc-10">NUC 10</a> and placement
+definitions in <a href="#nuc-11">NUC 11</a>, option definitions must not
+require modification of the data they reference.</p>
+<h3 id="problem-statement-11">Problem Statement</h3>
+<p>An option is not a version. A version records the state of data at a
+point in its history; an option identifies one of several alternatives
+that may coexist at the same time. A room, wall, layout, track segment,
+or entire dataset may be common to several proposed solutions, while
+only some elements differ between them. Current file-based exchange
+cannot express that common set as shared option membership. Even when
+duplicated elements retain the same identifier, each self-contained
+option file or layer must carry another copy, and the format cannot
+distinguish intentional option membership from coincidentally repeated
+data.</p>
+<p>Option membership also cannot depend on changing the referenced
+objects to declare which options they belong to. A party that does not
+own or cannot write to those objects may still need to create a new
+option that collects them in their current state and adds alternative
+data. The option must therefore exist outside the data as a separately
+authored set of references.</p>
+<h3 id="ifcx-approach-11">IFCX Approach</h3>
+<p>IFCX does not currently provide first-class option semantics. It
+needs an external option definition that can collect references to
+existing objects, layers, or datasets; identify data shared by several
+options; and add references or overrides specific to one alternative.
+The referenced data does not declare its option membership and does not
+need to be copied, modified, or owned by the option author. A consumer
+composes an option by resolving its shared and option-specific
+references. Option identity and membership remain distinct from dataset
+version, layer order, and repeated identifiers, allowing an option to
+reference either the current state or an explicitly versioned state of
+its source data.</p>
+<h3 id="success-criteria-4">Success Criteria</h3>
+<details>
+<summary>
+Show success criteria
+</summary>
+<p>A prototype demonstrates this NUC only if it satisfies all of the
+following:</p>
+<ol type="1">
+<li><p><strong>Options and versions are distinct.</strong> A consumer
+can determine whether two compositions are simultaneous alternatives or
+successive states in time. <em>Test: create two options referencing the
+same dataset version, then create a later version of that dataset and
+confirm that option identity and version identity remain independently
+queryable.</em></p></li>
+<li><p><strong>Common data is stored once.</strong> One object or
+dataset can participate in multiple options without being copied into
+each option. <em>Test: compose two alternatives containing a shared
+room, wall, or track segment and confirm that both resolve the same
+referenced record while only their differing elements are
+separate.</em></p></li>
+<li><p><strong>Membership is external to the data.</strong> Creating,
+changing, or deleting an option does not modify the objects it collects.
+<em>Test: create a new option over read-only source data and confirm
+that the source content is byte-for-byte unchanged.</em></p></li>
+<li><p><strong>Non-owners can author options.</strong> A party with read
+access but no write ownership of the underlying data can collect it into
+an option and add data that the party does own. <em>Test: compose a
+valid option from a read-only base dataset plus a writable
+option-specific dataset.</em></p></li>
+<li><p><strong>Alternatives coexist without invalidation.</strong>
+Selecting or developing one option does not invalidate the existing
+state or other options. <em>Test: maintain an operational configuration
+and two proposed renovation configurations simultaneously, and resolve
+each independently.</em></p></li>
+</ol>
+</details>
+<h3 id="ifcstep-limitations-11">IFC/STEP Limitations</h3>
+<details>
+<summary>
+Show IFC/STEP Limitations
+</summary>
+<p>IFC and STEP do not define first-class semantics for simultaneous
+design options, shared membership across options, or external option
+sets. Alternatives can be approximated with groups, classification
+conventions, property values, or separate files, but a general IFC
+consumer cannot determine from those mechanisms which elements are
+common, mutually exclusive, or specific to an option without prior
+agreement. When alternatives are exchanged as separate files, common
+objects are duplicated even if their GlobalIds are preserved, and
+changes must be coordinated across the copies. The current file-based
+form of IFCX can similarly approximate alternatives with layers and
+repeated paths, but it does not identify an option as distinct from a
+version or ordinary duplicated data, nor does it provide an external
+option definition that collects data by reference without modifying or
+copying it.</p>
+</details>
+<h3 id="business-scenarios-11">Business Scenarios</h3>
+<details>
+<summary>
+Show scenarios
+</summary>
+<h4 id="client-review-of-two-design-options">1. Client review of two
+design options</h4>
+<p>An architect presents two layouts to a client. The project, rooms,
+structural elements, and most walls are common to both; only a limited
+set of partitions, doors, and equipment differs. Each option references
+the common data once and adds only its alternative elements. The client
+can switch between complete compositions without the project team
+maintaining two copies of the unchanged model.</p>
+<h4 id="renovation-while-a-facility-remains-operational">2. Renovation
+while a facility remains operational</h4>
+<p>An occupied space has a valid current configuration that must remain
+available to operators throughout a renovation study. Several proposed
+reconfigurations reference that operational data and add, replace, or
+omit elements within their own option definitions. The proposals coexist
+with the current condition without invalidating it, rewriting it, or
+requiring the renovation author to own it.</p>
+<h4 id="agent-generated-proposed-solutions">3. Agent-generated proposed
+solutions</h4>
+<p>An agent evaluates many possible layouts or infrastructure solutions.
+Each proposal references the same connected site, room, wall, track, and
+system data and contributes only its proposed changes. The alternatives
+remain identifiable as options rather than becoming unrelated copied
+datasets, allowing people and other agents to compare them, trace what
+is shared, and discard a proposal without affecting its sources.</p>
+</details>
+<hr />
+<p><a id="nuc-13"></a></p>
+<h2 id="nuc-13-reference-first-distributed-access">NUC 13:
+Reference-first distributed access</h2>
+<p><strong>Related NUCs:</strong> <a href="#nuc-2">NUC 2</a> addresses
+decentralised collaboration, <a href="#nuc-3">NUC 3</a> addresses
+selective loading, <a href="#nuc-7">NUC 7</a> addresses incremental
+updates, and <a href="#nuc-8">NUC 8</a> addresses external references.
+This NUC also provides the distributed access model needed for the
+external structures, placements, and options described by <a href="#nuc-10">NUC 10</a>, <a href="#nuc-11">NUC 11</a>, and <a href="#nuc-12">NUC 12</a>.</p>
+<h3 id="problem-statement-12">Problem Statement</h3>
+<p>IFC exchange is based on sending data somewhere else before it can be
+used: a recipient downloads a file, imports it, and operates on a new
+copy. That copy immediately creates questions about ownership, currency,
+synchronisation, and redistribution. Modern distributed web environments
+can instead provide authorised access to data at its source, allowing
+consumers to reference and compose it without first taking possession of
+another exchange copy. Current IFCX prototypes largely retain the file
+boundary and place the structure and data to be consumed inside it, so
+they do not yet establish this live, reference-first model.</p>
+<p>Caching may improve performance, but a cached representation must not
+become the conceptual source of truth. When an authoritative live source
+is available, a consumer should resolve it directly or validate that its
+cache still represents the requested live or explicitly versioned state.
+Cache location, storage medium, eviction, and warming strategies are
+implementation choices. Offline exchange and long-term archival formats
+are separate concerns and are outside this NUC.</p>
+<h3 id="ifcx-approach-12">IFCX Approach</h3>
+<p>IFCX does not currently solve this requirement. It needs a web-first,
+reference-first access model in which authoritative datasets remain at
+addressable web or file locations and authorised clients resolve either
+their live state or an explicitly identified version. Independently
+owned datasets can then be permissioned and assembled by reference
+without being copied into one new container or requiring the source
+systems to know about one another. The intended pattern is analogous to
+<a href="https://delta.io/sharing/">Delta Sharing</a>: an open protocol
+provides secure access to live data across different products, while
+providers continue to govern the shared source.</p>
+<p>The IFCX specification should define the interoperable semantics
+needed to identify, authorise, resolve, version, and validate referenced
+data. It should not prescribe whether an implementation caches data in
+memory or on disk, how long a cache remains hot, or how distributed
+infrastructure refreshes it. A conforming consumer may cache, but it
+must preserve source identity and distinguish a validated cached result
+from the current live state. Structures, placement definitions, options,
+and other overlays may remain private to a third party while referencing
+data from several independent sources.</p>
+<h3 id="success-criteria-5">Success Criteria</h3>
+<details>
+<summary>
+Show success criteria
+</summary>
+<p>A prototype demonstrates this NUC only if it satisfies all of the
+following:</p>
+<ol type="1">
+<li><p><strong>Live data is consumed at its source.</strong> A client
+can resolve and use an authorised dataset without first importing it
+into a new IFCX container. <em>Test: update the source, resolve the live
+reference again, and confirm that the consumer receives the current
+state without a new file being distributed.</em></p></li>
+<li><p><strong>Live and versioned references are distinct.</strong> A
+live reference follows the authoritative current state, while an
+explicitly versioned reference continues to resolve the identified
+state. <em>Test: update a source and confirm that the live reference
+changes and the pinned version does not.</em></p></li>
+<li><p><strong>Independent sources compose without prior
+coordination.</strong> A third party can assemble referenced data from
+multiple CDEs and apply its own structure, placement, or option overlays
+without copying or modifying the source datasets. <em>Test: compose two
+read-only source datasets with a private overlay held in a third CDE,
+while neither source CDE contains references to the other or to the
+overlay.</em></p></li>
+<li><p><strong>Access is permissioned and revocable.</strong> A provider
+can grant read access without granting write access or transferring
+ownership, and can later revoke future access. <em>Test: authorise,
+read, deny a write, revoke access, and confirm each result. The test
+does not claim that data already transmitted to a client can be made
+technically uncopyable.</em></p></li>
+<li><p><strong>Caching is implementation-independent.</strong>
+Interoperability does not depend on a prescribed cache architecture.
+<em>Test: use one client without a persistent cache and another with a
+cache; after source validation or refresh, both resolve the same
+requested live or versioned state and preserve the same source
+identity.</em></p></li>
+<li><p><strong>Stale cache data is not silently authoritative.</strong>
+When the source is reachable, a consumer can validate whether cached
+data still represents the requested state before treating it as current.
+<em>Test: change a source after caching, request the live state, and
+confirm that the client detects or refreshes the stale entry rather than
+presenting it as current.</em></p></li>
+</ol>
+</details>
+<h3 id="ifcstep-limitations-12">IFC/STEP Limitations</h3>
+<details>
+<summary>
+Show IFC/STEP Limitations
+</summary>
+<p>STEP Part 21 and conventional IFC exchange serialise a model snapshot
+for transfer and import. Most instance references are meaningful within
+that exchange graph, so the recipient normally needs a local resolved
+copy before using the data. STEP and IFC-related API work can provide
+programmatic access to models, but an API alone does not establish this
+NUC’s default semantics: independently governed live datasets,
+permissioned cross-owner references, source-authoritative freshness,
+arbitrary third-party composition, and implementation-independent
+caching. These requirements would need additional standardised protocol
+and reference semantics. Current file-based IFCX prototypes inherit the
+same copy-first boundary even though their JSON representation may be
+easier to serve over HTTP.</p>
+</details>
+<h3 id="business-scenarios-12">Business Scenarios</h3>
+<details>
+<summary>
+Show scenarios
+</summary>
+<h4 id="live-composition-across-three-cdes">1. Live composition across
+three CDEs</h4>
+<p>One project CDE holds geometric data and a second holds metadata
+under a different organisation’s control. A third CDE creates a private
+overlay containing the spatial structures, placement logic, and options
+described by NUCs 10, 11, and 12. It composes both source datasets by
+reference; the first two CDEs do not need to know about one another or
+store the overlay. No additional IFCX container holding copies of all
+three datasets is required, although any participant may use an
+implementation-specific cache.</p>
+<h4 id="permissioned-read-only-project-data">2. Permissioned read-only
+project data</h4>
+<p>An owner gives a consultant read-only access to a live dataset in the
+way an online document can be shared without granting edit rights or
+transferring ownership. The consultant’s application consumes the
+authorised data directly and cannot write back to the source.
+Contractual and technical controls may restrict retention or caching,
+but the exchange format does not make the impossible promise that bytes
+already delivered to an authorised client cannot be copied.</p>
+<h4 id="frequently-changing-authoritative-information">3. Frequently
+changing authoritative information</h4>
+<p>An author updates project data throughout the day. Consumers follow
+the live reference rather than treating yesterday’s downloaded file or
+an unchecked cache as authoritative. A consuming system may retain data
+locally for performance, but it validates the cached state against the
+source and refreshes it when required. The author publishes once at the
+source instead of redistributing a new container after every change.</p>
+<h4 id="share-once-across-heterogeneous-platforms">4. Share once across
+heterogeneous platforms</h4>
+<p>Following the business pattern demonstrated by Delta Sharing, a
+provider exposes one governed dataset through an open access protocol.
+Design, construction, analysis, and operational platforms connect to
+that shared source using their own technology stacks. Each consumer
+decides how to process and cache the data, while the provider manages
+permissions and the authoritative live or versioned states once rather
+than shipping platform-specific copies.</p>
 </details>
 </main>
 </div>
