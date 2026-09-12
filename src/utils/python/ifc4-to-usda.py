@@ -336,18 +336,18 @@ def process(el, path=(), parentPath=None, asclass=False):
 
                         UsdGeom.Xform(prim).AddTransformOp().Set(Gf.Matrix4d((M4.T)))
 
-                        the = np.arctan2(mapc.XAxisAbscissa, mapc.XAxisOrdinate)
+                        the = np.arctan2(mapc.XAxisOrdinate, mapc.XAxisAbscissa)
                         scm = np.zeros((3, 3))
                         np.fill_diagonal(scm, mapc.Scale or 1)
                         rot = np.array([
                             [np.cos(the), -np.sin(the), 0],
-                            [np.sin(the), -np.cos(the), 0],
+                            [np.sin(the), np.cos(the), 0],
                             [0,0,1]
                         ])
                         e,n,h = (rot @ scm @ xyz + (mapc.Eastings, mapc.Northings, mapc.OrthogonalHeight))
 
                         from pyproj import Transformer
-                        to_latlon = Transformer.from_crs("EPSG:32610", "EPSG:4326")
+                        to_latlon = Transformer.from_crs(crs2d, "EPSG:4326", always_xy=True)
                         lat, lon = to_latlon.transform(e,n,h)[0:2]
 
                         prim.CreateAttribute(f'{crs2d.lower().replace(":", "")}:eastings', Sdf.ValueTypeNames.Double).Set(e)
