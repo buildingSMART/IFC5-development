@@ -1,7 +1,7 @@
 import { FlattenCompositionInput, CreateArtificialRoot, ExpandFirstRootInInput } from "./composition/compose";
 import { CompositionInputNode } from "./composition/node";
 import { IfcxFile, IfcxNode, ImportNode } from "./schema/schema-helper";
-import { Validate } from "./schema/schema-validation";
+import { SchemaValidationError, Validate } from "./schema/schema-validation";
 import { MMSet } from "./util/mm";
 
 function ToInputNodes(data: IfcxNode[])
@@ -151,7 +151,7 @@ export function Diff(file1: IfcxFile, file2: IfcxFile)
     return result;
 }
 
-export function Federate(files: IfcxFile[])
+export function Federate(files: IfcxFile[], acceptDuplicateSchemas: boolean = false)
 {
     if (files.length === 0)
     {
@@ -164,6 +164,26 @@ export function Federate(files: IfcxFile[])
         schemas: {},
         data: []
     };
+
+    if (!acceptDuplicateSchemas) {
+        files.forEach((file) => {
+            // @todo not very efficient in case of deep import trees
+            const localSchemas = new Set(Object.keys(file.schemas));
+            const importedSchemas : Set<String> = new Set();
+            const recurse = (uri : string) => {
+                files.filter(f => f.src == uri).forEach(f => {
+                    Object.keys(f.schemas).forEach(s => importedSchemas.add(s));
+                    f.imports.map(i => i.uri).forEach(recurse);
+                });
+            };
+            file.imports.map(i => i.uri).forEach(recurse);
+            for (let s of localSchemas) {
+                if (importedSchemas.has(s)) {
+                    throw new SchemaValidationError(`Imported schema '${s}' also defined in base layer`);
+                }
+            }
+        })
+    }
 
     files.forEach((file) => {
         Object.keys(file.schemas).forEach((schemaID) => result.schemas[schemaID] = file.schemas[schemaID]);
