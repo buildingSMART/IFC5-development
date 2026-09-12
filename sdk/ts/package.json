@@ -1,0 +1,17 @@
+{
+  "name": "sdk-ts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "esbuild test/test.ts --bundle --outfile=test.js --platform=node && node test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "jszip": "^3.10.1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.27.3"
+  }
+}

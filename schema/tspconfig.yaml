@@ -1,7 +1,11 @@
 emit:
-  # - "@typespec/json-schema"
+  - "@typespec/json-schema"
   - "@typespec/openapi3"
 options:
   "@typespec/json-schema":
     file-type: json
-output-dir: "{project-root}/out"
+    emitter-output-dir: "{output-dir}"
+  "@typespec/openapi3":
+    file-type: json
+    emitter-output-dir: "{output-dir}"
+output-dir: "{project-root}/../standard"
