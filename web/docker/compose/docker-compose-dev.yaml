@@ -1,0 +1,18 @@
+services:
+
+  ifc5-web:
+    build:
+      context: ../..
+      dockerfile: docker/config/${DOCKERFILE:-dev.Dockerfile}
+    image: ifc5-web:${WEB_IMAGE_TAG:-latest}
+    container_name: ifc5-web
+    working_dir: /app
+    ports:
+      - "${PORT:-8080}:80"
+    volumes:
+      - ../../../src:/app/src
+      - ../..:/app/web
+      - ifc5-node-modules:/app/src/node_modules
+
+volumes:
+  ifc5-node-modules:
