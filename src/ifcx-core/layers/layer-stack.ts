@@ -11,10 +11,12 @@ export class IfcxLayerStack
     private tree: PostCompositionNode;
     private schemas: {[key:string]:IfcxSchema};
     private federated: IfcxFile;
+    private checkSchemas: boolean;
 
-    constructor(layers: IfcxFile[])
+    constructor(layers: IfcxFile[], checkSchemas: boolean = true)
     {
         this.layers = layers;
+        this.checkSchemas = checkSchemas;
         this.Compose();
     }
 
@@ -28,7 +30,7 @@ export class IfcxLayerStack
         this.federated = Federate(this.layers);
         // TODO: schema files
         this.schemas = this.federated.schemas;
-        this.tree = LoadIfcxFile(this.federated);
+        this.tree = LoadIfcxFile(this.federated, this.checkSchemas);
     }
 
     public GetFullTree()
@@ -64,7 +66,7 @@ export class IfcxLayerStackBuilder
         return this;
     }
 
-    async Build(): Promise<IfcxLayerStack | Error>
+    async Build(checkSchemas: boolean = true): Promise<IfcxLayerStack | Error>
     {
         if (!this.mainLayerId) throw new Error(`no main layer ID specified`);
 
@@ -77,7 +79,7 @@ export class IfcxLayerStackBuilder
 
         try
         {
-            return new IfcxLayerStack(layers);
+            return new IfcxLayerStack(layers, checkSchemas);
         }
         catch (e)
         {

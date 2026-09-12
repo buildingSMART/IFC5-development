@@ -99,7 +99,7 @@ async function processArgs(args: string[])
             new InMemoryLayerProvider().AddAll([userDefinedOrder, ...files]), 
             ...providers
         ]);
-        let layerStack = await (new IfcxLayerStackBuilder(provider).FromId(userDefinedOrder.header.id)).Build();
+        let layerStack = await (new IfcxLayerStackBuilder(provider).FromId(userDefinedOrder.header.id)).Build(validate);
         if (layerStack instanceof Error)
         {
             throw layerStack;
