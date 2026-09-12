@@ -128,6 +128,7 @@
             background: #666;
             line-height: 2em;
             border-bottom: solid 1px #555;
+            overflow: hidden;
         }
 
         .header h1 {
@@ -217,12 +218,32 @@
         .error-modal .message::before {
             content: '\26A0 \A0 \A0';
         }
+
+        #showComposition {
+            float: right;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            aspect-ratio: 1;
+            color: #eee;
+            text-decoration: none;
+            border-left: solid 1px #555;
+            background: #ffffff12;
+        }
+
+        #showComposition:hover {
+            background: #ffffff24;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="header"><h1>IFC5 view <span>BETA - IFC 5 is still heavily under development. Software tools (including this viewer), the IFC 5 datamodel, schema and examples are under constant change.</span></h1></div>
+        <div class="header">
+            <a href="#" id="showComposition" class="material-symbols-outlined" title="Show post-composition JSON">code</a>
+            <h1>IFC5 view <span>BETA - IFC 5 is still heavily under development. Software tools (including this viewer), the IFC 5 datamodel, schema and examples are under constant change.</span></h1>
+        </div>
         <div class='layers'>
             <h2>Layer browser (lower takes priority)</h2>
             <div></div>
@@ -261,7 +282,12 @@
     }
     </script>
     <script type="module">
-        import addModel from './render.mjs';
+        import addModel, { getPostCompositionJson } from './render.mjs';
+
+        document.querySelector('#showComposition').addEventListener('click', (event) => {
+            event.preventDefault();
+            window.open(URL.createObjectURL(new Blob([JSON.stringify(getPostCompositionJson(), null, 2)], { type: 'application/json' })));
+        });
 
         document.querySelector('#fileForm').addEventListener('submit', function(event) {
             event.preventDefault();
