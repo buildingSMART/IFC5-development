@@ -13,7 +13,7 @@ export interface components {
             value: components["schemas"]["IfcxValueDescription"];
         };
         /** @enum {string} */
-        DataType: "Real" | "Boolean" | "Integer" | "String" | "DateTime" | "Enum" | "Array" | "Object" | "Reference" | "Blob";
+        DataType: "Real" | "Boolean" | "Integer" | "String" | "DateTime" | "Enum" | "Array" | "Object" | "Reference" | "Blob" | "Union";
         EnumRestrictions: {
             options: string[];
         };
@@ -27,7 +27,8 @@ export interface components {
         };
         IfcxHeader: {
             id: string;
-            version: string;
+            ifcxVersion: string;
+            dataVersion: string;
             author: string;
             timestamp: string;
         };
@@ -48,13 +49,15 @@ export interface components {
             value: components["schemas"]["IfcxValueDescription"];
         };
         IfcxValueDescription: {
-            dataType: components["schemas"]["DataType"];
+            dataType?: components["schemas"]["DataType"];
             optional?: boolean;
             inherits?: string[];
             quantityKind?: components["schemas"]["QuantityKind"];
             enumRestrictions?: components["schemas"]["EnumRestrictions"];
             arrayRestrictions?: components["schemas"]["ArrayRestrictions"];
             objectRestrictions?: components["schemas"]["ObjectRestrictions"];
+            unionRestrictions?: components["schemas"]["UnionRestrictions"];
+            ref?: string;
         };
         ImportNode: {
             uri: string;
@@ -67,6 +70,9 @@ export interface components {
         };
         /** @enum {string} */
         QuantityKind: "Plane angle" | "Thermodynamic temperature" | "Electric current" | "Time" | "Frequency" | "Mass" | "Length" | "Linear velocity" | "Force" | "Pressure" | "Area" | "Energy" | "Power" | "Volume";
+        UnionRestrictions: {
+            values: components["schemas"]["IfcxValueDescription"][];
+        };
         code: string;
         path: string;
     };
