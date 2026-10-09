@@ -72,6 +72,45 @@ describe("composition expansion", () => {
         expect(() => ComposeNodeFromInput("parentclass", nodes)).to.throw(CycleError);
     });
 
+    it("rejects cycles through child paths", () => {
+        let nodes = new Map<string, CompositionInputNode[]>();
+
+        AddChild(nodes, "a", "x", "b/c");
+        AddChild(nodes, "b", "c", "a");
+
+        expect(() => ComposeNodeFromInput("a", nodes)).to.throw(CycleError);
+    });
+
+    it("rejects cycles through nodes that edit a child path", () => {
+        let nodes = new Map<string, CompositionInputNode[]>();
+
+        AddChild(nodes, "a", "x", "leaf");
+        AddInherits(nodes, "a/x", "ih", "b");
+        AddChild(nodes, "b", "y", "a");
+
+        expect(() => ComposeNodeFromInput("a", nodes)).to.throw(CycleError);
+    });
+
+    it("rejects references into the node's own head", () => {
+        let nodes = new Map<string, CompositionInputNode[]>();
+
+        // Composing `a` would compose `a` again to find `a/x`.
+        AddChild(nodes, "a", "x", "leaf");
+        AddChild(nodes, "a", "y", "a/x");
+
+        expect(() => ComposeNodeFromInput("a", nodes)).to.throw(CycleError);
+    });
+
+    it("accepts references into a sibling's children without a cycle", () => {
+        let nodes = new Map<string, CompositionInputNode[]>();
+
+        AddChild(nodes, "b", "c", "leaf");
+        AddChild(nodes, "a", "x", "b/c");
+
+        let root = NodeToJSON(ComposeNodeFromInput("a", nodes));
+        expect(root.children.x).to.exist;
+    });
+
     it("adds children of children", () => {
         let nodes = new Map<string, CompositionInputNode[]>();
 

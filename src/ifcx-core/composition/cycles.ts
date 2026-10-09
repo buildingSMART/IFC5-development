@@ -1,5 +1,6 @@
 import { MMSet } from "../util/mm";
 import { PreCompositionNode } from "./node";
+import { GetHead } from "./path";
 
 export class CycleError extends Error
 {
@@ -9,16 +10,23 @@ export class CycleError extends Error
 // https://en.wikipedia.org/wiki/Topological_sorting
 export function FindRootsOrCycles(nodes: Map<string, PreCompositionNode>)
 {
+    // Composition resolves a reference `head/a/b` by composing `head`, and a
+    // node at `head/a` is applied while composing `head`. Cycles therefore
+    // run between heads, so dependencies are tracked head to head.
     let dependencies = new Map<string, string[]>();
     let dependents = new Map<string, string[]>();
     nodes.forEach((node, path) => {
         Object.keys(node.inherits).forEach((inheritName) => {
-            MMSet(dependencies, path, node.inherits[inheritName]);
-            MMSet(dependents, node.inherits[inheritName], path);
+            let ref = node.inherits[inheritName];
+            if (ref === null) return;
+            MMSet(dependencies, GetHead(path), GetHead(ref));
+            MMSet(dependents, ref, path);
         })
         Object.keys(node.children).forEach((childName) => {
-            MMSet(dependencies, path, node.children[childName]);
-            MMSet(dependents, node.children[childName], path);
+            let ref = node.children[childName];
+            if (ref === null) return;
+            MMSet(dependencies, GetHead(path), GetHead(ref));
+            MMSet(dependents, ref, path);
         })
     });
     let paths = [...nodes.keys()];
@@ -51,7 +59,7 @@ export function FindRootsOrCycles(nodes: Map<string, PreCompositionNode>)
             {
                 roots.add(path);
             }
-            visit(path);
+            visit(GetHead(path));
         })    
     } catch (e)
     {
