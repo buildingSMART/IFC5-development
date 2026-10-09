@@ -42,11 +42,7 @@ describe("layerStack builder", () => {
 
         expect(layerStack instanceof Error).to.be.false;
         let p = layerStack as IfcxLayerStack;
-        expect(p.GetLayerIds().length).to.equal(4);
-        expect(p.GetLayerIds()[0]).to.equal("file1");
-        expect(p.GetLayerIds()[1]).to.equal("file2");
-        expect(p.GetLayerIds()[2]).to.equal("file3");
-        expect(p.GetLayerIds()[3]).to.equal("file4");
+        expect(p.GetLayerIds()).to.deep.equal(["file4", "file3", "file2", "file1"]);
     });
     
     it("respects layer order of the main layer #2", async () => {
@@ -55,13 +51,82 @@ describe("layerStack builder", () => {
 
         expect(layerStack instanceof Error).to.be.false;
         let p = layerStack as IfcxLayerStack;
-        expect(p.GetLayerIds().length).to.equal(4);
-        expect(p.GetLayerIds()[0]).to.equal("file2");
-        expect(p.GetLayerIds()[1]).to.equal("file4");
-        expect(p.GetLayerIds()[2]).to.equal("file3");
-        expect(p.GetLayerIds()[3]).to.equal("file1");
+        expect(p.GetLayerIds()).to.deep.equal(["file4", "file3", "file1", "file2"]);
     });
     
+    it("adds nested imports once", async () => {
+        let provider = new InMemoryLayerProvider()
+            .add(ExampleFileWithImport("main", "1", [{uri: "a"}, {uri: "b"}]))
+            .add(ExampleFileWithImport("a", "2", [{uri: "c"}]))
+            .add(ExampleFileWithImport("b", "3"))
+            .add(ExampleFileWithImport("c", "4"));
+        let layerStack = await new IfcxLayerStackBuilder(provider).FromId("main").Build();
+
+        expect(layerStack instanceof Error).to.be.false;
+        let p = layerStack as IfcxLayerStack;
+        expect(p.GetLayerIds()).to.deep.equal(["c", "a", "b", "main"]);
+    });
+
+    it("adds deeply nested imports once", async () => {
+        let provider = new InMemoryLayerProvider()
+            .add(ExampleFileWithImport("main", "1", [{uri: "a"}]))
+            .add(ExampleFileWithImport("a", "2", [{uri: "b"}]))
+            .add(ExampleFileWithImport("b", "3", [{uri: "c"}]))
+            .add(ExampleFileWithImport("c", "4"));
+        let layerStack = await new IfcxLayerStackBuilder(provider).FromId("main").Build();
+
+        expect(layerStack instanceof Error).to.be.false;
+        let p = layerStack as IfcxLayerStack;
+        expect(p.GetLayerIds()).to.deep.equal(["c", "b", "a", "main"]);
+    });
+
+    it("a layer overrides the layers it imports", async () => {
+        let provider = new InMemoryLayerProvider()
+            .add(ExampleFileWithImport("main", "main", [{uri: "a"}]))
+            .add(ExampleFileWithImport("a", "a", [{uri: "b"}]))
+            .add(ExampleFileWithImport("b", "b"));
+        let layerStack = await new IfcxLayerStackBuilder(provider).FromId("main").Build();
+
+        expect(layerStack instanceof Error).to.be.false;
+        let root = NodeToJSON((layerStack as IfcxLayerStack).GetFullTree());
+        expect(root.children.root.attributes["example::attribute"]).to.equal("main");
+    });
+
+    it("an import overrides the layers it imports", async () => {
+        let provider = new InMemoryLayerProvider()
+            .add(new IfcxFileBuilder().Id("main").Import({uri: "a"}).Build())
+            .add(ExampleFileWithImport("a", "a", [{uri: "b"}]))
+            .add(ExampleFileWithImport("b", "b"));
+        let layerStack = await new IfcxLayerStackBuilder(provider).FromId("main").Build();
+
+        expect(layerStack instanceof Error).to.be.false;
+        let p = layerStack as IfcxLayerStack;
+        expect(p.GetFederatedLayer().header.id).to.equal("main");
+        let root = NodeToJSON(p.GetFullTree());
+        expect(root.children.root.attributes["example::attribute"]).to.equal("a");
+    });
+
+    it("an import that a sibling also imports goes before that sibling", async () => {
+        let provider = new InMemoryLayerProvider()
+            .add(ExampleFileWithImport("main", "main", [{uri: "a"}, {uri: "b"}]))
+            .add(ExampleFileWithImport("a", "a", [{uri: "b"}]))
+            .add(ExampleFileWithImport("b", "b"));
+        let layerStack = await new IfcxLayerStackBuilder(provider).FromId("main").Build() as IfcxLayerStack;
+
+        // `a` imports `b`, so `a` overrides `b` even though `main` lists `b` later.
+        expect(layerStack.GetLayerIds()).to.deep.equal(["b", "a", "main"]);
+    });
+
+    it("a later import overrides an earlier one", async () => {
+        let provider = new InMemoryLayerProvider()
+            .add(ExampleFileWithImport("main", "main", [{uri: "a"}, {uri: "b"}]))
+            .add(ExampleFileWithImport("a", "a"))
+            .add(ExampleFileWithImport("b", "b"));
+        let layerStack = await new IfcxLayerStackBuilder(provider).FromId("main").Build() as IfcxLayerStack;
+
+        expect(layerStack.GetLayerIds()).to.deep.equal(["a", "b", "main"]);
+    });
+
     it("schemas are found in imports", async () => {
         let file1 = new IfcxFileBuilder().Id("file1").Import({uri:"file2"}).Node(NodeWithAttr("root", "attr", "1")).Build();
         let file2 = new IfcxFileBuilder().Id("file2").Schema("attr", StringValueSchema()).Build();

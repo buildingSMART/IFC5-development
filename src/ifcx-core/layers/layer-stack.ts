@@ -6,7 +6,8 @@ import { RemoteLayerProvider } from "./layer-providers";
 
 export class IfcxLayerStack
 {
-    // main layer at 0
+    // In federation order: every layer after the layers it imports, so a
+    // layer overrides its imports. The main layer is last.
     private layers: IfcxFile[];
     private tree: PostCompositionNode;
     private schemas: {[key:string]:IfcxSchema};
@@ -26,6 +27,7 @@ export class IfcxLayerStack
     private Compose()
     {
         this.federated = Federate(this.layers);
+        this.federated.header = this.layers[this.layers.length - 1].header;
         // TODO: schema files
         this.schemas = this.federated.schemas;
         this.tree = LoadIfcxFile(this.federated);
@@ -85,33 +87,35 @@ export class IfcxLayerStackBuilder
         }
     }
 
-    private async SatisfyDependencies(activeLayer: IfcxFile, placed: Map<string, boolean>, orderedLayers: IfcxFile[])
+    // Returns the layers `activeLayer` depends on, each once, in federation
+    // order: every layer after its own imports, and sibling imports in the
+    // order they are written, so a later import overrides an earlier one.
+    // A layer is placed where the walk first reaches it, so when an earlier
+    // import also imports a later sibling, that sibling goes before it.
+    // The caller adds them to the layer set; a nested call must not, or its
+    // layers would be added once there and again by every caller above it.
+    private async ReturnRecursiveDependencies(activeLayer: IfcxFile, placed: Set<string>)
     {
-        let pending: IfcxFile[] = [];
-        for (const impt of activeLayer.imports) {
-            if (!placed.has(impt.uri))
-            {
-                let layer = await this.provider.GetLayerByURI(impt.uri);
-                if (layer instanceof Error)
-                {
-                    return layer;
-                }
-                pending.push(layer);
-                placed.set(impt.uri, true);
-            }
-        }
         let temp: IfcxFile[] = [];
-        for (const layer of pending) {
-            temp.push(layer);
-            let layers = await this.SatisfyDependencies(layer, placed, orderedLayers);
+        for (const impt of activeLayer.imports) {
+            if (placed.has(impt.uri))
+            {
+                continue;
+            }
+            placed.add(impt.uri);
+            let layer = await this.provider.GetLayerByURI(impt.uri);
+            if (layer instanceof Error)
+            {
+                return layer;
+            }
+            let layers = await this.ReturnRecursiveDependencies(layer, placed);
             if (layers instanceof Error)
             {
                 return layers;
             }
             temp.push(...layers);
+            temp.push(layer);
         }
-
-        temp.forEach(t => orderedLayers.push(t));
 
         return temp;
     }
@@ -124,15 +128,14 @@ export class IfcxLayerStackBuilder
             return activeLayer;
         }
 
-        let layerSet: IfcxFile[] = [activeLayer]; // TODO: remove
-        let placed = new Map<string, boolean>();
-        placed.set(activeLayer.header.id, true); // TODO: remove
-        let result = await this.SatisfyDependencies(activeLayer, placed, layerSet);
+        let placed = new Set<string>();
+        placed.add(activeLayer.header.id); // TODO: remove
+        let result = await this.ReturnRecursiveDependencies(activeLayer, placed);
         if (result instanceof Error)
         {
             return result;
         }
-        
-        return layerSet;
+        // The main layer goes last, so it overrides everything it imports.
+        return [...result, activeLayer];
     }
 }
