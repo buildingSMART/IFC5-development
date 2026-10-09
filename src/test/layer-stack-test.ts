@@ -62,6 +62,32 @@ describe("layerStack builder", () => {
         expect(p.GetLayerIds()[3]).to.equal("file1");
     });
     
+    it("adds nested imports once", async () => {
+        let provider = new InMemoryLayerProvider()
+            .add(ExampleFileWithImport("main", "1", [{uri: "a"}, {uri: "b"}]))
+            .add(ExampleFileWithImport("a", "2", [{uri: "c"}]))
+            .add(ExampleFileWithImport("b", "3"))
+            .add(ExampleFileWithImport("c", "4"));
+        let layerStack = await new IfcxLayerStackBuilder(provider).FromId("main").Build();
+
+        expect(layerStack instanceof Error).to.be.false;
+        let p = layerStack as IfcxLayerStack;
+        expect(p.GetLayerIds()).to.deep.equal(["main", "a", "c", "b"]);
+    });
+
+    it("adds deeply nested imports once", async () => {
+        let provider = new InMemoryLayerProvider()
+            .add(ExampleFileWithImport("main", "1", [{uri: "a"}]))
+            .add(ExampleFileWithImport("a", "2", [{uri: "b"}]))
+            .add(ExampleFileWithImport("b", "3", [{uri: "c"}]))
+            .add(ExampleFileWithImport("c", "4"));
+        let layerStack = await new IfcxLayerStackBuilder(provider).FromId("main").Build();
+
+        expect(layerStack instanceof Error).to.be.false;
+        let p = layerStack as IfcxLayerStack;
+        expect(p.GetLayerIds()).to.deep.equal(["main", "a", "b", "c"]);
+    });
+
     it("schemas are found in imports", async () => {
         let file1 = new IfcxFileBuilder().Id("file1").Import({uri:"file2"}).Node(NodeWithAttr("root", "attr", "1")).Build();
         let file2 = new IfcxFileBuilder().Id("file2").Schema("attr", StringValueSchema()).Build();
