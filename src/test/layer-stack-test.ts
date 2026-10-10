@@ -1,3 +1,4 @@
+import { LoadIfcxFile } from "../ifcx-core/workflows";
 import { InMemoryLayerProvider } from "../ifcx-core/layers/layer-providers";
 import { IfcxLayerStack, IfcxLayerStackBuilder } from "../ifcx-core/layers/layer-stack";
 import { ExampleFile, ExampleFileWithImport, IfcxFileBuilder, NodeWithAttr, StringValueSchema } from "./example-file";
@@ -80,3 +81,20 @@ describe("layerStack builder", () => {
 })
 
 
+
+describe("layerStack composition", () => {
+    it("composes the same tree as loading the federated layer", async () => {
+        let type = { path: "type", children: {}, inherits: {}, attributes: { attr: "type" } };
+        let building = { path: "building", children: { part: "type" }, inherits: { type: "type" }, attributes: {} };
+        let file1 = new IfcxFileBuilder().Id("file1").Import({uri: "file2"}).Import({uri: "file3"}).Node(NodeWithAttr("building", "attr", "1")).Build();
+        let file2 = new IfcxFileBuilder().Id("file2").Schema("attr", StringValueSchema()).Node(type).Node(building).Build();
+        let file3 = new IfcxFileBuilder().Id("file3").Node(NodeWithAttr("building", "attr", "3")).Node({ path: "building", children: { part: null }, inherits: {}, attributes: {} }).Build();
+
+        let provider = new InMemoryLayerProvider().add(file1).add(file2).add(file3);
+        let layerStack = await new IfcxLayerStackBuilder(provider).FromId("file1").Build() as IfcxLayerStack;
+
+        let tree = NodeToJSON(layerStack.GetFullTree());
+        expect(tree).to.deep.equal(NodeToJSON(LoadIfcxFile(layerStack.GetFederatedLayer())));
+        expect(JSON.stringify(tree)).to.contain("attr");
+    });
+});

@@ -4,9 +4,8 @@ import { IfcxFile, IfcxNode, ImportNode } from "./schema/schema-helper";
 import { Validate } from "./schema/schema-validation";
 import { MMSet } from "./util/mm";
 
-function ToInputNodes(data: IfcxNode[])
+function ToInputNodes(data: IfcxNode[], inputNodes = new Map<string, CompositionInputNode[]>())
 {
-    let inputNodes = new Map<string, CompositionInputNode[]>();
     data.forEach((ifcxNode) => {
         let node = {
             path: ifcxNode.path,
@@ -23,13 +22,35 @@ function ToInputNodes(data: IfcxNode[])
 // TODO: cleanup options by creating better API
 export function LoadIfcxFile(file: IfcxFile, checkSchemas: boolean = true, createArtificialRoot: boolean = true)
 {
-    let inputNodes = ToInputNodes(file.data);
+    return Load(ToInputNodes(file.data), file.schemas, checkSchemas, createArtificialRoot);
+}
+
+// Same result as LoadIfcxFile(Federate(layers)), without first collapsing every path into a federated file:
+// flattening already merges the nodes of a path in layer order
+export function LoadIfcxLayers(layers: IfcxFile[], checkSchemas: boolean = true, createArtificialRoot: boolean = true)
+{
+    let inputNodes = new Map<string, CompositionInputNode[]>();
+    layers.forEach((layer) => ToInputNodes(layer.data, inputNodes));
+    return Load(inputNodes, MergeSchemas(layers), checkSchemas, createArtificialRoot);
+}
+
+export function MergeSchemas(files: IfcxFile[])
+{
+    let schemas: IfcxFile["schemas"] = {};
+    files.forEach((file) => {
+        Object.keys(file.schemas).forEach((schemaID) => schemas[schemaID] = file.schemas[schemaID]);
+    })
+    return schemas;
+}
+
+function Load(inputNodes: Map<string, CompositionInputNode[]>, schemas: IfcxFile["schemas"], checkSchemas: boolean, createArtificialRoot: boolean)
+{
     let compositionNodes = FlattenCompositionInput(inputNodes);
 
     try {
         if (checkSchemas)
         {
-            Validate(file.schemas, compositionNodes);
+            Validate(schemas, compositionNodes);
         }
     } catch (e)
     {
@@ -161,13 +182,9 @@ export function Federate(files: IfcxFile[])
     let result: IfcxFile = {
         header: files[0].header,
         imports: [],
-        schemas: {},
+        schemas: MergeSchemas(files),
         data: []
     };
-
-    files.forEach((file) => {
-        Object.keys(file.schemas).forEach((schemaID) => result.schemas[schemaID] = file.schemas[schemaID]);
-    })
 
     files.forEach((file) => {
         file.data.forEach((node) => result.data.push(node));

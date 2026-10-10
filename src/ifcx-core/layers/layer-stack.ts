@@ -1,6 +1,6 @@
 import { PostCompositionNode } from "../composition/node";
 import { IfcxFile, IfcxSchema } from "../schema/schema-helper";
-import { Federate, LoadIfcxFile } from "../workflows";
+import { Federate, LoadIfcxLayers, MergeSchemas } from "../workflows";
 import { RemoteLayerProvider } from "./layer-providers";
 
 
@@ -10,7 +10,7 @@ export class IfcxLayerStack
     private layers: IfcxFile[];
     private tree: PostCompositionNode;
     private schemas: {[key:string]:IfcxSchema};
-    private federated: IfcxFile;
+    private federated: IfcxFile | null = null;
 
     constructor(layers: IfcxFile[])
     {
@@ -25,10 +25,9 @@ export class IfcxLayerStack
 
     private Compose()
     {
-        this.federated = Federate(this.layers);
         // TODO: schema files
-        this.schemas = this.federated.schemas;
-        this.tree = LoadIfcxFile(this.federated);
+        this.schemas = MergeSchemas(this.layers);
+        this.tree = LoadIfcxLayers(this.layers);
     }
 
     public GetFullTree()
@@ -37,8 +36,10 @@ export class IfcxLayerStack
         return this.tree;
     }
 
+    // built on first request: composition does not need it
     public GetFederatedLayer()
     {
+        if (!this.federated) this.federated = Federate(this.layers);
         return this.federated;
     }
 
