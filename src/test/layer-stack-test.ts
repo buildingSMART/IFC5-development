@@ -1,4 +1,8 @@
 import { InMemoryLayerProvider } from "../ifcx-core/layers/layer-providers";
+import { FSLayerProvider } from "../ifcx-core/layers/fs-layer-provider";
+import * as fs from "fs";
+import * as os from "os";
+import * as path from "path";
 import { IfcxLayerStack, IfcxLayerStackBuilder } from "../ifcx-core/layers/layer-stack";
 import { ExampleFile, ExampleFileWithImport, IfcxFileBuilder, NodeWithAttr, StringValueSchema } from "./example-file";
 import { describe, it } from "./util/cappucino";
@@ -62,6 +66,20 @@ describe("layerStack builder", () => {
         expect(p.GetLayerIds()[3]).to.equal("file1");
     });
     
+    it("loads layers from a directory with FSLayerProvider", async () => {
+        let dir = fs.mkdtempSync(path.join(os.tmpdir(), "ifcx-fs-"));
+        try {
+            fs.writeFileSync(path.join(dir, "main.ifcx"), JSON.stringify(ExampleFileWithImport("main", "main", [{uri: "a"}])));
+            fs.writeFileSync(path.join(dir, "a.ifcx"), JSON.stringify(ExampleFileWithImport("a", "a")));
+            let layerStack = await new IfcxLayerStackBuilder(new FSLayerProvider(dir)).FromId("main").Build();
+
+            expect(layerStack instanceof Error).to.be.false;
+            expect((layerStack as IfcxLayerStack).GetLayerIds()).to.have.members(["main", "a"]);
+        } finally {
+            fs.rmSync(dir, { recursive: true, force: true });
+        }
+    });
+
     it("schemas are found in imports", async () => {
         let file1 = new IfcxFileBuilder().Id("file1").Import({uri:"file2"}).Node(NodeWithAttr("root", "attr", "1")).Build();
         let file2 = new IfcxFileBuilder().Id("file2").Schema("attr", StringValueSchema()).Build();

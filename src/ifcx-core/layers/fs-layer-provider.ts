@@ -29,10 +29,10 @@ export class FSLayerProvider implements RemoteLayerProvider
     {
         if (this.layers.size !== 0) return; 
 
-        let paths = fs.readDirSync(this.dir);
+        let paths = fs.readdirSync(this.dir);
         for (const file of paths) {
             let filepath = path.join(this.dir, file);
-            if (!fs.statSync(filepath).isFile() || !fs.existSync(filepath))
+            if (!fs.statSync(filepath).isFile() || !fs.existsSync(filepath))
             {
                 return new Error(`File not found with path ${filepath}`);
             }
