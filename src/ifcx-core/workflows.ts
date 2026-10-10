@@ -4,15 +4,15 @@ import { IfcxFile, IfcxNode, ImportNode } from "./schema/schema-helper";
 import { Validate } from "./schema/schema-validation";
 import { MMSet } from "./util/mm";
 
-function ToInputNodes(data: IfcxNode[])
+function ToInputNodes(data: IfcxNode[], layer?: string, inputNodes = new Map<string, CompositionInputNode[]>())
 {
-    let inputNodes = new Map<string, CompositionInputNode[]>();
     data.forEach((ifcxNode) => {
         let node = {
             path: ifcxNode.path,
             children: ifcxNode.children ? ifcxNode.children : {}, 
             inherits: ifcxNode.inherits ? ifcxNode.inherits : {},
-            attributes: ifcxNode.attributes ? ifcxNode.attributes : {}
+            attributes: ifcxNode.attributes ? ifcxNode.attributes : {},
+            layer
         } as CompositionInputNode;
         MMSet(inputNodes, node.path, node);
     });
@@ -21,9 +21,10 @@ function ToInputNodes(data: IfcxNode[])
 
 
 // TODO: cleanup options by creating better API
-export function LoadIfcxFile(file: IfcxFile, checkSchemas: boolean = true, createArtificialRoot: boolean = true)
+// Pass the federated layers (in federation order) as provenanceLayers to record each attribute's opinions per layer
+export function LoadIfcxFile(file: IfcxFile, checkSchemas: boolean = true, createArtificialRoot: boolean = true, provenanceLayers?: IfcxFile[])
 {
-    let inputNodes = ToInputNodes(file.data);
+    let inputNodes = provenanceLayers ? ToLayerInputNodes(provenanceLayers) : ToInputNodes(file.data);
     let compositionNodes = FlattenCompositionInput(inputNodes);
 
     try {
@@ -44,6 +45,13 @@ export function LoadIfcxFile(file: IfcxFile, checkSchemas: boolean = true, creat
     {
         return ExpandFirstRootInInput(compositionNodes);
     }
+}
+
+function ToLayerInputNodes(layers: IfcxFile[])
+{
+    let inputNodes = new Map<string, CompositionInputNode[]>();
+    layers.forEach((layer) => ToInputNodes(layer.data, layer.header.id, inputNodes));
+    return inputNodes;
 }
 
 function MakeInputNode(path: string)

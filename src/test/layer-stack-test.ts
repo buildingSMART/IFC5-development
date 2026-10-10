@@ -1,3 +1,5 @@
+import { Federate, LoadIfcxFile } from "../ifcx-core/workflows";
+import { GetOpinions } from "../ifcx-core/composition/node";
 import { InMemoryLayerProvider } from "../ifcx-core/layers/layer-providers";
 import { IfcxLayerStack, IfcxLayerStackBuilder } from "../ifcx-core/layers/layer-stack";
 import { ExampleFile, ExampleFileWithImport, IfcxFileBuilder, NodeWithAttr, StringValueSchema } from "./example-file";
@@ -80,3 +82,52 @@ describe("layerStack builder", () => {
 })
 
 
+
+describe("composition provenance", () => {
+    function Layers()
+    {
+        let type = { path: "type", children: {}, inherits: {}, attributes: { colour: "grey", height: "low" } };
+        let building = { path: "building", children: {}, inherits: { type: "type" }, attributes: { colour: "red" } };
+        let site = { path: "site", children: { b: "building" }, inherits: {}, attributes: {} };
+        let base = new IfcxFileBuilder().Id("base").Schema("colour", StringValueSchema()).Schema("height", StringValueSchema())
+            .Node(type).Node(building).Node(site).Build();
+        let view = new IfcxFileBuilder().Id("view").Node(NodeWithAttr("building", "colour", "blue")).Build();
+        return [base, view];
+    }
+
+    it("is off by default", () => {
+        let layers = Layers();
+        let root = LoadIfcxFile(Federate(layers));
+        expect(root.children.get("site")!.children.get("b")!.sources).to.be.undefined;
+    });
+
+    it("lists every opinion per attribute, the last one is the composed value", () => {
+        let layers = Layers();
+        let root = LoadIfcxFile(Federate(layers), true, true, layers);
+        // the building is reached as a child of the site
+        let building = root.children.get("site")!.children.get("b")!;
+
+        expect(building.attributes.get("colour")).to.equal("blue");
+        expect(GetOpinions(building, "colour")).to.deep.equal([
+            { layer: "base", path: "type", value: "grey" },
+            { layer: "base", path: "building", value: "red" },
+            { layer: "view", path: "building", value: "blue" },
+        ]);
+        expect(GetOpinions(building, "height")).to.deep.equal([{ layer: "base", path: "type", value: "low" }]);
+    });
+
+    it("layer stack composes with provenance when asked", async () => {
+        let [base, view] = Layers();
+        let main = new IfcxFileBuilder().Id("main").Import({uri: "base"}).Import({uri: "view"}).Build();
+        let provider = new InMemoryLayerProvider().add(main).add(base).add(view);
+
+        let plain = await new IfcxLayerStackBuilder(provider).FromId("main").Build() as IfcxLayerStack;
+        expect(plain.GetFullTree().children.get("site")!.children.get("b")!.sources).to.be.undefined;
+
+        let stack = await new IfcxLayerStackBuilder(provider).FromId("main").WithProvenance().Build() as IfcxLayerStack;
+        let building = stack.GetFullTree().children.get("site")!.children.get("b")!;
+        let opinions = GetOpinions(building, "colour")!;
+        expect(opinions[opinions.length - 1].value).to.equal(building.attributes.get("colour"));
+        expect(opinions.map(o => o.layer).every(l => stack.GetLayerIds().includes(l))).to.be.true;
+    });
+});

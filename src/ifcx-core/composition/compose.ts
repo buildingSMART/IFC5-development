@@ -1,5 +1,5 @@
 import { CycleError, FindRootsOrCycles } from "./cycles";
-import { CompositionInputNode, GetChildNodeWithPath, MakePostCompositionNode, PostCompositionNode, PreCompositionNode } from "./node";
+import { CompositionInputNode, GetChildNodeWithPath, MakePostCompositionNode, OpinionSource, PostCompositionNode, PreCompositionNode } from "./node";
 import { GetHead, GetTail } from "./path";
 
 /* 
@@ -29,7 +29,8 @@ function FlattenPathToPreCompositionNode(path: string, inputNodes: CompositionIn
         path,
         children: {},
         inherits: {},
-        attributes: {}
+        attributes: {},
+        inputs: undefined
     } as PreCompositionNode;
 
     inputNodes.forEach((node) => {
@@ -53,6 +54,9 @@ function FlattenPathToPreCompositionNode(path: string, inputNodes: CompositionIn
             compositionNode.attributes[attrName] = node.attributes[attrName];
         })
     })
+
+    // the composed tree keeps these for provenance; an array grown by push has spare capacity, so trim it
+    if (inputNodes[0]?.layer !== undefined) compositionNode.inputs = inputNodes.length > 1 ? inputNodes.slice() : inputNodes;
     
     return compositionNode;
 }
@@ -155,6 +159,7 @@ function AddDataFromPreComposition(input: PreCompositionNode, node: PostComposit
         for (let [attrID, attr] of subnode.attributes) {
             node.attributes.set(attrID, attr);
         }
+        if (subnode.sources) AddSources(node, subnode.sources);
     });
 
     Object.entries(input.children).forEach(([childName, child]) => {
@@ -177,4 +182,12 @@ function AddDataFromPreComposition(input: PreCompositionNode, node: PostComposit
     Object.entries(input.attributes).forEach(([attrID, attr]) => {
         node.attributes.set(attrID, attr);
     })
+
+    if (input.inputs) AddSources(node, input.inputs);
+}
+
+function AddSources(node: PostCompositionNode, sources: OpinionSource[])
+{
+    // share the arrays instead of copying them: the first source costs nothing, later ones one small pair
+    node.sources = node.sources ? [node.sources, sources] : sources;
 }

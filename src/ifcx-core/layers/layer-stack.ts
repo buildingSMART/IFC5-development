@@ -11,10 +11,12 @@ export class IfcxLayerStack
     private tree: PostCompositionNode;
     private schemas: {[key:string]:IfcxSchema};
     private federated: IfcxFile;
+    private provenance: boolean;
 
-    constructor(layers: IfcxFile[])
+    constructor(layers: IfcxFile[], provenance: boolean = false)
     {
         this.layers = layers;
+        this.provenance = provenance;
         this.Compose();
     }
 
@@ -28,7 +30,7 @@ export class IfcxLayerStack
         this.federated = Federate(this.layers);
         // TODO: schema files
         this.schemas = this.federated.schemas;
-        this.tree = LoadIfcxFile(this.federated);
+        this.tree = LoadIfcxFile(this.federated, true, true, this.provenance ? this.layers : undefined);
     }
 
     public GetFullTree()
@@ -52,6 +54,7 @@ export class IfcxLayerStackBuilder
 {
     provider: RemoteLayerProvider;
     mainLayerId: string | null = null;
+    provenance: boolean = false;
 
     constructor(provider: RemoteLayerProvider)
     {
@@ -61,6 +64,13 @@ export class IfcxLayerStackBuilder
     FromId(id: string)
     {
         this.mainLayerId = id;
+        return this;
+    }
+
+    // Record which layer supplied each attribute value (read with GetOpinions)
+    WithProvenance()
+    {
+        this.provenance = true;
         return this;
     }
 
@@ -77,7 +87,7 @@ export class IfcxLayerStackBuilder
 
         try
         {
-            return new IfcxLayerStack(layers);
+            return new IfcxLayerStack(layers, this.provenance);
         }
         catch (e)
         {
