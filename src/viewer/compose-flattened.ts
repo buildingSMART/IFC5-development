@@ -4,6 +4,7 @@ import { PostCompositionNode } from "../ifcx-core/composition/node";
 import { InMemoryLayerProvider, StackedLayerProvider } from "../ifcx-core/layers/layer-providers";
 import { FetchLayerProvider } from "../ifcx-core/layers/fetch-layer-provider";
 import { IfcxLayerStackBuilder } from "../ifcx-core/layers/layer-stack";
+import { LoadIfcxFile } from "../ifcx-core/workflows";
 
 function TreeNodeToComposedObject(path: string, node: PostCompositionNode, schemas: {[key: string]: IfcxSchema}): ComposedObject
 {
@@ -80,10 +81,13 @@ export async function compose3(files: IfcxFile[])
     
     // Add local path to attributes for lookup
     // @todo make this less insane
-    layerStack.GetFederatedLayer().data.forEach((n, i) => {
+    // GetFullTree() federates the layers again, which would drop these markers,
+    // so compose from the same federated layer they were written into.
+    let federated = layerStack.GetFederatedLayer();
+    federated.data.forEach((n, i) => {
       n.attributes = n.attributes || {};
       n.attributes[`__internal_${i}`] = n.path;
     });
 
-    return TreeNodeToComposedObject("", layerStack.GetFullTree(), layerStack.GetSchemas());
+    return TreeNodeToComposedObject("", LoadIfcxFile(federated), layerStack.GetSchemas());
 }
